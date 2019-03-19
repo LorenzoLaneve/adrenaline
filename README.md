@@ -1,4 +1,4 @@
-# Adrenalina
+# Adrenaline
 ###### Project of Software Engineering ([Politecnico di Milano](https://www.polimi.it/), A.Y. 2018/2019)
 
 By
