@@ -1,5 +1,5 @@
 # Adrenalina
-###### [Politecnico di Milano](https://www.polimi.it/), A.Y. 2018/2019
+###### Project of Software Engineering ([Politecnico di Milano](https://www.polimi.it/), A.Y. 2018/2019)
 
 By
 [Lorenzo Laneve](https://github.com/NoImaginationGuy),
