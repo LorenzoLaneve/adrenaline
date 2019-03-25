@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.polimi.deib.newdem.se</groupId>
-    <artifactId>adrenalina</artifactId>
+    <artifactId>Adrenaline</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>adrenalina</name>
+    <name>Adrenaline</name>
     <url>http://www.example.com</url>
 
     <properties>
@@ -43,6 +43,8 @@
     </dependencies>
 
     <build>
+        <defaultGoal>package</defaultGoal>
+
         <plugins>
 
             <!-- Export the project as a runnable JAR, with the provided mainClass -->
@@ -50,13 +52,48 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>it.polimi.deib.newdem.se.MainClass</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>build-client-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>client</classifier>
+                            <archive>
+                                <manifest>
+                                    <mainClass>it.polimi.deib.newdem.se.adrenaline.client.ClientMain</mainClass>
+                                </manifest>
+                            </archive>
+                            <excludes>
+                                <exclude>**/server</exclude>
+                                <exclude>**/server/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>build-server-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>server</classifier>
+                            <archive>
+                                <manifest>
+                                    <mainClass>it.polimi.deib.newdem.se.adrenaline.server.ServerMain</mainClass>
+                                </manifest>
+                            </archive>
+                            <excludes>
+                                <exclude>**/client</exclude>
+                                <exclude>**/client/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Jacoco is a code coverage library that allows basic report creation -->
