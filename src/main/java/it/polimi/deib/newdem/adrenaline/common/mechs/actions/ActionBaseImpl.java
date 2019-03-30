@@ -10,6 +10,7 @@ public abstract class ActionBaseImpl implements Action {
     private Player actor;
 
     public ActionBaseImpl(Player actor) {
+        // TODO implement
         this.actor = actor;
     }
 

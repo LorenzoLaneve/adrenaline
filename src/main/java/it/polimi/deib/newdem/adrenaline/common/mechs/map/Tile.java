@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.map;
 
 import java.util.List;
 import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
-import it.polimi.deib.newdem.adrenaline.common.mechs.items.ItemSet;
+import it.polimi.deib.newdem.adrenaline.common.mechs.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.WeaponSet;
 
 public interface Tile {
@@ -21,9 +21,9 @@ public interface Tile {
 
     boolean hasSpawnPoint();
 
-    ItemSet getDrops();
+    DropInstance getDrops();
     /*
-    At the time of writing, ItemSet hasn't been intrduced
+    At the time of writing, DropInstance hasn't been intrduced
     not even as a stub
 
     TODO validate

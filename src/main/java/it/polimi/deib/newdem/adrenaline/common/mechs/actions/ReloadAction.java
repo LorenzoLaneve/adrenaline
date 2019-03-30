@@ -6,6 +6,7 @@ public class ReloadAction extends ActionBaseImpl {
 
     public ReloadAction(Player actor) {
         super(actor);
+        // TODO implement
     }
 
 }

@@ -3,9 +3,13 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.items;
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.PaymentInvoice;
 import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
 
-public interface PowerUpCard {
+public interface WeaponCard {
 
-    PaymentInvoice getUsePrice();
+    PaymentInvoice getPickupPrice();
+
+    PaymentInvoice getReloadPrice();
 
     Effect getEffect();
+
+    Weapon makeWeapon();
 }

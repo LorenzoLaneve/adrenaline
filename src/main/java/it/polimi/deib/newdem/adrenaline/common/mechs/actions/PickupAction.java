@@ -10,6 +10,7 @@ public class PickupAction extends ActionBaseImpl {
         super(actor);
         this.minDist = minDist;
         this.maxDist = maxDist;
+        // TODO implement
     }
 
 }
