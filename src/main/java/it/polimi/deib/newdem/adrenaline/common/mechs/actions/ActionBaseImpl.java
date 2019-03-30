@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
 
 public abstract class ActionBaseImpl implements Action {

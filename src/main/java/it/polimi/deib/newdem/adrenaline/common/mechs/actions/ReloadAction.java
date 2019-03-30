@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 
 public class ReloadAction extends ActionBaseImpl {
 

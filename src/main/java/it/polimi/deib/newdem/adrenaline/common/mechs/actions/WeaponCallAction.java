@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.Weapon;
 
 public class WeaponCallAction extends ActionBaseImpl {

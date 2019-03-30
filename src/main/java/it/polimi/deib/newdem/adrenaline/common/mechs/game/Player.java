@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.AmmoSet;
@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface Player {
 
+    Game getGame();
+
+    PlayerInventory getInventory();
+
     String getName();
 
     PlayerColor getColor();
@@ -17,19 +21,21 @@ public interface Player {
 
     DamageBoard getDamageBoard();
 
-    AmmoSet getAmmos();
-    /*
-    At the time of writing, AmmoSet hasn't been intrduced
-    not even as a stub
-
-    TODO validate
-     */
-
     List<ActionFactory> getMoves();
+
+    int getDeaths();
+
+    int getTotalDamage();
+
+    Player getDamager(int cell);
+
+    int getDamageFromPlayer(Player player);
+
+    int getMarksFromPlayer(Player player);
 
     WeaponSet getReadyWeapons();
     /*
-    At the time of writing, WeaponSet hasn't been intrduced
+    At the time of writing, WeaponSet hasn't been introduced
     not even as a stub
 
     TODO validate
@@ -37,7 +43,7 @@ public interface Player {
 
     WeaponSet getUnloadedWeapons();
     /*
-    At the time of writing, AmmoSet hasn't been intrduced
+    At the time of writing, AmmoSet hasn't been introduced
     not even as a stub
 
     TODO validate
@@ -45,7 +51,7 @@ public interface Player {
 
     PowerUpSet getPowerUp();
     /*
-    At the time of writing, PowerUpSet hasn't been intrduced
+    At the time of writing, PowerUpSet hasn't been introduced
     not even as a stub
 
     TODO validate

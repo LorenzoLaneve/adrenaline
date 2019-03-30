@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.map;
 
 import java.util.List;
-import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.WeaponSet;
 
