@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.map;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.Player;
-import it.polimi.deib.newdem.adrenaline.common.mechs.items.ItemSet;
+import it.polimi.deib.newdem.adrenaline.common.mechs.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.WeaponSet;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public abstract class ConcreteTile implements Tile {
     }
 
     @Override
-    public ItemSet getDrops() {
+    public DropInstance getDrops() {
         // TODO implement
         return null;
     }

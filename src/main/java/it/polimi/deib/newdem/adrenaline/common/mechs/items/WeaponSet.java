@@ -1,4 +1,24 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.items;
 
-public interface WeaponSet {
+import java.util.List;
+
+public class WeaponSet {
+
+    public WeaponSet() {
+        // TODO implement
+    }
+
+    List<WeaponCard> getWeapons() {
+        // TODO implement
+        return null;
+    }
+
+    void addWeapon(WeaponCard weap) {
+        // TODO implement
+    }
+
+    void removeWeapon(WeaponCard weapon) {
+        // TODO implement
+    }
+
 }

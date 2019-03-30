@@ -11,9 +11,12 @@ public class WeaponCallAction extends ActionBaseImpl {
     public WeaponCallAction(Player actor, Weapon weapon) {
         super(actor);
         this.weapon = weapon;
+        // TODO implement
     }
 
     public Weapon getWeapon() {
         return weapon;
+        // TODO implement
+
     }
 }

@@ -16,9 +16,12 @@ public class PowerUpCallAction extends ActionBaseImpl {
     public PowerUpCallAction(Player actor, PowerUpCard card) {
         super(actor);
         this.card = card;
+        // TODO implement
+
     }
 
     public PowerUpCard getCard() {
         return card;
+        // TODO implement
     }
 }
