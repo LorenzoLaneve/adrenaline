@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.se.adrenaline.server;
+package it.polimi.deib.newdem.adrenaline.server;
 
 public class ServerMain {
 

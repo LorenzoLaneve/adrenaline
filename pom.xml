@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>it.polimi.deib.newdem.se</groupId>
+    <groupId>it.polimi.deib.newdem.adrenaline</groupId>
     <artifactId>Adrenaline</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -64,7 +64,7 @@
                             <classifier>client</classifier>
                             <archive>
                                 <manifest>
-                                    <mainClass>it.polimi.deib.newdem.se.adrenaline.client.ClientMain</mainClass>
+                                    <mainClass>it.polimi.deib.newdem.adrenaline.client.ClientMain</mainClass>
                                 </manifest>
                             </archive>
                             <excludes>
@@ -84,7 +84,7 @@
                             <classifier>server</classifier>
                             <archive>
                                 <manifest>
-                                    <mainClass>it.polimi.deib.newdem.se.adrenaline.server.ServerMain</mainClass>
+                                    <mainClass>it.polimi.deib.newdem.adrenaline.server.ServerMain</mainClass>
                                 </manifest>
                             </archive>
                             <excludes>

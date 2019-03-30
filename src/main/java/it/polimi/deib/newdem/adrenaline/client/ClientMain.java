@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.se.adrenaline.client;
+package it.polimi.deib.newdem.adrenaline.client;
 
 public class ClientMain {
 
