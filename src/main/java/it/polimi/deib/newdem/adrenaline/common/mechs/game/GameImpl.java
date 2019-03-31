@@ -2,13 +2,18 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.map.Map;
 
+import java.util.List;
+
 public class GameImpl implements Game {
 
     private Map map;
 
-    public GameImpl(Map map) {
-        this.map = map;
-    }
+    private RoundRobim turnQueue;
+
+    private KillTrack killTrack;
+
+    private List<Player> players;
+
 
     @Override
     public Map getMap() {

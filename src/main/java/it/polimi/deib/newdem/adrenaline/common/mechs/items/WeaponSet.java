@@ -4,6 +4,9 @@ import java.util.List;
 
 public class WeaponSet {
 
+    private List<WeaponCard> cards;
+
+
     public WeaponSet() {
         // TODO implement
     }

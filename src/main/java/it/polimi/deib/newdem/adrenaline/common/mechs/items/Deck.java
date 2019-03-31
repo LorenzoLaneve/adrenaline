@@ -2,22 +2,22 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.items;
 
 import java.util.List;
 
-public class Deck<T> {
+public class Deck<CardType> {
 
     // subject to change or restructuring
-    List<T> list;
+    List<CardType> list;
 
-    public Deck(List<T> list) {
+    public Deck(List<CardType> list) {
         this.list = list;
         // TODO implement
     }
 
-    public T extract(){
+    public CardType extract(){
         // TODO implement
         return null;
     }
 
-    public void discard(T card){
+    public void discard(CardType card){
         // TODO implement
     }
 

@@ -5,6 +5,14 @@ import it.polimi.deib.newdem.adrenaline.common.mechs.actions.ActionFactory;
 import java.util.List;
 
 public class PlayerImpl implements Player {
+
+    private PlayerInventory inventory;
+
+    private ActionBoard actionBoard;
+
+    private DamageBoard damageBoard;
+
+
     @Override
     public Game getGame() {
         //TODO
