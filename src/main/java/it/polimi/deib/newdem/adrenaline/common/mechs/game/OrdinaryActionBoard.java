@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.ActionFactory;
-import it.polimi.deib.newdem.adrenaline.common.mechs.game.ActionBoard;
 
 import java.util.List;
 
