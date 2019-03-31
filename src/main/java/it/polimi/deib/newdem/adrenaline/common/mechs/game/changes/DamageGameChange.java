@@ -1,15 +1,19 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs.changes;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Game;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 
-public class ScoreAssignmentGameChange implements GameChange {
+public class DamageGameChange implements GameChange {
 
-    private Player player;
-    private int scoreAmount;
+    private Player attacker;
+    private Player attacked;
 
-    public ScoreAssignmentGameChange(Player player, int scoreAmount){
+    private int damageAmount;
+    private int markAmount;
+
+
+    public DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt){
         //TODO
     }
 

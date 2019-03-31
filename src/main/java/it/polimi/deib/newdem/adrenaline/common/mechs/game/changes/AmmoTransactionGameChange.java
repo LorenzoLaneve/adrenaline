@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs.changes;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;

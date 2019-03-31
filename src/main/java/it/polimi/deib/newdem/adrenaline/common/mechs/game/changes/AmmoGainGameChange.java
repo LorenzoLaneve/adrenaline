@@ -1,15 +1,13 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs.changes;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Game;
-import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
+import it.polimi.deib.newdem.adrenaline.common.mechs.items.AmmoSet;
 
-public class DeathGameChange implements GameChange {
+public class AmmoGainGameChange extends AmmoTransactionGameChange {
 
-    private Player killer;
-    private Player killed;
-
-    public DeathGameChange(Player killer, Player killed){
+    public AmmoGainGameChange(Player player, AmmoSet ammos){
+        super(player, ammos);
         //TODO
     }
 

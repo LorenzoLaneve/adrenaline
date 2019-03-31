@@ -1,18 +1,16 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs.changes;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Game;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
-import it.polimi.deib.newdem.adrenaline.common.mechs.map.Tile;
+import it.polimi.deib.newdem.adrenaline.common.mechs.items.Weapon;
 
-public class MovementGameChange implements GameChange {
+public class WeaponReloadGameChange implements GameChange {
 
     private Player player;
+    private Weapon weapon;
 
-    private Tile sourceTile;
-    private Tile destinationTile;
-
-    public MovementGameChange(Player player, Tile srcTile, Tile destTile){
+    public WeaponReloadGameChange(Player player, Weapon weapon){
         //TODO
     }
 

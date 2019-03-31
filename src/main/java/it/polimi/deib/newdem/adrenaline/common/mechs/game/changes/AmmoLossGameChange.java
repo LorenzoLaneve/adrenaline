@@ -1,12 +1,12 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs.changes;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Game;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.AmmoSet;
 
-public class AmmoGainGameChange extends AmmoTransactionGameChange {
+public class AmmoLossGameChange extends AmmoTransactionGameChange {
 
-    public AmmoGainGameChange(Player player, AmmoSet ammos){
+    public AmmoLossGameChange(Player player, AmmoSet ammos){
         super(player, ammos);
         //TODO
     }
