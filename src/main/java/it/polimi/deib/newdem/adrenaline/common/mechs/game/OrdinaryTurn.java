@@ -1,6 +1,6 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
-public class FirstTurn extends TurnBaseImpl {
+public class OrdinaryTurn extends TurnBaseImpl {
     /*
     This class may be changed from direct implementation to
     extension of base implementator

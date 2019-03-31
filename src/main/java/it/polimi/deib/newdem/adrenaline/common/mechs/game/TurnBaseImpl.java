@@ -1,6 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.mechs;
-
-import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
+package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 public abstract class TurnBaseImpl implements Turn {
 
