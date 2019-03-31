@@ -2,7 +2,8 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.map;
 
 public class TilePosition {
 
-    int x, y;
+    private int x;
+    private int y;
 
     // TODO validate
     public TilePosition(int x, int y) {

@@ -4,7 +4,8 @@ import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 
 public class PickupAction extends ActionBaseImpl {
 
-    private int minDist, maxDist;
+    private int minDist;
+    private int maxDist;
 
     public PickupAction(Player actor, int minDist, int maxDist) {
         super(actor);
