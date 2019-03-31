@@ -6,7 +6,7 @@ import it.polimi.deib.newdem.adrenaline.common.mechs.map.Map;
 
 public class DirectionalPlayerSelector implements PlayerSelector {
 
-    private MetaPlayer suorcePlayer;
+    private MetaPlayer sourcePlayer;
     private Direction direction;
 
     public DirectionalPlayerSelector(Player sourcePlayer, Direction direction){

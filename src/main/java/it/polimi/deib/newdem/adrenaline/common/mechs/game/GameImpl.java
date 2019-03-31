@@ -8,7 +8,7 @@ public class GameImpl implements Game {
 
     private Map map;
 
-    private RoundRobim turnQueue;
+    private RoundRobin turnQueue;
 
     private KillTrack killTrack;
 

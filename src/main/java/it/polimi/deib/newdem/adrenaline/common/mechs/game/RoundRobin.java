@@ -2,11 +2,11 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 import java.util.List;
 
-public class RoundRobim {
+public class RoundRobin {
 
     private List<Player> players;
 
-    public RoundRobim(List<Player> players) {
+    public RoundRobin(List<Player> players) {
         this.players = players;
         // TODO implement
     }
