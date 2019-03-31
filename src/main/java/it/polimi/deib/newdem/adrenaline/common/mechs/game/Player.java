@@ -17,10 +17,6 @@ public interface Player {
 
     PlayerColor getColor();
 
-    ActionBoard getActionBoard();
-
-    DamageBoard getDamageBoard();
-
     List<ActionFactory> getMoves();
 
     int getDeaths();
@@ -32,30 +28,6 @@ public interface Player {
     int getDamageFromPlayer(Player player);
 
     int getMarksFromPlayer(Player player);
-
-    WeaponSet getReadyWeapons();
-    /*
-    At the time of writing, WeaponSet hasn't been introduced
-    not even as a stub
-
-    TODO validate
-     */
-
-    WeaponSet getUnloadedWeapons();
-    /*
-    At the time of writing, AmmoSet hasn't been introduced
-    not even as a stub
-
-    TODO validate
-     */
-
-    PowerUpSet getPowerUp();
-    /*
-    At the time of writing, PowerUpSet hasn't been introduced
-    not even as a stub
-
-    TODO validate
-     */
 
     boolean isDead();
 }

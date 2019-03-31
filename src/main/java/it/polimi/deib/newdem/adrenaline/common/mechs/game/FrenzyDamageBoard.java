@@ -1,22 +1,25 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.ActionFactory;
-import it.polimi.deib.newdem.adrenaline.common.mechs.game.DamageBoard;
-import it.polimi.deib.newdem.adrenaline.common.mechs.game.DamageBoardFace;
 
 import java.util.List;
 
-public class FrenzyDamageBoard implements DamageBoardFace {
+public class FrenzyDamageBoard extends DamageBoardImpl {
+
+    public FrenzyDamageBoard(Player player) {
+        super(player);
+        // TODO implement
+    }
 
     @Override
-    public DamageBoard getBoard() {
+    public List<ActionFactory> getAdditionalMoves(int totalDamage) {
         // TODO implement
         return null;
     }
 
     @Override
-    public List<ActionFactory> getAdditionalMoves() {
+    public int getScoreForPlayer(Player player) {
         // TODO implement
-        return null;
+        return 0;
     }
 }

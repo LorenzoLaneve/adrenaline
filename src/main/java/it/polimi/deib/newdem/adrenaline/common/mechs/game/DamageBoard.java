@@ -1,18 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
+import it.polimi.deib.newdem.adrenaline.common.mechs.actions.ActionFactory;
+
+import java.util.List;
+
 public interface DamageBoard {
 
     Player getPlayer();
 
-    int getDeaths();
+    List<ActionFactory> getAdditionalMoves(int totalDamage);
 
-    void dealDamageTo(Player p, int damage);
+    int getScoreForPlayer(Player player);
 
-    void dealMarksTo(Player p, int marks);
-
-    int getTotalDamage();
-
-    int getTotalMarks();
-
-    Player getDamager(int cell);
 }

@@ -32,18 +32,6 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public ActionBoard getActionBoard() {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public DamageBoard getDamageBoard() {
-        //TODO
-        return null;
-    }
-
-    @Override
     public List<ActionFactory> getMoves() {
         //TODO
         return null;
@@ -77,24 +65,6 @@ public class PlayerImpl implements Player {
     public int getMarksFromPlayer(Player player) {
         //TODO
         return 0;
-    }
-
-    @Override
-    public WeaponSet getReadyWeapons() {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public WeaponSet getUnloadedWeapons() {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public PowerUpSet getPowerUp() {
-        //TODO
-        return null;
     }
 
     @Override
