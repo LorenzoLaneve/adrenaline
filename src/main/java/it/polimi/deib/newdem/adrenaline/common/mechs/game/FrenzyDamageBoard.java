@@ -12,7 +12,7 @@ public class FrenzyDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    public List<ActionFactory> getAdditionalMoves(int totalDamage) {
+    public List<ActionFactory> getAdditionalActions(int totalDamage) {
         // TODO implement
         return null;
     }

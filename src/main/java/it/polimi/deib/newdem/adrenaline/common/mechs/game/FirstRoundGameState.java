@@ -12,4 +12,9 @@ public class FirstRoundGameState implements GameState {
         return false;
         // TODO implement
     }
+
+    @Override
+    public void gameWillEnterGameState(Game game) {
+        // TODO implement
+    }
 }

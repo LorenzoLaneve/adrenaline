@@ -12,4 +12,9 @@ public class FrenzyGameState implements GameState {
         // TODO implement
 
     }
+
+    @Override
+    public void gameWillEnterGameState(Game game) {
+        // TODO implement
+    }
 }

@@ -5,9 +5,9 @@ import it.polimi.deib.newdem.adrenaline.common.mechs.items.WeaponSet;
 
 public class PlayerInventory {
 
-    int red;
-    int blue;
-    int yellow;
+    private int red;
+    private int blue;
+    private int yellow;
     private Player player;
 
     public PlayerInventory(){
@@ -16,7 +16,6 @@ public class PlayerInventory {
 
     public Player getPlayer(){
         //TODO
-
         return null;
     }
 
@@ -36,14 +35,17 @@ public class PlayerInventory {
     }
 
     public int getRed() {
+        // TODO implement
         return red;
     }
 
     public int getBlue() {
+        // TODO implement
         return blue;
     }
 
     public int getYellow() {
+        // TODO implement
         return yellow;
     }
 }

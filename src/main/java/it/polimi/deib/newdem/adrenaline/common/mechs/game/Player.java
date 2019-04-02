@@ -8,9 +8,9 @@ public interface Player {
 
     Game getGame();
 
-    PlayerInventory getInventory();
-
     String getName();
+
+    PlayerInventory getInventory();
 
     PlayerColor getColor();
 

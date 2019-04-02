@@ -8,7 +8,7 @@ public interface DamageBoard {
 
     Player getPlayer();
 
-    List<ActionFactory> getAdditionalMoves(int totalDamage);
+    List<ActionFactory> getAdditionalActions(int totalDamage);
 
     int getScoreForPlayer(Player player);
 
