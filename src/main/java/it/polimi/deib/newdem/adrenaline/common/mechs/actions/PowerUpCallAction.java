@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
+import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.items.PowerUpCard;
 
@@ -20,8 +21,9 @@ public class PowerUpCallAction extends ActionBaseImpl {
 
     }
 
-    public PowerUpCard getCard() {
-        return card;
-        // TODO implement
+    @Override
+    public Effect getEffect() {
+        //TODO implement
+        return null;
     }
 }

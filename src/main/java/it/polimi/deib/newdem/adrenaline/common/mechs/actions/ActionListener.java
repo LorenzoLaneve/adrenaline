@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.common.mechs.effects.MetaPlayer;
@@ -39,5 +40,7 @@ public interface ActionListener {
 
     int actionDidRequestAdditionalDamage();
 
-    int actionDidRqeustRevengeMark(Player attackedPlayer);
+    int actionDidRequestRevengeMark(Player attackedPlayer);
+
+    void actionDidEmitGameChange(GameChange gameChange);
 }

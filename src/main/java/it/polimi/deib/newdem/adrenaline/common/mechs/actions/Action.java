@@ -1,8 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
 import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
 
 public interface Action {
+
+    Player getActor();
 
     Effect getEffect();
     /*
@@ -12,9 +16,9 @@ public interface Action {
     TODO validate
      */
 
-    void bindListener(ActionListener lsitener);
-
-    void unbindListener(ActionListener listener);
+    void bindListener(ActionListener listener);
 
     void start();
+
+    void emitGameChange(GameChange gameChange);
 }

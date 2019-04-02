@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.actions;
 
+import it.polimi.deib.newdem.adrenaline.common.mechs.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.common.mechs.game.Player;
-import it.polimi.deib.newdem.adrenaline.common.mechs.effects.Effect;
 
 public abstract class ActionBaseImpl implements Action {
 
@@ -14,14 +14,6 @@ public abstract class ActionBaseImpl implements Action {
         this.actor = actor;
     }
 
-
-    @Override
-    public Effect getEffect() {
-        // TODO implement
-        return null;
-    }
-
-
     @Override
     public void bindListener(ActionListener listener) {
         // TODO implement
@@ -33,7 +25,13 @@ public abstract class ActionBaseImpl implements Action {
     }
 
     @Override
-    public void unbindListener(ActionListener listener) {
-        // TODO implement
+    public Player getActor() {
+        //TODO implement
+        return null;
+    }
+
+    @Override
+    public void emitGameChange(GameChange gameChange) {
+        //TODO implement
     }
 }
