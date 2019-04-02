@@ -8,7 +8,6 @@ public class ConcreteRoom implements Room {
     // TODO figure out data structure
 
     // discussed on Discord
-    // inferred from getMap()
     private Map map;
 
     private List<Tile> tiles;
@@ -22,13 +21,13 @@ public class ConcreteRoom implements Room {
     @Override
     public List<Tile> getTiles() {
         // TODO implement
-        return null;
+        return tiles;
     }
 
     @Override
     public Map getMap() {
         // TODO implement
-        return null;
+        return map;
     }
 
     @Override

@@ -9,6 +9,10 @@ import java.util.List;
 public abstract class ConcreteTile implements Tile {
     // TODO figure out data structure
 
+    private Room room;
+
+    private List<Player> players;
+
     @Override
     public Map getMap() {
         // TODO implement
@@ -40,19 +44,7 @@ public abstract class ConcreteTile implements Tile {
     }
 
     @Override
-    public List<Tile> getAdjacents() {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public DropInstance getDrops() {
-        // TODO implement
-        return null;
-    }
-
-    @Override
-    public WeaponSet getWeapons() {
+    public List<Tile> getAdjacentTiles() {
         // TODO implement
         return null;
     }
