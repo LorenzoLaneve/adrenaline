@@ -2,12 +2,13 @@ package it.polimi.deib.newdem.adrenaline.common.mechs.items;
 
 public class DropInstance {
 
-    final AmmoSet ammoSet;
-    final PowerUpCard powerUpCard;
+    private final AmmoSet ammoSet;
+    private final PowerUpCard powerUpCard;
 
     public DropInstance(AmmoSet ammoSet, PowerUpCard powerUpCard) {
         this.ammoSet = ammoSet;
         this.powerUpCard = powerUpCard;
+        // TODO implement
     }
 
     AmmoSet getAmmos() {
@@ -17,7 +18,7 @@ public class DropInstance {
 
     PowerUpCard getPowerUp() {
         // TODO implement
-        return null;
+        return powerUpCard;
     }
 
     boolean hasPowerUp() {

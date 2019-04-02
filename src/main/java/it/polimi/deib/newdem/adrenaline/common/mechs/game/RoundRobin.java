@@ -4,10 +4,10 @@ import java.util.List;
 
 public class RoundRobin {
 
-    private List<Player> players;
+    private List<Player> waitingPlayers;
 
     public RoundRobin(List<Player> players) {
-        this.players = players;
+        this.waitingPlayers = players;
         // TODO implement
     }
 

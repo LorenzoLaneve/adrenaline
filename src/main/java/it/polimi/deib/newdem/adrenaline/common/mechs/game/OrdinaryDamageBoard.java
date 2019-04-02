@@ -12,7 +12,7 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    public List<ActionFactory> getAdditionalMoves(int totalDamage) {
+    public List<ActionFactory> getAdditionalActions(int totalDamage) {
         return null;
     }
 

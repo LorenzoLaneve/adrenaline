@@ -4,19 +4,19 @@ public abstract class TurnBaseImpl implements Turn {
 
     private Player activePlayer;
 
-    protected abstract void turnDidStart();
-
-    protected abstract void turnDidFinish();
+    public TurnBaseImpl(Player activePlayer) {
+        this.activePlayer = activePlayer;
+        // TODO implement
+    }
 
     @Override
     public Player getActivePlayer() {
         // TODO implement
-        return null;
+        return activePlayer;
     }
 
     @Override
     public void start() {
         // TODO implement
-        // or leave as abstract
     }
 }

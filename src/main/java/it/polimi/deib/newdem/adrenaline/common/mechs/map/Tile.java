@@ -17,23 +17,11 @@ public interface Tile {
 
     List<Player> getPlayers();
 
-    List<Tile> getAdjacents();
+    List<Tile> getAdjacentTiles();
 
     boolean hasSpawnPoint();
 
     DropInstance getDrops();
-    /*
-    At the time of writing, DropInstance hasn't been intrduced
-    not even as a stub
-
-    TODO validate
-     */
 
     WeaponSet getWeapons();
-    /*
-    At the time of writing, WeaponSet hasn't been intrduced
-    not even as a stub
-
-    TODO validate
-     */
 }

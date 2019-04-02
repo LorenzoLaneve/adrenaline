@@ -6,4 +6,6 @@ public interface Turn {
 
     void start();
 
+    void turnWillStart();
+
 }

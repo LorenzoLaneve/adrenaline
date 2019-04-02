@@ -14,6 +14,8 @@ public class GameImpl implements Game {
 
     private List<Player> players;
 
+    private GameState gameState;
+
 
     @Override
     public Map getMap() {
