@@ -5,10 +5,10 @@ import java.util.List;
 public class Deck<T> {
 
     // subject to change or restructuring
-    List<T> list;
+    private List<T> cards;
 
     public Deck(List<T> list) {
-        this.list = list;
+        this.cards = list;
         // TODO implement
     }
 
