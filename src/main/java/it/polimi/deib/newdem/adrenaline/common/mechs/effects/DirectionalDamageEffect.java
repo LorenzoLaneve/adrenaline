@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.actions.Action;
-
 public class DirectionalDamageEffect extends DamageEffect {
 
     private boolean ignoreWalls;
@@ -14,7 +12,7 @@ public class DirectionalDamageEffect extends DamageEffect {
     }
 
     @Override
-    public void apply(Action action) {
+    public void apply(EffectVisitor visitor) {
         //TODO
     }
 }

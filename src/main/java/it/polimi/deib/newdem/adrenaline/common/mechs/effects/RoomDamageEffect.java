@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.actions.Action;
-
 public class RoomDamageEffect extends DamageEffect {
 
     private TileSelectorFactory selectorMaker;
@@ -12,7 +10,7 @@ public class RoomDamageEffect extends DamageEffect {
         //TODO
     }
     @Override
-    public void apply(Action action) {
+    public void apply(EffectVisitor visitor) {
         //TODO
     }
 

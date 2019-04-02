@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.actions.Action;
-
 public class ChainDamageEffect extends ConcreteEffect {
 
 
@@ -11,7 +9,7 @@ public class ChainDamageEffect extends ConcreteEffect {
     }
 
     @Override
-    public void apply(Action action) {
+    public void apply(EffectVisitor visitor) {
         //TODO
     }
 }

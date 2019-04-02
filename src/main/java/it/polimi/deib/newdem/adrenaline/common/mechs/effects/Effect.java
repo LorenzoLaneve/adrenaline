@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.actions.Action;
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.PaymentInvoice;
 
 public interface Effect {
@@ -9,6 +8,6 @@ public interface Effect {
 
     PaymentInvoice getPrice();
 
-    void apply(Action action);
+    void apply(EffectVisitor visitor);
 
 }

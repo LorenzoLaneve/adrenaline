@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.mechs.actions.Action;
 import it.polimi.deib.newdem.adrenaline.common.mechs.actions.PaymentInvoice;
 
 public class PayableEffect extends ConcreteEffect {
@@ -13,8 +12,14 @@ public class PayableEffect extends ConcreteEffect {
         //TODO
     }
     @Override
-    public void apply(Action action) {
+    public void apply(EffectVisitor visitor) {
         //TODO
 
+    }
+
+    @Override
+    public PaymentInvoice getPrice(){
+        //TODO
+        return null;
     }
 }
