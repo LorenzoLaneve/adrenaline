@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.common.controller.actions.PaymentInvoice;
-
 public class PayableEffect extends ConcreteEffect {
 
     private Effect effect;

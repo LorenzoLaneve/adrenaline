@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.actions;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects;
 
 public class PaymentInvoice {
 
