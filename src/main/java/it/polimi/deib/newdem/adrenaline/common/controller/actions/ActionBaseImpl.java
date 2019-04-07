@@ -7,7 +7,7 @@ public abstract class ActionBaseImpl implements Action {
 
     private ActionListener listener;
 
-    private Player actor;
+    protected Player actor;
 
     public ActionBaseImpl(Player actor) {
         // TODO implement

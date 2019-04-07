@@ -1,13 +1,11 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
 
 import it.polimi.deib.newdem.adrenaline.common.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.model.map.Map;
 
-public class VisiblePlayerSelector implements PlayerSelector {
+public class AnyPlayerSelector implements PlayerSelector {
 
-    Player sourcePlayer;
-
-    public VisiblePlayerSelector(Player sourcePlayer){
+    public AnyPlayerSelector(){
         //TODO
     }
 

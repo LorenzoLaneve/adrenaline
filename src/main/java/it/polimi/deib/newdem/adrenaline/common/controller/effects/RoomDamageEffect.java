@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.selection.TileSelectorFactory;
+
 public class RoomDamageEffect extends DamageEffect {
 
     private TileSelectorFactory selectorMaker;

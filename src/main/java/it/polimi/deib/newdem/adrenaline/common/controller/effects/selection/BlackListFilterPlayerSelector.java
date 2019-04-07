@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
 
 import it.polimi.deib.newdem.adrenaline.common.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.model.map.Map;
@@ -7,9 +7,12 @@ import java.util.List;
 
 public class BlackListFilterPlayerSelector implements PlayerSelector {
 
-    List<Player> excluded;
+    private List<Player> excluded;
+    private PlayerSelector innerSelector;
 
     public BlackListFilterPlayerSelector(List<Player> excluded, PlayerSelector innerSelector){
+        this.excluded = excluded;
+        this.innerSelector = innerSelector;
         //TODO
     }
 

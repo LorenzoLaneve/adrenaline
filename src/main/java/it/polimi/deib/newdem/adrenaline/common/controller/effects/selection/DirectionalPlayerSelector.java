@@ -1,5 +1,6 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
 
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.MetaPlayer;
 import it.polimi.deib.newdem.adrenaline.common.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.common.model.map.Direction;
 import it.polimi.deib.newdem.adrenaline.common.model.map.Map;

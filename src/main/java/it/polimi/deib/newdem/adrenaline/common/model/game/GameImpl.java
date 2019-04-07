@@ -36,4 +36,15 @@ public class GameImpl implements Game {
         return false;
         // TODO implement
     }
+
+    @Override
+    public void makeTurn() {
+        // TODO implement
+        gameState.makeTurn();
+    }
+
+    public void changeState(GameState state) {
+        // TODO implement
+    }
+
 }

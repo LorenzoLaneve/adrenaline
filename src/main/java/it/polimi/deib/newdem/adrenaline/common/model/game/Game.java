@@ -9,4 +9,6 @@ public interface Game {
     Player getPlayer(PlayerColor color);
 
     boolean isInFrenzy();
+
+    void makeTurn();
 }

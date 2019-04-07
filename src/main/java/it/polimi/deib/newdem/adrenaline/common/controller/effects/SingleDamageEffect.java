@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.selection.PlayerSelectorFactory;
+
 public class SingleDamageEffect extends DamageEffect {
 
     private MetaPlayer metaPlayer;
@@ -13,6 +15,13 @@ public class SingleDamageEffect extends DamageEffect {
         //TODO
     }
 
+    /** Implements the single (individual) damage efect.
+     *
+     * Calculates the variations associated with a damage effects
+     * and generates the corresponding gameChange in @code{visitor}.
+     *
+     * @param visitor
+     */
     @Override
     public void apply(EffectVisitor visitor) {
         //TODO

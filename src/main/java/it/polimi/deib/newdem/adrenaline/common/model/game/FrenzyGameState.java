@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.common.model.game;
 public class FrenzyGameState implements GameState {
     @Override
     public Turn makeTurn() {
+        // TODO implement
         return null;
     }
 

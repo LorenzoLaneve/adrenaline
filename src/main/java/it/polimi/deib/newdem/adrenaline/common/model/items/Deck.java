@@ -7,6 +7,10 @@ public class Deck<T> {
     // subject to change or restructuring
     private List<T> cards;
 
+    /** Creates a new {@code Deck} made up of the elements of the given list
+     *
+     * @param list the elements to build a deck from
+     */
     public Deck(List<T> list) {
         this.cards = list;
         // TODO implement

@@ -6,5 +6,5 @@ public interface GameState {
 
     boolean isInFrenzy();
 
-    public void gameWillEnterGameState(Game game);
+    void gameWillEnterGameState(Game game);
 }

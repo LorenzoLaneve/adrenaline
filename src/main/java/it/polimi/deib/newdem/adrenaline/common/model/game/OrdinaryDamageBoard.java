@@ -13,11 +13,13 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
 
     @Override
     public List<ActionFactory> getAdditionalActions(int totalDamage) {
+        // TODO implement
         return null;
     }
 
     @Override
     public int getScoreForPlayer(Player player) {
+        // TODO implement
         return 0;
     }
 

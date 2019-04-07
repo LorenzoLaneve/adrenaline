@@ -1,9 +1,11 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
+
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.EffectVisitor;
 
 public class NearTileSelectorFactory implements TileSelectorFactory{
 
-    int minDistance;
-    int maxDistance;
+    private int minDistance;
+    private int maxDistance;
 
     public NearTileSelectorFactory(int minDist, int maxDist){
         //TODO

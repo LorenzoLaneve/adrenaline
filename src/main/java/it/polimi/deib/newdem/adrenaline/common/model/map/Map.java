@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Map {
 
-    List<Room> getRoom();
+    List<Room> getRooms();
 
     Tile getTile(TilePosition p);
 

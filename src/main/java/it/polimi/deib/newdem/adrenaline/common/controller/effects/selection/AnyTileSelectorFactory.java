@@ -1,4 +1,6 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
+
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.EffectVisitor;
 
 public class AnyTileSelectorFactory implements TileSelectorFactory {
 

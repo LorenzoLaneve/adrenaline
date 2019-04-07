@@ -1,12 +1,14 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller.effects.selection;
 
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.EffectVisitor;
+import it.polimi.deib.newdem.adrenaline.common.controller.effects.MetaPlayer;
 import it.polimi.deib.newdem.adrenaline.common.model.game.Player;
 
 import java.util.List;
 
 public class VisiblePlayerSelectorFactory implements PlayerSelectorFactory {
 
-    MetaPlayer sourcePlayer;
+    private MetaPlayer sourcePlayer;
 
     public VisiblePlayerSelectorFactory(MetaPlayer sourcePlayer){
         //TODO
