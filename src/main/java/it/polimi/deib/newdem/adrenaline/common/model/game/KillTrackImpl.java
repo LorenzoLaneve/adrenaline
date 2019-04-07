@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.common.mechs.game;
 
+import it.polimi.deib.newdem.adrenaline.common.model.game.KillTrack;
+import it.polimi.deib.newdem.adrenaline.common.model.game.Player;
+
 import java.util.List;
 
 public class KillTrackImpl implements KillTrack {

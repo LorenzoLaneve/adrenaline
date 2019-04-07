@@ -18,4 +18,9 @@ public class RMIUserModule implements IncomingUserModule {
         //TODO
         return null;
     }
+
+    @Override
+    public void close() {
+        //TODO implement
+    }
 }
