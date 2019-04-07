@@ -6,5 +6,8 @@ public interface IncomingUserModule {
 
     void init();
 
-    User newUser();
+    User newUser() throws InterruptedException;
+
+    void close();
+
 }

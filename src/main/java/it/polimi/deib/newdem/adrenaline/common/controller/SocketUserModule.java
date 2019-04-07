@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
 public class SocketUserModule implements IncomingUserModule {
 
-    public SocketUserModule(){
+    public SocketUserModule(int port){
         //TODO
     }
 
@@ -17,5 +17,10 @@ public class SocketUserModule implements IncomingUserModule {
     public User newUser() {
         //TODO
         return null;
+    }
+
+    @Override
+    public void close() {
+        //TODO
     }
 }
