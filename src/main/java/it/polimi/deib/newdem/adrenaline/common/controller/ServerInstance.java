@@ -19,7 +19,7 @@ public class ServerInstance {
     /**
      * Creates a new server instance.
      * @param log The Logger object that will accept incoming diagnostics from the server
-     * @param config The configuration object the server will set
+     * @param config The configuration object the server will use
      */
     public ServerInstance(Logger log, Config config) {
         this.log = log;
