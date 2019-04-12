@@ -4,8 +4,10 @@ public interface LobbyTimerListener {
 
     void timerWillStart();
 
-    void timerSync();
+    void timerSync(int secondsLeft);
 
     void timerDidFinish();
+
+    void timerDidAbort();
 
 }
