@@ -2,14 +2,13 @@ package it.polimi.deib.newdem.adrenaline.common.controller;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerInstance {
 
     private Logger log;
-
-    //private Config config;
 
     private UserGreeter greeter;
 
@@ -26,18 +25,35 @@ public class ServerInstance {
      */
     public ServerInstance(Logger log, Config config) {
         this.log = log;
-        //this.config = config;
         this.greeter = new UserGreeter();
 
+        this.ready = false;
+
+        addUserModules(config);
+    }
+
+    private void addUserModules(Config config) {
         if (config.isSocketActive()) {
-            greeter.addUserModule(new SocketUserModule(config.getSocketPort()));
+            try {
+                greeter.addUserModule(new SocketUserModule(config.getSocketPort()));
+
+                getLogger().log(Level.INFO, String.format("Socket module successfully added. Listening to TCP port %d", config.getSocketPort()));
+            } catch (IOException e) {
+                getLogger().log(Level.SEVERE, "Could not create Socket Module: "+ e.getMessage());
+            }
+
         }
 
         if (config.isRMIActive()) {
             greeter.addUserModule(new RMIUserModule());
         }
+    }
 
-        this.ready = false;
+    /**
+     * Returns the Logger object for the log this server should report diagnostics to.
+     */
+    public Logger getLogger() {
+        return log;
     }
 
     /**
@@ -71,9 +87,9 @@ public class ServerInstance {
                 User incomingUser = greeter.accept();
 
                 userRegistry.registerUser(incomingUser);
-                log.log(Level.INFO, String.format("User %s joined the server.", incomingUser.getName()));
+                getLogger().log(Level.INFO, String.format("User %s joined the server.", incomingUser.getName()));
             } catch (Exception e) {
-                log.log(Level.SEVERE, "Server encountered error: "+ e.getMessage());
+                getLogger().log(Level.SEVERE, "Server encountered error: "+ e.getMessage());
 
                 stopServer = true;
             }
