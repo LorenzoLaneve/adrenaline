@@ -8,13 +8,10 @@ public class LobbyRegistry {
 
     private List<LobbyManager> waitingLobbies;
 
-    private LobbyRegistry(){
-        //TODO
-    }
+    private ServerInstance core;
 
-    public static LobbyRegistry getRegistry(){
+    public LobbyRegistry(ServerInstance core){
         //TODO
-        return null;
     }
 
     public void tickTimers(){

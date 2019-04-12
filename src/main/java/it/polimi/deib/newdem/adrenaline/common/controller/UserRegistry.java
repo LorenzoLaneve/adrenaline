@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.controller.effects;
+package it.polimi.deib.newdem.adrenaline.common.controller;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
@@ -8,13 +8,10 @@ public class UserRegistry {
 
     private List<User> users;
 
-    private UserRegistry(){
-        //TODO
-    }
+    private ServerInstance core;
 
-    public static UserRegistry getRegistry(){
+    public UserRegistry(ServerInstance core){
         //TODO
-        return null;
     }
 
     public void registerUser(User user){

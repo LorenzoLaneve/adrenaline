@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.common.controller;
 
-import it.polimi.deib.newdem.adrenaline.common.controller.effects.UserRegistry;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
 import java.util.logging.Level;
@@ -10,9 +9,13 @@ public class ServerInstance {
 
     private Logger log;
 
-    private Config config;
+    //private Config config;
 
     private UserGreeter greeter;
+
+    private LobbyRegistry lobbyRegistry;
+
+    private UserRegistry userRegistry;
 
     private boolean ready;
 
@@ -23,7 +26,7 @@ public class ServerInstance {
      */
     public ServerInstance(Logger log, Config config) {
         this.log = log;
-        this.config = config;
+        //this.config = config;
         this.greeter = new UserGreeter();
 
         if (config.isSocketActive()) {
@@ -43,21 +46,21 @@ public class ServerInstance {
     public void init() {
         greeter.init();
 
+        lobbyRegistry = new LobbyRegistry(this);
+        userRegistry = new UserRegistry(this);
+
         ready = true;
     }
 
     /**
      * Starts the server instance in the current thread.
-     * @throws NotReadyException if the server instance was not initialized before starting.
+     * @throws InvalidStateException if the server instance was not initialized before starting.
      * @implNote To initialize the server instance, please call ServerInstance.init()
      */
-    public void start() throws NotReadyException {
-        UserRegistry userRegistry = UserRegistry.getRegistry();
-
-        LobbyRegistry lobbyRegistry = LobbyRegistry.getRegistry();
+    public void start() throws InvalidStateException {
 
         if (!ready || userRegistry == null || lobbyRegistry == null) {
-            throw new NotReadyException("This server instance was not initialized. Please call init() before starting.");
+            throw new InvalidStateException("This server instance was not initialized. Please call init() before starting.");
         }
 
         greeter.start();
@@ -75,6 +78,8 @@ public class ServerInstance {
                 stopServer = true;
             }
         }
+
+        greeter.close();
 
     }
 

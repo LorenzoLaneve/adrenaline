@@ -15,6 +15,8 @@ public class UserGreeter {
 
     private boolean closeRequested;
 
+    private boolean ready;
+
     /**
      * Create a new, empty user greeter.
      */
@@ -24,6 +26,7 @@ public class UserGreeter {
         this.backlog = new ArrayList<>();
 
         this.closeRequested = false;
+        this.ready = false;
     }
 
     /**
@@ -40,12 +43,18 @@ public class UserGreeter {
         for (IncomingUserModule module : modules) {
             module.init();
         }
+        ready = true;
     }
 
     /**
      * Starts all the modules, by calling UserGreeter.runModule() on a separate thread for each module.
+     * @throws InvalidStateException if init() was not called on the same instance before this method.
      */
-    public void start() {
+    public void start() throws InvalidStateException {
+        if (!ready) {
+            throw new InvalidStateException("Instance not initialized. Please call init() on this object first.");
+        }
+
         for (IncomingUserModule module : modules) {
             Thread moduleThread = new Thread(() -> runModule(module));
             threads.add(moduleThread);
@@ -70,15 +79,20 @@ public class UserGreeter {
     /**
      * Closes all the associated modules by killing the threads and then calls, for each module, IncomingUserModule.close() on the current thread.
      */
-    public void close() {
-        closeRequested = true;
+    public synchronized void close() {
+        if (!closeRequested) {
+            closeRequested = true;
 
-        for (Thread thread : threads) {
-            thread.interrupt();
-        }
+            for (Thread thread : threads) {
+                thread.interrupt();
+            }
+            threads.clear();
+            backlog.clear();
 
-        for (IncomingUserModule module : modules) {
-            module.close();
+            for (IncomingUserModule module : modules) {
+                module.close();
+            }
+            ready = false;
         }
     }
 
