@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.common.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.LobbyState;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
-public interface LobbyManager  {
+public interface LobbyController {
 
     Lobby getLobby();
 

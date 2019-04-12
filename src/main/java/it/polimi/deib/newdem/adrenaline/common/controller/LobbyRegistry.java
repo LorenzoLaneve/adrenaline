@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LobbyRegistry {
 
-    private List<LobbyManager> waitingLobbies;
+    private List<LobbyController> waitingLobbies;
 
     private ServerInstance core;
 
@@ -14,16 +14,12 @@ public class LobbyRegistry {
         //TODO
     }
 
-    public void tickTimers(){
-        //TODO
-    }
-
-    public LobbyManager getFirstLobbyManager(){
+    public LobbyController getFirstLobbyManager(){
         //TODO
         return null;
     }
 
-    public LobbyManager getLobbyManager(User user){
+    public LobbyController getLobbyManager(User user){
         //TODO
         return null;
     }

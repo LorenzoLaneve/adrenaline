@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.common.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.LobbyState;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 
-public class LobbyManagerImpl implements LobbyManager{
+public class LobbyControllerImpl implements LobbyController {
 
     private Thread mainThread;
     private LobbyListener listener;
@@ -41,7 +41,7 @@ public class LobbyManagerImpl implements LobbyManager{
         //TODO
     }
 
-    public LobbyManagerImpl(){
+    public LobbyControllerImpl(){
         //TODO
     }
 }
