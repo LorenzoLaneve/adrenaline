@@ -2,34 +2,61 @@ package it.polimi.deib.newdem.adrenaline.common.controller;
 
 public class Config {
 
+    private boolean useSockets = true;
+
+    private boolean useRMI = true;
+
+    private int socketPort = 9700;
+
+    private int timerLength = 60;
+
+
+    private Config() {  }
+
+    /**
+     * Parses the given configuration file into a new configuration info object.
+     * @param fileName the filename of the configuration file that has to be read.
+     * @return a new {@code Config} object containing all the information retrieved by the given file.
+     */
     public Config fromFile(String fileName){
-        //TODO
-        return null;
+        //TODO file reading
+        return new Config();
     }
 
-    public Config getDefaultConfig(){
-        //TODO
-        return null;
+    /**
+     * Returns the hardcoded default configuration.
+     * @implNote This should only be used in absence of a configuration file.
+     */
+    public Config getDefaultConfig() {
+        return new Config();
     }
 
-    public int getTimerLenght(){
-        //TODO
-        return 0;
+    /**
+     * Returns the length in seconds that timers used by the controller should have when the lobby enters in the countdown state.
+     */
+    public int getTimerLength() {
+        return timerLength;
     }
 
-    public int getSocketPort(){
-        //TODO
-        return 0;
+    /**
+     * Returns the TCP port the socket of the server should listen to new connections from.
+     */
+    public int getSocketPort() {
+        return socketPort;
     }
 
+    /**
+     * Returns whether the socket module should be added to the modules used by the server instance.
+     */
     public boolean isSocketActive(){
-        //TODO
-        return false;
+        return useSockets;
     }
 
+    /**
+     * Returns whether the RMI module should be added to the modules used by the server instance.
+     */
     public boolean isRMIActive(){
-        //TODO
-        return false;
+        return useRMI;
     }
 
 }
