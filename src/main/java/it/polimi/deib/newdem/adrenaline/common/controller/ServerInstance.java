@@ -33,19 +33,23 @@ public class ServerInstance {
     }
 
     private void addUserModules(Config config) {
-        if (config.isSocketActive()) {
-            try {
-                greeter.addUserModule(new SocketUserModule(config.getSocketPort()));
+        try {
+            if (config.isSocketActive()) {
+                try {
+                    greeter.addUserModule(new SocketUserModule(config.getSocketPort()));
 
-                getLogger().log(Level.INFO, String.format("Socket module successfully added. Listening to TCP port %d", config.getSocketPort()));
-            } catch (IOException e) {
-                getLogger().log(Level.SEVERE, "Could not create Socket Module: "+ e.getMessage());
+                    getLogger().log(Level.INFO, String.format("Socket module successfully added. Listening to TCP port %d", config.getSocketPort()));
+                } catch (IOException e) {
+                    getLogger().log(Level.SEVERE, "Could not create Socket Module: " + e.getMessage());
+                }
+
             }
 
-        }
-
-        if (config.isRMIActive()) {
-            greeter.addUserModule(new RMIUserModule());
+            if (config.isRMIActive()) {
+                greeter.addUserModule(new RMIUserModule());
+            }
+        } catch (InvalidStateException x) {
+            getLogger().log(Level.SEVERE, "Could not add modules to the user greeter because it was already initialized.");
         }
     }
 

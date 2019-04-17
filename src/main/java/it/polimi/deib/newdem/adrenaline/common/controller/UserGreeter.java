@@ -25,30 +25,48 @@ public class UserGreeter {
         this.threads = new ArrayList<>();
         this.backlog = new ArrayList<>();
 
-        this.closeRequested = false;
+        this.closeRequested = true;
         this.ready = false;
     }
 
     /**
      * Adds the given module to the modules that have to be used to retrieve incoming users.
+     * @throws IllegalArgumentException if the given module is null.
+     * @throws InvalidStateException if this method is called after the {@code init()} method.
+     * This is to avoid adding new modules while the already added modules are running.
      */
-    public void addUserModule(IncomingUserModule module) {
+    public void addUserModule(IncomingUserModule module) throws InvalidStateException {
+        if (module == null) {
+            throw new IllegalArgumentException("The module passed to the greeter must be non-null.");
+        }
+
+        if (ready) {
+            throw new InvalidStateException("The user greeter is already initialized and cannot accept any new modules.");
+        }
+
         modules.add(module);
     }
 
     /**
-     * Initializes all the modules by calling the method IncomingUserModule.init() on the current thread.
+     * Initializes all the modules by calling IncomingUserModule.init() on all the added modules.
+     * @implNote This is done on the current thread.
+     * If init() is called on an already initialized user greeter, the object will not be initialized again.
      */
     public void init() {
-        for (IncomingUserModule module : modules) {
-            module.init();
+        if (!ready) {
+            this.closeRequested = false;
+            for (IncomingUserModule module : modules) {
+                module.init();
+            }
+            ready = true;
         }
-        ready = true;
     }
 
     /**
-     * Starts all the modules, by calling UserGreeter.runModule() on a separate thread for each module.
+     * Starts all the modules. A new thread for each added module is initialized and run,
+     * and it will continuously ask the associated module for new users by calling IncomingUserModule.newUser().
      * @throws InvalidStateException if init() was not called on the same instance before this method.
+     * @implNote and {@code null} module returned by the module through {@code newUser()} will cause the receiver thread to immediately interrupt.
      */
     public void start() throws InvalidStateException {
         if (!ready) {
@@ -78,6 +96,7 @@ public class UserGreeter {
 
     /**
      * Closes all the associated modules by killing the threads and then calls, for each module, IncomingUserModule.close() on the current thread.
+     * @implNote if close() is called on an already closed user greeter, the call will be ignored.
      */
     public synchronized void close() {
         if (!closeRequested) {
@@ -104,6 +123,9 @@ public class UserGreeter {
         while (!closeRequested) {
             try {
                 User newUser = module.newUser();
+                if (newUser == null) {
+                    Thread.currentThread().interrupt();
+                }
 
                 synchronized (this) {
                     backlog.add(newUser);
