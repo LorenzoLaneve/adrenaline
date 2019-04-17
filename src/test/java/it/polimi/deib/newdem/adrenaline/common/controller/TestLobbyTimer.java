@@ -7,10 +7,26 @@ import static org.junit.Assert.fail;
 
 public class TestLobbyTimer {
 
+    private LobbyTimerListener emptyListener = new LobbyTimerListener() {
+        @Override
+        public void timerWillStart() {  }
+
+        @Override
+        public void timerSync(int secondsLeft) {  }
+
+        @Override
+        public void timerDidFinish() {  }
+
+        @Override
+        public void timerDidAbort() {  }
+    };
+
+
+
     @Test
     public void testStartPositive() {
 
-        LobbyTimer t = new LobbyTimer(1);
+        LobbyTimer t = new LobbyTimer(1, emptyListener);
 
         try {
             t.start(50);
@@ -23,7 +39,7 @@ public class TestLobbyTimer {
     @Test
     public void testStartNegative() {
 
-        LobbyTimer t = new LobbyTimer(5);
+        LobbyTimer t = new LobbyTimer(5, emptyListener);
 
         try{
             t.start(-7);
@@ -48,57 +64,13 @@ public class TestLobbyTimer {
 
     @Test
     public void testConstructorPositive() {
-        LobbyTimer t;
-
-        t = new LobbyTimer(1);
-
+        new LobbyTimer(1, emptyListener);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegative() {
-        LobbyTimer t;
-
-        t = new LobbyTimer(-1);
-        t = new LobbyTimer(0);
+        new LobbyTimer(-1, emptyListener);
+        new LobbyTimer(0, emptyListener);
     }
 
-    @Test
-    public void testAbortPositive() {
-        //TODO unclear expected behavior
-    }
-
-    @Test
-    public void testAbortNegative(){
-        // TODO unclear expected behavior
-    }
-
-    @Test
-    public void testGetSecondsLeftPositive(){
-        // TODO unclear expected behavior
-    }
-
-    @Test
-    public void testGetSecondsLeftNegative(){
-        // TODO unclear expected behavior
-    }
-
-    @Test
-    public void testResetPositive(){
-        // TODO unclear expected behavior
-    }
-    @Test
-    public void testResetEgative(){
-        // TODO unclear expected behavior
-    }
-
-
-    @Test
-    public void testSetListenerPositive(){
-        // TODO unclear expected behavior
-    }
-
-    @Test
-    public void testSetListenerNegative(){
-        // TODO unclear expected behavior
-    }
 }

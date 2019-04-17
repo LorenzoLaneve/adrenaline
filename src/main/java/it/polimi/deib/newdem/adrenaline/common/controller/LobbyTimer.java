@@ -15,15 +15,15 @@ public class LobbyTimer {
     /**
      * Initializes the timer instance.
      * @param syncPeriod The period in seconds between two synchronization callbacks.
+     * @throws IllegalArgumentException if syncPeriod is non-positive or if the listener is null.
+     * @apiNote Only one listener per timer is permitted.
      */
-    public LobbyTimer(int syncPeriod) {
-        this.syncPeriod = syncPeriod;
-    }
+    public LobbyTimer(int syncPeriod, LobbyTimerListener lst) {
+        if (syncPeriod <= 0 || lst == null) {
+            throw new IllegalArgumentException("The sync period of the timer must be positive and the lst must be non-null.");
+        }
 
-    /**
-     * Sets the given listener to the timer listener that will receive callbacks.
-     */
-    public void setListener(LobbyTimerListener lst) {
+        this.syncPeriod = syncPeriod;
         this.listener = lst;
     }
 
@@ -33,8 +33,13 @@ public class LobbyTimer {
      * @implNote The current thread will be responsible to do the countdown for the timer,
      * the synchronization callbacks will be called on a separate thread, while the end and start events will be called on the current thread.
      * @throws InterruptedException if the thread is interrupted while the timer is counting.
+     * @throws IllegalArgumentException if seconds is non-positive.
      */
     public void start(int seconds) throws InterruptedException {
+        if (seconds <= 0) {
+            throw new IllegalArgumentException("The seconds left for the countdown must be a valid positive integer value.");
+        }
+
         synchronized (this) {
             this.abortRequested = false;
             this.secondsLeft = timerDuration;
