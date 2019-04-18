@@ -6,30 +6,62 @@ public class AmmoSet {
     private final int yellowAmmos;
     private final int blueAmmos;
 
-    public AmmoSet(int redAmmos, int yellowAmmos, int blueAmmos) {
-        this.redAmmos = redAmmos;
-        this.yellowAmmos = yellowAmmos;
-        this.blueAmmos = blueAmmos;
-        // TODO implement
+    /**
+     * Initializes the AmmoSet object.
+     * @param redAmmos The amount of starting red ammos in the set.
+     * @param yellowAmmos The amount of starting yellow ammos in the set.
+     * @param blueAmmos The amount of starting blue ammos in the set.
+     * @throws IllegalArgumentException if any of the starting amounts of ammos is not between 0 and 3.
+     */
+
+    public AmmoSet(int redAmmos, int yellowAmmos, int blueAmmos) throws IllegalArgumentException {
+
+        boolean legalRedAmmos;
+        boolean legalYellowAmmos;
+        boolean legalBlueAmmos;
+
+        legalRedAmmos = redAmmos <= 3 && redAmmos >= 0;
+        legalYellowAmmos = yellowAmmos <= 3 && yellowAmmos >= 0;
+        legalBlueAmmos = blueAmmos <= 3 && blueAmmos >= 0;
+
+        if(legalRedAmmos && legalBlueAmmos && legalYellowAmmos){
+            this.redAmmos = redAmmos;
+            this.yellowAmmos = yellowAmmos;
+            this.blueAmmos = blueAmmos;
+        }
+        else{
+            throw new IllegalArgumentException("0-3 ammos of each color accepted");
+        }
+
+
     }
 
+    /**
+     * @return current amount of red ammos in the set.
+     */
+
     public int getRedAmmos() {
-        // TODO implement
         return redAmmos;
     }
 
+    /**
+     * @return current amount of yellow ammos in the set.
+     */
     public int getYellowAmmos() {
-        // TODO implement
         return yellowAmmos;
     }
 
+    /**
+     * @return current amount of blue ammos in the set.
+     */
     public int getBlueAmmos() {
-        // TODO implement
         return blueAmmos;
     }
 
+    /**
+     * @return current total amount of ammos of any color.
+     */
     public int getTotalAmmos() {
-        // TODO implement
-        return 0;
+        return redAmmos + yellowAmmos + blueAmmos;
     }
 }
