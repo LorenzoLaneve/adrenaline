@@ -14,7 +14,7 @@ public class AmmoSet {
      * @throws IllegalArgumentException if any of the starting amounts of ammos is not between 0 and 3.
      */
 
-    public AmmoSet(int redAmmos, int yellowAmmos, int blueAmmos) throws IllegalArgumentException {
+    public AmmoSet(int redAmmos, int yellowAmmos, int blueAmmos) {
 
         boolean legalRedAmmos;
         boolean legalYellowAmmos;
@@ -37,7 +37,7 @@ public class AmmoSet {
     }
 
     /**
-     * @return current amount of red ammos in the set.
+     * @return amount of red ammos in the set.
      */
 
     public int getRedAmmos() {
@@ -45,21 +45,21 @@ public class AmmoSet {
     }
 
     /**
-     * @return current amount of yellow ammos in the set.
+     * @return amount of yellow ammos in the set.
      */
     public int getYellowAmmos() {
         return yellowAmmos;
     }
 
     /**
-     * @return current amount of blue ammos in the set.
+     * @return amount of blue ammos in the set.
      */
     public int getBlueAmmos() {
         return blueAmmos;
     }
 
     /**
-     * @return current total amount of ammos of any color.
+     * @return total amount of ammos of any color.
      */
     public int getTotalAmmos() {
         return redAmmos + yellowAmmos + blueAmmos;

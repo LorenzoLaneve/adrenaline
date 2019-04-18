@@ -8,7 +8,7 @@ public class TestAmmoSet {
 
 
     @Test
-    public void testGetRedAmmos() {
+    public void TestGetRedAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int redAmmos = ammoSet.getRedAmmos();
@@ -20,7 +20,7 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void testGetYellowAmmos() {
+    public void TestGetYellowAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int yellowAmmos = ammoSet.getYellowAmmos();
@@ -32,7 +32,7 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void testGetBlueAmmos() {
+    public void TestGetBlueAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int blueAmmos = ammoSet.getBlueAmmos();
@@ -56,12 +56,12 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void testConstructorPositive() {
+    public void TestConstructorPositive() {
         new AmmoSet(1, 2,3);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructorNegative() {
+    public void TestConstructorNegative() {
         new AmmoSet(-1, -1,-1);
         new AmmoSet(4,4, 4);
     }
