@@ -121,9 +121,13 @@ public class DeckTest {
 
     }
 
-    @Test
-    public void testConstructorNegative() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNegativeNull() {
         new Deck<MockCard>(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorNegativeEmpty() {
         new Deck<MockCard>(new ArrayList<MockCard>());
     }
 
@@ -135,11 +139,16 @@ public class DeckTest {
             d.draw();
     }
 
-    @Test
-    public void testDiscardNegative() throws NoDrawableCardException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDiscardNegativeForeign() throws NoDrawableCardException {
         Deck<MockCard> d = new Deck<>(arg);
 
         d.discard(new MockCard("Delta"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDiscardNegativeDouble() throws NoDrawableCardException {
+        Deck<MockCard> d = new Deck<>(arg);
 
         MockCard m1 = d.draw();
 
