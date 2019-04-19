@@ -6,4 +6,7 @@ public interface KillTrack {
 
     int getTrackLength();
 
+    void registerKill(Player player);
+
+    int getTotalKills();
 }
