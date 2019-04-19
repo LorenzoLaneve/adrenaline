@@ -10,14 +10,14 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class DeckTest {
+public class TestDeck {
 
-    List<MockCard> arg;
+    private List<MockCard> arg;
 
     public class MockCard {
         private String name;
 
-        public MockCard(String name) {
+        MockCard(String name) {
             this.name = name;
         }
 
@@ -38,7 +38,7 @@ public class DeckTest {
 
     @Test
     public void testConstructorPositive() {
-        new Deck<MockCard>(this.arg);
+        new Deck<>(this.arg);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class DeckTest {
 
     @Test
     public void testReshufflePositive() throws NoDrawableCardException {
-        Deck<MockCard> d = new Deck<MockCard>(arg);
+        Deck<MockCard> d = new Deck<>(arg);
         MockCard m1, m2;
 
         d.discard(d.draw());
@@ -128,7 +128,7 @@ public class DeckTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegativeEmpty() {
-        new Deck<MockCard>(new ArrayList<MockCard>());
+        new Deck<>(new ArrayList<MockCard>());
     }
 
     @Test(expected = NoDrawableCardException.class)
@@ -140,10 +140,17 @@ public class DeckTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDiscardNegativeForeign() throws NoDrawableCardException {
+    public void testDiscardNegativeForeign() {
         Deck<MockCard> d = new Deck<>(arg);
 
         d.discard(new MockCard("Delta"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDiscardNegativeNull() {
+        Deck<MockCard> d = new Deck<>(arg);
+
+        d.discard(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
