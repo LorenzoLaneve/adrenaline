@@ -44,7 +44,7 @@ public class OrdinaryTile extends ConcreteTile {
         return set;
     }
 
-    /**adds drop to the tile if it doesn't have one
+    /**Adds drop to the tile if it doesn't have one
      *
      * @param drop the drop to add.
      * @throws DropAlreadyPresentException if the tile already has a drop.
@@ -61,9 +61,9 @@ public class OrdinaryTile extends ConcreteTile {
 
     }
 
-    /**
+    /**Adds Weapon to the tile.
      *
-     * @param weapon
+     * @param weapon the weapon card of the weapon to add.
      * @throws NotSpawnPointTileException always since it is not a spawn point tile.
      */
     @Override
@@ -71,7 +71,7 @@ public class OrdinaryTile extends ConcreteTile {
         throw new NotSpawnPointTileException("It is not possible to add Weapons to an Ordinary Tile");
     }
 
-    /**Grabs drop from the tile if present ends signal that after the tile lacks one.
+    /**Grabs drop from the tile if present then signals that the tile doesn't have one anymore.
      *
      * @return the drop present in the tile.
      */
@@ -87,9 +87,9 @@ public class OrdinaryTile extends ConcreteTile {
 
     }
 
-    /**
+    /**Grabs weapon from the tile's weapon set.
      *
-     * @param weaponCard
+     * @param weaponCard the weapon to grab.
      * @return empty weapon set since this is an ordinary tile.
      */
     @Override
