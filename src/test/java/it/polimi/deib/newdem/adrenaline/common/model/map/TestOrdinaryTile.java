@@ -61,8 +61,6 @@ public class TestOrdinaryTile {
 
         w1 = new MockWeapon("Max Aitken Beaverbrook");
 
-        tile = new OrdinaryTile();
-
     }
 
     @Test
@@ -100,14 +98,9 @@ public class TestOrdinaryTile {
         assertFalse(tile.missingDrop());
     }
 
-    @Test
-    public void testGrabWeapons() {
-
-        List<WeaponCard> weaponSet;
-
-        weaponSet = tile.inspectWeaponSet().getWeapons();
-
-        assertEquals(weaponSet.size(), 0);
+    @Test (expected = NotSpawnPointTileException.class)
+    public void testGrabWeapon() throws NotSpawnPointTileException {
+        tile.grabWeapon(w1);
     }
 
     @Test

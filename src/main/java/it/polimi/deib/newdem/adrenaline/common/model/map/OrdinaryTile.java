@@ -93,10 +93,8 @@ public class OrdinaryTile extends ConcreteTile {
      * @return empty weapon set since this is an ordinary tile.
      */
     @Override
-    public WeaponSet grabWeapon(WeaponCard weaponCard) {
-        WeaponSet set;
-        set = new WeaponSet();
-        return set;
+    public WeaponCard grabWeapon(WeaponCard weaponCard) throws NotSpawnPointTileException {
+        throw new NotSpawnPointTileException("It is not possible to add Weapons to an Ordinary Tile");
     }
 
     /**Check if the tile lacks a drop.
