@@ -36,14 +36,38 @@ public class DropInstance {
     /**
      * @return the drop's ammo set object.
      */
-    AmmoSet getAmmos() {
+    public AmmoSet getAmmos() {
         return this.ammoSet;
     }
 
     /**
      * @return the drop's boolean flag to signal the presence of a power-up card.
      */
-    boolean hasPowerUp() {
+    public boolean hasPowerUp() {
         return hasPowerUp;
+    }
+
+    /**Compares the drop to another dropInstance.
+     *
+     * @param dropInstance the drop to compare.
+     * @return boolean value stating if the drops have the same ammos and both include or not powerUps.
+     */
+    public boolean equalDrop(DropInstance dropInstance){
+        boolean equal;
+
+        equal = (this.ammoSet.getRedAmmos() == dropInstance.ammoSet.getRedAmmos() &&
+                this.ammoSet.getBlueAmmos() == dropInstance.ammoSet.getBlueAmmos() &&
+                this.ammoSet.getYellowAmmos() == dropInstance.ammoSet.getYellowAmmos() &&
+                this.hasPowerUp() == dropInstance.hasPowerUp());
+
+        return equal;
+    }
+
+    /**Copies the drop instance.
+     *
+     * @return a new equal instance of DropInstance.
+     */
+    public DropInstance copyDrop(){
+        return new DropInstance(this.ammoSet, this.hasPowerUp());
     }
 }
