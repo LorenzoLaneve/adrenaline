@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.common.model.items;
 
 import it.polimi.deib.newdem.adrenaline.common.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.common.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.common.model.map.WeaponAlreadyPresentException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,12 +64,12 @@ public class TestWeaponSet {
     }
 
     @Test
-    public void TestConstructor() {
+    public void testConstructor() {
         //this method cannot fail
     }
 
     @Test
-    public void TestGetWeapons() throws OutOfSlotsException {
+    public void testGetWeapons() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
         weaponSet.addWeapon(w2);
@@ -81,7 +82,7 @@ public class TestWeaponSet {
     }
 
     @Test
-    public void TestAddWeaponPositive() throws OutOfSlotsException {
+    public void testAddWeaponPositive() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
 
@@ -93,8 +94,8 @@ public class TestWeaponSet {
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void TestAddWeaponNegativeOnIllegalArgument() throws OutOfSlotsException {
+    @Test(expected = WeaponAlreadyPresentException.class)
+    public void testAddWeaponNegativeOnIllegalArgument() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
         weaponSet.addWeapon(w1);
@@ -102,7 +103,7 @@ public class TestWeaponSet {
     }
 
     @Test(expected = OutOfSlotsException.class)
-    public void TestAddWeaponNegativeOnFullSet() throws OutOfSlotsException {
+    public void testAddWeaponNegativeOnFullSet() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
         weaponSet.addWeapon(w2);
@@ -114,7 +115,7 @@ public class TestWeaponSet {
     }
 
     @Test
-    public void TestRemoveWeaponPositive() throws OutOfSlotsException {
+    public void testRemoveWeaponPositive() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
         weaponSet.addWeapon(w2);
@@ -129,10 +130,28 @@ public class TestWeaponSet {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void TestRemoveWeaponNegative() throws OutOfSlotsException {
+    public void testRemoveWeaponNegative() throws OutOfSlotsException, WeaponAlreadyPresentException {
 
         weaponSet.addWeapon(w1);
 
         weaponSet.removeWeapon(w2);
+    }
+
+    @Test
+    public void testEqualWeaponSet() throws OutOfSlotsException, WeaponAlreadyPresentException{
+        WeaponSet weaponSet1 = new WeaponSet();
+
+        weaponSet1.addWeapon(w1);
+        weaponSet1.addWeapon(w2);
+
+        weaponSet.addWeapon(w1);
+        weaponSet.addWeapon(w2);
+
+        assertTrue(weaponSet.equalWeaponSet(weaponSet1));
+    }
+
+    @Test
+    public void testCopySet(){
+        assertTrue(weaponSet.equalWeaponSet(weaponSet.copyWeaponSet()));
     }
 }
