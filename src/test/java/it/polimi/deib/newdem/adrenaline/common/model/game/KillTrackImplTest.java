@@ -78,14 +78,14 @@ public class KillTrackImplTest {
         kt.registerKill(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetKillerNegativeNegativeIndex() {
         KillTrack kt = new KillTrackImpl(5);
 
         kt.getKiller(-1);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetKillerNegativeOutOfBoundIndex() {
         KillTrack kt = new KillTrackImpl(5);
 

@@ -27,4 +27,6 @@ public interface Player {
     int getMarksFromPlayer(Player player);
 
     boolean isDead();
+
+    void registerDamageBoard(DamageBoard damageBoard);
 }

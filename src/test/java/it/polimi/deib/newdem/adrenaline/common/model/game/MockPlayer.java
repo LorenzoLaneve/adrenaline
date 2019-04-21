@@ -8,14 +8,35 @@ public class MockPlayer implements Player{
 
     private PlayerColor color;
     private String name;
+    private DamageBoard damageBoard;
+    private int deathCount;
+
+    public MockPlayer() {
+        color = PlayerColor.YELLOW;
+        name = "Alice";
+        deathCount = 0;
+        this.damageBoard = null;
+    }
 
     public MockPlayer(PlayerColor color) {
         this.color = color;
+        deathCount = 0;
+        this.damageBoard = null;
     }
 
     public MockPlayer(PlayerColor color, String name) {
         this.color = color;
         this.name = name;
+        this.damageBoard = null;
+        deathCount = 0;
+    }
+
+    public void registerDamageBoard(DamageBoard d) {
+        this.damageBoard = d;
+    }
+
+    public void die() {
+        deathCount += 1;
     }
 
     @Override
@@ -45,7 +66,7 @@ public class MockPlayer implements Player{
 
     @Override
     public int getDeaths() {
-        return 0;
+        return deathCount;
     }
 
     @Override

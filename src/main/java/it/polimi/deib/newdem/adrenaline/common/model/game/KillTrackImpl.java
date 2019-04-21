@@ -45,7 +45,7 @@ public class KillTrackImpl implements KillTrack {
     @Override
     public Player getKiller(int killIndex) {
         if(killIndex < 0 || killIndex > getTotalKills()) {
-            throw new IllegalArgumentException("KillIndex must be between 0 inclusive and getTotalKills() exclusive");
+            throw new IndexOutOfBoundsException("KillIndex must be between 0 inclusive and getTotalKills() exclusive");
         }
 
         return killers.get(killIndex);

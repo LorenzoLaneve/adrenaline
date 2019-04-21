@@ -78,4 +78,9 @@ public class PlayerImpl implements Player {
         //TODO
         return false;
     }
+
+    @Override
+    public void registerDamageBoard(DamageBoard damageBoard) {
+        this.damageBoard = damageBoard;
+    }
 }

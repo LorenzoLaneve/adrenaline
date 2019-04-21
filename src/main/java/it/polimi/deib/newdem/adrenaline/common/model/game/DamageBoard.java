@@ -12,4 +12,13 @@ public interface DamageBoard {
 
     int getScoreForPlayer(Player player);
 
+    void takeDamage(int dmgAmount, Player attacker);
+
+    void takeMark(int markAmount, Player attacker);
+
+    Player getDamager(int index);
+
+    int getTotalDamageFromPlayer(Player player);
+
+    int getTotalMarksFromPlayer(Player player);
 }

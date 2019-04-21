@@ -2,13 +2,18 @@ package it.polimi.deib.newdem.adrenaline.common.model.game;
 
 import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
 
-import java.util.List;
+import java.util.*;
 
 public class FrenzyDamageBoard extends DamageBoardImpl {
 
+    /**
+     * Builds a {@code FrenzyDamageBoard} for this {@code Player}
+     *
+     * @param player the player this board belongs to
+     */
     public FrenzyDamageBoard(Player player) {
         super(player);
-        // TODO implement
+        score = new ArrayList<>(Arrays.asList(2,1,1,1));
     }
 
     @Override
@@ -18,8 +23,7 @@ public class FrenzyDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    public int getScoreForPlayer(Player player) {
-        // TODO implement
-        return 0;
+    protected boolean shouldAssignFirstBlood() {
+        return false;
     }
 }
