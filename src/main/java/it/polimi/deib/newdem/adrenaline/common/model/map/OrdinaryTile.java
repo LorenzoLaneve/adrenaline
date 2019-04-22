@@ -4,10 +4,20 @@ import it.polimi.deib.newdem.adrenaline.common.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.common.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.common.model.items.WeaponSet;
 
+
 public class OrdinaryTile extends ConcreteTile {
 
     private boolean missingDrop = true;
     private DropInstance dropInstance;
+
+    /**Creates a new {@code OrdinaryTile} belonging to room and in position tilePosition.
+     *
+     * @param room the room to which the tile belongs.
+     * @param tilePosition the position the tile occupies.
+     */
+    public OrdinaryTile(Room room, TilePosition tilePosition){
+        super(room, tilePosition);
+    }
 
     /**Used to reveal if the tile is a Spawn Point Tile
      *

@@ -6,6 +6,9 @@ import it.polimi.deib.newdem.adrenaline.common.model.items.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class TestSpawnPointTile {
@@ -14,6 +17,11 @@ public class TestSpawnPointTile {
     DropInstance d1;
     WeaponSet set;
     WeaponCard w1;
+    Room room;
+    RoomTileSeeds roomTileSeeds;
+    List<RoomTileSeeds> roomTileSeedsList;
+    Map map;
+    TilePosition tilePosition;
 
 
     public class MockWeapon implements WeaponCard{
@@ -52,7 +60,30 @@ public class TestSpawnPointTile {
     public void testInit(){
         AmmoSet ammoSet = new AmmoSet(1,1,0);
 
-        tile = new SpawnPointTile();
+        TilePosition topLeft;
+        TilePosition topRight;
+        TilePosition bottomRight;
+        TilePosition bottomLeft;
+        TilePosition spawnPointTilePosition;
+
+        topLeft = new TilePosition(0,9);
+        topRight = new TilePosition(6,9);
+        bottomRight = new TilePosition(6,0);
+        bottomLeft = new TilePosition(0,0);
+        spawnPointTilePosition = new TilePosition(0,2);
+
+        roomTileSeeds = new RoomTileSeeds(topLeft,topRight,bottomRight,bottomLeft, spawnPointTilePosition);
+
+        roomTileSeedsList = new ArrayList<>();
+        roomTileSeedsList.add(roomTileSeeds);
+
+        map = new ConcreteMap(roomTileSeedsList);
+        map.generateRooms();
+
+        room = new ConcreteRoom(map, roomTileSeeds);
+        room.getTiles();
+
+        tile = new SpawnPointTile(room, tilePosition);
 
         d1 = new DropInstance(ammoSet, true);
 

@@ -37,5 +37,7 @@ public interface Tile {
 
     boolean missingDrop();
 
+    void addPlayer(Player player);
 
+    void removePlayer(Player player);
 }

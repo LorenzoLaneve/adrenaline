@@ -5,9 +5,19 @@ import it.polimi.deib.newdem.adrenaline.common.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.common.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.common.model.items.WeaponSet;
 
+
 public class SpawnPointTile extends ConcreteTile {
 
     private WeaponSet weaponSet = new WeaponSet();
+
+    /**Creates a new {@code SpawnPointTile} belonging to room and in position tilePosition.
+     *
+     * @param room the room to which the tile belongs.
+     * @param tilePosition the position the tile occupies.
+     */
+    public SpawnPointTile(Room room, TilePosition tilePosition){
+        super(room, tilePosition);
+    }
 
     /**Used to reveal if the tile is a Spawn Point Tile
      *
@@ -91,4 +101,5 @@ public class SpawnPointTile extends ConcreteTile {
     public boolean missingDrop() {
         return true;
     }
+
 }
