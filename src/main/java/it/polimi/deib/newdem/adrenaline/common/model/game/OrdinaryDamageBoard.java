@@ -2,13 +2,15 @@ package it.polimi.deib.newdem.adrenaline.common.model.game;
 
 import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrdinaryDamageBoard extends DamageBoardImpl {
 
     public OrdinaryDamageBoard(Player player) {
         super(player);
-        // TODO implement
+        score = new ArrayList<>(Arrays.asList(8,6,4,2,1,1));
     }
 
     @Override
@@ -18,9 +20,7 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    public int getScoreForPlayer(Player player) {
-        // TODO implement
-        return 0;
+    protected boolean shouldAssignFirstBlood() {
+        return true;
     }
-
 }

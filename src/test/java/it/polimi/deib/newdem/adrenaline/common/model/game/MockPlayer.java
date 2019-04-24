@@ -4,83 +4,93 @@ import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
 
 import java.util.List;
 
-public class PlayerImpl implements Player {
+public class MockPlayer implements Player{
 
-    private PlayerInventory inventory;
-
-    private ActionBoard actionBoard;
-
+    private PlayerColor color;
+    private String name;
     private DamageBoard damageBoard;
+    private int deathCount;
 
+    public MockPlayer() {
+        color = PlayerColor.YELLOW;
+        name = "Alice";
+        deathCount = 0;
+        this.damageBoard = null;
+    }
 
-    @Override
-    public Game getGame() {
-        //TODO
-        return null;
+    public MockPlayer(PlayerColor color) {
+        this.color = color;
+        deathCount = 0;
+        this.damageBoard = null;
+    }
+
+    public MockPlayer(PlayerColor color, String name) {
+        this.color = color;
+        this.name = name;
+        this.damageBoard = null;
+        deathCount = 0;
+    }
+
+    public void registerDamageBoard(DamageBoard d) {
+        this.damageBoard = d;
+    }
+
+    public void die() {
+        deathCount += 1;
     }
 
     @Override
-    public PlayerInventory getInventory() {
-        //TODO
+    public Game getGame() {
         return null;
     }
 
     @Override
     public String getName() {
-        //TODO
+        return null;
+    }
+
+    @Override
+    public PlayerInventory getInventory() {
         return null;
     }
 
     @Override
     public PlayerColor getColor() {
-        //TODO
-        return null;
+        return color;
     }
 
     @Override
     public List<ActionFactory> getMoves() {
-        //TODO
         return null;
     }
 
     @Override
     public int getDeaths() {
-        //TODO
-        return 0;
+        return deathCount;
     }
 
     @Override
     public int getTotalDamage() {
-        //TODO
         return 0;
     }
 
     @Override
     public Player getDamager(int cell) {
-        //TODO
         return null;
     }
 
     @Override
     public int getDamageFromPlayer(Player player) {
-        //TODO
         return 0;
     }
 
     @Override
     public int getMarksFromPlayer(Player player) {
-        //TODO
         return 0;
     }
 
     @Override
     public boolean isDead() {
-        //TODO
         return false;
-    }
-
-    @Override
-    public void registerDamageBoard(DamageBoard damageBoard) {
-        this.damageBoard = damageBoard;
     }
 }

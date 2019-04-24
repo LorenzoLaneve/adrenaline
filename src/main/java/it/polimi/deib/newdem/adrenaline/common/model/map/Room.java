@@ -11,5 +11,9 @@ public interface Room {
     Map getMap();
 
     // discussed on Discord
-    Player getPlayers();
+    List<Player> getPlayers();
+
+    RoomTileSeeds getRoomTileSeeds();
+
+    void generateTiles();
 }
