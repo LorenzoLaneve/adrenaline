@@ -1,9 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.common.controller;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.SocketUserConnection;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class SocketUserModule implements IncomingUserModule {
 
@@ -15,17 +17,34 @@ public class SocketUserModule implements IncomingUserModule {
 
     @Override
     public void init() {
-        //TODO
+        // nothing to init.
     }
 
     @Override
     public User newUser() {
-        //TODO
-        return null;
+
+        try {
+            Socket clientSocket = serverSocket.accept();
+
+            User user = new User();
+
+            SocketUserConnection newConnection = new SocketUserConnection(clientSocket, user);
+            newConnection.start();
+
+            return user;
+        } catch (IOException x) {
+            return null;
+        }
     }
 
     @Override
     public void close() {
-        //TODO
+        try {
+            serverSocket.close();
+        } catch (IOException x) {
+            // no problem
+        } finally {
+            serverSocket = null;
+        }
     }
 }
