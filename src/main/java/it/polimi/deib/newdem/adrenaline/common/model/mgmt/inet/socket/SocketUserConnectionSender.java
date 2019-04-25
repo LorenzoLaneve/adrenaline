@@ -24,13 +24,12 @@ public class SocketUserConnectionSender implements UserConnectionSender {
         try {
             output.writeInt(SocketMessage.UPDATE_USER_NAME);
 
-
+            StreamHelper.writeString(output, event.getNewUsername());
 
         } catch (IOException x) {
             throw new ConnectionException("An I/O error occurred during the socket writing.");
         }
     }
-
 
 
     @Override
