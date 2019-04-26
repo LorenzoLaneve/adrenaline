@@ -13,7 +13,7 @@ public interface Room {
     // discussed on Discord
     List<Player> getPlayers();
 
-    RoomTileSeeds getRoomTileSeeds();
+    void addTiles(Tile tile);
 
-    void generateTiles();
+    void setMap(Map map);
 }
