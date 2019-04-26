@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket;
+package it.polimi.deib.newdem.adrenaline.common.view.inet.socket;
 
 public final class SocketMessage {
 

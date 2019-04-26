@@ -1,11 +1,11 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket;
+package it.polimi.deib.newdem.adrenaline.common.view.inet.socket;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.ConnectionException;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnectionReceiver;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events.UserEvent;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.messages.SocketMessageReader;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.ConnectionException;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnectionReceiver;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.socket.messages.SocketMessageReader;
 
 import java.io.*;
 import java.net.Socket;

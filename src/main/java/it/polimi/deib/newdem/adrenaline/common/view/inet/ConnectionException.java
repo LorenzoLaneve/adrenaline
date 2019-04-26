@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet;
+package it.polimi.deib.newdem.adrenaline.common.view.inet;
 
 public class ConnectionException extends Exception {
 

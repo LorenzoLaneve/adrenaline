@@ -1,9 +1,9 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket;
+package it.polimi.deib.newdem.adrenaline.common.view.inet.socket;
 
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.ConnectionException;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnectionSender;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events.EnterLobbyEvent;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events.UpdateUsernameEvent;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.ConnectionException;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnectionSender;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.events.EnterLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.events.UpdateUsernameEvent;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

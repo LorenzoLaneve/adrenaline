@@ -1,7 +1,7 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet;
+package it.polimi.deib.newdem.adrenaline.common.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.events.UserEvent;
 
 public interface UserConnection {
 

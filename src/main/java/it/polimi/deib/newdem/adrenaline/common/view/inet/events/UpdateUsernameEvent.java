@@ -1,9 +1,9 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events;
+package it.polimi.deib.newdem.adrenaline.common.view.inet.events;
 
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.ConnectionException;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnectionReceiver;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnectionSender;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.ConnectionException;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnectionReceiver;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnectionSender;
 
 public class UpdateUsernameEvent implements UserEvent {
 

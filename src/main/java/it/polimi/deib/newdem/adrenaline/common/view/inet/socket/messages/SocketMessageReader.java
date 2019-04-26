@@ -1,8 +1,8 @@
-package it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.messages;
+package it.polimi.deib.newdem.adrenaline.common.view.inet.socket.messages;
 
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.events.UserEvent;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.InvalidMessageException;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.SocketMessage;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.socket.InvalidMessageException;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.socket.SocketMessage;
 
 import java.io.DataInputStream;
 import java.io.IOException;

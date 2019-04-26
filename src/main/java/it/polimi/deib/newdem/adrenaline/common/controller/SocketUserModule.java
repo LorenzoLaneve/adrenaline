@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.controller;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.socket.SocketUserConnection;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.socket.SocketUserConnection;
 
 import java.io.IOException;
 import java.net.ServerSocket;

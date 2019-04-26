@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.common.model.mgmt;
 
-import it.polimi.deib.newdem.adrenaline.common.model.mgmt.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.common.view.inet.UserConnection;
 
 public class User {
 
