@@ -8,6 +8,6 @@ public interface Map {
 
     Tile getTile(TilePosition p);
 
-    void generateRooms();
+    void bindRooms();
 
 }
