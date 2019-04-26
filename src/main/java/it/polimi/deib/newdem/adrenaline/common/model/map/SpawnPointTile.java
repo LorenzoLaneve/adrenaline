@@ -12,11 +12,10 @@ public class SpawnPointTile extends ConcreteTile {
 
     /**Creates a new {@code SpawnPointTile} belonging to room and in position tilePosition.
      *
-     * @param room the room to which the tile belongs.
      * @param tilePosition the position the tile occupies.
      */
-    public SpawnPointTile(Room room, TilePosition tilePosition){
-        super(room, tilePosition);
+    public SpawnPointTile(TilePosition tilePosition){
+        super(tilePosition);
     }
 
     /**Used to reveal if the tile is a Spawn Point Tile
