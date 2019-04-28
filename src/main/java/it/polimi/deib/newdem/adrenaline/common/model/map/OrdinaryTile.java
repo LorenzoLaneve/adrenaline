@@ -12,11 +12,10 @@ public class OrdinaryTile extends ConcreteTile {
 
     /**Creates a new {@code OrdinaryTile} belonging to room and in position tilePosition.
      *
-     * @param room the room to which the tile belongs.
      * @param tilePosition the position the tile occupies.
      */
-    public OrdinaryTile(Room room, TilePosition tilePosition){
-        super(room, tilePosition);
+    public OrdinaryTile(TilePosition tilePosition){
+        super(tilePosition);
     }
 
     /**Used to reveal if the tile is a Spawn Point Tile

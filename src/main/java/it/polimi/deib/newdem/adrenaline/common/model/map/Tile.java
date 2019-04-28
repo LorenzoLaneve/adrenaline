@@ -40,4 +40,12 @@ public interface Tile {
     void addPlayer(Player player);
 
     void removePlayer(Player player);
+
+    void addAdjacentTiles(Tile tile);
+
+    void setRoom(Room room);
+
+    boolean equalTile(Tile tile);
+
+
 }

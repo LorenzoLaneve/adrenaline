@@ -11,25 +11,36 @@ public class ConcreteRoom implements Room {
 
     private ArrayList<Tile> tiles;
 
-    private RoomTileSeeds roomTileSeeds;
-
-    public ConcreteRoom(Map map, RoomTileSeeds roomTileSeeds) {
-        this.map = map;
-        this.roomTileSeeds = roomTileSeeds;
+    /**Creates a new {@code ConcreteRoom} instance.
+     *
+     */
+    public ConcreteRoom() {
         this.tiles = new ArrayList<>();
     }
 
+    /**Returns the list of tiles belonging to the room.
+     *
+     * @return the list of tiles belonging to the room.
+     */
     @Override
     public List<Tile> getTiles() {
         return new ArrayList<>(tiles);
     }
 
     @Override
+
+    /**Returns the map to which the room belongs.
+     *
+     * @return the map to which the room belongs.
+     */
     public Map getMap() {
-        //TODO how not to send map
         return map;
     }
 
+    /**Returns the players in the room.
+     *
+     * @return a list of the players in the room.
+     */
     @Override
     public List<Player> getPlayers() {
         ArrayList<Player> playerList = new ArrayList<>();
@@ -40,35 +51,23 @@ public class ConcreteRoom implements Room {
         return playerList;
     }
 
-    @Override
-    public RoomTileSeeds getRoomTileSeeds() {
-        return new RoomTileSeeds(roomTileSeeds.getCornerTopLeft(),
-                roomTileSeeds.getCornerTopRight(),
-                roomTileSeeds.getCornerBottomRight(),
-                roomTileSeeds.getCornerBottomLeft(),
-                roomTileSeeds.getSpawnPointTilePosition());
-    }
+    /**Called after the Room is initialized to bind the already created tiles to the room.
+     *
+     * @param tile the tile to bind to the room.
+     */
 
     @Override
-    public void generateTiles() {
-        int leftX = roomTileSeeds.getLeftX();
-        int rightX = roomTileSeeds.getRightX();
-        int topY = roomTileSeeds.getTopY();
-        int bottomY = roomTileSeeds.getBottomY();
-
-        for(int y = bottomY; y <= topY; y++){
-            for (int x = leftX; x <= rightX; x++){
-                if(x == roomTileSeeds.getSpawnPointTilePosition().getX() && y == roomTileSeeds.getSpawnPointTilePosition().getY()) {
-                    SpawnPointTile newTile = new SpawnPointTile(this, new TilePosition(x, y));
-                    tiles.add(newTile);
-                }
-                else{
-                    tiles.add(new OrdinaryTile(this, new TilePosition(x, y)));
-                }
-            }
-
-        }
+    public void addTiles(Tile tile){
+        tiles.add(tile);
     }
 
+    /**Called after the Map is initialized to bind the already created room to the map.
+     *
+     * @param map the map to which to bind the room.
+     */
+    @Override
+    public void setMap(Map map) {
+        this.map = map;
+    }
 
 }

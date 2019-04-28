@@ -5,19 +5,20 @@ public class TilePosition {
     private int x;
     private int y;
 
-    // TODO validate
     public TilePosition(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     public int getX() {
-        // TODO implement
         return x;
     }
 
     public int getY() {
-        // TODO implement
         return y;
+    }
+
+    public boolean equalPosition(TilePosition tilePosition){
+        return (this.getY() == tilePosition.getY() && this.getX() == tilePosition.getX());
     }
 }

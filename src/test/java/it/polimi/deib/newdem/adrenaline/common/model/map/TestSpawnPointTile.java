@@ -6,23 +6,15 @@ import it.polimi.deib.newdem.adrenaline.common.model.items.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class TestSpawnPointTile {
 
-    SpawnPointTile tile;
+    Tile tile;
+    TilePosition tilePosition;
     DropInstance d1;
     WeaponSet set;
     WeaponCard w1;
-    Room room;
-    RoomTileSeeds roomTileSeeds;
-    List<RoomTileSeeds> roomTileSeedsList;
-    Map map;
-    TilePosition tilePosition;
-
 
     public class MockWeapon implements WeaponCard{
         private String code;
@@ -57,40 +49,23 @@ public class TestSpawnPointTile {
     }
 
     @Before
-    public void testInit(){
+    public void initTest(){
         AmmoSet ammoSet = new AmmoSet(1,1,0);
 
-        TilePosition topLeft;
-        TilePosition topRight;
-        TilePosition bottomRight;
-        TilePosition bottomLeft;
-        TilePosition spawnPointTilePosition;
+        tilePosition = new TilePosition(0,0);
 
-        topLeft = new TilePosition(0,9);
-        topRight = new TilePosition(6,9);
-        bottomRight = new TilePosition(6,0);
-        bottomLeft = new TilePosition(0,0);
-        spawnPointTilePosition = new TilePosition(0,2);
-
-        roomTileSeeds = new RoomTileSeeds(topLeft,topRight,bottomRight,bottomLeft, spawnPointTilePosition);
-
-        roomTileSeedsList = new ArrayList<>();
-        roomTileSeedsList.add(roomTileSeeds);
-
-        map = new ConcreteMap(roomTileSeedsList);
-        map.generateRooms();
-
-        room = new ConcreteRoom(map, roomTileSeeds);
-        room.getTiles();
-
-        tile = new SpawnPointTile(room, tilePosition);
+        tile = new SpawnPointTile(tilePosition);
 
         d1 = new DropInstance(ammoSet, true);
 
         set = new WeaponSet();
 
-        w1 = new MockWeapon("Mad Jack");
+        w1 = new MockWeapon("Max Aitken Beaverbrook");
 
+    }
+
+    @Test
+    public void testConstructor(){
 
     }
 
@@ -100,12 +75,11 @@ public class TestSpawnPointTile {
     }
 
     @Test
-    public void testInspectDrop() {
-        assertNull(tile.inspectDrop());
+    public void inspectDrop() {
     }
 
     @Test
-    public void testInspectWeaponSetPositive() throws OutOfSlotsException, WeaponAlreadyPresentException {
+    public void testInspectWeaponSetPositive() throws OutOfSlotsException, WeaponAlreadyPresentException, NotSpawnPointTileException {
         tile.addWeapon(w1);
 
         if(!(tile.inspectWeaponSet().getWeapons().contains(w1))){
@@ -114,12 +88,12 @@ public class TestSpawnPointTile {
     }
 
     @Test(expected = NotOrdinaryTileException.class)
-    public void testAddDropPositive() throws NotOrdinaryTileException {
+    public void testAddDropPositive() throws NotOrdinaryTileException, DropAlreadyPresentException {
         tile.addDrop(d1);
     }
 
     @Test
-    public void testAddWeaponPositive() throws OutOfSlotsException, WeaponAlreadyPresentException {
+    public void testAddWeaponPositive() throws OutOfSlotsException, WeaponAlreadyPresentException, NotSpawnPointTileException {
         if(!(tile.inspectWeaponSet().getWeapons().contains(w1))) {
             tile.addWeapon(w1);
 
@@ -130,10 +104,11 @@ public class TestSpawnPointTile {
     }
 
     @Test (expected = WeaponAlreadyPresentException.class)
-    public void testAddWeaponNegative() throws OutOfSlotsException,WeaponAlreadyPresentException {
+    public void testAddWeaponNegative() throws OutOfSlotsException, WeaponAlreadyPresentException, NotSpawnPointTileException {
         tile.addWeapon(w1);
         tile.addWeapon(w1);
     }
+
 
     @Test (expected = NotOrdinaryTileException.class)
     public void testGrabDrop() throws NotOrdinaryTileException{
@@ -141,25 +116,14 @@ public class TestSpawnPointTile {
     }
 
     @Test
-    public void testGrabWeaponPositive()  throws OutOfSlotsException, WeaponAlreadyPresentException{
+    public void testGrabWeaponPositive() throws OutOfSlotsException, WeaponAlreadyPresentException, NotSpawnPointTileException {
         tile.addWeapon(w1);
         assertEquals(w1, tile.grabWeapon(w1));
 
-    }
-
-    @Test
-    public void testGrabWeaponNegative() throws OutOfSlotsException, WeaponAlreadyPresentException{
-        tile.addWeapon(w1);
-        assertEquals(w1, tile.grabWeapon(w1));
-
-        if (tile.inspectWeaponSet().getWeapons().contains(w1)) {
-            fail();
-        }
     }
 
     @Test
     public void testMissingDrop() {
         assertTrue(tile.missingDrop());
     }
-
 }
