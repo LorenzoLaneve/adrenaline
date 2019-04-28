@@ -31,33 +31,33 @@ public class MapBuilder {
         this.roomListInt = extractRoomList();
         this.spawnPointTileIntList = extractSpawnPointList();
 
-        int[] tileInt1 = new int[2];
-        int[] tileInt2 = new int[2];
+        ArrayList<Integer> tileInt1 = new ArrayList<Integer>(2);
+        ArrayList<Integer> tileInt2 = new ArrayList<Integer>(2);
 
         //TODO json
 
-        if(matrixMap[tileInt1[0]][tileInt1[1]] == null){
+        if(matrixMap[tileInt1.get(1)][tileInt1.get(1)] == null){
             if(spawnPointTileIntList.contains(tileInt1)){
-                matrixMap[tileInt1[0]][tileInt1[1]] = new SpawnPointTile(new TilePosition(tileInt1[0],tileInt1[1]));
+                matrixMap[tileInt1.get(0)][tileInt1.get(1)] = new SpawnPointTile(new TilePosition(tileInt1.get(0), tileInt1.get(1)));
 
             }
             else{
-                matrixMap[tileInt1[0]][tileInt1[1]] = new OrdinaryTile(new TilePosition(tileInt1[0],tileInt1[1]));
+                matrixMap[tileInt1.get(0)][tileInt1.get(1)] = new OrdinaryTile(new TilePosition(tileInt1.get(0), tileInt1.get(1)));
             }
         }
 
-        if(matrixMap[tileInt2[0]][tileInt2[1]] == null){
+        if(matrixMap[tileInt2.get(0)][tileInt2.get(1)] == null){
             if(spawnPointTileIntList.contains(tileInt2)){
-                matrixMap[tileInt2[0]][tileInt2[1]] = new SpawnPointTile(new TilePosition(tileInt2[0],tileInt2[1]));
+                matrixMap[tileInt2.get(0)][tileInt2.get(1)] = new SpawnPointTile(new TilePosition(tileInt2.get(0), tileInt2.get(1)));
 
             }
             else{
-                matrixMap[tileInt2[0]][tileInt2[1]] = new OrdinaryTile(new TilePosition(tileInt2[0],tileInt2[1]));
+                matrixMap[tileInt2.get(0)][tileInt2.get(1)] = new OrdinaryTile(new TilePosition(tileInt2.get(0), tileInt2.get(1)));
             }
         }
 
-        matrixMap[tileInt2[0]][tileInt2[1]].addAdjacentTiles(matrixMap[tileInt1[0]][tileInt1[1]]);
-        matrixMap[tileInt1[0]][tileInt1[1]].addAdjacentTiles(matrixMap[tileInt2[0]][tileInt2[1]]);
+        matrixMap[tileInt2.get(0)][tileInt2.get(1)].addAdjacentTiles(matrixMap[tileInt1.get(0)][tileInt1.get(1)]);
+        matrixMap[tileInt1.get(0)][tileInt1.get(1)].addAdjacentTiles(matrixMap[tileInt2.get(0)][tileInt2.get(1)]);
 
         bindTiles();
 
