@@ -29,4 +29,8 @@ public interface Player {
     boolean isDead();
 
     void registerDamageBoard(DamageBoard damageBoard);
+
+    void takeDamage(int dmgAmount, Player attacker);
+
+    void takeMark(int markAmount, Player attacker);
 }

@@ -8,7 +8,7 @@ public interface DamageBoard {
 
     Player getPlayer();
 
-    List<ActionFactory> getAdditionalActions(int totalDamage);
+    List<ActionFactory> getAdditionalActions();
 
     int getScoreForPlayer(Player player);
 
@@ -21,4 +21,6 @@ public interface DamageBoard {
     int getTotalDamageFromPlayer(Player player);
 
     int getTotalMarksFromPlayer(Player player);
+
+    int getTotalDamage();
 }

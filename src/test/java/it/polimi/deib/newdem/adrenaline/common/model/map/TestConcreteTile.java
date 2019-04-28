@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.common.model.map;
 
+import it.polimi.deib.newdem.adrenaline.common.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.common.model.game.MockGame;
+import it.polimi.deib.newdem.adrenaline.common.model.game.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.common.model.game.PlayerImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +24,13 @@ public class TestConcreteTile {
     Tile tileRight;
     TilePosition tilePosition;
     TilePosition tilePositionRight;
+    Game game;
 
     @Before
     public void initTest(){
-        player1 = new PlayerImpl();
-        player2 = new PlayerImpl();
+        game = new MockGame();
+        player1 = new PlayerImpl(PlayerColor.MAGENTA, game, "Larry");
+        player2 = new PlayerImpl(PlayerColor.GRAY, game, "Carl");
 
         matrixMap = new Tile[2][2];
         List<int[]> roomInt = new ArrayList<>();
@@ -103,7 +108,7 @@ public class TestConcreteTile {
 
     @Test
     public void testAddPlayer() {
-        player3 = new PlayerImpl();
+        player3 = new PlayerImpl(PlayerColor.YELLOW, game, "Steve");
 
         tile.addPlayer(player3);
 

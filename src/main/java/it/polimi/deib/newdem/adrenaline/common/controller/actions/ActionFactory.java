@@ -7,4 +7,5 @@ public interface ActionFactory {
 
     Action makeAction(Player actor);
 
+    ActionType getType();
 }

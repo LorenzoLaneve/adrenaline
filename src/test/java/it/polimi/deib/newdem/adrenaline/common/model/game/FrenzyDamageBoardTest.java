@@ -18,10 +18,6 @@ public class FrenzyDamageBoardTest {
     }
 
     @Test
-    public void testGetAdditionalActions() {
-    }
-
-    @Test
     public void testGetScoreForPlayer() {
         Player p1 = new MockPlayer(PlayerColor.GRAY);
         Player p2 = new MockPlayer(PlayerColor.CYAN);
@@ -48,5 +44,13 @@ public class FrenzyDamageBoardTest {
 
         dmgb.takeDamage(5, p1);
         assertEquals(1,dmgb.getScoreForPlayer(p1));
+    }
+
+    @Test
+    public void testGetAdditionalActions() {
+        Player p1 = new MockPlayer();
+        assertEquals(0, dmgb.getAdditionalActions().size());
+        dmgb.takeDamage(7,p1);
+        assertEquals(0, dmgb.getAdditionalActions().size());
     }
 }

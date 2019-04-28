@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
 
 import java.util.List;
 
-public class MockPlayer implements Player{
+public class MockPlayer implements Player {
 
     private PlayerColor color;
     private String name;
@@ -92,5 +92,15 @@ public class MockPlayer implements Player{
     @Override
     public boolean isDead() {
         return false;
+    }
+
+    @Override
+    public void takeDamage(int dmgAmount, Player attacker) {
+
+    }
+
+    @Override
+    public void takeMark(int markAmount, Player attacker) {
+
     }
 }

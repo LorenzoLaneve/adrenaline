@@ -212,4 +212,13 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     protected abstract boolean shouldAssignFirstBlood();
+
+    /**
+     * Calculates the total damage on this scoreboard and returns it as a simple scalar
+     * @return total damage
+     */
+    @Override
+    public int getTotalDamage() {
+        return damages.size();
+    }
 }

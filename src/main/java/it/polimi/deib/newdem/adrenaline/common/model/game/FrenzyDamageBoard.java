@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
 
 import java.util.*;
 
+
 public class FrenzyDamageBoard extends DamageBoardImpl {
 
     /**
@@ -16,10 +17,15 @@ public class FrenzyDamageBoard extends DamageBoardImpl {
         score = new ArrayList<>(Arrays.asList(2,1,1,1));
     }
 
+    /**
+     * Returns the {@code ActionFactory} enables by the current damage.
+     * In this concrete class, this will always be nothing.
+     *
+     * @return the additional actions
+     */
     @Override
-    public List<ActionFactory> getAdditionalActions(int totalDamage) {
-        // TODO implement
-        return null;
+    public List<ActionFactory> getAdditionalActions() {
+        return new ArrayList<>();
     }
 
     @Override
