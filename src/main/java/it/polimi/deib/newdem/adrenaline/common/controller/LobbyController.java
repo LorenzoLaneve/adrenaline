@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.controller;
 
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.Lobby;
+import it.polimi.deib.newdem.adrenaline.common.model.mgmt.LobbyListener;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.LobbyState;
 import it.polimi.deib.newdem.adrenaline.common.model.mgmt.User;
 

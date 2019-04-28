@@ -5,4 +5,5 @@ import it.polimi.deib.newdem.adrenaline.common.controller.GameManager;
 public interface GameManagerFactory {
 
     GameManager makeGameManager();
+
 }

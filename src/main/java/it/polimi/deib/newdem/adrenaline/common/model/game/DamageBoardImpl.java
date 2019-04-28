@@ -13,6 +13,8 @@ public abstract class DamageBoardImpl implements DamageBoard {
     private HashMap<Player, Integer> marks;
     private static final int MAX_LIFE = 12;
 
+    // TODO add listener member
+
     private class ScoreboardEntry {
         private final Player p;
         private final int totalScore;
