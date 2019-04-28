@@ -82,6 +82,54 @@ public class DamageBoardImplTest {
         assertEquals(3,dmgb.getTotalMarksFromPlayer(p1));
     }
 
+    @Test
+    public void testComparator()  {
+        Player p2 = new MockPlayer(PlayerColor.GRAY);
+        Player p3 = new MockPlayer(PlayerColor.MAGENTA);
+
+        dmgb.takeDamage(1,p1);
+        dmgb.takeDamage(1,p2);
+        dmgb.takeDamage(1,p3);
+
+
+        assertEquals(9, dmgb.getScoreForPlayer(p1));
+        assertEquals(6, dmgb.getScoreForPlayer(p2));
+        assertEquals(4, dmgb.getScoreForPlayer(p3));
+
+
+        ((MockPlayer) p1).die();
+        dmgb = new OrdinaryDamageBoard(p1);
+        p1.registerDamageBoard(dmgb);
+
+        dmgb.takeDamage(1,p2);
+        dmgb.takeDamage(1,p1);
+        dmgb.takeDamage(1,p3);
+
+        assertEquals(4, dmgb.getScoreForPlayer(p1));
+        assertEquals(7, dmgb.getScoreForPlayer(p2));
+        assertEquals(2, dmgb.getScoreForPlayer(p3));
+
+        ((MockPlayer) p1).die();
+        dmgb = new OrdinaryDamageBoard(p1);
+        p1.registerDamageBoard(dmgb);
+
+        dmgb.takeDamage(2,p1);
+        dmgb.takeDamage(1,p2);
+
+        assertEquals(5, dmgb.getScoreForPlayer(p1));
+        assertEquals(2, dmgb.getScoreForPlayer(p2));
+
+        ((MockPlayer) p1).die();
+        dmgb = new OrdinaryDamageBoard(p1);
+        p1.registerDamageBoard(dmgb);
+
+        dmgb.takeDamage(1,p1);
+        dmgb.takeDamage(2,p2);
+
+        assertEquals(2, dmgb.getScoreForPlayer(p1));
+        assertEquals(2, dmgb.getScoreForPlayer(p2));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegative() {
         DamageBoard dmgb = new OrdinaryDamageBoard(null);

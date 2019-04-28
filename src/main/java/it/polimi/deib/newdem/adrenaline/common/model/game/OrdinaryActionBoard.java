@@ -1,7 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.common.model.game;
 
 import it.polimi.deib.newdem.adrenaline.common.controller.actions.ActionFactory;
+import it.polimi.deib.newdem.adrenaline.common.controller.actions.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.common.controller.actions.ConcreteActionFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrdinaryActionBoard implements ActionBoard {
@@ -12,8 +15,14 @@ public class OrdinaryActionBoard implements ActionBoard {
      */
     @Override
     public List<ActionFactory> getBasicActions() {
-        // TODO implement
-        return null;
+
+        List<ActionFactory> factories = new ArrayList<>();
+        factories.add(new ConcreteActionFactory(AtomicActionType.MOVE3));
+        factories.add(new ConcreteActionFactory(AtomicActionType.MOVE1,
+                AtomicActionType.GRAB));
+        factories.add(new ConcreteActionFactory(AtomicActionType.SHOOT));
+
+        return factories;
     }
 
     /**
