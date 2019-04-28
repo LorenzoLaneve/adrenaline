@@ -7,7 +7,7 @@ public class MapBuilder {
 
 
     private String mapFile;
-    private List<int[]> spawnPointTileIntList;
+    private List<ArrayList> spawnPointTileIntList;
     private List<List> roomListInt;
     private List<Room> rooms;
     private Tile[][] matrixMap;
@@ -31,12 +31,17 @@ public class MapBuilder {
         this.roomListInt = extractRoomList();
         this.spawnPointTileIntList = extractSpawnPointList();
 
-        ArrayList<Integer> tileInt1 = new ArrayList<Integer>(2);
-        ArrayList<Integer> tileInt2 = new ArrayList<Integer>(2);
+        ArrayList<Integer> tileInt1 = new ArrayList<>(2);
+        ArrayList<Integer> tileInt2 = new ArrayList<>(2);
+
+        tileInt1.set(0,-1);
+        tileInt1.set(1,-1);
+        tileInt2.set(0,-1);
+        tileInt2.set(1,-1);
 
         //TODO json
 
-        if(matrixMap[tileInt1.get(1)][tileInt1.get(1)] == null){
+        if(matrixMap[tileInt1.get(0)][tileInt1.get(1)] == null){
             if(spawnPointTileIntList.contains(tileInt1)){
                 matrixMap[tileInt1.get(0)][tileInt1.get(1)] = new SpawnPointTile(new TilePosition(tileInt1.get(0), tileInt1.get(1)));
 
@@ -73,7 +78,7 @@ public class MapBuilder {
 
         //TODO json
 
-        List<int[]> room = new ArrayList<>();
+        List<ArrayList> room = new ArrayList<>();
 
         roomListInt.add(room);
 
@@ -84,11 +89,11 @@ public class MapBuilder {
      *
      * @return the list of rooms' spawn points to be used in buildMatrixMap.
      */
-    public List<int[]> extractSpawnPointList(){
-        List<int[]> spIntList;
+    public List<ArrayList> extractSpawnPointList(){
+        List<ArrayList> spIntList;
         spIntList = new ArrayList<>();
 
-        int[] spawnPointTile = new int[2];
+        ArrayList<Integer> spawnPointTile = new ArrayList<>(2);
 
         //TODO json
 
@@ -99,12 +104,12 @@ public class MapBuilder {
      *
      */
     public void bindTiles(){
-        for(List<int[]> roomInt : roomListInt){
+        for(List<ArrayList> roomInt : roomListInt){
             Room room = new ConcreteRoom();
             rooms.add(room);
-            for(int[] intPos : roomInt){
-                matrixMap[intPos[0]][intPos[1]].setRoom(room);
-                room.addTiles(matrixMap[intPos[0]][intPos[1]]);
+            for(ArrayList<Integer> intPos : roomInt){
+                matrixMap[intPos.get(0)][intPos.get(1)].setRoom(room);
+                room.addTiles(matrixMap[intPos.get(0)][intPos.get(1)]);
             }
         }
 
