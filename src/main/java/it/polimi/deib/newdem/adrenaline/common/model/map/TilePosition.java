@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.model.map;
 
+import java.util.Objects;
+
 public class TilePosition {
 
     private int x;
@@ -18,7 +20,19 @@ public class TilePosition {
         return y;
     }
 
-    public boolean equalPosition(TilePosition tilePosition){
-        return (this.getY() == tilePosition.getY() && this.getX() == tilePosition.getX());
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof TilePosition)) {
+            return false;
+        }
+        TilePosition tilePosition = (TilePosition) o;
+        return x == tilePosition.getX() && y == tilePosition.getY();
     }
 }

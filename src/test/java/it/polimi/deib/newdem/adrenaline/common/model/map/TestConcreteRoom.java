@@ -59,11 +59,11 @@ public class TestConcreteRoom {
                 int finalX = x;
                 int finalY = y;
                 if (x != 1 && y != 1) {
-                    if (room.getTiles().stream().noneMatch(tile->(tile.equalTile(matrixMap[finalX][finalY]) && !tile.hasSpawnPoint()))) {
+                    if (room.getTiles().stream().noneMatch(tile->(tile.getPosition().equals(matrixMap[finalX][finalY].getPosition()) && !tile.hasSpawnPoint()))) {
                         fail();
                     }
                 } else {
-                    if (room.getTiles().stream().noneMatch(tile->(tile.equalTile(matrixMap[finalX][finalY]) && tile.hasSpawnPoint()))){
+                    if (room.getTiles().stream().noneMatch(tile->(tile.getPosition().equals(matrixMap[finalX][finalY].getPosition()) && tile.hasSpawnPoint()))){
                         fail();
                     }
                 }

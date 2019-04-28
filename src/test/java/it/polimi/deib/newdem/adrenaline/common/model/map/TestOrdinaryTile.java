@@ -2,12 +2,10 @@ package it.polimi.deib.newdem.adrenaline.common.model.map;
 
 import it.polimi.deib.newdem.adrenaline.common.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.common.controller.effects.PaymentInvoice;
-import it.polimi.deib.newdem.adrenaline.common.model.game.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.common.model.items.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -87,7 +85,7 @@ public class TestOrdinaryTile {
 
         currDrop = tile.inspectDrop();
 
-        assertTrue(currDrop.equalDrop(d1));
+        assertEquals(currDrop,d1);
         assertFalse(tile.missingDrop());
     }
 
@@ -97,7 +95,7 @@ public class TestOrdinaryTile {
 
         weaponSet = tile.inspectWeaponSet().getWeapons();
 
-        assertEquals(weaponSet.size(), 0);
+        assertEquals(0,weaponSet.size());
     }
 
     @Test
@@ -108,7 +106,7 @@ public class TestOrdinaryTile {
 
         currDrop = tile.inspectDrop();
 
-        assertTrue(currDrop.equalDrop(d1));
+        assertEquals(d1, currDrop);
     }
 
     @Test(expected = NotSpawnPointTileException.class)
@@ -124,7 +122,7 @@ public class TestOrdinaryTile {
 
         currDrop = tile.grabDrop();
 
-        assertTrue(currDrop.equalDrop(d1));
+        assertEquals(currDrop,d1);
         assertTrue(tile.missingDrop());
     }
 

@@ -61,10 +61,30 @@ public abstract class ConcreteTile implements Tile {
         return new TilePosition(tilePosition.getX(), tilePosition.getY());
     }
 
+    /**Return the distance of this tile form tile t.
+     *
+     * @param t the tile from which the distance should be calculated.
+     * @return the distance of this tile form tile t.
+     */
     @Override
     public int distanceFrom(Tile t) {
-        // TODO implement
-        return 0;
+        int distance = -1;
+
+        if (adjacentTiles.contains(t)){
+            distance = 1;
+        }
+        else{
+            for(Tile adTile : adjacentTiles){
+                if (adTile.distanceFrom(t) < distance){
+                    distance = adTile.distanceFrom(t) + distanceFrom(adTile);
+                }
+                else if(distance == -1){
+                    distance = adTile.distanceFrom(t) + distanceFrom(adTile);
+                }
+            }
+        }
+        return distance;
+
     }
 
     /**Returns the players in the room.
@@ -121,13 +141,5 @@ public abstract class ConcreteTile implements Tile {
     @Override
     public void addAdjacentTiles(Tile tile){
         adjacentTiles.add(tile);
-    }
-
-    @Override
-    public boolean equalTile(Tile tile){
-        return (this.getPosition().getY() == tile.getPosition().getY() &&
-                this.getPosition().getX() == tile.getPosition().getX() &&
-                this.getRoom() == tile.getRoom() &&
-                this.hasSpawnPoint() == tile.hasSpawnPoint());
     }
 }

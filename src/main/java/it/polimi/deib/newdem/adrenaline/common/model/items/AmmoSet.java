@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.model.items;
 
+import java.util.Objects;
+
 public class AmmoSet {
 
     private final int redAmmos;
@@ -64,4 +66,23 @@ public class AmmoSet {
     public int getTotalAmmos() {
         return redAmmos + yellowAmmos + blueAmmos;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(redAmmos, yellowAmmos, blueAmmos);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof AmmoSet)) {
+            return false;
+        }
+        AmmoSet ammoSet = (AmmoSet) o;
+        return redAmmos == ammoSet.getRedAmmos() &&
+                yellowAmmos == ammoSet.getYellowAmmos() &&
+                blueAmmos == ammoSet.getBlueAmmos();
+    }
+
 }

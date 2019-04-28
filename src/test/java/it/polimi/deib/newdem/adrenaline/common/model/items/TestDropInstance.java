@@ -79,7 +79,7 @@ public class TestDropInstance {
         DropInstance dropInstance1 = new DropInstance(ammoSet1, hasPowerUp1);
         DropInstance dropInstance2 = new DropInstance(ammoSet2, hasPowerUp2);
 
-        assertTrue(dropInstance1.equalDrop(dropInstance2));
+        assertEquals(dropInstance1,dropInstance2);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TestDropInstance {
         DropInstance dropInstance1 = new DropInstance(ammoSet1, hasPowerUp1);
         DropInstance dropInstance2 = new DropInstance(ammoSet2, hasPowerUp2);
 
-        assertFalse(dropInstance1.equalDrop(dropInstance2));
+        assertNotEquals(dropInstance1, dropInstance2);
     }
 
     @Test
@@ -108,6 +108,6 @@ public class TestDropInstance {
 
         DropInstance dropInstance2 = dropInstance1.copyDrop();
 
-        assertTrue(dropInstance1.equalDrop(dropInstance2));
+        assertEquals(dropInstance1, dropInstance2);
     }
 }

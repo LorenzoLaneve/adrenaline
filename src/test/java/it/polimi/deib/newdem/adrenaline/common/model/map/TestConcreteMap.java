@@ -53,12 +53,12 @@ public class TestConcreteMap {
         for(int x=0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 if (x != 1 && y != 1) {
-                    if (!(map.getTile(new TilePosition(x, y)).equalTile(matrixMap[x][y]) &&
+                    if (!(map.getTile(new TilePosition(x, y)).getPosition().equals(matrixMap[x][y].getPosition()) &&
                             !map.getTile(new TilePosition(x, y)).hasSpawnPoint())) {
                         fail();
                     }
                 } else {
-                    if (!(map.getTile(new TilePosition(x, y)).equalTile(matrixMap[x][y]) &&
+                    if (!(map.getTile(new TilePosition(x, y)).getPosition().equals(matrixMap[x][y].getPosition()) &&
                             map.getTile(new TilePosition(x, y)).hasSpawnPoint())) {
                         fail();
                     }

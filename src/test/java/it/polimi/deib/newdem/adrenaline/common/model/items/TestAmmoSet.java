@@ -8,7 +8,7 @@ public class TestAmmoSet {
 
 
     @Test
-    public void TestGetRedAmmos() {
+    public void testGetRedAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int redAmmos = ammoSet.getRedAmmos();
@@ -20,7 +20,7 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void TestGetYellowAmmos() {
+    public void testGetYellowAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int yellowAmmos = ammoSet.getYellowAmmos();
@@ -32,7 +32,7 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void TestGetBlueAmmos() {
+    public void testGetBlueAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int blueAmmos = ammoSet.getBlueAmmos();
@@ -44,7 +44,7 @@ public class TestAmmoSet {
     }
 
     @Test
-    public void TestGetTotalAmmos() {
+    public void testGetTotalAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
 
         int totalAmmos = ammoSet.getTotalAmmos();

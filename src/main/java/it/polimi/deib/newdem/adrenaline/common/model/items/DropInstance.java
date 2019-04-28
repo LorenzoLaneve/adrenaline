@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.common.model.items;
 
+import java.util.Objects;
+
 public class DropInstance {
 
     private final AmmoSet ammoSet;
@@ -49,18 +51,25 @@ public class DropInstance {
 
     /**Compares the drop to another dropInstance.
      *
-     * @param dropInstance the drop to compare.
+     * @param o the drop to compare.
      * @return boolean value stating if the drops have the same ammos and both include or not powerUps.
      */
-    public boolean equalDrop(DropInstance dropInstance){
-        boolean equal;
+    @Override
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (!(o instanceof DropInstance)) {
+            return false;
+        }
 
-        equal = (this.ammoSet.getRedAmmos() == dropInstance.ammoSet.getRedAmmos() &&
-                this.ammoSet.getBlueAmmos() == dropInstance.ammoSet.getBlueAmmos() &&
-                this.ammoSet.getYellowAmmos() == dropInstance.ammoSet.getYellowAmmos() &&
+        DropInstance dropInstance = (DropInstance) o;
+
+        return (this.ammoSet.equals(dropInstance.getAmmos()) &&
                 this.hasPowerUp() == dropInstance.hasPowerUp());
+    }
 
-        return equal;
+    @Override
+    public int hashCode() {
+        return Objects.hash(ammoSet, hasPowerUp);
     }
 
     /**Copies the drop instance.

@@ -45,7 +45,4 @@ public interface Tile {
 
     void setRoom(Room room);
 
-    boolean equalTile(Tile tile);
-
-
 }

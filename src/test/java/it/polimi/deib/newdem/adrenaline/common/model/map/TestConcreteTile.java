@@ -125,9 +125,4 @@ public class TestConcreteTile {
         assertTrue(tile.getAdjacentTiles().stream().anyMatch(matchTile ->(matchTile.getPosition().getX() == tileRight.getPosition().getX() &&
                 matchTile.getPosition().getY() == tileRight.getPosition().getY()) ));
     }
-
-    @Test
-    public void testEqualTile() {
-        //TODO
-    }
 }
