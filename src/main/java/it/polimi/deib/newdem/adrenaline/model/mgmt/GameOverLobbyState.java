@@ -1,21 +1,19 @@
 package it.polimi.deib.newdem.adrenaline.model.mgmt;
 
-public class TimerWaitingLobbyState implements LobbyState {
+public class GameOverLobbyState implements LobbyState {
 
-    TimerWaitingLobbyState() {
-        //TODO
+    GameOverLobbyState() {
+        // TODO
     }
 
     @Override
     public LobbyState userDidEnterLobby(User user, Lobby lobby) {
-        // TODO
-        return null;
+        return this;
     }
 
     @Override
     public LobbyState userDidExitLobby(User user, Lobby lobby) {
-        // TODO
-        return null;
+        return this;
     }
 
     @Override
