@@ -10,6 +10,10 @@ public class Config {
 
     private int timerLength = 60;
 
+    private int minPlayers = 3;
+
+    private int maxPlayers = 5;
+
 
     private Config() {  }
 
@@ -36,6 +40,20 @@ public class Config {
      */
     public int getTimerLength() {
         return timerLength;
+    }
+
+    /**
+     * Returns the minimum numbers of players that lobbies in this server need to start a new game.
+     */
+    public int getMinPlayers() {
+        return minPlayers;
+    }
+
+    /**
+     * Returns the maximum numbers of players that lobbies in this server need to start the game immediately.
+     */
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
     /**
