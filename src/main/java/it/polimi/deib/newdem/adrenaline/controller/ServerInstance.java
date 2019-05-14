@@ -18,6 +18,8 @@ public class ServerInstance {
 
     private boolean ready;
 
+    private Config currentConfig;
+
     /**
      * Creates a new server instance.
      * @param log The Logger object that will accept incoming diagnostics from the server
@@ -26,6 +28,7 @@ public class ServerInstance {
     public ServerInstance(Logger log, Config config) {
         this.log = log;
         this.greeter = new UserGreeter();
+        this.currentConfig = config;
 
         this.ready = false;
 
@@ -61,6 +64,13 @@ public class ServerInstance {
     }
 
     /**
+     * Returns the configuration object used by this server instance.
+     */
+    public Config getCurrentConfig() {
+        return currentConfig;
+    }
+
+    /**
      * Initializes the server instance.
      */
     public void init() {
@@ -91,6 +101,8 @@ public class ServerInstance {
                 User incomingUser = greeter.accept();
 
                 userRegistry.registerUser(incomingUser);
+
+                // TODO add new user to lobbyRegistry.getLobbyManagerForUser(incomingUser);
                 getLogger().log(Level.INFO, String.format("User %s joined the server.", incomingUser.getName()));
             } catch (Exception e) {
                 getLogger().log(Level.SEVERE, "Server encountered error: "+ e.getMessage());

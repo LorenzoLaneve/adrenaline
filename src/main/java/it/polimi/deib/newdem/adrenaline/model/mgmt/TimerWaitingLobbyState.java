@@ -28,4 +28,9 @@ public class TimerWaitingLobbyState implements LobbyState {
         // TODO
     }
 
+    @Override
+    public boolean acceptsNewUsers() {
+        return true;
+    }
+
 }

@@ -9,4 +9,6 @@ public interface LobbyState {
     void lobbyWillEnterState(Lobby lobby);
 
     void lobbyDidExitState(Lobby lobby);
+
+    boolean acceptsNewUsers();
 }

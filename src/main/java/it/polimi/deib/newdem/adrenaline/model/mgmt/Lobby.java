@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface Lobby {
 
+    void setListener(LobbyListener listener);
+
     /**
      * Adds the given user to the lobby.
      */
@@ -29,5 +31,10 @@ public interface Lobby {
      * Returns the number of players that will cause the lobby to immediately start the game.
      */
     int getMaxPlayers();
+
+    /**
+     * Returns whether the lobby can accept new users to join the game.
+     */
+    boolean acceptsNewUsers();
 
 }

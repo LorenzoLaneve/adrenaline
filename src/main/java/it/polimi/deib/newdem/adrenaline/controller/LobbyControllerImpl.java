@@ -1,48 +1,46 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
-import it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyListener;
-import it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyState;
-import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.*;
+import it.polimi.deib.newdem.adrenaline.view.server.LobbyViewEventListener;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
-public class LobbyControllerImpl implements LobbyController {
+public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener {
 
     private Thread mainThread;
     private LobbyListener listener;
+    private Lobby lobby;
+    private VirtualLobbyView view;
+
+    public LobbyControllerImpl(Config config) {
+        this.lobby = new LobbyImpl(config.getMinPlayers(), config.getMaxPlayers(), GameManagerFactory.create());
+
+        this.view = new VirtualLobbyView(lobby, this);
+        this.lobby.setListener(view);
+    }
 
     @Override
     public Lobby getLobby() {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public LobbyListener getListener() {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public void setListener(LobbyListener lst) {
-        //TODO
-    }
-
-    @Override
-    public void changeState(LobbyState state) {
-        //TODO
+        return lobby;
     }
 
     @Override
     public void addUser(User user) {
-        //TODO
+        this.lobby.addUser(user);
     }
 
     @Override
     public void removeUser(User user) {
-        //TODO
+        this.lobby.removeUser(user);
     }
 
-    public LobbyControllerImpl(){
-        //TODO
+    @Override
+    public void userDidLoadLobby(User user, Lobby lobby) {
+
     }
+
+    @Override
+    public void userWillExitLobby(User user, Lobby lobby) {
+
+    }
+
 }

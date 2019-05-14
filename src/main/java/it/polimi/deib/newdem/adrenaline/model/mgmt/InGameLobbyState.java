@@ -26,4 +26,9 @@ public class InGameLobbyState implements LobbyState {
         // TODO
     }
 
+    @Override
+    public boolean acceptsNewUsers() {
+        return false;
+    }
+
 }
