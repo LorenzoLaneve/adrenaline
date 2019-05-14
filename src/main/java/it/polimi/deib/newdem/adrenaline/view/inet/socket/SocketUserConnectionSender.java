@@ -3,6 +3,8 @@ package it.polimi.deib.newdem.adrenaline.view.inet.socket;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameEvent;
 
 import java.io.DataOutputStream;
@@ -37,11 +39,21 @@ public class SocketUserConnectionSender implements UserConnectionSender {
         try {
             output.writeInt(SocketMessage.ENTER_LOBBY);
 
-
+            // TODO implement here
 
         } catch (IOException x) {
             throw new ConnectionException("An I/O error occurred during the socket writing.");
         }
+    }
+
+    @Override
+    public void sendExitLobbyEvent(ExitLobbyEvent event) throws ConnectionException {
+        // TODO implement here
+    }
+
+    @Override
+    public void sendLobbyTimerUpdateEvent(LobbyTimerUpdateEvent event) throws ConnectionException {
+        // TODO implement here
     }
 
 

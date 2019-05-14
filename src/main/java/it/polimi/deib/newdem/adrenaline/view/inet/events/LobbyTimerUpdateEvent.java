@@ -5,31 +5,30 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
-public class EnterLobbyEvent implements UserEvent {
+public class LobbyTimerUpdateEvent implements UserEvent {
 
-    private String username;
+    private int seconds;
 
     /**
-     * Create a new enter lobby event indicating that the user with the specified username entered the lobby (server bound event)
-     * @param username The name provided by the new user.
+     * Create a new event indicating that the timer is being updated (server bound event)
+     * @param seconds The seconds left on the timer.
      */
-    public EnterLobbyEvent(String username) {
-        this.username = username;
+    public LobbyTimerUpdateEvent(int seconds) {
+        this.seconds = seconds;
     }
 
-
-    public String getUsername() {
-        return username;
+    public int getSecondsLeft() {
+        return seconds;
     }
 
 
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.userDidEnterLobby(connection, this);
+        receiver.lobbyDidUpdateTimer(connection, this);
     }
 
     @Override
     public void sendEvent(UserConnectionSender sender) throws ConnectionException {
-        sender.sendEnterLobbyEvent(this);
+        sender.sendLobbyTimerUpdateEvent(this);
     }
 }

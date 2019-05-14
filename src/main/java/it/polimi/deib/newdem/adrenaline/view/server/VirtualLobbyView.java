@@ -5,19 +5,30 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
+
 
 public class VirtualLobbyView implements LobbyView, LobbyListener {
 
+    private Lobby lobby;
 
-    @Override
-    public void userDidEnterLobby(User user, Lobby lobby) {
-        // TODO
+    private LobbyViewEventListener eventListener;
+
+    public VirtualLobbyView(Lobby lobby, LobbyViewEventListener listener) {
+        this.lobby = lobby;
+        this.eventListener = listener;
     }
 
-    @Override
-    public void userDidExitLobby(User user, Lobby lobby) {
-        // TODO
+
+    public void sendEventToLobby(UserEvent event) {
+        for (User user : lobby.getUsers()) {
+            user.getBoundConnection().sendEvent(event);
+        }
     }
+
 
     @Override
     public void addGameView(GameView gv) {
@@ -26,17 +37,45 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     @Override
     public void addUser(String name) {
-        // TODO
+        sendEventToLobby(new EnterLobbyEvent(name));
+    }
+
+    @Override
+    public void removeUser(String name) {
+        sendEventToLobby(new ExitLobbyEvent(name));
     }
 
     @Override
     public void startTimer(int seconds) {
-        // TODO
+        sendEventToLobby(new LobbyTimerUpdateEvent(seconds));
     }
 
     @Override
     public void syncTimer(int seconds) {
-        // TODO
+        sendEventToLobby(new LobbyTimerUpdateEvent(seconds));
+    }
+
+
+
+
+    @Override
+    public void userDidEnterLobby(User user, Lobby lobby) {
+        addUser(user.getName());
+    }
+
+    @Override
+    public void userDidExitLobby(User user, Lobby lobby) {
+        removeUser(user.getName());
+    }
+
+    @Override
+    public void lobbyDidStartTimer(int seconds) {
+        startTimer(seconds);
+    }
+
+    @Override
+    public void lobbyDidSyncTimer(int seconds) {
+        syncTimer(seconds);
     }
 
 }

@@ -1,6 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameEvent;
 
 public interface UserConnectionReceiver {
@@ -14,11 +16,25 @@ public interface UserConnectionReceiver {
     void userDidUpdateUsername(UserConnection connection, UpdateUsernameEvent event);
 
     /**
-     * The server.
+     * A new user entered the lobby.
      * @param connection the connection that received the event.
      * @param event an {@code EnterLobbyEvent} object containing all the information about the event.
      */
-    void serverDidAssignLobby(UserConnection connection, EnterLobbyEvent event);
+    void userDidEnterLobby(UserConnection connection, EnterLobbyEvent event);
+
+    /**
+     * A user left the lobby.
+     * @param connection the connection that received the event.
+     * @param event an {@code ExitLobbyEvent} object containing all the information about the event.
+     */
+    void userDidExitLobby(UserConnection connection, ExitLobbyEvent event);
+
+    /**
+     * The lobby timer has been updated.
+     * @param connection the connection that received the event.
+     * @param event an {@code LobbyTimerUpdateEvent} object containing all the information about the event.
+     */
+    void lobbyDidUpdateTimer(UserConnection connection, LobbyTimerUpdateEvent event);
 
 
     /**
