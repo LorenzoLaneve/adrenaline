@@ -22,7 +22,7 @@ public class Config {
      * @param fileName the filename of the configuration file that has to be read.
      * @return a new {@code Config} object containing all the information retrieved by the given file.
      */
-    public Config fromFile(String fileName){
+    public static Config fromFile(String fileName){
         //TODO file reading
         return new Config();
     }
@@ -31,7 +31,7 @@ public class Config {
      * Returns the hardcoded default configuration.
      * @implNote This should only be used in absence of a configuration file.
      */
-    public Config getDefaultConfig() {
+    public static Config getDefaultConfig() {
         return new Config();
     }
 
