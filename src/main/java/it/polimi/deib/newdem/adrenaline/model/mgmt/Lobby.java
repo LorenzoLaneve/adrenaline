@@ -17,24 +17,24 @@ public interface Lobby {
     void removeUser(User user);
 
     /**
+     * Starts the timer in the lobby.
+     */
+    void startTimer(int secondsLeft);
+
+    /**
+     * Updates the seconds left for the countdown in the lobby.
+     */
+    void refreshTimer(int secondsLeft);
+
+    /**
+     * Aborts the timer in the lobby.
+     */
+    void abortTimer();
+
+    /**
      * Returns a list of the users that are in the lobby at the moment of the call.
      * Please note that no assumption will be made on the order.
      */
     List<User> getUsers();
-
-    /**
-     * Returns the minimum number of players required by the lobby to start the game.
-     */
-    int getMinPlayers();
-
-    /**
-     * Returns the number of players that will cause the lobby to immediately start the game.
-     */
-    int getMaxPlayers();
-
-    /**
-     * Returns whether the lobby can accept new users to join the game.
-     */
-    boolean acceptsNewUsers();
 
 }

@@ -30,39 +30,46 @@ public class LobbyTimer {
     /**
      * Starts the timer.
      * @param seconds The seconds left to the end of the countdown.
-     * @implNote The current thread will be responsible to do the countdown for the timer,
-     * the synchronization callbacks will be called on a separate thread, while the end and start events will be called on the current thread.
-     * @throws InterruptedException if the thread is interrupted while the timer is counting.
+     * @implNote The countdown for the timer and all the callbacks for LobbyTimerListener will be called on a separate thread.
      * @throws IllegalArgumentException if seconds is non-positive.
      */
-    public void start(int seconds) throws InterruptedException {
+    public void start(int seconds) {
         if (seconds <= 0) {
             throw new IllegalArgumentException("The seconds left for the countdown must be a valid positive integer value.");
         }
 
-        synchronized (this) {
-            this.abortRequested = false;
-            this.secondsLeft = timerDuration;
-        }
-        listener.timerWillStart();
+        this.timerDuration = seconds;
+        new Thread(this::doCountdown).start();
+    }
 
-        while (secondsLeft > 0) {
-            Thread.sleep(1000);
-
-            if (abortRequested) {
-                return;
-            }
-
+    private void doCountdown() {
+        try {
             synchronized (this) {
-                secondsLeft -= 1;
+                this.abortRequested = false;
+                this.secondsLeft = timerDuration;
+            }
+            listener.timerWillStart(timerDuration);
 
-                if (syncPeriod > 0 || (timerDuration - secondsLeft) % syncPeriod == 0) {
-                    new Thread(() -> listener.timerSync(secondsLeft)).start();
+            while (secondsLeft > 0) {
+                Thread.sleep(1000);
+
+                if (abortRequested) {
+                    return;
+                }
+
+                synchronized (this) {
+                    secondsLeft -= 1;
+
+                    if (syncPeriod > 0 || (timerDuration - secondsLeft) % syncPeriod == 0) {
+                        new Thread(() -> listener.timerSync(secondsLeft)).start();
+                    }
                 }
             }
-        }
 
-        listener.timerDidFinish();
+            listener.timerDidFinish();
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     /**
@@ -82,6 +89,13 @@ public class LobbyTimer {
      */
     public void reset(int seconds){
         this.secondsLeft = seconds;
+    }
+
+    /**
+     * Returns whether the timer has been aborted.
+     */
+    public boolean abortRequested() {
+        return abortRequested;
     }
 
     /**
