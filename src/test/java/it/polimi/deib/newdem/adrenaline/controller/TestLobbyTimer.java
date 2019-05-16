@@ -9,7 +9,7 @@ public class TestLobbyTimer {
 
     private LobbyTimerListener emptyListener = new LobbyTimerListener() {
         @Override
-        public void timerWillStart() {  }
+        public void timerWillStart(int secondsLeft) {  }
 
         @Override
         public void timerSync(int secondsLeft) {  }
@@ -31,7 +31,7 @@ public class TestLobbyTimer {
         try {
             t.start(50);
         }
-        catch (InterruptedException e) {
+        catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -43,22 +43,10 @@ public class TestLobbyTimer {
 
         try{
             t.start(-7);
-        }
-        catch (InterruptedException e) {
             fail();
         }
         catch (IllegalArgumentException e) {
             assertTrue(true);
-        }
-
-        try{
-            t.start(0);
-        }
-        catch (InterruptedException e) {
-            fail();
-        }
-        catch (IllegalArgumentException e) {
-            // ok
         }
     }
 
