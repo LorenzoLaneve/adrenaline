@@ -19,4 +19,6 @@ public interface LobbyController {
 
     boolean acceptsNewUsers();
 
+    void startGame();
+
 }

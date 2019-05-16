@@ -20,7 +20,7 @@ public class InGameLobbyState implements LobbyState {
 
     @Override
     public void lobbyWillEnterState(LobbyController lobbyController) {
-        // TODO
+        lobbyController.startGame();
     }
 
     @Override

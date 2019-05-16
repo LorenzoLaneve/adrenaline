@@ -79,6 +79,12 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
     }
 
     @Override
+    public void startGame() {
+        // TODO game controller creation
+    }
+
+
+    @Override
     public void userDidLoadLobby(User user, Lobby lobby) {
         // TODO
     }
