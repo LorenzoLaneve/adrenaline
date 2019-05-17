@@ -33,4 +33,12 @@ public interface Player {
     void takeDamage(int dmgAmount, Player attacker);
 
     void takeMark(int markAmount, Player attacker);
+
+    void goFrenzy(boolean precedesFirstPlayer);
+
+    void assignFirstPlayerCard();
+
+    void init();
+
+    boolean hasFirstPlayerCard();
 }

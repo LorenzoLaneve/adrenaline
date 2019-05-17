@@ -8,12 +8,15 @@ public class KillTrackImpl implements KillTrack {
     private List<Player> killers;
     private int initialTrackLength;
 
+    public static final int MIN_KILLTRACK_SIZE = 5 - 1; // arrays start at zero
+    public static final int MAX_KILLTRACK_SIZE = 8 - 1;
+
     /** Creates a new {@code KillTrack} with {@code trackLength} initial skulls on it.
      *
      * @param trackLength Amount of initial skulls on the track. Between 5 and 8, inclusive.
      */
     public KillTrackImpl(int trackLength){
-        if(trackLength < 5 || trackLength > 8) {
+        if(trackLength < MIN_KILLTRACK_SIZE || trackLength > MAX_KILLTRACK_SIZE) {
             throw new IllegalArgumentException("TrackLength must be between 5 and 8 inclusive");
         }
 
@@ -32,7 +35,6 @@ public class KillTrackImpl implements KillTrack {
         if(null == player) {
             throw new IllegalArgumentException("Player must not be null");
         }
-
         killers.add(player);
     }
 

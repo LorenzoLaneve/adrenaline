@@ -6,9 +6,15 @@ public interface Game {
 
     Map getMap();
 
-    Player getPlayer(PlayerColor color);
+    Player getPlayerFromColor(PlayerColor color);
 
     boolean isInFrenzy();
 
-    void makeTurn();
+    boolean shouldGoFrenzy();
+
+    Turn getNextTurn();
+
+    void concludeTurn(Turn turn);
+
+
 }

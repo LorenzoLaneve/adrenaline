@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DamageBoard {
 
@@ -21,6 +22,8 @@ public interface DamageBoard {
     int getTotalDamageFromPlayer(Player player);
 
     int getTotalMarksFromPlayer(Player player);
+
+    Map<Player, Integer> getMarksMap();
 
     int getTotalDamage();
 }
