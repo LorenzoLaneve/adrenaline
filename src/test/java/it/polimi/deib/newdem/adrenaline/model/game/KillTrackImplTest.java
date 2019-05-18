@@ -8,7 +8,7 @@ public class KillTrackImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegativeLowerBound() {
-        new KillTrackImpl(4);
+        new KillTrackImpl(KillTrackImpl.MIN_KILLTRACK_SIZE - 1);
     }
 
     @Test(expected = IllegalArgumentException.class)

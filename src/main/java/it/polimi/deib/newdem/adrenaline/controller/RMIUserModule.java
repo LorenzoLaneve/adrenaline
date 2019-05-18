@@ -14,8 +14,12 @@ public class RMIUserModule implements IncomingUserModule {
     }
 
     @Override
-    public User newUser() {
-        //TODO
+    public synchronized User newUser() {
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

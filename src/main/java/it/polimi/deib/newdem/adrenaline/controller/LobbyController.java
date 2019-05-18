@@ -10,4 +10,15 @@ public interface LobbyController {
     void addUser(User user);
 
     void removeUser(User user);
+
+    int getMinPlayers();
+
+    int getMaxPlayers();
+
+    LobbyTimerListener getTimerListener();
+
+    boolean acceptsNewUsers();
+
+    void startGame();
+
 }

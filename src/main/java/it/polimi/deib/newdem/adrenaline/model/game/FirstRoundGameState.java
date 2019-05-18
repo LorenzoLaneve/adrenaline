@@ -1,11 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+/**
+ * This class is deprecated.
+ *
+ * As of this commit, this class is never used.
+ *
+ */
+
 public class FirstRoundGameState implements GameState {
-    @Override
-    public Turn makeTurn() {
-        return null;
-        // TODO implement
-    }
 
     @Override
     public boolean isInFrenzy() {

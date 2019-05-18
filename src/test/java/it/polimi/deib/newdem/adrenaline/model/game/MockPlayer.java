@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
 import java.util.List;
 
-public class MockPlayer implements Player {
+public class MockPlayer extends PlayerImpl {
 
     private PlayerColor color;
     private String name;
@@ -12,6 +12,7 @@ public class MockPlayer implements Player {
     private int deathCount;
 
     public MockPlayer() {
+        super(PlayerColor.YELLOW, new MockGame(), "SimpleMockPlayer");
         color = PlayerColor.YELLOW;
         name = "Alice";
         deathCount = 0;
@@ -19,12 +20,14 @@ public class MockPlayer implements Player {
     }
 
     public MockPlayer(PlayerColor color) {
+        super(PlayerColor.YELLOW, new MockGame(), "ColoredMockPlayer");
         this.color = color;
         deathCount = 0;
         this.damageBoard = null;
     }
 
     public MockPlayer(PlayerColor color, String name) {
+        super(color, new MockGame(), name);
         this.color = color;
         this.name = name;
         this.damageBoard = null;
@@ -67,40 +70,5 @@ public class MockPlayer implements Player {
     @Override
     public int getDeaths() {
         return deathCount;
-    }
-
-    @Override
-    public int getTotalDamage() {
-        return 0;
-    }
-
-    @Override
-    public Player getDamager(int cell) {
-        return null;
-    }
-
-    @Override
-    public int getDamageFromPlayer(Player player) {
-        return 0;
-    }
-
-    @Override
-    public int getMarksFromPlayer(Player player) {
-        return 0;
-    }
-
-    @Override
-    public boolean isDead() {
-        return false;
-    }
-
-    @Override
-    public void takeDamage(int dmgAmount, Player attacker) {
-
-    }
-
-    @Override
-    public void takeMark(int markAmount, Player attacker) {
-
     }
 }

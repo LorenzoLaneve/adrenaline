@@ -4,8 +4,5 @@ public interface Turn {
 
     Player getActivePlayer();
 
-    void start();
-
-    void turnWillStart();
-
+    void execute();
 }

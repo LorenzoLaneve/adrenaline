@@ -1,11 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+/**
+ * This class is deprecated.
+ *
+ * As of this commit, this class is never used.
+ *
+ */
+
 public class FrenzyGameState implements GameState {
-    @Override
-    public Turn makeTurn() {
-        // TODO implement
-        return null;
-    }
 
     @Override
     public boolean isInFrenzy() {

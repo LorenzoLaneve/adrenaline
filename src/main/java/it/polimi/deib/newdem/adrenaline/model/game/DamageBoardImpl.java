@@ -10,8 +10,10 @@ public abstract class DamageBoardImpl implements DamageBoard {
     protected Player player;
     protected List<Player> damages;
     protected ArrayList<Integer> score; // this member must be populated by concrete classes
-    private HashMap<Player, Integer> marks;
-    private static final int MAX_LIFE = 12;
+    protected HashMap<Player, Integer> marks;
+    public static final int MAX_LIFE = 11;
+    public static final int DEATH_SHOT_INDEX = 9;
+    // Arrays start at zero
 
     // TODO add listener member
 
@@ -110,7 +112,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         if(null == attacker || dmgAmount < 0) {
             throw new IllegalArgumentException();
         }
-        while(damages.size() < MAX_LIFE && dmgAmount > 0) {
+        while(damages.size() <= MAX_LIFE && dmgAmount > 0) {
             damages.add(attacker);
             dmgAmount--;
         }
@@ -220,5 +222,14 @@ public abstract class DamageBoardImpl implements DamageBoard {
     @Override
     public int getTotalDamage() {
         return damages.size();
+    }
+
+    /**
+     * Creates and returns a map reporting all marks currently registered
+     *
+     * @return marks map
+     */
+    public Map<Player, Integer> getMarksMap() {
+        return new HashMap<>(marks);
     }
 }
