@@ -1,9 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
-import it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 public interface UserConnectionReceiver {
 
@@ -42,5 +39,18 @@ public interface UserConnectionReceiver {
      * @param connection the connection that has been closed.
      */
     void connectionDidClose(UserConnection connection);
+    
+    void playerDidMove(UserConnection connection, MovePlayerEvent event);
+    
+    void playerDidSpawn(UserConnection connection, SpawnPlayerEvent event);
 
+    void dropDidSpawn(UserConnection connection, SpawnDropEvent spawnDropEvent);
+
+    void playerDidDie(UserConnection connection, DeathPlayerEvent deathPlayerEvent);
+
+    void playerDidLeaveMap(UserConnection connection, LeaveMapPlayerEvent leaveMapPlayerEvent);
+
+    void mapDidSendTileData(UserConnection connection, MapTileDataEvent mapTileDataEvent);
+
+    void mapDidSendSpawnPointData(UserConnection connection, MapSpawnPointDataEvent receptionSpawnPointDataEvent);
 }
