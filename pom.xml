@@ -30,6 +30,13 @@
 
     </properties>
 
+    <repositories>
+        <repository>
+            <id>gson-repo</id>
+            <url>https://mvnrepository.com/artifact/com.google.code.gson/gson</url>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <!-- JUnit provides unit testing for Java applications -->
