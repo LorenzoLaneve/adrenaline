@@ -1,25 +1,38 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
-import java.util.List;
+import java.util.*;
 
-public class RoundRobin {
+public class RoundRobin<T> {
 
-    private List<Player> waitingPlayers;
+    private Deque<T> queue;
 
-    public RoundRobin(List<Player> players) {
-        this.waitingPlayers = players;
-        // TODO implement
+    public RoundRobin(List<T> elements) {
+        this.queue = new ArrayDeque<>(elements);
     }
 
-    public Player nextPlayer() {
-        // TODO implement
-        return null;
+    public RoundRobin() {
+        this.queue = new ArrayDeque<>();
     }
 
-    public void enqueue(Player player) {
-        // TODO implements
+    public T next() {
+        return queue.poll();
     }
 
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
 
+    public void enqueue(T element) {
+        if(null != element) {
+            queue.addLast(element);
+        }
+    }
 
+    public void enqueueFirst(T element) {
+        queue.addFirst(element);
+    }
+
+    public List<T> getList() {
+        return new ArrayList<>(queue);
+    }
 }

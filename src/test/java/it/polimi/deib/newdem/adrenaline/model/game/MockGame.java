@@ -4,12 +4,22 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 
 public class MockGame implements Game {
     @Override
+    public boolean shouldGoFrenzy() {
+        return false;
+    }
+
+    @Override
+    public Turn getNextTurn() {
+        return null;
+    }
+
+    @Override
     public Map getMap() {
         return null;
     }
 
     @Override
-    public Player getPlayer(PlayerColor color) {
+    public Player getPlayerFromColor(PlayerColor color) {
         return null;
     }
 
@@ -19,7 +29,7 @@ public class MockGame implements Game {
     }
 
     @Override
-    public void makeTurn() {
-
+    public void concludeTurn(Turn turn) {
     }
+
 }

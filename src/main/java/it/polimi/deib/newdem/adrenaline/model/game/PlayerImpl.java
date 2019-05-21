@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
 
 public class PlayerImpl implements Player {
 
@@ -19,12 +20,7 @@ public class PlayerImpl implements Player {
     private int deaths;
     private boolean isDead; // maybe inferred?
     private boolean isInit;
-
-    /*
-    public PlayerImpl() {
-        //TODO do what now?
-    }
-    */
+    private boolean hasFirstPlayerCard;
 
     public PlayerImpl(PlayerColor color, Game game, String name) {
         this.color = color;
@@ -40,7 +36,7 @@ public class PlayerImpl implements Player {
     /**
      * Initializes this player.
      *
-     * This player's inventory, damage and action boards are created.
+     * This player's new inventory, damage and action boards are created.
      */
     public void init() {
         this.damageBoard = new OrdinaryDamageBoard(this);
@@ -197,7 +193,10 @@ public class PlayerImpl implements Player {
         if(!isInit) throw new PlayerNotInitializedException();
         if(dmgAmount < 0 || null == attacker || this == attacker) throw new IllegalArgumentException();
         this.damageBoard.takeDamage(dmgAmount, attacker);
-        //TODO notify event
+        //TODO notify damage event
+
+        isDead = damageBoard.getTotalDamage() >= DEATH_SHOT_INDEX;
+        //TODO notify death (fatal damage?)
     }
 
     /**
@@ -212,5 +211,26 @@ public class PlayerImpl implements Player {
         if(markAmount < 0 || null == attacker || this == attacker) throw new IllegalArgumentException();
         this.damageBoard.takeMark(markAmount, attacker);
         //TODO notify event
+    }
+
+    public void assignFirstPlayerCard() {
+        hasFirstPlayerCard = true;
+    }
+
+    @Override
+    public boolean hasFirstPlayerCard() {
+        return hasFirstPlayerCard;
+    }
+
+    @Override
+    public void goFrenzy(boolean precedesFirstPlayer) {
+        if(precedesFirstPlayer) actionBoard = new FrenzyDoubleActionBoard();
+        else                    actionBoard = new FrenzySingleActionBoard();
+
+        if(0 == damageBoard.getTotalDamage()) {
+            registerDamageBoard(
+                    new FrenzyDamageBoard(this, this.damageBoard.getMarksMap())
+            );
+        }
     }
 }

@@ -3,6 +3,9 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class DamageBoardImplTest {
@@ -130,12 +133,29 @@ public class DamageBoardImplTest {
         assertEquals(2, dmgb.getScoreForPlayer(p2));
     }
 
+    @Test
+    public void testGetMarkMapPositive() {
+        PlayerImpl p1 = new PlayerImpl(PlayerColor.MAGENTA, new MockGame(), "Carl");
+        PlayerImpl p2 = new PlayerImpl(PlayerColor.GRAY, new MockGame(), "larry");
+        DamageBoard d = new OrdinaryDamageBoard(p1);
+        p1.init();
+        p1.registerDamageBoard(d);
+        p2.init();
+
+        p1.takeMark(1, p2);
+        assertNotNull(d.getMarksMap());
+        Map<Player, Integer> map = d.getMarksMap();
+        map.get(p2);
+        System.out.println(d.getMarksMap().get(p2));
+        assertEquals(1, d.getMarksMap().get(p2).intValue());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegative() {
         DamageBoard dmgb = new OrdinaryDamageBoard(null);
     }
 
-    // getPlayer can't fail, no point in testGetPlayerNegative
+    // getPlayerFromColor can't fail, no point in testGetPlayerNegative
 
     @Test(expected = IllegalArgumentException.class)
     public void testTakeDamageNegativeLessThanZero() {
