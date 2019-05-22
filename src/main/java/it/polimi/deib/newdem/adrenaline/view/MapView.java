@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.List;
@@ -54,6 +55,8 @@ public interface MapView {
      * Notifies that the player with the given color has to be removed from the map.
      */
     void removePlayer(PlayerColor player);
+
+    void addWeapon(Tile tile, int cardId);
 
 
 }

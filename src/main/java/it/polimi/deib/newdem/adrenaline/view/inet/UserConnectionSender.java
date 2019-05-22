@@ -40,4 +40,6 @@ public interface UserConnectionSender {
     void sendPlayerAcquirePowerUpEvent(PlayerAcquirePowerUpEvent event) throws ConnectionException;
 
     void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException;
+
+    void sendSpawnWeaponEvent(SpawnWeaponEvent spawnWeaponEvent) throws ConnectionException;
 }

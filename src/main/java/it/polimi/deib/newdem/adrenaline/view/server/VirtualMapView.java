@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -93,6 +94,11 @@ public class VirtualMapView implements MapView, MapListener {
         setSpawnPoints(spawnPointTileDataPosition);
     }
 
+    @Override
+    public void weaponDidSpawn(Tile tile, WeaponCard weapon) {
+
+    }
+
 
     /// MapView methods
 
@@ -129,6 +135,11 @@ public class VirtualMapView implements MapView, MapListener {
     @Override
     public void removePlayer(PlayerColor player) {
         gameView.sendEvent(new LeaveMapPlayerEvent(player));
+    }
+
+    @Override
+    public void addWeapon(Tile tile, int cardId) {
+        gameView.sendEvent(new SpawnWeaponEvent(tile, cardId));
     }
 
 }

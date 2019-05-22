@@ -9,10 +9,10 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
 public class SpawnDropEvent implements UserEvent {
 
-    DropType drop1;
-    DropType drop2;
-    DropType drop3;
-    TilePosition tilePosition;
+    private DropType drop1;
+    private DropType drop2;
+    private DropType drop3;
+    private TilePosition tilePosition;
 
     public SpawnDropEvent(DropType drop1, DropType drop2, DropType drop3, TilePosition tilePosition){
         this.drop1 = drop1;

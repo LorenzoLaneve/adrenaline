@@ -68,4 +68,6 @@ public interface UserConnectionReceiver {
     void playerDidAcquirePowerUp(UserConnection connection, PlayerAcquirePowerUpEvent event);
 
     void playerDidAcquireWeapon(UserConnection connection, PlayerAcquireWeaponEvent event);
+
+    void weaponDidSpawn(UserConnection connection, SpawnWeaponEvent event);
 }
