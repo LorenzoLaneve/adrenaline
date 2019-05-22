@@ -6,6 +6,6 @@ public interface Effect {
 
     PaymentInvoice getPrice();
 
-    void apply(EffectVisitor visitor);
+    void apply(EffectVisitor visitor) throws UndoException;
 
 }
