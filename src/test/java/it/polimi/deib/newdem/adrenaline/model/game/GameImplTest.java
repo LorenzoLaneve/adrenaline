@@ -3,15 +3,15 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.MockMap;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.tools.JavaCompiler;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.List;
 
+import static it.polimi.deib.newdem.adrenaline.model.game.GameImpl.MAX_PLAYERS_PER_GAME;
 import static org.junit.Assert.*;
 
 public class GameImplTest {
@@ -20,7 +20,7 @@ public class GameImplTest {
     GameParameters gp;
     Map map;
     Player p1;
-    EnumMap<PlayerColor, Player> colorPlayerEnumMap;
+    List<ColorUserPair> colorUserPairs;
 
     @Before
     public void setUp() throws Exception {
@@ -28,14 +28,14 @@ public class GameImplTest {
         p1 = new MockPlayer(PlayerColor.MAGENTA);
         map = new MockMap();
 
-        colorPlayerEnumMap = new EnumMap<>(PlayerColor.class);
-        colorPlayerEnumMap.put(p1.getColor(), p1);
+        colorUserPairs = new ArrayList<>(MAX_PLAYERS_PER_GAME);
+        colorUserPairs.add(new ColorUserPair(p1.getColor(), new User()));
 
-        gp.setMap(map);
-        gp.setColorPlayerMap(colorPlayerEnumMap);
+        gp.setGameMap(map);
+        gp.setColorUserOrder(colorUserPairs);
 
         game = new GameImpl(gp);
-        game.reset();
+        game.init();
     }
 
     @Test
@@ -46,18 +46,21 @@ public class GameImplTest {
 
     @Test
     public void testGetPlayer() throws Exception {
-        MockPlayer p1 = new MockPlayer(PlayerColor.MAGENTA);
         GameParameters gp = new GameParameters();
-        EnumMap<PlayerColor, Player> colorPlayerEnumMap = new EnumMap<>(PlayerColor.class);
+        List<ColorUserPair> colorUserPairs = new ArrayList<>();
 
-        colorPlayerEnumMap.put(p1.getColor(), p1);
-        gp.setColorPlayerMap(colorPlayerEnumMap);
+        colorUserPairs.add(new ColorUserPair(PlayerColor.MAGENTA, new User()));
+        gp.setColorUserOrder(colorUserPairs);
 
         Game thisGame = new GameImpl(gp);
+        ((GameImpl) thisGame).init();
 
-        assertEquals(p1, thisGame.getPlayerFromColor(PlayerColor.MAGENTA));
+        assertNotNull(thisGame.getPlayerFromColor(PlayerColor.MAGENTA));
 
-        assertEquals(this.p1, game.getPlayerFromColor(PlayerColor.MAGENTA));
+        assertNotNull(game.getPlayerFromColor(PlayerColor.MAGENTA));
+
+        assertNotEquals(thisGame.getPlayerFromColor(PlayerColor.MAGENTA),
+                game.getPlayerFromColor(PlayerColor.MAGENTA));
     }
 
     @Test
@@ -67,17 +70,20 @@ public class GameImplTest {
 
     @Test
     public void testShouldGoFrenzy() throws Exception {
-        Player p2 = new PlayerImpl(PlayerColor.GREEN, game, "Larry");
-        java.util.Map<PlayerColor, Player> MyMap = gp.getColorPlayerMap();
-        MyMap.put(PlayerColor.GREEN, p2);
+        // Player p2 = new PlayerImpl(PlayerColor.GREEN, game, "Larry");
+        // java.util.Map<PlayerColor, Player> MyMap = gp.getColorUserOrder();
+        List<ColorUserPair> colorUserPairs = gp.getColorUserOrder();
+        colorUserPairs.add(new ColorUserPair(PlayerColor.GREEN, new User()));
         GameParameters gameParameters = new GameParameters();
 
-        gameParameters.setColorPlayerMap(MyMap);
-        gameParameters.setMap(map);
+        gameParameters.setColorUserOrder(colorUserPairs);
+        gameParameters.setGameMap(map);
 
         game = new GameImpl(gameParameters);
-        game.reset();
-        p2.init();
+        game.init();  //<<<<<
+
+        Player p2 = game.getPlayerFromColor(PlayerColor.GREEN);
+        // p2.init();
 
         assertFalse(game.shouldGoFrenzy());
         for(int i = 0; i <= GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT; i++) {
@@ -110,45 +116,108 @@ public class GameImplTest {
     @Test
     public void testGoFrenzy() throws Exception {
         Player p2 = new MockPlayer();
-        p1.takeMark(2, p2);
+        p2.init();
+        Player p3 = game.getPlayerFromColor(PlayerColor.MAGENTA);
+        p3.takeMark(2, p2);
         game.goFrenzy();
-        assertEquals(2, p1.getMarksFromPlayer(p2));
+        assertEquals(2, p3.getMarksFromPlayer(p2));
     }
 
     @Test
     public void testGoFrenzyFirstPlayerCard() throws Exception {
-        Player p2 = new MockPlayer(PlayerColor.GREEN);
-        Player p3 = new MockPlayer(PlayerColor.YELLOW);
-        Player p4 = new MockPlayer(PlayerColor.GRAY);
 
-        p2.assignFirstPlayerCard();
-
-        java.util.Map<PlayerColor, Player> MyMap = gp.getColorPlayerMap();
-        MyMap.put(p2.getColor(), p2);
-        MyMap.put(p3.getColor(), p3);
-        MyMap.put(p4.getColor(), p4);
-
-        gp.setColorPlayerMap(MyMap);
-        gp.setPlayerOrder(Arrays.asList(
-                p1,
-                p2,
-                p3,
-                p4
-        ));
+        List<ColorUserPair> colorUserPairs = gp.getColorUserOrder();
+        colorUserPairs.add(new ColorUserPair(PlayerColor.GREEN, new User()));
+        colorUserPairs.add(new ColorUserPair(PlayerColor.YELLOW, new User()));
+        colorUserPairs.add(new ColorUserPair(PlayerColor.GRAY, new User()));
+        gp.setColorUserOrder(colorUserPairs);
 
         GameImpl myGame = new GameImpl(gp);
-        myGame.reset();
+        myGame.init();
 
-        p2.init();
-        p3.init();
+        Player p2 = myGame.getPlayerFromColor(PlayerColor.GREEN);
+        p2.assignFirstPlayerCard();
+
+        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
+        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
+        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
 
         myGame.goFrenzy();
+
+        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.GREEN).getMoves().size());
+        assertEquals(2, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
+        assertEquals(2, myGame.getPlayerFromColor(PlayerColor.GRAY).getMoves().size());
+
+    }
+
+    @Test
+    public void testSetUserForColor() throws Exception {
+        game.setUserForColor(new User(), PlayerColor.MAGENTA);
+    }
+
+    @Test
+    public void testGetUserByPlayer() throws Exception {
+        Player p1 = game.getPlayerFromColor(PlayerColor.MAGENTA);
+        assertNotNull(game.getUserByPlayer(p1));
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testgoFrenzyNegative() throws Exception {
+    public void testGoFrenzyNegative() throws Exception {
         game.goFrenzy();
         assertFalse(game.shouldGoFrenzy());
         game.goFrenzy();
+    }
+
+    @Test
+    public void testGetPlayerFromColorNegative() throws Exception {
+        GameParameters gp = new GameParameters();
+        gp.setColorUserOrder(Arrays.asList(new ColorUserPair(
+                PlayerColor.GREEN, new User()
+        )));
+        Game myGame = new GameImpl(gp);
+        myGame.init();
+        assertNull(myGame.getPlayerFromColor(PlayerColor.MAGENTA));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testInitNegativeNoPlayers() throws Exception {
+        GameParameters gp = new GameParameters();
+        Game mygame = new GameImpl(gp);
+        mygame.init();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testInitNegativeDouble() throws Exception {
+        GameParameters gp = new GameParameters();
+        gp.setColorUserOrder(Arrays.asList(
+                new ColorUserPair(PlayerColor.MAGENTA, new User())
+        ));
+        Game myGame = new GameImpl(gp);
+        myGame.init();
+        try{
+            myGame.init();
+        }
+        catch (IllegalStateException e) {
+            throw e;
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetUserForColorNegativeNoColor() throws Exception {
+        game.setUserForColor(new User(), PlayerColor.GREEN);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testInitNEgativeNoPlayers() throws Exception {
+        GameParameters gp = new GameParameters();
+        Game myGame = new GameImpl(gp);
+        myGame.init();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testTesetNegativeNoPlayers() throws Exception {
+        GameParameters gp = new GameParameters();
+        Game myGame = new GameImpl(gp);
+        ((GameImpl) myGame).reset();
     }
 }

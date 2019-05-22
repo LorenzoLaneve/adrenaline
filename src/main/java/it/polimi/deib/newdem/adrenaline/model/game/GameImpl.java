@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
@@ -24,7 +24,9 @@ public class GameImpl implements Game {
 
     private List<GameListener> listeners;
 
-    private EnumMap<PlayerColor, Player> playerColorMap;
+    private java.util.Map<PlayerColor, User> colorUserMap;
+
+    public static final int MAX_PLAYERS_PER_GAME = 5;
 
     /**
      * Builds a new game from the given {@code GameParameters}
@@ -32,10 +34,11 @@ public class GameImpl implements Game {
      * @param parameters to build the new game from
      */
     public GameImpl(GameParameters parameters) {
-        map = parameters.getMap();
+        map = parameters.getGameMap();
         killtrackStartSize = parameters.getKillTrackInitialLength();
-        playerColorMap = (EnumMap<PlayerColor, Player>) parameters.getColorPlayerMap();
-        players = parameters.getPlayerOrder();
+        colorUserMap = parameters.getColorUserMap();
+        players = new ArrayList<>(MAX_PLAYERS_PER_GAME);
+        // ^ no players added
         turnQueue = new RoundRobin<>();
     }
 
@@ -58,7 +61,12 @@ public class GameImpl implements Game {
      */
     @Override
     public Player getPlayerFromColor(PlayerColor color) {
-        return playerColorMap.getOrDefault(color, null);
+        for(Player p : players) {
+            if(color == p.getColor()){
+                return p;
+            }
+        }
+        return null;
     }
 
     /**
@@ -83,13 +91,45 @@ public class GameImpl implements Game {
     }
 
     /**
+     * Prepares this game for its first execution
+     */
+    public void init() {
+
+        // create Players
+        if(colorUserMap.isEmpty()) {
+            throw new IllegalStateException();
+        }
+        if(!players.isEmpty()) throw new IllegalStateException();
+
+        for(java.util.Map.Entry<PlayerColor,User> e : colorUserMap.entrySet()) {
+            Player newPlayer = new PlayerImpl(
+                    e.getKey(),
+                    this,
+                    e.getValue().getName()
+            );
+            players.add(newPlayer);
+        }
+
+        // calling reset
+        reset();
+    }
+
+
+    /**
      * Prepares this game for a new game.
      *
+     * resets kill track
+     * builds initial turns
+     * sets the game to not be in frenzy (therefore ordinary gameplay state)
      */
     public void reset() {
         killTrack = new KillTrackImpl(killtrackStartSize);
-        for(Player p : players) {
+        if(players.isEmpty()) {
+            throw new IllegalStateException();
+        }
+        for (Player p : players) {
             p.init();
+            //TODO notify game view
             turnQueue.enqueue(new FirstTurn(p));
         }
         isFrenzy = false;
@@ -134,15 +174,28 @@ public class GameImpl implements Game {
         }
     }
 
+    /**
+     * Assigns a new {@code User} to the {@code Player} of the given {@code PlayerColor}.
+     *
+     * @throws IllegalArgumentException if there is no player for the given {@code PlayerColor}
+     * @param user to assign to the player of the given color
+     * @param color of the user to whom assign the new user-
+     */
     @Override
     public void setUserForColor(User user, PlayerColor color) {
-        // TODO
+        if(!colorUserMap.containsKey(color)) throw new IllegalArgumentException();
+        colorUserMap.replace(color, user);
     }
 
+    /**
+     * Gets the {@code User} associated with this {@code Player}
+     *
+     * @param player to find the user associated with
+     * @return user associated to the given {@code Player}
+     */
     @Override
     public User getUserByPlayer(Player player) {
-        // TODO
-        return null;
+        return colorUserMap.getOrDefault(player.getColor(), null);
     }
 
     /**

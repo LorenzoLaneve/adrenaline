@@ -1,29 +1,30 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+
 import java.util.*;
 
+import static it.polimi.deib.newdem.adrenaline.model.game.GameImpl.MAX_PLAYERS_PER_GAME;
 import static it.polimi.deib.newdem.adrenaline.model.game.KillTrackImpl.MAX_KILLTRACK_SIZE;
 import static it.polimi.deib.newdem.adrenaline.model.game.KillTrackImpl.MIN_KILLTRACK_SIZE;
 
 public class GameParameters {
 
-    // eeeeh
-    // If Player object are passed to game, not created by it,
-    // what does create them?
-    // GM? Sure, let's go with that one.
-
-    private EnumMap<PlayerColor, Player> colorPlayerMap;
-    private it.polimi.deib.newdem.adrenaline.model.map.Map map;
+    // colorUserOrder to create players from within GameImpl
+    private List<ColorUserPair> colorUserOrder;
+    private it.polimi.deib.newdem.adrenaline.model.map.Map gameMap;
     private int killTrackInitialLength;
-    private List<Player> playerOrder;
+
+    // List<PlayerColor>, player has not been created yet.
+    private List<PlayerColor> playerOrder;
 
     public static final int KILLTRACK_STARTING_SIZE_DEFAULT = 5;
 
 
     public GameParameters() {
-        colorPlayerMap = new EnumMap<>(PlayerColor.class);
+        colorUserOrder = new ArrayList<>(MAX_PLAYERS_PER_GAME);
 
-        map = null; // needs to read from disk, hard to justify a default map
+        gameMap = null; // needs to read from disk, hard to justify a default gameMap
         // will be set explicitly
 
         killTrackInitialLength = KILLTRACK_STARTING_SIZE_DEFAULT;
@@ -32,28 +33,38 @@ public class GameParameters {
         // will be randomized and stored on the first get.
     }
 
-    public Map<PlayerColor, Player> getColorPlayerMap() {
-        if (colorPlayerMap.entrySet().isEmpty())
+    public List<ColorUserPair> getColorUserOrder() {
+        if (colorUserOrder.isEmpty())
         {
             throw new IllegalStateException();
         }
-        return colorPlayerMap;
+        return colorUserOrder;
     }
 
-    public boolean isColorPlayerMapSet() {
-        return colorPlayerMap.entrySet().isEmpty();
+    public Map<PlayerColor, User> getColorUserMap() {
+        if(colorUserOrder.isEmpty()) throw new IllegalStateException();
+        EnumMap<PlayerColor, User> newMap = new EnumMap<>(PlayerColor.class);
+        for(ColorUserPair p : colorUserOrder) {
+            newMap.put(p.getColor(),p.getUser());
+        }
+        return newMap;
     }
 
-    public void setColorPlayerMap(Map<PlayerColor, Player> colorPlayerMap) {
-        this.colorPlayerMap = (EnumMap<PlayerColor, Player>) colorPlayerMap;
+    public boolean isColorUserOrderSet() {
+        return !colorUserOrder.isEmpty();
     }
 
-    public it.polimi.deib.newdem.adrenaline.model.map.Map getMap() {
-        return map;
+    public void setColorUserOrder(List<ColorUserPair> colorUserOrder) {
+        this.colorUserOrder = colorUserOrder;
+
     }
 
-    public void setMap(it.polimi.deib.newdem.adrenaline.model.map.Map map) {
-        this.map = map;
+    public it.polimi.deib.newdem.adrenaline.model.map.Map getGameMap() {
+        return gameMap;
+    }
+
+    public void setGameMap(it.polimi.deib.newdem.adrenaline.model.map.Map gameMap) {
+        this.gameMap = gameMap;
     }
 
     public int getKillTrackInitialLength() {
@@ -67,17 +78,22 @@ public class GameParameters {
         this.killTrackInitialLength = length;
     }
 
-    public List<Player> getPlayerOrder() {
+    public List<PlayerColor> getPlayerOrder() {
         if(null != playerOrder) return playerOrder;
+        if(!isColorUserOrderSet()) throw new IllegalStateException();
+
         playerOrder = new ArrayList<>();
-        for(Map.Entry<PlayerColor, Player> e: colorPlayerMap.entrySet()) {
-            playerOrder.add(e.getValue());
+
+        for(ColorUserPair p : colorUserOrder) {
+            playerOrder.add(p.getColor());
         }
+
         Collections.shuffle(playerOrder);
+
         return new ArrayList<>(playerOrder);
     }
 
-    public void setPlayerOrder(List<Player> playerOrder) {
+    public void setPlayerOrder(List<PlayerColor> playerOrder) {
         this.playerOrder = playerOrder;
     }
 }

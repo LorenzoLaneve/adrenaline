@@ -57,7 +57,7 @@ public class TestSpawnPointTile {
     public void initTest(){
         AmmoSet ammoSet = new AmmoSet(1,1,0);
 
-        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
+        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
 
         Map map = new ConcreteMap(mapBuilder.getMatrixMap(),mapBuilder.getRooms());
         map.bindRooms();

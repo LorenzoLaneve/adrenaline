@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public class MockGame implements Game {
 
+    @Override
+    public void init() {
+
+    }
 
     @Override
     public boolean shouldGoFrenzy() {

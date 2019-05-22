@@ -39,4 +39,6 @@ public interface EffectVisitor {
      */
     void reportGameChange(GameChange gameChange);
 
+    void enqueueEffect();
+
 }

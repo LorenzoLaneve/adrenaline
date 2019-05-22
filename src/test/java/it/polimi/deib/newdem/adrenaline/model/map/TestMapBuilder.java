@@ -11,7 +11,7 @@ public class TestMapBuilder {
 
 
 
-        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
+        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
 
         List<Room> rooms = mapBuilder.getRooms();
         Tile[][] matrixMap = mapBuilder.getMatrixMap();

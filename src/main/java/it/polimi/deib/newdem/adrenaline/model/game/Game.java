@@ -21,4 +21,6 @@ public interface Game {
 
     User getUserByPlayer(Player player);
 
+    void init();
+
 }
