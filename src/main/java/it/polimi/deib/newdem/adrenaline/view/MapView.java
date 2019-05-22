@@ -56,7 +56,7 @@ public interface MapView {
      */
     void removePlayer(PlayerColor player);
 
-    void addWeapon(Tile tile, int cardId);
+    void addWeapon(TilePosition tilePosition, int cardId);
 
 
 }

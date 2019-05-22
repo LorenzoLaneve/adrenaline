@@ -182,6 +182,19 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     }
 
     @Override
+    public void sendSpawnWeaponEvent(SpawnWeaponEvent event) throws ConnectionException {
+        try{
+            output.writeInt(SocketMessage.SPAWN_WEAPON);
+
+            StreamHelper.writeTilePosition(output, event.getTilePosition());
+            output.writeInt(event.getWeaponCardID());
+
+        } catch (IOException x) {
+            throw new ConnectionException("An I/O error occurred during the socket writing.");
+        }
+    }
+
+    @Override
     public void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException {
         // TODO
     }
@@ -205,6 +218,5 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     public void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException {
         // TODO
     }
-
 
 }

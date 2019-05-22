@@ -51,6 +51,11 @@ public class TestWeaponSet {
         public Weapon makeWeapon() {
             return null;
         }
+
+        @Override
+        public int getCardID() {
+            return 0;
+        }
     }
 
     @Before

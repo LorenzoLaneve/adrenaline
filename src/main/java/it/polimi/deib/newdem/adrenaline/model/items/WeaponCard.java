@@ -12,4 +12,6 @@ public interface WeaponCard {
     Effect getEffect();
 
     Weapon makeWeapon();
+
+    int getCardID();
 }

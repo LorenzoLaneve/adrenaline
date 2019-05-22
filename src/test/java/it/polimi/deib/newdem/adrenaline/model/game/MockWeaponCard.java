@@ -36,4 +36,9 @@ public class MockWeaponCard implements WeaponCard {
     public Weapon makeWeapon() {
         return null;
     }
+
+    @Override
+    public int getCardID() {
+        return 0;
+    }
 }

@@ -96,7 +96,7 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void weaponDidSpawn(Tile tile, WeaponCard weapon) {
-
+        addWeapon(tile.getPosition(), weapon.getCardID());
     }
 
 
@@ -138,8 +138,8 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
-    public void addWeapon(Tile tile, int cardId) {
-        gameView.sendEvent(new SpawnWeaponEvent(tile, cardId));
+    public void addWeapon(TilePosition tilePosition, int cardId) {
+        gameView.sendEvent(new SpawnWeaponEvent(tilePosition, cardId));
     }
 
 }

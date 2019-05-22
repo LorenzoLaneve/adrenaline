@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 
 public class TestOrdinaryTile {
 
-    Tile tile;
-    TilePosition tilePosition;
-    DropInstance d1;
-    WeaponSet set;
-    WeaponCard w1;
+    private Tile tile;
+    private TilePosition tilePosition;
+    private DropInstance d1;
+    private WeaponSet set;
+    private WeaponCard w1;
 
     public class MockWeapon implements WeaponCard{
         private String code;
@@ -47,6 +47,11 @@ public class TestOrdinaryTile {
         @Override
         public Weapon makeWeapon() {
             return null;
+        }
+
+        @Override
+        public int getCardID() {
+            return 0;
         }
     }
 

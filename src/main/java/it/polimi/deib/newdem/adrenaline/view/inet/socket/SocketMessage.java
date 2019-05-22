@@ -31,4 +31,6 @@ public final class SocketMessage {
 
     public static final int GAME_END = 0x000D;
 
+    public static final int SPAWN_WEAPON = 0x000E;
+
 }
