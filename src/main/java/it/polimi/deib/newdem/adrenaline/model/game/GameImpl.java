@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -131,6 +132,16 @@ public class GameImpl implements Game {
         if(shouldGoFrenzy()) {
             goFrenzy();
         }
+    }
+
+    @Override
+    public void setUserForColor(User user, PlayerColor color) {
+        // TODO
+    }
+
+    @Override
+    public void getUserByPlayer(Player player) {
+        // TODO
     }
 
     /**

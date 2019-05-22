@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public interface Game {
 
@@ -16,5 +17,8 @@ public interface Game {
 
     void concludeTurn(Turn turn);
 
+    void setUserForColor(User user, PlayerColor color);
+
+    void getUserByPlayer(Player player);
 
 }
