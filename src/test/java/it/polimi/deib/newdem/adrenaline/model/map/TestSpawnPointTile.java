@@ -59,8 +59,7 @@ public class TestSpawnPointTile {
 
         MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
 
-        Map map = new ConcreteMap(mapBuilder.getMatrixMap(),mapBuilder.getRooms());
-        map.bindRooms();
+        Map map = mapBuilder.buildMap();
 
         tilePosition = new TilePosition(0,0);
 
