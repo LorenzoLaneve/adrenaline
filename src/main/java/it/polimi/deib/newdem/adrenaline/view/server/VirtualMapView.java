@@ -8,12 +8,23 @@ import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 public class VirtualMapView implements MapView, MapListener {
+
+    private VirtualGameView gameView;
+
+
+    public VirtualMapView(VirtualGameView gameView) {
+        this.gameView = gameView;
+    }
+
+    public void addMapEventListener(MapViewEventListener listener) {
+        // TODO
+    }
 
 
     @Override
@@ -83,39 +94,41 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
 
+    /// MapView methods
+
     @Override
     public void setTiles(List<TilePosition> tileData) {
-        // TODO
+        gameView.sendEvent(new MapTileDataEvent(new ArrayList<>(tileData)));
     }
 
     @Override
     public void setSpawnPoints(List<TilePosition> tileData) {
-        // TODO
+        gameView.sendEvent(new MapSpawnPointDataEvent(new ArrayList<>(tileData)));
     }
 
     @Override
     public void addDrops(TilePosition tile, DropType drop1, DropType drop2, DropType drop3) {
-        // TODO
+        gameView.sendEvent(new SpawnDropEvent(drop1, drop2, drop3, tile));
     }
 
     @Override
     public void movePlayer(PlayerColor player, TilePosition destTile) {
-        // TODO
+        gameView.sendEvent(new MovePlayerEvent(player, destTile));
     }
 
     @Override
     public void spawnPlayer(PlayerColor player, TilePosition tile) {
-        // TODO
+        gameView.sendEvent(new SpawnPlayerEvent(player, tile));
     }
 
     @Override
     public void killPlayer(PlayerColor player) {
-        // TODO
+        gameView.sendEvent(new DeathPlayerEvent(player));
     }
 
     @Override
     public void removePlayer(PlayerColor player) {
-        // TODO
+        gameView.sendEvent(new LeaveMapPlayerEvent(player));
     }
 
 }
