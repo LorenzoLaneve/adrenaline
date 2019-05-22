@@ -14,4 +14,10 @@ public interface Map {
 
     void movePlayer(Player player, Tile destination);
 
+    void setListener(MapListener listener);
+
+    MapListener getListener();
+
+    void removePlayer(Player player);
+
 }

@@ -63,6 +63,7 @@ public class OrdinaryTile extends ConcreteTile {
         if(missingDrop){
             dropInstance = drop;
             missingDrop = false;
+            getMap().getListener().dropDidSpawn(this,drop);
         }
         else{
             throw new DropAlreadyPresentException("Drop already present");

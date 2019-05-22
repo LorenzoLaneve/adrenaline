@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.model.game.Player;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ public class ConcreteMap implements Map {
 
     private List<Room> rooms;
     private Tile[][] matrixMap;
+    private MapListener mapListener;
 
     /**Creates a new {@code ConcreteMap} using the matrixMap and list of rooms provided by the MapBuilder.
      *
@@ -54,5 +58,60 @@ public class ConcreteMap implements Map {
         for(Room room : rooms){
             room.setMap(this);
         }
+    }
+
+    @Override
+    public void movePlayer(Player player, Tile destination) {
+        Tile source = player.getTile();
+
+        if(source == null){
+            destination.addPlayer(player);
+            player.setTile(destination);
+            mapListener.playerDidSpawn(player, destination);
+        }
+        else{
+            source.removePlayer(player);
+            destination.addPlayer(player);
+            player.setTile(destination);
+            mapListener.playerDidMove(player, source, destination);
+        }
+    }
+
+    @Override
+    public void setListener(MapListener listener) {
+        this.mapListener = listener;
+        if(mapListener != null){
+
+            List<Tile> tileList = new ArrayList<Tile>();
+            List<Tile> spawnPointTileList = new ArrayList<Tile>();
+
+            for(Tile[] tileRow: matrixMap){
+                for (Tile tile : tileRow){
+                    if(tile!= null){
+                        tileList.add(tile);
+                        if(tile.hasSpawnPoint()){
+                            spawnPointTileList.add(tile);
+                        }
+                    }
+                }
+            }
+
+            mapListener.mapDidSendTileData(tileList);
+            mapListener.mapDidSendSpawnPointData(spawnPointTileList);
+
+        }
+    }
+
+    @Override
+    public MapListener getListener() {
+        return mapListener;
+    }
+
+    @Override
+    public void removePlayer(Player player) {
+        Tile tile = player.getTile();
+
+        tile.removePlayer(player);
+        mapListener.playerDidLeaveMap(player);
     }
 }

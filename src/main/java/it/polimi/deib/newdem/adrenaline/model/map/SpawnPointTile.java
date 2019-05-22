@@ -64,6 +64,7 @@ public class SpawnPointTile extends ConcreteTile {
     @Override
     public void addWeapon(WeaponCard weapon) throws OutOfSlotsException, WeaponAlreadyPresentException {
         this.weaponSet.addWeapon(weapon);
+        getMap().getListener().weaponDidSpawn(this, weapon);
     }
 
     /**Grabs drop from the tile if present ends signal that after the tile lacks one.
