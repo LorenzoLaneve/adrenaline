@@ -163,5 +163,48 @@ public class SocketUserConnectionSender implements UserConnectionSender {
         }
     }
 
+    @Override
+    public void sendGameStartEvent(GameStartEvent event) throws ConnectionException {
+        try {
+            output.writeInt(SocketMessage.GAME_START);
+        } catch (IOException x) {
+            throw new ConnectionException("An I/O error occurred during the socket writing.");
+        }
+    }
+
+    @Override
+    public void sendGameEndEvent(GameEndEvent event) throws ConnectionException {
+        try {
+            output.writeInt(SocketMessage.GAME_END);
+        } catch (IOException x) {
+            throw new ConnectionException("An I/O error occurred during the socket writing.");
+        }
+    }
+
+    @Override
+    public void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerActiveEvent(PlayerActiveEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerScoreEvent(PlayerScoreEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerAcquirePowerUpEvent(PlayerAcquirePowerUpEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException {
+        // TODO
+    }
+
 
 }

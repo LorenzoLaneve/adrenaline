@@ -1,8 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public class MockGame implements Game {
+
+
     @Override
     public boolean shouldGoFrenzy() {
         return false;
@@ -30,6 +33,16 @@ public class MockGame implements Game {
 
     @Override
     public void concludeTurn(Turn turn) {
+    }
+
+    @Override
+    public void setUserForColor(User user, PlayerColor color) {
+
+    }
+
+    @Override
+    public User getUserByPlayer(Player player) {
+        return null;
     }
 
 }

@@ -19,6 +19,6 @@ public interface Game {
 
     void setUserForColor(User user, PlayerColor color);
 
-    void getUserByPlayer(Player player);
+    User getUserByPlayer(Player player);
 
 }

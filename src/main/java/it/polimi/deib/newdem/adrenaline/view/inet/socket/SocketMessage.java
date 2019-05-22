@@ -27,4 +27,8 @@ public final class SocketMessage {
 
     public static final int SPAWN_PLAYER = 0x000B;
 
+    public static final int GAME_START = 0x000C;
+
+    public static final int GAME_END = 0x000D;
+
 }

@@ -1,9 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent;
 
 public interface UserConnectionSender {
-
 
     void sendUpdateUsernameEvent(UpdateUsernameEvent event) throws ConnectionException;
 
@@ -26,4 +26,18 @@ public interface UserConnectionSender {
     void sendMapTileDataEvent(MapTileDataEvent event) throws ConnectionException;
 
     void sendMapSpawnPointDataEvent(MapSpawnPointDataEvent event) throws  ConnectionException;
+
+    void sendGameStartEvent(GameStartEvent event) throws ConnectionException;
+
+    void sendGameEndEvent(GameEndEvent event) throws ConnectionException;
+
+    void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException;
+
+    void sendPlayerActiveEvent(PlayerActiveEvent event) throws ConnectionException;
+
+    void sendPlayerScoreEvent(PlayerScoreEvent event) throws ConnectionException;
+
+    void sendPlayerAcquirePowerUpEvent(PlayerAcquirePowerUpEvent event) throws ConnectionException;
+
+    void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException;
 }

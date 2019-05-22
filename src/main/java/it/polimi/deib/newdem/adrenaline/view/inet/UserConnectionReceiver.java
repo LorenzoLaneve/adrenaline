@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent;
 
 public interface UserConnectionReceiver {
 
@@ -44,13 +45,27 @@ public interface UserConnectionReceiver {
     
     void playerDidSpawn(UserConnection connection, SpawnPlayerEvent event);
 
-    void dropDidSpawn(UserConnection connection, SpawnDropEvent spawnDropEvent);
+    void dropDidSpawn(UserConnection connection, SpawnDropEvent event);
 
-    void playerDidDie(UserConnection connection, DeathPlayerEvent deathPlayerEvent);
+    void playerDidDie(UserConnection connection, DeathPlayerEvent event);
 
-    void playerDidLeaveMap(UserConnection connection, LeaveMapPlayerEvent leaveMapPlayerEvent);
+    void playerDidLeaveMap(UserConnection connection, LeaveMapPlayerEvent event);
 
-    void mapDidSendTileData(UserConnection connection, MapTileDataEvent mapTileDataEvent);
+    void mapDidSendTileData(UserConnection connection, MapTileDataEvent event);
 
-    void mapDidSendSpawnPointData(UserConnection connection, MapSpawnPointDataEvent receptionSpawnPointDataEvent);
+    void mapDidSendSpawnPointData(UserConnection connection, MapSpawnPointDataEvent event);
+
+    void gameWillStart(UserConnection connection, GameStartEvent event);
+
+    void gameWillEnd(UserConnection connection, GameEndEvent event);
+
+    void playerDidUpdateUsername(UserConnection connection, PlayerNameEvent event);
+
+    void playerDidBecomeActive(UserConnection connection, PlayerActiveEvent event);
+
+    void playerDidUpdateScore(UserConnection connection, PlayerScoreEvent event);
+
+    void playerDidAcquirePowerUp(UserConnection connection, PlayerAcquirePowerUpEvent event);
+
+    void playerDidAcquireWeapon(UserConnection connection, PlayerAcquireWeaponEvent event);
 }

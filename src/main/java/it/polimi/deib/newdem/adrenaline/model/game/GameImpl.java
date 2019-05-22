@@ -140,8 +140,9 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void getUserByPlayer(Player player) {
+    public User getUserByPlayer(Player player) {
         // TODO
+        return null;
     }
 
     /**
