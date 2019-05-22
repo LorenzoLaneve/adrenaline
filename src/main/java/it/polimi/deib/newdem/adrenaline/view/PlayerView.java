@@ -8,9 +8,9 @@ public interface PlayerView {
     void setName(String name);
 
     /**
-     * Notifies whether the player has the control of the game (i.e. it is their turn).
+     * Notifies that the player acquired the control of the game (i.e. it is their turn).
      */
-    void setActive(boolean isActive);
+    void takeControl();
 
     /**
      * Notifies an update of the score of the player associated to this view.
@@ -20,13 +20,9 @@ public interface PlayerView {
     /**
      * Notifies that the player associated to this view acquired a new card.
      * @param cardID The ID of the power up card, according to the loaded deck.
+     * @see it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard for HIDDEN constant.
      */
     void addPowerUpCard(int cardID);
-
-    /**
-     * Notifies that the player associated to this view acquired a new power up card, without giving further information about it.
-     */
-    void addHiddenPowerUpCard();
 
     /**
      * Notifies that the player associated to this view acquired a new weapon card.
