@@ -2,8 +2,10 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MapBuilder {
@@ -106,7 +108,7 @@ public class MapBuilder {
             int[] blue = spawnPointTileDict.getBlue();
             int[] yellow = spawnPointTileDict.getYellow();
 
-            if(tileInt.equals(red) || tileInt.equals(blue) || tileInt.equals(yellow)){
+            if(Arrays.equals(red,tileInt) || Arrays.equals(blue,tileInt) || Arrays.equals(yellow,tileInt)){
                 result = true;
             }
 

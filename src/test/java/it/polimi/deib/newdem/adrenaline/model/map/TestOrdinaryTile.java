@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 
 public class TestOrdinaryTile {
 
-    private Tile tile;
-    private TilePosition tilePosition;
-    private DropInstance d1;
-    private WeaponSet set;
-    private WeaponCard w1;
+    Tile tile;
+    TilePosition tilePosition;
+    DropInstance d1;
+    WeaponSet set;
+    WeaponCard w1;
 
     public class MockWeapon implements WeaponCard{
         private String code;
@@ -58,11 +58,17 @@ public class TestOrdinaryTile {
 
     @Before
     public void initTest(){
+
+        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
+
+        Map map = new ConcreteMap(mapBuilder.getMatrixMap(),mapBuilder.getRooms());
+        map.bindRooms();
+
         AmmoSet ammoSet = new AmmoSet(1,1,0);
 
-        tilePosition = new TilePosition(0,0);
+        tilePosition = new TilePosition(1,0);
 
-        tile = new OrdinaryTile(tilePosition);
+        tile = map.getTile(tilePosition);
 
         d1 = new DropInstance(ammoSet, true);
 

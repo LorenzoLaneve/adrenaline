@@ -9,7 +9,9 @@ public class TestMapBuilder {
     @Test
     public void testConstructor(){
 
-        MapBuilder mapBuilder = new MapBuilder("C:\\Users\\Lopardo-PC\\Desktop\\Java\\Adrenaline\\repo\\src\\main\\java\\it\\polimi\\deib\\newdem\\adrenaline\\model\\map\\JsonData.json");
+
+
+        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
 
         List<Room> rooms = mapBuilder.getRooms();
         Tile[][] matrixMap = mapBuilder.getMatrixMap();
