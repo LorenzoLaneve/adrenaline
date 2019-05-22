@@ -5,16 +5,20 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 public class NearTileSelector implements TileSelector {
 
+    private Tile sourceTile;
     private int minDistance;
     private int maxDistance;
 
-    public NearTileSelector(int minDist, int maxDist){
-        //TODO
+    public NearTileSelector(Tile sourceTile, int minDist, int maxDist){
+        this.sourceTile = sourceTile;
+        this.minDistance = minDist;
+        this.maxDistance = maxDist;
     }
 
     @Override
     public boolean isSelectable(Map map, Tile tile) {
-        //TODO
-        return false;
+        int distance = sourceTile.distanceFrom(tile);
+
+        return minDistance < distance && distance < maxDistance;
     }
 }

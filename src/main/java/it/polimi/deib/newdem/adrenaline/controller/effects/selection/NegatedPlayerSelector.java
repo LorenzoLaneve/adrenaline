@@ -9,12 +9,10 @@ public class NegatedPlayerSelector implements PlayerSelector {
 
     public NegatedPlayerSelector(PlayerSelector innerSelector){
         this.innerSelector = innerSelector;
-        //TODO
     }
 
     @Override
     public boolean isSelectable(Map map, Player player) {
-        //TODO
-        return false;
+        return !innerSelector.isSelectable(map, player);
     }
 }

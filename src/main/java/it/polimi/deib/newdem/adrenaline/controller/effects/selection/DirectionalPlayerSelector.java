@@ -7,16 +7,17 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 
 public class DirectionalPlayerSelector implements PlayerSelector {
 
-    private MetaPlayer sourcePlayer;
+    private Player sourcePlayer;
     private Direction direction;
 
-    public DirectionalPlayerSelector(Player sourcePlayer, Direction direction){
-        //TODO
+    public DirectionalPlayerSelector(Player sourcePlayer, Direction direction) {
+        this.sourcePlayer = sourcePlayer;
+        this.direction = direction;
     }
 
     @Override
     public boolean isSelectable(Map map, Player player) {
-        //TODO
+        // TODO
         return false;
     }
 }
