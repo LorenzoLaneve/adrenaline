@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
@@ -9,6 +10,10 @@ public interface Player {
     Game getGame();
 
     String getName();
+
+    Tile getTile();
+
+    void setTile(Tile dest);
 
     PlayerInventory getInventory();
 

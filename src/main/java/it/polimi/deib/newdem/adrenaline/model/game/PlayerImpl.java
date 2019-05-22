@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class PlayerImpl implements Player {
     private PlayerColor color;
     private Game game;
     private String name;
+    private Tile tile;
     private int deaths;
     private boolean isDead; // maybe inferred?
     private boolean isInit;
@@ -26,6 +28,7 @@ public class PlayerImpl implements Player {
         this.color = color;
         this.game = game;
         this.name = name;
+        this.tile = null;
         this.deaths = 0;
         this.isDead = false;
         this.isInit = false;
@@ -74,6 +77,16 @@ public class PlayerImpl implements Player {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Tile getTile() {
+        return tile;
+    }
+
+    @Override
+    public void setTile(Tile dest) {
+        this.tile = tile;
     }
 
     /**
