@@ -4,13 +4,12 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.EffectVisitor;
 
 public class AnyTileSelectorFactory implements TileSelectorFactory {
 
-    public AnyTileSelectorFactory(){
-        //TODO
+    public AnyTileSelectorFactory() {
+        // nothing to do here
     }
 
     @Override
     public TileSelector makeSelector(EffectVisitor visitor) {
-        //TODO
-        return null;
+        return new AnyTileSelector();
     }
 }

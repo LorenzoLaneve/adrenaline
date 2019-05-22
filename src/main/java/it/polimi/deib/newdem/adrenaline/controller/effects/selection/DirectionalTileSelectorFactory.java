@@ -9,12 +9,13 @@ public class DirectionalTileSelectorFactory implements TileSelectorFactory {
     private boolean ignoreWalls;
 
     public DirectionalTileSelectorFactory(int minDist, int maxDist, boolean ignoreWalls){
-        //TODO
+        this.minDistance = minDist;
+        this.maxDistance = maxDist;
+        this.ignoreWalls = ignoreWalls;
     }
 
     @Override
     public TileSelector makeSelector(EffectVisitor visitor) {
-        //TODO
-        return null;
+        return new DirectionalTileSelector(minDistance, maxDistance, ignoreWalls);
     }
 }
