@@ -86,7 +86,7 @@ public class PlayerImpl implements Player {
 
     @Override
     public void setTile(Tile dest) {
-        this.tile = tile;
+        this.tile = dest;
     }
 
     /**
