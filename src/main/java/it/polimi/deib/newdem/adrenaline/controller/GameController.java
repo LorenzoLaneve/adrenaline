@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-public interface GameManager {
+public interface GameController {
 
     void setupGame();
 
