@@ -13,12 +13,10 @@ public class BlackListFilterPlayerSelector implements PlayerSelector {
     public BlackListFilterPlayerSelector(List<Player> excluded, PlayerSelector innerSelector){
         this.excluded = excluded;
         this.innerSelector = innerSelector;
-        //TODO
     }
 
     @Override
     public boolean isSelectable(Map map, Player player) {
-        //TODO
-        return false;
+        return !excluded.contains(player) && innerSelector.isSelectable(map, player);
     }
 }

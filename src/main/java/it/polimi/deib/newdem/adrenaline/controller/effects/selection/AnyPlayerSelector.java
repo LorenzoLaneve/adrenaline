@@ -5,13 +5,12 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 
 public class AnyPlayerSelector implements PlayerSelector {
 
-    public AnyPlayerSelector(){
-        //TODO
+    public AnyPlayerSelector() {
+        // nothing here
     }
 
     @Override
     public boolean isSelectable(Map map, Player player) {
-        //TODO
-        return false;
+        return true;
     }
 }
