@@ -42,4 +42,8 @@ public interface UserConnectionSender {
     void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException;
 
     void sendSpawnWeaponEvent(SpawnWeaponEvent spawnWeaponEvent) throws ConnectionException;
+
+    void sendPlayerDamageEvent(PlayerDamageEvent event) throws ConnectionException;
+
+    void sendPlayerConvertMarksEvent(PlayerConvertMarksEvent event) throws ConnectionException;
 }

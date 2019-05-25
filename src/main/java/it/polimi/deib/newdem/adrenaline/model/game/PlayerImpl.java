@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.ArrayList;
@@ -206,10 +207,14 @@ public class PlayerImpl implements Player {
         if(!isInit) throw new PlayerNotInitializedException();
         if(dmgAmount < 0 || null == attacker || this == attacker) throw new IllegalArgumentException();
         this.damageBoard.takeDamage(dmgAmount, attacker);
-        //TODO notify damage event
 
         isDead = damageBoard.getTotalDamage() >= DEATH_SHOT_INDEX;
-        //TODO notify death (fatal damage?)
+        if (isDead) {
+            Map map = getTile().getMap();
+            if (map.getListener() != null) {
+                map.getListener().playerDidDie(this);
+            }
+        }
     }
 
     /**

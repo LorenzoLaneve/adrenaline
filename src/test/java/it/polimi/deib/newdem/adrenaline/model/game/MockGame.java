@@ -26,6 +26,11 @@ public class MockGame implements Game {
     }
 
     @Override
+    public void setListener(GameListener listener) {
+
+    }
+
+    @Override
     public Player getPlayerFromColor(PlayerColor color) {
         return null;
     }

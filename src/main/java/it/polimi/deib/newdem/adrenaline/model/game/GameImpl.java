@@ -22,7 +22,7 @@ public class GameImpl implements Game {
 
     private boolean isFrenzy;
 
-    private List<GameListener> listeners;
+    private GameListener listener;
 
     private java.util.Map<PlayerColor, User> colorUserMap;
 
@@ -50,6 +50,11 @@ public class GameImpl implements Game {
     @Override
     public Map getMap() {
         return map;
+    }
+
+    @Override
+    public void setListener(GameListener listener) {
+        this.listener = listener;
     }
 
     /**

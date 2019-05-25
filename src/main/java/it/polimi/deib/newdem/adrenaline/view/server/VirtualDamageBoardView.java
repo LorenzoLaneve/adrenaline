@@ -4,27 +4,41 @@ import it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener;
 import it.polimi.deib.newdem.adrenaline.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.DamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.GameView;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerConvertMarksEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDamageEvent;
 
 public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListener {
 
+    private Player owner;
+
+    private VirtualGameView gameView;
+
+    public VirtualDamageBoardView(Player owner, VirtualGameView gameView) {
+        this.owner = owner;
+        this.gameView = gameView;
+    }
+
+
     @Override
     public void boardDidTakeDamage(int damageAmount, int markAmount, Player dealer) {
-        // TODO
+        registerDamage(damageAmount, markAmount, dealer.getColor());
     }
 
     @Override
-    public void registerDamage(int damageAmount, PlayerColor dealer) {
-        // TODO
+    public void boardDidConvertMarks(Player dealer) {
+        convertMarks(dealer.getColor());
     }
 
+
     @Override
-    public void registerMarks(int markAmount, PlayerColor dealer) {
-        // TODO
+    public void registerDamage(int damageAmount, int markAmount, PlayerColor dealer) {
+        gameView.sendEvent(new PlayerDamageEvent(owner.getColor(), dealer, damageAmount, markAmount));
     }
 
     @Override
     public void convertMarks(PlayerColor dealer) {
-        // TODO
+        gameView.sendEvent(new PlayerConvertMarksEvent(owner.getColor()));
     }
 
 }

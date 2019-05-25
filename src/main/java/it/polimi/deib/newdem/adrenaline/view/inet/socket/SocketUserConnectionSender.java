@@ -195,6 +195,16 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     }
 
     @Override
+    public void sendPlayerDamageEvent(PlayerDamageEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerConvertMarksEvent(PlayerConvertMarksEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
     public void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException {
         // TODO
     }
