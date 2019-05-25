@@ -20,4 +20,11 @@ public interface Map {
 
     void removePlayer(Player player);
 
+    static Map buildMap(Tile[][] matrixMap, List<Room> rooms){
+        Map map = new ConcreteMap(matrixMap,rooms);
+        map.bindRooms();
+
+        return map;
+    }
+
 }

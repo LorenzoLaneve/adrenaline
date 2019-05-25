@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -115,12 +114,19 @@ public class MapBuilder {
             return result;
     }
 
-    public List<Room> getRooms() {
+    private List<Room> getRooms() {
         return rooms;
     }
 
-    public Tile[][] getMatrixMap() {
+    private Tile[][] getMatrixMap() {
         return matrixMap;
+    }
+
+    public Map buildMap(){
+        Map map = new ConcreteMap(matrixMap,rooms);
+        map.bindRooms();
+
+        return map;
     }
 }
 
