@@ -7,6 +7,8 @@ public interface Game {
 
     Map getMap();
 
+    void setListener(GameListener listener);
+
     Player getPlayerFromColor(PlayerColor color);
 
     boolean isInFrenzy();
