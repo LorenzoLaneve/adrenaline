@@ -27,9 +27,9 @@ public class MapBuilder {
             Gson gson = new Gson();
             JsonData jsonData = gson.fromJson(reader,JsonData.class );
 
-            adjacencyList = jsonData.getAdjacencyList();
-            roomListInt = jsonData.getRoomListInt();
-            spawnPointTileDict = jsonData.getSpawnPointTileDict();
+            this.adjacencyList = jsonData.getAdjacencyList();
+            this.roomListInt = jsonData.getRoomListInt();
+            this.spawnPointTileDict = jsonData.getSpawnPointTileDict();
 
         } catch (Exception e) {
             //TODO
