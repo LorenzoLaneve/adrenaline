@@ -70,4 +70,8 @@ public interface UserConnectionReceiver {
     void playerDidAcquireWeapon(UserConnection connection, PlayerAcquireWeaponEvent event);
 
     void weaponDidSpawn(UserConnection connection, SpawnWeaponEvent event);
+
+    void playerDidTakeDamage(UserConnection connection, PlayerDamageEvent event);
+
+    void playerDidConvertMarks(UserConnection connection, PlayerConvertMarksEvent event);
 }
