@@ -1,8 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-public class LobbyTimer {
+public class Timer {
 
-    private LobbyTimerListener listener;
+    private TimerListener listener;
 
     private int secondsLeft;
 
@@ -18,7 +18,7 @@ public class LobbyTimer {
      * @throws IllegalArgumentException if syncPeriod is non-positive or if the listener is null.
      * @apiNote Only one listener per timer is permitted.
      */
-    public LobbyTimer(int syncPeriod, LobbyTimerListener lst) {
+    public Timer(int syncPeriod, TimerListener lst) {
         if (syncPeriod <= 0 || lst == null) {
             throw new IllegalArgumentException("The sync period of the timer must be positive and the lst must be non-null.");
         }
@@ -30,7 +30,7 @@ public class LobbyTimer {
     /**
      * Starts the timer.
      * @param seconds The seconds left to the end of the countdown.
-     * @implNote The countdown for the timer and all the callbacks for LobbyTimerListener will be called on a separate thread.
+     * @implNote The countdown for the timer and all the callbacks for TimerListener will be called on a separate thread.
      * @throws IllegalArgumentException if seconds is non-positive.
      */
     public void start(int seconds) {

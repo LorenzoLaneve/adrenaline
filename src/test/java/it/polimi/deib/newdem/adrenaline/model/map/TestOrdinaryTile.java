@@ -61,8 +61,7 @@ public class TestOrdinaryTile {
 
         MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
 
-        Map map = new ConcreteMap(mapBuilder.getMatrixMap(),mapBuilder.getRooms());
-        map.bindRooms();
+        Map map = mapBuilder.buildMap();
 
         AmmoSet ammoSet = new AmmoSet(1,1,0);
 

@@ -5,9 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class TestLobbyTimer {
+public class TestTimer {
 
-    private LobbyTimerListener emptyListener = new LobbyTimerListener() {
+    private TimerListener emptyListener = new TimerListener() {
         @Override
         public void timerWillStart(int secondsLeft) {  }
 
@@ -26,7 +26,7 @@ public class TestLobbyTimer {
     @Test
     public void testStartPositive() {
 
-        LobbyTimer t = new LobbyTimer(1, emptyListener);
+        Timer t = new Timer(1, emptyListener);
 
         try {
             t.start(50);
@@ -39,7 +39,7 @@ public class TestLobbyTimer {
     @Test
     public void testStartNegative() {
 
-        LobbyTimer t = new LobbyTimer(5, emptyListener);
+        Timer t = new Timer(5, emptyListener);
 
         try{
             t.start(-7);
@@ -52,13 +52,13 @@ public class TestLobbyTimer {
 
     @Test
     public void testConstructorPositive() {
-        new LobbyTimer(1, emptyListener);
+        new Timer(1, emptyListener);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegative() {
-        new LobbyTimer(-1, emptyListener);
-        new LobbyTimer(0, emptyListener);
+        new Timer(-1, emptyListener);
+        new Timer(0, emptyListener);
     }
 
 }

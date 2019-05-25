@@ -14,6 +14,8 @@ public class Config {
 
     private int maxPlayers = 5;
 
+    private GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
+
 
     private Config() {  }
 
@@ -75,6 +77,13 @@ public class Config {
      */
     public boolean isRMIActive(){
         return useRMI;
+    }
+
+    /**
+     * Returns the factory object used to create new game controllers for the .
+     */
+    public GameControllerFactory getGameControllerFactory() {
+        return gameMaker;
     }
 
 }
