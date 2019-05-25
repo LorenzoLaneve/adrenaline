@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.MockMap;
+import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class GameImplTest {
     public void setUp() throws Exception {
         gp = new GameParameters();
         p1 = new MockPlayer(PlayerColor.MAGENTA);
-        map = new MockMap();
+        map = Map.createMap(getClass().getClassLoader().getResource("JsonData.json").getFile());
 
         colorPlayerEnumMap = new EnumMap<>(PlayerColor.class);
         colorPlayerEnumMap.put(p1.getColor(), p1);
@@ -74,6 +75,8 @@ public class GameImplTest {
 
         gameParameters.setColorPlayerMap(MyMap);
         gameParameters.setMap(map);
+
+        map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
 
         game = new GameImpl(gameParameters);
         game.reset();

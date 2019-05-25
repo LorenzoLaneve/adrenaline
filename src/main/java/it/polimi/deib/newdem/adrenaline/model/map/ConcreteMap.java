@@ -67,13 +67,17 @@ public class ConcreteMap implements Map {
         if(source == null){
             destination.addPlayer(player);
             player.setTile(destination);
-            mapListener.playerDidSpawn(player, destination);
+            if (mapListener != null) {
+                mapListener.playerDidSpawn(player, destination);
+            }
         }
         else{
             source.removePlayer(player);
             destination.addPlayer(player);
             player.setTile(destination);
-            mapListener.playerDidMove(player, source, destination);
+            if (mapListener != null) {
+                mapListener.playerDidMove(player, source, destination);
+            }
         }
     }
 
