@@ -27,7 +27,15 @@ public class TimedExecutor implements TimerListener {
             Thread.currentThread().interrupt();
         }
 
-        if (timeout || !isOver) {
+        if (isOver) {
+            timer.abort();
+        }
+
+        if (timeout) {
+            executionThread.interrupt();
+        }
+
+        if (timeout && !isOver) {
             throw new TimeoutException("The runnable object run out of time.");
         }
     }
