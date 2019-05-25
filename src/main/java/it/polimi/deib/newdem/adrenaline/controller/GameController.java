@@ -1,10 +1,19 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+
+import java.util.List;
+
 public interface GameController {
 
-    void setupGame();
+    void setupGame(List<User> users);
 
-    void start();
+    void recoverGame();
 
-    void recover();
+    void runGame();
+
+    void userDidLeaveLobby(User user);
+
+    void userDidReenterLobby(User user);
+
 }

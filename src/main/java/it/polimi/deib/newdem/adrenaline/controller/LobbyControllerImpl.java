@@ -6,16 +6,22 @@ import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
 public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener, LobbyTimerListener {
 
+    private Config config;
+
     private Thread mainThread;
 
     private Lobby lobby;
 
     private LobbyState lobbyState;
 
+    private GameController gameController;
+
     private int minPlayers;
     private int maxPlayers;
 
     LobbyControllerImpl(Config config) {
+        this.config = config;
+
         this.lobby = new LobbyImpl();
 
         this.minPlayers = config.getMinPlayers();
@@ -23,6 +29,8 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
 
         VirtualLobbyView view = new VirtualLobbyView(lobby, this);
         this.lobby.setListener(view);
+
+        this.gameController = null;
 
         this.switchState(new ReadyLobbyState());
     }
@@ -80,7 +88,16 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
 
     @Override
     public void startGame() {
-        // TODO game controller creation
+        this.gameController = config.getGameControllerFactory().makeGameController(this);
+        this.gameController.setupGame(lobby.getUsers());
+
+        this.mainThread = new Thread(gameController::runGame);
+        this.mainThread.start();
+    }
+
+    @Override
+    public void endGame() {
+        switchState(new GameOverLobbyState());
     }
 
 
