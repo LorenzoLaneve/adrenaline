@@ -7,7 +7,7 @@ public class TestMapBuilder {
 
     @Test
     public void testConstructor(){
-        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("JsonData.json").getFile());
+        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("Map0_0.json").getFile());
     }
 
 
