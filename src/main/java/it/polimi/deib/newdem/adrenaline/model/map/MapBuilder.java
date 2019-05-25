@@ -32,7 +32,7 @@ public class MapBuilder {
             spawnPointTileDict = jsonData.getSpawnPointTileDict();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //TODO
         }
 
         this.matrixMap = new Tile[99][99];
