@@ -4,7 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.*;
 import it.polimi.deib.newdem.adrenaline.view.server.LobbyViewEventListener;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
-public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener, LobbyTimerListener {
+public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener, TimerListener {
 
     private Config config;
 
@@ -77,7 +77,7 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
     }
 
     @Override
-    public LobbyTimerListener getTimerListener() {
+    public TimerListener getTimerListener() {
         return this;
     }
 

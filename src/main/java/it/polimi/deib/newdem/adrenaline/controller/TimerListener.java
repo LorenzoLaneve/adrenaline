@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-public interface LobbyTimerListener {
+public interface TimerListener {
 
     void timerWillStart(int secondsLeft);
 

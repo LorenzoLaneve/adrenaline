@@ -5,7 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public class TimerWaitingLobbyState implements LobbyState {
 
-    private LobbyTimer timer;
+    private Timer timer;
 
     TimerWaitingLobbyState() {
         // nothing to do
@@ -35,7 +35,7 @@ public class TimerWaitingLobbyState implements LobbyState {
 
     @Override
     public void lobbyWillEnterState(LobbyController lobbyController) {
-        timer = new LobbyTimer(10, lobbyController.getTimerListener());
+        timer = new Timer(10, lobbyController.getTimerListener());
         timer.start(60);
         // FIXME the sync period should be retrieved from the config.
     }

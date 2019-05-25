@@ -15,7 +15,7 @@ public interface LobbyController {
 
     int getMaxPlayers();
 
-    LobbyTimerListener getTimerListener();
+    TimerListener getTimerListener();
 
     boolean acceptsNewUsers();
 
