@@ -2,12 +2,14 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
+import it.polimi.deib.newdem.adrenaline.model.game.PlayerListener;
+import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
-public class VirtualPlayerView implements PlayerView {
+public class VirtualPlayerView implements PlayerView, PlayerListener {
 
     private VirtualGameView gameView;
 
@@ -90,4 +92,41 @@ public class VirtualPlayerView implements PlayerView {
 
     }
 
+    @Override
+    public void playerTookDamage(int dmgAmount, Player attacker) {
+        takeDamage(dmgAmount, attacker.getColor());
+    }
+
+    @Override
+    public void playerTookMark(int markAmount, Player attacker) {
+        takeMark(markAmount, attacker.getColor());
+
+    }
+
+    @Override
+    public void playerDidDrawPowerUpCard(PowerUpCard powerUpCard) {
+        addPowerUpCard(powerUpCard.getCardID());
+
+    }
+
+    @Override
+    public void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard) {
+        removePowerUpCard(powerUpCard.getCardID());
+    }
+
+    @Override
+    public void playerDidGrabDrop(DropInstance dropInstance) {
+        //TODO
+    }
+
+    @Override
+    public void playerDidGrabWeapon(WeaponCard weaponCard) {
+        addWeaponCard(weaponCard.getCardID());
+    }
+
+    @Override
+    public void playerDidDiscardWeapon(WeaponCard weaponCard) {
+        removeWeaponCard(weaponCard.getCardID());
+
+    }
 }

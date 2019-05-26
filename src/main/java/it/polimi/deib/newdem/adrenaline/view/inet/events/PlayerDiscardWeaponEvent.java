@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.view.server;
+package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
@@ -7,43 +7,32 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
-public class PlayerDidRemoveAmmoSetEvent implements UserEvent {
+public class PlayerDiscardWeaponEvent implements UserEvent {
 
     private PlayerColor player;
-    private int yellowAmount;
-    private int redAmount;
-    private int blueAmount;
 
-    public PlayerDidRemoveAmmoSetEvent(PlayerColor color, int yellowAmount, int redAmount, int blueAmount) {
+    private int cardID;
+
+    public PlayerDiscardWeaponEvent(PlayerColor player, int cardID) {
         this.player = player;
-        this.yellowAmount = yellowAmount;
-        this.redAmount = redAmount;
-        this.blueAmount = blueAmount;
+        this.cardID = cardID;
     }
 
     public PlayerColor getPlayer() {
         return player;
     }
 
-    public int getBlueAmount() {
-        return blueAmount;
-    }
-
-    public int getRedAmount() {
-        return redAmount;
-    }
-
-    public int getYellowAmount() {
-        return yellowAmount;
+    public int getCardID() {
+        return cardID;
     }
 
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.playerDidRemoveAmmoSet(connection, this);
+        receiver.playerDidRemoveWeapon(connection, this);
     }
 
     @Override
     public void sendEvent(UserConnectionSender sender) throws ConnectionException {
-        sender.sendPlayerDidRemoveAmmoSetEvent(this);
+        sender.sendDiscardWeaponEvent(this);
     }
 }

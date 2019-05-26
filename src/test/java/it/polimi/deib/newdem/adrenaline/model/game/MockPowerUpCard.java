@@ -14,4 +14,9 @@ public class MockPowerUpCard implements PowerUpCard {
     public Effect getEffect() {
         return null;
     }
+
+    @Override
+    public int getCardID() {
+        return 0;
+    }
 }

@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
 import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
@@ -58,5 +59,6 @@ public interface MapView {
 
     void addWeapon(TilePosition tilePosition, int cardId);
 
+    void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3);
 
 }

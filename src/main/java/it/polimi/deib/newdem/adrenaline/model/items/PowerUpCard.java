@@ -11,4 +11,6 @@ public interface PowerUpCard {
     PaymentInvoice getUsePrice();
 
     Effect getEffect();
+
+    int getCardID();
 }

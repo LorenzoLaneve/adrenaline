@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.socket;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
-import it.polimi.deib.newdem.adrenaline.view.server.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -232,6 +231,11 @@ public class SocketUserConnectionSender implements UserConnectionSender {
 
     @Override
     public void sendPlayerDidRemoveAmmoSetEvent(PlayerDidRemoveAmmoSetEvent event) throws ConnectionException {
+        //TODO
+    }
+
+    @Override
+    public void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException {
         //TODO
     }
 
