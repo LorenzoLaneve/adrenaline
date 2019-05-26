@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent;
+import it.polimi.deib.newdem.adrenaline.view.server.*;
 
 public interface UserConnectionReceiver {
 
@@ -74,4 +75,16 @@ public interface UserConnectionReceiver {
     void playerDidTakeDamage(UserConnection connection, PlayerDamageEvent event);
 
     void playerDidConvertMarks(UserConnection connection, PlayerConvertMarksEvent event);
+
+    void playerDidRemovePowerUp(UserConnection connection, PlayerDiscardPowerUpEvent event);
+
+    void playerDidRemoveWeapon(UserConnection connection, PlayerDiscardWeaponEvent event);
+
+    void playerDidReceiveDamage(UserConnection connection, PlayerDidReceiveDamageEvent event);
+
+    void playerDidReceiveMark(UserConnection connection, PlayerDidReceiveMarkEvent event);
+
+    void playerDidReceiveAmmoSet(UserConnection connection, PlayerDidReceiveAmmoSetEvent event);
+
+    void playerDidRemoveAmmoSet(UserConnection connection, PlayerDidRemoveAmmoSetEvent event);
 }
