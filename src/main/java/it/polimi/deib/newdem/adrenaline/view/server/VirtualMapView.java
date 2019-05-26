@@ -99,6 +99,32 @@ public class VirtualMapView implements MapView, MapListener {
         addWeapon(tile.getPosition(), weapon.getCardID());
     }
 
+    @Override
+    public void playerGrabbedDrop(Player player, DropInstance drop, Tile tile) {
+        List<DropType> drops = new ArrayList<>();
+
+        AmmoSet ammoSet = drop.getAmmos();
+
+        for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
+            drops.add(DropType.BLUE_AMMO);
+        }
+
+        for (int i = 0; i < ammoSet.getRedAmmos(); i++) {
+            drops.add(DropType.RED_AMMO);
+        }
+
+        for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
+            drops.add(DropType.YELLOW_AMMO);
+        }
+
+        if(drop.hasPowerUp()){
+            drops.add(DropType.POWER_UP);
+        }
+
+
+        acquireDrop(tile.getPosition(), player.getColor(), drops.get(0), drops.get(1), drops.get(2));
+    }
+
 
     /// MapView methods
 
@@ -140,6 +166,11 @@ public class VirtualMapView implements MapView, MapListener {
     @Override
     public void addWeapon(TilePosition tilePosition, int cardId) {
         gameView.sendEvent(new SpawnWeaponEvent(tilePosition, cardId));
+    }
+
+    @Override
+    public void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3) {
+        gameView.sendEvent(new acquireDropEvent(drop1, drop2, drop3, tile, player));
     }
 
 }

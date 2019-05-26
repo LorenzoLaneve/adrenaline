@@ -2,9 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent;
-import it.polimi.deib.newdem.adrenaline.view.server.*;
-
-import java.net.ConnectException;
 
 public interface UserConnectionSender {
 
@@ -61,4 +58,6 @@ public interface UserConnectionSender {
     void sendPlayerDidReceiveAmmoSetEvent(PlayerDidReceiveAmmoSetEvent event) throws ConnectionException;
 
     void sendPlayerDidRemoveAmmoSetEvent(PlayerDidRemoveAmmoSetEvent event) throws ConnectionException;
+
+    void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException;
 }

@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.view.server;
+package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
