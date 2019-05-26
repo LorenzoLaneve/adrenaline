@@ -54,4 +54,13 @@ public class MockGame implements Game {
         return null;
     }
 
+    @Override
+    public boolean isOver() {
+        return false;
+    }
+
+    @Override
+    public int getTurnTime() {
+        return 0;
+    }
 }

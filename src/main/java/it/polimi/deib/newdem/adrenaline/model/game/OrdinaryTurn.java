@@ -10,12 +10,6 @@ public class OrdinaryTurn extends TurnBaseImpl {
     }
 
     @Override
-    protected void performClosingActions() {
-        //TODO implement
-        // requires action anc listeners
-    }
-
-    @Override
     protected void endOfTurn() {
         //TODO implement
         // requires action anc listeners

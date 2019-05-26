@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,16 @@ public class PlayerImpl implements Player {
     private boolean isInit;
     private boolean hasFirstPlayerCard;
 
+    public static Player makePlayer(PlayerColor color, Game game, String name) {
+        Player p = new PlayerImpl(color,game,name);
+        p.init();
+        return p;
+    }
+
     public PlayerImpl(PlayerColor color, Game game, String name) {
         this.color = color;
         this.game = game;
-        this.name = name;
+        this.name = name; // TODO deprecate
         this.tile = null;
         this.deaths = 0;
         this.isDead = false;
@@ -75,10 +82,12 @@ public class PlayerImpl implements Player {
      *
      * @return the name
      */
+    //TODO reflect on user
     @Override
     public String getName() {
         return this.name;
     }
+
 
     @Override
     public Tile getTile() {
@@ -240,15 +249,29 @@ public class PlayerImpl implements Player {
         return hasFirstPlayerCard;
     }
 
+    /**
+     * Flips the action board and damage board where applicable.
+     *
+     * @param precedesFirstPlayer
+     */
     @Override
     public void goFrenzy(boolean precedesFirstPlayer) {
         if(precedesFirstPlayer) actionBoard = new FrenzyDoubleActionBoard();
         else                    actionBoard = new FrenzySingleActionBoard();
+
+        actionBoard.boardDidFlip();
 
         if(0 == damageBoard.getTotalDamage()) {
             registerDamageBoard(
                     new FrenzyDamageBoard(this, this.damageBoard.getMarksMap())
             );
         }
+    }
+
+    @Override
+    public int getScoreForPlayer(Player player) {
+        if(!isInit) throw new PlayerNotInitializedException();
+        if(null == damageBoard) throw new IllegalStateException();
+        return damageBoard.getScoreForPlayer(player);
     }
 }

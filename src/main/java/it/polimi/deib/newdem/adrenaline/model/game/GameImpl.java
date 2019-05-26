@@ -11,20 +11,15 @@ import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_
 public class GameImpl implements Game {
 
     private Map map;
-
     private RoundRobin<Turn> turnQueue;
-
     private final int killtrackStartSize;
-
     private KillTrack killTrack;
-
     private List<Player> players;
-
-    private boolean isFrenzy;
-
+    private boolean isFrenzy; // BAD, enum or states
+    private boolean isOver;
     private GameListener listener;
-
     private java.util.Map<PlayerColor, User> colorUserMap;
+    private int turnTime;
 
     public static final int MAX_PLAYERS_PER_GAME = 5;
 
@@ -40,6 +35,8 @@ public class GameImpl implements Game {
         players = new ArrayList<>(MAX_PLAYERS_PER_GAME);
         // ^ no players added
         turnQueue = new RoundRobin<>();
+        isOver = false;
+        turnTime = parameters.getTurnTime();
     }
 
     /**
@@ -99,7 +96,8 @@ public class GameImpl implements Game {
      * Prepares this game for its first execution
      */
     public void init() {
-
+        // TODO check that listener is not null
+        // TODO add flavorful exception
         // create Players
         if(colorUserMap.isEmpty()) {
             throw new IllegalStateException();
@@ -170,9 +168,15 @@ public class GameImpl implements Game {
                 // setup respawn (if not already done)
             }
         }
+
+        //TODO
         //  assign score
+
+        //TODO
         //  update killtrack
 
+
+        //go to frenzy if required
         turnQueue.enqueue(new OrdinaryTurn(turn.getActivePlayer()));
         if(shouldGoFrenzy()) {
             goFrenzy();
@@ -206,7 +210,7 @@ public class GameImpl implements Game {
     /**
      * Goes frenzy.
      *
-     * This fips all players' boards where applicable
+     * This flips all players' boards where applicable
      * and prepares the last turn of all players
      * according to the game's criteria.
      *
@@ -224,5 +228,29 @@ public class GameImpl implements Game {
        }
 
        isFrenzy = true;
+    }
+
+    // TODO the thing
+    private void distibuteScore(Player p) {
+        for(Player q : this.players) {
+            /*
+            q.addScore(
+                     p.getScoreForPlayer(q)
+             );
+             */
+        }
+    }
+
+    public boolean isOver() {
+        return isOver;
+    }
+
+    @Override
+    public int getTurnTime() {
+        return turnTime;
+    }
+
+    public void setKilltrackListener(KillTrackListener listener) {
+        // killTrack.setListener(listener);
     }
 }

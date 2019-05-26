@@ -28,10 +28,11 @@ public interface SocketMessageReader {
                 return new UpdateUsernameMessageReader();
             case SocketMessage.ENTER_LOBBY:
                 //
+            case SocketMessage.DEATH_PLAYER:
+                return new DeathPlayerMessageReader();
 
             default:
                 throw new InvalidMessageException("type is not a valid message type.");
         }
     }
-
 }

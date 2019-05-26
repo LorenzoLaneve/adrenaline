@@ -1,13 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.MockMap;
-import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +27,9 @@ public class GameImplTest {
     public void setUp() throws Exception {
         gp = new GameParameters();
         p1 = new MockPlayer(PlayerColor.MAGENTA);
-        map = Map.createMap(getClass().getClassLoader().getResource("JsonData.json").getFile());
-
+        String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
+        String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
+        map = Map.createMap(decodedPath);
         colorUserPairs = new ArrayList<>(MAX_PLAYERS_PER_GAME);
         colorUserPairs.add(new ColorUserPair(p1.getColor(), new User()));
 
@@ -71,8 +72,6 @@ public class GameImplTest {
 
     @Test
     public void testShouldGoFrenzy() throws Exception {
-        // Player p2 = new PlayerImpl(PlayerColor.GREEN, game, "Larry");
-        // java.util.Map<PlayerColor, Player> MyMap = gp.getColorUserOrder();
         List<ColorUserPair> colorUserPairs = gp.getColorUserOrder();
         colorUserPairs.add(new ColorUserPair(PlayerColor.GREEN, new User()));
         GameParameters gameParameters = new GameParameters();
@@ -80,13 +79,15 @@ public class GameImplTest {
         gameParameters.setColorUserOrder(colorUserPairs);
         gameParameters.setGameMap(map);
 
-        map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
+        // map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
 
         game = new GameImpl(gameParameters);
         game.init();  //<<<<<
 
         Player p2 = game.getPlayerFromColor(PlayerColor.GREEN);
         // p2.init();
+
+        map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
 
         assertFalse(game.shouldGoFrenzy());
         for(int i = 0; i <= GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT; i++) {

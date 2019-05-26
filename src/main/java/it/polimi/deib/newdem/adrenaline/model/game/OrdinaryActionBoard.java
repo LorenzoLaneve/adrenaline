@@ -9,6 +9,8 @@ import java.util.List;
 
 public class OrdinaryActionBoard implements ActionBoard {
 
+    private ActionBoardListener listener;
+
     /**Returns all the {@code ActionFactories} for legal {@code Action}s
      *
      * @return the {@code ActionFactories}
@@ -33,5 +35,10 @@ public class OrdinaryActionBoard implements ActionBoard {
     @Override
     public int getIterations() {
         return 2;
+    }
+
+    @Override
+    public void boardDidFlip() {
+        listener.boardDidFlip();
     }
 }

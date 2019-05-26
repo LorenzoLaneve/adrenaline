@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
 
 import java.util.*;
 
@@ -14,11 +15,11 @@ public class GameParameters {
     private List<ColorUserPair> colorUserOrder;
     private it.polimi.deib.newdem.adrenaline.model.map.Map gameMap;
     private int killTrackInitialLength;
-
-    // List<PlayerColor>, player has not been created yet.
+    private int turnTime;
     private List<PlayerColor> playerOrder;
 
     public static final int KILLTRACK_STARTING_SIZE_DEFAULT = 5;
+    public static final int TURN_TIME_DEFAULT_MS = 60000;
 
 
     public GameParameters() {
@@ -28,6 +29,7 @@ public class GameParameters {
         // will be set explicitly
 
         killTrackInitialLength = KILLTRACK_STARTING_SIZE_DEFAULT;
+        turnTime = TURN_TIME_DEFAULT_MS;
 
         playerOrder = null; // if not assigned with its setter,
         // will be randomized and stored on the first get.
@@ -95,5 +97,13 @@ public class GameParameters {
 
     public void setPlayerOrder(List<PlayerColor> playerOrder) {
         this.playerOrder = playerOrder;
+    }
+
+    public int getTurnTime() {
+        return turnTime;
+    }
+
+    public void setTurnTime(int turnTime) {
+        this.turnTime = turnTime;
     }
 }

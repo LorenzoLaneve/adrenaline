@@ -14,13 +14,7 @@ public class FirstTurn extends TurnBaseImpl {
     protected void performInitialActions() {
         //TODO implement
         // requires action anc listeners
-
-    }
-
-    @Override
-    protected void performClosingActions() {
-        //TODO implement
-        // requires action anc listeners
+        // requires spawn in routine
     }
 
     @Override

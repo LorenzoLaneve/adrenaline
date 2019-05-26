@@ -9,6 +9,8 @@ import java.util.List;
 
 public class FrenzyDoubleActionBoard implements ActionBoard {
 
+
+
     /**
      * Returns the basic actions for this damageBoard
      *
@@ -41,5 +43,10 @@ public class FrenzyDoubleActionBoard implements ActionBoard {
     @Override
     public int getIterations() {
         return 2;
+    }
+
+    @Override
+    public void boardDidFlip() {
+        // TODO absorb in superclass
     }
 }

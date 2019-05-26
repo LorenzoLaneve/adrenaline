@@ -25,4 +25,7 @@ public interface Game {
 
     void init();
 
+    boolean isOver();
+
+    int getTurnTime();
 }

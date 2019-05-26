@@ -5,10 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 
 public class VirtualLobbyView implements LobbyView, LobbyListener {

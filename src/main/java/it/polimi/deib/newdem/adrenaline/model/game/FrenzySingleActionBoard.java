@@ -38,4 +38,9 @@ public class FrenzySingleActionBoard implements ActionBoard {
     public int getIterations() {
         return 1;
     }
+
+    @Override
+    public void boardDidFlip() {
+        // TODO implement in superclass
+    }
 }

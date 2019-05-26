@@ -14,7 +14,9 @@ public abstract class TurnBaseImpl implements Turn {
 
     @Override
     public void execute() {
-
+        performInitialActions();
+        performCoreActions();
+        // performClosingActions(); outsourced to game.concludeTurn()
     }
 
     protected abstract void performInitialActions();
@@ -44,6 +46,5 @@ public abstract class TurnBaseImpl implements Turn {
             ExecutedActions += MyEvent.isSuccesful() ? 1 : 0;
             */
     }
-    protected abstract void performClosingActions();
     protected abstract void endOfTurn();
 }

@@ -10,4 +10,5 @@ public interface ActionBoard {
 
     int getIterations();
 
+    void boardDidFlip();
 }

@@ -33,4 +33,19 @@ public final class SocketMessage {
 
     public static final int SPAWN_WEAPON = 0x000E;
 
+    public static final int DAMAGE_BOARD_FLIP = 0X000F;
+
+    public static final int PLAYER_ACQUIRE_POWERUP = 0X0010;
+
+    public static final int PLAYER_ACQUIRE_WEAPON = 0x0011;
+
+    public static final int PLAYER_ACTIVE = 0x0012;
+
+    public static final int PLAYER_CONVERT_MARKS = 0x0013;
+
+    public static final int PLAYER_DAMAGE = 0x0014;
+
+    public static final int PLAYER_NAME = 0x0015;
+
+    public static final int PLAYER_SCORE = 0x0016;
 }

@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.*;
-import it.polimi.deib.newdem.adrenaline.view.server.LobbyViewEventListener;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyViewEventListener;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
 public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener, TimerListener {

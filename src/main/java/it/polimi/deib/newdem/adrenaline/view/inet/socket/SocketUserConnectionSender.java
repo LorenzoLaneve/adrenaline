@@ -7,10 +7,12 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import static it.polimi.deib.newdem.adrenaline.view.inet.socket.SocketMessage.*;
+
 public class SocketUserConnectionSender implements UserConnectionSender {
 
     private DataOutputStream output;
-
+    private static final String IO_ERROR_MSG = "An I/O error occurred during the socket writing.";
 
     public SocketUserConnectionSender(DataOutputStream output) {
         this.output = output;
@@ -196,12 +198,29 @@ public class SocketUserConnectionSender implements UserConnectionSender {
 
     @Override
     public void sendPlayerDamageEvent(PlayerDamageEvent event) throws ConnectionException {
-        // TODO
+        try{
+            output.writeInt(PLAYER_DAMAGE);
+
+            StreamHelper.writePlayerColor(output, event.getAttacker()); // attacker
+            StreamHelper.writePlayerColor(output, event.getDamagedPlayer()); // defender
+            output.writeInt(event.getDamageAmount()); // dmg amount
+            output.writeInt(event.getMarkAmount()); // mrk amount
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
     public void sendPlayerConvertMarksEvent(PlayerConvertMarksEvent event) throws ConnectionException {
-        // TODO
+        try {
+            output.writeInt(PLAYER_CONVERT_MARKS);
+
+            StreamHelper.writePlayerColor(output, event.getDamagedPlayer());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
@@ -241,27 +260,76 @@ public class SocketUserConnectionSender implements UserConnectionSender {
 
     @Override
     public void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException {
-        // TODO
+        try{
+            output.writeInt(PLAYER_NAME);
+
+            StreamHelper.writePlayerColor(output, event.getPlayerColor());
+            StreamHelper.writeString(output, event.getNewName());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
     public void sendPlayerActiveEvent(PlayerActiveEvent event) throws ConnectionException {
         // TODO
+        try{
+            output.writeInt(PLAYER_ACTIVE);
+
+            StreamHelper.writePlayerColor(output, event.getPlayerColor());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
     public void sendPlayerScoreEvent(PlayerScoreEvent event) throws ConnectionException {
         // TODO
+        try{
+            output.writeInt(PLAYER_SCORE);
+
+            StreamHelper.writePlayerColor(output, event.getPlayerColor());
+            output.writeInt(event.getNewScore());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
     public void sendPlayerAcquirePowerUpEvent(PlayerAcquirePowerUpEvent event) throws ConnectionException {
-        // TODO
+        try {
+            output.writeInt(PLAYER_ACQUIRE_POWERUP);
+
+            output.writeInt( event.getPowerUpCardID() );
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
     @Override
     public void sendPlayerAcquireWeaponEvent(PlayerAcquireWeaponEvent event) throws ConnectionException {
-        // TODO
+        try{
+            output.writeInt(PLAYER_ACQUIRE_WEAPON);
+
+            output.writeInt(event.getWeaponCardID());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
     }
 
+    @Override
+    public void sendDamageBoardFlipEvent(DamageBoardFlipEvent event) throws ConnectionException {
+        //TODO implement
+        try{
+            output.writeInt(SocketMessage.DAMAGE_BOARD_FLIP);
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
+    }
 }

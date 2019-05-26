@@ -41,6 +41,8 @@ public interface Player {
 
     void goFrenzy(boolean precedesFirstPlayer);
 
+    int getScoreForPlayer(Player player);
+
     void assignFirstPlayerCard();
 
     void init();
