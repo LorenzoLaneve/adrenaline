@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
+import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
+
 public interface PlayerView {
 
     /**
@@ -28,7 +31,19 @@ public interface PlayerView {
      * Notifies that the player associated to this view acquired a new weapon card.
      * @param cardID The ID of the power up card, according to the loaded deck.
      */
+
+    void removePowerUpCard(int cardID);
+
     void addWeaponCard(int cardID);
 
+    void removeWeaponCard(int cardID);
+
+    void takeDamage(int dmgAmount, PlayerColor playerColor);
+
+    void takeMark(int markAmount, PlayerColor playerColor );
+
+    void addAmmoSet(int yellowAmount, int redAmount, int blueAmount);
+
+    void removeAmmoSet(int yellowAmount, int redAmount, int blueAmount);
 
 }
