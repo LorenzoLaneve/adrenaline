@@ -25,7 +25,7 @@ public class VirtualGameView implements GameView, GameListener {
 
     public void sendEvent(UserEvent event) {
         for (User user : users.values()) {
-            user.getBoundConnection().sendEvent(event);
+            user.sendEvent(event);
         }
     }
 

@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.mgmt;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 public class User {
 
@@ -42,8 +43,25 @@ public class User {
      * Returns the UserConnection object that has to be used to communicate with the user.
      * @apiNote This can also return {@code null} if the client associated with the user is not connected.
      */
-    public UserConnection getBoundConnection() {
+    private UserConnection getBoundConnection() {
         return boundConnection;
+    }
+
+    /**
+     * Sends an event to this user using their connection.
+     * @apiNote The method will do nothing if the user is disconnected.
+     */
+    public void sendEvent(UserEvent event) {
+        if (isConnected()) {
+            getBoundConnection().sendEvent(event);
+        }
+    }
+
+    /**
+     * Returns whether the user has an active connection.
+     */
+    public boolean isConnected() {
+        return getBoundConnection() != null;
     }
 
 }

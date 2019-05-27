@@ -22,7 +22,7 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     public void sendEventToLobby(UserEvent event) {
         for (User user : lobby.getUsers()) {
-            user.getBoundConnection().sendEvent(event);
+            user.sendEvent(event);
         }
     }
 
