@@ -2,10 +2,10 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class PlayerImpl implements Player {
      */
     public void init() {
         this.damageBoard = new OrdinaryDamageBoard(this);
-        this.actionBoard = new OrdinaryActionBoard();
+        this.actionBoard = new ActionBoardImpl();
         this.inventory = new PlayerInventory(this);
         this.isInit = true;
     }
@@ -152,7 +152,7 @@ public class PlayerImpl implements Player {
      * Identifies the player that dealt the {@code cell}-th damage to this player.
      *
      * @param cell the index of the cell. Between 0 and 11 inclusive.
-     * @return
+     * @return player who dealt the damage. Can be null.
      */
     @Override
     public Player getDamager(int cell) {
@@ -187,7 +187,7 @@ public class PlayerImpl implements Player {
     /**
      * Identifies wether or not this player is currently alive.
      *
-     * @return
+     * @return is the player dead
      */
     @Override
     public boolean isDead() {
@@ -252,14 +252,12 @@ public class PlayerImpl implements Player {
     /**
      * Flips the action board and damage board where applicable.
      *
-     * @param precedesFirstPlayer
+     * @param precedesFirstPlayer does the player precedes the first player in this last turn?
      */
     @Override
     public void goFrenzy(boolean precedesFirstPlayer) {
-        if(precedesFirstPlayer) actionBoard = new FrenzyDoubleActionBoard();
-        else                    actionBoard = new FrenzySingleActionBoard();
 
-        actionBoard.boardDidFlip();
+        actionBoard.goFrenzy(precedesFirstPlayer);
 
         if(0 == damageBoard.getTotalDamage()) {
             registerDamageBoard(

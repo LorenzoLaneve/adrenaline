@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.action_board;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
@@ -7,13 +7,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrenzySingleActionBoard implements ActionBoard {
-
-    /**
-     * Returns the basic actions for this damageBoard
-     *
-     * @return allowed actions
-     */
+public class FrenzySingleActionBoardBehavior extends FrenzyCommonBehavior {
     @Override
     public List<ActionFactory> getBasicActions() {
         List<ActionFactory> factories = new ArrayList<>(2);
@@ -29,18 +23,8 @@ public class FrenzySingleActionBoard implements ActionBoard {
         return factories;
     }
 
-    /**
-     * Returns the total number of allowed moves for this {@code DamageBoard}
-     *
-     * @return total number of moves
-     */
     @Override
     public int getIterations() {
         return 1;
-    }
-
-    @Override
-    public void boardDidFlip() {
-        // TODO implement in superclass
     }
 }

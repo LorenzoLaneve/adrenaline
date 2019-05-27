@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +20,10 @@ public class PlayerImplTest {
     private ActionType t2;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         g = new MockGame();
         p = new PlayerImpl(YELLOW, g,"Larry");
-        ((PlayerImpl) p).init();
+        p.init();
         q = new PlayerImpl(GRAY, g, "Carl"); // q is not initialized
         t2 = new ActionType(MOVE1, SHOOT);
         t1 = new ActionType(MOVE2, GRAB);
@@ -54,7 +55,7 @@ public class PlayerImplTest {
         assertNotNull(p);
         assertNotNull(p.getMoves());
         assertTrue(p.getMoves().containsAll(
-                (new OrdinaryActionBoard()).getBasicActions()
+                (new ActionBoardImpl()).getBasicActions()
         ));
         assertFalse(p.getMoves().contains(
                 new ConcreteActionFactory(t1)
@@ -74,7 +75,7 @@ public class PlayerImplTest {
 
 
         assertTrue(p.getMoves().containsAll(
-                (new OrdinaryActionBoard()).getBasicActions()
+                (new ActionBoardImpl()).getBasicActions()
         ));
         assertTrue(p.getMoves().contains(
                 new ConcreteActionFactory(t1)
@@ -86,7 +87,7 @@ public class PlayerImplTest {
         d.takeDamage(3, p2);
 
         assertTrue(p.getMoves().containsAll(
-                (new OrdinaryActionBoard()).getBasicActions()
+                (new ActionBoardImpl()).getBasicActions()
         ));
         assertTrue(p.getMoves().contains(
                 new ConcreteActionFactory(t1)

@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.action_board;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
@@ -10,5 +10,7 @@ public interface ActionBoard {
 
     int getIterations();
 
-    void boardDidFlip();
+    void setListener(ActionBoardListener listener);
+
+    void goFrenzy(boolean precedesFirstPlayer);
 }
