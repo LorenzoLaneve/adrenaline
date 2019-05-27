@@ -82,6 +82,8 @@ public class AdrenalineGameController implements GameController {
             }
             catch (TimeoutException e) {
                 // revert?
+            } catch (AbortedException e) {
+                // nothing to do here?
             }
         }
         lobbyController.endGame(); // /snap/
