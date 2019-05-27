@@ -3,11 +3,16 @@ package it.polimi.deib.newdem.adrenaline.model.mgmt;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private String name;
 
     private UserConnection boundConnection;
+
+    private List<UserListener> listeners;
 
     /**
      * Initializes a new, empty user.
@@ -15,6 +20,23 @@ public class User {
     public User() {
         this.name = null;
         this.boundConnection = null;
+
+        this.listeners = new ArrayList<>();
+    }
+
+    /**
+     * Adds the given object to the listeners of the current user.
+     */
+    public void addListener(UserListener listener) {
+        listeners.add(listener);
+    }
+
+    /**
+     * Removes the given object from the listeners of the current user.
+     * The object will no longer receive updates about the user connection.
+     */
+    public void removeListener(UserListener listener) {
+        listeners.remove(listener);
     }
 
     /**
@@ -37,6 +59,10 @@ public class User {
      */
     public void bindConnection(UserConnection connection) {
         this.boundConnection = connection;
+
+        for (UserListener listener : listeners) {
+            listener.userDidChangeConnection(this);
+        }
     }
 
     /**
