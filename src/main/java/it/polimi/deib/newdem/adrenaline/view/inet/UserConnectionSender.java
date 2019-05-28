@@ -69,4 +69,8 @@ public interface UserConnectionSender {
 
     void sendPlayerReconnectEvent(PlayerReconnectEvent event) throws ConnectionException;
 
+    void sendPlayerSelectionRequest(PlayerSelectionRequest event) throws ConnectionException;
+
+    //void sendPlayerSelectionResponse(Player) throws ConnectionException;
+
 }

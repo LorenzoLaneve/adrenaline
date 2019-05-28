@@ -357,4 +357,9 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     public void sendPlayerReconnectEvent(PlayerReconnectEvent event) throws ConnectionException {
         // TODO
     }
+
+    @Override
+    public void sendPlayerSelectionRequest(PlayerSelectionRequest event) throws ConnectionException {
+        // TODO
+    }
 }

@@ -1,22 +1,40 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
+import it.polimi.deib.newdem.adrenaline.model.map.JsonData;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
+import it.polimi.deib.newdem.adrenaline.view.server.dialogs.PlayerDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 
 public class ServerConnectionReceiver implements UserConnectionReceiver {
 
     private List<MapViewEventListener> mapListeners;
 
+    private HashMap<User, List<PlayerDialog>> playerDialogs;
+
     public ServerConnectionReceiver() {
         this.mapListeners = new ArrayList<>();
     }
 
-    public void addMapListener(MapViewEventListener listener) {
+    public void addPlayerDialog(User user, PlayerDialog dialog) {
+        List<PlayerDialog> dialogs = playerDialogs.get(user);
+
+        if (dialogs == null) {
+            dialogs = new ArrayList<>();
+            playerDialogs.put(user, dialogs);
+        }
+
+        dialogs.add(dialog);
+    }
+
+    public void addMapEventListener(MapViewEventListener listener) {
         this.mapListeners.add(listener);
     }
 
@@ -183,6 +201,11 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
 
     @Override
     public void playerDidReconnect(UserConnection connection, PlayerReconnectEvent event) {
+        // TODO
+    }
+
+    @Override
+    public void gameDidRequestPlayer(UserConnection connection, PlayerSelectionRequest request) {
         // TODO
     }
 
