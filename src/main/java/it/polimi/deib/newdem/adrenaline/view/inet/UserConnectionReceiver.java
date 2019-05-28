@@ -90,4 +90,6 @@ public interface UserConnectionReceiver {
     void dropDidGetAcquired(UserConnection connection, AcquireDropEvent event);
 
     void damageBoardDidFlip(UserConnection connection, DamageBoardFlipEvent event);
+
+    void killTrackDidAddTear(UserConnection connection, KillTrackAddKillEvent event);
 }

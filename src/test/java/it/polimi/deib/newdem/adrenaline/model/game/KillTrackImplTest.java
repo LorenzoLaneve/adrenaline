@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -24,14 +26,14 @@ public class KillTrackImplTest {
 
         KillTrack kt = new KillTrackImpl(5);
 
-        kt.registerKill(p);
+        kt.addKill(p,1);
         assertEquals(kt.getKiller(0),p);
-        kt.registerKill(p);
-        kt.registerKill(p);
-        kt.registerKill(p);
-        kt.registerKill(p);
-        kt.registerKill(p);
-        kt.registerKill(p2);
+        kt.addKill(p,1);
+        kt.addKill(p,1);
+        kt.addKill(p,2);
+        kt.addKill(p,1);
+        kt.addKill(p,1);
+        kt.addKill(p2,2);
         assertEquals(kt.getKiller(6),p2);
     }
 
@@ -43,9 +45,9 @@ public class KillTrackImplTest {
 
         KillTrack kt = new KillTrackImpl(5);
 
-        kt.registerKill(p1);
-        kt.registerKill(p2);
-        kt.registerKill(p3);
+        kt.addKill(p1, 1);
+        kt.addKill(p2, 1);
+        kt.addKill(p3, 1);
 
         assertEquals(kt.getKiller(1),p2);
     }
@@ -58,15 +60,15 @@ public class KillTrackImplTest {
 
         assertEquals(5, kt.getTrackLength());
 
-        kt.registerKill(p1);
+        kt.addKill(p1,1);
         assertEquals(5, kt.getTrackLength());
-        kt.registerKill(p1);
+        kt.addKill(p1,1);
         assertEquals(5, kt.getTrackLength());
-        kt.registerKill(p1);
+        kt.addKill(p1,1);
         assertEquals(5, kt.getTrackLength());
-        kt.registerKill(p1);
+        kt.addKill(p1,1);
         assertEquals(5, kt.getTrackLength());
-        kt.registerKill(p1);
+        kt.addKill(p1,1);
         assertEquals(5, kt.getTrackLength());
     }
 
@@ -74,8 +76,24 @@ public class KillTrackImplTest {
     public void testRegisterKillNegative() {
         KillTrack kt = new KillTrackImpl(5);
 
-        kt.registerKill(null);
+        kt.addKill(null, 1);
     }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRegisterKillNegativeBelow() {
+        KillTrack kt = new KillTrackImpl(5);
+
+        kt.addKill(new MockPlayer(), -1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRegisterKillNegativeAbove() {
+        KillTrack kt = new KillTrackImpl(5);
+
+        kt.addKill(new MockPlayer(), 7);
+    }
+
+
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetKillerNegativeNegativeIndex() {
@@ -97,18 +115,46 @@ public class KillTrackImplTest {
         MockPlayer p = new MockPlayer(PlayerColor.YELLOW);
 
         assertEquals(0,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(1,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(2,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(3,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(4,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(5,kt.getTotalKills());
-        kt.registerKill(p);
+        kt.addKill(p, 1);
         assertEquals(6,kt.getTotalKills());
     }
 
+    @Test
+    public void testGetScoreForPlayerPositiveBase() throws Exception {
+        MockPlayer p1 = new MockPlayer(PlayerColor.YELLOW);
+        MockPlayer p2 = new MockPlayer(PlayerColor.GREEN);
+        MockPlayer p3 = new MockPlayer(PlayerColor.GRAY);
+
+        KillTrackImpl kt = new KillTrackImpl(KillTrackImpl.MAX_KILLTRACK_SIZE);
+        kt.addKill(p1,1);
+
+        assertEquals(8, kt.getScoreForPlayer(p1));
+
+        kt = new KillTrackImpl(KillTrackImpl.MAX_KILLTRACK_SIZE);
+        kt.addKill(p1, 1);
+        kt.addKill(p2, 2);
+        kt.addKill(p3, 1);
+        kt.addKill(p2, 1);
+
+        assertEquals(8, kt.getScoreForPlayer(p2));
+        assertEquals(6, kt.getScoreForPlayer(p1));
+        assertEquals(4, kt.getScoreForPlayer(p3));
+    }
+
+    @Test
+    public void testGetScoreForPlayerNegative() throws Exception {
+        KillTrack kt = new KillTrackImpl(KillTrackImpl.MAX_KILLTRACK_SIZE);
+        assertEquals(0, kt.getScoreForPlayer(new MockPlayer()));
+        assertEquals(0,kt.getScoreForPlayer(null));
+    }
 }

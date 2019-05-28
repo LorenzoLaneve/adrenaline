@@ -7,7 +7,7 @@ public interface KillTrackView {
     /**
      * Notifies a new kill made by the player with the given color.
      */
-    void registerKill(PlayerColor pColor);
+    void registerKill(PlayerColor pColor, int amount);
 
     /**
      * Notifies that the game passed to frenzy mode.
