@@ -48,4 +48,6 @@ public final class SocketMessage {
     public static final int PLAYER_NAME = 0x0015;
 
     public static final int PLAYER_SCORE = 0x0016;
+
+    public static final int KILLTRACK_ADD_KILL = 0x0017;
 }

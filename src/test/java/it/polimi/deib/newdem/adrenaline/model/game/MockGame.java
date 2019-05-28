@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
@@ -26,7 +27,7 @@ public class MockGame implements Game {
     }
 
     @Override
-    public void setListener(GameListener listener) {
+    public void setGameListener(GameListener listener) {
 
     }
 
@@ -62,5 +63,10 @@ public class MockGame implements Game {
     @Override
     public int getTurnTime() {
         return 0;
+    }
+
+    @Override
+    public void setKillTrackListener(KillTrackListener listener) {
+
     }
 }

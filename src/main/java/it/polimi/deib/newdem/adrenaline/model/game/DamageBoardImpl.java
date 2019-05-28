@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.utils.Scoreboard;
+import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;
+
 import java.util.*;
 
 import static java.lang.Integer.max;
@@ -13,71 +16,11 @@ public abstract class DamageBoardImpl implements DamageBoard {
     protected HashMap<Player, Integer> marks;
     public static final int MAX_LIFE = 11;
     public static final int DEATH_SHOT_INDEX = 9;
+    public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
     // Arrays start at zero
 
     // TODO add listener member
     private DamageBoardListener listener; //???????????????????????????????
-
-    private class ScoreboardEntry {
-        private final Player p;
-        private final int totalScore;
-        private final int earliestShot;
-
-        public ScoreboardEntry(Player p, int totalScore, int earliestShot) {
-            this.p = p;
-            this.totalScore = totalScore;
-            this.earliestShot = earliestShot;
-        }
-
-        public int getTotalScore() {
-            return totalScore;
-        }
-
-        public int getEarliestShot() {
-            return earliestShot;
-        }
-
-        public Player getPlayer() {
-            return p;
-        }
-    }
-
-    private class Scoreboard {
-        private ArrayList<ScoreboardEntry> entries;
-
-        private Comparator<ScoreboardEntry> damageboardComparator = (e1, e2) -> {
-            if (null == e1 || null == e2) throw new IllegalArgumentException();
-            else if (e1.getTotalScore() < e2.getTotalScore())
-                return -1;
-            else if (e1.getTotalScore() > e2.getTotalScore())
-                return 1;
-            else if (e1.getEarliestShot() > e2.getEarliestShot())
-                return -1;
-            else if (e1.getEarliestShot() < e2.getEarliestShot())
-                return 1;
-            else return 0;
-
-        };
-
-        public Scoreboard() {
-            entries = new ArrayList<>();
-        }
-
-        public void registerEntry(ScoreboardEntry e) {
-            entries.add(e);
-        }
-
-        public int getPlacement(Player p) {
-            entries.sort(damageboardComparator.reversed());
-            for (int i = 0; i < entries.size(); i++) {
-                if (entries.get(i).getPlayer().equals(p)) {
-                    return i;
-                }
-            }
-            return -1;
-        }
-    }
-
 
     /** Builds a {@code DamageBoardImplementation} bound to {@code player}.
      *

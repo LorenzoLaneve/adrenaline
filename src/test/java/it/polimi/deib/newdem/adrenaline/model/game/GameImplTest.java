@@ -98,10 +98,11 @@ public class GameImplTest {
         assertTrue(game.isInFrenzy());
     }
 
+    /*
     @Test
     public void testReset() throws Exception {
         game.reset();
-    }
+    }*/
 
     @Test
     public void testGetNextTurn() throws Exception {
@@ -218,10 +219,12 @@ public class GameImplTest {
         myGame.init();
     }
 
+    /*
     @Test(expected = IllegalStateException.class)
     public void testTesetNegativeNoPlayers() throws Exception {
         GameParameters gp = new GameParameters();
         Game myGame = new GameImpl(gp);
         ((GameImpl) myGame).reset();
     }
+    */
 }

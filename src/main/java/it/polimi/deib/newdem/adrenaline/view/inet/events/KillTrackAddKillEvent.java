@@ -6,25 +6,31 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
-public class DamageBoardFlipEvent implements UserEvent {
+public class KillTrackAddKillEvent implements UserEvent {
 
-    private PlayerColor color;
+    private final PlayerColor color;
+    private final int amount;
 
-    public DamageBoardFlipEvent(PlayerColor color) {
+    public KillTrackAddKillEvent(PlayerColor color, int amount) {
         this.color = color;
+        this.amount = amount;
     }
 
     public PlayerColor getColor() {
         return color;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.damageBoardDidFlip(connection, this);
+        receiver.killTrackDidAddTear(connection, this);
     }
 
     @Override
     public void sendEvent(UserConnectionSender sender) throws ConnectionException {
-        sender.sendDamageBoardFlipEvent(this);
+        sender.sendKillTrackAddKillEvent(this);
     }
 }

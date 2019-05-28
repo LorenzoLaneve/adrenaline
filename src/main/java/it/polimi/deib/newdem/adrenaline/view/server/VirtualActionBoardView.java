@@ -25,6 +25,6 @@ public class VirtualActionBoardView implements ActionBoardView, ActionBoardListe
 
     @Override
     public void flipActionBoard() {
-        gameView.sendEvent(new DamageBoardFlipEvent());
+        gameView.sendEvent(new DamageBoardFlipEvent(owner));
     }
 }

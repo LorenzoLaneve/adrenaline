@@ -62,4 +62,6 @@ public interface UserConnectionSender {
     void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException;
 
     void sendDamageBoardFlipEvent(DamageBoardFlipEvent event) throws ConnectionException;
+
+    void sendKillTrackAddKillEvent(KillTrackAddKillEvent event) throws ConnectionException;
 }
