@@ -3,12 +3,15 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerNotInitializedException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import org.junit.Before;
 import org.junit.Test;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
-import static it.polimi.deib.newdem.adrenaline.model.game.PlayerColor.*;
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.*;
 import static org.junit.Assert.*;
 
 public class PlayerImplTest {

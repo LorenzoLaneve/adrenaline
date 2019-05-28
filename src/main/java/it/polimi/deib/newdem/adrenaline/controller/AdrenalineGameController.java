@@ -1,13 +1,14 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.game.*;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.MapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class AdrenalineGameController implements GameController {
     private Game game;
 
     private LobbyController lobbyController;
+
+    private VirtualGameView vgv;
 
     public static final int MAX_PLAYERS = 5;
 
@@ -59,12 +62,13 @@ public class AdrenalineGameController implements GameController {
         gp.setColorUserOrder(listCup);
 
         game = new GameImpl(gp);
-        game.init(); // (VirtualGameView)
         // bind map listener?
 
-        VirtualGameView vgv = new VirtualGameView();
+        vgv = new VirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
-        // game.setKillTrackListener();
+        game.init(); // (VirtualGameView)
     }
 
     @Override

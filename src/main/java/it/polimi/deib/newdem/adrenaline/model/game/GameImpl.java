@@ -1,5 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
@@ -7,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
+import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.OVERKILL_SHOT_INDEX;
 
 public class GameImpl implements Game {
 
@@ -20,6 +31,8 @@ public class GameImpl implements Game {
     private GameListener listener;
     private java.util.Map<PlayerColor, User> colorUserMap;
     private int turnTime;
+    private boolean init;
+    private ListenerRegistry listenerRegistry;
 
     public static final int MAX_PLAYERS_PER_GAME = 5;
 
@@ -37,6 +50,8 @@ public class GameImpl implements Game {
         turnQueue = new RoundRobin<>();
         isOver = false;
         turnTime = parameters.getTurnTime();
+        listenerRegistry = new ListenerRegistry();
+        init = false;
     }
 
     /**
@@ -50,8 +65,9 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void setListener(GameListener listener) {
-        this.listener = listener;
+    public void setGameListener(GameListener listener) {
+        if(init) this.listener = listener;
+        else listenerRegistry.setGameListener(listener);
     }
 
     /**
@@ -98,6 +114,10 @@ public class GameImpl implements Game {
     public void init() {
         // TODO check that listener is not null
         // TODO add flavorful exception
+
+        // prepare new killtrack
+        killTrack = new KillTrackImpl(killtrackStartSize);
+
         // create Players
         if(colorUserMap.isEmpty()) {
             throw new IllegalStateException();
@@ -113,29 +133,29 @@ public class GameImpl implements Game {
             players.add(newPlayer);
         }
 
-        // calling reset
-        reset();
-    }
+        // attach new listeners
+        killTrack.setListener(listenerRegistry.getKillTrackListener());
+        listener = listenerRegistry.getGameListener();
 
+        // register players on listener
+        for(Player p : players) {
+            listener.userDidEnterGame(
+                    colorUserMap.get(p.getColor()),
+                    p);
+        }
 
-    /**
-     * Prepares this game for a new game.
-     *
-     * resets kill track
-     * builds initial turns
-     * sets the game to not be in frenzy (therefore ordinary gameplay state)
-     */
-    public void reset() {
-        killTrack = new KillTrackImpl(killtrackStartSize);
+        // prepare round robin
         if(players.isEmpty()) {
             throw new IllegalStateException();
         }
         for (Player p : players) {
             p.init();
-            //TODO notify game view
             turnQueue.enqueue(new FirstTurn(p));
         }
+
+        // set flags
         isFrenzy = false;
+        init = true;
     }
 
     /**
@@ -162,7 +182,10 @@ public class GameImpl implements Game {
         // register kills
         for(Player p : players) {
             if(p.isDead()) {
-                killTrack.registerKill(p.getDamager(DEATH_SHOT_INDEX));
+                Player killer = p.getDamager(DEATH_SHOT_INDEX);
+                int amount = 1;
+                amount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
+                killTrack.addKill(killer, amount);
                 //TODO
                 // remove player from map
                 // setup respawn (if not already done)
@@ -250,7 +273,9 @@ public class GameImpl implements Game {
         return turnTime;
     }
 
-    public void setKilltrackListener(KillTrackListener listener) {
-        // killTrack.setListener(listener);
+    @Override
+    public void setKillTrackListener(KillTrackListener listener) {
+        if(!init) listenerRegistry.setKillTrackListener(listener);
+        else killTrack.setListener(listener);
     }
 }

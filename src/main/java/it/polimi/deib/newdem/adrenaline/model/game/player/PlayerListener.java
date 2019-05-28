@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;

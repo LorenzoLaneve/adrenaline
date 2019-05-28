@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerNotInitializedException;
 import org.junit.Test;
 
 public class PlayerNotInitializedExceptionTest {

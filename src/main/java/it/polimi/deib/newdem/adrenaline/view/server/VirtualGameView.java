@@ -2,8 +2,8 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.MapView;

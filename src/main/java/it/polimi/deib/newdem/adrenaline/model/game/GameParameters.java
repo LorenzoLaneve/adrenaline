@@ -1,13 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
 
 import java.util.*;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.GameImpl.MAX_PLAYERS_PER_GAME;
-import static it.polimi.deib.newdem.adrenaline.model.game.KillTrackImpl.MAX_KILLTRACK_SIZE;
-import static it.polimi.deib.newdem.adrenaline.model.game.KillTrackImpl.MIN_KILLTRACK_SIZE;
+import static it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl.MAX_KILLTRACK_SIZE;
+import static it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl.MIN_KILLTRACK_SIZE;
 
 public class GameParameters {
 

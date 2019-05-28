@@ -14,6 +14,7 @@ public class ActionBoardImpl implements ActionBoard {
      */
     public ActionBoardImpl() {
         this.behavior = new OrdinaryActionBoardBehavior();
+        this.listener = new NullActionBoardListener();
     }
 
     /**
@@ -22,6 +23,7 @@ public class ActionBoardImpl implements ActionBoard {
      * @param listener which will be registered
      */
     public void setListener(ActionBoardListener listener) {
+
         this.listener = listener;
     }
 
@@ -65,12 +67,6 @@ public class ActionBoardImpl implements ActionBoard {
      * Notifies the assigned listener, if it exists, of the change to frenzy behavior.
      */
     void notifyFlip() {
-        /*
-        if(null == listener) throw new IllegalStateException();
         listener.boardDidFlip();
-        */
-        // TODO handle gracefully lack of listener
-        // TODO when and/or where should this listener be registered?
-        if(null != listener) listener.boardDidFlip();
     }
 }

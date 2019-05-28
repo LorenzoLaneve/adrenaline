@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
 import java.util.List;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;

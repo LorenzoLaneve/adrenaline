@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.util.ArrayList;

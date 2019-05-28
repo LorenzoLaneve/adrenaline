@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public abstract class ActionBaseImpl implements Action {
 

@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
@@ -170,7 +170,7 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3) {
-        gameView.sendEvent(new acquireDropEvent(drop1, drop2, drop3, tile, player));
+        gameView.sendEvent(new AcquireDropEvent(drop1, drop2, drop3, tile, player));
     }
 
 }

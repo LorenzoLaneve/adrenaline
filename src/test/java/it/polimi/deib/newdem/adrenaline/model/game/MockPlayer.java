@@ -1,6 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 
 import java.util.List;
 

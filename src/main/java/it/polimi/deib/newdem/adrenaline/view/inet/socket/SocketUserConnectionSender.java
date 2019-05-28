@@ -254,7 +254,7 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     }
 
     @Override
-    public void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException {
+    public void sendAcquiredDropEvent(AcquireDropEvent event) throws ConnectionException {
         //TODO
     }
 
@@ -324,9 +324,23 @@ public class SocketUserConnectionSender implements UserConnectionSender {
 
     @Override
     public void sendDamageBoardFlipEvent(DamageBoardFlipEvent event) throws ConnectionException {
-        //TODO implement
         try{
             output.writeInt(SocketMessage.DAMAGE_BOARD_FLIP);
+
+            StreamHelper.writePlayerColor(output, event.getColor());
+        }
+        catch (IOException e) {
+            throw new ConnectionException(IO_ERROR_MSG);
+        }
+    }
+
+    @Override
+    public void sendKillTrackAddKillEvent(KillTrackAddKillEvent event) throws ConnectionException {
+        try{
+            output.writeInt(SocketMessage.KILLTRACK_ADD_KILL);
+
+            StreamHelper.writePlayerColor(output, event.getColor());
+            output.writeInt(event.getAmount());
         }
         catch (IOException e) {
             throw new ConnectionException(IO_ERROR_MSG);
