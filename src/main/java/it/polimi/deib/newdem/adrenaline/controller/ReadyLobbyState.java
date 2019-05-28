@@ -33,12 +33,12 @@ public class ReadyLobbyState implements LobbyState {
 
     @Override
     public void lobbyWillEnterState(LobbyController lobbyController) {
-        // TODO
+        // nothing to do here
     }
 
     @Override
     public void lobbyDidExitState(LobbyController lobbyController) {
-        // TODO
+        // nothing to do here
     }
 
     @Override

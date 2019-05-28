@@ -1,10 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.*;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyViewEventListener;
+import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.view.server.ServerConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
-public class LobbyControllerImpl implements LobbyController, LobbyViewEventListener, TimerListener {
+public class LobbyControllerImpl implements LobbyController, TimerListener, UserListener {
 
     private Config config;
 
@@ -15,6 +16,8 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
     private LobbyState lobbyState;
 
     private GameController gameController;
+
+    private ServerConnectionReceiver connectionReceiver;
 
     private int minPlayers;
     private int maxPlayers;
@@ -27,10 +30,12 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
         this.minPlayers = config.getMinPlayers();
         this.maxPlayers = config.getMaxPlayers();
 
-        VirtualLobbyView view = new VirtualLobbyView(lobby, this);
+        VirtualLobbyView view = new VirtualLobbyView(lobby);
         this.lobby.setListener(view);
 
         this.gameController = null;
+
+        this.connectionReceiver = new ServerConnectionReceiver();
 
         this.switchState(new ReadyLobbyState());
     }
@@ -55,6 +60,7 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
     @Override
     public synchronized void addUser(User user) {
         this.lobby.addUser(user);
+        user.addListener(this);
 
         this.switchState(lobbyState.userDidEnterLobby(user, this));
     }
@@ -62,6 +68,7 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
     @Override
     public synchronized void removeUser(User user) {
         this.lobby.removeUser(user);
+        user.removeListener(this);
 
         this.switchState(lobbyState.userDidExitLobby(user, this));
     }
@@ -102,17 +109,6 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
 
 
     @Override
-    public void userDidLoadLobby(User user, Lobby lobby) {
-        // TODO
-    }
-
-    @Override
-    public void userWillExitLobby(User user, Lobby lobby) {
-        // TODO
-    }
-
-
-    @Override
     public void timerWillStart(int secondsLeft) {
         lobby.startTimer(secondsLeft);
     }
@@ -124,11 +120,24 @@ public class LobbyControllerImpl implements LobbyController, LobbyViewEventListe
 
     @Override
     public void timerDidFinish() {
-        //lobby.abortTimer();
+        // nothing to do... maybe?
     }
 
     @Override
     public void timerDidAbort() {
         lobby.abortTimer();
+    }
+
+    @Override
+    public void userDidChangeConnection(User user, UserConnection oldConnection, UserConnection newConnection) {
+        if (gameController != null) {
+            if (oldConnection != null && newConnection == null) {
+                // user disconnected
+                gameController.userDidDisconnect(user);
+            } else if (oldConnection == null && newConnection != null) {
+                // user reconnected
+                gameController.userDidReconnect(user);
+            }
+        }
     }
 }

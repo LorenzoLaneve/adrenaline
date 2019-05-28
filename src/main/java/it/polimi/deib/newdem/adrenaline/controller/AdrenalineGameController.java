@@ -94,13 +94,14 @@ public class AdrenalineGameController implements GameController {
     }
 
     @Override
-    public void userDidLeaveLobby(User user) {
-
+    public void userDidDisconnect(User user) {
+        // TODO
     }
 
     @Override
-    public void userDidReenterLobby(User user) {
-
+    public void userDidReconnect(User user) {
+        // TODO
     }
+
 
 }

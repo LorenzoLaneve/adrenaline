@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.socket;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
@@ -345,5 +346,15 @@ public class SocketUserConnectionSender implements UserConnectionSender {
         catch (IOException e) {
             throw new ConnectionException(IO_ERROR_MSG);
         }
+    }
+
+    @Override
+    public void sendPlayerDisconnectEvent(PlayerDisconnectEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendPlayerReconnectEvent(PlayerReconnectEvent event) throws ConnectionException {
+        // TODO
     }
 }

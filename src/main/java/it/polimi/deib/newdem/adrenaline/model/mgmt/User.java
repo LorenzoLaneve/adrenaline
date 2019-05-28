@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.mgmt;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class User {
 
     private List<UserListener> listeners;
 
+    private List<UserConnectionReceiver> receivers;
+
     /**
      * Initializes a new, empty user.
      */
@@ -22,6 +25,7 @@ public class User {
         this.boundConnection = null;
 
         this.listeners = new ArrayList<>();
+        this.receivers = new ArrayList<>();
     }
 
     /**
@@ -56,12 +60,27 @@ public class User {
     /**
      * Binds the given connection to the user.
      * This means that further events sent and received from the connection will be associated to this user.
+     * @implNote All the connection receivers associated to this user will be kept and passed to the new connection,
+     * while being removed from the old connection.
      */
     public void bindConnection(UserConnection connection) {
+        UserConnection oldConnection = this.boundConnection;
         this.boundConnection = connection;
 
+        if (oldConnection != null) {
+            for (UserConnectionReceiver receiver : receivers) {
+                oldConnection.removeReceiver(receiver);
+            }
+        }
+
+        if (boundConnection != null) {
+            for (UserConnectionReceiver receiver : receivers) {
+                boundConnection.addReceiver(receiver);
+            }
+        }
+
         for (UserListener listener : listeners) {
-            listener.userDidChangeConnection(this);
+            listener.userDidChangeConnection(this, oldConnection, boundConnection);
         }
     }
 
@@ -71,6 +90,34 @@ public class User {
      */
     private UserConnection getBoundConnection() {
         return boundConnection;
+    }
+
+    /**
+     * Adds the given UserConnectionReceiver to the objects that have to receive events from the user's connection.
+     */
+    public void addReceiver(UserConnectionReceiver receiver) {
+        if (receiver == null)
+            throw new IllegalArgumentException("The given receiver must be non-null.");
+
+        this.receivers.add(receiver);
+
+        if (isConnected()) {
+            getBoundConnection().addReceiver(receiver);
+        }
+    }
+
+    /**
+     * Removes the given UserConnectionReceiver so that it will not receive further events from this user.
+     */
+    public void removeReceiver(UserConnectionReceiver receiver) {
+        if (receiver == null)
+            throw new IllegalArgumentException("The given receiver must be non-null");
+
+        this.receivers.remove(receiver);
+
+        if (isConnected()) {
+            getBoundConnection().removeReceiver(receiver);
+        }
     }
 
     /**

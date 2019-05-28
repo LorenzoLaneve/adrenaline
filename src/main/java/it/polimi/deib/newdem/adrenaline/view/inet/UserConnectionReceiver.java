@@ -92,4 +92,9 @@ public interface UserConnectionReceiver {
     void damageBoardDidFlip(UserConnection connection, DamageBoardFlipEvent event);
 
     void killTrackDidAddTear(UserConnection connection, KillTrackAddKillEvent event);
+
+    void playerDidDisconnect(UserConnection connection, PlayerDisconnectEvent event);
+
+    void playerDidReconnect(UserConnection connection, PlayerReconnectEvent event);
+
 }

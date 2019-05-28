@@ -6,10 +6,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.PlayerView;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.GameEndEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.GameStartEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDisconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.util.Collection;
@@ -37,18 +37,6 @@ public class VirtualGameView implements GameView, GameListener {
         return this.users.get(color);
     }
 
-
-
-    @Override
-    public void addPlayerView(PlayerView pv) {
-        // nothing to do here
-    }
-
-    @Override
-    public void addMapView(MapView mv) {
-        // nothing to do here
-    }
-
     @Override
     public void gameWillStart(Game game) {
         sendEvent(new GameStartEvent());
@@ -70,4 +58,14 @@ public class VirtualGameView implements GameView, GameListener {
         this.users.remove(player.getColor());
     }
 
+
+    @Override
+    public void disablePlayer(PlayerColor color) {
+        sendEvent(new PlayerDisconnectEvent(color));
+    }
+
+    @Override
+    public void enablePlayer(PlayerColor color) {
+        sendEvent(new PlayerReconnectEvent(color));
+    }
 }
