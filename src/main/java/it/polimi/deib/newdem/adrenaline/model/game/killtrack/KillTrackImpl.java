@@ -1,13 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.ScoreAssignmentGameChange;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.Scoreboard;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class KillTrackImpl implements KillTrack {
 

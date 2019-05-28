@@ -1,4 +1,6 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.turn;
+
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class FirstTurn extends TurnBaseImpl {
 

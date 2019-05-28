@@ -1,4 +1,6 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.turn;
+
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class OrdinaryTurn extends TurnBaseImpl {
 
@@ -6,7 +8,9 @@ public class OrdinaryTurn extends TurnBaseImpl {
     protected void performInitialActions() {
         //TODO implement
         // requires action anc listeners
-
+        // if dead, spawn
+        // User u = getActivePlayer().getGame().getUserByPlayer(getActivePlayer());
+        // u.sendDialog();
     }
 
     @Override

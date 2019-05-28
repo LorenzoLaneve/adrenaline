@@ -1,11 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class RoundRobinTest {
 

@@ -1,8 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerListener;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;

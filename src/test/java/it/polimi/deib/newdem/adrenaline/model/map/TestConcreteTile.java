@@ -2,8 +2,8 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.MockGame;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import org.junit.Before;
 import org.junit.Test;
 

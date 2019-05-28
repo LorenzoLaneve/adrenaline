@@ -1,13 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-import static it.polimi.deib.newdem.adrenaline.model.game.PlayerColor.GREEN;
-import static it.polimi.deib.newdem.adrenaline.model.game.PlayerColor.YELLOW;
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.GREEN;
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.YELLOW;
 import static org.junit.Assert.*;
 
 public class GameParametersTest {

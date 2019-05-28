@@ -2,15 +2,15 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.MockGame;
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.polimi.deib.newdem.adrenaline.model.game.PlayerColor.CYAN;
-import static it.polimi.deib.newdem.adrenaline.model.game.PlayerColor.MAGENTA;
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.CYAN;
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAGENTA;
 import static org.junit.Assert.*;
 
 public class TestConcreteRoom {

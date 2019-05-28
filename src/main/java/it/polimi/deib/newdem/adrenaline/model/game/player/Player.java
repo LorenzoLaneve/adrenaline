@@ -1,6 +1,8 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
+import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;

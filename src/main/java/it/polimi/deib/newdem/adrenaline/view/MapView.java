@@ -1,8 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.List;

@@ -1,11 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 public class PlayerDiscardWeaponEvent implements UserEvent {
 

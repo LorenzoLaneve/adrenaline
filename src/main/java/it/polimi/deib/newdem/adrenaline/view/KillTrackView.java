@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 
 public interface KillTrackView {
 

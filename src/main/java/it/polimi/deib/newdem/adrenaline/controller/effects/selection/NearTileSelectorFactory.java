@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectVisitor;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class NearTileSelectorFactory implements TileSelectorFactory{
 

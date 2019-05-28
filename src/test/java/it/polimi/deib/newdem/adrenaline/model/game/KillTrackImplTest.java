@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
