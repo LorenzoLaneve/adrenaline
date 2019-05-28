@@ -87,7 +87,7 @@ public interface UserConnectionReceiver {
 
     void playerDidRemoveAmmoSet(UserConnection connection, PlayerDidRemoveAmmoSetEvent event);
 
-    void dropDidGetAquired(UserConnection connection, acquireDropEvent event);
+    void dropDidGetAcquired(UserConnection connection, AcquireDropEvent event);
 
     void damageBoardDidFlip(UserConnection connection, DamageBoardFlipEvent event);
 }
