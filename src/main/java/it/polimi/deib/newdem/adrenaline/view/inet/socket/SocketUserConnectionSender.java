@@ -254,7 +254,7 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     }
 
     @Override
-    public void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException {
+    public void sendAcquiredDropEvent(AcquireDropEvent event) throws ConnectionException {
         //TODO
     }
 

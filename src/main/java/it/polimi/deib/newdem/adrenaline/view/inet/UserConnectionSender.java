@@ -59,7 +59,7 @@ public interface UserConnectionSender {
 
     void sendPlayerDidRemoveAmmoSetEvent(PlayerDidRemoveAmmoSetEvent event) throws ConnectionException;
 
-    void sendAcquiredDropEvent(acquireDropEvent event) throws ConnectionException;
+    void sendAcquiredDropEvent(AcquireDropEvent event) throws ConnectionException;
 
     void sendDamageBoardFlipEvent(DamageBoardFlipEvent event) throws ConnectionException;
 

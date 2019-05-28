@@ -170,7 +170,7 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3) {
-        gameView.sendEvent(new acquireDropEvent(drop1, drop2, drop3, tile, player));
+        gameView.sendEvent(new AcquireDropEvent(drop1, drop2, drop3, tile, player));
     }
 
 }
