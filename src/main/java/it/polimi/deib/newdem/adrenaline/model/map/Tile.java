@@ -45,4 +45,6 @@ public interface Tile {
 
     void setRoom(Room room);
 
+    List<Tile> getTiles(Direction direction, boolean ignoreWalls);
+
 }

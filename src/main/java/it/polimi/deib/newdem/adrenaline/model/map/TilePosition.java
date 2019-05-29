@@ -8,6 +8,10 @@ public class TilePosition {
     private int y;
 
     public TilePosition(int x, int y) {
+
+        if(x<0 || y<0 ){
+            throw new IllegalArgumentException();
+        }
         this.x = x;
         this.y = y;
     }
@@ -34,5 +38,20 @@ public class TilePosition {
         }
         TilePosition tilePosition = (TilePosition) o;
         return x == tilePosition.getX() && y == tilePosition.getY();
+    }
+
+    public TilePosition move(Direction direction) {
+        switch (direction){
+            case EAST:
+                return new TilePosition(this.getX()+1,this.getY());
+            case WEST:
+                return new TilePosition(this.getX()-1, this.getY());
+            case NORTH:
+                return new TilePosition(this.getX(), this.getY()+1);
+            case SOUTH:
+                return new TilePosition(this.getX(), this.getY()-1);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 }

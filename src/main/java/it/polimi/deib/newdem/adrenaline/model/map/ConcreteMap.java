@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,4 +117,5 @@ public class ConcreteMap implements Map {
         tile.removePlayer(player);
         mapListener.playerDidLeaveMap(player);
     }
+
 }

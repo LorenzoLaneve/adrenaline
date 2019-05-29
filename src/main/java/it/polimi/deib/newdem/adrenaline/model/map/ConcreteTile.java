@@ -142,4 +142,35 @@ public abstract class ConcreteTile implements Tile {
     public void addAdjacentTiles(Tile tile){
         adjacentTiles.add(tile);
     }
+
+    @Override
+    public List<Tile> getTiles(Direction direction, boolean ignoreWalls){
+
+        List<Tile> directionalTiles = new ArrayList<>();
+
+        TilePosition currTilePosition = this.getPosition();
+
+        Tile currTile = this;
+
+        directionalTiles.add(currTile);
+
+        boolean adjacent = true;
+
+        while(currTile!= null && (ignoreWalls || adjacent )){
+            Tile preTile = currTile;
+            directionalTiles.add(currTile);
+            try{
+                currTilePosition = currTilePosition.move(direction);
+            }catch(IllegalArgumentException e){
+                break;
+            }
+            currTile = this.getMap().getTile(currTilePosition);
+            adjacent = preTile.getAdjacentTiles().contains(currTile);
+        }
+
+        return directionalTiles;
+
+    }
+
+
 }
