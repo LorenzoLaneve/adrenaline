@@ -362,4 +362,14 @@ public class SocketUserConnectionSender implements UserConnectionSender {
     public void sendPlayerSelectionRequest(PlayerSelectionRequest event) throws ConnectionException {
         // TODO
     }
+
+    @Override
+    public void sendRejectUsernameEvent(RejectUsernameEvent event) throws ConnectionException {
+        // TODO
+    }
+
+    @Override
+    public void sendUpdateUsernameRequest(UpdateUsernameRequest request) throws ConnectionException {
+        // TODO
+    }
 }
