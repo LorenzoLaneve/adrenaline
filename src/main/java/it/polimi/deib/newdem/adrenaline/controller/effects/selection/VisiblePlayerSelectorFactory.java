@@ -17,13 +17,8 @@ public class VisiblePlayerSelectorFactory implements PlayerSelectorFactory {
 
     @Override
     public PlayerSelector makeSelector(EffectVisitor visitor, List<Player> excluded) {
-        try {
-            Player p = visitor.getBoundPlayer(sourcePlayer, new BlackListFilterPlayerSelector(excluded, new AnyPlayerSelector()));
-
-            return new VisiblePlayerSelector(p);
-        } catch (UndoException x) {
-            return null;
-            // FIXME what can i do here?
-        }
+        return new BlackListFilterPlayerSelector(excluded,
+                new VisiblePlayerSelector(visitor.getBoundPlayer(sourcePlayer))
+        );
     }
 }

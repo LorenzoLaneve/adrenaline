@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EffectSequence extends ConcreteEffect {
@@ -8,11 +9,16 @@ public class EffectSequence extends ConcreteEffect {
 
     public EffectSequence(int id, List<Effect> effectList) {
         super(id);
-        //TODO
+
+        this.effectList = new ArrayList<>(effectList);
     }
 
     @Override
     public void apply(EffectVisitor visitor) {
-        //TODO
+
+        for (Effect effect : effectList) {
+            visitor.scheduleEffect(effect);
+        }
+
     }
 }

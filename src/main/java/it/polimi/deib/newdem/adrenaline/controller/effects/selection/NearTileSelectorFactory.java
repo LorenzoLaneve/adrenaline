@@ -2,8 +2,6 @@ package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectVisitor;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
-import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class NearTileSelectorFactory implements TileSelectorFactory{
 
@@ -19,13 +17,6 @@ public class NearTileSelectorFactory implements TileSelectorFactory{
 
     @Override
     public TileSelector makeSelector(EffectVisitor visitor) {
-        try {
-            Player p = visitor.getBoundPlayer(sourcePlayer, new AnyPlayerSelector());
-
-            return new NearTileSelector(p.getTile(), minDistance, maxDistance);
-        } catch (UndoException x) {
-            return null;
-            // FIXME what can i do here?
-        }
+        return new NearTileSelector(visitor.getBoundPlayer(sourcePlayer).getTile(), minDistance, maxDistance);
     }
 }
