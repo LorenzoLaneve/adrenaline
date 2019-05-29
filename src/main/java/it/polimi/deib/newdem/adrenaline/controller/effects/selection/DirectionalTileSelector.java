@@ -5,11 +5,11 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 public class DirectionalTileSelector implements TileSelector {
 
-    int minDistance;
-    int maxDistance;
-    boolean ignoreWalls;
+    private int minDistance;
+    private int maxDistance;
+    private boolean ignoreWalls;
 
-    public DirectionalTileSelector(int minDist, int maxDist, boolean ignoreWalls){
+    public DirectionalTileSelector(int minDist, int maxDist, boolean ignoreWalls) {
         //TODO
     }
 
