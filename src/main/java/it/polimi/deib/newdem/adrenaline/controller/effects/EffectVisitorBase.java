@@ -146,6 +146,11 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     }
 
     @Override
+    public Player getBoundPlayer(MetaPlayer player) {
+        return boundPlayers.get(player);
+    }
+
+    @Override
     public Tile getTile(TileSelector selector) throws UndoException {
         Tile t = askForTile(selector);
         promptRegistry.add(getCurrentEffect());

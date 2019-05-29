@@ -18,6 +18,13 @@ public interface EffectVisitor {
     Player getBoundPlayer(MetaPlayer player, PlayerSelector selector) throws UndoException;
 
     /**
+     * Returns a Player object associated with the given meta player.
+     * If no player is bound, {@code null} will be returned.
+     * @see EffectVisitor#getBoundPlayer(MetaPlayer, PlayerSelector) overload that will ask to bound the player if it is not bound yet.
+     */
+    Player getBoundPlayer(MetaPlayer player);
+
+    /**
      * Prompts the caller for a tile among the tiles in the map responding to the given selector.
      * @throws UndoException if the caller requested an undo action.
      */
@@ -38,7 +45,5 @@ public interface EffectVisitor {
      * Generates a game change that has to be applied to the game as a consequence of the execution of this effect.
      */
     void reportGameChange(GameChange gameChange);
-
-    void enqueueEffect();
 
 }
