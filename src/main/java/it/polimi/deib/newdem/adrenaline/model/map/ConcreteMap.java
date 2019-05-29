@@ -117,4 +117,5 @@ public class ConcreteMap implements Map {
         tile.removePlayer(player);
         mapListener.playerDidLeaveMap(player);
     }
+
 }
