@@ -1,10 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.model.game.utils;
 
 import it.polimi.deib.newdem.adrenaline.model.game.MockPlayer;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ScoreboardTest {
 

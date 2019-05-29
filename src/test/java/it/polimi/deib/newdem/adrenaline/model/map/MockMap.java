@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.List;
 

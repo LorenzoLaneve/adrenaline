@@ -31,6 +31,8 @@ public interface UserConnectionSender {
 
     void sendGameEndEvent(GameEndEvent event) throws ConnectionException;
 
+    void sendAcquiredDropEvent(AcquireDropEvent event) throws ConnectionException;
+
     void sendPlayerNameEvent(PlayerNameEvent event) throws ConnectionException;
 
     void sendPlayerActiveEvent(PlayerActiveEvent event) throws ConnectionException;
@@ -59,9 +61,20 @@ public interface UserConnectionSender {
 
     void sendPlayerDidRemoveAmmoSetEvent(PlayerDidRemoveAmmoSetEvent event) throws ConnectionException;
 
-    void sendAcquiredDropEvent(AcquireDropEvent event) throws ConnectionException;
-
     void sendDamageBoardFlipEvent(DamageBoardFlipEvent event) throws ConnectionException;
 
     void sendKillTrackAddKillEvent(KillTrackAddKillEvent event) throws ConnectionException;
+
+    void sendPlayerDisconnectEvent(PlayerDisconnectEvent event) throws ConnectionException;
+
+    void sendPlayerReconnectEvent(PlayerReconnectEvent event) throws ConnectionException;
+
+    void sendPlayerSelectionRequest(PlayerSelectionRequest event) throws ConnectionException;
+
+    void sendRejectUsernameEvent(RejectUsernameEvent event) throws ConnectionException;
+
+    void sendUpdateUsernameRequest(UpdateUsernameRequest request) throws ConnectionException;
+
+    //void sendPlayerSelectionResponse(Player) throws ConnectionException;
+
 }

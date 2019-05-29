@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
-import it.polimi.deib.newdem.adrenaline.model.game.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView.DropType;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;

@@ -12,8 +12,8 @@ public interface GameController {
 
     void runGame();
 
-    void userDidLeaveLobby(User user);
+    void userDidDisconnect(User user);
 
-    void userDidReenterLobby(User user);
+    void userDidReconnect(User user);
 
 }

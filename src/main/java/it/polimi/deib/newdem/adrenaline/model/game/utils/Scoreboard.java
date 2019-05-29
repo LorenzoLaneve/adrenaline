@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.utils;
 
-import it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl;
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.ArrayList;
 import java.util.Comparator;

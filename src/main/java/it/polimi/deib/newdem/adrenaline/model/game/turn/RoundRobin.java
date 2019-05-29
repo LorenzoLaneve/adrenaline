@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
 import java.util.*;
 

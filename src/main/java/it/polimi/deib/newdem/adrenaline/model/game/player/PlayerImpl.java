@@ -1,7 +1,11 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
+import it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard;
+import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;

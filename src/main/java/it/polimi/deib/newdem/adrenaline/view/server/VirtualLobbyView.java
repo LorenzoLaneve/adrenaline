@@ -12,17 +12,14 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     private Lobby lobby;
 
-    private LobbyViewEventListener eventListener;
-
-    public VirtualLobbyView(Lobby lobby, LobbyViewEventListener listener) {
+    public VirtualLobbyView(Lobby lobby) {
         this.lobby = lobby;
-        this.eventListener = listener;
     }
 
 
-    public void sendEventToLobby(UserEvent event) {
+    private void sendEvent(UserEvent event) {
         for (User user : lobby.getUsers()) {
-            user.getBoundConnection().sendEvent(event);
+            user.sendEvent(event);
         }
     }
 
@@ -34,22 +31,22 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     @Override
     public void addUser(String name) {
-        sendEventToLobby(new EnterLobbyEvent(name));
+        sendEvent(new EnterLobbyEvent(name));
     }
 
     @Override
     public void removeUser(String name) {
-        sendEventToLobby(new ExitLobbyEvent(name));
+        sendEvent(new ExitLobbyEvent(name));
     }
 
     @Override
     public void startTimer(int seconds) {
-        sendEventToLobby(new LobbyTimerUpdateEvent(seconds));
+        sendEvent(new LobbyTimerUpdateEvent(seconds));
     }
 
     @Override
     public void syncTimer(int seconds) {
-        sendEventToLobby(new LobbyTimerUpdateEvent(seconds));
+        sendEvent(new LobbyTimerUpdateEvent(seconds));
     }
 
 

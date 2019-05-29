@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 
-import it.polimi.deib.newdem.adrenaline.model.game.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 // package-private
 class Cell {

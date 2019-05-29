@@ -1,6 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.game.*;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
@@ -83,19 +86,22 @@ public class AdrenalineGameController implements GameController {
             }
             catch (TimeoutException e) {
                 // revert?
+            } catch (AbortedException e) {
+                // nothing to do here?
             }
         }
         lobbyController.endGame(); // /snap/
     }
 
     @Override
-    public void userDidLeaveLobby(User user) {
-
+    public void userDidDisconnect(User user) {
+        // TODO
     }
 
     @Override
-    public void userDidReenterLobby(User user) {
-
+    public void userDidReconnect(User user) {
+        // TODO
     }
+
 
 }

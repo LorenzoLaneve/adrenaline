@@ -92,4 +92,14 @@ public interface UserConnectionReceiver {
     void damageBoardDidFlip(UserConnection connection, DamageBoardFlipEvent event);
 
     void killTrackDidAddTear(UserConnection connection, KillTrackAddKillEvent event);
+
+    void playerDidDisconnect(UserConnection connection, PlayerDisconnectEvent event);
+
+    void playerDidReconnect(UserConnection connection, PlayerReconnectEvent event);
+
+    void gameDidRequestPlayer(UserConnection connection, PlayerSelectionRequest request);
+
+    void serverDidRejectUsername(UserConnection connection, RejectUsernameEvent event);
+
+    void serverDidRequestUsername(UserConnection connection, UpdateUsernameRequest request);
 }
