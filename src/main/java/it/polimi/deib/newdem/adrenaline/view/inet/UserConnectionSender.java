@@ -71,6 +71,10 @@ public interface UserConnectionSender {
 
     void sendPlayerSelectionRequest(PlayerSelectionRequest event) throws ConnectionException;
 
+    void sendRejectUsernameEvent(RejectUsernameEvent event) throws ConnectionException;
+
+    void sendUpdateUsernameRequest(UpdateUsernameRequest request) throws ConnectionException;
+
     //void sendPlayerSelectionResponse(Player) throws ConnectionException;
 
 }

@@ -9,4 +9,9 @@ public interface UserListener {
      */
     void userDidChangeConnection(User user, UserConnection oldConnection, UserConnection newConnection);
 
+    /**
+     * Notifies that the given user has changed name.
+     */
+    void userDidChangeName(User user, String name);
+
 }

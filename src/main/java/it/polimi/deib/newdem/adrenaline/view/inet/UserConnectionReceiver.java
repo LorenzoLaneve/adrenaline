@@ -98,4 +98,8 @@ public interface UserConnectionReceiver {
     void playerDidReconnect(UserConnection connection, PlayerReconnectEvent event);
 
     void gameDidRequestPlayer(UserConnection connection, PlayerSelectionRequest request);
+
+    void serverDidRejectUsername(UserConnection connection, RejectUsernameEvent event);
+
+    void serverDidRequestUsername(UserConnection connection, UpdateUsernameRequest request);
 }

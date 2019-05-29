@@ -51,10 +51,14 @@ public class User {
         return name;
     }
     /**
-     * Sets the user's name to the given name. Please note that no check on the string is done by this method, nor any event will be triggered.
+     * Sets the user's name to the given name. Please note that no check on the string is done by this method.
      */
     public void setName(String name) {
         this.name = name;
+
+        for (UserListener listener : listeners) {
+            listener.userDidChangeName(this, name);
+        }
     }
 
     /**

@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
-import it.polimi.deib.newdem.adrenaline.model.map.JsonData;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
@@ -11,7 +10,6 @@ import it.polimi.deib.newdem.adrenaline.view.server.dialogs.PlayerDialog;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Function;
 
 public class ServerConnectionReceiver implements UserConnectionReceiver {
 
@@ -206,6 +204,16 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
 
     @Override
     public void gameDidRequestPlayer(UserConnection connection, PlayerSelectionRequest request) {
+        // TODO
+    }
+
+    @Override
+    public void serverDidRejectUsername(UserConnection connection, RejectUsernameEvent event) {
+        // TODO
+    }
+
+    @Override
+    public void serverDidRequestUsername(UserConnection connection, UpdateUsernameRequest request) {
         // TODO
     }
 

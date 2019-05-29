@@ -140,4 +140,9 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
             }
         }
     }
+
+    @Override
+    public void userDidChangeName(User user, String name) {
+        // TODO notify game controller
+    }
 }
