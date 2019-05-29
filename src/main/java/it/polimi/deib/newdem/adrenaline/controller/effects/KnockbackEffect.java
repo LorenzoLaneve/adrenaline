@@ -1,19 +1,35 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelectorFactory;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelectorFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+
+import java.util.ArrayList;
 
 public class KnockbackEffect extends ConcreteEffect {
 
-    private int minDistance;
-    private int maxDistance;
+    private MetaPlayer metaTarget;
 
-    public KnockbackEffect(int id, MetaPlayer target, int knockBackDist, TileSelectorFactory selectorFactory) {
+    private TileSelectorFactory tileSelectorFactory;
+    private PlayerSelectorFactory playerSelectorFactory;
+
+    public KnockbackEffect(int id, MetaPlayer metaTarget, PlayerSelectorFactory playerSelectorFactory, TileSelectorFactory tileSelectorFactory) {
         super(id);
-        //TODO
+
+        this.metaTarget = metaTarget;
+
+        this.tileSelectorFactory = tileSelectorFactory;
+        this.playerSelectorFactory = playerSelectorFactory;
     }
 
     @Override
-    public void apply(EffectVisitor visitor) {
-        //TODO
+    public void apply(EffectVisitor visitor) throws UndoException {
+        Player target = visitor.getBoundPlayer(metaTarget, playerSelectorFactory.makeSelector(visitor, new ArrayList<>()));
+
+        Tile targetTile = visitor.getTile(tileSelectorFactory.makeSelector(visitor));
+
+        visitor.reportGameChange(new MovementGameChange(target, targetTile));
     }
 }

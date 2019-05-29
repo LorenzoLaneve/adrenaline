@@ -5,23 +5,25 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-public class MovementGameChange implements GameChange {
+public class DropPickupGameChange implements GameChange {
 
     private Player player;
 
-    private Tile destinationTile;
+    private Tile dropTile;
 
-    public MovementGameChange(Player player, Tile destTile) {
-        //TODO
+    public DropPickupGameChange(Player player, Tile dropTile) {
+        this.player = player;
+        this.dropTile = dropTile;
     }
 
     @Override
     public void update(Game game) {
-        //TODO
+        // TODO
     }
 
     @Override
     public void revert(Game game) {
-        //TODO
+        // TODO
     }
+
 }
