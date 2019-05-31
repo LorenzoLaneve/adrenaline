@@ -2,10 +2,6 @@ package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectVisitor;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
-import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-
-import java.util.List;
 
 public class VisiblePlayerSelectorFactory implements PlayerSelectorFactory {
 
@@ -16,9 +12,7 @@ public class VisiblePlayerSelectorFactory implements PlayerSelectorFactory {
     }
 
     @Override
-    public PlayerSelector makeSelector(EffectVisitor visitor, List<Player> excluded) {
-        return new BlackListFilterPlayerSelector(excluded,
-                new VisiblePlayerSelector(visitor.getBoundPlayer(sourcePlayer))
-        );
+    public PlayerSelector makeSelector(EffectVisitor visitor) {
+        return new VisiblePlayerSelector(visitor.getBoundPlayer(sourcePlayer));
     }
 }
