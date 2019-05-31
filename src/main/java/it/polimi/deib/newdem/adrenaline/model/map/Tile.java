@@ -47,4 +47,6 @@ public interface Tile {
 
     List<Tile> getTiles(Direction direction, boolean ignoreWalls);
 
+    Direction getDirection(Tile tile);
+
 }

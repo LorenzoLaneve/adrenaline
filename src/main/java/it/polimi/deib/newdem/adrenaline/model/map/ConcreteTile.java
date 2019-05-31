@@ -172,5 +172,34 @@ public abstract class ConcreteTile implements Tile {
 
     }
 
+    @Override
+    public Direction getDirection(Tile tile){
+
+        int x = tile.getPosition().getX();
+        int y = tile.getPosition().getY();
+
+        int currY = this.tilePosition.getY();
+        int currX = this.tilePosition.getX();
+
+        Direction direction = null;
+
+        if(y == currY && x != currX ){
+            if (x>currX){
+                direction = Direction.EAST;
+            }else {
+                direction = Direction.WEST;
+            }
+        }else if(x == currX && y != currY){
+            if (y>currY){
+                direction = Direction.NORTH;
+            }else {
+                direction = Direction.SOUTH;
+            }
+
+        }
+
+        return direction;
+    }
+
 
 }
