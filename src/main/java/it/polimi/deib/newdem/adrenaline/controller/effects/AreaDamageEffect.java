@@ -6,14 +6,14 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-public class RoomDamageEffect extends ConcreteEffect {
+public class AreaDamageEffect extends ConcreteEffect {
 
     private int damageAmount;
     private int markAmount;
 
     private TileSelectorFactory selectorMaker;
 
-    public RoomDamageEffect(int id, int dmgAmt, int mrkAmt, TileSelectorFactory selectorMaker) {
+    public AreaDamageEffect(int id, int dmgAmt, int mrkAmt, TileSelectorFactory selectorMaker) {
         super(id);
         this.selectorMaker = selectorMaker;
 
@@ -22,12 +22,12 @@ public class RoomDamageEffect extends ConcreteEffect {
     }
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
+    public void apply(EffectVisitor visitor) {
         Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
 
-        Tile roomTile = visitor.getTile(selectorMaker.makeSelector(visitor));
+        Map gameMap = attacker.getTile().getMap();
 
-        for (Tile tile : roomTile.getRoom().getTiles()) {
+        for (Tile tile : gameMap.selectTiles(selectorMaker.makeSelector(visitor))) {
             for (Player player : tile.getPlayers()) {
                 visitor.reportGameChange(new DamageGameChange(attacker, player, damageAmount, markAmount));
             }
