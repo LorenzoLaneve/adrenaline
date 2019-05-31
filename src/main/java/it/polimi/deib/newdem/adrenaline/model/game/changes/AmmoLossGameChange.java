@@ -1,23 +1,27 @@
 package it.polimi.deib.newdem.adrenaline.model.game.changes;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 
-public class AmmoLossGameChange extends AmmoTransactionGameChange {
+public class AmmoLossGameChange implements GameChange {
 
-    public AmmoLossGameChange(Player player, AmmoSet ammos){
-        super(player, ammos);
-        //TODO
+    private Player player;
+    private AmmoSet ammos;
+
+
+    public AmmoLossGameChange(Player player, AmmoSet ammos) {
+        // TODO
     }
 
     @Override
     public void update(Game game) {
-        //TODO
+        // TODO
     }
 
     @Override
     public void revert(Game game) {
-        //TODO
+        // TODO
     }
 }

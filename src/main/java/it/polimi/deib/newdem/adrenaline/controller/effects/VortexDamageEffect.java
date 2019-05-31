@@ -27,13 +27,22 @@ public class VortexDamageEffect extends ConcreteEffect {
         }
         visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
 
-        if (/*visitor.pay(rosso)*/true) {
+        if (visitor.requestPayment(attacker, new PaymentInvoice(1, 0, 0, 0))) {
             Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, new NearPlayerSelector(vortexTile, 0, 1));
+            if (bluePlayer.getTile() != vortexTile) {
+                visitor.reportGameChange(new MovementGameChange(bluePlayer, vortexTile));
+            }
             visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
 
-            Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN, new NearPlayerSelector(vortexTile, 0, 1));
-            visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
-            // TODO green is not mandatory
+            Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN,
+                                                        new NearPlayerSelector(vortexTile, 0, 1),
+                                                        false);
+            if (greenPlayer != null) {
+                if (greenPlayer.getTile() != vortexTile) {
+                    visitor.reportGameChange(new MovementGameChange(greenPlayer, vortexTile));
+                }
+                visitor.reportGameChange(new DamageGameChange(attacker, greenPlayer, 1, 0));
+            }
         }
 
     }
