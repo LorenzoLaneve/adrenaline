@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,11 @@ public class DirectionalTileSelector implements TileSelector {
     private int minDistance;
     private int maxDistance;
     private boolean ignoreWalls;
-    private Tile sourceTile;
+    private TilePosition sourceTilePosition;
 
 
-    public DirectionalTileSelector(Tile sourceTile, int minDist, int maxDist, boolean ignoreWalls) {
-        this.sourceTile = sourceTile;
+    public DirectionalTileSelector(TilePosition sourceTilePosition, int minDist, int maxDist, boolean ignoreWalls) {
+        this.sourceTilePosition = sourceTilePosition;
         this.minDistance = minDist;
         this.maxDistance = maxDist;
         this.ignoreWalls = ignoreWalls;
@@ -25,6 +26,8 @@ public class DirectionalTileSelector implements TileSelector {
     @Override
     public boolean isSelectable(Map map, Tile tile) {
         List<Tile> selectableTiles = new ArrayList<>();
+
+        Tile sourceTile = map.getTile(sourceTilePosition);
 
         int distance = tile.distanceFrom(sourceTile);
 
