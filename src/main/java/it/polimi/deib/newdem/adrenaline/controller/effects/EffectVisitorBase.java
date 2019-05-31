@@ -134,6 +134,10 @@ public abstract class EffectVisitorBase implements EffectVisitor {
 
     @Override
     public Player getBoundPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        if (player == MetaPlayer.ATTACKER) {
+            return getAttacker();
+        }
+
         if (!notBoundablePlayers.contains(player)) {
             Player p = boundPlayers.get(player);
 
@@ -159,6 +163,10 @@ public abstract class EffectVisitorBase implements EffectVisitor {
 
     @Override
     public Player getBoundPlayer(MetaPlayer player) {
+        if (player == MetaPlayer.ATTACKER) {
+            return getAttacker();
+        }
+
         return boundPlayers.get(player);
     }
 
@@ -225,5 +233,7 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     public abstract void applyGameChange(GameChange gameChange);
 
     public abstract void revertGameChange(GameChange gameChange);
+
+    public abstract Player getAttacker();
 
 }
