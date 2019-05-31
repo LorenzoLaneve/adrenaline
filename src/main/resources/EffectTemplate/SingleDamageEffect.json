@@ -1,0 +1,12 @@
+{
+  "type": "SingleDamageEffect",
+  "id": 0,
+  "dmgAmt": 0,
+  "mrkAmt": 0,
+  "target": "---",
+  "selector": {
+    "type": "NearPlayerSelector",
+    "minDist": 0,
+    "maxDist": 0
+  }
+}

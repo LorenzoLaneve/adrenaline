@@ -1,0 +1,13 @@
+{
+  "id": 0,
+  "type": "PayableEffect",
+  "price": {
+    "yellowAmmos": 0,
+    "blueAmmos": 0,
+    "redAmmos": 0,
+    "anyAmmos": 0
+  },
+  "effect":{
+
+  }
+}

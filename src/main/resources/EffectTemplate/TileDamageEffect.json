@@ -1,0 +1,9 @@
+{
+  "type": "TileDamageEffect",
+  "id": 0,
+  "dmdAmt": 0,
+  "mrkAmt": 0,
+  "selector": {
+    "type": "AnyTileSelector"
+  }
+}
