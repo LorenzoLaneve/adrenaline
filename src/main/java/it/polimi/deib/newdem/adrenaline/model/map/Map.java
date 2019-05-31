@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface Map {
     MapListener getListener();
 
     void removePlayer(Player player);
+
+    List<Tile> selectTiles(TileSelector selector);
 
     static Map createMap(String mapJsonData){
 

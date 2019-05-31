@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.ArrayList;
@@ -118,4 +119,21 @@ public class ConcreteMap implements Map {
         mapListener.playerDidLeaveMap(player);
     }
 
+
+    @Override
+    public List<Tile> selectTiles(TileSelector selector) {
+        List<Tile> selectedTiles = new ArrayList<>();
+
+        for (int i = 0; i < matrixMap.length && matrixMap[i] != null; i++) {
+
+            for (int j = 0; j < matrixMap.length && matrixMap[i][j] != null; j++) {
+                Tile tile = matrixMap[i][j];
+                if (selector.isSelectable(this, tile)) {
+                    selectedTiles.add(tile);
+                }
+            }
+        }
+
+        return selectedTiles;
+    }
 }

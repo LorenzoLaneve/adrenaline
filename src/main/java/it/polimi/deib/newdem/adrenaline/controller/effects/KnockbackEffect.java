@@ -6,8 +6,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-import java.util.ArrayList;
-
 public class KnockbackEffect extends ConcreteEffect {
 
     private MetaPlayer metaTarget;
@@ -26,7 +24,7 @@ public class KnockbackEffect extends ConcreteEffect {
 
     @Override
     public void apply(EffectVisitor visitor) throws UndoException {
-        Player target = visitor.getBoundPlayer(metaTarget, playerSelectorFactory.makeSelector(visitor, new ArrayList<>()));
+        Player target = visitor.getBoundPlayer(metaTarget, playerSelectorFactory.makeSelector(visitor));
 
         Tile targetTile = visitor.getTile(tileSelectorFactory.makeSelector(visitor));
 

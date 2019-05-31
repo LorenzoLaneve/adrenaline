@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
+import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -20,6 +21,9 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     private Map<Effect, List<GameChange>> gameChanges;
 
     private Map<MetaPlayer, Player> boundPlayers;
+
+    private List<MetaPlayer> notBoundablePlayers;
+
 
     private Map<Effect, List<MetaPlayer>> playerPromptRegistry;
     // effects that asked for a player.
@@ -39,6 +43,8 @@ public abstract class EffectVisitorBase implements EffectVisitor {
         this.gameChanges = new HashMap<>();
 
         this.boundPlayers = new EnumMap<>(MetaPlayer.class);
+        this.notBoundablePlayers = new ArrayList<>();
+
         this.playerPromptRegistry = new HashMap<>();
 
         this.promptRegistry = new ArrayList<>();
@@ -127,26 +133,40 @@ public abstract class EffectVisitorBase implements EffectVisitor {
 
 
     @Override
-    public Player getBoundPlayer(MetaPlayer player, PlayerSelector selector) throws UndoException {
-        Player p = boundPlayers.get(player);
-
-        if (p == null) {
-            p = askForPlayer(player, selector);
-
-            List<MetaPlayer> metaPlayers = playerPromptRegistry.get(getCurrentEffect());
-
-            if (metaPlayers == null) {
-                metaPlayers = new ArrayList<>();
-                playerPromptRegistry.put(getCurrentEffect(), metaPlayers);
-            }
-            metaPlayers.add(player);
+    public Player getBoundPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        if (player == MetaPlayer.ATTACKER) {
+            return getAttacker();
         }
 
-        return p;
+        if (!notBoundablePlayers.contains(player)) {
+            Player p = boundPlayers.get(player);
+
+            if (p == null) {
+                p = askForPlayer(player, selector, mandatory);
+
+                if (p == null) {
+                    notBoundablePlayers.add(player);
+                } else {
+                    List<MetaPlayer> metaPlayers = playerPromptRegistry.get(getCurrentEffect());
+
+                    if (metaPlayers == null) {
+                        metaPlayers = new ArrayList<>();
+                        playerPromptRegistry.put(getCurrentEffect(), metaPlayers);
+                    }
+                    metaPlayers.add(player);
+                }
+            }
+            return p;
+        }
+        return null;
     }
 
     @Override
     public Player getBoundPlayer(MetaPlayer player) {
+        if (player == MetaPlayer.ATTACKER) {
+            return getAttacker();
+        }
+
         return boundPlayers.get(player);
     }
 
@@ -177,6 +197,18 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     }
 
     @Override
+    public boolean requestPayment(Player player, PaymentInvoice payment) throws UndoException {
+
+        PaymentReceipt receipt = askForPayment(player, payment);
+        if (receipt != null) {
+            reportGameChange(new PaymentGameChange(player, receipt));
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public void reportGameChange(GameChange gameChange) {
         applyGameChange(gameChange);
 
@@ -190,14 +222,18 @@ public abstract class EffectVisitorBase implements EffectVisitor {
 
 
 
-    public abstract Player askForPlayer(MetaPlayer player, PlayerSelector selector) throws UndoException;
+    public abstract Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException;
 
     public abstract Tile askForTile(TileSelector selector) throws UndoException;
 
     public abstract Effect askForEffectChoice(List<Effect> choices) throws UndoException;
 
+    public abstract PaymentReceipt askForPayment(Player player, PaymentInvoice payment) throws UndoException;
+
     public abstract void applyGameChange(GameChange gameChange);
 
     public abstract void revertGameChange(GameChange gameChange);
+
+    public abstract Player getAttacker();
 
 }
