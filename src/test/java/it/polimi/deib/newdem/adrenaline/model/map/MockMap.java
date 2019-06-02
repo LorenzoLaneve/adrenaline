@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public class MockMap implements Map {
     public Tile getTile(TilePosition p) {
         if(p.equals(new TilePosition(0,0))) return new OrdinaryTile(p);
         if(p.equals(new TilePosition(1,1))) return new SpawnPointTile(p);
+        return null;
+    }
+
+    @Override
+    public List<Tile> selectTiles(TileSelector selector) {
         return null;
     }
 
