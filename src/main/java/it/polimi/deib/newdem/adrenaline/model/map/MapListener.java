@@ -25,7 +25,7 @@ public interface MapListener {
 
     void weaponDidSpawn(Tile tile, WeaponCard weapon);
 
-    void playerGrabbedDrop(Player player, DropInstance drop, Tile tile );
+    void playerDidGrabDrop(Player player, DropInstance drop, Tile tile );
 
 
     // TODO methods definition for other map events.

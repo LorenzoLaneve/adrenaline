@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,5 +136,37 @@ public class ConcreteMap implements Map {
         }
 
         return selectedTiles;
+    }
+
+    @Override
+    public Tile getSpawnPointFromColor(AmmoColor ammoColor) {
+
+        Tile returnTile = null;
+
+        for (Tile tile: getAllTiles()){
+            if(tile.hasSpawnPoint()){
+                SpawnPointTile spawnPointTile = (SpawnPointTile) tile;
+                if (ammoColor == spawnPointTile.getSpawnPointColor()){
+                    returnTile = spawnPointTile;
+                }
+            }
+        }
+        return returnTile;
+    }
+
+    @Override
+    public List<Tile> getAllTiles() {
+
+        List<Tile> tiles = new ArrayList<>();
+
+        for (int i = 0; i < matrixMap.length && matrixMap[i] != null; i++) {
+
+            for (int j = 0; j < matrixMap.length && matrixMap[i][j] != null; j++) {
+                Tile tile = matrixMap[i][j];
+                tiles.add(tile);
+            }
+        }
+
+        return tiles;
     }
 }

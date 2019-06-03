@@ -22,8 +22,10 @@ public class TestConcreteTile {
     PlayerImpl player3;
     Tile tile;
     Tile tileRight;
+    Tile tileRightRight;
     TilePosition tilePosition;
     TilePosition tilePositionRight;
+    TilePosition tilePositionRightRight;
     Game game;
 
     @Before
@@ -38,9 +40,11 @@ public class TestConcreteTile {
 
         tilePosition = new TilePosition(0,0);
         tilePositionRight = new TilePosition(1,0);
+        tilePositionRightRight = new TilePosition(1,1);
 
         tile = map.getTile(tilePosition);
         tileRight = map.getTile(tilePositionRight);
+        tileRightRight = map.getTile(tilePositionRightRight);
 
         room = map.getRooms().get(0);
 
@@ -83,6 +87,7 @@ public class TestConcreteTile {
     public void testDistanceFrom() {
         assertEquals(1,tile.distanceFrom(tileRight));
         assertEquals(0,tile.distanceFrom(tile));
+        assertEquals(2, tile.distanceFrom(tileRightRight));
     }
 
     @Test

@@ -73,6 +73,9 @@ public abstract class ConcreteTile implements Tile {
         if (adjacentTiles.contains(t)){
             distance = 1;
         }
+        else if(t.equals(this)){
+            distance = 0;
+        }
         else{
             for(Tile adTile : adjacentTiles){
                 if (adTile.distanceFrom(t) < distance){

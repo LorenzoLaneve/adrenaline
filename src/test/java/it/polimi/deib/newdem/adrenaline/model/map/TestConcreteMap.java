@@ -1,10 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualMapView;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class TestConcreteMap {
 
-    ConcreteMap map;
+    Map map;
     List<Room> rooms;
     Room room;
     Tile[][] matrixMap;
@@ -36,17 +35,14 @@ public class TestConcreteMap {
                     matrixMap[x][y] = new OrdinaryTile(new TilePosition(x,y));
                 }
                 else{
-                    matrixMap[x][y] = new SpawnPointTile(new TilePosition(x,y));
+                    matrixMap[x][y] = new SpawnPointTile(new TilePosition(x,y), AmmoColor.RED);
                 }
             }
         }
-        room = new ConcreteRoom();
 
-        rooms.add(room);
+        map =  Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
 
-        map = new ConcreteMap(matrixMap, rooms);
-
-        map.bindRooms();
+        room = map.getRooms().get(0);
 
         MockMapListener mockMapListener = new MockMapListener();
 
@@ -75,21 +71,24 @@ public class TestConcreteMap {
 
     @Test
     public void testGetTile() {
-        for(int x=0; x < 4; x++) {
-            for (int y = 0; y < 4; y++) {
-                if (x != 1 && y != 1) {
-                    if (!(map.getTile(new TilePosition(x, y)).getPosition().equals(matrixMap[x][y].getPosition()) &&
-                            !map.getTile(new TilePosition(x, y)).hasSpawnPoint())) {
-                        fail();
-                    }
-                } else {
-                    if (!(map.getTile(new TilePosition(x, y)).getPosition().equals(matrixMap[x][y].getPosition()) &&
-                            map.getTile(new TilePosition(x, y)).hasSpawnPoint())) {
-                        fail();
-                    }
-                }
-            }
-        }
+        TilePosition redSpawnPointPos = new TilePosition(0,0);
+        TilePosition blueSpawnPointPos = new TilePosition(1,1);
+        TilePosition yellowSpawnPointPos = new TilePosition(0,1);
+        TilePosition noSpawnPointPos = new TilePosition(1,0);
+
+        boolean red = map.getTile(redSpawnPointPos).hasSpawnPoint();
+        boolean blue = map.getTile(blueSpawnPointPos).hasSpawnPoint();
+        boolean yellow = map.getTile(yellowSpawnPointPos).hasSpawnPoint();
+        boolean nope = map.getTile(noSpawnPointPos).hasSpawnPoint();
+
+        SpawnPointTile redSpawnPoint = (SpawnPointTile) map.getTile(redSpawnPointPos);
+        SpawnPointTile blueSpawnPoint = (SpawnPointTile) map.getTile(blueSpawnPointPos);
+        SpawnPointTile yellowSpawnPoint = (SpawnPointTile) map.getTile(yellowSpawnPointPos);
+
+
+        assertEquals(AmmoColor.RED, redSpawnPoint.getSpawnPointColor());
+        assertEquals(AmmoColor.BLUE, blueSpawnPoint.getSpawnPointColor());
+        assertEquals(AmmoColor.YELLOW, yellowSpawnPoint.getSpawnPointColor());
     }
 
     @Test
@@ -144,6 +143,12 @@ public class TestConcreteMap {
         map.setListener(newMockMapListener);
 
         assertEquals(newMockMapListener, map.getListener());
+    }
+
+    @Test
+    public void testGetSpawnPoint(){
+        Tile redSpawnPoint = map.getTile(new TilePosition(0,0));
+        assertEquals(redSpawnPoint, map.getSpawnPointFromColor(AmmoColor.RED));
     }
 
 }
