@@ -13,11 +13,11 @@ public class DirectionalTileSelector implements TileSelector {
     private int minDistance;
     private int maxDistance;
     private boolean ignoreWalls;
-    private TilePosition sourceTilePosition;
+    private Tile sourceTile;
 
 
-    public DirectionalTileSelector(TilePosition sourceTilePosition, int minDist, int maxDist, boolean ignoreWalls) {
-        this.sourceTilePosition = sourceTilePosition;
+    public DirectionalTileSelector(Tile sourceTile, int minDist, int maxDist, boolean ignoreWalls) {
+        this.sourceTile = sourceTile;
         this.minDistance = minDist;
         this.maxDistance = maxDist;
         this.ignoreWalls = ignoreWalls;
@@ -27,11 +27,9 @@ public class DirectionalTileSelector implements TileSelector {
     public boolean isSelectable(Map map, Tile tile) {
         List<Tile> selectableTiles = new ArrayList<>();
 
-        Tile sourceTile = map.getTile(sourceTilePosition);
-
         int distance = tile.distanceFrom(sourceTile);
 
-        boolean distCond =  (distance <= maxDistance && distance >= minDistance);
+        boolean distCond = (distance <= maxDistance && distance >= minDistance);
 
         selectableTiles.addAll(sourceTile.getTiles(Direction.WEST, ignoreWalls));
         selectableTiles.addAll(sourceTile.getTiles(Direction.EAST, ignoreWalls));
