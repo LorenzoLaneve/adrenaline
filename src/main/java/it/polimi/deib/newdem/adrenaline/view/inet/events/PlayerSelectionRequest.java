@@ -13,19 +13,19 @@ public class PlayerSelectionRequest implements UserEvent {
 
     private List<PlayerColor> selectablePlayers;
 
-    private boolean error;
+    private boolean mandatory;
 
-    public PlayerSelectionRequest(List<PlayerColor> selectablePlayers, boolean error) {
+    public PlayerSelectionRequest(List<PlayerColor> selectablePlayers, boolean mandatory) {
         this.selectablePlayers = selectablePlayers;
-        this.error = error;
+        this.mandatory = mandatory;
     }
 
     public List<PlayerColor> getSelectablePlayers() {
         return new ArrayList<>(selectablePlayers);
     }
 
-    public boolean errorOccurred() {
-        return error;
+    public boolean isMandatory() {
+        return mandatory;
     }
 
 
