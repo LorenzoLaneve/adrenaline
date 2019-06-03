@@ -13,5 +13,5 @@ public interface GameView {
      * Notifies that the player with the given color reconnected from the enclosing lobby.
      */
     void enablePlayer(PlayerColor color);
-
+    
 }

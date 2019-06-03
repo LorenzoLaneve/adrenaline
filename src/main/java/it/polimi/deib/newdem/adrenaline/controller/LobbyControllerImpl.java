@@ -107,6 +107,11 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
         switchState(new GameOverLobbyState());
     }
 
+    @Override
+    public ServerConnectionReceiver getConnectionReceiver() {
+        return connectionReceiver;
+    }
+
 
     @Override
     public void timerWillStart(int secondsLeft) {

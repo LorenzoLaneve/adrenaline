@@ -1,26 +1,30 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.GameEndEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.GameStartEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDisconnectEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
+import it.polimi.deib.newdem.adrenaline.view.server.dialogs.Dialog;
+import it.polimi.deib.newdem.adrenaline.view.server.dialogs.DialogAdapter;
 
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.List;
 
-public class VirtualGameView implements GameView, GameListener {
+public class VirtualGameView implements GameView, GameListener, DialogAdapter<PlayerColor> {
 
     private EnumMap<PlayerColor, User> users;
 
-    public VirtualGameView() {
+    private ServerConnectionReceiver connectionReceiver;
+
+    public VirtualGameView(ServerConnectionReceiver connectionReceiver) {
         this.users = new EnumMap<>(PlayerColor.class);
+
+        this.connectionReceiver = connectionReceiver;
     }
 
     public void sendEvent(UserEvent event) {
@@ -28,6 +32,28 @@ public class VirtualGameView implements GameView, GameListener {
             user.sendEvent(event);
         }
     }
+
+    /**
+     * Asks the given user to choose between the given player colors.
+     * @param mandatory whether a choice needs to be made and selecting no players is not a possible choice.
+     * @return The choice made by the player, or {@code null} if the user chose to select no players.
+     */
+    public PlayerColor promptPlayerColor(User user, List<PlayerColor> choices, boolean mandatory) throws UndoException, InterruptedException {
+        Dialog<PlayerColor> dialog = new Dialog<>(this, user, choices, mandatory);
+        connectionReceiver.addDialog(user, dialog);
+
+        PlayerColor response;
+        try {
+            response = dialog.presentDialog();
+        } catch (Exception x) {
+            connectionReceiver.removeDialog(user, dialog);
+            throw x;
+        }
+
+        connectionReceiver.removeDialog(user, dialog);
+        return response;
+    }
+
 
     public Collection<PlayerColor> getPlayers() {
         return users.keySet();
@@ -67,5 +93,10 @@ public class VirtualGameView implements GameView, GameListener {
     @Override
     public void enablePlayer(PlayerColor color) {
         sendEvent(new PlayerReconnectEvent(color));
+    }
+
+    @Override
+    public void sendDialogRequest(Dialog<PlayerColor> dialog, User user, List<PlayerColor> admittedChoices) {
+        user.sendEvent(new PlayerSelectionRequest(admittedChoices, dialog.isMandatory()));
     }
 }

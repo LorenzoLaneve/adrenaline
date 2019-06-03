@@ -58,7 +58,7 @@ public class AdrenalineGameController implements GameController {
         game = new GameImpl(gp);
         // bind map listener?
 
-        vgv = new VirtualGameView();
+        vgv = new VirtualGameView(lobbyController.getConnectionReceiver());
         game.setGameListener(vgv);
         game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
