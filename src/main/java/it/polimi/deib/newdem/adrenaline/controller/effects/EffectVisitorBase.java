@@ -179,8 +179,8 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     }
 
     @Override
-    public Effect chooseEffect(List<Effect> choices) throws UndoException {
-        Effect e = askForEffectChoice(choices);
+    public Integer chooseEffect(List<Integer> choices) throws UndoException {
+        Integer e = askForEffectChoice(choices);
         promptRegistry.add(getCurrentEffect());
 
         return e;
@@ -197,9 +197,9 @@ public abstract class EffectVisitorBase implements EffectVisitor {
     }
 
     @Override
-    public boolean requestPayment(Player player, PaymentInvoice payment) throws UndoException {
+    public boolean requestPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
 
-        PaymentReceipt receipt = askForPayment(player, payment);
+        PaymentReceipt receipt = askForPayment(player, payment, effect);
         if (receipt != null) {
             reportGameChange(new PaymentGameChange(player, receipt));
             return true;
@@ -226,9 +226,9 @@ public abstract class EffectVisitorBase implements EffectVisitor {
 
     public abstract Tile askForTile(TileSelector selector) throws UndoException;
 
-    public abstract Effect askForEffectChoice(List<Effect> choices) throws UndoException;
+    public abstract Integer askForEffectChoice(List<Integer> choices) throws UndoException;
 
-    public abstract PaymentReceipt askForPayment(Player player, PaymentInvoice payment) throws UndoException;
+    public abstract PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException;
 
     public abstract void applyGameChange(GameChange gameChange);
 

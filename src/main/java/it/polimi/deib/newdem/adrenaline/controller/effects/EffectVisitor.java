@@ -45,9 +45,10 @@ public interface EffectVisitor {
 
     /**
      * Prompts the caller to choose an effect among the given effects.
+     * @returns The integer for the effect chosen by the player, or {@code null} if the caller requested to stop.
      * @throws UndoException if the caller requested an undo action.
      */
-    Effect chooseEffect(List<Effect> choices) throws UndoException;
+    Integer chooseEffect(List<Integer> choices) throws UndoException;
 
     /**
      * Adds the effect to the effects queue, implying that it will be executed in the future.
@@ -59,10 +60,11 @@ public interface EffectVisitor {
      * The caller may be asked to select power-ups to pay, and if the payment is accepted,
      * the visitor will report an ammo payment game change associated with the current effect.
      * @param player The player that will be charged of the payment.
+     * @param effect An integer that identifies what the payment is for.
      * @return {@code true} iff the called accepted the payment.
      * @throws UndoException if the caller requested an undo action.
      */
-    boolean requestPayment(Player player, PaymentInvoice payment) throws UndoException;
+    boolean requestPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException;
 
     /**
      * Generates a game change that has to be applied to the game as a consequence of the execution of this effect.
