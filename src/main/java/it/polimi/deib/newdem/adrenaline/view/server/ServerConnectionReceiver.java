@@ -1,11 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
-import it.polimi.deib.newdem.adrenaline.view.server.dialogs.PlayerDialog;
+import it.polimi.deib.newdem.adrenaline.view.server.dialogs.Dialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,14 +16,14 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
 
     private List<MapViewEventListener> mapListeners;
 
-    private HashMap<User, List<PlayerDialog>> playerDialogs;
+    private HashMap<User, List<Dialog<PlayerColor>>> playerDialogs;
 
     public ServerConnectionReceiver() {
         this.mapListeners = new ArrayList<>();
     }
 
-    public void addPlayerDialog(User user, PlayerDialog dialog) {
-        List<PlayerDialog> dialogs = playerDialogs.get(user);
+    public void addDialog(User user, Dialog<PlayerColor> dialog) {
+        List<Dialog<PlayerColor>> dialogs = playerDialogs.get(user);
 
         if (dialogs == null) {
             dialogs = new ArrayList<>();
@@ -30,6 +31,14 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
         }
 
         dialogs.add(dialog);
+    }
+
+    public void removeDialog(User user, Dialog<PlayerColor> dialog) {
+        List<Dialog<PlayerColor>> dialogs = playerDialogs.get(user);
+
+        if (dialogs != null) {
+            dialogs.remove(dialog);
+        }
     }
 
     public void addMapEventListener(MapViewEventListener listener) {
