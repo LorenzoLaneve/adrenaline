@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Room;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
@@ -14,6 +15,10 @@ public class VisibleTileSelector implements TileSelector{
 
     public VisibleTileSelector(Tile tile) {
         this.sourceTile = tile;
+    }
+
+    public VisibleTileSelector(Player player) {
+        this(player.getTile());
     }
 
     @Override

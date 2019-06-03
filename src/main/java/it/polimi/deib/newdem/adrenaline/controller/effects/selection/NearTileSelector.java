@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -13,6 +14,10 @@ public class NearTileSelector implements TileSelector {
         this.sourceTile = sourceTile;
         this.minDistance = minDist;
         this.maxDistance = maxDist;
+    }
+
+    public NearTileSelector(Player sourcePlayer, int minDist, int maxDist) {
+        this(sourcePlayer.getTile(), minDist, maxDist);
     }
 
     @Override
