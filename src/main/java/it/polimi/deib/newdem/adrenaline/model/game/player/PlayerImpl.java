@@ -7,6 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
+import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -310,5 +311,16 @@ public class PlayerImpl implements Player {
     @Override
     public int getMovesAmount() {
         return actionBoard.getIterations();
+    }
+
+    @Override
+    public void drawCard() {
+        try {
+            game.getPowerUpDeck().draw();
+        }
+        catch (NoDrawableCardException e) {
+            // this should never happen
+            throw new IllegalStateException(e);
+        }
     }
 }

@@ -13,7 +13,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
-import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualPlayerView;
 import org.omg.CORBA.PRIVATE_MEMBER;
@@ -33,6 +33,9 @@ public class GameImpl implements Game {
     private boolean isFrenzy; // BAD, enum or states
     private boolean isOver;
     private int turnTime;
+    private Deck<PowerUpCard> powerUpDeck;
+    private Deck<WeaponCard> weaponDeck;
+    private Deck<DropInstance> dropDeck;
     private GameListener listener;
     private java.util.Map<PlayerColor, User> colorUserMap;
     private boolean init;
@@ -59,63 +62,7 @@ public class GameImpl implements Game {
     }
 
     private GameImpl(){}
-/*
-    public static Game fromData(GameData gameData) {
-        GameImpl game = new GameImpl();
-        game.map = gameData.getMap();
-        game.map.setListener(null);
-        game.map.addDrops();
 
-        game.weaponDeck = new WeaponDeck<WeaponCard>(gameData.getWeaponDeckCards());
-        game.powerUpDeck = new PowerUpDeck<PowerUpCard>(gameData.getPowerUpDeckCards());
-        //^ creates decks with all cards
-        // discarding is rough
-        // actives are also rough
-        // order is also rough
-
-        for(PlayerData playerData : gameData.getPlayersDataList()){
-            game.players.add( PlayerImpl.fromDataEmptyBoards(playerData, game) );
-            // yes color
-        }
-
-        for(PlayerData playerData : gameData.getPlayersDataList()) {
-            Player currentplayer = game.getPlayerFromColor(playerData.getColor());
-            DamageBoardData dmgbd = currentData.getDamageBoardData();
-
-            if(dmgbd.isFlipped()) {
-                boolean precedesFirstPlayer =
-                        playerData.getActionBoardData().getFace() == FrenzyDouble;
-                currentplayer.goFrenzy(precedesFirstPlayer);
-            }
-
-            for(PlayerColor damager : dmgbd.getDamages()) {
-                currentplayer.takeDamage(1, game.getPlayerFromColor(damager));
-            }
-
-            for(java.util.Map.Entry<PlayerColor,Integer> entry : dmgdb.getMarks().entrySet()){
-                currentplayer.takeMark(
-                        entry.getValue(),
-                        game.getPlayerFromColor(entry.getKey()));
-            }
-
-        }
-
-        //illTrack = new KillTrackImpl(parameters.getKillTrackInitialLength());
-        game.killTrack = gameData.getKillTrack();
-        //colorUserMap = parameters.getColorUserMap();
-        //players = new ArrayList<>(MAX_PLAYERS_PER_GAME);
-        //// ^ no players added
-        game.players = new ArrayList<>(MAX_PLAYERS_PER_GAME);
-
-
-
-        //turnQueue = new RoundRobin<>();
-        //isOver = false;
-        //turnTime = parameters.getTurnTime();
-        //listenerRegistry = new ListenerRegistry();
-        //init = false;
-    }
-*/
     /**
      * Returns a reference to tis game's map
      *
@@ -232,7 +179,13 @@ public class GameImpl implements Game {
 
         bindElementsListeners();
 
-        // load cards(?)
+        // load cards
+        // TODO read from json
+        /*
+        weaponDeck = new Deck<>(new ArrayList<>());
+        powerUpDeck = new Deck<>(new ArrayList<>());
+        dropDeck = new Deck<>(new ArrayList<>());
+        */
 
         // create Players
         createNewPlayers();
@@ -245,6 +198,10 @@ public class GameImpl implements Game {
 
         // init players
         initPlayers();
+
+        // fill tiles
+        //TODO load non-empty decks from json
+        // refillTiles(); // no decks, breaks tests for now
 
         // set flags
         isFrenzy = false;
@@ -300,6 +257,12 @@ public class GameImpl implements Game {
                 // setup respawn (if not implicit in turn)
             }
         }
+
+        // refill tiles
+        // both drops
+        // and weapons
+        // TODO load decks from json
+        // refillTiles(); // needs non-empty decks
 
         // add new turn
         if(!isFrenzy) {
@@ -404,5 +367,53 @@ public class GameImpl implements Game {
     public void declareOver() {
         isOver = true;
         // persistence?
+    }
+
+    public Deck<PowerUpCard> getPowerUpDeck() {
+        return powerUpDeck;
+    }
+
+    private void refillTiles(){
+        // TODO
+        // map.getEmptyTiles(); // not implemented
+        for(Tile t : map.getAllTiles()){
+            if(t.hasSpawnPoint()) {
+                while (t.inspectWeaponSet().getWeapons().size() < 3) {
+                    try {
+                        t.addWeapon(weaponDeck.draw());
+                    }
+                    catch (NoDrawableCardException e) {
+                        // this CAN happen, and that's ok.
+                        // We just ignore it and move on,
+                        // as designed in game.
+                    }
+                    catch (OutOfSlotsException |
+                            WeaponAlreadyPresentException |
+                            NotSpawnPointTileException e) {
+                        // this should NOT happen, so we report it
+                        throw new IllegalStateException(e);
+                    }
+                }
+            }
+            else {
+                // t has NOT spawnpoint
+                // ==> t is ordinaryTile
+                if(t.missingDrop()){
+                    try {
+                        t.addDrop(dropDeck.draw());
+                    }
+                    catch (NoDrawableCardException e) {
+                        // this CAN happen, and that's ok.
+                        // We just ignore it and move on,
+                        // as designed in game.
+                    }
+                    catch (DropAlreadyPresentException |
+                            NotOrdinaryTileException e) {
+                        // this should NOT happen, so we report it
+                        throw new IllegalStateException(e);
+                    }
+                }
+            }
+        }
     }
 }

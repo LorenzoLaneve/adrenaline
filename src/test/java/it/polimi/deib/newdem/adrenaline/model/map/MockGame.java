@@ -6,7 +6,11 @@ import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
+import it.polimi.deib.newdem.adrenaline.model.items.Deck;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+
+import java.util.List;
 
 public class MockGame implements Game {
 
@@ -78,5 +82,20 @@ public class MockGame implements Game {
     @Override
     public int getTurnTime() {
         return 0;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return null;
+    }
+
+    @Override
+    public void declareOver() {
+
+    }
+
+    @Override
+    public Deck<PowerUpCard> getPowerUpDeck() {
+        return null;
     }
 }

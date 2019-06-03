@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.turn;
 import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,5 +24,10 @@ public class ScriptedDataSource implements TurnDataSource {
         ActionType out = arr[i];
         i++;
         return out;
+    }
+
+    @Override
+    public PowerUpCard chooseCard(List<PowerUpCard> cards) {
+        return null;
     }
 }

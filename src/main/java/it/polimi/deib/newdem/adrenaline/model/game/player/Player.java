@@ -60,4 +60,6 @@ public interface Player {
     void setListener(PlayerListener listener);
 
     boolean isConnected();
+
+    void drawCard();
 }
