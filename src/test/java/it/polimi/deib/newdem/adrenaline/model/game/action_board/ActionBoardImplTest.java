@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.action_board;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.MockPlayer;
+import it.polimi.deib.newdem.adrenaline.view.server.ServerConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualActionBoardView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class ActionBoardImplTest {
 
     @Test
     public void testSetListener() {
-        VirtualGameView vgv = new VirtualGameView();
+        VirtualGameView vgv = new VirtualGameView(new ServerConnectionReceiver());
         cab.setListener(new VirtualActionBoardView(vgv, (new MockPlayer()).getColor()));
     }
 
@@ -49,7 +50,7 @@ public class ActionBoardImplTest {
 
     @Test
     public void testGoFrenzy() throws Exception {
-        VirtualGameView vgv = new VirtualGameView();
+        VirtualGameView vgv = new VirtualGameView(new ServerConnectionReceiver());
         cab.goFrenzy(false);
         cab = new ActionBoardImpl();
         cab.setListener(new VirtualActionBoardView(vgv, (new MockPlayer()).getColor()));
