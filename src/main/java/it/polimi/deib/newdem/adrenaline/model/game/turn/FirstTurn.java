@@ -16,14 +16,14 @@ public class FirstTurn extends TurnBaseImpl {
     protected void performInitialActions() {
         //TODO implement
         // requires action anc listeners
+
+        // draw card
+
+        // discard card
+
+        // get set pos in map
+
         // requires spawn in routine
-    }
-
-    @Override
-    protected void endOfTurn() {
-        //TODO implement
-        // requires action anc listeners
-
     }
 
     public FirstTurn(Player activePlayer) {
