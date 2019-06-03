@@ -1,85 +1,76 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import com.google.gson.*;
+import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
+import it.polimi.deib.newdem.adrenaline.controller.effects.EffectLoader;
+import it.polimi.deib.newdem.adrenaline.controller.effects.InvalidEffectException;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
-public class WeaponDeck<WeaponCard> {
-    private Deque<WeaponCard> drawableCards;
-    private HashSet<WeaponCard> discardedCards;
-    private HashSet<WeaponCard> activeCards;
+public class WeaponDeck {
 
-    /** Creates a new {@code Deck} made up of the elements of the given list.
-     *
-     * @throws IllegalArgumentException {@code list} is null or empty
-     * @param list the elements to build a {@code Deck} from. This may have repetitions.
-     *             Not null, not empty.
-     */
-    public WeaponDeck(List<WeaponCard> list) {
-        if(null == list || list.isEmpty()) {
-            throw new IllegalArgumentException("Invalid parameter list");
+    private List<WeaponCard> cards;
+
+    private WeaponDeck(List<WeaponCard> cards) {
+        this.cards = new ArrayList<>(cards);
+    }
+
+    public Deck<WeaponCard> createNewDeck() {
+        return new Deck<>(cards);
+    }
+
+
+
+
+    private static PaymentInvoice parseInvoice(JsonElement element) {
+        JsonObject invoiceObject = element.getAsJsonObject();
+
+        int redAmmos = invoiceObject.get("red").getAsInt();
+        int blueAmmos = invoiceObject.get("blue").getAsInt();
+        int yellowAmmos = invoiceObject.get("yellow").getAsInt();
+        int anyColorAmmos = invoiceObject.get("any").getAsInt();
+
+        return new PaymentInvoice(redAmmos, blueAmmos, yellowAmmos, anyColorAmmos);
+    }
+
+    static WeaponDeck fromJson(String jsonFile) {
+        List<WeaponCard> cards = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(jsonFile)) {
+            JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
+
+            JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();
+
+            for (JsonElement object : cardsJsonArray) {
+                JsonObject cardObject = object.getAsJsonObject();
+
+                int cardID = cardObject.get("id").getAsInt();
+
+                PaymentInvoice pickupPrice = parseInvoice(cardObject.get("pickupPrice"));
+                PaymentInvoice reloadPrice = parseInvoice(cardObject.get("reloadPrice"));
+
+                String effectClassName = cardObject.get("effectClass").getAsString();
+                Effect cardEffect = EffectLoader.fromClass(effectClassName);
+
+                WeaponCard card = new WeaponCardImpl(cardID, pickupPrice, reloadPrice, cardEffect);
+                cards.add(card);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (InvalidEffectException e) {
+            e.printStackTrace();
         }
 
-        ArrayList<WeaponCard> workingList = new ArrayList<>(list);
-        Collections.shuffle(workingList);
-
-        this.drawableCards = new LinkedList<>(workingList);
-        this.discardedCards = new HashSet<>();
-        this.activeCards = new HashSet<>();
+        return new WeaponDeck(cards);
     }
 
-
-    /** Draws a card from this deck.
-     *
-     * If no card is drawable, the discard pile is shuffled into the deck,
-     * then a card is drawn.
-     *
-     * @return the drawn card
-     */
-    public WeaponCard draw() throws NoDrawableCardException {
-        if(this.isEmpty()) {
-            reshuffle();
-        }
-
-        if(this.isEmpty()) {
-            throw new NoDrawableCardException();
-        }
-
-        WeaponCard drawnCard = drawableCards.pop();
-        activeCards.add(drawnCard);
-        return drawnCard;
-    }
-
-    /** Puts the given {@code card} into this deck's discard pile.
-     *
-     * @throws IllegalArgumentException the given {@code card} does not belong to this deck.
-     * @param card the card to discard. Not null, must belong to this deck.
-     */
-    public void discard(WeaponCard card) {
-        if(!activeCards.contains(card)) {
-            throw new IllegalArgumentException("This card does not belong to this deck");
-        }
-
-        activeCards.remove(card);
-        discardedCards.add(card);
-    }
-
-    /** Checks for the presence of drawable cards.
-     *
-     * @return whether or not the deck is empty
-     */
-    public boolean isEmpty() {
-        return drawableCards.isEmpty();
-    }
-
-    /** Shuffles this deck's discard pile together with the main deck.
-     *
-     */
-    public void reshuffle() {
-        ArrayList<WeaponCard> workingList = new ArrayList<>();
-
-        workingList.addAll(discardedCards);
-        workingList.addAll(drawableCards);
-        Collections.shuffle(workingList);
-
-        this.drawableCards = new LinkedList<>(workingList);
-    }
 }
