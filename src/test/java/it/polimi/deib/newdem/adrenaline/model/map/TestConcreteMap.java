@@ -1,5 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualMapView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +19,7 @@ public class TestConcreteMap {
     List<Room> rooms;
     Room room;
     Tile[][] matrixMap;
+    PlayerImpl player;
 
     @Before
     public void initTest(){
@@ -41,6 +47,25 @@ public class TestConcreteMap {
         map = new ConcreteMap(matrixMap, rooms);
 
         map.bindRooms();
+
+        MockMapListener mockMapListener = new MockMapListener();
+
+        map.setListener(mockMapListener);
+
+        Game game = new MockGame(map);
+
+        player = new PlayerImpl(PlayerColor.YELLOW, game, "dude");
+
+        TilePosition tilePosition = new TilePosition(0,0);
+
+        Tile destination = map.getTile(tilePosition);
+
+        map.movePlayer(player, destination);
+    }
+
+    @Test
+    public void testConcreteMap(){
+        map = new ConcreteMap(matrixMap, rooms);
     }
 
     @Test
@@ -70,6 +95,55 @@ public class TestConcreteMap {
     @Test
     public void testBindRooms(){
         assertEquals(room.getMap(), map);
+    }
+
+    @Test
+    public void testMovePlayer(){
+
+        TilePosition tilePosition = new TilePosition(1,1);
+
+        Tile destination = map.getTile(tilePosition);
+
+
+        map.movePlayer(player, destination);
+
+        assertEquals(destination, player.getTile());
+    }
+
+    @Test
+    public void removePlayer(){
+        Tile currPos = player.getTile();
+
+        map.removePlayer(player);
+
+
+        assertFalse(currPos.getPlayers().contains(player));
+
+    }
+
+    @Test
+    public void selectTiles(){
+        MockSelector selector = new MockSelector();
+
+        assertTrue(map.selectTiles(selector).contains(map.getTile(new TilePosition(0,0))));
+    }
+
+    @Test
+    public void setListener(){
+        MockMapListener newMockMapListener = new MockMapListener();
+
+        map.setListener(newMockMapListener);
+
+        assertEquals(newMockMapListener, map.getListener());
+    }
+
+    @Test
+    public void getListener(){
+        MockMapListener newMockMapListener = new MockMapListener();
+
+        map.setListener(newMockMapListener);
+
+        assertEquals(newMockMapListener, map.getListener());
     }
 
 }

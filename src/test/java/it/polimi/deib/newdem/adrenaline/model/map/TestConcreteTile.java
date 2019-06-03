@@ -16,7 +16,7 @@ public class TestConcreteTile {
 
     Room room;
     Tile[][] matrixMap;
-    ConcreteMap map;
+    Map map;
     PlayerImpl player1;
     PlayerImpl player2;
     PlayerImpl player3;
@@ -31,26 +31,19 @@ public class TestConcreteTile {
         game = new MockGame();
         player1 = new PlayerImpl(PlayerColor.MAGENTA, game, "Larry");
         player2 = new PlayerImpl(PlayerColor.GRAY, game, "Carl");
-
-        matrixMap = new Tile[2][2];
         List<int[]> roomInt = new ArrayList<>();
         roomInt.add(new int[]{0,0});
+
+        map = Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
 
         tilePosition = new TilePosition(0,0);
         tilePositionRight = new TilePosition(1,0);
 
-        tile = new OrdinaryTile(tilePosition);
-        tileRight = new OrdinaryTile(tilePositionRight);
+        tile = map.getTile(tilePosition);
+        tileRight = map.getTile(tilePositionRight);
 
-        matrixMap[0][0] = tile;
-        matrixMap[1][0] = tileRight;
+        room = map.getRooms().get(0);
 
-        room = new ConcreteRoom();
-
-        room.setMap(map);
-
-        tile.setRoom(room);
-        tileRight.setRoom(room);
 
         tile.addPlayer(player1);
         tile.addPlayer(player2);
@@ -58,6 +51,7 @@ public class TestConcreteTile {
 
     @Test
     public void testConstructor(){
+        Tile ordinaryTile = new OrdinaryTile(new TilePosition(0,0));
 
     }
 
@@ -87,7 +81,8 @@ public class TestConcreteTile {
 
     @Test
     public void testDistanceFrom() {
-        //TODO
+        assertEquals(1,tile.distanceFrom(tileRight));
+        assertEquals(0,tile.distanceFrom(tile));
     }
 
     @Test
@@ -129,5 +124,18 @@ public class TestConcreteTile {
 
         assertTrue(tile.getAdjacentTiles().stream().anyMatch(matchTile ->(matchTile.getPosition().getX() == tileRight.getPosition().getX() &&
                 matchTile.getPosition().getY() == tileRight.getPosition().getY()) ));
+    }
+
+    @Test
+    public void testGetTiles(){
+
+        boolean  test = tile.getTiles(Direction.EAST, true).contains(tileRight);
+
+        assertTrue(test);
+    }
+
+    @Test
+    public void testGetDirection(){
+        assertEquals(Direction.EAST, tile.getDirection(tileRight));
     }
 }

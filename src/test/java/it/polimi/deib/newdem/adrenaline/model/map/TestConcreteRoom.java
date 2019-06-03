@@ -56,7 +56,7 @@ public class TestConcreteRoom {
 
     @Test
     public void testConstructor(){
-
+        room = new ConcreteRoom();
     }
 
     @Test
