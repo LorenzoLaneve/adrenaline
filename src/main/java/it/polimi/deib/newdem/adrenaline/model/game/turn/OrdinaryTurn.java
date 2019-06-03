@@ -13,12 +13,6 @@ public class OrdinaryTurn extends TurnBaseImpl {
         // u.sendDialog();
     }
 
-    @Override
-    protected void endOfTurn() {
-        //TODO implement
-        // requires action anc listeners
-    }
-
     public OrdinaryTurn(Player activePlayer) {
         super(activePlayer);
         // TODO implement

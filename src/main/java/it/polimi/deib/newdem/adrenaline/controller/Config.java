@@ -1,21 +1,22 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-public class Config {
+public final class Config {
 
-    private boolean useSockets = true;
+    protected boolean useSockets = true;
 
-    private boolean useRMI = true;
+    protected boolean useRMI = true;
 
-    private int socketPort = 9700;
+    protected int socketPort = 9700;
 
-    private int timerLength = 60;
+    protected int timerLength = 60;
 
-    private int minPlayers = 3;
+    protected int minPlayers = 3;
 
-    private int maxPlayers = 5;
+    protected int maxPlayers = 5;
 
-    private GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
+    protected int turnTime = 1;
 
+    protected GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
 
     private Config() {  }
 
@@ -84,6 +85,13 @@ public class Config {
      */
     public GameControllerFactory getGameControllerFactory() {
         return gameMaker;
+    }
+
+    /**
+     * Returns the time for an ordinary turn
+     */
+    public int getTurnTime(){
+        return turnTime;
     }
 
 }

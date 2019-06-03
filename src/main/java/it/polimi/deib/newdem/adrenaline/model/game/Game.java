@@ -7,6 +7,8 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
+import java.util.List;
+
 public interface Game {
 
     Map getMap();
@@ -16,6 +18,8 @@ public interface Game {
     void setKillTrackListener(KillTrackListener listener);
 
     Player getPlayerFromColor(PlayerColor color);
+
+    List<Player> getPlayers();
 
     boolean isInFrenzy();
 
@@ -32,6 +36,8 @@ public interface Game {
     void init();
 
     boolean isOver();
+
+    void declareOver();
 
     int getTurnTime();
 }

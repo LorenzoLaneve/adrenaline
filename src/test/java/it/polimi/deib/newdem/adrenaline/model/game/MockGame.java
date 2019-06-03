@@ -7,6 +7,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MockGame implements Game {
 
     @Override
@@ -70,6 +73,16 @@ public class MockGame implements Game {
 
     @Override
     public void setKillTrackListener(KillTrackListener listener) {
+
+    }
+
+    @Override
+    public List<Player> getPlayers(){
+        return new ArrayList<>(0);
+    }
+
+    @Override
+    public void declareOver() {
 
     }
 }
