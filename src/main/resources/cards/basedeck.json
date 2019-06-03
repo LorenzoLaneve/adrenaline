@@ -1,0 +1,219 @@
+{
+  "cards": [
+    {
+      "id": 1,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 2,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.LockRifleEffect"
+    },
+    {
+      "id": 2,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 0,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect"
+    },
+    {
+      "id": 3,
+
+      "pickupPrice": {
+        "red": 1,
+        "blue": 0,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 1,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.MachineGunEffect"
+    },
+    {
+      "id": 4,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 0,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TractorBeamEffect"
+    },
+    {
+      "id": 5,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 1,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.VortexCannonEffect"
+    },
+    {
+      "id": 6,
+
+      "pickupPrice": {
+        "red": 1,
+        "blue": 0,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 1,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.THOREffect"
+    },
+    {
+      "id": 7,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 1,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.FurnaceEffect"
+    },
+    {
+      "id": 8,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 0,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.PlasmaGunEffect"
+    },
+    {
+      "id": 9,
+
+      "pickupPrice": {
+        "red": 1,
+        "blue": 0,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 2,
+        "blue": 0,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HeatseekerEffect"
+    },
+    {
+      "id": 10,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 2,
+        "yellow": 1,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.WhisperEffect"
+    },
+    {
+      "id": 11,
+
+      "pickupPrice": {
+        "red": 0,
+        "blue": 1,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "reloadPrice": {
+        "red": 0,
+        "blue": 2,
+        "yellow": 0,
+        "any": 0
+      },
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HellionEffect"
+    }
+
+
+
+
+
+
+  ]
+}
