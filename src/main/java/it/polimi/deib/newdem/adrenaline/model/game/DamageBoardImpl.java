@@ -127,7 +127,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
      * Calculates the score for {@code player} from this board
      *
      * @param player the player to calculate damage for
-     * @return
+     * @return Score, zero or more. If {@code p} did not deal damage, zero will be returned.
      */
     @Override
     public int getScoreForPlayer(Player player) {

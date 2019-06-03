@@ -11,19 +11,21 @@ import java.util.List;
 public class DirectionalPlayerSelector implements PlayerSelector {
 
     private Player sourcePlayer;
-    private Direction direction;
     private boolean ignoreWalls;
 
-    public DirectionalPlayerSelector(Player sourcePlayer, Direction direction, boolean ignoreWalls) {
+    public DirectionalPlayerSelector(Player sourcePlayer, boolean ignoreWalls) {
         this.sourcePlayer = sourcePlayer;
-        this.direction = direction;
         this.ignoreWalls = ignoreWalls;
     }
 
     @Override
     public boolean isSelectable(Map map, Player player) {
 
-        List<Tile> tilesSelectablePlayers = sourcePlayer.getTile().getTiles(direction,ignoreWalls);
+
+        List<Tile> tilesSelectablePlayers = sourcePlayer.getTile().getTiles(Direction.WEST,ignoreWalls);
+        tilesSelectablePlayers.addAll(sourcePlayer.getTile().getTiles(Direction.EAST,ignoreWalls));
+        tilesSelectablePlayers.addAll(sourcePlayer.getTile().getTiles(Direction.NORTH,ignoreWalls));
+        tilesSelectablePlayers.addAll(sourcePlayer.getTile().getTiles(Direction.SOUTH,ignoreWalls));
 
         List<Player> selectablePlayers = new ArrayList<>();
 

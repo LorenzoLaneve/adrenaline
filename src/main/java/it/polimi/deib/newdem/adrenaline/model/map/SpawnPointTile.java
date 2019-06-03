@@ -1,21 +1,26 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
-import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
-import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponSet;
+import it.polimi.deib.newdem.adrenaline.model.items.*;
 
 
 public class SpawnPointTile extends ConcreteTile {
+
+    private AmmoColor spawnPointColor;
 
     private WeaponSet weaponSet = new WeaponSet();
 
     /**Creates a new {@code SpawnPointTile} belonging to room and in position tilePosition.
      *
      * @param tilePosition the position the tile occupies.
+     * @param spawnPointColor
      */
-    public SpawnPointTile(TilePosition tilePosition){
+    public SpawnPointTile(TilePosition tilePosition, AmmoColor spawnPointColor){
         super(tilePosition);
+        this.spawnPointColor = spawnPointColor;
+    }
+
+    public AmmoColor getSpawnPointColor() {
+        return spawnPointColor;
     }
 
     /**Used to reveal if the tile is a Spawn Point Tile

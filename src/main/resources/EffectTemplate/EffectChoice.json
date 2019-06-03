@@ -1,5 +1,7 @@
 {
   "type": "choice",
+  "id":0,
+  "iterations":0,
   "choices": [
     {
       "id": 0,
@@ -19,7 +21,7 @@
         {
           "type": "KnockbackEffect",
           "target": "red",
-          "knockBackDist": "1",
+          "knockBackDist": 1,
           "selector": {
             "type": "NearTile",
             "sourcePlayer": "attacker",

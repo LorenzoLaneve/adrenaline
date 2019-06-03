@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.MockGame;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +44,7 @@ public class TestConcreteRoom {
 
                 }
                 else{
-                    matrixMap[x][y] = new SpawnPointTile(new TilePosition(x,y));
+                    matrixMap[x][y] = new SpawnPointTile(new TilePosition(x,y), AmmoColor.RED);
                     matrixMap[x][y].addPlayer(player1);
                     matrixMap[x][y].addPlayer(player2);
                 }
@@ -56,7 +57,7 @@ public class TestConcreteRoom {
 
     @Test
     public void testConstructor(){
-
+        room = new ConcreteRoom();
     }
 
     @Test

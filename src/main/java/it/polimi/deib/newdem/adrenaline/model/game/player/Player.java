@@ -23,6 +23,8 @@ public interface Player {
 
     List<ActionFactory> getMoves();
 
+    int getMovesAmount();
+
     int getDeaths();
 
     int getTotalDamage();
@@ -50,4 +52,14 @@ public interface Player {
     void init();
 
     boolean hasFirstPlayerCard();
+
+    void addScore(int points);
+
+    int getScore();
+
+    void setListener(PlayerListener listener);
+
+    boolean isConnected();
+
+    void drawCard();
 }

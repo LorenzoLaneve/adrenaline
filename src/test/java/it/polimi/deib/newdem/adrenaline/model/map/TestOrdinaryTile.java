@@ -79,7 +79,7 @@ public class TestOrdinaryTile {
 
     @Test
     public void testConstructor(){
-
+        Tile ordinaryTile = new OrdinaryTile(new TilePosition(0,0));
     }
 
     @Test

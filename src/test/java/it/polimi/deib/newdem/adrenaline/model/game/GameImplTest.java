@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
@@ -30,18 +31,19 @@ public class GameImplTest {
     @Before
     public void setUp() throws Exception {
         gp = new GameParameters();
-        p1 = new MockPlayer(PlayerColor.MAGENTA);
+        // p1 = new PlayerImpl(PlayerColor.MAGENTA);
         String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
         String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
         map = Map.createMap(decodedPath);
         colorUserPairs = new ArrayList<>(MAX_PLAYERS_PER_GAME);
-        colorUserPairs.add(new ColorUserPair(p1.getColor(), new User()));
+        colorUserPairs.add(new ColorUserPair(PlayerColor.MAGENTA, new User()));
 
         gp.setGameMap(map);
         gp.setColorUserOrder(colorUserPairs);
 
         game = new GameImpl(gp);
         game.init();
+        p1 = game.getPlayerFromColor(PlayerColor.MAGENTA);
     }
 
     @Test

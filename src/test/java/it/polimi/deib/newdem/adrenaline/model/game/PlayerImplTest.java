@@ -7,8 +7,15 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerNotInitializedException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
+import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.map.MapBuilder;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.*;
@@ -23,11 +30,27 @@ public class PlayerImplTest {
     private ActionType t2;
 
     @Before
-    public void setUp() {
-        g = new MockGame();
-        p = new PlayerImpl(YELLOW, g,"Larry");
-        p.init();
-        q = new PlayerImpl(GRAY, g, "Carl"); // q is not initialized
+    public void setUp() throws Exception {
+        GameParameters gp = new GameParameters();
+        // p1 = new PlayerImpl(PlayerColor.MAGENTA);
+        String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
+        String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
+        gp.setGameMap(Map.createMap(decodedPath));
+        User user1 = new User();
+        user1.setName("Larry");
+        User user2 = new User();
+        user2.setName("Carl");
+        gp.setColorUserOrder(Arrays.asList(
+                new ColorUserPair(YELLOW, user1),
+                new ColorUserPair(GRAY, user2)
+        ));
+        g = new GameImpl(gp);
+        g.init();
+        //p = new PlayerImpl(YELLOW, g,"Larry");
+        //p.init();
+        p = g.getPlayerFromColor(YELLOW);
+        //q = new PlayerImpl(GRAY, g, "Carl"); // q is not initialized
+        q = g.getPlayerFromColor(GRAY);
         t2 = new ActionType(MOVE1, SHOOT);
         t1 = new ActionType(MOVE2, GRAB);
     }
@@ -174,6 +197,7 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetInventoryNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getInventory();
     }
 
@@ -190,36 +214,43 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetMovesNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getMoves();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDeathsNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getDeaths();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetTotalDamageNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getTotalDamage();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDamagerNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getDamager(2);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDamageFromPlayerNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getDamageFromPlayer(p);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetMarksFromPlayerNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.getMarksFromPlayer(p);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testIsDeadNegative() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.isDead();
     }
 
@@ -246,6 +277,7 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testTakeDamageNegativeInit() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.takeDamage(1, new MockPlayer());
     }
 
@@ -266,6 +298,7 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testTakMarkNegativeInit() {
+        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
         q.takeMark(1, new MockPlayer());
     }
 }

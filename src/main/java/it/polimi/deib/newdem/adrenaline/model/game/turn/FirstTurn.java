@@ -1,6 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 public class FirstTurn extends TurnBaseImpl {
 
@@ -15,14 +19,20 @@ public class FirstTurn extends TurnBaseImpl {
     @Override
     protected void performInitialActions() {
         //TODO implement
+        Player p = getActivePlayer();
+        Map map = p.getGame().getMap();
         // requires action anc listeners
-        // requires spawn in routine
-    }
 
-    @Override
-    protected void endOfTurn() {
-        //TODO implement
-        // requires action anc listeners
+        // draw card
+        p.drawCard();
+        p.drawCard();
+
+        // select spawn card
+        PowerUpCard selection = getDataSource().chooseCard(p.getInventory().getPowerUps());
+
+        // get set pos in map
+        Tile target = map.getSpawnPointFromColor(selection.getColor());
+        map.movePlayer(getActivePlayer(), target);
 
     }
 

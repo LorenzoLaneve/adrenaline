@@ -3,7 +3,9 @@ package it.polimi.deib.newdem.adrenaline.controller;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.NullTurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
@@ -19,6 +21,8 @@ public class AdrenalineGameController implements GameController {
     private LobbyController lobbyController;
 
     private VirtualGameView vgv;
+
+    protected java.util.Map<Player, TurnDataSource> playerDataSourceMap;
 
     public static final int MAX_PLAYERS = 5;
 
@@ -39,24 +43,14 @@ public class AdrenalineGameController implements GameController {
     @Override
     public void setupGame(List<User> users) {
         //TODO notifica listener
+        GameParameters gp = GameParameters.fromConfig(lobbyController.getConfig());
         if(users.isEmpty() || users.size() > MAX_PLAYERS) throw new IllegalArgumentException();
 
         String s = this.getClass().getClassLoader().getResource("maps/Map0_0.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
-        GameParameters gp = new GameParameters();
+        // GameParameters gp = new GameParameters();
 
-        List<ColorUserPair> listCup = new ArrayList<>(MAX_PLAYERS);
-
-        List<PlayerColor> colors = Arrays.asList(PlayerColor.values());
-        Collections.shuffle(colors);
-        Collections.shuffle(users);
-
-        for(int i = 0; i < users.size(); i++) {
-            listCup.add(new ColorUserPair(
-                    colors.get(i),
-                    users.get(i)
-            ));
-        }
+        List<ColorUserPair> listCup = generateColorUserOrder(users);
 
         gp.setGameMap(myMap);
         gp.setColorUserOrder(listCup);
@@ -69,6 +63,8 @@ public class AdrenalineGameController implements GameController {
         game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
         game.init(); // (VirtualGameView)
+
+        buildTurnDataSources(game);
     }
 
     @Override
@@ -76,10 +72,37 @@ public class AdrenalineGameController implements GameController {
 
     }
 
+    private List<ColorUserPair> generateColorUserOrder(List<User> users){
+        List<ColorUserPair> listCup = new ArrayList<>(MAX_PLAYERS);
+
+        List<PlayerColor> colors = Arrays.asList(PlayerColor.values());
+        Collections.shuffle(colors);
+        Collections.shuffle(users);
+
+        for(int i = 0; i < users.size(); i++) {
+            listCup.add(new ColorUserPair(
+                    colors.get(i),
+                    users.get(i)
+            ));
+        }
+        return listCup;
+    }
+
     @Override
     public void runGame() {
         while (!game.isOver()) {
             Turn turn = game.getNextTurn();
+            turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
+            if(!turn.getActivePlayer().isConnected()) {
+                game.concludeTurn(turn);
+                if(!isAnyPlayerConnected())
+                {
+                    game.declareOver();
+                    lobbyController.endGame();
+                }
+                continue;
+            }
+
             TimedExecutor te = new TimedExecutor(turn::execute);
             try {
                 te.execute(game.getTurnTime());
@@ -88,6 +111,7 @@ public class AdrenalineGameController implements GameController {
                 // revert?
             } catch (AbortedException e) {
                 // nothing to do here?
+                // player disconnected during their turn
             }
         }
         lobbyController.endGame(); // /snap/
@@ -103,5 +127,24 @@ public class AdrenalineGameController implements GameController {
         // TODO
     }
 
+    protected void buildTurnDataSources(Game game){
+        playerDataSourceMap = new HashMap<>();
+        for(PlayerColor c : PlayerColor.values()){
+            Player p = game.getPlayerFromColor(c);
+            if(null != p){
+                playerDataSourceMap.put(p, new NullTurnDataSource());
+            }
+        }
+    }
+
+    private boolean isAnyPlayerConnected(){
+        for(Player p : game.getPlayers())
+        {
+            if(p.isConnected()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

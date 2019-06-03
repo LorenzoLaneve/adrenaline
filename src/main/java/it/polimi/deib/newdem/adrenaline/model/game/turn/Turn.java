@@ -7,4 +7,6 @@ public interface Turn {
     Player getActivePlayer();
 
     void execute();
+
+    void bindDataSource(TurnDataSource turnDataSource);
 }

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
@@ -20,7 +21,15 @@ public class GameParameters {
 
     public static final int KILLTRACK_STARTING_SIZE_DEFAULT = 5;
     public static final int TURN_TIME_DEFAULT_MS = 60000;
+    public static final int MS_S_CONVERTON_RATE = 1000;
 
+
+    public static GameParameters fromConfig(Config config) {
+        GameParameters gp = new GameParameters();
+        gp.turnTime = config.getTurnTime() * MS_S_CONVERTON_RATE;
+
+        return gp;
+    }
 
     public GameParameters() {
         colorUserOrder = new ArrayList<>(MAX_PLAYERS_PER_GAME);

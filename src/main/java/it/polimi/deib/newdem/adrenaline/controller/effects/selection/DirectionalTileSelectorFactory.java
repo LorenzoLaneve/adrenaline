@@ -1,24 +1,24 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectVisitor;
-import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 public class DirectionalTileSelectorFactory implements TileSelectorFactory {
 
     private int minDistance;
     private int maxDistance;
     private boolean ignoreWalls;
-    private Tile sourceTile;
+    private TilePosition sourceTilePosition;
 
-    public DirectionalTileSelectorFactory(Tile sourceTile,int minDist, int maxDist, boolean ignoreWalls){
+    public DirectionalTileSelectorFactory(TilePosition sourceTilePosition,int minDist, int maxDist, boolean ignoreWalls){
         this.minDistance = minDist;
         this.maxDistance = maxDist;
         this.ignoreWalls = ignoreWalls;
-        this.sourceTile = sourceTile;
+        this.sourceTilePosition = sourceTilePosition;
     }
 
     @Override
     public TileSelector makeSelector(EffectVisitor visitor) {
-        return new DirectionalTileSelector(sourceTile,minDistance, maxDistance, ignoreWalls);
+        return new DirectionalTileSelector(sourceTilePosition,minDistance, maxDistance, ignoreWalls);
     }
 }

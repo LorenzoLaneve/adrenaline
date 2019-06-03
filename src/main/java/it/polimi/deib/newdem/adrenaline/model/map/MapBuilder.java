@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
 import com.google.gson.Gson;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -56,8 +57,8 @@ public class MapBuilder {
             int[] tileInt2 = adjacencyCouple[1];
 
             if(matrixMap[tileInt1[0]][tileInt1[1]] == null){
-                if(isSpawnPointTileInt(tileInt1)){
-                    matrixMap[tileInt1[0]][tileInt1[1]] = new SpawnPointTile(new TilePosition(tileInt1[0], tileInt1[1]));
+                if(spawnPointColorTileInt(tileInt1) != null){
+                    matrixMap[tileInt1[0]][tileInt1[1]] = new SpawnPointTile(new TilePosition(tileInt1[0], tileInt1[1]),spawnPointColorTileInt(tileInt1));
 
                 }
                 else{
@@ -66,8 +67,8 @@ public class MapBuilder {
             }
 
             if(matrixMap[tileInt2[0]][tileInt2[1]] == null){
-                if(isSpawnPointTileInt(tileInt2)){
-                    matrixMap[tileInt2[0]][tileInt2[1]] = new SpawnPointTile(new TilePosition(tileInt2[0], tileInt2[1]));
+                if(spawnPointColorTileInt(tileInt2) != null){
+                    matrixMap[tileInt2[0]][tileInt2[1]] = new SpawnPointTile(new TilePosition(tileInt2[0], tileInt2[1]),spawnPointColorTileInt(tileInt2));
 
                 }
                 else{
@@ -100,26 +101,26 @@ public class MapBuilder {
         return tempRooms;
     }
 
-    private boolean isSpawnPointTileInt(int[] tileInt){
-            boolean result = false;
+    private AmmoColor spawnPointColorTileInt(int[] tileInt){
+            AmmoColor result;
 
             int[] red = spawnPointTileDict.getRed();
             int[] blue = spawnPointTileDict.getBlue();
             int[] yellow = spawnPointTileDict.getYellow();
 
-            if(Arrays.equals(red,tileInt) || Arrays.equals(blue,tileInt) || Arrays.equals(yellow,tileInt)){
-                result = true;
+
+            if(Arrays.equals(red,tileInt)){
+                result = AmmoColor.RED;
+            }else if(Arrays.equals(blue,tileInt)){
+                result = AmmoColor.BLUE;
+            }else if(Arrays.equals(yellow,tileInt)){
+                result = AmmoColor.YELLOW;
+            }else{
+                result = null;
             }
 
+
             return result;
-    }
-
-    private List<Room> getRooms() {
-        return rooms;
-    }
-
-    private Tile[][] getMatrixMap() {
-        return matrixMap;
     }
 
     public Map buildMap(){

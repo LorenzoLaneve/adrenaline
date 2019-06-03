@@ -13,4 +13,6 @@ public interface PowerUpCard {
     Effect getEffect();
 
     int getCardID();
+
+    AmmoColor getColor();
 }
