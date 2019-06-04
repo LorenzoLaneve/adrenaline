@@ -67,6 +67,9 @@ public abstract class TurnBaseImpl implements Turn {
                 action.start();
                 executedActions++;
             }
+            catch (UndoException e) {
+                // do wht now?
+            }
             finally {}
             // catch (UndoException | TimeoutException | InterruptedException e){
                 // do stuff
