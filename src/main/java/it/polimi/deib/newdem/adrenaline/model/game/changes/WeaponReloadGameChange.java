@@ -11,12 +11,13 @@ public class WeaponReloadGameChange implements GameChange {
     private Weapon weapon;
 
     public WeaponReloadGameChange(Player player, Weapon weapon){
-        //TODO
+        this.player = player;
+        this.weapon = weapon;
     }
 
     @Override
     public void update(Game game) {
-        //TODO
+        player.getInventory().addWeapon(weapon);
     }
 
     @Override

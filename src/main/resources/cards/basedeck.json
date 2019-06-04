@@ -36,7 +36,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.ElectroScytheEffect"
     },
     {
       "id": 3,
@@ -169,7 +169,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HeatseekerEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HeatSeekerEffect"
     },
     {
       "id": 10,
@@ -226,7 +226,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.FlamethrowerEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.FlameThrowerEffect"
     },
     {
       "id": 13,
@@ -264,7 +264,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.GranadelauncherEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.GrenadeLauncherEffect"
     },
     {
       "id": 15,
@@ -302,7 +302,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RocketlauncherEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RocketLauncherEffect"
     },
     {
       "id": 17,
@@ -321,7 +321,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.PowergloveEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.PowerGloveEffect"
     },
     {
       "id": 18,
@@ -340,7 +340,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RailgunEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RailGunEffect"
     },
     {
       "id": 19,
@@ -378,7 +378,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.CyberbladeEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.CyberBladeEffect"
     },
     {
       "id": 21,
@@ -435,7 +435,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.LasermagnumEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.LaserMagnumEffect"
     }
   ]
 }

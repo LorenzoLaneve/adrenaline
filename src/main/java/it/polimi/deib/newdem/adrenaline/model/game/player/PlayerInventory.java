@@ -157,4 +157,13 @@ public class PlayerInventory {
         if(powerUpCards.size() >= MAX_EQUIPMENT - 1) throw new OutOfSlotsException();
         powerUpCards.add(card);
     }
+
+    public void removeAmmo(AmmoColor color, int amount){
+        if(amount < 0) throw new IllegalArgumentException();
+        ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO));
+    }
+
+    public void removePowerUp(List<PowerUpCard> powerUpCardList){
+        powerUpCards.removeAll(powerUpCardList);
+    }
 }

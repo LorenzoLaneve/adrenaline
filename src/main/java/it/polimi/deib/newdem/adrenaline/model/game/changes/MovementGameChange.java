@@ -12,12 +12,13 @@ public class MovementGameChange implements GameChange {
     private Tile destinationTile;
 
     public MovementGameChange(Player player, Tile destTile) {
-        //TODO
+        this.player = player;
+        this.destinationTile = destTile;
     }
 
     @Override
     public void update(Game game) {
-        //TODO
+        player.getTile().getMap().movePlayer(player,destinationTile);
     }
 
     @Override

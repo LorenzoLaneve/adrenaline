@@ -15,13 +15,14 @@ public class PowerUpCardDiscardGameChange implements GameChange {
 
 
     public PowerUpCardDiscardGameChange(Player player, List<PowerUpCard> powerUps) {
-        // TODO
+        this.player = player;
+        this.discardedPowerUps = powerUps;
     }
 
 
     @Override
     public void update(Game game) {
-        // TODO
+        player.getInventory().removePowerUp(discardedPowerUps);
     }
 
     @Override

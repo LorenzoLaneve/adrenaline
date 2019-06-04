@@ -5,27 +5,18 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
 
 public class WeaponCardImpl implements WeaponCard {
 
-    private int cardID;
+    PaymentInvoice pickupPrice;
+    PaymentInvoice reloadPrice;
+    Effect effect;
+    int id;
 
-    private PaymentInvoice pickupPrice;
-
-    private PaymentInvoice reloadPrice;
-
-    private Effect effect;
-
-
-    public WeaponCardImpl(int cardID, PaymentInvoice pickupPrice, PaymentInvoice reloadPrice, Effect effect) {
-        this.cardID = cardID;
+    public WeaponCardImpl(int id, PaymentInvoice pickupPrice, PaymentInvoice reloadPrice, Effect effect){
+        this.effect = effect;
         this.pickupPrice = pickupPrice;
         this.reloadPrice = reloadPrice;
-
-        this.effect = effect;
+        this.id = id;
     }
 
-    @Override
-    public int getCardID() {
-        return cardID;
-    }
 
     @Override
     public PaymentInvoice getPickupPrice() {
@@ -44,9 +35,11 @@ public class WeaponCardImpl implements WeaponCard {
 
     @Override
     public Weapon makeWeapon() {
-        // TODO
         return null;
     }
 
-
+    @Override
+    public int getCardID() {
+        return 0;
+    }
 }
