@@ -10,9 +10,9 @@ public interface UserConnectionReceiver {
     /**
      * The user sent an update username event.
      * @param connection the connection that received the event.
-     * @param event an {@code UpdateUsernameEvent} object containing all the information about the event.
+     * @param event an {@code UpdateUsernameResponse} object containing all the information about the event.
      */
-    void userDidUpdateUsername(UserConnection connection, UpdateUsernameEvent event);
+    void userDidUpdateUsername(UserConnection connection, UpdateUsernameResponse event);
 
     /**
      * A new user entered the lobby.
@@ -60,8 +60,6 @@ public interface UserConnectionReceiver {
 
     void gameWillEnd(UserConnection connection, GameEndEvent event);
 
-    void playerDidUpdateUsername(UserConnection connection, PlayerNameEvent event);
-
     void playerDidBecomeActive(UserConnection connection, PlayerActiveEvent event);
 
     void playerDidUpdateScore(UserConnection connection, PlayerScoreEvent event);
@@ -80,15 +78,11 @@ public interface UserConnectionReceiver {
 
     void playerDidRemoveWeapon(UserConnection connection, PlayerDiscardWeaponEvent event);
 
-    void playerDidReceiveDamage(UserConnection connection, PlayerDidReceiveDamageEvent event);
+    void playerDidReceiveAmmoSet(UserConnection connection, PlayerReceiveAmmoEvent event);
 
-    void playerDidReceiveMark(UserConnection connection, PlayerDidReceiveMarkEvent event);
+    void playerDidRemoveAmmoSet(UserConnection connection, PlayerDiscardAmmoEvent event);
 
-    void playerDidReceiveAmmoSet(UserConnection connection, PlayerDidReceiveAmmoSetEvent event);
-
-    void playerDidRemoveAmmoSet(UserConnection connection, PlayerDidRemoveAmmoSetEvent event);
-
-    void dropDidGetAcquired(UserConnection connection, AcquireDropEvent event);
+    void playerDidPickupDrop(UserConnection connection, DropPickupEvent event);
 
     void damageBoardDidFlip(UserConnection connection, DamageBoardFlipEvent event);
 
@@ -109,4 +103,7 @@ public interface UserConnectionReceiver {
     void lobbyDidStartTimer(UserConnection connection, LobbyTimerStartEvent event);
 
     void lobbyDidSendData(UserConnection connection, LobbyDataEvent event);
+
+    void playerDidUpdateName(UserConnection connection, PlayerNameEvent event);
+
 }

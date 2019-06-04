@@ -5,13 +5,9 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 public final class NullPlayerListener implements PlayerListener {
-    @Override
-    public void playerTookDamage(int dmgAmount, Player attacker) {
-
-    }
 
     @Override
-    public void playerTookMark(int markAmount, Player attacker) {
+    public void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker) {
 
     }
 

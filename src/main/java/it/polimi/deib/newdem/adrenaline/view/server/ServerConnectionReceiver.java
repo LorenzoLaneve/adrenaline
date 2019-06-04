@@ -47,7 +47,7 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
 
 
     @Override
-    public void userDidUpdateUsername(UserConnection connection, UpdateUsernameEvent event) {
+    public void userDidUpdateUsername(UserConnection connection, UpdateUsernameResponse event) {
         // TODO
     }
 
@@ -116,10 +116,6 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
         // TODO
     }
 
-    @Override
-    public void playerDidUpdateUsername(UserConnection connection, PlayerNameEvent event) {
-        // TODO
-    }
 
     @Override
     public void playerDidBecomeActive(UserConnection connection, PlayerActiveEvent event) {
@@ -167,27 +163,17 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
     }
 
     @Override
-    public void playerDidReceiveDamage(UserConnection connection, PlayerDidReceiveDamageEvent event) {
+    public void playerDidReceiveAmmoSet(UserConnection connection, PlayerReceiveAmmoEvent event) {
         // TODO
     }
 
     @Override
-    public void playerDidReceiveMark(UserConnection connection, PlayerDidReceiveMarkEvent event) {
+    public void playerDidRemoveAmmoSet(UserConnection connection, PlayerDiscardAmmoEvent event) {
         // TODO
     }
 
     @Override
-    public void playerDidReceiveAmmoSet(UserConnection connection, PlayerDidReceiveAmmoSetEvent event) {
-        // TODO
-    }
-
-    @Override
-    public void playerDidRemoveAmmoSet(UserConnection connection, PlayerDidRemoveAmmoSetEvent event) {
-        // TODO
-    }
-
-    @Override
-    public void dropDidGetAcquired(UserConnection connection, AcquireDropEvent event) {
+    public void playerDidPickupDrop(UserConnection connection, DropPickupEvent event) {
         // TODO
     }
 
@@ -238,6 +224,11 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
 
     @Override
     public void lobbyDidSendData(UserConnection connection, LobbyDataEvent event) {
+        // TODO
+    }
+
+    @Override
+    public void playerDidUpdateName(UserConnection connection, PlayerNameEvent event) {
         // TODO
     }
 

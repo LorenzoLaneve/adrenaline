@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
-public class UpdateUsernameEvent implements UserEvent {
+public class UpdateUsernameResponse implements UserEvent {
 
     private String newUsername;
 
@@ -11,7 +11,7 @@ public class UpdateUsernameEvent implements UserEvent {
      * Initializes a new username update event.
      * @param newUsername The new username that has to be set.
      */
-    public UpdateUsernameEvent(String newUsername) {
+    public UpdateUsernameResponse(String newUsername) {
         this.newUsername = newUsername;
     }
 

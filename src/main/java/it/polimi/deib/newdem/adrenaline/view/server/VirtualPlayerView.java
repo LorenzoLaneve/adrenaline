@@ -69,38 +69,26 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
-    public void takeDamage(int dmgAmount, PlayerColor dealer) {
-        gameView.sendEvent(new PlayerDidReceiveDamageEvent(player.getColor(), dealer, dmgAmount));
-
-    }
-
-    @Override
-    public void takeMark(int markAmount, PlayerColor dealer) {
-        gameView.sendEvent(new PlayerDidReceiveMarkEvent(player.getColor(), dealer, markAmount));
+    public void takeDamage(int dmgAmount, int mrkAmount, PlayerColor dealer) {
+        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), dealer, dmgAmount, mrkAmount));
 
     }
 
     @Override
     public void addAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
-        gameView.sendEvent(new PlayerDidReceiveAmmoSetEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
+        gameView.sendEvent(new PlayerReceiveAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
 
     }
 
     @Override
     public void removeAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
-        gameView.sendEvent(new PlayerDidRemoveAmmoSetEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
+        gameView.sendEvent(new PlayerDiscardAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
 
     }
 
     @Override
-    public void playerTookDamage(int dmgAmount, Player attacker) {
-        takeDamage(dmgAmount, attacker.getColor());
-    }
-
-    @Override
-    public void playerTookMark(int markAmount, Player attacker) {
-        takeMark(markAmount, attacker.getColor());
-
+    public void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker) {
+        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), attacker.getColor(), dmgAmount, mrkAmount));
     }
 
     @Override

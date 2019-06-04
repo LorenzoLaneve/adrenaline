@@ -6,27 +6,21 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 public class PlayerNameEvent implements UserEvent {
 
-    private PlayerColor playerColor;
+    private PlayerColor color;
 
-    private String newName;
+    private String name;
 
-    public PlayerNameEvent(PlayerColor playerColor, String newName) {
-        this.playerColor = playerColor;
-        this.newName = newName;
+    /**
+     * An event indicating that the player with the given color has the given name (server bound event).
+     */
+    public PlayerNameEvent(PlayerColor color, String name) {
+        this.color = color;
+        this.name = name;
     }
-
-    public PlayerColor getPlayerColor() {
-        return playerColor;
-    }
-
-    public String getNewName() {
-        return newName;
-    }
-
 
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.playerDidUpdateUsername(connection, this);
+        receiver.playerDidUpdateName(connection, this);
     }
 
 }

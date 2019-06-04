@@ -37,9 +37,7 @@ public interface PlayerView {
 
     void removeWeaponCard(int cardID);
 
-    void takeDamage(int dmgAmount, PlayerColor playerColor);
-
-    void takeMark(int markAmount, PlayerColor playerColor );
+    void takeDamage(int dmgAmount, int mrkAmount, PlayerColor playerColor);
 
     void addAmmoSet(int yellowAmount, int redAmount, int blueAmount);
 

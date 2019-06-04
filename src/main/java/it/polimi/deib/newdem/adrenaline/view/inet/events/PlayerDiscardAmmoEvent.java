@@ -4,22 +4,22 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
-public class PlayerDidReceiveAmmoSetEvent implements UserEvent {
+public class PlayerDiscardAmmoEvent implements UserEvent {
 
-    private PlayerColor player;
+    private PlayerColor color;
     private int yellowAmount;
     private int redAmount;
     private int blueAmount;
 
-    public PlayerDidReceiveAmmoSetEvent(PlayerColor player, int yellowAmount, int redAmount, int blueAmount) {
-        this.player = player;
+    public PlayerDiscardAmmoEvent(PlayerColor color, int yellowAmount, int redAmount, int blueAmount) {
+        this.color = color;
         this.yellowAmount = yellowAmount;
         this.redAmount = redAmount;
         this.blueAmount = blueAmount;
     }
 
     public PlayerColor getPlayer() {
-        return player;
+        return color;
     }
 
     public int getBlueAmount() {
@@ -36,7 +36,7 @@ public class PlayerDidReceiveAmmoSetEvent implements UserEvent {
 
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.playerDidReceiveAmmoSet(connection, this);
+        receiver.playerDidRemoveAmmoSet(connection, this);
     }
 
 }

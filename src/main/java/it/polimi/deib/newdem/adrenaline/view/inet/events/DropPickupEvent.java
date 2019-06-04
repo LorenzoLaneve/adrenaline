@@ -6,7 +6,7 @@ import it.polimi.deib.newdem.adrenaline.view.MapView.DropType;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
-public class AcquireDropEvent implements UserEvent {
+public class DropPickupEvent implements UserEvent {
 
     private DropType drop1;
     private DropType drop2;
@@ -16,7 +16,7 @@ public class AcquireDropEvent implements UserEvent {
 
     private PlayerColor player;
 
-    public AcquireDropEvent(DropType drop1, DropType drop2, DropType drop3, TilePosition tile, PlayerColor player) {
+    public DropPickupEvent(DropType drop1, DropType drop2, DropType drop3, TilePosition tile, PlayerColor player) {
         this.drop1 = drop1;
         this.drop2 = drop2;
         this.drop3 = drop3;
@@ -47,7 +47,7 @@ public class AcquireDropEvent implements UserEvent {
 
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.dropDidGetAcquired(connection, this);
+        receiver.playerDidPickupDrop(connection, this);
     }
 
 }
