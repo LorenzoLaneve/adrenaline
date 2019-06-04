@@ -1,11 +1,9 @@
-package it.polimi.deib.newdem.adrenaline.view.inet.socket;
+package it.polimi.deib.newdem.adrenaline.view.inet.sockets;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.socket.messages.SocketMessageReader;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SocketUserConnection implements UserConnection {
-
-    private Socket socket;
 
     private InputStream input;
 
@@ -36,8 +32,6 @@ public class SocketUserConnection implements UserConnection {
      * @throws IOException If a socket error occurs.
      */
     public SocketUserConnection(Socket observedSocket, User user) throws IOException {
-        this.socket = observedSocket;
-
         this.input = observedSocket.getInputStream();
         this.output = observedSocket.getOutputStream();
 
@@ -78,9 +72,12 @@ public class SocketUserConnection implements UserConnection {
     @Override
     public void sendEvent(UserEvent event) {
         try {
-            event.sendEvent(new SocketUserConnectionSender(new DataOutputStream(output)));
-        } catch (ConnectionException x) {
-            close(); // TODO is this a good behaviour?
+            ObjectOutputStream dos = new ObjectOutputStream(output);
+
+            dos.writeObject(event);
+        } catch (Exception x) {
+            close();
+            // TODO is this a good behaviour?
         }
     }
 
@@ -113,27 +110,24 @@ public class SocketUserConnection implements UserConnection {
 
 
     private void listen() {
-        try (DataInputStream dis = new DataInputStream(input)) {
+        try (ObjectInputStream dis = new ObjectInputStream(input)) {
 
             while (!closeRequested) {
 
-                int messageType = dis.readInt();
-
-                SocketMessageReader reader = SocketMessageReader.fromMessageType(messageType);
-
-                UserEvent event = reader.make(dis);
+                UserEvent event = (UserEvent) dis.readObject();
 
                 for (UserConnectionReceiver receiver : receiverList) {
                     event.notifyEvent(this, receiver);
                 }
+
             }
 
-        } catch (IOException | InvalidMessageException x) {
+        } catch (Exception x) {
+            Thread.currentThread().interrupt();
+        } finally {
             for (UserConnectionReceiver receiver : receiverList) {
                 receiver.connectionDidClose(this);
             }
-
-            Thread.currentThread().interrupt();
         }
     }
 
