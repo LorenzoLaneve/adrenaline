@@ -27,4 +27,9 @@ public interface LobbyView {
      */
     void syncTimer(int seconds);
 
+    /**
+     * Notifies that the timer in the lobby has been aborted.
+     */
+    void abortTimer();
+
 }

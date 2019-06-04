@@ -10,5 +10,7 @@ public interface LobbyListener {
     void lobbyDidStartTimer(int seconds);
 
     void lobbyDidSyncTimer(int seconds);
+
+    void lobbyDidAbortTimer();
     
 }

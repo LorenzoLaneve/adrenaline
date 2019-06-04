@@ -41,7 +41,7 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     @Override
     public void startTimer(int seconds) {
-        sendEvent(new LobbyTimerUpdateEvent(seconds));
+        sendEvent(new LobbyTimerStartEvent(seconds));
     }
 
     @Override
@@ -49,7 +49,10 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
         sendEvent(new LobbyTimerUpdateEvent(seconds));
     }
 
-
+    @Override
+    public void abortTimer() {
+        sendEvent(new LobbyTimerAbortEvent());
+    }
 
 
     @Override
@@ -70,6 +73,11 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
     @Override
     public void lobbyDidSyncTimer(int seconds) {
         syncTimer(seconds);
+    }
+
+    @Override
+    public void lobbyDidAbortTimer() {
+        abortTimer();
     }
 
 }

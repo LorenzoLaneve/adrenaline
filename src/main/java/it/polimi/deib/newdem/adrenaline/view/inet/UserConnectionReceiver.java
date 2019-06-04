@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerStartEvent;
 
 public interface UserConnectionReceiver {
 
@@ -102,4 +103,8 @@ public interface UserConnectionReceiver {
     void serverDidRejectUsername(UserConnection connection, RejectUsernameEvent event);
 
     void serverDidRequestUsername(UserConnection connection, UpdateUsernameRequest request);
+
+    void lobbyDidAbortTimer(UserConnection connection, LobbyTimerAbortEvent event);
+
+    void lobbyDidStartTimer(UserConnection connection, LobbyTimerStartEvent event);
 }
