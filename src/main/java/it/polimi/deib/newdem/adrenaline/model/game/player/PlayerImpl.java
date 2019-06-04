@@ -323,4 +323,20 @@ public class PlayerImpl implements Player {
             throw new IllegalStateException(e);
         }
     }
+
+    @Override
+    public DamageBoard getDamageBoard() {
+        return damageBoard;
+    }
+
+    @Override
+    public void reportDeath(boolean isDead) {
+        if (isDead) {
+            Map map = getTile().getMap();
+            if (map.getListener() != null) {
+                map.getListener().playerDidDie(this);
+            }
+            this.isDead = true;
+        }
+    }
 }

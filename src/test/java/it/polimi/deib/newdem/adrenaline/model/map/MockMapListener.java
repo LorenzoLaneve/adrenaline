@@ -51,4 +51,9 @@ public class MockMapListener implements MapListener {
     public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
 
     }
+
+    @Override
+    public void playerDidResurrect(Player player) {
+
+    }
 }

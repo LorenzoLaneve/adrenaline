@@ -27,4 +27,8 @@ public interface DamageBoard {
     Map<Player, Integer> getMarksMap();
 
     int getTotalDamage();
+
+    void setDamage(int cell, Player player);
+
+    void setMarksFromPlayer(int totalMarks, Player player);
 }
