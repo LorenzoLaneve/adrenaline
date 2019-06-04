@@ -99,7 +99,8 @@ public class VirtualMapView implements MapView, MapListener {
         addWeapon(tile.getPosition(), weapon.getCardID());
     }
 
-    public void playerGrabbedDrop(Player player, DropInstance drop, Tile tile) {
+    @Override
+    public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
         List<DropType> drops = new ArrayList<>();
 
         AmmoSet ammoSet = drop.getAmmos();
@@ -172,39 +173,4 @@ public class VirtualMapView implements MapView, MapListener {
         gameView.sendEvent(new AcquireDropEvent(drop1, drop2, drop3, tile, player));
     }
 
-    @Override
-    public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
-        int i = 0;
-        DropType[] drops = new DropType[3];
-        if(drop.hasPowerUp()) {
-            drops[0] = DropType.POWER_UP;
-            i++;
-        }
-
-        int currentAmmoCount = 0;
-        while (i < 3 && drop.getAmmos().getBlueAmmos() > currentAmmoCount) {
-            drops[i] = DropType.BLUE_AMMO;
-            i++;
-            currentAmmoCount++;
-        }
-
-        currentAmmoCount = 0;
-        while (i < 3 && drop.getAmmos().getRedAmmos() > currentAmmoCount) {
-            drops[i] = DropType.BLUE_AMMO;
-            i++;
-        }
-
-        currentAmmoCount = 0;
-        while (i < 3 && drop.getAmmos().getRedAmmos() > currentAmmoCount) {
-            drops[i] = DropType.BLUE_AMMO;
-            i++;
-        }
-
-        gameView.sendEvent(new AcquireDropEvent(
-                drops[0],
-                drops[1],
-                drops[2],
-                tile.getPosition(),
-                player.getColor()));
-    }
 }
