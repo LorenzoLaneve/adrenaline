@@ -1,26 +1,20 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.sockets;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
+import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SocketUserConnection implements UserConnection {
+public class SocketUserConnection extends UserConnectionBase {
 
     private InputStream input;
 
     private OutputStream output;
 
-    private List<UserConnectionReceiver> receiverList;
-
     private Thread listeningThread;
-
-    private User user;
 
     private boolean closeRequested;
 
@@ -32,16 +26,14 @@ public class SocketUserConnection implements UserConnection {
      * @throws IOException If a socket error occurs.
      */
     public SocketUserConnection(Socket observedSocket, User user) throws IOException {
+        super(user);
+
         this.input = observedSocket.getInputStream();
         this.output = observedSocket.getOutputStream();
 
-        this.receiverList = new ArrayList<>();
         this.listeningThread = null;
 
         this.closeRequested = true;
-
-        this.user = user;
-        user.bindConnection(this);
     }
 
 
@@ -51,22 +43,6 @@ public class SocketUserConnection implements UserConnection {
 
         this.listeningThread = new Thread(this::listen);
         this.listeningThread.start();
-    }
-
-    @Override
-    public User getUser() {
-        return user;
-    }
-
-
-    @Override
-    public void addReceiver(UserConnectionReceiver receiver) {
-        receiverList.add(receiver);
-    }
-
-    @Override
-    public void removeReceiver(UserConnectionReceiver receiver) {
-        receiverList.remove(receiver);
     }
 
     @Override
@@ -105,7 +81,7 @@ public class SocketUserConnection implements UserConnection {
             // no problem
         }
 
-        user.bindConnection(null);
+        super.close();
     }
 
 
@@ -113,21 +89,13 @@ public class SocketUserConnection implements UserConnection {
         try (ObjectInputStream dis = new ObjectInputStream(input)) {
 
             while (!closeRequested) {
-
-                UserEvent event = (UserEvent) dis.readObject();
-
-                for (UserConnectionReceiver receiver : receiverList) {
-                    event.notifyEvent(this, receiver);
-                }
-
+                notifyEvent((UserEvent) dis.readObject());
             }
 
         } catch (Exception x) {
             Thread.currentThread().interrupt();
         } finally {
-            for (UserConnectionReceiver receiver : receiverList) {
-                receiver.connectionDidClose(this);
-            }
+            close();
         }
     }
 

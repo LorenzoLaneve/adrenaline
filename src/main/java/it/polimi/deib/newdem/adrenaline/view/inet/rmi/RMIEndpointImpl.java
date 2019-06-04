@@ -7,20 +7,20 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RMIServerEndpointImpl extends UnicastRemoteObject implements RMIServerEndpoint {
+public class RMIEndpointImpl extends UnicastRemoteObject implements RMIEndpoint {
 
-    private RMIServerUserConnection connection;
+    private transient RMIUserConnection connection;
 
     private transient List<UserEvent> outgoingEvents;
 
 
-    public RMIServerEndpointImpl() throws RemoteException {
+    public RMIEndpointImpl() throws RemoteException {
         super();
 
         this.outgoingEvents = new ArrayList<>();
     }
 
-    public void setConnection(RMIServerUserConnection connection) {
+    public void setConnection(RMIUserConnection connection) {
         this.connection = connection;
     }
 
@@ -42,11 +42,6 @@ public class RMIServerEndpointImpl extends UnicastRemoteObject implements RMISer
         }
 
         return outgoingEvents.remove(0);
-    }
-
-    @Override
-    public void writeEvent(UserEvent event) {
-        connection.notifyEvent(event);
     }
 
 }

@@ -107,4 +107,6 @@ public interface UserConnectionReceiver {
     void lobbyDidAbortTimer(UserConnection connection, LobbyTimerAbortEvent event);
 
     void lobbyDidStartTimer(UserConnection connection, LobbyTimerStartEvent event);
+
+    void lobbyDidSendData(UserConnection connection, LobbyDataEvent event);
 }

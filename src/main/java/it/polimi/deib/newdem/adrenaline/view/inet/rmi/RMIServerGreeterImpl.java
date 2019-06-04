@@ -20,12 +20,16 @@ public class RMIServerGreeterImpl extends UnicastRemoteObject implements RMIServ
     }
 
     @Override
-    public RMIServerEndpoint connect() throws RemoteException {
+    public RMIEndpoint connect(RMIEndpoint clientEndpoint) throws RemoteException {
+        if (clientEndpoint == null) {
+            throw new IllegalArgumentException("An end point has to be provided in order to successfully connect.");
+        }
+
         User user = new User();
 
-        RMIServerEndpointImpl serverEndpoint = new RMIServerEndpointImpl();
+        RMIEndpointImpl serverEndpoint = new RMIEndpointImpl();
 
-        RMIServerUserConnection connection = new RMIServerUserConnection(serverEndpoint, user);
+        RMIUserConnection connection = new RMIUserConnection(clientEndpoint, serverEndpoint, user);
         connection.start();
 
         userModule.notifyNewUser(user);
