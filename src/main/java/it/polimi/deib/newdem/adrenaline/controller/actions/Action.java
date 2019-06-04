@@ -1,24 +1,25 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
-import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public interface Action {
 
+    /**
+     * Returns the player that is executing this action.
+     */
     Player getActor();
 
-    Effect getEffect();
-    /*
-    At the time of writing, Effect hasn't been introduced
-    not even as a stub
-
-    TODO validate
+    /**
+     * Returns the effect this action is executing.
      */
+    Effect getEffect();
 
-    void bindListener(ActionListener listener);
+    /**
+     * Starts to execute the action.
+     * @throws UndoException if the user requested to undo the action.
+     */
+    void start() throws UndoException;
 
-    void start();
-
-    void emitGameChange(GameChange gameChange);
 }

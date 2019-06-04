@@ -10,7 +10,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
-public interface ActionListener {
+public interface ActionDataSource {
 
     Player actionDidRequestPlayerBinding(MetaPlayer metaPlayer, PlayerSelector selector);
 
