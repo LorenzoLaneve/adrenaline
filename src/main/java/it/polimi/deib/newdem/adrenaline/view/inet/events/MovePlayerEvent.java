@@ -2,10 +2,8 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
 public class MovePlayerEvent implements UserEvent {
 
@@ -30,8 +28,4 @@ public class MovePlayerEvent implements UserEvent {
         receiver.playerDidMove(connection, this);
     }
 
-    @Override
-    public void sendEvent(UserConnectionSender sender) throws ConnectionException {
-        sender.sendMovePlayerEvent(this);
-    }
 }

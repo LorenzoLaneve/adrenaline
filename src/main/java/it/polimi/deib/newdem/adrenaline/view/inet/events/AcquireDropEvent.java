@@ -3,10 +3,8 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView.DropType;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
 public class AcquireDropEvent implements UserEvent {
 
@@ -52,8 +50,4 @@ public class AcquireDropEvent implements UserEvent {
         receiver.dropDidGetAcquired(connection, this);
     }
 
-    @Override
-    public void sendEvent(UserConnectionSender sender) throws ConnectionException {
-        sender.sendAcquiredDropEvent(this);
-    }
 }
