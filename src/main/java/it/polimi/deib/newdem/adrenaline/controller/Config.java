@@ -8,6 +8,11 @@ public final class Config {
 
     protected int socketPort = 9700;
 
+    protected int RMIPort = 9701;
+
+    protected String RMIIdentifier = "adrenaline";
+
+
     protected int timerLength = 60;
 
     protected int minPlayers = 3;
@@ -60,11 +65,21 @@ public final class Config {
     }
 
     /**
-     * Returns the TCP port the socket of the server should listen to new connections from.
+     * Returns the TCP port the socket of the server should listen to new socket connections from.
      */
     public int getSocketPort() {
         return socketPort;
     }
+
+    /**
+     * Returns the TCP port the socket of the server should listen to new RMI connections from.
+     */
+    public int getRMIPort() { return RMIPort; }
+
+    /**
+     * Return the URI for the server object that will wait for new RMI user connections.
+     */
+    public String getRMIIdentifier() { return RMIIdentifier; }
 
     /**
      * Returns whether the socket module should be added to the modules used by the server instance.
