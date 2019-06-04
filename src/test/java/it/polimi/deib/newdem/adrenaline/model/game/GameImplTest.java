@@ -31,7 +31,6 @@ public class GameImplTest {
     @Before
     public void setUp() throws Exception {
         gp = new GameParameters();
-        // p1 = new PlayerImpl(PlayerColor.MAGENTA);
         String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
         String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
         map = Map.createMap(decodedPath);
@@ -98,7 +97,16 @@ public class GameImplTest {
         assertFalse(game.shouldGoFrenzy());
         for(int i = 0; i <= GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT; i++) {
             Turn t = game.getNextTurn();
-            p2.takeDamage(10, p1);
+            for(int z = 0; z < 10; z++) {
+                try {
+                    p2.getDamageBoard().appendDamage(p1);
+                }
+                catch (DamageTrackFullException e) {
+                    // ok
+                }
+                p2.reportDeath(true);
+            }
+
             game.concludeTurn(t);
         }
         assertTrue(game.isInFrenzy());
@@ -129,7 +137,7 @@ public class GameImplTest {
         Player p2 = new MockPlayer();
         p2.init();
         Player p3 = game.getPlayerFromColor(PlayerColor.MAGENTA);
-        p3.takeMark(2, p2);
+        p3.getDamageBoard().setMarksFromPlayer(2,p2);
         game.goFrenzy();
         assertEquals(2, p3.getMarksFromPlayer(p2));
     }

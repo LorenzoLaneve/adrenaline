@@ -10,12 +10,12 @@ import static org.junit.Assert.*;
 public class FrenzyDamageBoardTest {
 
     private Player p;
-    private FrenzyDamageBoard dmgb;
+    private LegacyDamageBoardAdapter dmgb;
 
     @Before
     public void setUp(){
         p = new MockPlayer(PlayerColor.YELLOW);
-        dmgb = new FrenzyDamageBoard(p);
+        dmgb = new LegacyDamageBoardAdapter(new FrenzyDamageBoard(p));
         p.registerDamageBoard(dmgb);
     }
 
@@ -41,7 +41,7 @@ public class FrenzyDamageBoardTest {
         ((MockPlayer) p).die();
         ((MockPlayer) p).die();
         ((MockPlayer) p).die();
-        dmgb = new FrenzyDamageBoard(p);
+        dmgb = new LegacyDamageBoardAdapter(new FrenzyDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p1);

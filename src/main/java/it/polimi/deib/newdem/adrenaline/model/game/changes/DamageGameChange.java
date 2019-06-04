@@ -1,14 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.model.game.changes;
 
-import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.Game;
-import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
+import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.MAX_LIFE;
 import static java.lang.Math.min;
+import static java.lang.Math.multiplyExact;
 
 public class DamageGameChange implements GameChange {
 
@@ -42,14 +41,22 @@ public class DamageGameChange implements GameChange {
         }
 
         // apply as much of new damage as possible
-        actualDmg = min(desiredDmg, MAX_LIFE - dmgb.getTotalDamage());
-        int damageLeft = actualDmg;
-        while (damageLeft > 0) {
-            dmgb.setDamage(
-                    dmgb.getTotalDamage(),
-                    attacker
-            );
-            damageLeft--;
+        int damageLeft = desiredDmg;
+        try {
+            while (damageLeft > 0) {
+                //dmgb.setDamage(
+                //        dmgb.getTotalDamage(),
+                //        attacker
+                //);
+                dmgb.appendDamage(attacker);
+                damageLeft--;
+            }
+        }
+        catch (DamageTrackFullException e) {
+            // ok
+        }
+        finally {
+            actualDmg = desiredDmg - damageLeft;
         }
 
         // apply new mark
@@ -81,15 +88,24 @@ public class DamageGameChange implements GameChange {
 
         // revert damage
         int dmgCursor = actualDmg;
-        while (dmgCursor > 0) {
-            int dmgIndex = dmgb.getTotalDamage() - 1;
+        try {
+            while (dmgCursor > 0) {
+                int dmgIndex = dmgb.getTotalDamage() - 1;
 
-            // check for legal state gracefully
-            if(dmgIndex < 0 || dmgIndex > MAX_LIFE) throw new IndexOutOfBoundsException();
-            if(!attacker.equals(dmgb.getDamager(dmgIndex))) throw new IllegalStateException();
+                // check for legal state gracefully
+                if (dmgIndex < 0 || dmgIndex > MAX_LIFE) throw new IndexOutOfBoundsException();
+                if (!attacker.equals(dmgb.getDamager(dmgIndex))) throw new IllegalStateException();
 
-            dmgb.setDamage(dmgb.getTotalDamage() - 1, null);
-            dmgCursor--;
+                // dmgb.setDamage(dmgb.getTotalDamage() - 1, null);
+                Player removed = dmgb.popDamage();
+                if(!removed.equals(attacker)) throw new IllegalStateException();
+                dmgCursor--;
+            }
+        }
+        catch (DamageTrackEmptyException e) {
+            // do what now?
+            // this should never happen
+            throw new IllegalStateException(e);
         }
     }
 }

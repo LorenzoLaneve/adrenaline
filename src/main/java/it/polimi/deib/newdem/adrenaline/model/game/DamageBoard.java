@@ -14,10 +14,6 @@ public interface DamageBoard {
 
     int getScoreForPlayer(Player player);
 
-    void takeDamage(int dmgAmount, Player attacker);
-
-    void takeMark(int markAmount, Player attacker);
-
     Player getDamager(int index);
 
     int getTotalDamageFromPlayer(Player player);
@@ -31,4 +27,10 @@ public interface DamageBoard {
     void setDamage(int cell, Player player);
 
     void setMarksFromPlayer(int totalMarks, Player player);
+
+    boolean shouldAssignFirstBlood();
+
+    void appendDamage(Player player) throws DamageTrackFullException;
+
+    Player popDamage() throws DamageTrackEmptyException;
 }

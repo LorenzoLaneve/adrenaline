@@ -8,7 +8,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerNotInitializedException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.MapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -95,7 +94,7 @@ public class PlayerImplTest {
         }
         catch (OutOfSlotsException e) {fail();}
         // take some damage, test for updated moves
-        OrdinaryDamageBoard d = new OrdinaryDamageBoard(p);
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter( new OrdinaryDamageBoard(p));
         p.registerDamageBoard(d);
         d.takeDamage(3, p2);
 
@@ -132,7 +131,7 @@ public class PlayerImplTest {
     public void testGetTotalDamage() {
         // how do I take damage at all?
         assertEquals(0,p.getTotalDamage());
-        OrdinaryDamageBoard d = new OrdinaryDamageBoard(p);
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(d);
         d.takeDamage(5,new MockPlayer());
         assertEquals(5, p.getTotalDamage());
@@ -141,7 +140,7 @@ public class PlayerImplTest {
     @Test
     public void testGetDamager() {
         Player p2 = new MockPlayer();
-        OrdinaryDamageBoard d = new OrdinaryDamageBoard(p);
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(d);
         d.takeDamage(2,p2);
         assertEquals(p2, p.getDamager(0));
@@ -150,7 +149,7 @@ public class PlayerImplTest {
     @Test
     public void testGetDamageFromPlayer() {
         Player p2 = new MockPlayer();
-        OrdinaryDamageBoard d = new OrdinaryDamageBoard(p);
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(d);
         d.takeDamage(2,p2);
         assertEquals(2, p.getDamageFromPlayer(p2));
@@ -159,7 +158,7 @@ public class PlayerImplTest {
     @Test
     public void testGetMarksFromPlayer() {
         Player p2 = new MockPlayer();
-        OrdinaryDamageBoard d = new OrdinaryDamageBoard(p);
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(d);
         d.takeMark(2,p2);
         assertEquals(2, p.getMarksFromPlayer(p2));
@@ -173,16 +172,6 @@ public class PlayerImplTest {
     @Test
     public void testRegisterDamageBoard() {
         p.registerDamageBoard(new OrdinaryDamageBoard(p));
-    }
-
-    @Test
-    public void testTakeDamage() {
-        p.takeDamage(1, new MockPlayer());
-    }
-
-    @Test
-    public void testTakeMark() {
-        p.takeMark(1, new MockPlayer(MAGENTA));
     }
 
     //*
@@ -258,47 +247,5 @@ public class PlayerImplTest {
     public void testRegisterDamageBoard2() {
         q.registerDamageBoard(new OrdinaryDamageBoard(q));
         // this should not throw exception even with uninitialized player
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeDamageNegativeNull() {
-        p.takeDamage(1, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeDamageNegativeAmount() {
-        p.takeDamage(-1, new MockPlayer());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeDamageNegativThis() {
-        p.takeDamage(1, p);
-    }
-
-    @Test(expected = PlayerNotInitializedException.class)
-    public void testTakeDamageNegativeInit() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
-        q.takeDamage(1, new MockPlayer());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeMarkNegativeNull() {
-        p.takeMark(1, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeMarkNegativeAmount() {
-        p.takeMark(-1, new MockPlayer());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTakeMarkNegativeThis() {
-        p.takeMark(1, p);
-    }
-
-    @Test(expected = PlayerNotInitializedException.class)
-    public void testTakMarkNegativeInit() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
-        q.takeMark(1, new MockPlayer());
     }
 }

@@ -39,10 +39,6 @@ public interface Player {
 
     void registerDamageBoard(DamageBoard damageBoard);
 
-    void takeDamage(int dmgAmount, Player attacker);
-
-    void takeMark(int markAmount, Player attacker);
-
     void goFrenzy(boolean precedesFirstPlayer);
 
     int getScoreForPlayer(Player player);

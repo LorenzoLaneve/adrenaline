@@ -13,12 +13,12 @@ import static org.junit.Assert.*;
 public class DamageBoardImplTest {
 
     private Player p1;
-    private DamageBoard dmgb;
+    private LegacyDamageBoardAdapter dmgb;
 
     @Before
     public void setUp() {
         p1 = new MockPlayer(PlayerColor.YELLOW, "Gionni");
-        dmgb = new OrdinaryDamageBoard(p1);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class DamageBoardImplTest {
 
 
         ((MockPlayer) p1).die();
-        dmgb = new OrdinaryDamageBoard(p1);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
         p1.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(1,p2);
@@ -115,7 +115,7 @@ public class DamageBoardImplTest {
         assertEquals(2, dmgb.getScoreForPlayer(p3));
 
         ((MockPlayer) p1).die();
-        dmgb = new OrdinaryDamageBoard(p1);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
         p1.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(2,p1);
@@ -125,7 +125,7 @@ public class DamageBoardImplTest {
         assertEquals(2, dmgb.getScoreForPlayer(p2));
 
         ((MockPlayer) p1).die();
-        dmgb = new OrdinaryDamageBoard(p1);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
         p1.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(1,p1);
@@ -144,7 +144,7 @@ public class DamageBoardImplTest {
         p1.registerDamageBoard(d);
         p2.init();
 
-        p1.takeMark(1, p2);
+        p1.getDamageBoard().setMarksFromPlayer(1, p2);
         assertNotNull(d.getMarksMap());
         Map<Player, Integer> map = d.getMarksMap();
         map.get(p2);

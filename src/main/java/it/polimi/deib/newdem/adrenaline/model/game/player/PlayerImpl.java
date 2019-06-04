@@ -212,42 +212,6 @@ public class PlayerImpl implements Player {
         this.damageBoard = damageBoard;
     }
 
-    /**
-     * Receives damage from another player.
-     *
-     * @param dmgAmount amount, not negative
-     * @param attacker attacker, not null, not this player
-     */
-    @Override
-    public void takeDamage(int dmgAmount, Player attacker) {
-        if(!isInit) throw new PlayerNotInitializedException();
-        if(dmgAmount < 0 || null == attacker || this == attacker) throw new IllegalArgumentException();
-        this.damageBoard.takeDamage(dmgAmount, attacker);
-
-        isDead = damageBoard.getTotalDamage() >= DEATH_SHOT_INDEX;
-        if (isDead) {
-            Map map = getTile().getMap();
-            if (map.getListener() != null) {
-                map.getListener().playerDidDie(this);
-            }
-        }
-    }
-
-    /**
-     * Receives marks from another player.
-     *
-     * @param markAmount amount, not negative
-     * @param attacker attacker, not this player, not null
-     */
-    @Override
-    public void takeMark(int markAmount, Player attacker) {
-        if(!isInit) throw new PlayerNotInitializedException();
-        if(markAmount < 0 || null == attacker || this == attacker) throw new IllegalArgumentException();
-        this.damageBoard.takeMark(markAmount, attacker);
-        //TODO notify event
-        listener.playerTookMark(markAmount, attacker);
-    }
-
     public void assignFirstPlayerCard() {
         hasFirstPlayerCard = true;
     }
@@ -337,6 +301,11 @@ public class PlayerImpl implements Player {
                 map.getListener().playerDidDie(this);
             }
             this.isDead = true;
+            this.deaths += 1;
+        }
+        else {
+            this.isDead = false;
+            this.deaths--;
         }
     }
 }

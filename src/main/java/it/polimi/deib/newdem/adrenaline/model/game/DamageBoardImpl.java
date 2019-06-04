@@ -49,40 +49,6 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     /**
-     * Register damage from another player.
-     * @param dmgAmount amount of damage taken. Not negative, not zero.
-     * @param attacker player that dealt the damage. Not null.
-     */
-    @Override
-    public void takeDamage(int dmgAmount, Player attacker) {
-        if(null == attacker || dmgAmount < 0) {
-            throw new IllegalArgumentException();
-        }
-        while(damages.size() <= MAX_LIFE && dmgAmount > 0) {
-            damages.add(attacker);
-            dmgAmount--;
-        }
-    }
-
-    /**
-     * Register mark(s) from another player.
-     * @param markAmount amount of marks taken
-     * @param attacker player that dealt the marks
-     */
-    @Override
-    public void takeMark(int markAmount, Player attacker) {
-        if(null == attacker) {
-            throw new IllegalArgumentException();
-        }
-        if(markAmount < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        marks.put(attacker,
-                min(marks.getOrDefault(attacker, 0) + markAmount, 3));
-    }
-
-    /**
      * Identifies the player that dealt the {@code index}-th point of damage.
      * @param index Index slot, between 0 and 12 inclusive
      * @return player that dealt the damage
@@ -145,21 +111,24 @@ public abstract class DamageBoardImpl implements DamageBoard {
             ));
         }
 
+        // player did not deal damage
         int place = s.getPlacement(player);
-        if (place < 0) return 0; // player did not deal damage
+        if (place < 0) return 0;
 
+        // score for amount of damage dealt
         int totalScore = 0;
         if (place + this.player.getDeaths() < score.size()) {
             totalScore += score.get(place + this.player.getDeaths());
         }
+
+        // bonus first blood point
         if(shouldAssignFirstBlood() && damages.get(0).equals(player)) {
             totalScore++;
         }
 
+        // at this point, player has dealt at least one damage
         return max(totalScore, 1);
     }
-
-    protected abstract boolean shouldAssignFirstBlood();
 
     /**
      * Calculates the total damage on this scoreboard and returns it as a simple scalar
@@ -179,6 +148,22 @@ public abstract class DamageBoardImpl implements DamageBoard {
         return new HashMap<>(marks);
     }
 
+    public void appendDamage(Player player) throws DamageTrackFullException {
+        if(damages.size() > MAX_LIFE) {
+            throw new DamageTrackFullException();
+        }
+        damages.add(player);
+    }
+
+    public Player popDamage() throws DamageTrackEmptyException {
+        if(damages.isEmpty()) {
+            throw new DamageTrackEmptyException();
+        }
+        return damages.remove(damages.size() - 1);
+    }
+
+    // TODO deprecate
+    // DEPRECATED
     @Override
     public void setDamage(int cell, Player player) {
         damages.set(cell, player);
