@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule;
 
 import java.util.ArrayList;
 import java.util.List;
