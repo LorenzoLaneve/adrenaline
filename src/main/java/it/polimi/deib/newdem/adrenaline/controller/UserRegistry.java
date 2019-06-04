@@ -1,6 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener;
+import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.RejectUsernameEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest;
 
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserRegistry {
+public class UserRegistry implements UserListener {
 
     private List<User> unnamedUsers;
 
@@ -27,6 +29,7 @@ public class UserRegistry {
         core.getLogger().info(String.format("User %s registered to server.", user));
 
         unnamedUsers.add(user);
+        user.addListener(this);
         // TODO user.addReceiver(this);
 
         user.sendEvent(new UpdateUsernameRequest());
@@ -45,7 +48,34 @@ public class UserRegistry {
         }
     }
 
+    public void unregisterUser(User user) {
+        core.getLogger().info(String.format("User %s left the server.", user.getName()));
+
+        user.removeListener(this);
+        if (user.getName() != null) {
+            userNames.remove(user.getName());
+        } else {
+            unnamedUsers.remove(user);
+        }
+
+    }
+
     public User getUserByName(String name){
         return userNames.get(name);
     }
+
+    @Override
+    public void userDidChangeConnection(User user, UserConnection oldConnection, UserConnection newConnection) {
+        LobbyRegistry lobbyRegistry = core.getLobbyRegistry();
+
+        if (!user.isConnected() && !lobbyRegistry.userHasLobby(user)) {
+            unregisterUser(user);
+        }
+    }
+
+    @Override
+    public void userDidChangeName(User user, String name) {
+        // nothing to do here.
+    }
+
 }

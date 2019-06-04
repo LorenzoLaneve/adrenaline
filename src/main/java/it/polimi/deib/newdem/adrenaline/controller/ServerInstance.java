@@ -65,6 +65,15 @@ public class ServerInstance {
         }
     }
 
+    public UserRegistry getUserRegistry() {
+        return userRegistry;
+    }
+
+    public LobbyRegistry getLobbyRegistry() {
+        return lobbyRegistry;
+    }
+
+
     /**
      * Returns the Logger object for the log this server should report diagnostics to.
      */
