@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 import java.util.ArrayList;
@@ -14,8 +13,10 @@ public class LobbyRegistry {
 
     private ServerInstance core;
 
-    public LobbyRegistry(ServerInstance core){
+    public LobbyRegistry(ServerInstance core) {
         this.lobbies = new ArrayList<>();
+
+        this.core = core;
     }
 
     public LobbyController getAvailableLobbyController() {
@@ -34,6 +35,11 @@ public class LobbyRegistry {
     public LobbyController getLobbyController(User user) {
         //TODO persistence
         return getAvailableLobbyController();
+    }
+
+    public boolean userHasLobby(User user) {
+        // TODO
+        return false;
     }
 
 }
