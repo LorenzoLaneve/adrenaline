@@ -5,8 +5,9 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionSender;
 
-public interface UserEvent {
+import java.io.Serializable;
 
+public interface UserEvent extends Serializable {
 
     /**
      * Notifies the user connection receiver object of the event by calling the appropriate method.
