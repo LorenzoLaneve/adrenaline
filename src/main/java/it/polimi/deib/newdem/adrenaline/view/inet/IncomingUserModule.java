@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.controller;
+package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 

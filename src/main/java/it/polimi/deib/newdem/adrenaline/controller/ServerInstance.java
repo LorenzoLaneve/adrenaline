@@ -1,8 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule;
+import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserModule;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,15 +44,21 @@ public class ServerInstance {
                 try {
                     greeter.addUserModule(new SocketUserModule(config.getSocketPort()));
 
-                    getLogger().log(Level.INFO, String.format("Socket module successfully added. Listening to TCP port %d", config.getSocketPort()));
+                    getLogger().info(String.format("Socket module successfully added. Listening to TCP port %d", config.getSocketPort()));
                 } catch (IOException e) {
-                    getLogger().log(Level.SEVERE, "Could not create Socket Module: " + e.getMessage());
+                    getLogger().severe("Could not create Socket Module: " + e.getMessage());
                 }
 
             }
 
             if (config.isRMIActive()) {
-                greeter.addUserModule(new RMIUserModule());
+                try {
+                    greeter.addUserModule(new RMIUserModule(config.getRMIPort(), config.getRMIIdentifier()));
+
+                    getLogger().info(String.format("RMI module successfully added. Listening to TCP port %d with URI /%s", config.getRMIPort(), config.getRMIIdentifier()));
+                } catch (RemoteException e) {
+                    getLogger().severe("Could not create RMI Module: " + e.getMessage());
+                }
             }
         } catch (InvalidStateException x) {
             getLogger().log(Level.SEVERE, "Could not add modules to the user greeter because it was already initialized.");
