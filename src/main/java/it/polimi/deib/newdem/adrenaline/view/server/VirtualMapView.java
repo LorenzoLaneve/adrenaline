@@ -27,6 +27,10 @@ public class VirtualMapView implements MapView, MapListener {
         // TODO
     }
 
+    @Override
+    public void playerDidResurrect(Player player) {
+        //TODO implement
+    }
 
     @Override
     public void playerDidMove(Player player, Tile source, Tile destination) {

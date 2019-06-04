@@ -17,6 +17,8 @@ public interface MapListener {
 
     void playerDidDie(Player player);
 
+    void playerDidResurrect(Player player);
+
     void playerDidLeaveMap(Player player);
 
     void mapDidSendTileData(List<Tile> tileData);

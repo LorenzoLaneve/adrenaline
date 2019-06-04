@@ -15,6 +15,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     protected List<Player> damages;
     protected ArrayList<Integer> score; // this member must be populated by concrete classes
     protected HashMap<Player, Integer> marks;
+    // integer max size of damage vector
     public static final int MAX_LIFE = 11;
     public static final int DEATH_SHOT_INDEX = 9;
     public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
@@ -176,5 +177,15 @@ public abstract class DamageBoardImpl implements DamageBoard {
      */
     public Map<Player, Integer> getMarksMap() {
         return new HashMap<>(marks);
+    }
+
+    @Override
+    public void setDamage(int cell, Player player) {
+        damages.set(cell, player);
+    }
+
+    @Override
+    public void setMarksFromPlayer(int totalMarks, Player player) {
+        marks.put(player, totalMarks);
     }
 }

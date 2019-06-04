@@ -62,4 +62,8 @@ public interface Player {
     boolean isConnected();
 
     void drawCard();
+
+    DamageBoard getDamageBoard();
+
+    void reportDeath(boolean isDead);
 }
