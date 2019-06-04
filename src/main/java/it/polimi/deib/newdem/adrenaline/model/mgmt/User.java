@@ -83,7 +83,7 @@ public class User {
             }
         }
 
-        for (UserListener listener : listeners) {
+        for (UserListener listener : new ArrayList<>(listeners)) {
             listener.userDidChangeConnection(this, oldConnection, boundConnection);
         }
     }

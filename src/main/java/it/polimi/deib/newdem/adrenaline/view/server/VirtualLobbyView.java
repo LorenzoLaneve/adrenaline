@@ -7,13 +7,20 @@ import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class VirtualLobbyView implements LobbyView, LobbyListener {
 
     private Lobby lobby;
 
+    private List<String> users;
+
     public VirtualLobbyView(Lobby lobby) {
         this.lobby = lobby;
+
+        this.users = new ArrayList<>();
     }
 
 
@@ -32,11 +39,20 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
     @Override
     public void addUser(String name) {
         sendEvent(new EnterLobbyEvent(name));
+
+        users.add(name);
+
+        for (User user : lobby.getUsers()) if (user.getName().equals(name)) {
+            user.sendEvent(new LobbyDataEvent(users));
+            break;
+        }
+
     }
 
     @Override
     public void removeUser(String name) {
         sendEvent(new ExitLobbyEvent(name));
+        users.remove(name);
     }
 
     @Override

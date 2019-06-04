@@ -226,4 +226,19 @@ public class ServerConnectionReceiver implements UserConnectionReceiver {
         // TODO
     }
 
+    @Override
+    public void lobbyDidAbortTimer(UserConnection connection, LobbyTimerAbortEvent event) {
+        // TODO
+    }
+
+    @Override
+    public void lobbyDidStartTimer(UserConnection connection, LobbyTimerStartEvent event) {
+        // TODO
+    }
+
+    @Override
+    public void lobbyDidSendData(UserConnection connection, LobbyDataEvent event) {
+        // TODO
+    }
+
 }

@@ -31,14 +31,18 @@ public class LobbyImpl implements Lobby {
     public synchronized void addUser(User user) {
         this.users.add(user);
 
-        // TODO listener callback
+        if (listener != null) {
+            listener.userDidEnterLobby(user, this);
+        }
     }
 
     @Override
     public synchronized void removeUser(User user) {
         this.users.remove(user);
 
-        // TODO listener callback
+        if (listener != null) {
+            listener.userDidExitLobby(user, this);
+        }
     }
 
     @Override
@@ -46,21 +50,27 @@ public class LobbyImpl implements Lobby {
         this.timerActive = true;
         this.secondsLeft = secondsLeft;
 
-        // TODO listener callback
+        if (listener != null) {
+            listener.lobbyDidStartTimer(secondsLeft);
+        }
     }
 
     @Override
     public void refreshTimer(int secondsLeft) {
         this.secondsLeft = secondsLeft;
 
-        // TODO listener callback
+        if (listener != null) {
+            listener.lobbyDidSyncTimer(secondsLeft);
+        }
     }
 
     @Override
     public void abortTimer() {
         this.timerActive = false;
 
-        // TODO listener callback
+        if (listener != null) {
+            listener.lobbyDidAbortTimer();
+        }
     }
 
     @Override
