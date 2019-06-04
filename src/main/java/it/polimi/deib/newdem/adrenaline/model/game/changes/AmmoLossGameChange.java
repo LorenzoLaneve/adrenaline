@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.changes;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 
 public class AmmoLossGameChange implements GameChange {
@@ -12,12 +13,15 @@ public class AmmoLossGameChange implements GameChange {
 
 
     public AmmoLossGameChange(Player player, AmmoSet ammos) {
-        // TODO
+        this.ammos = ammos;
+        this.player = player;
     }
 
     @Override
     public void update(Game game) {
-        // TODO
+        player.getInventory().removeAmmo(AmmoColor.YELLOW, ammos.getYellowAmmos());
+        player.getInventory().removeAmmo(AmmoColor.RED, ammos.getRedAmmos());
+        player.getInventory().removeAmmo(AmmoColor.BLUE, ammos.getBlueAmmos());
     }
 
     @Override
