@@ -46,7 +46,7 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    protected boolean shouldAssignFirstBlood() {
+    public boolean shouldAssignFirstBlood() {
         return true;
     }
 }

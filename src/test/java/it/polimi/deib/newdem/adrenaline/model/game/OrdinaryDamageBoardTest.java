@@ -4,28 +4,51 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.map.MapBuilder;
+import it.polimi.deib.newdem.adrenaline.model.map.SpawnPointTile;
+import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
 public class OrdinaryDamageBoardTest {
 
     private Player p;
-    private OrdinaryDamageBoard dmgb;
+    private LegacyDamageBoardAdapter dmgb;
 
     @Before
     public void setUp(){
-        p = new MockPlayer(PlayerColor.YELLOW);
-        dmgb = new OrdinaryDamageBoard(p);
+        // p = new MockPlayer(PlayerColor.YELLOW);
+        GameParameters gp = new GameParameters();
+        gp.setColorUserOrder(Arrays.asList(
+                new ColorUserPair(PlayerColor.YELLOW, new User()),
+                new ColorUserPair(PlayerColor.CYAN, new User()),
+                new ColorUserPair(PlayerColor.GRAY, new User()),
+                new ColorUserPair(PlayerColor.GREEN, new User())
+
+        ));
+        gp.setGameMap(Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " ")));
+        Game game = new GameImpl(gp);
+        game.init();
+
+        p = game.getPlayerFromColor(PlayerColor.YELLOW);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
     }
 
     @Test
     public void testGetScoreForPlayer() {
-        Player p1 = new MockPlayer(PlayerColor.GRAY);
-        Player p2 = new MockPlayer(PlayerColor.CYAN);
-        Player p3 = new MockPlayer(PlayerColor.GREEN);
+        Game g = p.getGame();
+        Player p1 = g.getPlayerFromColor(PlayerColor.GRAY);
+        Player p2 = g.getPlayerFromColor(PlayerColor.CYAN);
+        Player p3 = g.getPlayerFromColor(PlayerColor.GREEN);
 
         dmgb.takeDamage(2, p3);
         dmgb.takeDamage(6, p1);
@@ -37,8 +60,11 @@ public class OrdinaryDamageBoardTest {
         assertEquals(0, dmgb.getScoreForPlayer(p));
         assertEquals(0, dmgb.getScoreForPlayer(null));
 
-        ((MockPlayer) p).die();
-        dmgb = new OrdinaryDamageBoard(p);
+        Tile spawn = p.getGame().getMap().getSpawnPointFromColor(AmmoColor.RED);
+        p.getGame().getMap().movePlayer(p, spawn);
+        p.reportDeath(true);
+
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p1);
@@ -51,8 +77,9 @@ public class OrdinaryDamageBoardTest {
         assertEquals(0,dmgb.getScoreForPlayer(null));
         assertEquals(0,dmgb.getScoreForPlayer(p));
 
-        ((MockPlayer) p).die();
-        dmgb = new OrdinaryDamageBoard(p);
+        //((MockPlayer) p).die();
+        p.reportDeath(true);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p1);
@@ -61,8 +88,9 @@ public class OrdinaryDamageBoardTest {
         assertEquals(5, dmgb.getScoreForPlayer(p1));
         assertEquals(2,dmgb.getScoreForPlayer(p2));
 
-        ((MockPlayer) p).die();
-        dmgb = new OrdinaryDamageBoard(p);
+        //((MockPlayer) p).die();
+        p.reportDeath(true);
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p2);
@@ -71,10 +99,11 @@ public class OrdinaryDamageBoardTest {
         assertEquals(3, dmgb.getScoreForPlayer(p2));
         assertEquals(1,dmgb.getScoreForPlayer(p1));
 
-        ((MockPlayer) p).die();
-        ((MockPlayer) p).die();
-        ((MockPlayer) p).die();
-        dmgb = new OrdinaryDamageBoard(p);
+        p.reportDeath(true);
+        p.reportDeath(true);
+        p.reportDeath(true);
+
+        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p2);

@@ -45,7 +45,7 @@ public class FrenzyDamageBoard extends DamageBoardImpl {
     }
 
     @Override
-    protected boolean shouldAssignFirstBlood() {
+    public boolean shouldAssignFirstBlood() {
         return false;
     }
 }
