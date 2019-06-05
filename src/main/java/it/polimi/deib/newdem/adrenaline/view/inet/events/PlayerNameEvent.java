@@ -18,6 +18,14 @@ public class PlayerNameEvent implements UserEvent {
         this.name = name;
     }
 
+    public PlayerColor getPlayer() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
         receiver.playerDidUpdateName(connection, this);

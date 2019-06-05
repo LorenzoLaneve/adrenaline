@@ -68,10 +68,10 @@ public abstract class TurnBaseImpl implements Turn {
                 executedActions++;
             }
             catch (UndoException e) {
-                // do wht now?
+                // do not increment executedActions
             }
             finally {}
-            // catch (UndoException | TimeoutException | InterruptedException e){
+            // catch (TimeoutException | InterruptedException e){
                 // do stuff
                 // undo stuff
                 // terminate

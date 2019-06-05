@@ -12,7 +12,7 @@ public class SpawnWeaponEvent implements UserEvent {
     public SpawnWeaponEvent(TilePosition tilePosition, int cardID) {
         this.cardID = cardID;
 
-        this.tilePosition = getTilePosition();
+        this.tilePosition = tilePosition;
     }
 
     public int getWeaponCardID() {
