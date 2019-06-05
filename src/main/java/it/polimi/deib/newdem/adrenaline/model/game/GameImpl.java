@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
-import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
@@ -15,8 +13,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualPlayerView;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +128,7 @@ public class GameImpl implements Game {
         for(java.util.Map.Entry<PlayerColor,User> e : colorUserMap.entrySet()) {
             Player newPlayer = new PlayerImpl(
                     e.getKey(),
-                    this,
-                    e.getValue().getName()
+                    this
             );
             // newPlayer.setListener(new VirtualPlayerView(listener));
             // should be in controller

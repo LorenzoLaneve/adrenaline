@@ -137,8 +137,8 @@ public class DamageBoardImplTest {
 
     @Test
     public void testGetMarkMapPositive() {
-        PlayerImpl p1 = new PlayerImpl(PlayerColor.MAGENTA, new MockGame(), "Carl");
-        PlayerImpl p2 = new PlayerImpl(PlayerColor.GRAY, new MockGame(), "larry");
+        PlayerImpl p1 = new PlayerImpl(PlayerColor.MAGENTA, new MockGame());
+        PlayerImpl p2 = new PlayerImpl(PlayerColor.GRAY, new MockGame());
         DamageBoard d = new OrdinaryDamageBoard(p1);
         p1.init();
         p1.registerDamageBoard(d);

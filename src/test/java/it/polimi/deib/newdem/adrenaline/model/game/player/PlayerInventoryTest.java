@@ -1,10 +1,16 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.player;
 
+import it.polimi.deib.newdem.adrenaline.model.game.MockPlayer;
+import it.polimi.deib.newdem.adrenaline.model.game.MockPowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.game.MockWeapon;
+import it.polimi.deib.newdem.adrenaline.model.game.MockWeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
 import static org.junit.Assert.*;
@@ -157,5 +163,35 @@ public class PlayerInventoryTest {
         inv.addWeapon(new MockWeapon("Rifle"));
         inv.addWeapon(new MockWeapon("Laser"));
         inv.addWeapon(new MockWeapon("Saw"));
+    }
+
+    //
+    // New stuff
+    //
+
+    @Test
+    public void testRemoveWeaponNegative() throws Exception {
+        inv.addWeapon(new MockWeapon("Gun"));
+        inv.removeWeapon(new MockWeapon("Rifle"));
+    }
+
+    @Test
+    public void testRemoveAmmo() throws Exception {
+        try {
+            inv.removeAmmo(AmmoColor.RED, -1);
+        }
+        catch (IllegalArgumentException e) {
+            // ok
+        }
+        catch (Exception e) {
+            fail(); // not ok
+        }
+        inv.addAmmo(AmmoColor.RED, 2);
+        inv.removeAmmo(AmmoColor.RED, 1);
+    }
+
+    @Test
+    public void testRemovePowerUp() throws Exception {
+        inv.removePowerUp(new ArrayList<>());
     }
 }

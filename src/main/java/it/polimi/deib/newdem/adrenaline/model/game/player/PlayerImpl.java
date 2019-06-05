@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
-import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
 
 public class PlayerImpl implements Player {
 
@@ -33,12 +32,12 @@ public class PlayerImpl implements Player {
     private int score;
 
     public static Player makePlayer(PlayerColor color, Game game) {
-        Player p = new PlayerImpl(color,game, "ILLEGAL_NAME");
+        Player p = new PlayerImpl(color,game);
         p.init();
         return p;
     }
 
-    public PlayerImpl(PlayerColor color, Game game, String name) {
+    public PlayerImpl(PlayerColor color, Game game) {
         this.color = color;
         this.game = game;
         this.listener = new NullPlayerListener();

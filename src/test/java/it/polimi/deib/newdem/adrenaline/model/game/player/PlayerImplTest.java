@@ -1,13 +1,13 @@
-package it.polimi.deib.newdem.adrenaline.model.game;
+package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerNotInitializedException;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.model.map.NullMapListener;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +52,11 @@ public class PlayerImplTest {
         q = g.getPlayerFromColor(GRAY);
         t2 = new ActionType(MOVE1, SHOOT);
         t1 = new ActionType(MOVE2, GRAB);
+    }
+
+    @Test
+    public void testMakePlayer() throws Exception {
+        PlayerImpl.makePlayer(GREEN, new MockGame());
     }
 
     @Test
@@ -186,7 +191,7 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetInventoryNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getInventory();
     }
 
@@ -203,43 +208,43 @@ public class PlayerImplTest {
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetMovesNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getMoves();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDeathsNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getDeaths();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetTotalDamageNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getTotalDamage();
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDamagerNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getDamager(2);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetDamageFromPlayerNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getDamageFromPlayer(p);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testGetMarksFromPlayerNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.getMarksFromPlayer(p);
     }
 
     @Test(expected = PlayerNotInitializedException.class)
     public void testIsDeadNegative() {
-        q = new PlayerImpl(YELLOW, new MockGame(), "Dummy");
+        q = new PlayerImpl(YELLOW, new MockGame());
         q.isDead();
     }
 
@@ -247,5 +252,76 @@ public class PlayerImplTest {
     public void testRegisterDamageBoard2() {
         q.registerDamageBoard(new OrdinaryDamageBoard(q));
         // this should not throw exception even with uninitialized player
+    }
+
+    @Test
+    public void testGetScoreForPlayer() throws Exception {
+        try{
+            Player p = new PlayerImpl(GRAY, new MockGame());
+            p.getScoreForPlayer(null);
+        }
+        catch (PlayerNotInitializedException e) {
+            // ok
+        }
+        catch (Exception e) {
+            fail();
+        }
+
+        try{
+            Player p = new PlayerImpl(GRAY, new MockGame());
+            p.init();
+            p.registerDamageBoard(null);
+            p.getScoreForPlayer(null);
+        }
+        catch (IllegalStateException e) {
+            // ok
+        }
+        catch (Exception e) {
+            fail();
+        }
+
+        assertEquals(0,p.getScoreForPlayer(new MockPlayer()));
+    }
+
+    @Test
+    public void testGetScore() throws Exception {
+        assertEquals(0, p.getScore());
+    }
+
+    @Test
+    public void testSetLsitener() throws Exception {
+        p.setListener(new NullPlayerListener());
+    }
+
+    @Test
+    public void testGetMovesAmount() throws Exception {
+        assertEquals(2, p.getMovesAmount());
+    }
+
+    @Test
+    public void testDrawCard() throws Exception {
+        // TODO come back to thins once decks can be loaded
+        // p.drawCard();
+    }
+
+    @Test
+    public void testReportDeath() throws Exception {
+        g.getMap().movePlayer(p, g.getMap().getSpawnPointFromColor(AmmoColor.RED));
+
+        assertEquals(0,p.getDeaths());
+        assertFalse(p.isDead());
+
+        p.reportDeath(true);
+
+        assertEquals(1,p.getDeaths());
+        assertTrue(p.isDead());
+
+        p.reportDeath(false);
+
+        assertEquals(0,p.getDeaths());
+        assertFalse(p.isDead());
+
+        g.getMap().setListener(new NullMapListener());
+        p.reportDeath(true);
     }
 }

@@ -50,7 +50,7 @@ public class TestConcreteMap {
 
         Game game = new MockGame(map);
 
-        player = new PlayerImpl(PlayerColor.YELLOW, game, "dude");
+        player = new PlayerImpl(PlayerColor.YELLOW, game);
 
         TilePosition tilePosition = new TilePosition(0,0);
 

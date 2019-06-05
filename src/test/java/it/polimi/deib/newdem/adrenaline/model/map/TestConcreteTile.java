@@ -31,8 +31,8 @@ public class TestConcreteTile {
     @Before
     public void initTest(){
         game = new MockGame();
-        player1 = new PlayerImpl(PlayerColor.MAGENTA, game, "Larry");
-        player2 = new PlayerImpl(PlayerColor.GRAY, game, "Carl");
+        player1 = new PlayerImpl(PlayerColor.MAGENTA, game);
+        player2 = new PlayerImpl(PlayerColor.GRAY, game);
         List<int[]> roomInt = new ArrayList<>();
         roomInt.add(new int[]{0,0});
 
@@ -108,7 +108,7 @@ public class TestConcreteTile {
 
     @Test
     public void testAddPlayer() {
-        player3 = new PlayerImpl(PlayerColor.YELLOW, game, "Steve");
+        player3 = new PlayerImpl(PlayerColor.YELLOW, game);
 
         tile.addPlayer(player3);
 

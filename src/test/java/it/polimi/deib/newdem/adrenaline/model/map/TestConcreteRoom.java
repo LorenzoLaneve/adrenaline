@@ -31,8 +31,8 @@ public class TestConcreteRoom {
 
         game = new MockGame();
 
-        player1 = new PlayerImpl(CYAN, game, "Larry");
-        player2 = new PlayerImpl(MAGENTA, game, "Steve");
+        player1 = new PlayerImpl(CYAN, game);
+        player2 = new PlayerImpl(MAGENTA, game);
 
         room = new ConcreteRoom();
 
