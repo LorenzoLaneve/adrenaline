@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 public class PlayerDamageEvent implements UserEvent {
 
@@ -40,8 +39,8 @@ public class PlayerDamageEvent implements UserEvent {
 
 
     @Override
-    public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.playerDidTakeDamage(connection, this);
+    public void publish(UserConnection connection) {
+        connection.publishEvent(this);
     }
 
 }

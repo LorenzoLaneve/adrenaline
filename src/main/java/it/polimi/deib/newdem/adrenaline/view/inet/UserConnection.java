@@ -3,6 +3,9 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserConnection {
 
 
@@ -18,19 +21,36 @@ public interface UserConnection {
     User getUser();
 
     /**
-     * Adds the given receiver, making him listen to future events.
+     * Subscribes the given subscriber object to this connection so that it will receiver events of the given class.
      */
-    void addReceiver(UserConnectionReceiver receiver);
+    <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber);
 
     /**
-     * Removes the given receiver, so that it will not receive any further event.
+     * Removes the subscription of the given object to this connection so that it will no longer
+     * receive events of the given class from this connection.
      */
-    void removeReceiver(UserConnectionReceiver receiver);
+    <T extends UserEvent> void unsubscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber);
+
+    /**
+     * Removes all the subscribers from this connection, so that events will no longer be notified to anyone.
+     */
+    void clearSubscribers();
+
+    /**
+     * Copies all the subscribers of the given map to the connection subscribers.
+     * @apiNote This will delete any previous subscriber added to the connection.
+     */
+    void copySubscribers(Map<Class<? extends UserEvent>, List<UserEventSubscriber>> subscribers);
 
     /**
      * Sends the given {@code UserEvent} to the other end of the connection.
      */
     void sendEvent(UserEvent event);
+
+    /**
+     * Notifies the given event to the appropriate subscribers of this connection.
+     */
+    <T extends UserEvent> void publishEvent(T event);
 
     /**
      * Closes the connection, freeing all the allocated resources.

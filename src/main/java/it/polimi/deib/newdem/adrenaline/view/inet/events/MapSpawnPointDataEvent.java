@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 import java.util.List;
 
@@ -18,9 +17,10 @@ public class MapSpawnPointDataEvent implements UserEvent {
         return spawnPointTileDataPosition;
     }
 
+
     @Override
-    public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.mapDidSendSpawnPointData(connection, this);
+    public void publish(UserConnection connection) {
+        connection.publishEvent(this);
     }
 
 }

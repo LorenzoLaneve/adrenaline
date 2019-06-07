@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 public class DamageBoardFlipEvent implements UserEvent {
 
@@ -16,9 +15,10 @@ public class DamageBoardFlipEvent implements UserEvent {
         return color;
     }
 
+
     @Override
-    public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.damageBoardDidFlip(connection, this);
+    public void publish(UserConnection connection) {
+        connection.publishEvent(this);
     }
 
 }
