@@ -18,6 +18,14 @@ public class PlayerNameEvent implements UserEvent {
     }
 
 
+    public PlayerColor getPlayer() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void publish(UserConnection connection) {
         connection.publishEvent(this);
