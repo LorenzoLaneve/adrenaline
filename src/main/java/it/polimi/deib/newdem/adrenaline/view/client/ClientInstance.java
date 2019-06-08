@@ -2,13 +2,15 @@ package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameResponse;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,8 +21,6 @@ public class ClientInstance {
 
     private UserConnection clientConnection;
 
-    private UserConnectionReceiver clientReceiver;
-
 
     public ClientInstance(ViewMaker viewMaker) {
         this.viewMaker = viewMaker;
@@ -29,10 +29,15 @@ public class ClientInstance {
     public void start() {
         createConnection();
 
+        clientConnection.subscribeEvent(UpdateUsernameRequest.class, this::usernameRequested);
 
 
+    }
 
+    private void usernameRequested(UserConnection connection, UpdateUsernameRequest request) {
+        connection.unsubscribeEvent(UpdateUsernameRequest.class, this::usernameRequested);
 
+        connection.sendEvent(new UpdateUsernameResponse("Pippo"));
     }
 
     private void createConnection() {

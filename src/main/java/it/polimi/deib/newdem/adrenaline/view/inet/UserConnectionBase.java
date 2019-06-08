@@ -13,11 +13,16 @@ public abstract class UserConnectionBase implements UserConnection {
 
     private HashMap<Class<? extends UserEvent>, List<UserEventSubscriber>> subscribers;
 
+    private final HashMap<Class<? extends UserEvent>, List<UserEvent>> pendingEvents;
+
     private User user;
+
+    private final Object subsMutex = new Object();
 
 
     public UserConnectionBase(User user) {
         this.subscribers = new HashMap<>();
+        this.pendingEvents = new HashMap<>();
 
         this.user = user;
         user.bindConnection(this);
@@ -31,7 +36,16 @@ public abstract class UserConnectionBase implements UserConnection {
 
     @Override
     public <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber) {
-        subscribers.computeIfAbsent(eventClass, key -> new ArrayList<>()).add(subscriber);
+        synchronized (subsMutex) {
+            subscribers.computeIfAbsent(eventClass, key -> new ArrayList<>()).add(subscriber);
+        }
+
+        synchronized (pendingEvents) {
+            List<UserEvent> eventList = pendingEvents.get(eventClass);
+            if (eventList != null) {
+                for (UserEvent event : eventList) notifyEvent(event);
+            }
+        }
     }
 
     @Override
@@ -45,12 +59,16 @@ public abstract class UserConnectionBase implements UserConnection {
 
     @Override
     public void clearSubscribers() {
-        this.subscribers = new HashMap<>();
+        synchronized (subsMutex) {
+            this.subscribers = new HashMap<>();
+        }
     }
 
     @Override
     public void copySubscribers(Map<Class<? extends UserEvent>, List<UserEventSubscriber>> subscribers) {
-        this.subscribers = new HashMap<>(subscribers);
+        synchronized (subsMutex) {
+            this.subscribers = new HashMap<>(subscribers);
+        }
     }
 
     @Override
@@ -58,7 +76,9 @@ public abstract class UserConnectionBase implements UserConnection {
         notifyEvent(new ConnectionCloseEvent());
 
         // empty subscribers
-        this.subscribers = new HashMap<>();
+        synchronized (subsMutex) {
+            this.subscribers = new HashMap<>();
+        }
 
         user.bindConnection(null);
     }
@@ -79,8 +99,8 @@ public abstract class UserConnectionBase implements UserConnection {
     public <T extends UserEvent> void publishEvent(T event) {
         List<UserEventSubscriber> subscriberList = subscribers.get(event.getClass());
 
-        if (subscriberList != null) {
-            for (UserEventSubscriber<? extends UserEvent> subscriber : subscriberList) {
+        if (subscriberList != null && !subscriberList.isEmpty()) {
+            for (UserEventSubscriber<? extends UserEvent> subscriber : new ArrayList<>(subscriberList)) {
                 try {
                     UserEventSubscriber<T> castedSubscriber = (UserEventSubscriber<T>)(subscriber);
 
@@ -88,6 +108,10 @@ public abstract class UserConnectionBase implements UserConnection {
                 } catch (ClassCastException x) {
                     // this should not happen, but it is not a problem.
                 }
+            }
+        } else {
+            synchronized (pendingEvents) {
+                pendingEvents.computeIfAbsent(event.getClass(), key -> new ArrayList<>()).add(event);
             }
         }
     }
