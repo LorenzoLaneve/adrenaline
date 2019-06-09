@@ -22,6 +22,6 @@ public class DamageBoardFlipEventTest {
 
     @Test
     public void testNotify() throws Exception {
-        e.notifyEvent(new MockConnectionSender(), new MockConnectionReceiver());
+        e.publish(new MockConnectionSender());
     }
 }

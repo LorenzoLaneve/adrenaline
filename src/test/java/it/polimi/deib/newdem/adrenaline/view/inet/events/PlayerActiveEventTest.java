@@ -23,6 +23,6 @@ public class PlayerActiveEventTest {
 
     @Test
     public void testNotifyEvent() throws Exception {
-        e.notifyEvent(new MockConnectionSender(), new MockConnectionReceiver());
+        e.publish(new MockConnectionSender());
     }
 }

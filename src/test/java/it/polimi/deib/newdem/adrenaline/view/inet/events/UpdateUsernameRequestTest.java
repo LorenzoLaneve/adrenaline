@@ -9,6 +9,6 @@ public class UpdateUsernameRequestTest {
 
     @Test
     public void testNotifyEvent() throws Exception {
-        new UpdateUsernameRequest().notifyEvent(new MockConnectionSender(), new MockConnectionReceiver());
+        new UpdateUsernameRequest().publish(new MockConnectionSender());
     }
 }

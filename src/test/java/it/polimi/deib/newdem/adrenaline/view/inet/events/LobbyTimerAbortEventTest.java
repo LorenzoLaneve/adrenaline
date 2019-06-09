@@ -9,6 +9,6 @@ public class LobbyTimerAbortEventTest {
 
     @Test
     public void testNotifyEvent() throws Exception {
-        new LobbyTimerAbortEvent().notifyEvent(new MockConnectionSender(), new MockConnectionReceiver());
+        new LobbyTimerAbortEvent().publish(new MockConnectionSender());
     }
 }
