@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 public class PlayerDiscardPowerUpEvent implements UserEvent {
 
@@ -22,10 +21,10 @@ public class PlayerDiscardPowerUpEvent implements UserEvent {
         return color;
     }
 
-    @Override
-    public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.playerDidRemovePowerUp(connection, this);
 
+    @Override
+    public void publish(UserConnection connection) {
+        connection.publishEvent(this);
     }
 
 }

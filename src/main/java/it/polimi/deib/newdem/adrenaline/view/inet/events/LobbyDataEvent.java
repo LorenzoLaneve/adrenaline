@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,10 @@ public class LobbyDataEvent implements UserEvent {
         return new ArrayList<>(users);
     }
 
+
     @Override
-    public void notifyEvent(UserConnection connection, UserConnectionReceiver receiver) {
-        receiver.lobbyDidSendData(connection, this);
+    public void publish(UserConnection connection) {
+        connection.publishEvent(this);
     }
 
 }

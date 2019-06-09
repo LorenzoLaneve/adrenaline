@@ -2,9 +2,11 @@ package it.polimi.deib.newdem.adrenaline.model.mgmt;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
+import it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -15,7 +17,7 @@ public class User {
 
     private List<UserListener> listeners;
 
-    private List<UserConnectionReceiver> receivers;
+    private HashMap<Class<? extends UserEvent>, List<UserEventSubscriber>> subscribers;
 
     /**
      * Initializes a new, empty user.
@@ -25,7 +27,7 @@ public class User {
         this.boundConnection = null;
 
         this.listeners = new ArrayList<>();
-        this.receivers = new ArrayList<>();
+        this.subscribers = new HashMap<>();
     }
 
     /**
@@ -72,15 +74,11 @@ public class User {
         this.boundConnection = connection;
 
         if (oldConnection != null) {
-            for (UserConnectionReceiver receiver : receivers) {
-                oldConnection.removeReceiver(receiver);
-            }
+            oldConnection.clearSubscribers();
         }
 
         if (boundConnection != null) {
-            for (UserConnectionReceiver receiver : receivers) {
-                boundConnection.addReceiver(receiver);
-            }
+            boundConnection.copySubscribers(subscribers);
         }
 
         for (UserListener listener : new ArrayList<>(listeners)) {
@@ -97,30 +95,33 @@ public class User {
     }
 
     /**
-     * Adds the given UserConnectionReceiver to the objects that have to receive events from the user's connection.
+     * Adds the given event subscriber to the objects that have to receive events from the user's connection.
      */
-    public void addReceiver(UserConnectionReceiver receiver) {
-        if (receiver == null)
-            throw new IllegalArgumentException("The given receiver must be non-null.");
+    public <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber) {
+        if (subscriber == null)
+            throw new IllegalArgumentException("The given subscriber must be non-null.");
 
-        this.receivers.add(receiver);
+        subscribers.computeIfAbsent(eventClass, key -> new ArrayList<>()).add(subscriber);
 
         if (isConnected()) {
-            getBoundConnection().addReceiver(receiver);
+            getBoundConnection().subscribeEvent(eventClass, subscriber);
         }
     }
 
     /**
-     * Removes the given UserConnectionReceiver so that it will not receive further events from this user.
+     * Removes the given event subscriber so that it will not receive further events from this user.
      */
-    public void removeReceiver(UserConnectionReceiver receiver) {
-        if (receiver == null)
-            throw new IllegalArgumentException("The given receiver must be non-null");
+    public <T extends UserEvent> void unsubscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber) {
+        if (subscribers == null)
+            throw new IllegalArgumentException("The given subscriber must be non-null");
 
-        this.receivers.remove(receiver);
+        List<UserEventSubscriber> subList = subscribers.get(eventClass);
+        if (subList != null) {
+            subList.remove(subscriber);
+        }
 
         if (isConnected()) {
-            getBoundConnection().removeReceiver(receiver);
+            getBoundConnection().unsubscribeEvent(eventClass, subscriber);
         }
     }
 

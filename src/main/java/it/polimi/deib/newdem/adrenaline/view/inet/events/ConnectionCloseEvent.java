@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
-public class GameStartEvent implements UserEvent {
+public class ConnectionCloseEvent implements UserEvent {
 
     @Override
     public void publish(UserConnection connection) {

@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.inet.sockets;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.io.*;

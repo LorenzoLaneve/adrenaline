@@ -1,16 +1,14 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 
 import java.io.Serializable;
 
 public interface UserEvent extends Serializable {
 
     /**
-     * Notifies the user connection receiver object of the event by calling the appropriate method.
+     * Notifies all the subscribers to this event registered in the given user connection object of this event.
      */
-    void notifyEvent(UserConnection connection, UserConnectionReceiver receiver);
-    
+    void publish(UserConnection connection);
+
 }
