@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.view.inet.events;
+package it.polimi.deib.newdem.adrenaline.view;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
