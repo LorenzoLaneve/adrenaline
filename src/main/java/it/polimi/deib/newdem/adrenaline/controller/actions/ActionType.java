@@ -1,9 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class ActionType {
+public class ActionType implements Serializable {
     /**
      * Represent the composite type of an action.
      *
