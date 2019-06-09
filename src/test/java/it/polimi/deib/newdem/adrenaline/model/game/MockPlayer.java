@@ -15,7 +15,7 @@ public class MockPlayer extends PlayerImpl {
     private int deathCount;
 
     public MockPlayer() {
-        super(PlayerColor.YELLOW, new MockGame(), "SimpleMockPlayer");
+        super(PlayerColor.YELLOW, new MockGame());
         color = PlayerColor.YELLOW;
         name = "Alice";
         deathCount = 0;
@@ -23,14 +23,14 @@ public class MockPlayer extends PlayerImpl {
     }
 
     public MockPlayer(PlayerColor color) {
-        super(PlayerColor.YELLOW, new MockGame(), "ColoredMockPlayer");
+        super(PlayerColor.YELLOW, new MockGame());
         this.color = color;
         deathCount = 0;
         this.damageBoard = null;
     }
 
     public MockPlayer(PlayerColor color, String name) {
-        super(color, new MockGame(), name);
+        super(color, new MockGame());
         this.color = color;
         this.name = name;
         this.damageBoard = null;
