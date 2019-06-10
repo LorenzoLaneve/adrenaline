@@ -72,7 +72,7 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void playerDidResurrect(Player player) {
-        //TODO implement
+        spawnPlayer(player.getColor(), player.getTile().getPosition());
     }
 
     @Override

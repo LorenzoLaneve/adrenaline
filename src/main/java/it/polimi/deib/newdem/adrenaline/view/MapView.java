@@ -16,6 +16,16 @@ public interface MapView {
 
 
     /**
+     * Adds the given object as listener for this view, so that it will receive events from this view.
+     */
+    void addEventListener(MapViewEventListener listener);
+
+    /**
+     * Removes this object so it will no longer receive events from this view.
+     */
+    void removeEventListener(MapViewEventListener listener);
+
+    /**
      * Passes all the tiles of the map to the view.
      * @param tileData A list of the positions where there is a tile of the map.
      */
