@@ -33,30 +33,13 @@ public class VirtualGameView implements GameView, GameListener, DialogAdapter<Pl
         }
     }
 
-    /**
-     * Asks the given user to choose between the given player colors.
-     * @param mandatory whether a choice needs to be made and selecting no players is not a possible choice.
-     * @return The choice made by the player, or {@code null} if the user chose to select no players.
-     */
-    public PlayerColor promptPlayerColor(User user, List<PlayerColor> choices, boolean mandatory) throws UndoException, InterruptedException {
-        Dialog<PlayerColor> dialog = new Dialog<>(this, user, choices, mandatory);
-        connectionReceiver.addDialog(user, dialog);
-
-        PlayerColor response;
-        try {
-            response = dialog.presentDialog();
-        } catch (Exception x) {
-            connectionReceiver.removeDialog(user, dialog);
-            throw x;
-        }
-
-        connectionReceiver.removeDialog(user, dialog);
-        return response;
-    }
-
 
     public Collection<PlayerColor> getPlayers() {
         return users.keySet();
+    }
+
+    public Collection<User> getUsers() {
+        return users.values();
     }
 
     public User getUserFromColor(PlayerColor color) {

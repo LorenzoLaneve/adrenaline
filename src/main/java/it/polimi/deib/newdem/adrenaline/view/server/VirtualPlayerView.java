@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
@@ -71,19 +72,16 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void takeDamage(int dmgAmount, int mrkAmount, PlayerColor dealer) {
         gameView.sendEvent(new PlayerDamageEvent(player.getColor(), dealer, dmgAmount, mrkAmount));
-
     }
 
     @Override
     public void addAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
         gameView.sendEvent(new PlayerReceiveAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
-
     }
 
     @Override
     public void removeAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
         gameView.sendEvent(new PlayerDiscardAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
-
     }
 
     @Override
@@ -94,7 +92,6 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void playerDidDrawPowerUpCard(PowerUpCard powerUpCard) {
         addPowerUpCard(powerUpCard.getCardID());
-
     }
 
     @Override
@@ -104,7 +101,9 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
 
     @Override
     public void playerDidGrabDrop(DropInstance dropInstance) {
-        //TODO
+        AmmoSet ammos = dropInstance.getAmmos();
+
+        addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
     }
 
     @Override
