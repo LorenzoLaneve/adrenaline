@@ -6,7 +6,7 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 import java.util.List;
 import java.util.Map;
 
-public interface UserConnection extends AutoCloseable {
+public interface UserConnection {
 
 
     /**
@@ -51,5 +51,10 @@ public interface UserConnection extends AutoCloseable {
      * Notifies the given event to the appropriate subscribers of this connection.
      */
     <T extends UserEvent> void publishEvent(T event);
+
+    /**
+     * Closes the connection, freeing all the allocated resources.
+     */
+    void close();
 
 }

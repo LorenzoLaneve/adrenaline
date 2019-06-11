@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.mgmt;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 

@@ -119,9 +119,6 @@ public class ServerInstance {
                 User incomingUser = greeter.accept();
 
                 userRegistry.registerUser(incomingUser);
-
-                // TODO add new user to lobbyRegistry.getLobbyManagerForUser(incomingUser);
-                getLogger().log(Level.INFO, String.format("User %s joined the server.", incomingUser.getName()));
             } catch (Exception e) {
                 getLogger().log(Level.SEVERE, "Server encountered error: "+ e.getMessage());
 

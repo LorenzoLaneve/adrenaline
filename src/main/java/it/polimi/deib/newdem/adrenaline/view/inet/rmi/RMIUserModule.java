@@ -57,7 +57,7 @@ public class RMIUserModule implements IncomingUserModule {
         }
     }
 
-    public synchronized void notifyNewUser(User user) {
+    synchronized void notifyNewUser(User user) {
         this.backlog.add(user);
         notifyAll();
     }
