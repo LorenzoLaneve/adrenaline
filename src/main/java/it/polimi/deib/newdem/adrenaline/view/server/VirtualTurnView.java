@@ -120,6 +120,7 @@ public class VirtualTurnView implements TurnDataSource {
     }
 
     private synchronized void receivePowerUp(UserConnection connection, PowerUpCardSelectionEvent event) {
+        this.powerUpReceived = true;
         this.receivedPowerUpCard = event.getSelectedCardID();
         notifyAll();
     }
