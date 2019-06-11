@@ -1,8 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class TestAmmoSet {
 
@@ -64,5 +65,14 @@ public class TestAmmoSet {
     public void TestConstructorNegative() {
         new AmmoSet(-1, -1,-1);
         new AmmoSet(4,4, 4);
+    }
+
+    @Test
+    public void testEquals(){
+        Map map = null;
+
+        AmmoSet ammoSet = new AmmoSet(1,1,1);
+
+        assertNotEquals(ammoSet,map);
     }
 }
