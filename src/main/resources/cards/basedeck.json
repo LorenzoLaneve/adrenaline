@@ -36,7 +36,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.ElectroScytheEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect"
     },
     {
       "id": 3,
@@ -169,7 +169,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HeatSeekerEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.HeatseekerEffect"
     },
     {
       "id": 10,
@@ -226,7 +226,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.FlameThrowerEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.FlamethrowerEffect"
     },
     {
       "id": 13,
@@ -340,7 +340,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RailGunEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.RailgunEffect"
     },
     {
       "id": 19,
@@ -378,7 +378,7 @@
         "any": 0
       },
 
-      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.CyberBladeEffect"
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.CyberbladeEffect"
     },
     {
       "id": 21,
