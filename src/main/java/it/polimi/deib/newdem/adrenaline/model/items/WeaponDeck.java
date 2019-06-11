@@ -37,7 +37,7 @@ public class WeaponDeck {
         return new PaymentInvoice(redAmmos, blueAmmos, yellowAmmos, anyColorAmmos);
     }
 
-    static WeaponDeck fromJson(String jsonFile) {
+    static WeaponDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<WeaponCard> cards = new ArrayList<>();
 
         try (FileReader reader = new FileReader(jsonFile)) {
@@ -60,14 +60,8 @@ public class WeaponDeck {
                 cards.add(card);
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (InvalidEffectException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new InvalidJSONException(e.getMessage());
         }
 
         return new WeaponDeck(cards);
