@@ -8,7 +8,9 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.ActionSelectionEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ActionSelectionRequest;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PowerUpCardSelectionEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.PowerUpCardSelectionRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,12 +41,12 @@ public class VirtualTurnView implements TurnDataSource {
 
     @Override
     public synchronized ActionType chooseAction(List<ActionType> actionTypeList) {
-        if (actionTypeList != null) {
+        if (actionTypeList == null) {
             throw new IllegalArgumentException("Action type list must not be null");
         }
 
         user.subscribeEvent(ActionSelectionEvent.class, actionSubscriber);
-        // TODO send action type request
+        user.sendEvent(new ActionSelectionRequest(actionTypeList));
 
         this.receivedActionType = null;
         try {
@@ -52,7 +54,7 @@ public class VirtualTurnView implements TurnDataSource {
                 wait();
 
                 if (receivedActionType != null && !actionTypeList.contains(receivedActionType)) {
-                    // TODO send action type request
+                    user.sendEvent(new ActionSelectionRequest(actionTypeList));
 
                     this.receivedActionType = null;
                 }
@@ -85,7 +87,7 @@ public class VirtualTurnView implements TurnDataSource {
         List<Integer> cardList = cards.stream().map(PowerUpCard::getCardID).collect(Collectors.toList());
 
         user.subscribeEvent(PowerUpCardSelectionEvent.class, powerUpCardSubscriber);
-        // TODO send card request
+        user.sendEvent(new PowerUpCardSelectionRequest(cards));
 
         this.powerUpReceived = false;
         try {
@@ -93,7 +95,7 @@ public class VirtualTurnView implements TurnDataSource {
                 wait();
 
                 if (powerUpReceived && !cardList.contains(receivedPowerUpCard)) {
-                    // TODO send card request
+                    user.sendEvent(new PowerUpCardSelectionRequest(cards));
 
                     this.powerUpReceived = false;
                 }
