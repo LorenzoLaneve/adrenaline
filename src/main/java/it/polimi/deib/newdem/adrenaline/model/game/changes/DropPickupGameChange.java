@@ -7,6 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.map.NotOrdinaryTileException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 public class DropPickupGameChange implements GameChange {
@@ -27,24 +28,24 @@ public class DropPickupGameChange implements GameChange {
 
         try{
             dropInstance = dropTile.grabDrop();
-        }catch (Exception e){
-            //TODO
-        }
 
-        if(dropInstance.hasPowerUp()){
-            PowerUpCard card;
-            try{
-                card = game.getPowerUpDeck().draw();
+            if(dropInstance.hasPowerUp() && player.getInventory().canAcceptPowerUp()){
+                PowerUpCard card;
                 try{
-                    player.getInventory().addPowerUp(card);
-                }catch (OutOfSlotsException e){
-                    //TODO
+                    card = game.getPowerUpDeck().draw();
+                    try{
+                        player.getInventory().addPowerUp(card);
+                    }catch (OutOfSlotsException e){
+                        throw new IllegalStateException();
+                    }
+                }catch (NoDrawableCardException e){
+                    throw new IllegalStateException();
                 }
-            }catch (NoDrawableCardException e){
-                throw new IllegalStateException();
             }
-        }
 
+        }catch (NotOrdinaryTileException e){
+            throw new IllegalStateException();
+        }
 
     }
 

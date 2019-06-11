@@ -152,9 +152,13 @@ public class PlayerInventory {
         }
     }
 
+    public boolean canAcceptPowerUp() {
+        return powerUpCards.size() < MAX_EQUIPMENT - 1;
+    }
+
     public void addPowerUp(PowerUpCard card) throws OutOfSlotsException {
         if(null == card) throw new IllegalArgumentException();
-        if(powerUpCards.size() >= MAX_EQUIPMENT - 1) throw new OutOfSlotsException();
+        if(!canAcceptPowerUp()) throw new OutOfSlotsException();
         powerUpCards.add(card);
     }
 
