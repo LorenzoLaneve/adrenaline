@@ -76,8 +76,12 @@ public class MapBuilder {
                 }
             }
 
-            matrixMap[tileInt2[0]][tileInt2[1]].addAdjacentTiles(matrixMap[tileInt1[0]][tileInt1[1]]);
-            matrixMap[tileInt1[0]][tileInt1[1]].addAdjacentTiles(matrixMap[tileInt2[0]][tileInt2[1]]);
+            if(!matrixMap[tileInt2[0]][tileInt2[1]].getAdjacentTiles().contains(matrixMap[tileInt1[0]][tileInt1[1]])) {
+                matrixMap[tileInt2[0]][tileInt2[1]].addAdjacentTiles(matrixMap[tileInt1[0]][tileInt1[1]]);
+            }
+            if (!matrixMap[tileInt1[0]][tileInt1[1]].getAdjacentTiles().contains(matrixMap[tileInt2[0]][tileInt2[1]])){
+                matrixMap[tileInt1[0]][tileInt1[1]].addAdjacentTiles(matrixMap[tileInt2[0]][tileInt2[1]]);
+            }
 
         }
 
