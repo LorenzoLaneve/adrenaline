@@ -35,6 +35,10 @@ public class SocketUserConnection extends UserConnectionBase {
         this.closeRequested = true;
     }
 
+    public SocketUserConnection(String host, int port, User user) throws IOException {
+        this(new Socket(host, port), user);
+    }
+
 
     @Override
     public void start() {

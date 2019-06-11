@@ -4,14 +4,11 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameResponse;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -57,9 +54,7 @@ public class ClientInstance {
 
                     clientConnection = new RMIUserConnection(serverGreeter, localEndpoint, new User());
                 } else {
-                    Socket socket = new Socket(connectionView.getServerHost(), connectionView.getServerPort());
-
-                    clientConnection = new SocketUserConnection(socket, new User());
+                    clientConnection = new SocketUserConnection(connectionView.getServerHost(), connectionView.getServerPort(), new User());
                 }
 
                 clientConnection.start();
