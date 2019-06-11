@@ -24,8 +24,6 @@ public interface DamageBoard {
 
     int getTotalDamage();
 
-    void setDamage(int cell, Player player);
-
     void setMarksFromPlayer(int totalMarks, Player player);
 
     boolean shouldAssignFirstBlood();

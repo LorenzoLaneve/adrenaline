@@ -22,7 +22,7 @@ public class AdrenalineGameControllerTest {
     @Before
     public void setUp(){
         Config config = Config.getDefaultConfig(); // config
-        agc = new AdrenalineGameController(new LobbyControllerImpl(Config.getDefaultConfig()));
+        agc = new AdrenalineGameController(new LobbyControllerImpl(config));
         doSetUpGame();
     }
 
@@ -46,11 +46,13 @@ public class AdrenalineGameControllerTest {
 
         User u1 = new User();
         User u2 = new User();
+        User u3 = new User();
         u1.setName("Carl");
         u2.setName("Larry");
+        u3.setName("Steve");
 
         agc.setupGame(Arrays.asList(
-                u1,u2
+                u1,u2, u3
         ));
     }
 
@@ -62,7 +64,7 @@ public class AdrenalineGameControllerTest {
                 new ScriptedDataSource(new ActionType(AtomicActionType.MOVE1))
         );
 
-        agc.setupGame(Arrays.asList(new User(), new User()));
+        agc.setupGame(Arrays.asList(new User(), new User(), new User()));
         agc.runGame();
     }
 }

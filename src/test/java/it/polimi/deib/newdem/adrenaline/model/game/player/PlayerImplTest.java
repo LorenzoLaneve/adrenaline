@@ -43,6 +43,7 @@ public class PlayerImplTest {
                 new ColorUserPair(YELLOW, user1),
                 new ColorUserPair(GRAY, user2)
         ));
+        gp.setMinPlayers(2);
         g = new GameImpl(gp);
         g.init();
         //p = new PlayerImpl(YELLOW, g,"Larry");
@@ -312,6 +313,7 @@ public class PlayerImplTest {
         assertFalse(p.isDead());
 
         p.reportDeath(true);
+        p.addSkull();
 
         assertEquals(1,p.getDeaths());
         assertTrue(p.isDead());

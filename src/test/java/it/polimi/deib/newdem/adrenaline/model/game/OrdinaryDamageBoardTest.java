@@ -63,6 +63,7 @@ public class OrdinaryDamageBoardTest {
         Tile spawn = p.getGame().getMap().getSpawnPointFromColor(AmmoColor.RED);
         p.getGame().getMap().movePlayer(p, spawn);
         p.reportDeath(true);
+        p.addSkull();
 
         dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
@@ -77,8 +78,8 @@ public class OrdinaryDamageBoardTest {
         assertEquals(0,dmgb.getScoreForPlayer(null));
         assertEquals(0,dmgb.getScoreForPlayer(p));
 
-        //((MockPlayer) p).die();
         p.reportDeath(true);
+        p.addSkull();
         dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
@@ -88,8 +89,9 @@ public class OrdinaryDamageBoardTest {
         assertEquals(5, dmgb.getScoreForPlayer(p1));
         assertEquals(2,dmgb.getScoreForPlayer(p2));
 
-        //((MockPlayer) p).die();
+
         p.reportDeath(true);
+        p.addSkull();
         dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);
 
@@ -102,6 +104,9 @@ public class OrdinaryDamageBoardTest {
         p.reportDeath(true);
         p.reportDeath(true);
         p.reportDeath(true);
+        p.addSkull();
+        p.addSkull();
+        p.addSkull();
 
         dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
         p.registerDamageBoard(dmgb);

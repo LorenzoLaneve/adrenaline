@@ -24,8 +24,6 @@ public class AdrenalineGameController implements GameController {
 
     protected java.util.Map<Player, TurnDataSource> playerDataSourceMap;
 
-    public static final int MAX_PLAYERS = 5;
-
     public AdrenalineGameController(LobbyController lobbyController) {
         this.lobbyController = lobbyController;
     }
@@ -44,16 +42,20 @@ public class AdrenalineGameController implements GameController {
     public void setupGame(List<User> users) {
         //TODO notifica listener
         GameParameters gp = GameParameters.fromConfig(lobbyController.getConfig());
-        if(users.isEmpty() || users.size() > MAX_PLAYERS) throw new IllegalArgumentException();
+        if(users.isEmpty() || users.size() > lobbyController.getConfig().getMaxPlayers()) {
+            throw new IllegalArgumentException();
+        }
 
         String s = this.getClass().getClassLoader().getResource("maps/Map0_0.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
-        // GameParameters gp = new GameParameters();
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);
 
         gp.setGameMap(myMap);
         gp.setColorUserOrder(listCup);
+        Config config = lobbyController.getConfig();
+        gp.setMinPlayers(config.getMinPlayers());
+        gp.setMaxPlayers(config.getMaxPlayers());
 
         game = new GameImpl(gp);
         // bind map listener?
@@ -73,7 +75,7 @@ public class AdrenalineGameController implements GameController {
     }
 
     private List<ColorUserPair> generateColorUserOrder(List<User> users){
-        List<ColorUserPair> listCup = new ArrayList<>(MAX_PLAYERS);
+        List<ColorUserPair> listCup = new ArrayList<>(lobbyController.getConfig().getMaxPlayers());
 
         List<PlayerColor> colors = Arrays.asList(PlayerColor.values());
         Collections.shuffle(colors);
