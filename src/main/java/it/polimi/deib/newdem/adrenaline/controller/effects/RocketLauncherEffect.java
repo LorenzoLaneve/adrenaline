@@ -71,7 +71,7 @@ public class RocketLauncherEffect implements Effect {
             }
 
             choices.remove(choice);
-        } while (choices.isEmpty());
+        } while (!choices.isEmpty());
 
     }
 

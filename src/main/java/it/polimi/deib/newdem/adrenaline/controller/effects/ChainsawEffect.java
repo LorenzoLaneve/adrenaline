@@ -20,7 +20,7 @@ public class ChainsawEffect implements Effect {
         }
 
         Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new SameTilePlayerSelector(attacker));
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 3,0));
+        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, dmg,0));
     }
 
 }

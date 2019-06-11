@@ -54,6 +54,10 @@ public class FlamethrowerEffect implements Effect {
 
             Iterator<Tile> tilesIterator = attacker.getTile().getTiles(direction,false).iterator();
             int dmg = 2;
+            if(tilesIterator.hasNext()){
+                Tile throwAwayTile = tilesIterator.next();
+                String usesele = "pleaze";
+            }
             while (dmg > 0 && tilesIterator.hasNext()) {
                 Tile tile = tilesIterator.next();
 
