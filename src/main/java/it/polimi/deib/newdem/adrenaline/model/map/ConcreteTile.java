@@ -155,8 +155,6 @@ public abstract class ConcreteTile implements Tile {
 
         Tile currTile = this;
 
-        directionalTiles.add(currTile);
-
         boolean adjacent = true;
 
         while(currTile!= null && (ignoreWalls || adjacent )){

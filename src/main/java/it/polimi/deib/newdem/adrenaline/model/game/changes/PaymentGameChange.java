@@ -24,7 +24,10 @@ public class PaymentGameChange implements GameChange {
         player.getInventory().removeAmmo(AmmoColor.RED, receipt.getPayedRedAmmos());
         player.getInventory().removeAmmo(AmmoColor.BLUE, receipt.getPayedBlueAmmos());
 
-        player.getInventory().removePowerUp(receipt.getPayedPowerUpCards());
+        if(receipt.getPayedPowerUpCards()!= null){
+            player.getInventory().removePowerUp(receipt.getPayedPowerUpCards());
+        }
+
     }
 
     @Override
