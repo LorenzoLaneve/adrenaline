@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MapBuilder {
 
-    private JsonData.SpawnPointTileDict spawnPointTileDict;
+    private SpawnPointTileDict spawnPointTileDict;
     private int[][][] roomListInt;
     private int[][][] adjacencyList;
     private final List<Room> rooms;
