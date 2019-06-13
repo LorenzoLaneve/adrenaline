@@ -24,6 +24,6 @@ public class NearTileSelector implements TileSelector {
     public boolean isSelectable(Map map, Tile tile) {
         int distance = sourceTile.distanceFrom(tile);
 
-        return minDistance < distance && distance < maxDistance;
+        return minDistance < distance && distance <= maxDistance;
     }
 }

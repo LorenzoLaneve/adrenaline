@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
-import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.ArrayList;
 import java.util.List;
