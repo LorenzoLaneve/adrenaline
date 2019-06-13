@@ -11,7 +11,6 @@ public class WeaponImpl implements Weapon {
 
     @Override
     public WeaponCard getCard() {
-        // TODO implement
         return card;
     }
 

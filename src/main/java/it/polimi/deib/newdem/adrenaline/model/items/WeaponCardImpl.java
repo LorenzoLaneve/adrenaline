@@ -35,11 +35,11 @@ public class WeaponCardImpl implements WeaponCard {
 
     @Override
     public Weapon makeWeapon() {
-        return null;
+        return new WeaponImpl(this);
     }
 
     @Override
     public int getCardID() {
-        return 0;
+        return id;
     }
 }
