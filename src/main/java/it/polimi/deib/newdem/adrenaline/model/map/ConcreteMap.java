@@ -4,8 +4,7 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelecto
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ConcreteMap implements Map {
 
@@ -168,5 +167,39 @@ public class ConcreteMap implements Map {
         }
 
         return tiles;
+    }
+
+    @Override
+    public int getDistance(Tile source, Tile destination) {
+
+        List<Tile> toVisit;
+        List<Tile> visiting = new ArrayList<>();
+        List<Tile> visited = new ArrayList<>();
+        Queue<Tile> queue = new LinkedList<>();
+
+        HashMap<Tile, Integer> distDict = new HashMap<>();
+
+        toVisit = getAllTiles();
+
+        visiting.add(source);
+        distDict.put(source,0);
+
+        queue.add(source);
+
+        while (queue.peek()!= null){
+            Tile curr = queue.remove();
+            for (Tile adTile:curr.getAdjacentTiles()){
+                if(!(visited.contains(adTile)) && !(visiting.contains(adTile))){
+                    visiting.add(adTile);
+                    toVisit.remove(adTile);
+
+                    distDict.put(adTile,distDict.get(curr) + 1);
+                    queue.add(adTile);
+                }
+            }
+            visiting.remove(curr);
+            visited.add(curr);
+        }
+        return distDict.get(destination);
     }
 }
