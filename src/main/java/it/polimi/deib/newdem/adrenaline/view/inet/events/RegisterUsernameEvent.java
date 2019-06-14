@@ -2,16 +2,16 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
-public class RejectUsernameEvent implements UserEvent {
+public class RegisterUsernameEvent implements UserEvent {
 
-    private String name;
+    private boolean accepted;
 
-    public RejectUsernameEvent(String name) {
-        this.name = name;
+    public RegisterUsernameEvent(boolean accepted) {
+        this.accepted = accepted;
     }
 
-    public String getName() {
-        return name;
+    public boolean usernameAccepted() {
+        return accepted;
     }
 
 

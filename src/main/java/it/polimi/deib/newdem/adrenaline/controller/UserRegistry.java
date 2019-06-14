@@ -3,10 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.RejectUsernameEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameResponse;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,13 +41,14 @@ public class UserRegistry implements UserListener {
     private synchronized void setNameForUser(String name, User user) {
         if (userNames.get(name) != null) {
             core.getLogger().info(String.format("User %s tried to update their name to %s, which is already taken.", user.hashCode(), name));
-            user.sendEvent(new RejectUsernameEvent(name));
+            user.sendEvent(new RegisterUsernameEvent(false));
         } else {
             userNames.put(name, user);
             user.setName(name);
             unnamedUsers.remove(user);
             user.unsubscribeEvent(UpdateUsernameResponse.class, this::changeName);
 
+            user.sendEvent(new RegisterUsernameEvent(true));
             core.getLogger().info(String.format("User %s successfully changed their name to %s.", user.hashCode(), name));
         }
     }
