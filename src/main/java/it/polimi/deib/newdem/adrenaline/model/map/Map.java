@@ -34,4 +34,6 @@ public interface Map {
         return new MapBuilder(mapJsonData).buildMap();
     }
 
+    int getDistance(Tile source, Tile destination);
+
 }

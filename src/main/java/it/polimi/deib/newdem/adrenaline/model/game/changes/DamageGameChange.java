@@ -44,10 +44,6 @@ public class DamageGameChange implements GameChange {
         int damageLeft = desiredDmg;
         try {
             while (damageLeft > 0) {
-                //dmgb.setDamage(
-                //        dmgb.getTotalDamage(),
-                //        attacker
-                //);
                 dmgb.appendDamage(attacker);
                 damageLeft--;
             }
@@ -63,7 +59,7 @@ public class DamageGameChange implements GameChange {
         dmgb.setMarksFromPlayer(desiredMrk, attacker);
 
         // declare death if applicable
-        if(dmgb.getTotalDamage() >= DEATH_SHOT_INDEX) {
+        if(dmgb.getTotalDamage() > DEATH_SHOT_INDEX) {
             attacked.reportDeath(true);
             didDie = true;
         }
@@ -96,7 +92,6 @@ public class DamageGameChange implements GameChange {
                 if (dmgIndex < 0 || dmgIndex > MAX_LIFE) throw new IndexOutOfBoundsException();
                 if (!attacker.equals(dmgb.getDamager(dmgIndex))) throw new IllegalStateException();
 
-                // dmgb.setDamage(dmgb.getTotalDamage() - 1, null);
                 Player removed = dmgb.popDamage();
                 if(!removed.equals(attacker)) throw new IllegalStateException();
                 dmgCursor--;

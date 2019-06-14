@@ -300,11 +300,17 @@ public class PlayerImpl implements Player {
                 map.getListener().playerDidDie(this);
             }
             this.isDead = true;
-            this.deaths += 1;
+            // DO not do this.deaths += 1; here
+            // ^ EOT
         }
         else {
             this.isDead = false;
             this.deaths--;
         }
+    }
+
+    @Override
+    public void addSkull() {
+        deaths++;
     }
 }

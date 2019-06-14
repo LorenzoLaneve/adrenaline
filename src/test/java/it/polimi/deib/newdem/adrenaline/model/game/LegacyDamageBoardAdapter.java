@@ -105,11 +105,6 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     }
 
     @Override
-    public void setDamage(int cell, Player player) {
-        innerDmgb.setDamage(cell, player);
-    }
-
-    @Override
     public void setMarksFromPlayer(int totalMarks, Player player) {
         innerDmgb.setMarksFromPlayer(totalMarks, player);
     }

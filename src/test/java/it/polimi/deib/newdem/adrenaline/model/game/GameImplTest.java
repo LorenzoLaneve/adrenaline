@@ -1,12 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.controller.Config;
+import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.NullKillTrackLister;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
-import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +42,7 @@ public class GameImplTest {
 
         gp.setGameMap(map);
         gp.setColorUserOrder(colorUserPairs);
+        gp.setMinPlayers(1);
 
         game = new GameImpl(gp);
         game.init();
@@ -58,9 +62,10 @@ public class GameImplTest {
 
         colorUserPairs.add(new ColorUserPair(PlayerColor.MAGENTA, new User()));
         gp.setColorUserOrder(colorUserPairs);
+        gp.setMinPlayers(1);
 
         Game thisGame = new GameImpl(gp);
-        ((GameImpl) thisGame).init();
+        thisGame.init();
 
         assertNotNull(thisGame.getPlayerFromColor(PlayerColor.MAGENTA));
 
@@ -86,6 +91,7 @@ public class GameImplTest {
 
         // map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
 
+        gameParameters.setMinPlayers(1);
         game = new GameImpl(gameParameters);
         game.init();  //<<<<<
 
@@ -145,7 +151,10 @@ public class GameImplTest {
     @Test
     public void testGoFrenzyFirstPlayerCard() throws Exception {
 
-        List<ColorUserPair> colorUserPairs = gp.getColorUserOrder();
+        // List<ColorUserPair> colorUserPairs = gp.getColorUserOrder();
+        GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
+        List<ColorUserPair> colorUserPairs = new ArrayList<>();
+
         colorUserPairs.add(new ColorUserPair(PlayerColor.GREEN, new User()));
         colorUserPairs.add(new ColorUserPair(PlayerColor.YELLOW, new User()));
         colorUserPairs.add(new ColorUserPair(PlayerColor.GRAY, new User()));
@@ -154,19 +163,61 @@ public class GameImplTest {
         GameImpl myGame = new GameImpl(gp);
         myGame.init();
 
-        Player p2 = myGame.getPlayerFromColor(PlayerColor.GREEN);
-        p2.assignFirstPlayerCard();
+        Player p1 = null, p2 = null, p3 = null;
+        List<Player> players = myGame.getPlayers();
 
-        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
-        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
-        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
+        for(int i = 0; i < players.size(); i++) {
+            if(players.get(i).hasFirstPlayerCard()) {
+                p1 = players.get( i      % (players.size()));
+                p2 = players.get((i + 1) % (players.size()));
+                p3 = players.get((i + 2) % (players.size()));
+            }
+        }
+        assertNotNull(p1);
+        assertNotNull(p2);
+        assertNotNull(p3);
+
+
+        assertEquals(3, p1.getMoves().size());
+        assertEquals(3, p2.getMoves().size());
+        assertEquals(3, p3.getMoves().size());
+
+        Turn lastTurn = myGame.getNextTurn();
+        Player lastPlayer = lastTurn.getActivePlayer();
+        myGame.concludeTurn(lastTurn);
 
         myGame.goFrenzy();
 
-        assertEquals(3, myGame.getPlayerFromColor(PlayerColor.GREEN).getMoves().size());
-        assertEquals(2, myGame.getPlayerFromColor(PlayerColor.YELLOW).getMoves().size());
-        assertEquals(2, myGame.getPlayerFromColor(PlayerColor.GRAY).getMoves().size());
+        assertEquals(2, p3.getMoves().size());
+        assertEquals(3, p1.getMoves().size());
+        assertEquals(2, p2.getMoves().size());
+        //assertEquals(2, p3.getMoves().size());
 
+    }
+
+    @Test
+    public void testGoFrenzyCondition() throws Exception {
+        GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
+        gp.setColorUserOrder(Arrays.asList(
+                new ColorUserPair(PlayerColor.YELLOW, new User()),
+                new ColorUserPair(PlayerColor.GREEN, new User()),
+                new ColorUserPair(PlayerColor.GRAY, new User())
+        ));
+
+        GameImpl game = new GameImpl(gp);
+        game.init();
+        Player first = null;
+
+        for(Player p : game.getPlayers()) {
+            if(p.hasFirstPlayerCard()) {
+                first = p;
+                break;
+            }
+        }
+        assertNotNull(first);
+        assertTrue(first.hasFirstPlayerCard());
+
+        game.goFrenzy();
     }
 
     @Test
@@ -193,6 +244,7 @@ public class GameImplTest {
         gp.setColorUserOrder(Arrays.asList(new ColorUserPair(
                 PlayerColor.GREEN, new User()
         )));
+        gp.setMinPlayers(1);
         Game myGame = new GameImpl(gp);
         myGame.init();
         assertNull(myGame.getPlayerFromColor(PlayerColor.MAGENTA));
@@ -233,12 +285,68 @@ public class GameImplTest {
         myGame.init();
     }
 
-    /*
     @Test(expected = IllegalStateException.class)
     public void testTesetNegativeNoPlayers() throws Exception {
         GameParameters gp = new GameParameters();
         Game myGame = new GameImpl(gp);
-        ((GameImpl) myGame).reset();
+        myGame.init();
     }
-    */
+
+    @Test
+    public void testSetListener() throws Exception {
+        game.setGameListener(new NullGameListener());
+    }
+
+    @Test
+    public void testDoubleKill() throws Exception {
+        GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
+        gp.setColorUserOrder(Arrays.asList(
+                new ColorUserPair(PlayerColor.MAGENTA, new User()),
+                new ColorUserPair(PlayerColor.GREEN, new User()),
+                new ColorUserPair(PlayerColor.GRAY, new User())
+        ));
+        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        Game g = new GameImpl(gp);
+        g.init();
+        Turn t = g.getNextTurn();
+        Player p = t.getActivePlayer();
+        List<Player> opponents = g.getPlayers();
+        opponents.remove(p);
+        assertEquals(2, opponents.size());
+        Player o1 = opponents.get(0);
+        Player o2 = opponents.get(1);
+        Map m = g.getMap();
+        Tile spawn = m.getSpawnPointFromColor(AmmoColor.RED);
+        m.movePlayer(p, spawn);
+        m.movePlayer(o1, spawn);
+        m.movePlayer(o2, spawn);
+
+        new DamageGameChange(p,o1,DamageBoardImpl.DEATH_SHOT_INDEX + 1, 0).update(g);
+        new DamageGameChange(p,o2,DamageBoardImpl.DEATH_SHOT_INDEX + 1, 0).update(g);
+
+        g.concludeTurn(t);
+        assertEquals(19, p.getScore());
+    }
+
+    @Test
+    public void testFrenzyTurnGeneration() throws Exception {
+        game.goFrenzy();
+        game.concludeTurn(game.getNextTurn());
+    }
+
+    @Test
+    public void testGetTurnTime() throws Exception {
+        assertEquals(gp.getTurnTime(), game.getTurnTime());
+    }
+
+    @Test
+    public void testSetKilltrackListenerOngoing() throws Exception {
+        game.setKillTrackListener(new NullKillTrackLister());
+    }
+
+    @Test
+    public void testGetPowerUpDeck() throws Exception {
+        // TODO assert not null
+        game.getPowerUpDeck();
+    }
 }

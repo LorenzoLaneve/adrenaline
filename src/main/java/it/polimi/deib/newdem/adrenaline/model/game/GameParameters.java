@@ -18,15 +18,21 @@ public class GameParameters {
     private int killTrackInitialLength;
     private int turnTime;
     private List<PlayerColor> playerOrder;
+    private int minPlayers;
+    private int maxPlayers;
 
     public static final int KILLTRACK_STARTING_SIZE_DEFAULT = 5;
-    public static final int TURN_TIME_DEFAULT_MS = 60000;
+    public static final int TURN_TIME_MS_DEFAULT = 60000;
+    public static final int MAX_PLAYERS_DEFAULT = 5;
+    public static final int MIN_PLAYERS_DEFAULT = 3;
     public static final int MS_S_CONVERTON_RATE = 1000;
 
 
     public static GameParameters fromConfig(Config config) {
         GameParameters gp = new GameParameters();
         gp.turnTime = config.getTurnTime() * MS_S_CONVERTON_RATE;
+        gp.minPlayers = config.getMinPlayers();
+        gp.maxPlayers = config.getMaxPlayers();
 
         return gp;
     }
@@ -38,7 +44,9 @@ public class GameParameters {
         // will be set explicitly
 
         killTrackInitialLength = KILLTRACK_STARTING_SIZE_DEFAULT;
-        turnTime = TURN_TIME_DEFAULT_MS;
+        turnTime = TURN_TIME_MS_DEFAULT;
+        minPlayers = MIN_PLAYERS_DEFAULT;
+        maxPlayers = MAX_PLAYERS_DEFAULT;
 
         playerOrder = null; // if not assigned with its setter,
         // will be randomized and stored on the first get.
@@ -114,5 +122,21 @@ public class GameParameters {
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
+    }
+
+    public int getMinPlayers() {
+        return minPlayers;
+    }
+
+    public void setMinPlayers(int minPlayers) {
+        this.minPlayers = minPlayers;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
 }

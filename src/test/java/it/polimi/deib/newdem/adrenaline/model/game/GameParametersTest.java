@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -70,5 +71,12 @@ public class GameParametersTest {
     public void testGetPlayerOrderNegativeEmptyMap() throws Exception {
         GameParameters gp = new GameParameters();
         gp.getPlayerOrder();
+    }
+
+    @Test
+    public void testSetTurnTime() throws Exception {
+        GameParameters gp = new GameParameters();
+        gp.setTurnTime(5);
+        assertEquals(5, gp.getTurnTime());
     }
 }

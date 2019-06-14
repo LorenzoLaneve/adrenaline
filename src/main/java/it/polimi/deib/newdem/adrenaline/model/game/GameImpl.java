@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
@@ -10,10 +11,17 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
+import it.polimi.deib.newdem.adrenaline.model.game.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +44,11 @@ public class GameImpl implements Game {
     private java.util.Map<PlayerColor, User> colorUserMap;
     private boolean init;
     private ListenerRegistry listenerRegistry;
+    private int minPlayers;
+    private int maxPlayers;
 
     public static final int MAX_PLAYERS_PER_GAME = 5;
+    public static final String WEAPON_DECK_PATH = "cards/basedeck.json";
 
     /**
      * Builds a new game from the given {@code GameParameters}
@@ -55,6 +66,8 @@ public class GameImpl implements Game {
         turnTime = parameters.getTurnTime();
         listenerRegistry = new ListenerRegistry();
         init = false;
+        minPlayers = parameters.getMinPlayers();
+        maxPlayers = parameters.getMaxPlayers();
     }
 
     private GameImpl(){}
@@ -120,20 +133,19 @@ public class GameImpl implements Game {
     }
 
     private void createNewPlayers(){
-        if(colorUserMap.isEmpty()) {
-            throw new IllegalStateException();
-        }
         if(!players.isEmpty()) throw new IllegalStateException();
+        boolean isFirst = true;
 
         for(java.util.Map.Entry<PlayerColor,User> e : colorUserMap.entrySet()) {
             Player newPlayer = new PlayerImpl(
                     e.getKey(),
                     this
             );
-            // newPlayer.setListener(new VirtualPlayerView(listener));
-            // should be in controller
-            // should send a copy of its current state, whichever it is
-            // @persistence
+
+            if(isFirst){
+                newPlayer.assignFirstPlayerCard();
+                isFirst = false;
+            }
             players.add(newPlayer);
         }
     }
@@ -147,19 +159,12 @@ public class GameImpl implements Game {
     }
 
     private void setUpRoundRobin() {
-        if(players.isEmpty()) {
-            throw new IllegalStateException();
-        }
         for (Player p : players) {
-            // p.init();
             turnQueue.enqueue(new FirstTurn(p));
         }
     }
 
     private void initPlayers() {
-        if(players.isEmpty()) {
-            throw new IllegalStateException();
-        }
         for (Player p : players) {
             p.init();
         }
@@ -171,13 +176,16 @@ public class GameImpl implements Game {
     public void init() {
         // TODO check that listener is not null
         // TODO add flavorful exception
+        // TODO bind to gp min
+        if(colorUserMap.entrySet().size() < minPlayers) throw new IllegalStateException();
 
         bindElementsListeners();
 
         // load cards
-        // TODO read from json
+        importWeaponDeck(WEAPON_DECK_PATH);
+
         /*
-        weaponDeck = new Deck<>(new ArrayList<>());
+        // TODO read from json powerups and drops
         powerUpDeck = new Deck<>(new ArrayList<>());
         dropDeck = new Deck<>(new ArrayList<>());
         */
@@ -213,6 +221,18 @@ public class GameImpl implements Game {
         Turn t = turnQueue.next();
         if(null == t) isOver = true;
         return t;
+    }
+
+    private void importWeaponDeck(String filePath) {
+        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
+        WeaponDeck factory;
+        try {
+            factory = WeaponDeck.fromJson(decodedPath);
+        }
+        catch(InvalidJSONException e) {
+            throw new IllegalStateException();
+        }
+        weaponDeck = factory.createNewDeck();
     }
 
     /**
@@ -257,7 +277,7 @@ public class GameImpl implements Game {
         // both drops
         // and weapons
         // TODO load decks from json
-        // refillTiles(); // needs non-empty decks
+        // refillTiles(); // needs non-empty drop deck
 
         // add new turn
         if(!isFrenzy) {
@@ -319,11 +339,7 @@ public class GameImpl implements Game {
 
 
     private void distributeScore(Player p) {
-
-        // assign bonus point for double kill
-
-
-        // score daage boards for
+        // score daage boards for dead player p
         for(Player q : this.players) {
             q.addScore(
                      p.getScoreForPlayer(q)
@@ -332,10 +348,11 @@ public class GameImpl implements Game {
     }
 
     private void registerDeath(Player p) {
+        p.addSkull();
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
-        int amount = 1;
-        amount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
-        killTrack.addKill(killer, amount);
+        int killtrackMarkAmount = 1;
+        killtrackMarkAmount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
+        killTrack.addKill(killer, killtrackMarkAmount);
     }
 
     public boolean isOver() {
@@ -370,44 +387,52 @@ public class GameImpl implements Game {
 
     private void refillTiles(){
         // TODO
-        // map.getEmptyTiles(); // not implemented
         for(Tile t : map.getAllTiles()){
             if(t.hasSpawnPoint()) {
-                while (t.inspectWeaponSet().getWeapons().size() < 3) {
-                    try {
-                        t.addWeapon(weaponDeck.draw());
-                    }
-                    catch (NoDrawableCardException e) {
-                        // this CAN happen, and that's ok.
-                        // We just ignore it and move on,
-                        // as designed in game.
-                    }
-                    catch (OutOfSlotsException |
-                            WeaponAlreadyPresentException |
-                            NotSpawnPointTileException e) {
-                        // this should NOT happen, so we report it
-                        throw new IllegalStateException(e);
-                    }
-                }
+                refillSpawn(t);
             }
             else {
                 // t has NOT spawnpoint
                 // ==> t is ordinaryTile
-                if(t.missingDrop()){
-                    try {
-                        t.addDrop(dropDeck.draw());
-                    }
-                    catch (NoDrawableCardException e) {
-                        // this CAN happen, and that's ok.
-                        // We just ignore it and move on,
-                        // as designed in game.
-                    }
-                    catch (DropAlreadyPresentException |
-                            NotOrdinaryTileException e) {
-                        // this should NOT happen, so we report it
-                        throw new IllegalStateException(e);
-                    }
-                }
+                refillDrop(t);
+            }
+        }
+    }
+
+    private void refillSpawn(Tile t) {
+        while (t.inspectWeaponSet().getWeapons().size() < 3) {
+            try {
+                t.addWeapon(weaponDeck.draw());
+            }
+            catch (NoDrawableCardException e) {
+                // this CAN happen, and that's ok.
+                // We just ignore it and move on,
+                // as designed in game.
+            }
+            catch (OutOfSlotsException |
+                    WeaponAlreadyPresentException |
+                    NotSpawnPointTileException e) {
+                // this should NOT happen, so we report it
+                throw new IllegalStateException(e);
+            }
+        }
+
+    }
+
+    private void refillDrop(Tile t) {
+        if(t.missingDrop()){
+            try {
+                t.addDrop(dropDeck.draw());
+            }
+            catch (NoDrawableCardException e) {
+                // this CAN happen, and that's ok.
+                // We just ignore it and move on,
+                // as designed in game.
+            }
+            catch (DropAlreadyPresentException |
+                    NotOrdinaryTileException e) {
+                // this should NOT happen, so we report it
+                throw new IllegalStateException(e);
             }
         }
     }

@@ -50,7 +50,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
 
     /**
      * Identifies the player that dealt the {@code index}-th point of damage.
-     * @param index Index slot, between 0 and 12 inclusive
+     * @param index Index slot, between 0 and 11 inclusive
      * @return player that dealt the damage
      */
     @Override
@@ -160,13 +160,6 @@ public abstract class DamageBoardImpl implements DamageBoard {
             throw new DamageTrackEmptyException();
         }
         return damages.remove(damages.size() - 1);
-    }
-
-    // TODO deprecate
-    // DEPRECATED
-    @Override
-    public void setDamage(int cell, Player player) {
-        damages.set(cell, player);
     }
 
     @Override

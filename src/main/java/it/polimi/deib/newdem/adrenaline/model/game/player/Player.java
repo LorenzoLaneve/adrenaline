@@ -62,4 +62,6 @@ public interface Player {
     DamageBoard getDamageBoard();
 
     void reportDeath(boolean isDead);
+
+    void addSkull();
 }

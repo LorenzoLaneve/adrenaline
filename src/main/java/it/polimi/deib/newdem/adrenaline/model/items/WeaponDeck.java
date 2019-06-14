@@ -37,7 +37,7 @@ public class WeaponDeck {
         return new PaymentInvoice(redAmmos, blueAmmos, yellowAmmos, anyColorAmmos);
     }
 
-    static WeaponDeck fromJson(String jsonFile) throws InvalidJSONException {
+    public static WeaponDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<WeaponCard> cards = new ArrayList<>();
 
         try (FileReader reader = new FileReader(jsonFile)) {
