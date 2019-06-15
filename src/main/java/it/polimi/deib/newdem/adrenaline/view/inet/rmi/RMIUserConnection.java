@@ -4,7 +4,9 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
+import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 public class RMIUserConnection extends UserConnectionBase {
 
@@ -59,6 +61,14 @@ public class RMIUserConnection extends UserConnectionBase {
 
             listeningThread = null;
         }
+
+        try {
+            UnicastRemoteObject.unexportObject(localEndpoint, true);
+        } catch (NoSuchObjectException e) {
+            // nothing to do here.
+        }
+
+        localEndpoint.close();
 
         super.close();
     }
