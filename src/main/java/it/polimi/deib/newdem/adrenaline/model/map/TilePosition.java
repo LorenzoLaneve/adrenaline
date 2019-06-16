@@ -1,8 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class TilePosition {
+public class TilePosition implements Serializable {
 
     private int x;
     private int y;

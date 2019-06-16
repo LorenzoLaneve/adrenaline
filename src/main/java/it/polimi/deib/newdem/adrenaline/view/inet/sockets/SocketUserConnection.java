@@ -11,7 +11,7 @@ public class SocketUserConnection extends UserConnectionBase {
 
     private InputStream input;
 
-    private OutputStream output;
+    private ObjectOutputStream output;
 
     private Thread listeningThread;
 
@@ -28,7 +28,7 @@ public class SocketUserConnection extends UserConnectionBase {
         super(user);
 
         this.input = observedSocket.getInputStream();
-        this.output = observedSocket.getOutputStream();
+        this.output = new ObjectOutputStream(observedSocket.getOutputStream());
 
         this.listeningThread = null;
 
@@ -51,9 +51,7 @@ public class SocketUserConnection extends UserConnectionBase {
     @Override
     public void sendEvent(UserEvent event) {
         try {
-            ObjectOutputStream dos = new ObjectOutputStream(output);
-
-            dos.writeObject(event);
+            output.writeObject(event);
         } catch (Exception x) {
             close();
             // TODO is this a good behaviour?

@@ -13,11 +13,14 @@ public class RMIEndpointImpl extends UnicastRemoteObject implements RMIEndpoint 
 
     private transient List<UserEvent> outgoingEvents;
 
+    private transient boolean shouldClose;
+
 
     public RMIEndpointImpl() throws RemoteException {
         super();
 
         this.outgoingEvents = new ArrayList<>();
+        this.shouldClose = false;
     }
 
     public void setConnection(RMIUserConnection connection) {
@@ -29,14 +32,22 @@ public class RMIEndpointImpl extends UnicastRemoteObject implements RMIEndpoint 
         notifyAll();
     }
 
+    protected synchronized void close() {
+        shouldClose = true;
+        notifyAll();
+    }
+
     @Override
-    public synchronized UserEvent readEvent() {
+    public synchronized UserEvent readEvent() throws RemoteException {
 
         try {
-            while (outgoingEvents.isEmpty()) {
+            while (!shouldClose && outgoingEvents.isEmpty()) {
                 wait();
             }
 
+            if (shouldClose) {
+                throw new RemoteException("Connection close requested.");
+            }
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
         }
