@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DropDeck {
-    private List<DropCard> cards;
+    private List<DropInstance> cards;
 
-    private DropDeck(List<DropCard> cards) {
+    private DropDeck(List<DropInstance> cards) {
         this.cards = new ArrayList<>(cards);
     }
 
-    public Deck<DropCard> createNewDeck() {
+    public Deck<DropInstance> createNewDeck() {
         return new Deck<>(cards);
     }
 
@@ -51,7 +51,7 @@ public class DropDeck {
 
 
     public static DropDeck fromJson(String jsonFile) throws InvalidJSONException {
-        List<DropCard> cards = new ArrayList<>();
+        List<DropInstance> cards = new ArrayList<>();
 
         try (FileReader reader = new FileReader(jsonFile)) {
             JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
@@ -66,7 +66,7 @@ public class DropDeck {
 
                 AmmoSet ammoSet = parseAmmoSet(cardObject);
 
-                DropCard card = new DropCardImpl(cardID,ammoSet, hasPowerUp);
+                DropInstance card = new DropInstance(ammoSet, hasPowerUp);
                 cards.add(card);
             }
 

@@ -23,7 +23,7 @@ public class TestDropDeck {
             fail();
         }
 
-        Deck<DropCard> actualDeck = dDeck.createNewDeck();
+        Deck<DropInstance> actualDeck = dDeck.createNewDeck();
     }
 
     @Test

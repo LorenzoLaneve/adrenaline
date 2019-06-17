@@ -49,6 +49,8 @@ public class GameImpl implements Game {
 
     public static final int MAX_PLAYERS_PER_GAME = 5;
     public static final String WEAPON_DECK_PATH = "cards/basedeck.json";
+    public static final String POWERUP_DECK_PATH = "cards/powerupdeck.json";
+    public static final String DROP_DECK_PATH = "cards/droptiledeck.json";
 
     /**
      * Builds a new game from the given {@code GameParameters}
@@ -184,11 +186,9 @@ public class GameImpl implements Game {
         // load cards
         importWeaponDeck(WEAPON_DECK_PATH);
 
-        /*
-        // TODO read from json powerups and drops
-        powerUpDeck = new Deck<>(new ArrayList<>());
-        dropDeck = new Deck<>(new ArrayList<>());
-        */
+        //load decks
+        importPowerUpDeck(POWERUP_DECK_PATH);
+        importDropDeck(DROP_DECK_PATH);
 
         // create Players
         createNewPlayers();
@@ -204,7 +204,7 @@ public class GameImpl implements Game {
 
         // fill tiles
         //TODO load non-empty decks from json
-        // refillTiles(); // no decks, breaks tests for now
+        refillTiles(); // no decks, breaks tests for now
 
         // set flags
         isFrenzy = false;
@@ -233,6 +233,30 @@ public class GameImpl implements Game {
             throw new IllegalStateException();
         }
         weaponDeck = factory.createNewDeck();
+    }
+
+    private void importPowerUpDeck(String filePath) {
+        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
+        PowerUpDeck factory;
+        try {
+            factory = PowerUpDeck.fromJson(decodedPath);
+        }
+        catch(InvalidJSONException e) {
+            throw new IllegalStateException();
+        }
+        powerUpDeck = factory.createNewDeck();
+    }
+
+    private void importDropDeck(String filePath) {
+        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
+        DropDeck factory;
+        try {
+            factory = DropDeck.fromJson(decodedPath);
+        }
+        catch(InvalidJSONException e) {
+            throw new IllegalStateException();
+        }
+        dropDeck = factory.createNewDeck();
     }
 
     /**
@@ -277,7 +301,7 @@ public class GameImpl implements Game {
         // both drops
         // and weapons
         // TODO load decks from json
-        // refillTiles(); // needs non-empty drop deck
+        refillTiles(); // needs non-empty drop deck
 
         // add new turn
         if(!isFrenzy) {

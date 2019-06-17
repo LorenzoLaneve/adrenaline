@@ -34,7 +34,7 @@ public class GameImplTest {
     @Before
     public void setUp() throws Exception {
         gp = new GameParameters();
-        String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
+        String encodedPath = getClass().getClassLoader().getResource("Map0_0.json").getFile();
         String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
         map = Map.createMap(decodedPath);
         colorUserPairs = new ArrayList<>(MAX_PLAYERS_PER_GAME);
@@ -63,6 +63,7 @@ public class GameImplTest {
         colorUserPairs.add(new ColorUserPair(PlayerColor.MAGENTA, new User()));
         gp.setColorUserOrder(colorUserPairs);
         gp.setMinPlayers(1);
+        gp.setGameMap(map);
 
         Game thisGame = new GameImpl(gp);
         thisGame.init();
@@ -159,6 +160,7 @@ public class GameImplTest {
         colorUserPairs.add(new ColorUserPair(PlayerColor.YELLOW, new User()));
         colorUserPairs.add(new ColorUserPair(PlayerColor.GRAY, new User()));
         gp.setColorUserOrder(colorUserPairs);
+        gp.setGameMap(map);
 
         GameImpl myGame = new GameImpl(gp);
         myGame.init();
@@ -198,6 +200,7 @@ public class GameImplTest {
     @Test
     public void testGoFrenzyCondition() throws Exception {
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
+        gp.setGameMap(map);
         gp.setColorUserOrder(Arrays.asList(
                 new ColorUserPair(PlayerColor.YELLOW, new User()),
                 new ColorUserPair(PlayerColor.GREEN, new User()),
@@ -241,6 +244,7 @@ public class GameImplTest {
     @Test
     public void testGetPlayerFromColorNegative() throws Exception {
         GameParameters gp = new GameParameters();
+        gp.setGameMap(map);
         gp.setColorUserOrder(Arrays.asList(new ColorUserPair(
                 PlayerColor.GREEN, new User()
         )));
