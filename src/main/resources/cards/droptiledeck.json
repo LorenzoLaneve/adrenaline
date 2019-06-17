@@ -1,0 +1,184 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "ammo": ["yellow", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 2,
+      "ammo": ["yellow", "red", "red"],
+      "powerUp": false
+    },
+    {
+      "id": 3,
+      "ammo": ["red", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 4,
+      "ammo": ["red", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 5,
+      "ammo": ["red", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 6,
+      "ammo": ["blue", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 7,
+      "ammo": ["blue", "red", "red"],
+      "powerUp": false
+    },
+    {
+      "id": 8,
+      "ammo": ["yellow", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 9,
+      "ammo": ["yellow", "red", "red"],
+      "powerUp": false
+    },
+    {
+      "id": 10,
+      "ammo": ["red", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 11,
+      "ammo": ["red", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 12,
+      "ammo": ["blue", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 13,
+      "ammo": ["blue", "red", "red"],
+      "powerUp": false
+    },
+    {
+      "id": 14,
+      "ammo": ["yellow", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 15,
+      "ammo": ["yellow", "red", "red"],
+      "powerUp": false
+    },
+    {
+      "id": 16,
+      "ammo": ["red", "blue", "blue"],
+      "powerUp": false
+    },
+    {
+      "id": 17,
+      "ammo": ["red", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 18,
+      "ammo": ["blue", "yellow", "yellow"],
+      "powerUp": false
+    },
+    {
+      "id": 19,
+      "ammo": ["yellow", "yellow"],
+      "powerUp": true
+    },
+    {
+      "id": 20,
+      "ammo": ["red", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 21,
+      "ammo": ["blue", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 22,
+      "ammo": ["yellow", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 23,
+      "ammo": ["yellow", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 24,
+      "ammo": ["red", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 25,
+      "ammo": ["yellow", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 26,
+      "ammo": ["yellow", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 27,
+      "ammo": ["red", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 28,
+      "ammo": ["yellow", "yellow"],
+      "powerUp": true
+    },
+    {
+      "id": 29,
+      "ammo": ["red", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 30,
+      "ammo": ["blue", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 31,
+      "ammo": ["yellow", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 32,
+      "ammo": ["yellow", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 33,
+      "ammo": ["red", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 34,
+      "ammo": ["yellow", "red"],
+      "powerUp": true
+    },
+    {
+      "id": 35,
+      "ammo": ["yellow", "blue"],
+      "powerUp": true
+    },
+    {
+      "id": 36,
+      "ammo": ["red", "blue"],
+      "powerUp": true
+    }
+  ]
+}
