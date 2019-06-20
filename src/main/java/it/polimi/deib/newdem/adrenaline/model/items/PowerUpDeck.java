@@ -1,85 +1,85 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
+import it.polimi.deib.newdem.adrenaline.controller.effects.EffectLoader;
+
+import java.io.FileReader;
 import java.util.*;
 
-public class PowerUpDeck<PowerUpCard> {
-    private Deque<PowerUpCard> drawableCards;
-    private HashSet<PowerUpCard> discardedCards;
-    private HashSet<PowerUpCard> activeCards;
+public class PowerUpDeck {
 
-    /** Creates a new {@code Deck} made up of the elements of the given list.
-     *
-     * @throws IllegalArgumentException {@code list} is null or empty
-     * @param list the elements to build a {@code Deck} from. This may have repetitions.
-     *             Not null, not empty.
-     */
-    public PowerUpDeck(List<PowerUpCard> list) {
-        if(null == list || list.isEmpty()) {
-            throw new IllegalArgumentException("Invalid parameter list");
-        }
+    private List<PowerUpCard> cards;
 
-        ArrayList<PowerUpCard> workingList = new ArrayList<>(list);
-        Collections.shuffle(workingList);
+    private PowerUpDeck(List<PowerUpCard> cards) {
+        this.cards = new ArrayList<>(cards);
+    }
 
-        this.drawableCards = new LinkedList<>(workingList);
-        this.discardedCards = new HashSet<>();
-        this.activeCards = new HashSet<>();
+    public Deck<PowerUpCard> createNewDeck() {
+        return new Deck<>(cards);
     }
 
 
-    /** Draws a card from this deck.
-     *
-     * If no card is drawable, the discard pile is shuffled into the deck,
-     * then a card is drawn.
-     *
-     * @return the drawn card
-     */
-    public PowerUpCard draw() throws NoDrawableCardException {
-        if(this.isEmpty()) {
-            reshuffle();
-        }
 
-        if(this.isEmpty()) {
-            throw new NoDrawableCardException();
-        }
 
-        PowerUpCard drawnCard = drawableCards.pop();
-        activeCards.add(drawnCard);
-        return drawnCard;
+    private static PowerUpTrigger parseTrigger(String jsonTrigger) throws InvalidJSONException {
+        switch (jsonTrigger.toLowerCase()) {
+            case "call":
+                return PowerUpTrigger.CALL;
+            case "damagetaken":
+                return PowerUpTrigger.DAMAGE_TAKEN;
+            case "damagedealt":
+                return PowerUpTrigger.DAMAGE_DEALT;
+            default:
+                throw new InvalidJSONException("Invalid trigger.");
+        }
     }
 
-    /** Puts the given {@code card} into this deck's discard pile.
-     *
-     * @throws IllegalArgumentException the given {@code card} does not belong to this deck.
-     * @param card the card to discard. Not null, must belong to this deck.
-     */
-    public void discard(PowerUpCard card) {
-        if(!activeCards.contains(card)) {
-            throw new IllegalArgumentException("This card does not belong to this deck");
+    private static AmmoColor parseAmmoColor(String jsonAmmoColor) throws InvalidJSONException {
+        switch (jsonAmmoColor.toLowerCase()) {
+            case "red":
+                return AmmoColor.RED;
+            case "yellow":
+                return AmmoColor.YELLOW;
+            case "blue":
+                return AmmoColor.BLUE;
+            default:
+                throw new InvalidJSONException("Invalid ammo color.");
+        }
+    }
+
+
+    public static PowerUpDeck fromJson(String jsonFile) throws InvalidJSONException {
+        List<PowerUpCard> cards = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(jsonFile)) {
+            JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
+
+            JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();
+
+            for (JsonElement object : cardsJsonArray) {
+                JsonObject cardObject = object.getAsJsonObject();
+
+                int cardID = cardObject.get("id").getAsInt();
+
+                String effectClassName = cardObject.get("effectClass").getAsString();
+                Effect cardEffect = EffectLoader.fromClass(effectClassName);
+
+                PowerUpTrigger trigger = parseTrigger(cardObject.get("trigger").getAsString());
+
+                AmmoColor equivalentAmmo = parseAmmoColor(cardObject.get("equivAmmo").getAsString());
+
+                PowerUpCard card = new PowerUpCardImpl(cardEffect, cardID, trigger, equivalentAmmo);
+                cards.add(card);
+            }
+
+        } catch (Exception e) {
+            throw new InvalidJSONException(e.getMessage());
         }
 
-        activeCards.remove(card);
-        discardedCards.add(card);
-    }
-
-    /** Checks for the presence of drawable cards.
-     *
-     * @return whether or not the deck is empty
-     */
-    public boolean isEmpty() {
-        return drawableCards.isEmpty();
-    }
-
-    /** Shuffles this deck's discard pile together with the main deck.
-     *
-     */
-    public void reshuffle() {
-        ArrayList<PowerUpCard> workingList = new ArrayList<>();
-
-        workingList.addAll(discardedCards);
-        workingList.addAll(drawableCards);
-        Collections.shuffle(workingList);
-
-        this.drawableCards = new LinkedList<>(workingList);
+        return new PowerUpDeck(cards);
     }
 }

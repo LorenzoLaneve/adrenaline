@@ -1,0 +1,228 @@
+{
+  "cards": [
+    // TELEPORT
+    {
+      "id": 0,
+
+      "equivAmmo": "blue",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 1,
+
+      "equivAmmo": "blue",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 2,
+
+      "equivAmmo": "red",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 3,
+
+      "equivAmmo": "red",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 4,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 5,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+
+    // NEWTON
+    {
+      "id": 6,
+
+      "equivAmmo": "blue",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+    {
+      "id": 7,
+
+      "equivAmmo": "blue",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+    {
+      "id": 8,
+
+      "equivAmmo": "red",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+    {
+      "id": 9,
+
+      "equivAmmo": "red",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+    {
+      "id": 10,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+    {
+      "id": 11,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "call",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect"
+    },
+
+    // TAGBACK GRENADE
+    {
+      "id": 12,
+
+      "equivAmmo": "blue",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+    {
+      "id": 13,
+
+      "equivAmmo": "blue",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+    {
+      "id": 14,
+
+      "equivAmmo": "red",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+    {
+      "id": 15,
+
+      "equivAmmo": "red",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+    {
+      "id": 16,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+    {
+      "id": 17,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "damageTaken",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+    },
+
+    // TARGETING SCOPE
+    {
+      "id": 18,
+
+      "equivAmmo": "blue",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    },
+    {
+      "id": 19,
+
+      "equivAmmo": "blue",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    },
+    {
+      "id": 20,
+
+      "equivAmmo": "red",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    },
+    {
+      "id": 21,
+
+      "equivAmmo": "red",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    },
+    {
+      "id": 22,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    },
+    {
+      "id": 23,
+
+      "equivAmmo": "yellow",
+
+      "trigger": "damageDealt",
+
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+    }
+  ]
+
+}
