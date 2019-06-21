@@ -34,7 +34,7 @@ public class OrdinaryDamageBoardTest {
                 new ColorUserPair(PlayerColor.GREEN, new User())
 
         ));
-        gp.setGameMap(Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " ")));
+        gp.setGameMap(Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " ")));
         Game game = new GameImpl(gp);
         game.init();
 

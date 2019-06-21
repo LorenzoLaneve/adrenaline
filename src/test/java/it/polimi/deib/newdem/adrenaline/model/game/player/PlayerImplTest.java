@@ -32,7 +32,7 @@ public class PlayerImplTest {
     public void setUp() throws Exception {
         GameParameters gp = new GameParameters();
         // p1 = new PlayerImpl(PlayerColor.MAGENTA);
-        String encodedPath = getClass().getClassLoader().getResource("JsonData.json").getFile();
+        String encodedPath = getClass().getClassLoader().getResource("TestMap.json").getFile();
         String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
         gp.setGameMap(Map.createMap(decodedPath));
         User user1 = new User();

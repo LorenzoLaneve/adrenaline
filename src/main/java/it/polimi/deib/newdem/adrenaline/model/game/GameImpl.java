@@ -48,9 +48,9 @@ public class GameImpl implements Game {
     private int maxPlayers;
 
     public static final int MAX_PLAYERS_PER_GAME = 5;
-    public static final String WEAPON_DECK_PATH = "cards/basedeck.json";
-    public static final String POWERUP_DECK_PATH = "cards/powerupdeck.json";
-    public static final String DROP_DECK_PATH = "cards/droptiledeck.json";
+    public static final String WEAPON_DECK_PATH = "cards/weapons.json";
+    public static final String POWERUP_DECK_PATH = "cards/powerups.json";
+    public static final String DROP_DECK_PATH = "cards/drops.json";
 
     /**
      * Builds a new game from the given {@code GameParameters}

@@ -17,7 +17,7 @@ public class TestDropDeck {
 
         try{
             dDeck = DropDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("droptiledeck.json").getFile().replace("%20", " ")
+                    this.getClass().getClassLoader().getResource("cards/drops.json").getFile().replace("%20", " ")
             );
         }catch (InvalidJSONException e){
             fail();
@@ -31,7 +31,7 @@ public class TestDropDeck {
 
         try{
             DropDeck dDeck = DropDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("droptiledeck.json").getFile().replace("%20", " ")
+                    this.getClass().getClassLoader().getResource("cards/drops.json").getFile().replace("%20", " ")
             );
         }catch (InvalidJSONException e){
             fail();

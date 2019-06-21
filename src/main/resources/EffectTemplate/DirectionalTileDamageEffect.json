@@ -1,9 +1,0 @@
-{
-  "type": "DirectionalTileDamageEffect",
-  "id":0,
-  "dmgAmt": 0,
-  "mrkAmt": 0,
-  "ignoreWalls": true,
-  "minDistance": 0,
-  "maxDistance": 0
-}

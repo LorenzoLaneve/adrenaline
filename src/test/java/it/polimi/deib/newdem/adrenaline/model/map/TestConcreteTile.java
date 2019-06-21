@@ -36,7 +36,7 @@ public class TestConcreteTile {
         List<int[]> roomInt = new ArrayList<>();
         roomInt.add(new int[]{0,0});
 
-        map = Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
+        map = Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
 
         tilePosition = new TilePosition(0,0);
         tilePositionRight = new TilePosition(1,0);

@@ -20,7 +20,7 @@ public class TestWeaponDeck {
     public void fromJson() {
         try{
             WeaponDeck wDeck = WeaponDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("basedeck.json").getFile().replace("%20", " ")
+                    this.getClass().getClassLoader().getResource("cards/weapons.json").getFile().replace("%20", " ")
             );
         }catch (Exception e){
             fail();

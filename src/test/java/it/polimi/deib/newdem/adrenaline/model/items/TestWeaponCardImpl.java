@@ -14,7 +14,7 @@ public class TestWeaponCardImpl {
     @Before
     public void setUp() throws Exception {
         WeaponDeck wDeck = WeaponDeck.fromJson(
-                this.getClass().getClassLoader().getResource("basedeck.json").getFile().replace("%20", " ")
+                this.getClass().getClassLoader().getResource("cards/weapons.json").getFile().replace("%20", " ")
         );
 
         Deck<WeaponCard> actualDeck = wDeck.createNewDeck();

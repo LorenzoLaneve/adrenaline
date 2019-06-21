@@ -17,7 +17,7 @@ public class TestPowerUpDeck {
         PowerUpDeck powerUpDeck = null;
 
         try{
-            powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("powerupdeck.json").getFile().replace("%20", " "));
+            powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("cards/powerups.json").getFile().replace("%20", " "));
         }catch (InvalidJSONException e){
             fail();
         }
@@ -29,7 +29,7 @@ public class TestPowerUpDeck {
     public void fromJson() {
 
         try{
-            PowerUpDeck powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("powerupdeck.json").getFile().replace("%20", " "));
+            PowerUpDeck powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("cards/powerups.json").getFile().replace("%20", " "));
         }catch (InvalidJSONException e){
             fail();
         }

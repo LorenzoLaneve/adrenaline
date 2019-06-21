@@ -15,12 +15,7 @@ public class TestPowerUpCardImpl {
     @Before
     public void setUp() throws Exception {
         Effect cardEffect = EffectLoader.fromClass("it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect");
-        card = new PowerUpCardImpl(1, AmmoColor.BLUE,cardEffect);
-    }
-
-    @Test
-    public void getUsePrice() {
-        card.getUsePrice();
+        card = new PowerUpCardImpl(cardEffect, 1, PowerUpTrigger.CALL, AmmoColor.BLUE);
     }
 
     @Test
@@ -36,7 +31,13 @@ public class TestPowerUpCardImpl {
     }
 
     @Test
-    public void getColor() {
-        assertEquals(AmmoColor.BLUE, card.getColor());
+    public void getTrigger() {
+        assertEquals(PowerUpTrigger.CALL, card.getTrigger());
     }
+
+    @Test
+    public void getColor() {
+        assertEquals(AmmoColor.BLUE, card.getEquivalentAmmo());
+    }
+
 }

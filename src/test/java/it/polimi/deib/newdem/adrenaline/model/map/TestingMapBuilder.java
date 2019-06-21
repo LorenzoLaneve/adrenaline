@@ -11,7 +11,7 @@ public class TestingMapBuilder {
     public static Map getNewMap(Class c) {
         Map map;
         try {
-            String encodedPath = c.getClassLoader().getResource("JsonData.json").getFile();
+            String encodedPath = c.getClassLoader().getResource("TestMap.json").getFile();
             String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
             map = Map.createMap(decodedPath);
         }

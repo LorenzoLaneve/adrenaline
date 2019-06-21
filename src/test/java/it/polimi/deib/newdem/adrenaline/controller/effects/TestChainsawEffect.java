@@ -146,7 +146,7 @@ public class TestChainsawEffect {
 
     @Before
     public void setUp() throws Exception {
-        map =  Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
+        map =  Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
 

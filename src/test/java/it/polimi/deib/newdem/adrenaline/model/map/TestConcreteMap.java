@@ -40,7 +40,7 @@ public class TestConcreteMap {
             }
         }
 
-        map =  Map.createMap(this.getClass().getClassLoader().getResource("JsonData.json").getFile().replace("%20", " "));
+        map =  Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
 
         room = map.getRooms().get(0);
 
