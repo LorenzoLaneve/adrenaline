@@ -1,8 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-public class TargetingScopeEffect implements Effect {
-    @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+public class TargetingScopeEffect implements Effect {
+
+    @Override
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        // TODO
     }
+
 }
