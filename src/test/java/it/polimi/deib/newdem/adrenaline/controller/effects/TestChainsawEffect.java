@@ -27,18 +27,15 @@ public class TestChainsawEffect {
     Player player1;
     Player player2;
     Player player3;
-    ChainsawVisitor visitor;
-    ChainsawVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
+    
 
-    public class ChainsawVisitor extends EffectVisitorBase{
-
-        public ChainsawVisitor(){
-            super();
-        }
+    public class ChainsawContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -50,17 +47,17 @@ public class TestChainsawEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             return null;
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,1,1, powerUpCards);
@@ -77,19 +74,25 @@ public class TestChainsawEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class ChainsawVisitorNoPayment extends EffectVisitorBase{
-
-        public ChainsawVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class ChainsawContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -101,17 +104,17 @@ public class TestChainsawEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             return null;
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             return null;
         }
 
@@ -126,8 +129,18 @@ public class TestChainsawEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -176,14 +189,16 @@ public class TestChainsawEffect {
         map.movePlayer(player2, destination);
         map.movePlayer(player3, destination3);
 
-        visitor = new ChainsawVisitor();
+
+
+        manager = new EffectManager(new ChainsawContext());
     }
 
     @Test
     public void testApplyPayment() {
         ChainsawEffect effect = new ChainsawEffect();
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -197,9 +212,9 @@ public class TestChainsawEffect {
     public void testApplyNoPayment(){
         ChainsawEffect effect = new ChainsawEffect();
 
-        visitorNoPayment = new ChainsawVisitorNoPayment();
+        managerNoPayment = new EffectManager(new ChainsawContextNoPayment());
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

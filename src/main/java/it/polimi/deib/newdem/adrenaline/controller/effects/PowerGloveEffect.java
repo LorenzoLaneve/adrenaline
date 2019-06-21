@@ -3,8 +3,6 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 
@@ -14,34 +12,41 @@ public class PowerGloveEffect implements Effect {
 
     private static final PaymentInvoice ROCKET_FIST_PAYMENT = new PaymentInvoice(0,1,0,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        if (!visitor.requestPayment(attacker, ROCKET_FIST_PAYMENT, ROCKET_FIST)) {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 1, 1));
-
-            visitor.reportGameChange(new MovementGameChange(attacker, redPlayer.getTile()));
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1,2));
-
+        if (!manager.pay(ROCKET_FIST, ROCKET_FIST_PAYMENT)) {
+            basicMode(manager, actor);
         } else {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 1,1));
+            rocketFistMode(manager, actor);
+        }
 
-            Direction comboDirection = attacker.getTile().getDirection(redPlayer.getTile());
+    }
 
-            visitor.reportGameChange(new MovementGameChange(attacker, redPlayer.getTile()));
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 1, 1));
 
-            Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
-                    new DirectionalPlayerSelector(attacker, comboDirection, false),
-                    new NearPlayerSelector(attacker, 1,1)
-            ), false);
+        manager.movePlayer(actor, redPlayer.getTile());
+        manager.damagePlayer(actor, redPlayer, 1,2);
+    }
 
-            if (bluePlayer != null) {
-                visitor.reportGameChange(new MovementGameChange(attacker, bluePlayer.getTile()));
-                visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 2, 0));
-            }
+    private void rocketFistMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 1, 1));
 
+        Direction comboDirection = actor.getTile().getDirection(redPlayer.getTile());
+
+        manager.movePlayer(actor, redPlayer.getTile());
+        manager.damagePlayer(actor, redPlayer, 2, 0);
+
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
+                new DirectionalPlayerSelector(actor, comboDirection, false),
+                new NearPlayerSelector(actor, 1, 1)
+        ), false);
+
+        if (bluePlayer != null) {
+            manager.movePlayer(actor, bluePlayer.getTile());
+            manager.damagePlayer(actor, bluePlayer, 2, 0);
         }
 
     }

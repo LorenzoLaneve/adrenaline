@@ -4,12 +4,9 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 public class MockPowerUpCard implements PowerUpCard {
-    @Override
-    public PaymentInvoice getUsePrice() {
-        return null;
-    }
 
     @Override
     public Effect getEffect() {
@@ -22,7 +19,13 @@ public class MockPowerUpCard implements PowerUpCard {
     }
 
     @Override
-    public AmmoColor getColor() {
+    public PowerUpTrigger getTrigger() {
+        return PowerUpTrigger.CALL;
+    }
+
+    @Override
+    public AmmoColor getEquivalentAmmo() {
         return null;
     }
+
 }

@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalPlayerSelector;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
@@ -17,40 +18,30 @@ public class RailgunEffect implements Effect {
 
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        List<Integer> choices = new ArrayList<>();
-        choices.add(BASIC_MODE);
-        choices.add(PIERCING_MODE);
+        EffectSwitch.create(BASIC_MODE, PIERCING_MODE)
+                .when(BASIC_MODE, this::basicMode)
+                .when(PIERCING_MODE, this::piercingMode)
+                .executeOne(manager, actor);
 
-        Player redPlayer, bluePlayer;
-        switch (visitor.chooseEffect(choices)) {
-            case BASIC_MODE:
-                redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new DirectionalPlayerSelector(attacker, true));
+    }
 
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 3 ,0));
-                break;
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new DirectionalPlayerSelector(actor, true));
 
-            case PIERCING_MODE:
-                redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new DirectionalPlayerSelector(attacker, true));
+        manager.damagePlayer(actor, redPlayer, 3 ,0);
+    }
 
-                Direction comboDirection = attacker.getTile().getDirection(redPlayer.getTile());
+    private void piercingMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new DirectionalPlayerSelector(actor, true));
 
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
+        Direction comboDirection = actor.getTile().getDirection(redPlayer.getTile());
 
-                List<Player> excludedPlayers = new ArrayList<>();
-                excludedPlayers.add(redPlayer);
+        manager.damagePlayer(actor, redPlayer, 2, 0);
 
-                bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE,
-                        new BlackListFilterPlayerSelector(excludedPlayers, new DirectionalPlayerSelector(attacker, comboDirection, true)));
-
-                visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 2,0));
-
-                break;
-
-        }
-
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new DirectionalPlayerSelector(actor, comboDirection, true));
+        manager.damagePlayer(actor, bluePlayer, 2, 0);
     }
 
 }

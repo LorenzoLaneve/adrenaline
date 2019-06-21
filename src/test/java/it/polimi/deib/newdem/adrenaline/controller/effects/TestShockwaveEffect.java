@@ -28,20 +28,16 @@ public class TestShockwaveEffect {
     Player player2;
     Player player3;
     Player player4;
-    ShockwaveVisitor visitor;
-    ShockwaveVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class ShockwaveVisitor extends EffectVisitorBase{
-
-        public ShockwaveVisitor(){
-            super();
-        }
+    public class ShockwaveContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -55,7 +51,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             if(counter == 1){
                 counter++;
@@ -66,7 +62,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -76,7 +72,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(0,0,1, powerUpCards);
@@ -94,19 +90,25 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class ShockwaveVisitorNoPayment extends EffectVisitorBase{
-
-        public ShockwaveVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class ShockwaveContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -120,7 +122,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             if(counter == 1){
                 counter++;
@@ -131,7 +133,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -141,7 +143,7 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -159,8 +161,18 @@ public class TestShockwaveEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -216,7 +228,7 @@ public class TestShockwaveEffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new ShockwaveVisitor();
+        manager = new EffectManager(new ShockwaveContext());
 
         counter = 0;
         effectsCounter = 0;
@@ -228,7 +240,7 @@ public class TestShockwaveEffect {
         ShockwaveEffect effect = new ShockwaveEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -244,7 +256,7 @@ public class TestShockwaveEffect {
         counter = 2;
         ShockwaveEffect effect = new ShockwaveEffect();
 
-        visitorNoPayment = new ShockwaveVisitorNoPayment();
+        managerNoPayment = new EffectManager(new ShockwaveContextNoPayment());
 
         TilePosition tilePosition4 = new TilePosition(2,1);
         Tile destination4 = map.getTile(tilePosition4);
@@ -252,7 +264,7 @@ public class TestShockwaveEffect {
         map.movePlayer(player4,destination4);
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

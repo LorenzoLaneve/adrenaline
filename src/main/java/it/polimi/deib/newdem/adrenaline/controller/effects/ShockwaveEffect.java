@@ -12,44 +12,49 @@ public class ShockwaveEffect implements Effect {
 
     private static final PaymentInvoice TSUNAMI_MODE_PAYMENT = new PaymentInvoice(0,0,1,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        if (!visitor.requestPayment(attacker, TSUNAMI_MODE_PAYMENT, TSUNAMI_MODE)) {
+        if (!manager.pay(TSUNAMI_MODE, TSUNAMI_MODE_PAYMENT)) {
+            basicMode(manager, actor);
+        } else {
+            tsunamiMode(manager, actor);
+        }
 
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 1,1));
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
+    }
 
-            PlayerSelector blueSelector = new IntersectPlayerSelector(
-                    new NegatedPlayerSelector(new SameTilePlayerSelector(redPlayer)),
-                    new NearPlayerSelector(attacker, 1,1)
-            );
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 1, 1));
+        manager.damagePlayer(actor, redPlayer, 1, 0);
 
-            Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, blueSelector, false);
-            if (bluePlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
+        PlayerSelector blueSelector = new IntersectPlayerSelector(
+                new NegatedPlayerSelector(new SameTilePlayerSelector(redPlayer)),
+                new NearPlayerSelector(actor, 1, 1)
+        );
 
-                PlayerSelector greenSelector = new IntersectPlayerSelector(
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, blueSelector, false);
+        if (bluePlayer != null) {
+            manager.damagePlayer(actor, bluePlayer, 1, 0);
+
+            PlayerSelector greenSelector = new IntersectPlayerSelector(
                     new NegatedPlayerSelector(new SameTilePlayerSelector(bluePlayer)),
                     blueSelector
-                );
+            );
 
-                Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN, greenSelector, false);
-                if (greenPlayer != null) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, greenPlayer, 1, 0));
-                }
+            Player greenPlayer = manager.bindPlayer(MetaPlayer.GREEN, greenSelector, false);
+            if (greenPlayer != null) {
+                manager.damagePlayer(actor, greenPlayer, 1, 0);
             }
+        }
+    }
 
+    private void tsunamiMode(EffectManager manager, Player actor) {
 
-        } else {
-
-            for (Tile adjTile : attacker.getTile().getAdjacentTiles()) {
-                for (Player player : adjTile.getPlayers()) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, player, 1,0));
-                }
+        for (Tile adjTile : actor.getTile().getAdjacentTiles()) {
+            for (Player player : adjTile.getPlayers()) {
+                manager.damagePlayer(actor, player, 1,0);
             }
-
         }
 
     }

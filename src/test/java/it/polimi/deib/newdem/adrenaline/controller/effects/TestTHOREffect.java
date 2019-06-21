@@ -28,20 +28,16 @@ public class TestTHOREffect {
     Player player2;
     Player player3;
     Player player4;
-    THORVisitor visitor;
-    THORVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class THORVisitor extends EffectVisitorBase{
-
-        public THORVisitor(){
-            super();
-        }
+    public class THORContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -55,14 +51,14 @@ public class TestTHOREffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             return map.getTile(new TilePosition(1,0));
 
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -72,7 +68,7 @@ public class TestTHOREffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(0,1,0, powerUpCards);
@@ -91,19 +87,25 @@ public class TestTHOREffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class THORVisitorNoPayment extends EffectVisitorBase{
-
-        public THORVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class THORContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -117,13 +119,13 @@ public class TestTHOREffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             return map.getTile(new TilePosition(0,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -133,7 +135,7 @@ public class TestTHOREffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -151,8 +153,18 @@ public class TestTHOREffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -208,7 +220,7 @@ public class TestTHOREffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new THORVisitor();
+        manager = new EffectManager(new THORContext());
 
         counter = 0;
         effectsCounter = 0;
@@ -220,7 +232,7 @@ public class TestTHOREffect {
         THOREffect effect = new THOREffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -236,10 +248,10 @@ public class TestTHOREffect {
         counter = 1;
         SledgehammerEffect effect = new SledgehammerEffect();
 
-        visitorNoPayment = new THORVisitorNoPayment();
+        managerNoPayment = new EffectManager(new THORContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

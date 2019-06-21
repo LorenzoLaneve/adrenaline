@@ -1,19 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class WhisperEffect implements Effect {
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 2, 100));
 
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
-
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 2, 100));
-
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 3, 1));
+        manager.damagePlayer(actor, redPlayer, 3, 1);
     }
 
 }

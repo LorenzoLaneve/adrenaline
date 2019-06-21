@@ -28,20 +28,16 @@ public class TestRocketLauncherEffect {
     Player player2;
     Player player3;
     Player player4;
-    RocketLauncherVisitor visitor;
-    RocketLauncherVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class RocketLauncherVisitor extends EffectVisitorBase{
-
-        public RocketLauncherVisitor(){
-            super();
-        }
+    public class RocketLauncherContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -55,12 +51,12 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -70,7 +66,7 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             if(counter == 0){
@@ -94,19 +90,25 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class RocketLauncherVisitorNoPayment extends EffectVisitorBase{
-
-        public RocketLauncherVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class RocketLauncherContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -120,12 +122,12 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = effectsCounter;
 
             effectsCounter++;
@@ -135,7 +137,7 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -152,8 +154,18 @@ public class TestRocketLauncherEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -209,7 +221,7 @@ public class TestRocketLauncherEffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new RocketLauncherVisitor();
+        manager = new EffectManager(new RocketLauncherContext());
 
         counter = 0;
         effectsCounter = 0;
@@ -221,7 +233,7 @@ public class TestRocketLauncherEffect {
         RocketLauncherEffect effect = new RocketLauncherEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }

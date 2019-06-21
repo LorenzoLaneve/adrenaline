@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -16,34 +17,31 @@ public class ShotgunEffect implements Effect {
 
     private static final int LONG_BARREL_MODE = 2;
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        List<Integer> choices = new ArrayList<>();
-        choices.add(BASIC_MODE);
-        choices.add(LONG_BARREL_MODE);
+        EffectSwitch.create(BASIC_MODE, LONG_BARREL_MODE)
+                .when(BASIC_MODE, this::basicMode)
+                .when(LONG_BARREL_MODE, this::longBarrelMode)
+                .executeOne(manager, actor);
 
-        Player redPlayer;
-        switch (visitor.chooseEffect(choices)) {
-            case BASIC_MODE:
-                redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 0,0));
+    }
 
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 3, 0));
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 0, 0));
 
-                Tile destTile = visitor.getTile(new NearTileSelector(attacker, 0, 1));
+        manager.damagePlayer(actor, redPlayer, 3, 0);
 
-                visitor.reportGameChange(new MovementGameChange(redPlayer, destTile));
-                break;
+        Tile destTile = manager.bindTile(new NearTileSelector(actor, 0, 1));
 
-            case LONG_BARREL_MODE:
-                redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 1,1));
+        manager.movePlayer(redPlayer, destTile);
+    }
 
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
-                break;
-            default: break;
-        }
+    private void longBarrelMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 1,1));
 
+        manager.damagePlayer(actor, redPlayer, 2, 0);
     }
 
 }

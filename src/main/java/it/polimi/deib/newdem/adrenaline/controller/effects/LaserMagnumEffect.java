@@ -1,13 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LaserMagnumEffect implements Effect {
 
@@ -15,33 +10,37 @@ public class LaserMagnumEffect implements Effect {
 
     private static final PaymentInvoice GIGAWATT_MODE_PAYMENT = new PaymentInvoice(1,1,1,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        if (!visitor.requestPayment(attacker, GIGAWATT_MODE_PAYMENT, GIGAWATT_MODE)) {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
-
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 0,1));
+        if (!manager.pay(GIGAWATT_MODE, GIGAWATT_MODE_PAYMENT)) {
+            basicMode(manager, actor);
         } else {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker), false);
-
-            if (redPlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
-
-                List<Player> excludedPlayers = new ArrayList<>();
-                excludedPlayers.add(redPlayer);
-
-                PlayerSelector blueSelector = new BlackListFilterPlayerSelector(excludedPlayers,
-                        new VisiblePlayerSelector(attacker));
-
-                Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, blueSelector, false);
-                if (bluePlayer != null) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
-                }
-            }
+            gigawattMode(manager, actor);
         }
 
+    }
+
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
+
+        manager.damagePlayer(actor, redPlayer, 0,1);
+    }
+
+    private void gigawattMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor), false);
+
+        if (redPlayer != null) {
+            manager.damagePlayer(actor, redPlayer, 2, 0);
+
+            PlayerSelector blueSelector = new VisiblePlayerSelector(actor);
+
+            Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, blueSelector, false);
+            if (bluePlayer != null) {
+                manager.damagePlayer(actor, bluePlayer, 1, 0);
+            }
+        }
     }
 
 }

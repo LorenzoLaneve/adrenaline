@@ -28,20 +28,16 @@ public class TestVortexCannonEffect {
     Player player2;
     Player player3;
     Player player4;
-    VortexCannonVisitor visitor;
-    VortexCannonVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class VortexCannonVisitor extends EffectVisitorBase{
-
-        public VortexCannonVisitor(){
-            super();
-        }
+    public class VortexCannonContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -55,12 +51,12 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -70,7 +66,7 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
                 return new PaymentReceipt(1,0,0, powerUpCards);
@@ -89,19 +85,25 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class VortexCannonVisitorNoPayment extends EffectVisitorBase{
-
-        public VortexCannonVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class VortexCannonContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -115,12 +117,12 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = effectsCounter;
 
             effectsCounter++;
@@ -130,7 +132,7 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -147,8 +149,18 @@ public class TestVortexCannonEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -204,7 +216,7 @@ public class TestVortexCannonEffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new VortexCannonVisitor();
+        manager = new EffectManager(new VortexCannonContext());
 
         counter = 0;
         effectsCounter = 0;
@@ -215,7 +227,7 @@ public class TestVortexCannonEffect {
         VortexCannonEffect effect = new VortexCannonEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -230,10 +242,10 @@ public class TestVortexCannonEffect {
     public void testApplyNoPayment() {
         VortexCannonEffect effect = new VortexCannonEffect();
 
-        visitorNoPayment = new VortexCannonVisitorNoPayment();
+        managerNoPayment = new EffectManager(new VortexCannonContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

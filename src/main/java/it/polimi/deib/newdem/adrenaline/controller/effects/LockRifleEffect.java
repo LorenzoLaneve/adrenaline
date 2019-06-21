@@ -1,12 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LockRifleEffect implements Effect {
 
@@ -16,24 +11,16 @@ public class LockRifleEffect implements Effect {
 
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
 
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
+        manager.damagePlayer(actor, redPlayer, 2, 1);
 
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 1));
+        if (manager.pay(SECOND_LOCK, SECOND_LOCK_PAYMENT)) {
+            Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new VisiblePlayerSelector(actor));
 
-        if (visitor.requestPayment(attacker, SECOND_LOCK_PAYMENT, SECOND_LOCK)) {
-
-            List<Player> excludedPlayers = new ArrayList<>();
-            excludedPlayers.add(redPlayer);
-
-            Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE,
-                    new BlackListFilterPlayerSelector(excludedPlayers, new VisiblePlayerSelector(attacker)));
-
-            visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 0, 1));
+            manager.damagePlayer(actor, bluePlayer, 0, 1);
         }
-
     }
 
 }

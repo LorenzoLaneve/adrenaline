@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.*;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Room;
@@ -15,41 +16,38 @@ public class FurnaceEffect implements Effect {
 
     private static final int COZY_FIRE_MODE = 2;
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        List<Integer> choices = new ArrayList<>();
-        choices.add(BASIC_MODE);
-        choices.add(COZY_FIRE_MODE);
+        EffectSwitch.create(BASIC_MODE, COZY_FIRE_MODE)
+                .when(BASIC_MODE, this::basicMode)
+                .when(COZY_FIRE_MODE, this::cozyFireMode)
+                .executeOne(manager, actor);
 
-        switch (visitor.chooseEffect(choices)) {
-            case BASIC_MODE:
-                Tile targetRoomTile = visitor.getTile(
-                        new IntersectTileSelector(
-                                new VisibleTileSelector(attacker),
-                                new NegatedTileSelector(new SameRoomTileSelector(attacker))
-                        )
-                );
+    }
 
-                Room targetRoom = targetRoomTile.getRoom();
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Tile targetRoomTile = manager.bindTile(
+                new IntersectTileSelector(
+                        new VisibleTileSelector(actor),
+                        new NegatedTileSelector(new SameRoomTileSelector(actor))
+                )
+        );
 
-                for (Player player : targetRoom.getPlayers()) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, player, 1, 0));
-                }
+        Room targetRoom = targetRoomTile.getRoom();
 
-                break;
-            case COZY_FIRE_MODE:
-                Tile targetTile = visitor.getTile(new NearTileSelector(attacker, 1, 1));
-
-                for (Player player : targetTile.getPlayers()) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, player, 1, 1));
-                }
-
-                break;
+        for (Player player : targetRoom.getPlayers()) {
+            manager.damagePlayer(actor, player, 1, 0);
         }
+    }
 
+    private void cozyFireMode(EffectManager manager, Player actor) throws UndoException {
+        Tile targetTile = manager.bindTile(new NearTileSelector(actor, 1, 1));
 
+        for (Player player : targetTile.getPlayers()) {
+            manager.damagePlayer(actor, player, 1, 1);
+        }
     }
 
 }

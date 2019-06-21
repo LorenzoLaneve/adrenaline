@@ -17,59 +17,67 @@ public class FlamethrowerEffect implements Effect {
 
     private static final PaymentInvoice BARBECUE_MODE_PAYMENT = new PaymentInvoice(0,0,2,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        if (!visitor.requestPayment(attacker, BARBECUE_MODE_PAYMENT, BARBECUE_MODE)) {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 1, 1), false);
-
-            Player bluePlayer;
-            if (redPlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
-
-                Direction direction = attacker.getTile().getDirection(redPlayer.getTile());
-
-                bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
-                        new DirectionalPlayerSelector(attacker, direction, false),
-                        new NearPlayerSelector(attacker, 2,2)
-                ), false);
-
-            } else {
-
-                bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
-                        new DirectionalPlayerSelector(attacker, false),
-                        new NearPlayerSelector(attacker, 2,2)
-                ));
-            }
-
-            if (bluePlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
-            }
-
+        if (!manager.pay(BARBECUE_MODE, BARBECUE_MODE_PAYMENT)) {
+            basicMode(manager, actor);
         } else {
-            Tile targetTile = visitor.getTile(new NearTileSelector(attacker, 1, 1));
-
-            Direction direction = attacker.getTile().getDirection(targetTile);
-
-            Iterator<Tile> tilesIterator = attacker.getTile().getTiles(direction,false).iterator();
-            int dmg = 2;
-            if(tilesIterator.hasNext()){
-                Tile throwAwayTile = tilesIterator.next();
-                String usesele = "pleaze";
-            }
-            while (dmg > 0 && tilesIterator.hasNext()) {
-                Tile tile = tilesIterator.next();
-
-                for (Player player : tile.getPlayers()) {
-                    visitor.reportGameChange(new DamageGameChange(attacker, player, dmg, 0));
-                }
-
-                dmg--;
-            }
-
+            barbecueMode(manager, actor);
         }
 
+    }
+
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 1, 1), false);
+
+        Player bluePlayer;
+        if (redPlayer != null) {
+            manager.damagePlayer(actor, redPlayer, 1, 0);
+
+            Direction direction = actor.getTile().getDirection(redPlayer.getTile());
+
+            bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
+                    new DirectionalPlayerSelector(actor, direction, false),
+                    new NearPlayerSelector(actor, 2, 2)
+            ), false);
+
+        } else {
+
+            bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new IntersectPlayerSelector(
+                    new DirectionalPlayerSelector(actor, false),
+                    new NearPlayerSelector(actor, 2, 2)
+            ));
+        }
+
+        if (bluePlayer != null) {
+            manager.damagePlayer(actor, bluePlayer, 1, 0);
+        }
+
+    }
+
+    private void barbecueMode(EffectManager manager, Player actor) throws UndoException {
+
+        Tile targetTile = manager.bindTile(new NearTileSelector(actor, 1, 1));
+
+        Direction direction = actor.getTile().getDirection(targetTile);
+
+        Iterator<Tile> tilesIterator = actor.getTile().getTiles(direction,false).iterator();
+        int dmg = 2;
+        if(tilesIterator.hasNext()) {
+            tilesIterator.next();
+        }
+        while (dmg > 0 && tilesIterator.hasNext()) {
+            Tile tile = tilesIterator.next();
+
+            for (Player player : tile.getPlayers()) {
+                manager.damagePlayer(actor, player, dmg, 0);
+            }
+
+            dmg--;
+        }
 
     }
 

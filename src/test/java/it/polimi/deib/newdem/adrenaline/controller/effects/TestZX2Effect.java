@@ -28,19 +28,15 @@ public class TestZX2Effect {
     Player player2;
     Player player3;
     Player player4;
-    ZX2Visitor visitor;
+    EffectManager manager;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class ZX2Visitor extends EffectVisitorBase{
-
-        public ZX2Visitor(){
-            super();
-        }
+    public class ZX2Context implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -54,12 +50,12 @@ public class TestZX2Effect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -69,7 +65,7 @@ public class TestZX2Effect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -88,8 +84,18 @@ public class TestZX2Effect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -145,7 +151,7 @@ public class TestZX2Effect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new ZX2Visitor();
+        manager = new EffectManager(new ZX2Context());
 
         counter = 0;
         effectsCounter = 0;
@@ -158,7 +164,7 @@ public class TestZX2Effect {
         ZX2Effect effect = new ZX2Effect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -174,7 +180,7 @@ public class TestZX2Effect {
         ZX2Effect effect = new ZX2Effect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }

@@ -3,8 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisibleTileSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -19,45 +18,39 @@ public class GrenadeLauncherEffect implements Effect {
 
     private static final PaymentInvoice EXTRA_GRENADE_PAYMENT = new PaymentInvoice(1,0,0,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
-
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1,0));
-
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
+        manager.damagePlayer(actor, redPlayer, 1, 0);
 
         List<Integer> choices = new ArrayList<>();
         choices.add(MOVE_TARGET);
-        choices.add(EXTRA_GRENADE);
+        //if (manager.pay(EXTRA_GRENADE, EXTRA_GRENADE_PAYMENT)) {
+            choices.add(EXTRA_GRENADE);
+        //}
 
-        Tile targetTile;
-        do {
-            Integer choice = visitor.chooseEffect(choices);
-            if (choice == null) {
-                break;
-            }
-
-            switch (choice) {
-                case MOVE_TARGET:
-                    targetTile = visitor.getTile(new NearTileSelector(redPlayer, 0, 1));
-
-                    visitor.reportGameChange(new MovementGameChange(redPlayer, targetTile));
-                    break;
-
-                case EXTRA_GRENADE:
-                    targetTile = visitor.getTile(new VisibleTileSelector(attacker));
-
-                    for (Player player : targetTile.getPlayers()) if (attacker != player) {
-                        visitor.reportGameChange(new DamageGameChange(attacker, player, 1, 0));
-                    }
-
-                    break;
-                default: break;
-            }
-
-            choices.remove(choice);
-        } while (choices.isEmpty());
+        EffectSwitch.create(choices)
+                .when(MOVE_TARGET, (m, a) -> moveTarget(m, a, redPlayer))
+                .when(EXTRA_GRENADE, this::extraGrenade)
+                .execute(manager, actor);
 
     }
+
+    private void moveTarget(EffectManager manager, Player actor, Player redPlayer) throws UndoException {
+        Tile targetTile = manager.bindTile(new NearTileSelector(redPlayer, 0, 1));
+
+        manager.movePlayer(redPlayer, targetTile);
+    }
+
+    private void extraGrenade(EffectManager manager, Player actor) throws UndoException {
+        Tile targetTile = manager.bindTile(new VisibleTileSelector(actor));
+
+        for (Player player : targetTile.getPlayers()) {
+            if (actor != player) {
+                manager.damagePlayer(actor, player, 1, 0);
+            }
+        }
+    }
+
 }

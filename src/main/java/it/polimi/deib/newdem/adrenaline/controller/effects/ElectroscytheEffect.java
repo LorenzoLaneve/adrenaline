@@ -10,19 +10,18 @@ public class ElectroscytheEffect implements Effect {
     private static final PaymentInvoice REAPER_MODE_PAYMENT = new PaymentInvoice(1, 1, 0,0);
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
         int damage = 1;
-
-        if (visitor.requestPayment(attacker, REAPER_MODE_PAYMENT, REAPER_MODE)) {
+        if (manager.pay(REAPER_MODE, REAPER_MODE_PAYMENT)) {
             damage = 2;
         }
 
-        for (Player player : attacker.getTile().getPlayers()) if (player != attacker) {
-            visitor.reportGameChange(new DamageGameChange(attacker, player, damage, 0));
+        for (Player player : actor.getTile().getPlayers()) {
+            if (player != actor) {
+                manager.damagePlayer(actor, player, damage, 0);
+            }
         }
 
     }
-
 }

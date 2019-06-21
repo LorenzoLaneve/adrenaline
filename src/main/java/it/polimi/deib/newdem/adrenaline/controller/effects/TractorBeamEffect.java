@@ -12,28 +12,35 @@ public class TractorBeamEffect implements Effect {
 
     private static final PaymentInvoice PUNISHER_MODE_PAYMENT = new PaymentInvoice(1,0,1,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        if (!visitor.requestPayment(attacker, PUNISHER_MODE_PAYMENT, PUNISHER_MODE)) {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new AnyPlayerSelector());
-
-            Tile destinationTile = visitor.getTile(new IntersectTileSelector(
-                    new VisibleTileSelector(attacker),
-                    new NearTileSelector(redPlayer, 0, 2)
-            ));
-
-            visitor.reportGameChange(new MovementGameChange(redPlayer, destinationTile));
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
+        if (!manager.pay(PUNISHER_MODE, PUNISHER_MODE_PAYMENT)) {
+            basicMode(manager, actor);
         } else {
-            Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(attacker, 0, 2));
-
-            visitor.reportGameChange(new MovementGameChange(redPlayer, attacker.getTile()));
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 3, 0));
+            punisherMode(manager, actor);
         }
 
     }
 
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new AnyPlayerSelector());
+
+        Tile destinationTile = manager.bindTile(new IntersectTileSelector(
+                new VisibleTileSelector(actor),
+                new NearTileSelector(redPlayer, 0, 2)
+        ));
+
+        manager.movePlayer(redPlayer, destinationTile);
+        manager.damagePlayer(actor, redPlayer, 1, 0);
+    }
+
+    private void punisherMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(actor, 0, 2));
+
+        manager.movePlayer(redPlayer, actor.getTile());
+        manager.damagePlayer(actor, redPlayer, 3, 0);
+    }
 
 }

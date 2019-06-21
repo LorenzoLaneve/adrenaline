@@ -28,29 +28,25 @@ public class TestElectroscytheEffect {
     Player player1;
     Player player2;
     Player player3;
-    ElectronScytheVisitor visitor;
-    ElectronScytheVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
 
-    public class ElectronScytheVisitorNoPayment extends EffectVisitorBase{
-
-        public ElectronScytheVisitorNoPayment(){
-            super();
-        }
+    public class ElectronScytheContextNoPayment implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
             return null;
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return null;
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -60,7 +56,7 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             return null;
         }
 
@@ -75,29 +71,36 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
-    public class ElectronScytheVisitor extends EffectVisitorBase{
+    public class ElectronScytheContext implements EffectContext{
 
-        public ElectronScytheVisitor(){
-            super();
-        }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
             return null;
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return null;
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -107,7 +110,7 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,1,0, powerUpCards);
@@ -124,8 +127,18 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -170,7 +183,7 @@ public class TestElectroscytheEffect {
         map.movePlayer(player2, destination);
         map.movePlayer(player3, destination);
 
-        visitor = new ElectronScytheVisitor();
+        manager = new EffectManager(new ElectronScytheContext());
 
     }
 
@@ -179,7 +192,7 @@ public class TestElectroscytheEffect {
         ElectroscytheEffect effect = new ElectroscytheEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -195,10 +208,10 @@ public class TestElectroscytheEffect {
     public void testApplyNoPayment() {
         ElectroscytheEffect effect = new ElectroscytheEffect();
 
-        visitorNoPayment = new ElectronScytheVisitorNoPayment();
+        managerNoPayment = new EffectManager(new ElectronScytheContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

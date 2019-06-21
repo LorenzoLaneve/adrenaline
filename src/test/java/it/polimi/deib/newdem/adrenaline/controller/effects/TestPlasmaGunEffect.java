@@ -28,20 +28,16 @@ public class TestPlasmaGunEffect {
     Player player2;
     Player player3;
     Player player4;
-    PlasmaGunVisitor visitor;
-    PlasmaGunVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class PlasmaGunVisitor extends EffectVisitorBase{
-
-        public PlasmaGunVisitor(){
-            super();
-        }
+    public class PlasmaGunContext implements EffectContext{
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -55,12 +51,12 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = effectsCounter;
 
             effectsCounter++;
@@ -70,7 +66,7 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
 
@@ -88,19 +84,25 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class PlasmaGunVisitorNoPayment extends EffectVisitorBase{
-
-        public PlasmaGunVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class PlasmaGunContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -114,12 +116,12 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = effectsCounter;
 
             effectsCounter++;
@@ -129,7 +131,7 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -146,8 +148,18 @@ public class TestPlasmaGunEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -203,7 +215,7 @@ public class TestPlasmaGunEffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new PlasmaGunVisitor();
+        manager = new EffectManager(new PlasmaGunContext());
 
         counter = 0;
         effectsCounter = 1;
@@ -215,7 +227,7 @@ public class TestPlasmaGunEffect {
         PlasmaGunEffect effect = new PlasmaGunEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -228,10 +240,10 @@ public class TestPlasmaGunEffect {
     public void testApplyNoPayment(){
         PlasmaGunEffect effect = new PlasmaGunEffect();
 
-        visitorNoPayment = new PlasmaGunVisitorNoPayment();
+        managerNoPayment = new EffectManager(new PlasmaGunContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

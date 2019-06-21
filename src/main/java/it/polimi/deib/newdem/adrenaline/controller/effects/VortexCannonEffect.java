@@ -17,46 +17,44 @@ public class VortexCannonEffect implements Effect {
 
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        Tile vortexTile = visitor.getTile(new IntersectTileSelector(
-                new VisibleTileSelector(attacker.getTile()),
-                new NearTileSelector(attacker, 1, 100)
+        Tile vortexTile = manager.bindTile(new IntersectTileSelector(
+                new VisibleTileSelector(actor.getTile()),
+                new NearTileSelector(actor, 1, 100)
         ));
 
-        List<Player> excludedPlayers = new ArrayList<>();
-
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new NearPlayerSelector(vortexTile, 0,1));
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new NearPlayerSelector(vortexTile, 0,1));
         if (redPlayer.getTile() != vortexTile) {
-            visitor.reportGameChange(new MovementGameChange(redPlayer, vortexTile));
+            manager.movePlayer(redPlayer, vortexTile);
         }
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
+        manager.damagePlayer(actor, redPlayer, 2, 0);
 
-        if (visitor.requestPayment(attacker, BLACK_HOLE_PAYMENT, BLACK_HOLE)) {
-            excludedPlayers.add(redPlayer);
-
-            Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE,
-                    new BlackListFilterPlayerSelector(excludedPlayers, new NearPlayerSelector(vortexTile, 0, 1)));
-
-            if (bluePlayer.getTile() != vortexTile) {
-                visitor.reportGameChange(new MovementGameChange(bluePlayer, vortexTile));
-            }
-            visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
-
-
-            excludedPlayers.add(bluePlayer);
-            Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN,
-                    new BlackListFilterPlayerSelector(excludedPlayers, new NearPlayerSelector(vortexTile, 0, 1)),
-                                                        false);
-
-            if (greenPlayer != null) {
-                if (greenPlayer.getTile() != vortexTile) {
-                    visitor.reportGameChange(new MovementGameChange(greenPlayer, vortexTile));
-                }
-                visitor.reportGameChange(new DamageGameChange(attacker, greenPlayer, 1, 0));
-            }
+        if (manager.pay(BLACK_HOLE, BLACK_HOLE_PAYMENT)) {
+            blackHole(manager, actor, vortexTile);
         }
 
     }
+
+    private void blackHole(EffectManager manager, Player actor, Tile vortexTile) throws UndoException {
+
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new NearPlayerSelector(vortexTile, 0, 1));
+
+        if (bluePlayer.getTile() != vortexTile) {
+            manager.movePlayer(bluePlayer, vortexTile);
+        }
+        manager.damagePlayer(actor, bluePlayer, 1, 0);
+
+
+        Player greenPlayer = manager.bindPlayer(MetaPlayer.GREEN,
+                new NearPlayerSelector(vortexTile, 0, 1), false);
+
+        if (greenPlayer != null) {
+            if (greenPlayer.getTile() != vortexTile) {
+                manager.movePlayer(greenPlayer, vortexTile);
+            }
+            manager.damagePlayer(actor, greenPlayer, 1, 0);
+        }
+    }
+
 }

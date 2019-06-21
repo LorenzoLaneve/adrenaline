@@ -18,42 +18,31 @@ public class MachineGunEffect implements Effect {
 
     private static final PaymentInvoice TURRET_TRIPOD_PAYMENT = new PaymentInvoice(0,1,0,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
+        manager.damagePlayer(actor, redPlayer, 1, 0);
 
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
-
-
-        List<Player> excludedPlayers = new ArrayList<>();
-        excludedPlayers.add(redPlayer);
-
-        Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE,
-                new BlackListFilterPlayerSelector(excludedPlayers, new VisiblePlayerSelector(attacker)), false);
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new VisiblePlayerSelector(actor), false);
         if (bluePlayer != null) {
-            visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
+            manager.damagePlayer(actor, bluePlayer, 1, 0);
         }
 
-        if (visitor.requestPayment(attacker, FOCUS_SHOT_PAYMENT, FOCUS_SHOT)) {
-            visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
+        if (manager.pay(FOCUS_SHOT, FOCUS_SHOT_PAYMENT)) {
+            manager.damagePlayer(actor, redPlayer, 1, 0);
         }
 
-        if (visitor.requestPayment(attacker, TURRET_TRIPOD_PAYMENT, TURRET_TRIPOD)) {
-
+        if (manager.pay(TURRET_TRIPOD, TURRET_TRIPOD_PAYMENT)) {
             if (bluePlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1,0));
+                manager.damagePlayer(actor, bluePlayer, 1,0);
             }
 
-            excludedPlayers.add(bluePlayer);
-            Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN,
-                    new BlackListFilterPlayerSelector(excludedPlayers, new VisiblePlayerSelector(attacker)), false);
-
+            Player greenPlayer = manager.bindPlayer(MetaPlayer.GREEN, new VisiblePlayerSelector(actor), false);
             if (greenPlayer != null) {
-                visitor.reportGameChange(new DamageGameChange(attacker, greenPlayer, 1, 0));
+                manager.damagePlayer(actor, greenPlayer, 1, 0);
             }
         }
-
 
     }
 }

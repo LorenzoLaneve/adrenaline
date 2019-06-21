@@ -27,20 +27,16 @@ public class TestCyberbladeEffect {
     Player player1;
     Player player2;
     Player player3;
-    CyberbladeVisitor visitor;
-    CyberbladeVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
 
 
-    public class CyberbladeVisitor extends EffectVisitorBase{
-
-        public CyberbladeVisitor(){
-            super();
-        }
+    public class CyberbladeContext implements EffectContext{
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -52,12 +48,12 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -67,7 +63,7 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(0,0,1, powerUpCards);
@@ -84,19 +80,25 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
-        }
-    }
-
-    public class CyberbladeVisitorNoPayment extends EffectVisitorBase{
-
-        public CyberbladeVisitorNoPayment(){
-            super();
         }
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
+        }
+    }
+
+    public class CyberbladeContextNoPayment implements EffectContext {
+
+        @Override
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -108,12 +110,12 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
             return map.getTile(new TilePosition(1,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
 
             Integer returnInt = counter;
 
@@ -124,7 +126,7 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             return null;
         }
 
@@ -139,8 +141,18 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -189,9 +201,9 @@ public class TestCyberbladeEffect {
         map.movePlayer(player2, destination);
         map.movePlayer(player3, destination3);
 
-        visitor = new CyberbladeVisitor();
+        manager = new EffectManager(new CyberbladeContext());
 
-        counter = 0;
+        counter = 1;
 
     }
 
@@ -200,7 +212,7 @@ public class TestCyberbladeEffect {
         CyberbladeEffect effect = new CyberbladeEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -217,10 +229,10 @@ public class TestCyberbladeEffect {
     public void testApplyNoPayment() {
         CyberbladeEffect effect = new CyberbladeEffect();
 
-        visitorNoPayment = new CyberbladeVisitorNoPayment();
+        managerNoPayment = new EffectManager(new CyberbladeContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

@@ -27,20 +27,16 @@ public class TestSledgehammerEffect {
     Player player2;
     Player player3;
     Player player4;
-    SledgehammerVisitor visitor;
-    SledgehammerVisitorNoPayment visitorNoPayment;
+    EffectManager manager;
+    EffectManager managerNoPayment;
     Game game;
     int counter;
     int effectsCounter;
 
-    public class SledgehammerVisitor extends EffectVisitorBase{
-
-        public SledgehammerVisitor(){
-            super();
-        }
+    public class SledgehammerContext implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -54,14 +50,14 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             return map.getTile(new TilePosition(2,0));
 
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -71,7 +67,7 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,0,1, powerUpCards);
@@ -89,20 +85,26 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
 
-    public class SledgehammerVisitorNoPayment extends EffectVisitorBase{
-
-        public SledgehammerVisitorNoPayment(){
-            super();
-        }
+    public class SledgehammerContextNoPayment implements EffectContext {
 
         @Override
-        public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
+        public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
 
             if(player == MetaPlayer.RED){
                 return player2;
@@ -116,13 +118,13 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public Tile askForTile(TileSelector selector) throws UndoException {
+        public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
 
             return map.getTile(new TilePosition(0,0));
         }
 
         @Override
-        public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
+        public Integer chooseFragment(List<Integer> choices) throws UndoException {
             Integer returnInt = counter;
 
             counter++;
@@ -132,7 +134,7 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -150,8 +152,18 @@ public class TestSledgehammerEffect {
         }
 
         @Override
-        public Player getAttacker() {
+        public Player getActor() {
             return player1;
+        }
+
+        @Override
+        public Player getAttacker() {
+            return null;
+        }
+
+        @Override
+        public Player getVictim() {
+            return null;
         }
     }
 
@@ -208,7 +220,7 @@ public class TestSledgehammerEffect {
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
 
-        visitor = new SledgehammerVisitor();
+        manager = new EffectManager(new SledgehammerContext());
 
         counter = 0;
         effectsCounter = 0;
@@ -220,7 +232,7 @@ public class TestSledgehammerEffect {
         SledgehammerEffect effect = new SledgehammerEffect();
 
         try{
-            effect.apply(visitor);
+            manager.execute(effect);
         }catch (Exception e){
             fail();
         }
@@ -234,10 +246,10 @@ public class TestSledgehammerEffect {
         counter = 1;
         SledgehammerEffect effect = new SledgehammerEffect();
 
-        visitorNoPayment = new SledgehammerVisitorNoPayment();
+        managerNoPayment = new EffectManager(new SledgehammerContextNoPayment());
 
         try{
-            effect.apply(visitorNoPayment);
+            managerNoPayment.execute(effect);
         }catch (Exception e){
             fail();
         }

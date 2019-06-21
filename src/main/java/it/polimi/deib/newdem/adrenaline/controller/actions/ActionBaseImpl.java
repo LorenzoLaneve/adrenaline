@@ -9,7 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
-public class ActionBaseImpl extends EffectVisitorBase implements Action {
+public class ActionBaseImpl implements Action {
 
     private ActionDataSource listener;
 
@@ -22,7 +22,7 @@ public class ActionBaseImpl extends EffectVisitorBase implements Action {
 
     @Override
     public void start() throws UndoException {
-        visit(getEffect());
+        //visit(getEffect());
     }
 
     @Override
@@ -35,44 +35,4 @@ public class ActionBaseImpl extends EffectVisitorBase implements Action {
         return null;
     }
 
-
-    @Override
-    public Player askForPlayer(MetaPlayer player, PlayerSelector selector, boolean mandatory) throws UndoException {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public Tile askForTile(TileSelector selector) throws UndoException {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public Integer askForEffectChoice(List<Integer> choices) throws UndoException {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public PaymentReceipt askForPayment(Player player, PaymentInvoice payment, Integer effect) throws UndoException {
-        // TODO
-        return null;
-    }
-
-
-    @Override
-    public void applyGameChange(GameChange gameChange) {
-        gameChange.update(actor.getGame());
-    }
-
-    @Override
-    public void revertGameChange(GameChange gameChange) {
-        gameChange.revert(actor.getGame());
-    }
-
-    @Override
-    public Player getAttacker() {
-        return actor;
-    }
 }

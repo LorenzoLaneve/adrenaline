@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -21,54 +22,42 @@ public class CyberbladeEffect implements Effect {
 
     private static final PaymentInvoice SLICE_AND_DICE_PAYMENT = new PaymentInvoice(0,0,1,0);
 
-    @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
 
+    @Override
+    public void apply(EffectManager manager, Player actor) throws UndoException {
         List<Integer> choices = new ArrayList<>();
         choices.add(BASIC_EFFECT);
         choices.add(SHADOWSTEP);
 
-        if (visitor.requestPayment(attacker, SLICE_AND_DICE_PAYMENT, SLICE_AND_DICE)) {
+        if (manager.pay(SLICE_AND_DICE, SLICE_AND_DICE_PAYMENT)) {
             choices.add(SLICE_AND_DICE);
         }
 
+        EffectSwitch.create(choices)
+                .when(BASIC_EFFECT, this::basicEffect)
+                .when(SHADOWSTEP, this::shadowstep)
+                .when(SLICE_AND_DICE, this::sliceAndDice)
+                .execute(manager, actor);
 
-        List<Player> excludedPlayers = new ArrayList<>();
+    }
 
-        do {
-            Integer choice = visitor.chooseEffect(choices);
-            if (choice == null) {
-                break;
-            }
 
-            switch (choice) {
-                case BASIC_EFFECT:
-                    Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED,
-                            new BlackListFilterPlayerSelector(excludedPlayers, new SameTilePlayerSelector(attacker)));
+    private void basicEffect(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new SameTilePlayerSelector(actor));
 
-                    visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2,0));
-                    excludedPlayers.remove(redPlayer);
-                    break;
+        manager.damagePlayer(actor, redPlayer, 2,0);
+    }
 
-                case SHADOWSTEP:
-                    Tile destTile = visitor.getTile(new NearTileSelector(attacker, 1,1));
+    private void shadowstep(EffectManager manager, Player actor) throws UndoException {
+        Tile destTile = manager.bindTile(new NearTileSelector(actor, 1, 1));
 
-                    visitor.reportGameChange(new MovementGameChange(attacker, destTile));
-                    break;
+        manager.movePlayer(actor, destTile);
+    }
 
-                case SLICE_AND_DICE:
-                    Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE,
-                            new BlackListFilterPlayerSelector(excludedPlayers, new SameTilePlayerSelector(attacker)));
+    private void sliceAndDice(EffectManager manager, Player actor) throws UndoException {
+        Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new SameTilePlayerSelector(actor));
 
-                    visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 2,0));
-                    excludedPlayers.remove(bluePlayer);
-                    break;
-            }
-
-            choices.remove(choice);
-        } while (!choices.isEmpty());
-
+        manager.damagePlayer(actor, bluePlayer, 2, 0);
     }
 
 }

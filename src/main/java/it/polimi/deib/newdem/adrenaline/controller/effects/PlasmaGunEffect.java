@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
+import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -20,51 +21,30 @@ public class PlasmaGunEffect implements Effect {
 
     private static final PaymentInvoice CHARGED_SHOT_PAYMENT = new PaymentInvoice(0,1,0,0);
 
+
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
 
-        List<Integer> choices = new ArrayList<>();
-        choices.add(BASIC_EFFECT);
-        choices.add(PHASE_GLIDE);
+        EffectSwitch.create(BASIC_EFFECT, PHASE_GLIDE)
+                .when(BASIC_EFFECT, this::basicMode)
+                .when(PHASE_GLIDE, this::phaseGlide)
+                .execute(manager, actor);
 
-        Player redPlayer = null;
-        do {
-            Integer choice = visitor.chooseEffect(choices);
-
-            if (choice != null) {
-                switch (choice) {
-                    case BASIC_EFFECT:
-                        redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
-
-                        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2,0));
-                        break;
-
-                    case PHASE_GLIDE:
-                        Tile destTile = visitor.getTile(new NearTileSelector(attacker, 0, 2));
-
-                        visitor.reportGameChange(new MovementGameChange(attacker, destTile));
-                        break;
-
-                    default: break;
-                }
-
-                choices.remove(choice);
-            } else {
-                break;
-            }
-
-        } while (choices.isEmpty());
-
-        if (redPlayer != null) {
-
-            if (visitor.requestPayment(redPlayer, CHARGED_SHOT_PAYMENT, CHARGED_SHOT)) {
-                visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 1, 0));
-            }
-
+        Player redPlayer = manager.getPlayer(MetaPlayer.RED);
+        if (redPlayer != null && manager.pay(CHARGED_SHOT, CHARGED_SHOT_PAYMENT)) {
+            manager.damagePlayer(actor, redPlayer, 1, 0);
         }
-
-
     }
 
+    private void basicMode(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
+
+        manager.damagePlayer(actor, redPlayer, 2,0);
+    }
+
+    private void phaseGlide(EffectManager manager, Player actor) throws UndoException {
+        Tile destTile = manager.bindTile(new NearTileSelector(actor, 0, 2));
+
+        manager.movePlayer(actor, destTile);
+    }
 }

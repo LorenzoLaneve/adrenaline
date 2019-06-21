@@ -16,20 +16,17 @@ public class THOREffect implements Effect {
 
 
     @Override
-    public void apply(EffectVisitor visitor) throws UndoException {
-        Player attacker = visitor.getBoundPlayer(MetaPlayer.ATTACKER);
+    public void apply(EffectManager manager, Player actor) throws UndoException {
+        Player redPlayer = manager.bindPlayer(MetaPlayer.RED, new VisiblePlayerSelector(actor));
+        manager.damagePlayer(actor, redPlayer, 2, 0);
 
-        Player redPlayer = visitor.getBoundPlayer(MetaPlayer.RED, new VisiblePlayerSelector(attacker));
-        visitor.reportGameChange(new DamageGameChange(attacker, redPlayer, 2, 0));
+        if (manager.pay(CHAIN_REACTION, CHAIN_REACTION_PAYMENT)) {
+            Player bluePlayer = manager.bindPlayer(MetaPlayer.BLUE, new VisiblePlayerSelector(redPlayer));
+            manager.damagePlayer(actor, bluePlayer, 1, 0);
 
-        if (visitor.requestPayment(attacker, CHAIN_REACTION_PAYMENT, CHAIN_REACTION)) {
-
-            Player bluePlayer = visitor.getBoundPlayer(MetaPlayer.BLUE, new VisiblePlayerSelector(redPlayer));
-            visitor.reportGameChange(new DamageGameChange(attacker, bluePlayer, 1, 0));
-
-            if (visitor.requestPayment(attacker, HIGH_VOLTAGE_PAYMENT, HIGH_VOLTAGE)) {
-                Player greenPlayer = visitor.getBoundPlayer(MetaPlayer.GREEN, new VisiblePlayerSelector(bluePlayer));
-                visitor.reportGameChange(new DamageGameChange(attacker, greenPlayer, 2, 0));
+            if (manager.pay(HIGH_VOLTAGE, HIGH_VOLTAGE_PAYMENT)) {
+                Player greenPlayer = manager.bindPlayer(MetaPlayer.GREEN, new VisiblePlayerSelector(bluePlayer));
+                manager.damagePlayer(actor, greenPlayer, 2, 0);
             }
         }
     }
