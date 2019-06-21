@@ -141,4 +141,13 @@ public class User {
         return getBoundConnection() != null;
     }
 
+    /**
+     * Binds the given user's connection to this user.
+     * The given user will no longer have a connection and should be freed.
+     */
+    public void takeOverConnection(User user) {
+        bindConnection(user.getBoundConnection());
+        user.bindConnection(null);
+    }
+
 }

@@ -3,11 +3,6 @@ package it.polimi.deib.newdem.adrenaline.view;
 public interface LobbyView {
 
     /**
-     * Associates the given game view to the lobby view.
-     */
-    void addGameView(GameView gv);
-
-    /**
      * Notifies that a new user with the given name entered the lobby.
      */
     void addUser(String name);

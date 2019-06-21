@@ -3,11 +3,15 @@ package it.polimi.deib.newdem.adrenaline.controller;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LobbyRegistry {
 
     private List<LobbyController> lobbies;
+
+    private Map<User, LobbyController> userLocations;
 
     private LobbyController firstLobbyController;
 
@@ -15,11 +19,12 @@ public class LobbyRegistry {
 
     public LobbyRegistry(ServerInstance core) {
         this.lobbies = new ArrayList<>();
+        this.userLocations = new HashMap<>();
 
         this.core = core;
     }
 
-    public LobbyController getAvailableLobbyController() {
+    private synchronized LobbyController getAvailableLobbyController() {
         if (firstLobbyController != null && !firstLobbyController.acceptsNewUsers()) {
             firstLobbyController = null;
         }
@@ -32,14 +37,29 @@ public class LobbyRegistry {
         return firstLobbyController;
     }
 
-    public LobbyController getLobbyController(User user) {
+    private LobbyController getOrCreateLobbyController(User user) {
         //TODO persistence
         return getAvailableLobbyController();
     }
 
-    public boolean userHasLobby(User user) {
-        // TODO
-        return false;
+    public void assignLobby(User user) {
+        LobbyController lobby = getOrCreateLobbyController(user);
+        lobby.addUser(user);
+        userLocations.put(user, lobby);
+
+        core.getLogger().info(String.format("User %s was assigned to lobby %s.", user.hashCode(), lobby.hashCode()));
+    }
+
+    public void removeUser(User user) {
+        LobbyController lobby = getLobbyByUser(user);
+        if (lobby != null && lobby.acceptsNewUsers()) {
+            userLocations.remove(user);
+            lobby.removeUser(user);
+        }
+    }
+
+    public LobbyController getLobbyByUser(User user) {
+        return userLocations.get(user);
     }
 
 }

@@ -40,8 +40,18 @@ public class UserRegistry implements UserListener {
 
     private synchronized void setNameForUser(String name, User user) {
         if (userNames.get(name) != null) {
-            core.getLogger().info(String.format("User %s tried to update their name to %s, which is already taken.", user.hashCode(), name));
-            user.sendEvent(new RegisterUsernameEvent(false));
+            User oldUser = userNames.get(name);
+            if (!oldUser.isConnected()) {
+                core.getLogger().info(String.format("User %s reconnected.", oldUser.getName()));
+
+                user.removeListener(this);
+                unnamedUsers.remove(user);
+
+                oldUser.takeOverConnection(user);
+            } else {
+                core.getLogger().info(String.format("User %s tried to update their name to %s, which is already taken.", user.hashCode(), name));
+                user.sendEvent(new RegisterUsernameEvent(false));
+            }
         } else {
             userNames.put(name, user);
             user.setName(name);
@@ -50,6 +60,8 @@ public class UserRegistry implements UserListener {
 
             user.sendEvent(new RegisterUsernameEvent(true));
             core.getLogger().info(String.format("User %s successfully changed their name to %s.", user.hashCode(), name));
+
+            core.getLobbyRegistry().assignLobby(user);
         }
     }
 
@@ -73,8 +85,14 @@ public class UserRegistry implements UserListener {
     public void userDidChangeConnection(User user, UserConnection oldConnection, UserConnection newConnection) {
         LobbyRegistry lobbyRegistry = core.getLobbyRegistry();
 
-        if (!user.isConnected() && !lobbyRegistry.userHasLobby(user)) {
-            unregisterUser(user);
+        if (!user.isConnected()) {
+            LobbyController lobby = lobbyRegistry.getLobbyByUser(user);
+            if (lobby != null && lobby.acceptsNewUsers()) {
+                lobbyRegistry.removeUser(user);
+                unregisterUser(user);
+            } else if (lobby == null) {
+                unregisterUser(user);
+            }
         }
     }
 
