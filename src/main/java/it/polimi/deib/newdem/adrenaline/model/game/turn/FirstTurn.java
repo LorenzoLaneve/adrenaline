@@ -31,7 +31,7 @@ public class FirstTurn extends TurnBaseImpl {
         PowerUpCard selection = getDataSource().chooseCard(p.getInventory().getPowerUps());
 
         // get set pos in map
-        Tile target = map.getSpawnPointFromColor(selection.getColor());
+        Tile target = map.getSpawnPointFromColor(selection.getEquivalentAmmo());
         map.movePlayer(getActivePlayer(), target);
 
     }
