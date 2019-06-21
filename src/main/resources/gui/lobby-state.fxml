@@ -1,0 +1,22 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<GridPane>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="37.0" prefWidth="38.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="94.0" prefWidth="193.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="39.0" prefWidth="39.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints prefHeight="50.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="40.0" minHeight="23.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="77.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints prefHeight="50.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label text="Waiting for three players" wrapText="true" id="lobbyState" styleClass="lobby-state" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="" id="lobbyTimer" styleClass="lobby-timer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    </children>
+</GridPane>

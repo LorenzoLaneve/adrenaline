@@ -1,0 +1,15 @@
+.subtitle-label {
+    -fx-text-fill: white;
+    -fx-width: 100%;
+}
+
+.form-label {
+    -fx-width: 100%;
+    -fx-text-fill: white;
+    -fx-text-align: center;
+    -fx-padding: 0 10px 0 0;
+}
+
+.footer-label {
+    -fx-text-fill: white;
+}

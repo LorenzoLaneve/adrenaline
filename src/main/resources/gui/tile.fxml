@@ -1,0 +1,32 @@
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<Pane styleClass="tile-slot">
+    <GridPane>
+        <rowConstraints>
+            <RowConstraints prefHeight="20" />
+            <RowConstraints prefHeight="65" />
+            <RowConstraints prefHeight="65" />
+            <RowConstraints prefHeight="20" />
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints prefWidth="20" />
+            <ColumnConstraints prefWidth="130" />
+            <ColumnConstraints prefWidth="20" />
+        </columnConstraints>
+        <children>
+            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                <Pane styleClass="player-pin,yellow" />
+                <Pane styleClass="player-pin,cyan" />
+                <Pane styleClass="player-pin,magenta" />
+            </FlowPane>
+            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                <Pane styleClass="drop-icon,blue-ammo" />
+                <Pane styleClass="drop-icon,blue-ammo" />
+                <Pane styleClass="drop-icon,powerup" />
+            </FlowPane>
+        </children>
+    </GridPane>
+</Pane>

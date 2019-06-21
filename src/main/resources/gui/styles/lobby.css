@@ -1,0 +1,37 @@
+.user-slot Label {
+    display: block;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #aaaaaa, #ffffff);
+    -fx-pref-width: 300.0;
+    -fx-pref-height: 50.0;
+    -fx-padding: 10 0 10 10;
+
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 15px;
+
+    -fx-background-radius: 5px;
+
+    -fx-border-radius: 5px;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px;
+}
+
+.username-form {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-color: white;
+
+    -fx-background-radius: 5px;
+    -fx-background-color: linear-gradient(from 0% 50% to 100% 50%, #cccccc, #999999);
+
+    -fx-border-radius: 5px;
+}
+
+.lobby-state {
+    -fx-font-family: ethnocentric;
+    -fx-text-fill: white;
+}
+
+.lobby-timer {
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<?import javafx.scene.layout.StackPane?>
+<StackPane id="overlay-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@styles/general.css" />
+        <URL value="@styles/game.css" />
+    </stylesheets>
+    <children>
+        <BorderPane styleClass="main-pane">
+            <right>
+                <ScrollPane styleClass="players-scroll-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <content>
+                        <FlowPane maxWidth="300.0" minWidth="300.0" prefWidth="300.0" vgap="15.0" BorderPane.alignment="CENTER">
+                            <FlowPane styleClass="player-slot,yellow">
+                                <children>
+                                    <FlowPane styleClass="player-panel">
+                                        <Label styleClass="player-name" text="Yellow" />
+                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                            <Label styleClass="ammo-amt,red" text="0" />
+                                            <Label styleClass="ammo-amt,blue" text="0" />
+                                            <Label styleClass="ammo-amt,yellow" text="0" />
+                                            <Label styleClass="ammo-amt,powerup" text="0" />
+                                        </FlowPane>
+                                    </FlowPane>
+                                    <Pane styleClass="damage-board">
+                                        <GridPane>
+                                            <rowConstraints>
+                                                <RowConstraints prefHeight="42.0" />
+                                                <RowConstraints prefHeight="58.0" />
+                                            </rowConstraints>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="300.0" />
+                                            </columnConstraints>
+                                            <children>
+                                                <GridPane GridPane.rowIndex="0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints prefWidth="174.0" />
+                                                        <ColumnConstraints prefWidth="126.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints prefHeight="50.0" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <FlowPane hgap="-7.0" styleClass="mark-signs" GridPane.columnIndex="1">
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,gray" />
+                                                            <Pane styleClass="dmg,gray" />
+                                                            <Pane styleClass="dmg,green" />
+                                                        </FlowPane>
+                                                    </children>
+                                                </GridPane>
+                                                <GridPane GridPane.rowIndex="1">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints prefWidth="10.0" />
+                                                        <ColumnConstraints prefWidth="290.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints prefHeight="50.0" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <FlowPane hgap="9.0" prefWidth="290.0" styleClass="dmg-signs" GridPane.columnIndex="1">
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,cyan" />
+                                                            <Pane styleClass="dmg,cyan" />
+                                                            <Pane styleClass="dmg,gray" />
+                                                            <Pane styleClass="dmg,gray" />
+                                                            <Pane styleClass="dmg,gray" />
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,magenta" />
+                                                            <Pane styleClass="dmg,green" />
+                                                            <Pane styleClass="dmg,green" />
+                                                            <Pane styleClass="dmg,green" />
+                                                        </FlowPane>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </GridPane>
+                                    </Pane>
+                                </children>
+                            </FlowPane>
+                            <FlowPane styleClass="player-slot,cyan">
+                                <children>
+                                    <FlowPane styleClass="player-panel">
+                                        <Label styleClass="player-name" text="Cyan" />
+                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                            <Label styleClass="ammo-amt,red" text="0" />
+                                            <Label styleClass="ammo-amt,blue" text="0" />
+                                            <Label styleClass="ammo-amt,yellow" text="0" />
+                                            <Label styleClass="ammo-amt,powerup" text="0" />
+                                        </FlowPane>
+                                    </FlowPane>
+                                    <Pane styleClass="damage-board" />
+                                </children>
+                            </FlowPane>
+                            <FlowPane styleClass="player-slot,magenta">
+                                <children>
+                                    <FlowPane styleClass="player-panel">
+                                        <Label styleClass="player-name" text="Magenta" />
+                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                            <Label styleClass="ammo-amt,red" text="0" />
+                                            <Label styleClass="ammo-amt,blue" text="0" />
+                                            <Label styleClass="ammo-amt,yellow" text="0" />
+                                            <Label styleClass="ammo-amt,powerup" text="0" />
+                                        </FlowPane>
+                                    </FlowPane>
+                                    <Pane styleClass="damage-board" />
+                                </children>
+                            </FlowPane>
+                            <FlowPane styleClass="player-slot,gray">
+                                <children>
+                                    <FlowPane styleClass="player-panel">
+                                        <Label styleClass="player-name" text="Gray" />
+                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                            <Label styleClass="ammo-amt,red" text="0" />
+                                            <Label styleClass="ammo-amt,blue" text="0" />
+                                            <Label styleClass="ammo-amt,yellow" text="0" />
+                                            <Label styleClass="ammo-amt,powerup" text="0" />
+                                        </FlowPane>
+                                    </FlowPane>
+                                    <Pane styleClass="damage-board" />
+                                </children>
+                            </FlowPane>
+                            <FlowPane styleClass="player-slot,green">
+                                <children>
+                                    <FlowPane styleClass="player-panel">
+                                        <Label styleClass="player-name" text="Green" />
+                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                            <Label styleClass="ammo-amt,red" text="0" />
+                                            <Label styleClass="ammo-amt,blue" text="0" />
+                                            <Label styleClass="ammo-amt,yellow" text="0" />
+                                            <Label styleClass="ammo-amt,powerup" text="0" />
+                                        </FlowPane>
+                                    </FlowPane>
+                                    <Pane styleClass="damage-board" />
+                                </children>
+                            </FlowPane>
+                        </FlowPane>
+                    </content>
+                </ScrollPane>
+            </right>
+            <center>
+                <GridPane styleClass="main-pane" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="400.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="60.0" />
+                    </rowConstraints>
+                    <children>
+                        <ScrollPane styleClass="map-scroll-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <content>
+                                <fx:include source="map.fxml" />
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </GridPane>
+            </center>
+        </BorderPane>
+
+        <!-- <StackPane styleClass="overlay-pane">
+            <fx:include source="player-equip.fxml" />
+        </StackPane> -->
+    </children>
+</StackPane>

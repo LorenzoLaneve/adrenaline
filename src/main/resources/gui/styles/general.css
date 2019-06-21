@@ -1,0 +1,43 @@
+@font-face {
+    font-family: ethnocentric;
+    src: url('ethnocentric-italic.ttf');
+}
+
+.main-pane {
+    -fx-background-color: rgb(27, 26, 20);
+    -fx-vertical-align: middle;
+}
+
+Button, ToggleButton {
+    -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, #666666, #222222);
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+Button:hover, ToggleButton:hover {
+    -fx-border-color: white;
+}
+
+Button:armed, ToggleButton:armed {
+    -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, #333333, #222222);
+}
+
+ToggleButton:selected {
+    -fx-background-color: linear-gradient(from 50% 100% to 50% 0%, #666666, #222222);
+}
+
+.title-label {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 35pt;
+    -fx-font-family: ethnocentric;
+    -fx-font-style: italic;
+    -fx-width: 100%;
+}
+
+.error-label {
+    -fx-text-fill: red;
+}

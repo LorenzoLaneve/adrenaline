@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.FlowPane?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<FlowPane styleClass="player-slot">
+    <children>
+        <FlowPane styleClass="player-panel">
+            <Label styleClass="player-name" text="Yellow" />
+            <FlowPane hgap="5.0" styleClass="ammo-panel">
+                <Label styleClass="ammo-amt,red" text="0" />
+                <Label styleClass="ammo-amt,blue" text="0" />
+                <Label styleClass="ammo-amt,yellow" text="0" />
+                <Label styleClass="ammo-amt,powerup" text="0" />
+            </FlowPane>
+        </FlowPane>
+        <Pane styleClass="damage-board">
+            <GridPane>
+                <rowConstraints>
+                    <RowConstraints prefHeight="42.0" />
+                    <RowConstraints prefHeight="58.0" />
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="300.0" />
+                </columnConstraints>
+                <children>
+                    <GridPane GridPane.rowIndex="0">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="174.0" />
+                            <ColumnConstraints prefWidth="126.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints prefHeight="50.0" />
+                        </rowConstraints>
+                        <children>
+                            <FlowPane hgap="-7.0" styleClass="mark-signs" GridPane.columnIndex="1" />
+                        </children>
+                    </GridPane>
+                    <GridPane GridPane.rowIndex="1">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="10.0" />
+                            <ColumnConstraints prefWidth="290.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints prefHeight="50.0" />
+                        </rowConstraints>
+                        <children>
+                            <FlowPane hgap="9.0" prefWidth="290.0" styleClass="dmg-signs" GridPane.columnIndex="1" />
+                        </children>
+                    </GridPane>
+                </children>
+            </GridPane>
+        </Pane>
+    </children>
+</FlowPane>

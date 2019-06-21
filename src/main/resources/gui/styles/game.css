@@ -1,0 +1,327 @@
+
+.map-scroll-pane, .players-scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.map-pane {
+    -fx-background-color: rgb(27, 26, 20);
+    -fx-background-image: url("assets/tables/Map0_0.png");
+    -fx-background-repeat: none;
+    -fx-background-position: left top;
+    -fx-background-size: 1100 833;
+    -fx-pref-width: 1100;
+    -fx-pref-height: 833;
+}
+
+.tile-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+}
+
+.v-card-slots Group {
+    -fx-pref-width: 104;
+    -fx-pref-height: 158;
+    -fx-background-color: transparent;
+}
+
+.h-card-slots Group {
+    -fx-pref-width: 158;
+    -fx-pref-height: 104;
+    -fx-background-color: transparent;
+}
+
+.v-card-slots ImageView, .h-card-slots ImageView {
+    -fx-pref-width: 104;
+    -fx-pref-height: 158;
+}
+
+.h-card-slots ImageView {
+    -fx-rotate: 90;
+}
+
+.kill-track-slot, .kill-track-slot FlowPane {
+    -fx-pref-width: 42;
+    -fx-pref-height: 58;
+    -fx-max-height: 58;
+    -fx-background-color: transparent;
+}
+
+.kill-track-slot.additional-kills, .kill-track-slot.additional-kills FlowPane {
+    -fx-pref-width: 100;
+}
+
+.kill-track-slot .dmg {
+    -fx-pref-width: 20;
+    -fx-pref-height: 58;
+
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+
+.powerup-slot {
+    -fx-pref-width: 80;
+    -fx-pref-height: 114;
+
+    -fx-background-size: 80 114;
+    -fx-background-radius: 5;
+    -fx-background-image: url("assets/cards/powerup_flipped.png");
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-border-color: transparent;
+}
+
+.powerup-slot:hover {
+    -fx-border-color: white;
+    -fx-cursor: hand;
+}
+
+.powerup-slot:pressed {
+    -fx-border-color: red;
+}
+
+
+.tile-slot {
+    -fx-pref-width: 170;
+    -fx-pref-height: 170;
+    -fx-background-color: transparent;
+}
+
+.player-pin {
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+
+    -fx-background-radius: 15;
+
+    -fx-border-width: 1;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.player-pin.yellow {
+    -fx-background-color: #ffe20a;
+}
+
+.player-pin.cyan {
+    -fx-background-color: #4ed3cc;
+}
+
+.player-pin.magenta {
+    -fx-background-color: #c100ba;
+}
+
+.player-pin.gray {
+    -fx-background-color: #bfbfbf;
+}
+
+.player-pin.green {
+    -fx-background-color: #4ac100;
+}
+
+.drop-icon {
+    -fx-pref-width: 35;
+    -fx-pref-height: 30;
+
+    -fx-background-size: 35 30;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.drop-icon.red-ammo {
+    -fx-background-image: url("assets/red_ammo.png");
+}
+
+.drop-icon.blue-ammo {
+    -fx-background-image: url("assets/blue_ammo.png");
+}
+
+.drop-icon.yellow-ammo {
+    -fx-background-image: url("assets/yellow_ammo.png");
+}
+
+.drop-icon.powerup {
+    -fx-pref-width: 24;
+    -fx-pref-height: 30;
+
+    -fx-background-size: 24 30;
+    -fx-background-image: url("assets/powerup.png");
+}
+
+
+
+.player-slot {
+    -fx-pref-width: 400;
+}
+
+.player-slot .player-panel {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #aaaaaa, #ffffff);
+    -fx-pref-width: 300.0;
+    -fx-pref-height: 50.0;
+
+    -fx-background-radius: 5px;
+
+    -fx-border-radius: 5px;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px;
+}
+
+.player-slot .player-panel .player-name {
+    -fx-pref-width: 150;
+
+    -fx-padding: 10 0 10 10;
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 17px;
+}
+
+.player-slot .player-panel .ammo-panel {
+    -fx-pref-width: 140;
+}
+
+.player-slot .player-panel .ammo-panel .ammo-amt {
+    -fx-pref-width: 30;
+
+    -fx-padding: 2 0 2 0;
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 12px;
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right center;
+    -fx-background-size: 20 17;
+}
+
+.player-slot .player-panel .ammo-panel .ammo-amt.red {
+    -fx-background-image: url("assets/red_ammo.png");
+}
+
+.player-slot .player-panel .ammo-panel .ammo-amt.blue {
+    -fx-background-image: url("assets/blue_ammo.png");
+}
+
+.player-slot .player-panel .ammo-panel .ammo-amt.yellow {
+    -fx-background-image: url("assets/yellow_ammo.png");
+}
+
+.player-slot .player-panel .ammo-panel .ammo-amt.powerup {
+    -fx-background-size: 20 25;
+    -fx-background-image: url("assets/powerup.png");
+}
+
+
+.player-slot .player-panel Label {
+    -fx-text-fill: black;
+}
+
+.player-slot.cyan .player-panel Label, .player-slot.magenta .player-panel Label, .player-slot.green .player-panel Label {
+     -fx-text-fill: white;
+}
+
+.player-slot .damage-board {
+    -fx-pref-width: 300.0;
+    -fx-pref-height: 105.0;
+    -fx-background-repeat: none;
+    -fx-background-position: left top;
+    -fx-background-size: 300 105;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.player-slot.yellow .damage-board, .player-slot.yellow .player-panel {
+    -fx-background-image: url("assets/boards/dmg_yellow_normal.png");
+}
+
+.player-slot.cyan .damage-board, .player-slot.cyan .player-panel {
+    -fx-background-image: url("assets/boards/dmg_cyan_normal.png");
+}
+
+.player-slot.magenta .damage-board, .player-slot.magenta .player-panel {
+    -fx-background-image: url("assets/boards/dmg_magenta_normal.png");
+}
+
+.player-slot.gray .damage-board, .player-slot.gray .player-panel {
+    -fx-background-image: url("assets/boards/dmg_gray_normal.png");
+}
+
+.player-slot.green .damage-board, .player-slot.green .player-panel {
+    -fx-background-image: url("assets/boards/dmg_green_normal.png");
+}
+
+
+.mark-signs .dmg {
+    -fx-pref-width: 15;
+    -fx-pref-height: 22;
+
+    -fx-background-size: 15 22;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.dmg-signs .dmg {
+    -fx-pref-width: 15;
+    -fx-pref-height: 22;
+
+    -fx-background-size: 15 22;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.mark-signs .dmg.yellow, .dmg-signs .dmg.yellow, .kill-track-slot .dmg.yellow {
+    -fx-background-image: url("assets/dmg_yellow.png");
+}
+
+.mark-signs .dmg.cyan, .dmg-signs .dmg.cyan, .kill-track-slot .dmg.cyan {
+    -fx-background-image: url("assets/dmg_cyan.png");
+}
+
+.mark-signs .dmg.magenta, .dmg-signs .dmg.magenta, .kill-track-slot .dmg.magenta {
+    -fx-background-image: url("assets/dmg_magenta.png");
+}
+
+.mark-signs .dmg.gray, .dmg-signs .dmg.gray, .kill-track-slot .dmg.gray {
+    -fx-background-image: url("assets/dmg_gray.png");
+}
+
+.mark-signs .dmg.green, .dmg-signs .dmg.green, .kill-track-slot .dmg.green {
+    -fx-background-image: url("assets/dmg_green.png");
+}
+
+
+.overlay-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.overlay-dialog {
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #aaaaaa, #ffffff);
+
+    -fx-background-radius: 5px;
+
+    -fx-border-radius: 5px;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px;
+}
+
+.overlay-dialog .overlay-dialog-title {
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 15px;
+}
+
+.card-viewer {
+    -fx-pref-width: 580;
+    -fx-padding: 5 0 5 0;
+    -fx-border-width: 1px;
+    -fx-border-color: #aaaaaa;
+    -fx-background-color: white;
+}
+
+.card-viewer.weapon-cards {
+    -fx-pref-height: 180;
+}
+
+.card-viewer.powerup-cards {
+    -fx-pref-height: 150;
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@styles/general.css" />
+        <URL value="@styles/lobby.css" />
+    </stylesheets>
+    <top>
+        <Label alignment="CENTER" styleClass="title-label" text="Adrenaline" BorderPane.alignment="CENTER_LEFT" />
+    </top>
+   <right>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="121.0" minHeight="50.0" prefHeight="185.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+             <Pane prefHeight="10.0" prefWidth="200.0" styleClass="user-slot" GridPane.rowIndex="0">
+                 <children>
+                     <Label id="userSlot1" text="Waiting for players..." />
+                 </children>
+             </Pane>
+             <Pane prefHeight="10.0" prefWidth="200.0" styleClass="user-slot" GridPane.rowIndex="1">
+                 <children>
+                     <Label id="userSlot2" text="Waiting for players..." />
+                 </children>
+             </Pane>
+             <Pane prefHeight="10.0" prefWidth="200.0" styleClass="user-slot" GridPane.rowIndex="2">
+                 <children>
+                     <Label id="userSlot3" text="Waiting for players..." />
+                 </children>
+             </Pane>
+             <Pane prefHeight="10.0" prefWidth="200.0" styleClass="user-slot" GridPane.rowIndex="3">
+                 <children>
+                     <Label id="userSlot4" text="Waiting for players..." />
+                 </children>
+             </Pane>
+             <Pane prefHeight="30.0" prefWidth="200.0" styleClass="user-slot" GridPane.rowIndex="4">
+                 <children>
+                     <Label id="userSlot5" text="Waiting for players..." />
+                 </children>
+             </Pane>
+         </children>
+      </GridPane>
+   </right>
+    <left>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="45.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="78.0" prefWidth="271.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="52.0" prefWidth="52.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="92.0" minHeight="25.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="249.0" minHeight="87.0" prefHeight="213.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="237.0" minHeight="82.0" prefHeight="118.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+         <children>
+             <Pane id="contentPane" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+        </GridPane>
+    </left>
+
+</BorderPane>

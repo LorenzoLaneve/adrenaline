@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<Pane styleClass="map-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@styles/general.css" />
+        <URL value="@styles/game.css" />
+    </stylesheets>
+    <children>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints prefWidth="1100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="188.0" />
+                <RowConstraints prefHeight="643.0" />
+            </rowConstraints>
+            <children>
+                <GridPane GridPane.rowIndex="0">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="581.0" />
+                        <ColumnConstraints prefWidth="353.0" />
+                        <ColumnConstraints prefWidth="166.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="188.0" />
+                    </rowConstraints>
+                    <children>
+                        <FlowPane styleClass="v-card-slots" hgap="16.5" prefWidth="362.0" GridPane.columnIndex="1">
+                            <Group>
+                                <ImageView fitWidth="104" fitHeight="158">
+                                    <image>
+                                        <Image url="@assets/cards/weapon_flipped.png" />
+                                    </image>
+                                </ImageView>
+                            </Group>
+                            <Group>
+                                <ImageView fitWidth="104" fitHeight="158">
+                                    <image>
+                                        <Image url="@assets/cards/weapon_flipped.png" />
+                                    </image>
+                                </ImageView>
+                            </Group>
+                            <Group>
+                                <ImageView fitWidth="104" fitHeight="158">
+                                    <image>
+                                        <Image url="@assets/cards/weapon_flipped.png" />
+                                    </image>
+                                </ImageView>
+                            </Group>
+                        </FlowPane>
+                        <GridPane GridPane.columnIndex="0">
+                            <columnConstraints>
+                                <ColumnConstraints prefWidth="79.0" />
+                                <ColumnConstraints prefWidth="502.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints prefHeight="42.0" />
+                                <RowConstraints prefHeight="146.0" />
+                            </rowConstraints>
+                            <children>
+                                <FlowPane hgap="4.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                            <Pane styleClass="dmg,magenta" />
+                                        </FlowPane>
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                            <Pane styleClass="dmg,yellow" />
+                                            <Pane styleClass="dmg,cyan" />
+                                            <Pane styleClass="dmg,gray" />
+                                        </FlowPane>
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                            <Pane styleClass="dmg,green" />
+                                            <Pane styleClass="dmg,green" />
+                                        </FlowPane>
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot,additional-kills">
+                                        <FlowPane hgap="-9.0" vgap="-40.0">
+                                            <Pane styleClass="dmg,magenta" />
+                                            <Pane styleClass="dmg,green" />
+                                            <Pane styleClass="dmg,magenta" />
+                                            <Pane styleClass="dmg,green" />
+                                        </FlowPane>
+                                    </Pane>
+                                </FlowPane>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="2">
+                            <columnConstraints>
+                                <ColumnConstraints prefWidth="50.0" />
+                                <ColumnConstraints prefWidth="116.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints prefHeight="46.0" />
+                                <RowConstraints prefHeight="142.0" />
+                            </rowConstraints>
+                            <children>
+                                <FlowPane prefHeight="148.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Pane styleClass="powerup-slot" />
+                                </FlowPane>
+                            </children>
+                        </GridPane>
+                    </children>
+                </GridPane>
+                <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="207.0" />
+                        <ColumnConstraints prefWidth="735.0" />
+                        <ColumnConstraints prefWidth="158.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="643.0" />
+                    </rowConstraints>
+               <children>
+                   <GridPane GridPane.columnIndex="0">
+                       <columnConstraints>
+                           <ColumnConstraints prefWidth="167.0" />
+                       </columnConstraints>
+                       <rowConstraints>
+                           <RowConstraints prefHeight="116.0" />
+                           <RowConstraints prefHeight="354.0" />
+                           <RowConstraints prefHeight="173.0" />
+                       </rowConstraints>
+                       <children>
+                           <FlowPane styleClass="h-card-slots" prefHeight="362.0" vgap="16.5" GridPane.rowIndex="1">
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                           </FlowPane>
+                       </children>
+                   </GridPane>
+                   <GridPane GridPane.columnIndex="2">
+                       <columnConstraints>
+                           <ColumnConstraints prefWidth="158.0" />
+                       </columnConstraints>
+                       <rowConstraints>
+                           <RowConstraints prefHeight="226.0" />
+                           <RowConstraints prefHeight="57.0" />
+                           <RowConstraints prefHeight="360.0" />
+                       </rowConstraints>
+                       <children>
+                           <FlowPane styleClass="h-card-slots" prefHeight="362.0" vgap="16.5" GridPane.rowIndex="2">
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                               <Group>
+                                   <ImageView fitWidth="104" fitHeight="158">
+                                       <image>
+                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                       </image>
+                                   </ImageView>
+                               </Group>
+                           </FlowPane>
+                           <GridPane>
+                               <columnConstraints>
+                                   <ColumnConstraints prefWidth="13.0" />
+                                   <ColumnConstraints prefWidth="145.0" />
+                               </columnConstraints>
+                               <rowConstraints>
+                                   <RowConstraints prefHeight="44.0" />
+                                   <RowConstraints prefHeight="182.0" />
+                               </rowConstraints>
+                               <children>
+                                   <FlowPane prefHeight="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <StackPane id="activeCardSlot" styleClass="v-card-slots">
+                                           <Group>
+                                               <children>
+                                                   <ImageView fitWidth="104" fitHeight="158">
+                                                       <image>
+                                                           <Image url="@assets/cards/weapon_flipped.png" />
+                                                       </image>
+                                                   </ImageView>
+                                               </children>
+                                           </Group>
+                                       </StackPane>
+                                   </FlowPane>
+                               </children>
+                           </GridPane>
+                       </children>
+                   </GridPane>
+                  <FlowPane hgap="10.0" vgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                      <children>
+                          <Pane id="tileSlot0_0" styleClass="tile-slot">
+                              <GridPane>
+                                  <rowConstraints>
+                                      <RowConstraints prefHeight="20" />
+                                      <RowConstraints prefHeight="65" />
+                                      <RowConstraints prefHeight="65" />
+                                      <RowConstraints prefHeight="20" />
+                                  </rowConstraints>
+                                  <columnConstraints>
+                                      <ColumnConstraints prefWidth="20" />
+                                      <ColumnConstraints prefWidth="130" />
+                                      <ColumnConstraints prefWidth="20" />
+                                  </columnConstraints>
+                                  <children>
+                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                          <Pane styleClass="player-pin,gray" />
+                                          <Pane styleClass="player-pin,green" />
+                                      </FlowPane>
+                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                          <Pane styleClass="drop-icon,red-ammo" />
+                                          <Pane styleClass="drop-icon,red-ammo" />
+                                          <Pane styleClass="drop-icon,yellow-ammo" />
+                                      </FlowPane>
+                                  </children>
+                              </GridPane>
+                          </Pane>
+                          <Pane id="tileSlot1_0" styleClass="tile-slot">
+                              <GridPane>
+                                  <rowConstraints>
+                                      <RowConstraints prefHeight="20" />
+                                      <RowConstraints prefHeight="65" />
+                                      <RowConstraints prefHeight="65" />
+                                      <RowConstraints prefHeight="20" />
+                                  </rowConstraints>
+                                  <columnConstraints>
+                                      <ColumnConstraints prefWidth="20" />
+                                      <ColumnConstraints prefWidth="130" />
+                                      <ColumnConstraints prefWidth="20" />
+                                  </columnConstraints>
+                                  <children>
+                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                          <Pane styleClass="player-pin,yellow" />
+                                          <Pane styleClass="player-pin,cyan" />
+                                          <Pane styleClass="player-pin,magenta" />
+                                      </FlowPane>
+                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                          <Pane styleClass="drop-icon,blue-ammo" />
+                                          <Pane styleClass="drop-icon,blue-ammo" />
+                                          <Pane styleClass="drop-icon,powerup" />
+                                      </FlowPane>
+                                  </children>
+                              </GridPane>
+                          </Pane>
+                          <Pane id="tileSlot2_0" styleClass="tile-slot" />
+                          <Pane id="tileSlot3_0" styleClass="tile-slot" />
+                          <Pane id="tileSlot0_1" styleClass="tile-slot" />
+                          <Pane id="tileSlot1_1" styleClass="tile-slot" />
+                          <Pane id="tileSlot2_1" styleClass="tile-slot" />
+                          <Pane id="tileSlot3_1" styleClass="tile-slot" />
+                          <Pane id="tileSlot0_2" styleClass="tile-slot" />
+                          <Pane id="tileSlot1_2" styleClass="tile-slot" />
+                          <Pane id="tileSlot2_2" styleClass="tile-slot" />
+                          <Pane id="tileSlot3_2" styleClass="tile-slot" />
+                      </children>
+                  </FlowPane>
+               </children>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
+</Pane>
