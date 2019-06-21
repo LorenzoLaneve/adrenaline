@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
@@ -67,6 +67,12 @@ public class VirtualGameView implements GameView, GameListener, DialogAdapter<Pl
         this.users.remove(player.getColor());
     }
 
+
+
+    @Override
+    public void setGameData(GameData data) {
+        // TODO
+    }
 
     @Override
     public void disablePlayer(PlayerColor color) {

@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
-import it.polimi.deib.newdem.adrenaline.view.MapView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,26 +14,26 @@ public class SpawnDropEventTest {
     @Before
     public void setUp() throws Exception {
         e = new SpawnDropEvent(
-                MapView.DropType.POWER_UP,
-                MapView.DropType.YELLOW_AMMO,
-                MapView.DropType.BLUE_AMMO,
+                GameData.DropType.POWER_UP,
+                GameData.DropType.YELLOW_AMMO,
+                GameData.DropType.BLUE_AMMO,
                 new TilePosition(0,0)
         );
     }
 
     @Test
     public void testGetDrop1() throws Exception {
-        assertEquals(MapView.DropType.POWER_UP, e.getDrop1());
+        assertEquals(GameData.DropType.POWER_UP, e.getDrop1());
     }
 
     @Test
     public void testGetDrop2() throws Exception {
-        assertEquals(MapView.DropType.YELLOW_AMMO, e.getDrop2());
+        assertEquals(GameData.DropType.YELLOW_AMMO, e.getDrop2());
     }
 
     @Test
     public void testGetDrop3() throws Exception {
-        assertEquals(MapView.DropType.BLUE_AMMO, e.getDrop3());
+        assertEquals(GameData.DropType.BLUE_AMMO, e.getDrop3());
     }
 
     @Test

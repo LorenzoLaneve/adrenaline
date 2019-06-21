@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
@@ -87,24 +88,24 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void dropDidSpawn(Tile tile, DropInstance drop) {
-        List<DropType> drops = new ArrayList<>();
+        List<GameData.DropType> drops = new ArrayList<>();
 
         AmmoSet ammoSet = drop.getAmmos();
 
         for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(DropType.BLUE_AMMO);
+            drops.add(GameData.DropType.BLUE_AMMO);
         }
 
         for (int i = 0; i < ammoSet.getRedAmmos(); i++) {
-            drops.add(DropType.RED_AMMO);
+            drops.add(GameData.DropType.RED_AMMO);
         }
 
         for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(DropType.YELLOW_AMMO);
+            drops.add(GameData.DropType.YELLOW_AMMO);
         }
 
         if(drop.hasPowerUp()){
-            drops.add(DropType.POWER_UP);
+            drops.add(GameData.DropType.POWER_UP);
         }
 
 
@@ -148,24 +149,24 @@ public class VirtualMapView implements MapView, MapListener {
 
     @Override
     public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
-        List<DropType> drops = new ArrayList<>();
+        List<GameData.DropType> drops = new ArrayList<>();
 
         AmmoSet ammoSet = drop.getAmmos();
 
         for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(DropType.BLUE_AMMO);
+            drops.add(GameData.DropType.BLUE_AMMO);
         }
 
         for (int i = 0; i < ammoSet.getRedAmmos(); i++) {
-            drops.add(DropType.RED_AMMO);
+            drops.add(GameData.DropType.RED_AMMO);
         }
 
         for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(DropType.YELLOW_AMMO);
+            drops.add(GameData.DropType.YELLOW_AMMO);
         }
 
         if(drop.hasPowerUp()){
-            drops.add(DropType.POWER_UP);
+            drops.add(GameData.DropType.POWER_UP);
         }
 
 
@@ -186,7 +187,7 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
-    public void addDrops(TilePosition tile, DropType drop1, DropType drop2, DropType drop3) {
+    public void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
         gameView.sendEvent(new SpawnDropEvent(drop1, drop2, drop3, tile));
     }
 
@@ -216,7 +217,7 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
-    public void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3) {
+    public void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
         gameView.sendEvent(new DropPickupEvent(drop1, drop2, drop3, tile, player));
     }
 

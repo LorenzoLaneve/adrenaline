@@ -1,18 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.List;
 
 public interface MapView {
-
-    enum DropType {
-        RED_AMMO,
-        BLUE_AMMO,
-        YELLOW_AMMO,
-        POWER_UP
-    }
 
 
     /**
@@ -41,9 +35,9 @@ public interface MapView {
     /**
      * Notifies that the given drops appeared in the given location.
      * @param tile The location of the tile where the drops appeared.
-     * @see MapView.DropType for possible values to give to drop1, drop2 and drop3.
+     * @see GameData.DropType for possible values to give to drop1, drop2 and drop3.
      */
-    void addDrops(TilePosition tile, DropType drop1, DropType drop2, DropType drop3);
+    void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3);
 
     /**
      * Notifies that the player with the given color moved to the given location.
@@ -67,6 +61,6 @@ public interface MapView {
 
     void addWeapon(TilePosition tilePosition, int cardId);
 
-    void acquireDrop(TilePosition tile, PlayerColor player, DropType drop1, DropType drop2, DropType drop3);
+    void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3);
 
 }

@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyListener;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
@@ -32,19 +31,15 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
 
 
     @Override
-    public void addGameView(GameView gv) {
-        // TODO
-    }
-
-    @Override
     public void addUser(String name) {
-        sendEvent(new EnterLobbyEvent(name));
-
         users.add(name);
 
-        for (User user : lobby.getUsers()) if (user.getName().equals(name)) {
-            user.sendEvent(new LobbyDataEvent(users));
-            break;
+        for (User user : lobby.getUsers()) {
+            if (user.getName().equals(name)) {
+                user.sendEvent(new LobbyDataEvent(users));
+            } else {
+                user.sendEvent(new EnterLobbyEvent(name));
+            }
         }
 
     }

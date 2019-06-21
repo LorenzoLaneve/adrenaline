@@ -1,21 +1,21 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
-import it.polimi.deib.newdem.adrenaline.view.MapView.DropType;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
 public class DropPickupEvent implements UserEvent {
 
-    private DropType drop1;
-    private DropType drop2;
-    private DropType drop3;
+    private GameData.DropType drop1;
+    private GameData.DropType drop2;
+    private GameData.DropType drop3;
 
     private TilePosition tilePosition;
 
     private PlayerColor player;
 
-    public DropPickupEvent(DropType drop1, DropType drop2, DropType drop3, TilePosition tile, PlayerColor player) {
+    public DropPickupEvent(GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3, TilePosition tile, PlayerColor player) {
         this.drop1 = drop1;
         this.drop2 = drop2;
         this.drop3 = drop3;
@@ -23,7 +23,7 @@ public class DropPickupEvent implements UserEvent {
         this.tilePosition = tile;
     }
 
-    public DropType getDrop3() {
+    public GameData.DropType getDrop3() {
         return drop3;
     }
 
@@ -31,7 +31,7 @@ public class DropPickupEvent implements UserEvent {
         return player;
     }
 
-    public DropType getDrop2() {
+    public GameData.DropType getDrop2() {
         return drop2;
     }
 
@@ -39,7 +39,7 @@ public class DropPickupEvent implements UserEvent {
         return tilePosition;
     }
 
-    public DropType getDrop1() {
+    public GameData.DropType getDrop1() {
         return drop1;
     }
 
