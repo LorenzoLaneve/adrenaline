@@ -32,4 +32,8 @@ public interface EffectContext {
     PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException;
 
 
+    void damageDealtTrigger(Player attacker, Player victim);
+
+    void damageTakenTrigger(Player attacker, Player victim);
+
 }

@@ -7,6 +7,8 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.*;
@@ -52,8 +54,10 @@ public class EffectManager {
     public void damagePlayer(Player attacker, Player victim, int damageAmount, int markAmount) {
         reportGameChange(new DamageGameChange(attacker, victim, damageAmount, markAmount));
 
-        // TODO DAMAGE DEALT trigger
-        // TODO DAMAGE TAKEN trigger
+        if (damageAmount > 0) {
+            context.damageTakenTrigger(attacker, victim);
+            context.damageDealtTrigger(attacker, victim);
+        }
     }
 
     public void movePlayer(Player player, Tile destination) {
