@@ -17,40 +17,72 @@ public class GameData implements Serializable {
 
     private class UserColorPair implements Serializable {
 
-        public String userName;
-        public PlayerColor color;
+        private String username;
+        private PlayerColor color;
 
-        public UserColorPair(String userName, PlayerColor color) {
-            this.userName = userName;
+        UserColorPair(String username, PlayerColor color) {
+            this.username = username;
             this.color = color;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public PlayerColor getColor() {
+            return color;
         }
 
     }
 
     private class TileDropPair implements Serializable {
 
-        public TilePosition tile;
-        public DropType drop1;
-        public DropType drop2;
-        public DropType drop3;
+        private TilePosition tile;
+        private DropType drop1;
+        private DropType drop2;
+        private DropType drop3;
 
-        public TileDropPair(TilePosition tile, DropType drop1, DropType drop2, DropType drop3) {
+        TileDropPair(TilePosition tile, DropType drop1, DropType drop2, DropType drop3) {
             this.tile = tile;
             this.drop1 = drop1;
             this.drop2 = drop2;
             this.drop3 = drop3;
         }
 
+        public TilePosition getTile() {
+            return tile;
+        }
+
+        public DropType getDrop1() {
+            return drop1;
+        }
+
+        public DropType getDrop2() {
+            return drop2;
+        }
+
+        public DropType getDrop3() {
+            return drop3;
+        }
+
     }
 
     private class PlayerTilePair implements Serializable {
 
-        public TilePosition tile;
-        public PlayerColor player;
+        private TilePosition tile;
+        private PlayerColor player;
 
-        public PlayerTilePair(TilePosition tile, PlayerColor player) {
+        PlayerTilePair(TilePosition tile, PlayerColor player) {
             this.tile = tile;
             this.player = player;
+        }
+
+        public TilePosition getTile() {
+            return tile;
+        }
+
+        public PlayerColor getPlayer() {
+            return player;
         }
 
     }

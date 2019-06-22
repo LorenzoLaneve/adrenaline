@@ -64,7 +64,9 @@ public class Timer {
                     return;
                 }
 
-                while (paused) wait();
+                synchronized (this) {
+                    while (paused) wait();
+                }
 
                 synchronized (this) {
                     secondsLeft -= 1;
@@ -128,7 +130,7 @@ public class Timer {
      * Resumes a timer that previously switched to a pause state by {@code Timer#pause()}.
      * Calling this method on an ongoing Timer will cause the call to be ignored.
      */
-    public void resume() {
+    public synchronized void resume() {
         this.paused = false;
         notifyAll();
     }
