@@ -4,6 +4,8 @@ public class Timer {
 
     private TimerListener listener;
 
+    private Thread countingThread;
+
     private int secondsLeft;
 
     private int timerDuration;
@@ -11,6 +13,8 @@ public class Timer {
     private int syncPeriod;
 
     private boolean abortRequested;
+
+    private boolean paused;
 
     /**
      * Initializes the timer instance.
@@ -39,13 +43,16 @@ public class Timer {
         }
 
         this.timerDuration = seconds;
-        new Thread(this::doCountdown).start();
+
+        countingThread = new Thread(this::doCountdown);
+        countingThread.start();
     }
 
     private void doCountdown() {
         try {
             synchronized (this) {
                 this.abortRequested = false;
+                this.paused = false;
                 this.secondsLeft = timerDuration;
             }
             listener.timerWillStart(timerDuration);
@@ -56,6 +63,8 @@ public class Timer {
                 if (abortRequested) {
                     return;
                 }
+
+                while (paused) wait();
 
                 synchronized (this) {
                     secondsLeft -= 1;
@@ -69,6 +78,8 @@ public class Timer {
             listener.timerDidFinish();
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
+        } finally {
+            countingThread = null;
         }
     }
 
@@ -103,6 +114,23 @@ public class Timer {
      */
     public int getSecondsLeft(){
         return secondsLeft;
+    }
+
+    /**
+     * Puts the timer in pause state, freezing the countdown until {@code Timer#resume()} is called.
+     * Calling this method on a Timer in pause state will cause the call to be ignored.
+     */
+    public void pause() {
+        this.paused = true;
+    }
+
+    /**
+     * Resumes a timer that previously switched to a pause state by {@code Timer#pause()}.
+     * Calling this method on an ongoing Timer will cause the call to be ignored.
+     */
+    public void resume() {
+        this.paused = false;
+        notifyAll();
     }
 
 }
