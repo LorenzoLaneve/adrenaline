@@ -31,23 +31,30 @@ public class TimedExecutor implements TimerListener {
         this.listener = listener;
     }
 
-    public synchronized void execute(int seconds) throws TimeoutException, AbortedException {
+    public void execute(int seconds) throws TimeoutException, AbortedException {
+        if (abort && !isOver) {
+            throw new AbortedException("The execution was aborted by an external thread.");
+        }
+
         Thread executionThread = new Thread(this::run);
         synchronized (executorThreads) {
             executorThreads.put(executionThread, this);
         }
-        executionThread.start();
 
         timer = new Timer(1, this);
         timer.start(seconds);
 
+        executionThread.start();
+
         try {
-            while (!isOver && !timeout) wait();
+            synchronized (this) {
+                while (!isOver && !abort && !timeout) wait();
+            }
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
         }
 
-        if (isOver) {
+        if (isOver || abort) {
             timer.abort();
         }
 
@@ -96,6 +103,13 @@ public class TimedExecutor implements TimerListener {
 
 
     public static void abortExecution() {
+        TimedExecutor executor;
+        synchronized (executorThreads) {
+            executor = executorThreads.get(Thread.currentThread());
+        }
+        if (executor != null) {
+            executor.abort = true;
+        }
         throw new InterruptExecutionException("Abort requested by execution thread.");
     }
 
