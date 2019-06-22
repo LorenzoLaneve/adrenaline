@@ -61,6 +61,16 @@ public class TestElectroscytheEffect {
         }
 
         @Override
+        public void damageDealtTrigger(Player attacker, Player victim) {
+
+        }
+
+        @Override
+        public void damageTakenTrigger(Player attacker, Player victim) {
+
+        }
+
+        @Override
         public void applyGameChange(GameChange gameChange) {
             gameChange.update(game);
         }
@@ -114,6 +124,16 @@ public class TestElectroscytheEffect {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,1,0, powerUpCards);
+        }
+
+        @Override
+        public void damageDealtTrigger(Player attacker, Player victim) {
+
+        }
+
+        @Override
+        public void damageTakenTrigger(Player attacker, Player victim) {
+
         }
 
         @Override

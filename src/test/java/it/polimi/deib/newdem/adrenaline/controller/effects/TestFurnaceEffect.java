@@ -75,6 +75,16 @@ public class TestFurnaceEffect {
         }
 
         @Override
+        public void damageDealtTrigger(Player attacker, Player victim) {
+
+        }
+
+        @Override
+        public void damageTakenTrigger(Player attacker, Player victim) {
+
+        }
+
+        @Override
         public void applyGameChange(GameChange gameChange) {
             gameChange.update(game);
         }
