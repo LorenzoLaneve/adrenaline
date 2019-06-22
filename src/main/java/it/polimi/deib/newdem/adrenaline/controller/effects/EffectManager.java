@@ -7,8 +7,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
-import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.*;
@@ -41,6 +39,20 @@ public class EffectManager {
             throw x;
         }
     }
+
+
+    public Player getActor() {
+        return context.getActor();
+    }
+
+    public Player getAttacker() {
+        return context.getAttacker();
+    }
+
+    public Player getVictim() {
+        return context.getVictim();
+    }
+
 
 
     private void undoEffect() {

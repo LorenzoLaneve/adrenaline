@@ -6,7 +6,7 @@ public class TagbackGrenadeEffect implements Effect {
 
     @Override
     public void apply(EffectManager manager, Player actor) throws UndoException {
-        // TODO
+        manager.damagePlayer(actor, manager.getAttacker(), 0, 1);
     }
 
 }
