@@ -27,11 +27,12 @@
                                 <children>
                                     <FlowPane styleClass="player-panel">
                                         <Label styleClass="player-name" text="Yellow" />
-                                        <FlowPane hgap="5.0" styleClass="ammo-panel">
+                                        <FlowPane hgap="5.0" vgap="5.0" alignment="CENTER" styleClass="ammo-panel">
                                             <Label styleClass="ammo-amt,red" text="0" />
                                             <Label styleClass="ammo-amt,blue" text="0" />
                                             <Label styleClass="ammo-amt,yellow" text="0" />
                                             <Label styleClass="ammo-amt,powerup" text="0" />
+                                            <Label styleClass="status" text="Offline" />
                                         </FlowPane>
                                     </FlowPane>
                                     <Pane styleClass="damage-board">

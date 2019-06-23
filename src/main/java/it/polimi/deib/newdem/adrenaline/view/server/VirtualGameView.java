@@ -8,14 +8,11 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
-import it.polimi.deib.newdem.adrenaline.view.server.dialogs.Dialog;
-import it.polimi.deib.newdem.adrenaline.view.server.dialogs.DialogAdapter;
 
 import java.util.Collection;
 import java.util.EnumMap;
-import java.util.List;
 
-public class VirtualGameView implements GameView, GameListener, DialogAdapter<PlayerColor> {
+public class VirtualGameView implements GameView, GameListener {
 
     private EnumMap<PlayerColor, User> users;
 
@@ -67,7 +64,7 @@ public class VirtualGameView implements GameView, GameListener, DialogAdapter<Pl
 
     @Override
     public void setGameData(GameData data) {
-        // TODO
+        sendEvent(new GameDataEvent(data));
     }
 
     @Override
@@ -80,8 +77,4 @@ public class VirtualGameView implements GameView, GameListener, DialogAdapter<Pl
         sendEvent(new PlayerReconnectEvent(color));
     }
 
-    @Override
-    public void sendDialogRequest(Dialog<PlayerColor> dialog, User user, List<PlayerColor> admittedChoices) {
-        user.sendEvent(new PlayerSelectionRequest(admittedChoices, dialog.isMandatory()));
-    }
 }

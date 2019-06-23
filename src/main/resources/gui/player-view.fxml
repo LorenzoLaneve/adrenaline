@@ -17,6 +17,7 @@
                 <Label styleClass="ammo-amt,blue" text="0" />
                 <Label styleClass="ammo-amt,yellow" text="0" />
                 <Label styleClass="ammo-amt,powerup" text="0" />
+                <Label styleClass="status" />
             </FlowPane>
         </FlowPane>
         <Pane styleClass="damage-board">

@@ -182,6 +182,11 @@
     -fx-pref-width: 140;
 }
 
+.player-slot .player-panel .status {
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 12px;
+}
+
 .player-slot .player-panel .ammo-panel .ammo-amt {
     -fx-pref-width: 30;
 
