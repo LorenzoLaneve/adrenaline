@@ -26,6 +26,8 @@ public class AmmoLossGameChange implements GameChange {
 
     @Override
     public void revert(Game game) {
-        // TODO
+        player.getInventory().addAmmo(AmmoColor.YELLOW, ammos.getYellowAmmos());
+        player.getInventory().addAmmo(AmmoColor.RED, ammos.getRedAmmos());
+        player.getInventory().addAmmo(AmmoColor.BLUE, ammos.getBlueAmmos());
     }
 }

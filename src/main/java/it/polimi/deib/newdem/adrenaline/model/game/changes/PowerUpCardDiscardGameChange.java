@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.changes;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.util.List;
@@ -27,6 +28,14 @@ public class PowerUpCardDiscardGameChange implements GameChange {
 
     @Override
     public void revert(Game game) {
-        // TODO
+
+        try {
+            for (PowerUpCard card : discardedPowerUps) {
+                player.getInventory().addPowerUp(card);
+            }
+        } catch (OutOfSlotsException e) {
+            throw new IllegalStateException();
+        }
+
     }
 }

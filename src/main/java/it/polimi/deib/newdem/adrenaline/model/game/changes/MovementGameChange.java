@@ -11,6 +11,8 @@ public class MovementGameChange implements GameChange {
 
     private Tile destinationTile;
 
+    private Tile sourceTile;
+
     public MovementGameChange(Player player, Tile destTile) {
         this.player = player;
         this.destinationTile = destTile;
@@ -18,11 +20,15 @@ public class MovementGameChange implements GameChange {
 
     @Override
     public void update(Game game) {
-        player.getTile().getMap().movePlayer(player,destinationTile);
+        sourceTile = player.getTile();
+
+        sourceTile.getMap().movePlayer(player, destinationTile);
     }
 
     @Override
     public void revert(Game game) {
-        //TODO
+        if (sourceTile != null) {
+            sourceTile.getMap().movePlayer(player, sourceTile);
+        }
     }
 }
