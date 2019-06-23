@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
-import it.polimi.deib.newdem.adrenaline.view.server.ServerConnectionReceiver;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
 public class LobbyControllerImpl implements LobbyController, TimerListener, UserListener {
@@ -16,8 +15,6 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
     private LobbyState lobbyState;
 
     private GameController gameController;
-
-    private ServerConnectionReceiver connectionReceiver;
 
     private int minPlayers;
     private int maxPlayers;
@@ -34,8 +31,6 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
         this.lobby.setListener(view);
 
         this.gameController = null;
-
-        this.connectionReceiver = new ServerConnectionReceiver();
 
         this.switchState(new ReadyLobbyState());
     }
@@ -108,12 +103,6 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
     }
 
     @Override
-    public ServerConnectionReceiver getConnectionReceiver() {
-        return connectionReceiver;
-    }
-
-
-    @Override
     public void timerWillStart(int secondsLeft) {
         lobby.startTimer(secondsLeft);
     }
@@ -148,7 +137,7 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     @Override
     public void userDidChangeName(User user, String name) {
-        // TODO notify game controller
+        // should never happen for now.
     }
 
     @Override

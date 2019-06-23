@@ -19,12 +19,8 @@ public class VirtualGameView implements GameView, GameListener, DialogAdapter<Pl
 
     private EnumMap<PlayerColor, User> users;
 
-    private ServerConnectionReceiver connectionReceiver;
-
-    public VirtualGameView(ServerConnectionReceiver connectionReceiver) {
+    public VirtualGameView() {
         this.users = new EnumMap<>(PlayerColor.class);
-
-        this.connectionReceiver = connectionReceiver;
     }
 
     public void sendEvent(UserEvent event) {

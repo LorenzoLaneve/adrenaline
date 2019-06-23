@@ -2,7 +2,6 @@ package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.ServerConnectionReceiver;
 
 public interface LobbyController {
 
@@ -25,7 +24,5 @@ public interface LobbyController {
     void startGame();
 
     void endGame();
-
-    ServerConnectionReceiver getConnectionReceiver();
 
 }
