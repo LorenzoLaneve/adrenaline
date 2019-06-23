@@ -1,8 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class DropInstance {
+public class DropInstance implements Serializable {
 
     private final AmmoSet ammoSet;
     private final boolean hasPowerUp;

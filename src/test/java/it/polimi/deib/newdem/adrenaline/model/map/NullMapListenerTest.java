@@ -63,13 +63,8 @@ public class NullMapListenerTest {
     }
 
     @Test
-    public void testMapDidSendTileData() throws Exception {
-        l.mapDidSendTileData(new ArrayList<>());
-    }
-
-    @Test
-    public void testMapDidSendSpawnPointData() throws Exception {
-        l.mapDidSendSpawnPointData(new ArrayList<>());
+    public void testMapDidRestoreData() throws Exception {
+        l.mapDidRestoreData(new MapData("ID"));
     }
 
     @Test

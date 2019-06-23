@@ -33,12 +33,7 @@ public class MockMapListener implements MapListener {
     }
 
     @Override
-    public void mapDidSendTileData(List<Tile> tileData) {
-
-    }
-
-    @Override
-    public void mapDidSendSpawnPointData(List<Tile> spawnPointTileData) {
+    public void mapDidRestoreData(MapData data) {
 
     }
 

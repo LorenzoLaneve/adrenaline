@@ -1,8 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AmmoSet {
+public class AmmoSet implements Serializable {
 
     private final int redAmmos;
     private final int yellowAmmos;

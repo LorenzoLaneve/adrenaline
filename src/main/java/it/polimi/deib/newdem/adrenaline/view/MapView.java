@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.util.List;
@@ -20,17 +21,9 @@ public interface MapView {
     void removeEventListener(MapViewEventListener listener);
 
     /**
-     * Passes all the tiles of the map to the view.
-     * @param tileData A list of the positions where there is a tile of the map.
+     * Updates the view with the given map data.
      */
-    void setTiles(List<TilePosition> tileData);
-
-    /**
-     * Passes all the information about the spawn points in the map. Please note that {@code setTiles()} should be called first,
-     * and all the tiles passed from this method have to be contained to the tiles notified through {@code setTiles()}.
-     * @param tileData A list of the positions where there is a spawn point of the map.
-     */
-    void setSpawnPoints(List<TilePosition> tileData);
+    void updateView(MapData data);
 
     /**
      * Notifies that the given drops appeared in the given location.

@@ -5,8 +5,6 @@ import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 
-import java.util.List;
-
 public interface MapListener {
 
     void playerDidMove(Player player, Tile source, Tile destination);
@@ -21,9 +19,7 @@ public interface MapListener {
 
     void playerDidLeaveMap(Player player);
 
-    void mapDidSendTileData(List<Tile> tileData);
-
-    void mapDidSendSpawnPointData(List<Tile> spawnPointTileData);
+    void mapDidRestoreData(MapData data);
 
     void weaponDidSpawn(Tile tile, WeaponCard weapon);
 

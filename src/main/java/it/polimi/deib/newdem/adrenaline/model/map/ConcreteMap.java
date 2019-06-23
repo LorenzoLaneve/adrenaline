@@ -86,8 +86,9 @@ public class ConcreteMap implements Map {
         this.mapListener = listener;
         if(mapListener != null){
 
-            List<Tile> tileList = new ArrayList<Tile>();
-            List<Tile> spawnPointTileList = new ArrayList<Tile>();
+            /*
+            List<Tile> tileList = new ArrayList<>();
+            List<Tile> spawnPointTileList = new ArrayList<>();
 
             for(Tile[] tileRow: matrixMap){
                 for (Tile tile : tileRow){
@@ -98,10 +99,12 @@ public class ConcreteMap implements Map {
                         }
                     }
                 }
-            }
+            }*/
 
-            mapListener.mapDidSendTileData(tileList);
-            mapListener.mapDidSendSpawnPointData(spawnPointTileList);
+            // TODO data creation
+            MapData data = new MapData("map ID here");
+
+            mapListener.mapDidRestoreData(data);
 
         }
     }

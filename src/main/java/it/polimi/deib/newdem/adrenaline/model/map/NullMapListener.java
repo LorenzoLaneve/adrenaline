@@ -4,7 +4,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
-import java.util.List;
 
 public class NullMapListener implements MapListener {
     @Override
@@ -38,12 +37,7 @@ public class NullMapListener implements MapListener {
     }
 
     @Override
-    public void mapDidSendTileData(List<Tile> tileData) {
-
-    }
-
-    @Override
-    public void mapDidSendSpawnPointData(List<Tile> spawnPointTileData) {
+    public void mapDidRestoreData(MapData data) {
 
     }
 

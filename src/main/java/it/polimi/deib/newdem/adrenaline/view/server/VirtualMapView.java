@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
+import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -72,6 +73,13 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
+    public void updateView(MapData data) {
+        gameView.sendEvent(new MapDataEvent(data));
+    }
+
+
+
+    @Override
     public void playerDidResurrect(Player player) {
         spawnPlayer(player.getColor(), player.getTile().getPosition());
     }
@@ -123,23 +131,8 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
-    public void mapDidSendTileData(List<Tile> tileData) {
-        List<TilePosition> tileDataPosition = new ArrayList<>();
-        for (Tile tile: tileData){
-            tileDataPosition.add(tile.getPosition());
-        }
-        setTiles(tileDataPosition);
-    }
-
-    @Override
-    public void mapDidSendSpawnPointData(List<Tile> spawnPointTileData) {
-        List<TilePosition> spawnPointTileDataPosition = new ArrayList<>();
-
-        for (Tile tile: spawnPointTileData){
-            spawnPointTileDataPosition.add(tile.getPosition());
-        }
-
-        setSpawnPoints(spawnPointTileDataPosition);
+    public void mapDidRestoreData(MapData data) {
+        updateView(data);
     }
 
     @Override
@@ -176,15 +169,7 @@ public class VirtualMapView implements MapView, MapListener {
 
     /// MapView methods
 
-    @Override
-    public void setTiles(List<TilePosition> tileData) {
-        gameView.sendEvent(new MapTileDataEvent(new ArrayList<>(tileData)));
-    }
 
-    @Override
-    public void setSpawnPoints(List<TilePosition> tileData) {
-        gameView.sendEvent(new MapSpawnPointDataEvent(new ArrayList<>(tileData)));
-    }
 
     @Override
     public void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
