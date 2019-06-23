@@ -6,7 +6,7 @@
 
 .map-pane {
     -fx-background-color: rgb(27, 26, 20);
-    -fx-background-image: url("assets/tables/Map0_0.png");
+    -fx-background-image: url("../assets/tables/Map0_0.png");
     -fx-background-repeat: none;
     -fx-background-position: left top;
     -fx-background-size: 1100 833;
@@ -65,7 +65,7 @@
 
     -fx-background-size: 80 114;
     -fx-background-radius: 5;
-    -fx-background-image: url("assets/cards/powerup_flipped.png");
+    -fx-background-image: url("../assets/cards/powerup_flipped.png");
 
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 
@@ -133,15 +133,15 @@
 }
 
 .drop-icon.red-ammo {
-    -fx-background-image: url("assets/red_ammo.png");
+    -fx-background-image: url("../assets/red_ammo.png");
 }
 
 .drop-icon.blue-ammo {
-    -fx-background-image: url("assets/blue_ammo.png");
+    -fx-background-image: url("../assets/blue_ammo.png");
 }
 
 .drop-icon.yellow-ammo {
-    -fx-background-image: url("assets/yellow_ammo.png");
+    -fx-background-image: url("../assets/yellow_ammo.png");
 }
 
 .drop-icon.powerup {
@@ -149,7 +149,7 @@
     -fx-pref-height: 30;
 
     -fx-background-size: 24 30;
-    -fx-background-image: url("assets/powerup.png");
+    -fx-background-image: url("../assets/powerup.png");
 }
 
 
@@ -195,20 +195,20 @@
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt.red {
-    -fx-background-image: url("assets/red_ammo.png");
+    -fx-background-image: url("../assets/red_ammo.png");
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt.blue {
-    -fx-background-image: url("assets/blue_ammo.png");
+    -fx-background-image: url("../assets/blue_ammo.png");
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt.yellow {
-    -fx-background-image: url("assets/yellow_ammo.png");
+    -fx-background-image: url("../assets/yellow_ammo.png");
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt.powerup {
     -fx-background-size: 20 25;
-    -fx-background-image: url("assets/powerup.png");
+    -fx-background-image: url("../assets/powerup.png");
 }
 
 
@@ -231,23 +231,23 @@
 }
 
 .player-slot.yellow .damage-board, .player-slot.yellow .player-panel {
-    -fx-background-image: url("assets/boards/dmg_yellow_normal.png");
+    -fx-background-image: url("../assets/boards/dmg_yellow_normal.png");
 }
 
 .player-slot.cyan .damage-board, .player-slot.cyan .player-panel {
-    -fx-background-image: url("assets/boards/dmg_cyan_normal.png");
+    -fx-background-image: url("../assets/boards/dmg_cyan_normal.png");
 }
 
 .player-slot.magenta .damage-board, .player-slot.magenta .player-panel {
-    -fx-background-image: url("assets/boards/dmg_magenta_normal.png");
+    -fx-background-image: url("../assets/boards/dmg_magenta_normal.png");
 }
 
 .player-slot.gray .damage-board, .player-slot.gray .player-panel {
-    -fx-background-image: url("assets/boards/dmg_gray_normal.png");
+    -fx-background-image: url("../assets/boards/dmg_gray_normal.png");
 }
 
 .player-slot.green .damage-board, .player-slot.green .player-panel {
-    -fx-background-image: url("assets/boards/dmg_green_normal.png");
+    -fx-background-image: url("../assets/boards/dmg_green_normal.png");
 }
 
 
@@ -270,23 +270,23 @@
 }
 
 .mark-signs .dmg.yellow, .dmg-signs .dmg.yellow, .kill-track-slot .dmg.yellow {
-    -fx-background-image: url("assets/dmg_yellow.png");
+    -fx-background-image: url("../assets/dmg_yellow.png");
 }
 
 .mark-signs .dmg.cyan, .dmg-signs .dmg.cyan, .kill-track-slot .dmg.cyan {
-    -fx-background-image: url("assets/dmg_cyan.png");
+    -fx-background-image: url("../assets/dmg_cyan.png");
 }
 
 .mark-signs .dmg.magenta, .dmg-signs .dmg.magenta, .kill-track-slot .dmg.magenta {
-    -fx-background-image: url("assets/dmg_magenta.png");
+    -fx-background-image: url("../assets/dmg_magenta.png");
 }
 
 .mark-signs .dmg.gray, .dmg-signs .dmg.gray, .kill-track-slot .dmg.gray {
-    -fx-background-image: url("assets/dmg_gray.png");
+    -fx-background-image: url("../assets/dmg_gray.png");
 }
 
 .mark-signs .dmg.green, .dmg-signs .dmg.green, .kill-track-slot .dmg.green {
-    -fx-background-image: url("assets/dmg_green.png");
+    -fx-background-image: url("../assets/dmg_green.png");
 }
 
 
