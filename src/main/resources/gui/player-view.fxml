@@ -11,7 +11,7 @@
 <FlowPane styleClass="player-slot">
     <children>
         <FlowPane styleClass="player-panel">
-            <Label styleClass="player-name" text="Yellow" />
+            <Label styleClass="player-name" />
             <FlowPane hgap="5.0" styleClass="ammo-panel">
                 <Label styleClass="ammo-amt,red" text="0" />
                 <Label styleClass="ammo-amt,blue" text="0" />
