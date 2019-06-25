@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.view.client;
+package it.polimi.deib.newdem.adrenaline.view;
 
 public interface ConnectionView {
 

@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
+import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 
 import java.io.InputStream;
 import java.io.PrintStream;

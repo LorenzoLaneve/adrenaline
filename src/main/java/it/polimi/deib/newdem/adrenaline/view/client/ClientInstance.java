@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
 import it.polimi.deib.newdem.adrenaline.view.UsernameView;

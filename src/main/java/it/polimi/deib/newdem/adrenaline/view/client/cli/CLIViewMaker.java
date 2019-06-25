@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.LobbyView;
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
+import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 import it.polimi.deib.newdem.adrenaline.view.UsernameView;
 import it.polimi.deib.newdem.adrenaline.view.client.ViewMaker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;

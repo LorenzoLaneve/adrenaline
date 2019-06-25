@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
+import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import static javafx.collections.ListChangeListener.Change;
 
 import java.io.IOException;
 
