@@ -25,6 +25,7 @@ public class GUIGameView implements GameView {
     public void disablePlayer(PlayerColor color) {
         Platform.runLater(() -> {
             Label label = (Label) window.getScene().lookup(".player-panel."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+            label.getStyleClass().add("offline");
             label.setText("");
         });
     }
@@ -33,6 +34,7 @@ public class GUIGameView implements GameView {
     public void enablePlayer(PlayerColor color) {
         Platform.runLater(() -> {
             Label label = (Label) window.getScene().lookup(".player-panel."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+            label.getStyleClass().remove("offline");
             label.setText("Offline");
         });
     }

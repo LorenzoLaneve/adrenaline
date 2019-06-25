@@ -122,7 +122,7 @@ public class GUIMapView implements MapView {
             AmmoColor spawnPointColor = spawnPointLocs.get(tilePosition);
             if (spawnPointColor != null) {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ GUIGameWindowHelper.toStyleClass(spawnPointColor) +"SpawnPointCards");
-                spawnPointCards.getChildren().add(GUIGameWindowHelper.createCardPane(cardId));
+                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(cardId));
             }
         });
     }

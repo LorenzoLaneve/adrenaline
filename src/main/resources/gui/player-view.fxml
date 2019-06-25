@@ -38,6 +38,9 @@
                         <rowConstraints>
                             <RowConstraints prefHeight="50.0" />
                         </rowConstraints>
+                        <FlowPane GridPane.columnIndex="0">
+                            <Label styleClass="score-amt" text="0" />
+                        </FlowPane>
                         <children>
                             <FlowPane hgap="-7.0" styleClass="mark-signs" GridPane.columnIndex="1" />
                         </children>

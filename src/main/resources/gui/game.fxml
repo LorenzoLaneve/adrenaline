@@ -22,7 +22,7 @@
             <right>
                 <ScrollPane styleClass="players-scroll-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <content>
-                        <FlowPane maxWidth="300.0" minWidth="300.0" prefWidth="300.0" vgap="15.0" BorderPane.alignment="CENTER">
+                        <FlowPane id="playerSlots" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" vgap="15.0" BorderPane.alignment="CENTER">
                             <FlowPane styleClass="player-slot,yellow">
                                 <children>
                                     <FlowPane styleClass="player-panel">
@@ -54,6 +54,9 @@
                                                         <RowConstraints prefHeight="50.0" />
                                                     </rowConstraints>
                                                     <children>
+                                                        <FlowPane GridPane.columnIndex="0">
+                                                            <Label styleClass="score-amt" text="0" />
+                                                        </FlowPane>
                                                         <FlowPane hgap="-7.0" styleClass="mark-signs" GridPane.columnIndex="1">
                                                             <Pane styleClass="dmg,magenta" />
                                                             <Pane styleClass="dmg,magenta" />

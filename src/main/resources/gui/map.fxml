@@ -49,35 +49,35 @@
                             <children>
                                 <FlowPane hgap="4.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                        <FlowPane id="killTrackSlot1" hgap="-9.0" vgap="-40.0" alignment="CENTER">
                                             <Pane styleClass="dmg,magenta" />
                                         </FlowPane>
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                        <FlowPane id="killTrackSlot2" hgap="-9.0" vgap="-40.0" alignment="CENTER">
                                             <Pane styleClass="dmg,yellow" />
-                                            <Pane styleClass="dmg,cyan" />
-                                            <Pane styleClass="dmg,gray" />
                                         </FlowPane>
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane hgap="-9.0" vgap="-40.0" alignment="CENTER">
-                                            <Pane styleClass="dmg,green" />
-                                            <Pane styleClass="dmg,green" />
-                                        </FlowPane>
+                                        <FlowPane id="killTrackSlot3" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
                                     </Pane>
-                                    <Pane styleClass="kill-track-slot" />
-                                    <Pane styleClass="kill-track-slot" />
-                                    <Pane styleClass="kill-track-slot" />
-                                    <Pane styleClass="kill-track-slot" />
-                                    <Pane styleClass="kill-track-slot" />
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane id="killTrackSlot4" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane id="killTrackSlot5" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane id="killTrackSlot6" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane id="killTrackSlot7" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                    </Pane>
+                                    <Pane styleClass="kill-track-slot">
+                                        <FlowPane id="killTrackSlot8" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                    </Pane>
                                     <Pane styleClass="kill-track-slot,additional-kills">
-                                        <FlowPane hgap="-9.0" vgap="-40.0">
-                                            <Pane styleClass="dmg,magenta" />
-                                            <Pane styleClass="dmg,green" />
-                                            <Pane styleClass="dmg,magenta" />
-                                            <Pane styleClass="dmg,green" />
-                                        </FlowPane>
+                                        <FlowPane id="killTrackSlot9" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                 </FlowPane>
                             </children>

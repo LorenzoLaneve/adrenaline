@@ -182,9 +182,13 @@
     -fx-pref-width: 140;
 }
 
-.player-slot .player-panel .status {
+.player-slot .player-panel .status, .player-slot .score-amt {
     -fx-font-family: ethnocentric;
     -fx-font-size: 12px;
+}
+
+.player-slot .score-amt {
+    -fx-padding: 4 0 4 10
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt {
@@ -217,11 +221,11 @@
 }
 
 
-.player-slot .player-panel Label {
+.player-slot Label {
     -fx-text-fill: black;
 }
 
-.player-slot.cyan .player-panel Label, .player-slot.magenta .player-panel Label, .player-slot.green .player-panel Label {
+.player-slot.cyan Label, .player-slot.magenta Label, .player-slot.green Label {
      -fx-text-fill: white;
 }
 

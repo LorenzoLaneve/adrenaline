@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GUIGameWindowHelper {
 
@@ -91,7 +89,7 @@ public class GUIGameWindowHelper {
 
 
 
-    public static Group createCardPane(int cardID) {
+    public static Group createSpawnPointCardPane(int cardID) {
         try {
             Image image = new Image(GUIGameWindowHelper.class.getResource("/gui/assets/cards/weapon"+ cardID +".png").openStream());
 
@@ -104,6 +102,45 @@ public class GUIGameWindowHelper {
             return null;
         }
     }
+
+    public static Group createPowerUpCardPane(int cardID) {
+        try {
+            String imgLocation = cardID < 0 ?
+                    "/gui/assets/cards/powerup_flipped.png" :
+                    "/gui/assets/cards/powerup"+ cardID +".png";
+
+            Image image = new Image(GUIGameWindowHelper.class.getResource(imgLocation).openStream());
+
+            ImageView imgView = new ImageView(image);
+            imgView.setFitWidth(83);
+            imgView.setFitHeight(130);
+
+            Group result = new Group(imgView);
+            result.getStyleClass().add(cardID < 0 ? "equipPowerUpHidden" : "equipPowerUp"+ cardID);
+            return result;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static Group createWeaponCardPane(int cardID) {
+        try {
+            String imgLocation = "/gui/assets/cards/weapon"+ cardID +".png";
+
+            Image image = new Image(GUIGameWindowHelper.class.getResource(imgLocation).openStream());
+
+            ImageView imgView = new ImageView(image);
+            imgView.setFitWidth(102);
+            imgView.setFitHeight(160);
+
+            Group result = new Group(imgView);
+            result.getStyleClass().add("equipWeapon"+ cardID);
+            return result;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
 
     public static Pane createDamageIcon(PlayerColor color) {
         Pane pane = new Pane();
