@@ -2,14 +2,19 @@ package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUIGameWindowHelper {
 
@@ -41,6 +46,18 @@ public class GUIGameWindowHelper {
                 return "yellow-ammo";
             case POWER_UP:
                 return "powerup";
+        }
+        return null;
+    }
+
+    public static String toStyleClass(AmmoColor color) {
+        switch (color) {
+            case RED:
+                return "red-ammo";
+            case BLUE:
+                return "blue-ammo";
+            case YELLOW:
+                return "yellow-ammo";
         }
         return null;
     }
@@ -108,7 +125,44 @@ public class GUIGameWindowHelper {
     }
 
 
+    public static Pane lookupTilePane(Scene scene, TilePosition position) {
+        return (Pane) scene.lookup("#tileSlot"+ position.getX() +"_"+ position.getY());
+    }
 
 
+    public static void addDropsToTilePane(Scene scene, TilePosition tile, DropInstance drop) {
+        Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup("tile-drops-pane");
+
+        int reds = drop.getAmmos().getRedAmmos();
+        while (reds > 0) {
+            dropsPane.getChildren().add(createDropIcon(GameData.DropType.RED_AMMO));
+            reds--;
+        }
+
+        int blues = drop.getAmmos().getBlueAmmos();
+        while (blues > 0) {
+            dropsPane.getChildren().add(createDropIcon(GameData.DropType.BLUE_AMMO));
+            blues--;
+        }
+
+        int yellows = drop.getAmmos().getYellowAmmos();
+        while (yellows > 0) {
+            dropsPane.getChildren().add(createDropIcon(GameData.DropType.YELLOW_AMMO));
+            yellows--;
+        }
+
+        if (drop.hasPowerUp()) {
+            dropsPane.getChildren().add(createDropIcon(GameData.DropType.POWER_UP));
+        }
+    }
+
+    public static void addPlayerToTilePane(Scene scene, PlayerColor color, TilePosition destTile) {
+        Pane playersPane = (Pane) GUIGameWindowHelper.lookupTilePane(scene, destTile).lookup(".tile-players-pane");
+        playersPane.getChildren().add(createPlayerPin(color));
+    }
+
+    public static Pane getPlayerPin(Scene scene, PlayerColor color) {
+        return (Pane) scene.lookup(".player-pin."+ toStyleClass(color));
+    }
 
 }
