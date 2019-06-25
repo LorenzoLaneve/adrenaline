@@ -12,14 +12,17 @@ public class GUIDamageBoardView implements DamageBoardView {
 
     private GUIGameWindow window;
 
-    public GUIDamageBoardView(GUIGameWindow window) {
+    private PlayerColor color;
+
+    public GUIDamageBoardView(GUIGameWindow window, PlayerColor color) {
         this.window = window;
+        this.color = color;
     }
 
 
     @Override
     public void registerDamage(int damageAmount, int markAmount, PlayerColor dealer) {
-        Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(dealer));
+        Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
 
         Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
         Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
