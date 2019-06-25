@@ -20,11 +20,6 @@ public class NullPlayerListenerTest {
     }
 
     @Test
-    public void testPlayerDidTakeDamage() throws Exception {
-        npl.playerDidTakeDamage(1,1,new MockPlayer());
-    }
-
-    @Test
     public void testPlayerDidDrawPowerUpCard() throws Exception {
         npl.playerDidDrawPowerUpCard(new MockPowerUpCard());
     }
