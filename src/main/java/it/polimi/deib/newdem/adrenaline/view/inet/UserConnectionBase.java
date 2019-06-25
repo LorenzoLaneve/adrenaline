@@ -104,7 +104,7 @@ public abstract class UserConnectionBase implements UserConnection {
                 try {
                     UserEventSubscriber<T> castedSubscriber = (UserEventSubscriber<T>)(subscriber);
 
-                    castedSubscriber.receiveEvent(this, event);
+                    new Thread(() -> castedSubscriber.receiveEvent(this, event)).start();
                 } catch (ClassCastException x) {
                     // this should not happen, but it is not a problem.
                 }
