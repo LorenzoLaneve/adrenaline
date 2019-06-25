@@ -70,11 +70,6 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
-    public void takeDamage(int dmgAmount, int mrkAmount, PlayerColor dealer) {
-        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), dealer, dmgAmount, mrkAmount));
-    }
-
-    @Override
     public void addAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
         gameView.sendEvent(new PlayerReceiveAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
     }
@@ -82,11 +77,6 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void removeAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
         gameView.sendEvent(new PlayerDiscardAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
-    }
-
-    @Override
-    public void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker) {
-        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), attacker.getColor(), dmgAmount, mrkAmount));
     }
 
     @Override

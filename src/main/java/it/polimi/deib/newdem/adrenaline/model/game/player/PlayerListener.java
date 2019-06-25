@@ -6,8 +6,6 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 public interface PlayerListener {
 
-    void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker);
-
     void playerDidDrawPowerUpCard(PowerUpCard powerUpCard);
 
     void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard);
