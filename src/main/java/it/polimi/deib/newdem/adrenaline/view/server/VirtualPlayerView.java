@@ -104,6 +104,5 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void playerDidDiscardWeapon(WeaponCard weaponCard) {
         removeWeaponCard(weaponCard.getCardID());
-
     }
 }
