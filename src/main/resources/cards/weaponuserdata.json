@@ -1,0 +1,365 @@
+{
+  "cards": [
+    {
+      "id": 1,
+
+      "screenName": "Lock Rifle",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Second Lock",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 2,
+
+      "screenName": "Electroscythe",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Reaper Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 3,
+
+      "screenName": "Machine Gun",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Focus Shot",
+          "location": "left"
+        },
+        "effect-2": {
+          "screenName": "Turret Tripod",
+          "location": "right"
+        }
+      }
+    },
+    {
+      "id": 4,
+
+      "screenName": "Tractor Beam",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Punisher Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 5,
+
+      "screenName": "Vortex Cannon",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Black Hole",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 6,
+
+      "screenName": "T.H.O.R.",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Chain Reaction",
+          "location": "left"
+        },
+        "effect-2": {
+          "screenName": "High Voltage",
+          "location": "right"
+        }
+      }
+    },
+    {
+      "id": 7,
+
+      "screenName": "Furnace",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Cozy Fire Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 8,
+
+      "screenName": "Plasma Gun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Phase Glide",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Charged Shot",
+          "location": "right"
+        }
+      }
+    },
+    {
+      "id": 9,
+
+      "screenName": "Heatseeker",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        }
+      }
+    },
+    {
+      "id": 10,
+
+      "screenName": "Whisper",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        }
+      }
+    },
+    {
+      "id": 11,
+
+      "screenName": "Hellion",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Nano-Tracer Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 12,
+
+      "screenName": "Flamethrower",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Barbecue Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 13,
+
+      "screenName": "ZX-2",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Scanner Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 14,
+
+      "screenName": "Grenade Launcher",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top-left"
+        },
+        "effect-1": {
+          "screenName": "Move Target",
+          "location": "top-right"
+        },
+        "effect-2": {
+          "screenName": "Extra Grenade",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 15,
+
+      "screenName": "Shotgun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Long Barrel Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 16,
+
+      "screenName": "Rocket Launcher",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Rocket Jump",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Fragmenting Warhead",
+          "location": "right"
+        }
+      }
+    },
+    {
+      "id": 17,
+
+      "screenName": "Power Glove",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Rocket Fist Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 18,
+
+      "screenName": "Railgun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Piercing Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 19,
+
+      "screenName": "Shockwave",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Tsunami Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 20,
+
+      "screenName": "Cyberblade",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Shadowstep",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Slice and Dice",
+          "location": "right"
+        }
+      }
+    },
+    {
+      "id": 21,
+
+      "screenName": "Sledgehammer",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Pulverizer Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 22,
+
+      "screenName": "Chainsaw",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Doom Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    {
+      "id": 23,
+
+      "screenName": "Laser Magnum",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Gigawatt Mode",
+          "location": "bottom"
+        }
+      }
+    }
+  ]
+}
