@@ -20,6 +20,9 @@
                 <Label styleClass="status" />
             </FlowPane>
         </FlowPane>
+        <Pane styleClass="action-board">
+
+        </Pane>
         <Pane styleClass="damage-board">
             <GridPane>
                 <rowConstraints>

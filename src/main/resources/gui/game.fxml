@@ -9,9 +9,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
-
 <?import javafx.scene.layout.StackPane?>
+
 <StackPane id="overlay-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@styles/general.css" />
@@ -22,12 +21,12 @@
             <right>
                 <ScrollPane styleClass="players-scroll-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <content>
-                        <FlowPane id="playerSlots" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" vgap="15.0" BorderPane.alignment="CENTER">
+                        <FlowPane id="playerSlots" maxWidth="332.0" minWidth="332.0" prefWidth="332.0" vgap="15.0" BorderPane.alignment="CENTER">
                             <FlowPane styleClass="player-slot,yellow">
                                 <children>
                                     <FlowPane styleClass="player-panel">
                                         <Label styleClass="player-name" text="Yellow" />
-                                        <FlowPane hgap="5.0" vgap="5.0" alignment="CENTER" styleClass="ammo-panel">
+                                        <FlowPane alignment="CENTER" hgap="5.0" styleClass="ammo-panel" vgap="5.0">
                                             <Label styleClass="ammo-amt,red" text="0" />
                                             <Label styleClass="ammo-amt,blue" text="0" />
                                             <Label styleClass="ammo-amt,yellow" text="0" />
@@ -35,7 +34,25 @@
                                             <Label styleClass="status" text="Offline" />
                                         </FlowPane>
                                     </FlowPane>
-                                    <Pane styleClass="damage-board">
+                                    <Pane styleClass="action-board">
+                                        <GridPane>
+                                            <rowConstraints>
+                                                <RowConstraints prefHeight="18.0" />
+                                                <RowConstraints prefHeight="87.0" />
+                                            </rowConstraints>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="32.0" />
+                                            </columnConstraints>
+                                            <children>
+                                                <FlowPane GridPane.rowIndex="1">
+                                                    <Pane styleClass="action-board-button" />
+                                                    <Pane styleClass="action-board-button" />
+                                                    <Pane styleClass="action-board-button" />
+                                                </FlowPane>
+                                            </children>
+                                        </GridPane>
+                                    </Pane>
+                                    <Pane styleClass="damage-board,frenzy">
                                         <GridPane>
                                             <rowConstraints>
                                                 <RowConstraints prefHeight="42.0" />
@@ -107,7 +124,31 @@
                                             <Label styleClass="ammo-amt,powerup" text="0" />
                                         </FlowPane>
                                     </FlowPane>
-                                    <Pane styleClass="damage-board" />
+                                    <Pane styleClass="action-board,frenzy">
+                                        <GridPane>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="23.0" minHeight="15.0" prefHeight="19.0" />
+                                                <RowConstraints maxHeight="46.0" minHeight="22.0" prefHeight="27.0" />
+                                                <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="24.0" />
+                                                <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="35.0" />
+                                            </rowConstraints>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="32.0" />
+                                            </columnConstraints>
+                                            <children>
+                                                <FlowPane GridPane.rowIndex="1">
+                                                    <Pane styleClass="action-board-button" />
+                                                    <Pane styleClass="action-board-button" />
+                                                    <Pane styleClass="action-board-button" />
+                                                </FlowPane>
+                                                <FlowPane GridPane.rowIndex="3">
+                                                    <Pane styleClass="action-board-button" />
+                                                    <Pane styleClass="action-board-button" />
+                                                </FlowPane>
+                                            </children>
+                                        </GridPane>
+                                    </Pane>
+                                    <Pane styleClass="damage-board,frenzy" />
                                 </children>
                             </FlowPane>
                             <FlowPane styleClass="player-slot,magenta">
@@ -121,6 +162,7 @@
                                             <Label styleClass="ammo-amt,powerup" text="0" />
                                         </FlowPane>
                                     </FlowPane>
+                                    <Pane styleClass="action-board" />
                                     <Pane styleClass="damage-board" />
                                 </children>
                             </FlowPane>
@@ -135,6 +177,7 @@
                                             <Label styleClass="ammo-amt,powerup" text="0" />
                                         </FlowPane>
                                     </FlowPane>
+                                    <Pane styleClass="action-board,frenzy" />
                                     <Pane styleClass="damage-board" />
                                 </children>
                             </FlowPane>
@@ -149,6 +192,7 @@
                                             <Label styleClass="ammo-amt,powerup" text="0" />
                                         </FlowPane>
                                     </FlowPane>
+                                    <Pane styleClass="action-board" />
                                     <Pane styleClass="damage-board" />
                                 </children>
                             </FlowPane>
