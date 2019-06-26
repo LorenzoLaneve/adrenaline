@@ -399,6 +399,8 @@
 
       "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.SledgehammerEffect"
     },
+
+    // maybe these should not be added
     {
       "id": 22,
 
