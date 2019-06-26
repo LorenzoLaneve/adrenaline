@@ -6,11 +6,13 @@ public class JsonData {
     private SpawnPointTileDict spawnPointTileDict;
     private int[][][] roomListInt;
     private int[][][] adjacencyList;
+    private String mapID;
 
-    public JsonData(SpawnPointTileDict spawnPointTileDict, int[][][] roomListInt,  int[][][] adjacencyList){
+    public JsonData(SpawnPointTileDict spawnPointTileDict, int[][][] roomListInt,  int[][][] adjacencyList, String mapID){
         this.adjacencyList = adjacencyList;
         this.roomListInt = roomListInt;
         this.spawnPointTileDict = spawnPointTileDict;
+        this.mapID = mapID;
     }
 
     public int[][][] getRoomListInt() {
@@ -25,4 +27,7 @@ public class JsonData {
         return adjacencyList;
     }
 
+    public String getMapID() {
+        return mapID;
+    }
 }

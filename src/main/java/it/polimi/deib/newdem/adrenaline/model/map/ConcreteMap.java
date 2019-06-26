@@ -11,15 +11,17 @@ public class ConcreteMap implements Map {
     private List<Room> rooms;
     private Tile[][] matrixMap;
     private MapListener mapListener;
+    private String mapID;
 
     /**Creates a new {@code ConcreteMap} using the matrixMap and list of rooms provided by the MapBuilder.
      *
      * @param matrixMap array of arrays of tiles.
      * @param rooms list of rooms.
      */
-    public ConcreteMap(Tile[][] matrixMap, List<Room> rooms) {
+    public ConcreteMap(Tile[][] matrixMap, List<Room> rooms, String mapID) {
         this.matrixMap = matrixMap;
         this.rooms = rooms;
+        this.mapID = mapID;
     }
 
     /**Returns the rooms in the map.
@@ -204,5 +206,66 @@ public class ConcreteMap implements Map {
             visited.add(curr);
         }
         return distDict.get(destination);
+    }
+
+    @Override
+    public MapData sendMapData() {
+
+        MapData mapData;
+
+        mapData = new MapData(mapID);
+
+        List<TilePosition> tilePositionList = new ArrayList<>();
+
+        for(Tile tile: getAllTiles()){
+            tilePositionList.add(tile.getPosition());
+        }
+
+        mapData.setTileData(tilePositionList);
+
+        mapData.setSpawnPoints(getSpawnPointFromColor(AmmoColor.RED).getPosition(),
+                getSpawnPointFromColor(AmmoColor.BLUE).getPosition(),
+                getSpawnPointFromColor(AmmoColor.YELLOW).getPosition());
+        for(Tile tile: getAllTiles()){
+            if(!tile.hasSpawnPoint()){
+                mapData.addDrops(tile.getPosition(), tile.inspectDrop());
+            }
+        }
+
+        for (Player player: getPlayers()){
+            mapData.setPlayerLocation(player.getColor(), getPlayerPosition(player));
+        }
+
+        return mapData;
+    }
+
+    @Override
+    public String getMapID() {
+        return mapID;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+
+        List<Player> playerList = new ArrayList<>();
+
+        for (Room room:getRooms()){
+            playerList.addAll(room.getPlayers());
+        }
+
+        return playerList;
+    }
+
+    @Override
+    public TilePosition getPlayerPosition(Player player) {
+
+        TilePosition position = null;
+
+        for (Tile tile:getAllTiles()){
+            if(tile.getPlayers().contains(player)){
+                position = tile.getPosition();
+            }
+        }
+        return position;
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 
 import java.io.Serializable;
@@ -21,6 +23,28 @@ public class MapData implements Serializable {
 
     private HashMap<TilePosition, DropInstance> drops;
 
+    private ArrayList<PlayerTilePair> playerLocations;
+
+
+    private class PlayerTilePair implements Serializable {
+
+        private TilePosition tile;
+        private PlayerColor player;
+
+        PlayerTilePair(TilePosition tile, PlayerColor player) {
+            this.tile = tile;
+            this.player = player;
+        }
+
+        public TilePosition getTile() {
+            return tile;
+        }
+
+        public PlayerColor getPlayer() {
+            return player;
+        }
+
+    }
 
     public MapData(String mapID) {
         this.mapID = mapID;
@@ -65,6 +89,10 @@ public class MapData implements Serializable {
 
     public DropInstance getDropInTile(TilePosition tile) {
         return drops.get(tile);
+    }
+
+    public void setPlayerLocation(PlayerColor player, TilePosition tile) {
+        this.playerLocations.add(new PlayerTilePair(tile, player));
     }
 
 }
