@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 public class ClientCLIMain {
 
+    /**
+     * Starts a new client instance with Command Line Interface.
+     */
     public static void main(String[] args) {
 
         try (ClientInstance cm = new ClientInstance(new CLIViewMaker(Logger.getGlobal(), System.out, System.in))) {
