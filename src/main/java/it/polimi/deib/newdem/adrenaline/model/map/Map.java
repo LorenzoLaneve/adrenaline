@@ -35,7 +35,7 @@ public interface Map {
 
     int getDistance(Tile source, Tile destination);
 
-    MapData sendMapData();
+    MapData generateMapData();
 
     String getMapID();
 
