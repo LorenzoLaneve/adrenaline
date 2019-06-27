@@ -19,7 +19,8 @@ public class CLIKillTrackView implements KillTrackView {
     }
 
     @Override
-    public void goFrenzy() {
-        out.println("Game turned into frenzy mode!");
+    public void undoLastKill() {
+        out.println("Last kill in the kill track has been undone.");
     }
+
 }

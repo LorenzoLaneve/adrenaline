@@ -7,4 +7,9 @@ public final class NullKillTrackLister implements KillTrackListener {
     public void playerDidKill(Player player, int amount) {
 
     }
+
+    @Override
+    public void killTrackDidUndoLastKill() {
+
+    }
 }

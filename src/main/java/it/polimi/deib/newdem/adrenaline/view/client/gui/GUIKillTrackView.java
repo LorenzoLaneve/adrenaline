@@ -29,8 +29,12 @@ public class GUIKillTrackView implements KillTrackView {
     }
 
     @Override
-    public void goFrenzy() {
-        // nothing to do here...
+    public void undoLastKill() {
+        Platform.runLater(() -> {
+            Pane slot = (Pane) window.getScene().lookup("#killTrackSlot"+ --currentSlot);
+
+            slot.getChildren().clear();
+        });
     }
 
 }
