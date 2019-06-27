@@ -19,9 +19,12 @@ public class TestConcreteMap {
     Room room;
     Tile[][] matrixMap;
     PlayerImpl player;
+    String mapID;
 
     @Before
     public void initTest(){
+
+        mapID = "Map0_0";
 
         matrixMap = new Tile[99][99];
         rooms = new ArrayList<>();
@@ -61,7 +64,7 @@ public class TestConcreteMap {
 
     @Test
     public void testConcreteMap(){
-        map = new ConcreteMap(matrixMap, rooms);
+        map = new ConcreteMap(matrixMap, rooms, mapID);
     }
 
     @Test

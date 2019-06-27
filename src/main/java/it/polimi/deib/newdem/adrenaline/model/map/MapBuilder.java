@@ -15,6 +15,7 @@ public class MapBuilder {
     private int[][][] adjacencyList;
     private final List<Room> rooms;
     private Tile[][] matrixMap;
+    private String mapID;
 
 
     /**Creates a new {@code MapBuilder} instance taking a json encoded version of the map as input.
@@ -31,6 +32,8 @@ public class MapBuilder {
             this.adjacencyList = jsonData.getAdjacencyList();
             this.roomListInt = jsonData.getRoomListInt();
             this.spawnPointTileDict = jsonData.getSpawnPointTileDict();
+            this.mapID = jsonData.getMapID();
+
 
         } catch (Exception e) {
             //TODO
@@ -128,7 +131,7 @@ public class MapBuilder {
     }
 
     public Map buildMap(){
-        Map map = new ConcreteMap(matrixMap,rooms);
+        Map map = new ConcreteMap(matrixMap,rooms, mapID);
         map.bindRooms();
 
         return map;
