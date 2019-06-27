@@ -7,7 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectionalTileSelector implements TileSelector {
+public class AnyDirectionalTileSelector implements TileSelector {
 
     private int minDistance;
     private int maxDistance;
@@ -15,7 +15,7 @@ public class DirectionalTileSelector implements TileSelector {
     private Tile sourceTile;
 
 
-    public DirectionalTileSelector(Tile sourceTile, int minDist, int maxDist, boolean ignoreWalls) {
+    public AnyDirectionalTileSelector(Tile sourceTile, int minDist, int maxDist, boolean ignoreWalls) {
         this.sourceTile = sourceTile;
         this.minDistance = minDist;
         this.maxDistance = maxDist;
