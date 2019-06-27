@@ -10,7 +10,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.io.FileReader;
 
-public class CLIHelper {
+class CLIHelper {
+
+    private CLIHelper() {  }
+
 
     public static String colorToString(PlayerColor color) {
         switch (color) {
