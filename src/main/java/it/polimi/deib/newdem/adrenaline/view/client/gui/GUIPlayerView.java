@@ -152,4 +152,20 @@ public class GUIPlayerView implements PlayerView {
         });
     }
 
+    @Override
+    public void reloadWeaponCard(int cardID) {
+        Platform.runLater(() -> {
+            Group weaponPane = (Group) weaponsPane.lookup(".equipWeapon"+ cardID);
+            weaponPane.getStyleClass().remove("needs-reload");
+        });
+    }
+
+    @Override
+    public void unloadWeaponCard(int cardID) {
+        Platform.runLater(() -> {
+            Group weaponPane = (Group) weaponsPane.lookup(".equipWeapon"+ cardID);
+            weaponPane.getStyleClass().add("needs-reload");
+        });
+    }
+
 }

@@ -73,4 +73,16 @@ public class CLIPlayerView implements PlayerView {
         out.println("- "+ blueAmount +" blue ammos");
         out.println("- "+ yellowAmount+" yellow ammos");
     }
+
+    @Override
+    public void reloadWeaponCard(int cardID) {
+        out.println("The following weapon(s) are now reloaded and ready to be used again:");
+        out.println(cardID +" - "+ CLIHelper.getWeaponName(cardID));
+    }
+
+    @Override
+    public void unloadWeaponCard(int cardID) {
+        out.println("The following weapon(s) have been used and now need to be reloaded:");
+        out.println(cardID +" - "+ CLIHelper.getWeaponName(cardID));
+    }
 }

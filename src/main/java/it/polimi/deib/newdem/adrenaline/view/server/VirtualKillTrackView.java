@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackAddKillEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackUndoKillEvent;
 
 public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
 
@@ -20,14 +21,18 @@ public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
     }
 
     @Override
+    public void killTrackDidUndoLastKill() {
+        undoLastKill();
+    }
+
+    @Override
     public void registerKill(PlayerColor pColor, int amount) {
         vgv.sendEvent(new KillTrackAddKillEvent(pColor, amount));
     }
 
     @Override
-    public void goFrenzy() {
-        // TODO
-        // deprecate
+    public void undoLastKill() {
+        vgv.sendEvent(new KillTrackUndoKillEvent());
     }
 
 }

@@ -5,7 +5,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.util.*;
 
-
+/**
+ * The damage board used in frenzy mode.
+ */
 public class FrenzyDamageBoard extends DamageBoardImpl {
 
     /**

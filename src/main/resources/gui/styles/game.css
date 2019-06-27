@@ -487,3 +487,7 @@
 .card-viewer.powerup-cards {
     -fx-pref-height: 150;
 }
+
+.card-viewer.weapon-cards .needs-reload {
+    -fx-rotate: 90;
+}

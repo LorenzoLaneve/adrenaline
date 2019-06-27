@@ -6,4 +6,6 @@ public interface KillTrackListener {
 
     void playerDidKill(Player player, int amount);
 
+    void killTrackDidUndoLastKill();
+
 }
