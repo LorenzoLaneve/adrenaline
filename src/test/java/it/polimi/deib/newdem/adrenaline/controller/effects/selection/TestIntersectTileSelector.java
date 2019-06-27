@@ -85,13 +85,13 @@ public class TestIntersectTileSelector {
     @Test
     public void isSelectable() {
 
-        NearTileSelector nearTileSelector = new NearTileSelector(player1, 1,2);
+        NearTileSelector nearTileSelector = new NearTileSelector(player1, 0,2);
         VisibleTileSelector visibleTileSelector = new VisibleTileSelector(player1.getTile());
 
         IntersectTileSelector intersectTileSelector = new IntersectTileSelector(nearTileSelector, visibleTileSelector);
 
         assertTrue(intersectTileSelector.isSelectable(map, player2.getTile()));
-        assertTrue(intersectTileSelector.isSelectable(map, player3.getTile()));
+        assertFalse(intersectTileSelector.isSelectable(map, player3.getTile()));
 
     }
 }
