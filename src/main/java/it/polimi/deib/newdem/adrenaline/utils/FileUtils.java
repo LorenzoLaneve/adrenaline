@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.model.game.utils;
+package it.polimi.deib.newdem.adrenaline.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;

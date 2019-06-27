@@ -15,7 +15,7 @@ public class TestGameData {
 
     @Test
     public void addPlayer() {
-        gameData.addPlayer("test", PlayerColor.GRAY, true);
+        gameData.addUser("test", PlayerColor.GRAY, true);
     }
 
 }

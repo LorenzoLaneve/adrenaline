@@ -13,4 +13,6 @@ public interface ActionBoard {
     void setListener(ActionBoardListener listener);
 
     void goFrenzy(boolean precedesFirstPlayer);
+
+    boolean isFrenzy();
 }

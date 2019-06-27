@@ -1,6 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.MoveAtom;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
+
+import java.util.ArrayList;
 
 
 public class ConcreteActionFactory implements ActionFactory {
@@ -17,9 +23,22 @@ public class ConcreteActionFactory implements ActionFactory {
     }
 
     @Override
-    public Action makeAction(Player actor) {
+    public Action makeAction(Player actor, ActionDataSource actionDataSource) {
         //TODO implement
-        return null;
+        // make container
+        ActionContainer container = new ActionContainer(actor, actionDataSource);
+        ArrayList<AtomicAction> atomicActions = new ArrayList<>();
+        AtomicAction currentAtomicAction = null;
+        for (AtomicActionType aat : actionType.getAtomicTypes()) {
+            switch (aat) {
+                case MOVE1:
+                    currentAtomicAction = new MoveAtom(container, 0,1);
+                    break;
+
+            }
+            container.addAtom(currentAtomicAction);
+        }
+        return container;
     }
 
     @Override

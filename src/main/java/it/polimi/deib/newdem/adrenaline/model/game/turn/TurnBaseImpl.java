@@ -62,7 +62,7 @@ public abstract class TurnBaseImpl implements Turn {
                             .map(ActionFactory::getType)
                             .collect(Collectors.toList()));
 
-            Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer);
+            Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {
                 action.start();
                 executedActions++;
@@ -76,13 +76,6 @@ public abstract class TurnBaseImpl implements Turn {
                 // undo stuff
                 // terminate
             // }
-
-            /*
-            ListeerPool = new ListenerPool(legalMoves.foreach(getTriggerListener));
-            MyEvent = ListenerPool.waitAny();
-            MyEvent.process();
-            ExecutedActions += MyEvent.isSuccesful() ? 1 : 0;
-            */
         }
     }
 

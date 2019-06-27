@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 import static org.junit.Assert.*;
 
 public class ActionBoardImplTest {

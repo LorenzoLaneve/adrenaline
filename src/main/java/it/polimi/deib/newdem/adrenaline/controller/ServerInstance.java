@@ -1,5 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
+import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
+import it.polimi.deib.newdem.adrenaline.model.items.InvalidJSONException;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule;
 import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserModule;
@@ -109,6 +113,17 @@ public class ServerInstance {
 
         if (!ready || userRegistry == null || lobbyRegistry == null) {
             throw new InvalidStateException("This server instance was not initialized. Please call init() before starting.");
+        }
+
+        // loading weapon deck from file
+        try {
+            WeaponDeck.loadCardsFromJson(GameImpl.WEAPON_DECK_PATH);
+        }
+        catch (InvalidJSONException e) {
+            throw new IllegalStateException("Could not load weapon deck");
+        }
+        catch (DeckAlreadyLoadedException e) {
+            // do nothing
         }
 
         greeter.start();

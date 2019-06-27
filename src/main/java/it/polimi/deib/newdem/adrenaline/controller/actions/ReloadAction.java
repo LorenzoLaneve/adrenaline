@@ -5,14 +5,19 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class ReloadAction extends ActionBaseImpl {
 
-    public ReloadAction(Player actor) {
-        super(actor);
+    public ReloadAction(Player actor, ActionDataSource actionDataSource) {
+        super(actor, actionDataSource, actor.getGame());
         // TODO implement
     }
 
+
     @Override
-    public Effect getEffect() {
-        //TODO implement
-        return null;
+    public void damageDealtTrigger(Player attacker, Player victim) {
+
+    }
+
+    @Override
+    public void damageTakenTrigger(Player attacker, Player victim) {
+
     }
 }

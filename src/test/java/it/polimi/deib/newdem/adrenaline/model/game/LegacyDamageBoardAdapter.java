@@ -118,4 +118,9 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     public Player popDamage() throws DamageTrackEmptyException {
         return innerDmgb.popDamage();
     }
+
+    @Override
+    public boolean isFrenzy() {
+        return innerDmgb.isFrenzy();
+    }
 }

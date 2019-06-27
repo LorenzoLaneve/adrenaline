@@ -69,4 +69,9 @@ public class ActionBoardImpl implements ActionBoard {
     void notifyFlip() {
         listener.boardDidFlip();
     }
+
+    @Override
+    public boolean isFrenzy() {
+        return behavior.isFrenzy();
+    }
 }

@@ -9,15 +9,19 @@ public class WeaponCallAction extends ActionBaseImpl {
     private Weapon weapon;
 
 
-    public WeaponCallAction(Player actor, Weapon weapon) {
-        super(actor);
+    public WeaponCallAction(Player actor, ActionDataSource actionDataSource, Weapon weapon) {
+        super(actor, actionDataSource, actor.getGame());
         this.weapon = weapon;
         // TODO implement
     }
 
     @Override
-    public Effect getEffect() {
-        //TODO implement
-        return null;
+    public void damageDealtTrigger(Player attacker, Player victim) {
+
+    }
+
+    @Override
+    public void damageTakenTrigger(Player attacker, Player victim) {
+
     }
 }

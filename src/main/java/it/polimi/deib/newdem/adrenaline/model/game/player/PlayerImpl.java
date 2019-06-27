@@ -15,7 +15,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 
 public class PlayerImpl implements Player {
 
@@ -318,5 +318,15 @@ public class PlayerImpl implements Player {
     @Override
     public void addSkull() {
         deaths++;
+    }
+
+    @Override
+    public boolean isActionBoardFrenzy() {
+        return actionBoard.isFrenzy();
+    }
+
+    @Override
+    public PlayerData generatePlayerData() {
+        return new PlayerData(this);
     }
 }

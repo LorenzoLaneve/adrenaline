@@ -16,7 +16,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.*;
 import static org.junit.Assert.*;
 

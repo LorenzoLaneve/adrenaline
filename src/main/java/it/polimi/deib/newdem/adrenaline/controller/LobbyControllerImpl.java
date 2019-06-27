@@ -93,6 +93,8 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
         lobby.startGame();
 
         this.gameController = config.getGameControllerFactory().makeGameController(this);
+        // ^ this may fail now, due to invalid json for decks.
+        // still not lazy enough?
         this.gameController.setupGame(lobby.getUsers());
 
         this.mainThread = new Thread(gameController::runGame);

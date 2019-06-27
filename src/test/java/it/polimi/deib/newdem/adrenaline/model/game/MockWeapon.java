@@ -58,4 +58,8 @@ public class MockWeapon implements Weapon {
     public void reload() {
 
     }
+
+    public void discharge() {
+
+    }
 }

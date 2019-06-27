@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.Scoreboard;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;
@@ -135,5 +136,14 @@ public class KillTrackImpl implements KillTrack {
         }
 
         return s;
+    }
+
+    @Override
+    public KillTrackData generateKillTrackData() {
+        KillTrackData data = new KillTrackData(this);
+        for(Cell c : kills) {
+            data.addCell(c);
+        }
+        return data;
     }
 }

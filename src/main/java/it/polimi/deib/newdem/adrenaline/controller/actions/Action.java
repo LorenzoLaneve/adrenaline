@@ -14,7 +14,8 @@ public interface Action {
     /**
      * Returns the effect this action is executing.
      */
-    Effect getEffect();
+    // deprecated
+    //Effect getEffect();
 
     /**
      * Starts to execute the action.
@@ -22,4 +23,6 @@ public interface Action {
      */
     void start() throws UndoException;
 
+    // allow skinny actions without EffectVisitor
+    // implement within start()?
 }

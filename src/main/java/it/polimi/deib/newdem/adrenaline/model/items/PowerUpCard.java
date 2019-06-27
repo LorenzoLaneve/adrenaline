@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 
-public interface PowerUpCard {
+public interface PowerUpCard extends Card{
 
     /**
      * Card ID that is used to identify hidden cards.
@@ -12,7 +12,7 @@ public interface PowerUpCard {
 
     Effect getEffect();
 
-    int getCardID();
+
 
     PowerUpTrigger getTrigger();
 

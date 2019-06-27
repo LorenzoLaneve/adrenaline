@@ -66,4 +66,8 @@ public interface Player {
     void reportDeath(boolean isDead);
 
     void addSkull();
+
+    boolean isActionBoardFrenzy();
+
+    PlayerData generatePlayerData();
 }

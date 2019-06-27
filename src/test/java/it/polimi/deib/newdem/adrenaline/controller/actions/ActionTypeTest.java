@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import org.junit.Test;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 import static org.junit.Assert.*;
 
 public class ActionTypeTest {

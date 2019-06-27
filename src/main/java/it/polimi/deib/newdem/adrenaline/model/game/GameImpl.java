@@ -10,7 +10,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
-import it.polimi.deib.newdem.adrenaline.model.game.utils.FileUtils;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
@@ -181,7 +181,7 @@ public class GameImpl implements Game {
         bindElementsListeners();
 
         // load cards
-        importWeaponDeck(WEAPON_DECK_PATH);
+        importWeaponDeck();
 
         //load decks
         importPowerUpDeck(POWERUP_DECK_PATH);
@@ -211,12 +211,22 @@ public class GameImpl implements Game {
     }
 
     private GameData generateGameData() {
+
         GameData gameData = new GameData();
 
         for (Player p : players) {
             User playerUser = getUserByPlayer(p);
-            gameData.addPlayer(playerUser.getName(), p.getColor(), playerUser.isConnected());
+
+            gameData.addUser(playerUser.getName(), p.getColor(), playerUser.isConnected());
+            gameData.addPlayer(p);
         }
+
+        gameData.addKillTrack(killTrack);
+        gameData.addMap(map);
+        gameData.addDropDeck(dropDeck);
+        gameData.addPowerUpDeck(powerUpDeck);
+        gameData.addWeaponCardDeck(weaponDeck);
+        gameData.setFinalized();
 
         return gameData;
     }
@@ -233,16 +243,9 @@ public class GameImpl implements Game {
         return t;
     }
 
-    private void importWeaponDeck(String filePath) {
-        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
-        WeaponDeck factory;
-        try {
-            factory = WeaponDeck.fromJson(decodedPath);
-        }
-        catch(InvalidJSONException e) {
-            throw new IllegalStateException();
-        }
-        weaponDeck = factory.createNewDeck();
+    // rethink as singleton from AdrenalineGameController
+    private void importWeaponDeck() {
+        weaponDeck = WeaponDeck.createNewDeck();
     }
 
     private void importPowerUpDeck(String filePath) {

@@ -2,7 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import java.util.*;
 
-public class Deck<T> {
+public class Deck<T extends Card> {
 
     private Deque<T> drawableCards;
     private HashSet<T> discardedCards;
@@ -82,5 +82,34 @@ public class Deck<T> {
         Collections.shuffle(workingList);
 
         this.drawableCards = new LinkedList<>(workingList);
+    }
+
+    /**
+     * Returns the amount od drawable cards in this deck.
+     *
+     * @return amount of drawable cards
+     */
+    public int getDrawableCardsAmount() {
+        return drawableCards.size();
+    }
+
+    /**
+     * Returns all the cards in this deck's discard pile. Order is not ensured.
+     *
+     * @return discarded cards
+     */
+    public List<T> getDiscardPile() {
+        return new ArrayList<>(discardedCards);
+    }
+
+    /**
+     * Generates a {@code DeckData} object for this deck
+     */
+    public DeckData generateDeckData() {
+        List<Integer> discardedCardsIDs= new ArrayList<>();
+        for(Card c : discardedCards) {
+            discardedCardsIDs.add(c.getCardID());
+        }
+        return new DeckData(this.drawableCards.size(), discardedCardsIDs);
     }
 }

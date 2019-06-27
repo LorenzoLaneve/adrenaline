@@ -14,7 +14,7 @@ public class TestDeck {
 
     private List<MockCard> arg;
 
-    public class MockCard {
+    public class MockCard implements Card {
         private String name;
 
         MockCard(String name) {
@@ -23,6 +23,11 @@ public class TestDeck {
 
         public String getName() {
             return name;
+        }
+
+        @Override
+        public int getCardID() {
+            return 0;
         }
     }
 
