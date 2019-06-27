@@ -65,7 +65,7 @@ public class GUIMapView implements MapView {
                 }
             }
 
-            spawnPointLocs.put(data.getRedSpawnLocation(), AmmoColor.RED);
+            spawnPointLocs.put(data.getRedSpawnPoint(), AmmoColor.RED);
             spawnPointLocs.put(data.getBlueSpawnPoint(), AmmoColor.BLUE);
             spawnPointLocs.put(data.getYellowSpawnPoint(), AmmoColor.YELLOW);
         });

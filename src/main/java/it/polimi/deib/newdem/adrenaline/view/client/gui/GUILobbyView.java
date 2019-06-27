@@ -44,4 +44,9 @@ public class GUILobbyView implements LobbyView {
         Platform.runLater(() -> lobbyWindow.abortTimer());
     }
 
+    @Override
+    public void startGame() {
+        Platform.runLater(() -> lobbyWindow.hide());
+    }
+
 }

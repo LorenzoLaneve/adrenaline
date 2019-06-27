@@ -51,5 +51,9 @@ public class GUIGameWindow {
         return scene;
     }
 
+    public void show() {
+        stage.show();
+        Platform.setImplicitExit(true);
+    }
 
 }
