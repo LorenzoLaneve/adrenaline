@@ -27,4 +27,31 @@ public enum AtomicActionType {
     public int getId() {
         return id;
     }
+
+    public boolean isMoveAction() {
+        return this == MOVE1 || this == MOVE2 || this == MOVE3 || this == MOVE4;
+    }
+
+    public int getMoveDistance() {
+        switch (this) {
+            case MOVE4:
+                return 4;
+            case MOVE3:
+                return 3;
+            case MOVE2:
+                return 2;
+            case MOVE1:
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    public boolean covers(AtomicActionType that) {
+        if (this.isMoveAction() && that.isMoveAction()) {
+            return this.getMoveDistance() < that.getMoveDistance();
+        }
+        return this == that;
+    }
+
 }
