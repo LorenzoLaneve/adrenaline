@@ -106,7 +106,8 @@ public class ConcreteMap implements Map {
             }*/
 
             // TODO data creation
-            MapData data = new MapData("map ID here");
+            MapData data = generateMapData();
+
 
             mapListener.mapDidRestoreData(data);
 
@@ -288,5 +289,10 @@ public class ConcreteMap implements Map {
             }
         }
         return position;
+    }
+
+    @Override
+    public void sendMapData() {
+        mapListener.mapDidRestoreData(generateMapData());
     }
 }

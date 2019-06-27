@@ -154,4 +154,29 @@ public class TestConcreteMap {
         assertEquals(redSpawnPoint, map.getSpawnPointFromColor(AmmoColor.RED));
     }
 
+    @Test
+    public void testSendMapData(){
+        MockMapListener newMockMapListener = new MockMapListener();
+
+        map.setListener(newMockMapListener);
+
+        map.sendMapData();
+    }
+
+    @Test
+    public void testGenerateMapData(){
+        MapData mapData = map.generateMapData();
+
+        //assertEquals(mapID, mapData.getMapID());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.RED).getPosition(), mapData.getRedSpawnPoint());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.BLUE).getPosition(), mapData.getBlueSpawnPoint());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.YELLOW).getPosition(), mapData.getYellowSpawnPoint());
+        assertEquals(new PlayerTilePair(new TilePosition(0,0),player.getColor()).getPlayer(),
+                mapData.getPlayerLocations().get(0).getPlayer());
+        assertEquals(new PlayerTilePair(new TilePosition(0,0),player.getColor()).getTile(),
+                mapData.getPlayerLocations().get(0).getTile());
+        for (Tile tile: map.getAllTiles()){
+            assertTrue(mapData.getTiles().contains(tile.getPosition()));
+        }
+    }
 }

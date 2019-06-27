@@ -43,4 +43,6 @@ public interface Map {
 
     TilePosition getPlayerPosition(Player player);
 
+    void sendMapData();
+
 }

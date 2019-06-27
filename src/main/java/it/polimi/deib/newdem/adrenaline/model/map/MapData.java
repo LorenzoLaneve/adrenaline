@@ -28,25 +28,6 @@ public class MapData implements Serializable {
     private List<Integer> blueWeaponSet;
     private List<Integer> yellowWeaponSet;
 
-    private class PlayerTilePair implements Serializable {
-
-        private TilePosition tile;
-        private PlayerColor player;
-
-        PlayerTilePair(TilePosition tile, PlayerColor player) {
-            this.tile = tile;
-            this.player = player;
-        }
-
-        public TilePosition getTile() {
-            return tile;
-        }
-
-        public PlayerColor getPlayer() {
-            return player;
-        }
-
-    }
 
     public MapData(String mapID) {
         this.mapID = mapID;
@@ -118,4 +99,7 @@ public class MapData implements Serializable {
         this.playerLocations.add(new PlayerTilePair(tile, player));
     }
 
+    public List<PlayerTilePair> getPlayerLocations() {
+        return playerLocations;
+    }
 }
