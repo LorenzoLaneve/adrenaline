@@ -10,11 +10,6 @@ public final class NullGameListener implements GameListener {
     }
 
     @Override
-    public void gameWillStart(Game game) {
-
-    }
-
-    @Override
     public void gameWillEnd(Game game) {
 
     }

@@ -27,4 +27,9 @@ public interface LobbyView {
      */
     void abortTimer();
 
+    /**
+     * Notifies that the lobby is going to start the game and send game data to the view.
+     */
+    void startGame();
+
 }

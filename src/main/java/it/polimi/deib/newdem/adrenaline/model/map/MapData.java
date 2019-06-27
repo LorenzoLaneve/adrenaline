@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
-import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 
@@ -87,7 +86,7 @@ public class MapData implements Serializable {
         return new ArrayList<>(tiles);
     }
 
-    public TilePosition getRedSpawnLocation() {
+    public TilePosition getRedSpawnPoint() {
         return redSpawnPoint;
     }
 

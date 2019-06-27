@@ -35,14 +35,13 @@ public class TimerWaitingLobbyState implements LobbyState {
 
     @Override
     public void lobbyWillEnterState(LobbyController lobbyController) {
-        timer = new Timer(10, lobbyController.getTimerListener());
-        timer.start(60);
-        // FIXME the sync period should be retrieved from the config.
+        timer = new Timer(1, lobbyController.getTimerListener());
+        timer.start(lobbyController.getConfig().getTimerLength());
     }
 
     @Override
     public void lobbyDidExitState(LobbyController lobbyController) {
-        if (!timer.abortRequested()) {
+        if (timer.isOver() && !timer.isOver()) {
             timer.abort();
         }
     }

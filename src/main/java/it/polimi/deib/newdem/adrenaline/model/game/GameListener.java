@@ -7,8 +7,6 @@ public interface GameListener {
 
     void gameDidInit(Game game, GameData gameData);
 
-    void gameWillStart(Game game);
-
     void gameWillEnd(Game game);
 
     void userDidEnterGame(User user, Player player);

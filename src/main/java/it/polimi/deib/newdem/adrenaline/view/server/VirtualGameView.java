@@ -46,11 +46,6 @@ public class VirtualGameView implements GameView, GameListener {
     }
 
     @Override
-    public void gameWillStart(Game game) {
-        sendEvent(new GameStartEvent());
-    }
-
-    @Override
     public void gameWillEnd(Game game) {
         sendEvent(new GameEndEvent());
         // FIXME additional info on game over?
