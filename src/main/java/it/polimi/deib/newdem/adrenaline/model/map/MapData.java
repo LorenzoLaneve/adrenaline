@@ -25,6 +25,9 @@ public class MapData implements Serializable {
 
     private ArrayList<PlayerTilePair> playerLocations;
 
+    private List<Integer> redWeaponSet;
+    private List<Integer> blueWeaponSet;
+    private List<Integer> yellowWeaponSet;
 
     private class PlayerTilePair implements Serializable {
 
@@ -50,6 +53,8 @@ public class MapData implements Serializable {
         this.mapID = mapID;
 
         this.drops = new HashMap<>();
+
+        playerLocations = new ArrayList<>();
     }
 
     public void setTileData(List<TilePosition> tileData) {
@@ -61,6 +66,13 @@ public class MapData implements Serializable {
         this.blueSpawnPoint = blue;
         this.yellowSpawnPoint = yellow;
     }
+
+    public void setWeaponSets(List<Integer> redWeaponSet, List<Integer> blueWeaponSet, List<Integer> yellowWeaponSet ){
+        this.redWeaponSet = new ArrayList<>(redWeaponSet);
+        this.blueWeaponSet = new ArrayList<>(blueWeaponSet);
+        this.yellowWeaponSet = new ArrayList<>(yellowWeaponSet);
+    }
+
 
     public void addDrops(TilePosition tile, DropInstance drop) {
         drops.put(tile, drop);
@@ -89,6 +101,18 @@ public class MapData implements Serializable {
 
     public DropInstance getDropInTile(TilePosition tile) {
         return drops.get(tile);
+    }
+
+    public List<Integer> getRedWeaponSet() {
+        return redWeaponSet;
+    }
+
+    public List<Integer> getBlueWeaponSet() {
+        return blueWeaponSet;
+    }
+
+    public List<Integer> getYellowWeaponSet() {
+        return yellowWeaponSet;
     }
 
     public void setPlayerLocation(PlayerColor player, TilePosition tile) {
