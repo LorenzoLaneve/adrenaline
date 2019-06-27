@@ -211,7 +211,7 @@ public class ConcreteMap implements Map {
     }
 
     @Override
-    public MapData sendMapData() {
+    public MapData generateMapData() {
 
         List<Integer> redWeaponSet = new ArrayList<>();
         List<Integer> blueWeaponSet = new ArrayList<>();
