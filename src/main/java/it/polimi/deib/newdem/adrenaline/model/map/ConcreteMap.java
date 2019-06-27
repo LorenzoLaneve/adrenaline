@@ -3,6 +3,8 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponSet;
 
 import java.util.*;
 
@@ -211,6 +213,10 @@ public class ConcreteMap implements Map {
     @Override
     public MapData sendMapData() {
 
+        List<Integer> redWeaponSet = new ArrayList<>();
+        List<Integer> blueWeaponSet = new ArrayList<>();
+        List<Integer> yellowWeaponSet = new ArrayList<>();
+
         MapData mapData;
 
         mapData = new MapData(mapID);
@@ -231,6 +237,21 @@ public class ConcreteMap implements Map {
                 mapData.addDrops(tile.getPosition(), tile.inspectDrop());
             }
         }
+        List<WeaponCard> weaponCardsRED = getSpawnPointFromColor(AmmoColor.RED).inspectWeaponSet().getWeapons();
+        List<WeaponCard> weaponCardsBLUE = getSpawnPointFromColor(AmmoColor.BLUE).inspectWeaponSet().getWeapons();
+        List<WeaponCard> weaponCardsYELLOW = getSpawnPointFromColor(AmmoColor.YELLOW).inspectWeaponSet().getWeapons();
+
+        for(WeaponCard card: weaponCardsRED){
+            redWeaponSet.add(card.getCardID());
+        }
+        for(WeaponCard card: weaponCardsBLUE){
+            redWeaponSet.add(card.getCardID());
+        }
+        for(WeaponCard card: weaponCardsYELLOW){
+            redWeaponSet.add(card.getCardID());
+        }
+
+        mapData.setWeaponSets(redWeaponSet, blueWeaponSet, yellowWeaponSet);
 
         for (Player player: getPlayers()){
             mapData.setPlayerLocation(player.getColor(), getPlayerPosition(player));
