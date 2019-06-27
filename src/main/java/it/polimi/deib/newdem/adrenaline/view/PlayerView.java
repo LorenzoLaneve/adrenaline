@@ -38,4 +38,8 @@ public interface PlayerView {
 
     void removeAmmoSet(int yellowAmount, int redAmount, int blueAmount);
 
+    void reloadWeaponCard(int cardID);
+
+    void unloadWeaponCard(int cardID);
+
 }

@@ -79,6 +79,16 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
         gameView.sendEvent(new PlayerDiscardAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
     }
 
+    @Override
+    public void reloadWeaponCard(int cardID) {
+        gameView.sendEvent(new WeaponReloadEvent(cardID));
+    }
+
+    @Override
+    public void unloadWeaponCard(int cardID) {
+        gameView.sendEvent(new WeaponUnloadEvent(cardID));
+    }
+
 
     @Override
     public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {
@@ -112,11 +122,11 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
 
     @Override
     public void playerDidUnloadWeaponCard(Player player, WeaponCard weaponCard) {
-        // TODO
+        unloadWeaponCard(weaponCard.getCardID());
     }
 
     @Override
     public void playerDidReloadWeaponCard(Player player, WeaponCard weaponCard) {
-        // TODO
+        reloadWeaponCard(weaponCard.getCardID());
     }
 }
