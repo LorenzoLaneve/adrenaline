@@ -17,4 +17,9 @@ public interface DamageBoardView {
      */
     void convertMarks(PlayerColor dealer);
 
+    /**
+     * Notifies that the damage board undid the last damage.
+     */
+    void popDamage();
+
 }

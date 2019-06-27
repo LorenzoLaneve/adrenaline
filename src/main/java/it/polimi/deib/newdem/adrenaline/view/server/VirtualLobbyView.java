@@ -34,11 +34,20 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
     public void addUser(String name) {
         users.add(name);
 
-        for (User user : lobby.getUsers()) {
-            if (user.getName().equals(name)) {
-                user.sendEvent(new LobbyDataEvent(users));
-            } else {
-                user.sendEvent(new EnterLobbyEvent(name));
+        if (lobby.isInGame()) {
+            for (User user : lobby.getUsers()) {
+                if (user.getName().equals(name)) {
+                    user.sendEvent(new GameStartEvent());
+                    break;
+                }
+            }
+        } else {
+            for (User user : lobby.getUsers()) {
+                if (user.getName().equals(name)) {
+                    user.sendEvent(new LobbyDataEvent(users));
+                } else {
+                    user.sendEvent(new EnterLobbyEvent(name));
+                }
             }
         }
 
@@ -65,6 +74,11 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
         sendEvent(new LobbyTimerAbortEvent());
     }
 
+    @Override
+    public void startGame() {
+        sendEvent(new GameStartEvent());
+    }
+
 
     @Override
     public void userDidEnterLobby(User user, Lobby lobby) {
@@ -89,6 +103,11 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
     @Override
     public void lobbyDidAbortTimer() {
         abortTimer();
+    }
+
+    @Override
+    public void lobbyWillStartGame() {
+        startGame();
     }
 
 }

@@ -12,7 +12,7 @@ public class Timer {
 
     private int syncPeriod;
 
-    private boolean abortRequested;
+    private boolean isOver;
 
     private boolean paused;
 
@@ -51,7 +51,7 @@ public class Timer {
     private void doCountdown() {
         try {
             synchronized (this) {
-                this.abortRequested = false;
+                this.isOver = false;
                 this.paused = false;
                 this.secondsLeft = timerDuration;
             }
@@ -60,7 +60,7 @@ public class Timer {
             while (secondsLeft > 0) {
                 Thread.sleep(1000);
 
-                if (abortRequested) {
+                if (isOver) {
                     return;
                 }
 
@@ -77,6 +77,10 @@ public class Timer {
                 }
             }
 
+            synchronized (this) {
+                isOver = true;
+            }
+
             listener.timerDidFinish();
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
@@ -91,7 +95,7 @@ public class Timer {
      */
     public void abort() {
         synchronized (this) {
-            abortRequested = true;
+            isOver = true;
         }
 
         listener.timerDidAbort();
@@ -105,10 +109,10 @@ public class Timer {
     }
 
     /**
-     * Returns whether the timer has been aborted.
+     * Returns whether the timer countdown is over.
      */
-    public boolean abortRequested() {
-        return abortRequested;
+    public boolean isOver() {
+        return isOver;
     }
 
     /**

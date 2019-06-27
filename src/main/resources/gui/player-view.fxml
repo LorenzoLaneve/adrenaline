@@ -11,14 +11,18 @@
 <FlowPane styleClass="player-slot">
     <children>
         <FlowPane styleClass="player-panel">
-            <Label styleClass="player-name" text="Yellow" />
+            <Label styleClass="player-name" />
             <FlowPane hgap="5.0" styleClass="ammo-panel">
                 <Label styleClass="ammo-amt,red" text="0" />
                 <Label styleClass="ammo-amt,blue" text="0" />
                 <Label styleClass="ammo-amt,yellow" text="0" />
                 <Label styleClass="ammo-amt,powerup" text="0" />
+                <Label styleClass="status" />
             </FlowPane>
         </FlowPane>
+        <Pane styleClass="action-board">
+
+        </Pane>
         <Pane styleClass="damage-board">
             <GridPane>
                 <rowConstraints>
@@ -37,6 +41,9 @@
                         <rowConstraints>
                             <RowConstraints prefHeight="50.0" />
                         </rowConstraints>
+                        <FlowPane GridPane.columnIndex="0">
+                            <Label styleClass="score-amt" text="0" />
+                        </FlowPane>
                         <children>
                             <FlowPane hgap="-7.0" styleClass="mark-signs" GridPane.columnIndex="1" />
                         </children>

@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
 import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
+import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 import javafx.application.Platform;
 
 public class GUIConnectionView implements ConnectionView, GUIConnectionPromptReceiver {

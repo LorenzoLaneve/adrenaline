@@ -27,6 +27,11 @@ public interface Lobby {
     void refreshTimer(int secondsLeft);
 
     /**
+     * Sets the game started flag for this lobby.
+     */
+    void startGame();
+
+    /**
      * Aborts the timer in the lobby.
      */
     void abortTimer();
@@ -36,5 +41,10 @@ public interface Lobby {
      * Please note that no assumption will be made on the order.
      */
     List<User> getUsers();
+
+    /**
+     * Returns whether the lobby has started a game.
+     */
+    boolean isInGame();
 
 }

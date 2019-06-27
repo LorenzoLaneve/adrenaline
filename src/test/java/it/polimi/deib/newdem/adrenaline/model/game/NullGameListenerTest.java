@@ -4,8 +4,6 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class NullGameListenerTest {
 
     NullGameListener l;
@@ -13,11 +11,6 @@ public class NullGameListenerTest {
     @Before
     public void setUp() throws Exception {
         l = new NullGameListener();
-    }
-
-    @Test
-    public void testGameWillStart() throws Exception {
-        l.gameWillStart(new MockGame());
     }
 
     @Test

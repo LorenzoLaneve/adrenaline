@@ -12,12 +12,13 @@ public class TestJsonData {
     int[] red = {1,2};
     int[] blue = {2,2};
     int[] yellow = {1,1};
+    private String mapID = null;
 
     @Test
     public void testConstructor(){
         try{
             spawnPointTileDict = new SpawnPointTileDict(red, blue, yellow);
-            JsonData jData = new JsonData(spawnPointTileDict, roomListInt, adjacencyList);
+            JsonData jData = new JsonData(spawnPointTileDict, roomListInt, adjacencyList, mapID );
             assertEquals(spawnPointTileDict, jData.getSpawnPointTileDict());
             assertEquals(roomListInt, jData.getRoomListInt());
             assertEquals(adjacencyList, jData.getAdjacencyList());

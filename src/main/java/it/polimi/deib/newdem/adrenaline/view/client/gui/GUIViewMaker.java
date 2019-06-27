@@ -1,9 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
-import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.LobbyView;
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
-import it.polimi.deib.newdem.adrenaline.view.UsernameView;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.client.ViewMaker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 import javafx.application.Application;
@@ -44,6 +42,26 @@ public class GUIViewMaker implements ViewMaker {
         this.gameWindow = new GUIGameWindow();
 
         return new GUIGameView(gameWindow);
+    }
+
+    @Override
+    public MapView makeMapView() {
+        return new GUIMapView(gameWindow);
+    }
+
+    @Override
+    public KillTrackView makeKillTrackView() {
+        return new GUIKillTrackView(gameWindow);
+    }
+
+    @Override
+    public PlayerView makePlayerView(PlayerColor playerColor) {
+        return new GUIPlayerView(gameWindow, playerColor);
+    }
+
+    @Override
+    public DamageBoardView makeDamageBoardView(PlayerColor playerColor) {
+        return new GUIDamageBoardView(gameWindow, playerColor);
     }
 
 }

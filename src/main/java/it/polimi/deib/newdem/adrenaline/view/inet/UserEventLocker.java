@@ -4,26 +4,25 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 public class UserEventLocker<T extends UserEvent> {
 
-    private UserEventSubscriber<T> subscriber;
-
-    private Class<T> eventClass;
-
     private T receivedEvent;
 
     public synchronized T waitOnEvent(Class<T> eventClass, UserConnection connection) throws InterruptedException {
-        this.subscriber = this::receiveEvent;
-        this.eventClass = eventClass;
+        UserEventSubscriber<T> subscriber = this::receiveEvent;
         this.receivedEvent = null;
 
         connection.subscribeEvent(eventClass, subscriber);
-        while (receivedEvent == null) wait();
+
+        try {
+            while (receivedEvent == null) wait();
+        } finally {
+            connection.unsubscribeEvent(eventClass, subscriber);
+        }
 
         return receivedEvent;
     }
 
     private synchronized void receiveEvent(UserConnection connection, T event) {
         this.receivedEvent = event;
-        connection.unsubscribeEvent(eventClass, subscriber);
         notifyAll();
     }
 

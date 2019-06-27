@@ -1,9 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
-import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.LobbyView;
-import it.polimi.deib.newdem.adrenaline.view.client.ConnectionView;
-import it.polimi.deib.newdem.adrenaline.view.UsernameView;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.client.ViewMaker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 
@@ -44,6 +42,26 @@ public class CLIViewMaker implements ViewMaker {
     @Override
     public GameView makeGameView() {
         return new CLIGameView(out);
+    }
+
+    @Override
+    public MapView makeMapView() {
+        return new CLIMapView(out);
+    }
+
+    @Override
+    public KillTrackView makeKillTrackView() {
+        return new CLIKillTrackView(out);
+    }
+
+    @Override
+    public PlayerView makePlayerView(PlayerColor playerColor) {
+        return new CLIPlayerView(playerColor, out);
+    }
+
+    @Override
+    public DamageBoardView makeDamageBoardView(PlayerColor playerColor) {
+        return new CLIDamageBoardView(playerColor, out);
     }
 
 }

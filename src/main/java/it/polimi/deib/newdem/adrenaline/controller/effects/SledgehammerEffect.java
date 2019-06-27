@@ -1,10 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.*;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalTileSelector;
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -34,7 +31,7 @@ public class SledgehammerEffect implements Effect {
 
         manager.damagePlayer(actor, redPlayer, 3, 0);
 
-        Tile destTile = manager.bindTile(new DirectionalTileSelector(actor.getTile(), 0, 2, false));
+        Tile destTile = manager.bindTile(new AnyDirectionalTileSelector(actor.getTile(), 0, 2, false));
         manager.movePlayer(redPlayer, destTile);
     }
 

@@ -89,7 +89,7 @@ public class User {
      * Returns the UserConnection object that has to be used to communicate with the user.
      * @apiNote This can also return {@code null} if the client associated with the user is not connected.
      */
-    private UserConnection getBoundConnection() {
+    public UserConnection getBoundConnection() {
         return boundConnection;
     }
 

@@ -1,0 +1,19 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane>
+    <rowConstraints>
+        <RowConstraints prefHeight="62.0" />
+        <RowConstraints prefHeight="49.0" />
+        <RowConstraints prefHeight="49.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints prefWidth="102.0" />
+    </columnConstraints>
+    <children>
+        <FlowPane alignment="CENTER" styleClass="top-buttons" GridPane.rowIndex="1" />
+        <FlowPane alignment="CENTER" styleClass="bottom-buttons" GridPane.rowIndex="2" />
+    </children>
+</GridPane>

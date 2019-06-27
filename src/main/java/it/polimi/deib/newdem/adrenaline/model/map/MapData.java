@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 
 import java.io.Serializable;
@@ -21,11 +22,19 @@ public class MapData implements Serializable {
 
     private HashMap<TilePosition, DropInstance> drops;
 
+    private ArrayList<PlayerTilePair> playerLocations;
+
+    private List<Integer> redWeaponSet;
+    private List<Integer> blueWeaponSet;
+    private List<Integer> yellowWeaponSet;
+
 
     public MapData(String mapID) {
         this.mapID = mapID;
 
         this.drops = new HashMap<>();
+
+        playerLocations = new ArrayList<>();
     }
 
     public void setTileData(List<TilePosition> tileData) {
@@ -37,6 +46,13 @@ public class MapData implements Serializable {
         this.blueSpawnPoint = blue;
         this.yellowSpawnPoint = yellow;
     }
+
+    public void setWeaponSets(List<Integer> redWeaponSet, List<Integer> blueWeaponSet, List<Integer> yellowWeaponSet ){
+        this.redWeaponSet = new ArrayList<>(redWeaponSet);
+        this.blueWeaponSet = new ArrayList<>(blueWeaponSet);
+        this.yellowWeaponSet = new ArrayList<>(yellowWeaponSet);
+    }
+
 
     public void addDrops(TilePosition tile, DropInstance drop) {
         drops.put(tile, drop);
@@ -51,7 +67,7 @@ public class MapData implements Serializable {
         return new ArrayList<>(tiles);
     }
 
-    public TilePosition getRedSpawnLocation() {
+    public TilePosition getRedSpawnPoint() {
         return redSpawnPoint;
     }
 
@@ -67,4 +83,23 @@ public class MapData implements Serializable {
         return drops.get(tile);
     }
 
+    public List<Integer> getRedWeaponSet() {
+        return redWeaponSet;
+    }
+
+    public List<Integer> getBlueWeaponSet() {
+        return blueWeaponSet;
+    }
+
+    public List<Integer> getYellowWeaponSet() {
+        return yellowWeaponSet;
+    }
+
+    public void setPlayerLocation(PlayerColor player, TilePosition tile) {
+        this.playerLocations.add(new PlayerTilePair(tile, player));
+    }
+
+    public List<PlayerTilePair> getPlayerLocations() {
+        return playerLocations;
+    }
 }

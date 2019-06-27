@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
-import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
@@ -16,12 +15,6 @@ import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +79,7 @@ public class GameImpl implements Game {
 
     @Override
     public void setGameListener(GameListener listener) {
-        if(init) this.listener = listener;
+        if (init) setAndNotifyListener(listener);
         else listenerRegistry.setGameListener(listener);
     }
 
@@ -131,7 +124,11 @@ public class GameImpl implements Game {
     private void bindElementsListeners() {
         // attach new listeners
         killTrack.setListener(listenerRegistry.getKillTrackListener());
-        listener = listenerRegistry.getGameListener();
+        setAndNotifyListener(listenerRegistry.getGameListener());
+    }
+
+    private void setAndNotifyListener(GameListener listener) {
+        this.listener = listener;
     }
 
     private void createNewPlayers(){
@@ -209,6 +206,19 @@ public class GameImpl implements Game {
         // set flags
         isFrenzy = false;
         init = true;
+
+        listener.gameDidInit(this, generateGameData());
+    }
+
+    private GameData generateGameData() {
+        GameData gameData = new GameData();
+
+        for (Player p : players) {
+            User playerUser = getUserByPlayer(p);
+            gameData.addPlayer(playerUser.getName(), p.getColor(), playerUser.isConnected());
+        }
+
+        return gameData;
     }
 
     /**

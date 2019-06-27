@@ -1,9 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.view.client;
 
+import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.LobbyView;
-import it.polimi.deib.newdem.adrenaline.view.UsernameView;
+import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber;
@@ -29,11 +28,8 @@ public class ClientInstance implements AutoCloseable {
 
     public void start() {
         createConnection();
-
         askUsername();
-
         waitLobby();
-
         playGame();
     }
 
@@ -117,7 +113,7 @@ public class ClientInstance implements AutoCloseable {
         UserEventSubscriber<EnterLobbyEvent> addSub = ((conn, event) -> lobbyView.addUser(event.getUsername()));
         UserEventSubscriber<ExitLobbyEvent> remSub = ((conn, event) -> lobbyView.removeUser(event.getUsername()));
         UserEventSubscriber<LobbyTimerStartEvent> timerStartSub = ((conn, event) -> lobbyView.startTimer(event.getSecondsLeft()));
-        UserEventSubscriber<LobbyTimerUpdateEvent> timerUpdateSub = ((conn, event) -> lobbyView.startTimer(event.getSecondsLeft()));
+        UserEventSubscriber<LobbyTimerUpdateEvent> timerUpdateSub = ((conn, event) -> lobbyView.syncTimer(event.getSecondsLeft()));
         UserEventSubscriber<LobbyTimerAbortEvent> timerAbortSub = ((conn, event) -> lobbyView.abortTimer());
 
         clientConnection.subscribeEvent(EnterLobbyEvent.class, addSub);
@@ -133,6 +129,7 @@ public class ClientInstance implements AutoCloseable {
             Thread.currentThread().interrupt();
             throw new ClosedException("Close requested.");
         }
+        lobbyView.startGame();
 
         clientConnection.unsubscribeEvent(EnterLobbyEvent.class, addSub);
         clientConnection.unsubscribeEvent(ExitLobbyEvent.class, remSub);
@@ -143,7 +140,19 @@ public class ClientInstance implements AutoCloseable {
     }
 
     private void playGame() {
-        GameView gameView = viewMaker.makeGameView();
+        GameClientManager manager = new GameClientManager(viewMaker, clientConnection);
+
+        manager.loadData();
+        manager.linkViews();
+
+        UserEventLocker<GameEndEvent> gameEndLocker = new UserEventLocker<>();
+        try {
+            gameEndLocker.waitOnEvent(GameEndEvent.class, clientConnection);
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+            throw new ClosedException("Close requested.");
+        }
+
     }
 
     @Override

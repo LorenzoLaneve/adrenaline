@@ -1,0 +1,22 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane>
+    <rowConstraints>
+        <RowConstraints prefHeight="18.0" />
+        <RowConstraints prefHeight="87.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints prefWidth="32.0" />
+    </columnConstraints>
+    <children>
+        <FlowPane GridPane.rowIndex="1">
+            <Pane styleClass="action-board-button" />
+            <Pane styleClass="action-board-button" />
+            <Pane styleClass="action-board-button" />
+        </FlowPane>
+    </children>
+</GridPane>

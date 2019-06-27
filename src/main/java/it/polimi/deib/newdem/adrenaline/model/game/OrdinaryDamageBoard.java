@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Damage board used when the game is not in frenzy mode.
+ */
 public class OrdinaryDamageBoard extends DamageBoardImpl {
 
     public static final int GRAB2_TRESHOLD = 2;

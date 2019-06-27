@@ -90,6 +90,8 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     @Override
     public void startGame() {
+        lobby.startGame();
+
         this.gameController = config.getGameControllerFactory().makeGameController(this);
         this.gameController.setupGame(lobby.getUsers());
 
@@ -114,7 +116,7 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     @Override
     public void timerDidFinish() {
-        // nothing to do... maybe?
+        this.switchState(new InGameLobbyState());
     }
 
     @Override

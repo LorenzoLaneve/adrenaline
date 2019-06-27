@@ -3,6 +3,8 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponSet;
 
 import java.util.*;
 
@@ -11,15 +13,17 @@ public class ConcreteMap implements Map {
     private List<Room> rooms;
     private Tile[][] matrixMap;
     private MapListener mapListener;
+    private String mapID;
 
     /**Creates a new {@code ConcreteMap} using the matrixMap and list of rooms provided by the MapBuilder.
      *
      * @param matrixMap array of arrays of tiles.
      * @param rooms list of rooms.
      */
-    public ConcreteMap(Tile[][] matrixMap, List<Room> rooms) {
+    public ConcreteMap(Tile[][] matrixMap, List<Room> rooms, String mapID) {
         this.matrixMap = matrixMap;
         this.rooms = rooms;
+        this.mapID = mapID;
     }
 
     /**Returns the rooms in the map.
@@ -102,7 +106,8 @@ public class ConcreteMap implements Map {
             }*/
 
             // TODO data creation
-            MapData data = new MapData("map ID here");
+            MapData data = generateMapData();
+
 
             mapListener.mapDidRestoreData(data);
 
@@ -204,5 +209,90 @@ public class ConcreteMap implements Map {
             visited.add(curr);
         }
         return distDict.get(destination);
+    }
+
+    @Override
+    public MapData generateMapData() {
+
+        List<Integer> redWeaponSet = new ArrayList<>();
+        List<Integer> blueWeaponSet = new ArrayList<>();
+        List<Integer> yellowWeaponSet = new ArrayList<>();
+
+        MapData mapData;
+
+        mapData = new MapData(mapID);
+
+        List<TilePosition> tilePositionList = new ArrayList<>();
+
+        for(Tile tile: getAllTiles()){
+            tilePositionList.add(tile.getPosition());
+        }
+
+        mapData.setTileData(tilePositionList);
+
+        mapData.setSpawnPoints(getSpawnPointFromColor(AmmoColor.RED).getPosition(),
+                getSpawnPointFromColor(AmmoColor.BLUE).getPosition(),
+                getSpawnPointFromColor(AmmoColor.YELLOW).getPosition());
+        for(Tile tile: getAllTiles()){
+            if(!tile.hasSpawnPoint()){
+                mapData.addDrops(tile.getPosition(), tile.inspectDrop());
+            }
+        }
+        List<WeaponCard> weaponCardsRED = getSpawnPointFromColor(AmmoColor.RED).inspectWeaponSet().getWeapons();
+        List<WeaponCard> weaponCardsBLUE = getSpawnPointFromColor(AmmoColor.BLUE).inspectWeaponSet().getWeapons();
+        List<WeaponCard> weaponCardsYELLOW = getSpawnPointFromColor(AmmoColor.YELLOW).inspectWeaponSet().getWeapons();
+
+        for(WeaponCard card: weaponCardsRED){
+            redWeaponSet.add(card.getCardID());
+        }
+        for(WeaponCard card: weaponCardsBLUE){
+            redWeaponSet.add(card.getCardID());
+        }
+        for(WeaponCard card: weaponCardsYELLOW){
+            redWeaponSet.add(card.getCardID());
+        }
+
+        mapData.setWeaponSets(redWeaponSet, blueWeaponSet, yellowWeaponSet);
+
+        for (Player player: getPlayers()){
+            mapData.setPlayerLocation(player.getColor(), getPlayerPosition(player));
+        }
+
+        return mapData;
+    }
+
+    @Override
+    public String getMapID() {
+        return mapID;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+
+        List<Player> playerList = new ArrayList<>();
+
+        for (Room room:getRooms()){
+            playerList.addAll(room.getPlayers());
+        }
+
+        return playerList;
+    }
+
+    @Override
+    public TilePosition getPlayerPosition(Player player) {
+
+        TilePosition position = null;
+
+        for (Tile tile:getAllTiles()){
+            if(tile.getPlayers().contains(player)){
+                position = tile.getPosition();
+            }
+        }
+        return position;
+    }
+
+    @Override
+    public void sendMapData() {
+        mapListener.mapDidRestoreData(generateMapData());
     }
 }

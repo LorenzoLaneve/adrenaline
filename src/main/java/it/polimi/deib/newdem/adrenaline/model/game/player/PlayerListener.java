@@ -1,22 +1,25 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
-import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 public interface PlayerListener {
 
-    void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker);
+    void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard);
 
-    void playerDidDrawPowerUpCard(PowerUpCard powerUpCard);
+    void playerDidDiscardPowerUpCard(Player player, PowerUpCard powerUpCard);
 
-    void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard);
+    void playerDidReceiveWeaponCard(Player player, WeaponCard weaponCard);
 
-    void playerDidGrabDrop(DropInstance dropInstance);
+    void playerDidDiscardWeaponCard(Player player, WeaponCard weaponCard);
 
-    void playerDidGrabWeapon(WeaponCard weaponCard);
+    void playerDidReceiveAmmos(Player player, AmmoSet ammos);
 
-    void playerDidDiscardWeapon(WeaponCard weaponCard);
+    void playerDidDiscardAmmos(Player player, AmmoSet ammos);
 
+    void playerDidUnloadWeaponCard(Player player, WeaponCard weaponCard);
+
+    void playerDidReloadWeaponCard(Player player, WeaponCard weaponCard);
 
 }

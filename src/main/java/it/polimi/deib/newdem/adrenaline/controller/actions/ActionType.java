@@ -61,4 +61,26 @@ public class ActionType implements Serializable {
         return true;
     }
 
+
+    /**
+     * Returns whether the given action type is covered by this action type, meaning that
+     * using this action type allows to do all the moves allowed by the given action type.
+     */
+    public boolean covers(ActionType actionType) {
+
+        int k = 0;
+        List<AtomicActionType> typesToCover = actionType.atoms;
+
+        for (AtomicActionType aType : atoms) {
+            if (k >= typesToCover.size()) {
+                return true;
+            }
+
+            while (!aType.covers(typesToCover.get(k))) { k++; }
+            k++;
+        }
+
+        return false;
+    }
+
 }

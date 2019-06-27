@@ -8,6 +8,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameParameters;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -20,7 +21,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestDirectionalTileSelector {
+public class TestUnionPlayerSelector {
 
     Map map;
     Player player1;
@@ -81,19 +82,18 @@ public class TestDirectionalTileSelector {
         map.movePlayer(player2, destination2);
         map.movePlayer(player3, destination3);
         map.movePlayer(player4,destination4);
-
-        int dist = player1.getTile().distanceFrom(player3.getTile());
-
-
     }
 
     @Test
     public void isSelectable() {
 
-        DirectionalTileSelector selc = new DirectionalTileSelector(player1.getTile(),0,1, false);
+        NearPlayerSelector nearPlayerSelector = new NearPlayerSelector(player1, 1,2);
+        DirectionalPlayerSelector directionalPlayerSelector = new DirectionalPlayerSelector(player1, Direction.EAST, false);
 
-        assertTrue(selc.isSelectable(map, player2.getTile()));
-        assertFalse(selc.isSelectable(map, player3.getTile()));
+        UnionPlayerSelector unionPlayerSelector = new UnionPlayerSelector(nearPlayerSelector, directionalPlayerSelector);
+
+        assertTrue(unionPlayerSelector.isSelectable(map, player2));
+        assertTrue(unionPlayerSelector.isSelectable(map, player4));
 
     }
 }

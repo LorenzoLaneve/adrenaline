@@ -19,9 +19,12 @@ public class TestConcreteMap {
     Room room;
     Tile[][] matrixMap;
     PlayerImpl player;
+    String mapID;
 
     @Before
     public void initTest(){
+
+        mapID = "Map0_0";
 
         matrixMap = new Tile[99][99];
         rooms = new ArrayList<>();
@@ -61,7 +64,7 @@ public class TestConcreteMap {
 
     @Test
     public void testConcreteMap(){
-        map = new ConcreteMap(matrixMap, rooms);
+        map = new ConcreteMap(matrixMap, rooms, mapID);
     }
 
     @Test
@@ -151,4 +154,29 @@ public class TestConcreteMap {
         assertEquals(redSpawnPoint, map.getSpawnPointFromColor(AmmoColor.RED));
     }
 
+    @Test
+    public void testSendMapData(){
+        MockMapListener newMockMapListener = new MockMapListener();
+
+        map.setListener(newMockMapListener);
+
+        map.sendMapData();
+    }
+
+    @Test
+    public void testGenerateMapData(){
+        MapData mapData = map.generateMapData();
+
+        //assertEquals(mapID, mapData.getMapID());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.RED).getPosition(), mapData.getRedSpawnPoint());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.BLUE).getPosition(), mapData.getBlueSpawnPoint());
+        assertEquals(map.getSpawnPointFromColor(AmmoColor.YELLOW).getPosition(), mapData.getYellowSpawnPoint());
+        assertEquals(new PlayerTilePair(new TilePosition(0,0),player.getColor()).getPlayer(),
+                mapData.getPlayerLocations().get(0).getPlayer());
+        assertEquals(new PlayerTilePair(new TilePosition(0,0),player.getColor()).getTile(),
+                mapData.getPlayerLocations().get(0).getTile());
+        for (Tile tile: map.getAllTiles()){
+            assertTrue(mapData.getTiles().contains(tile.getPosition()));
+        }
+    }
 }

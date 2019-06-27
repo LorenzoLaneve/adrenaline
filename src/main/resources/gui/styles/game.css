@@ -39,6 +39,43 @@
     -fx-rotate: 90;
 }
 
+
+.top-buttons Pane, .bottom-buttons Pane {
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-pref-height: 49.0;
+}
+
+.top-buttons Pane.top, .bottom-buttons Pane.bottom {
+    -fx-pref-width: 104;
+}
+
+.bottom-buttons Pane.left, .bottom-buttons Pane.right {
+    -fx-pref-width: 51;
+}
+
+.top-buttons Pane.top-left {
+    -fx-pref-width: 68;
+}
+
+.top-buttons Pane.top-right {
+    -fx-pref-width: 34;
+}
+
+.top-buttons Pane.selectable, .bottom-buttons Pane.selectable {
+    -fx-border-color: green;
+}
+
+.top-buttons Pane.selectable:hover, .bottom-buttons Pane.selectable:hover {
+    -fx-border-color: white;
+}
+
+.top-buttons Pane.selectable:pressed, .bottom-buttons Pane.selectable:pressed {
+    -fx-border-color: red;
+}
+
+
 .kill-track-slot, .kill-track-slot FlowPane {
     -fx-pref-width: 42;
     -fx-pref-height: 58;
@@ -103,6 +140,27 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
+.player-pin.dead {
+    -fx-border-style: dashed;
+    -fx-border-color: red;
+    -fx-border-width: 5;
+}
+
+.player-pin.selectable {
+    -fx-border-style: dashed;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-cursor: hand;
+}
+
+.player-pin.selectable:hover {
+    -fx-border-color: white;
+}
+
+.player-pin.selectable:pressed {
+    -fx-border-color: red;
+}
+
 .player-pin.yellow {
     -fx-background-color: #ffe20a;
 }
@@ -155,12 +213,12 @@
 
 
 .player-slot {
-    -fx-pref-width: 400;
+    -fx-pref-width: 335.0;
 }
 
 .player-slot .player-panel {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #aaaaaa, #ffffff);
-    -fx-pref-width: 300.0;
+    -fx-pref-width: 332.0;
     -fx-pref-height: 50.0;
 
     -fx-background-radius: 5px;
@@ -180,6 +238,15 @@
 
 .player-slot .player-panel .ammo-panel {
     -fx-pref-width: 140;
+}
+
+.player-slot .player-panel .status, .player-slot .score-amt {
+    -fx-font-family: ethnocentric;
+    -fx-font-size: 12px;
+}
+
+.player-slot .score-amt {
+    -fx-padding: 4 0 4 10
 }
 
 .player-slot .player-panel .ammo-panel .ammo-amt {
@@ -212,13 +279,45 @@
 }
 
 
-.player-slot .player-panel Label {
+.player-slot Label {
     -fx-text-fill: black;
 }
 
-.player-slot.cyan .player-panel Label, .player-slot.magenta .player-panel Label, .player-slot.green .player-panel Label {
+.player-slot.cyan Label, .player-slot.magenta Label, .player-slot.green Label {
      -fx-text-fill: white;
 }
+
+.player-slot .action-board {
+    -fx-pref-width: 32.0;
+    -fx-pref-height: 105.0;
+
+    -fx-background-repeat: none;
+    -fx-background-position: left top;
+    -fx-background-size: 32 105;
+    -fx-background-image: url("../assets/boards/act_cyan_normal.png");
+}
+
+.player-slot .action-board .action-board-button {
+    -fx-pref-width: 26.0;
+    -fx-pref-height: 18.0;
+
+    -fx-border-width: 2px;
+    -fx-border-radius: 5;
+    -fx-border-color: transparent;
+}
+
+.player-slot .action-board.frenzy .action-board-button {
+    -fx-pref-height: 14.0;
+}
+
+.player-slot .action-board .action-board-button:hover {
+    -fx-border-color: white;
+}
+
+.player-slot .action-board .action-board-button:pressed {
+    -fx-border-color: red;
+}
+
 
 .player-slot .damage-board {
     -fx-pref-width: 300.0;
@@ -248,6 +347,69 @@
 
 .player-slot.green .damage-board, .player-slot.green .player-panel {
     -fx-background-image: url("../assets/boards/dmg_green_normal.png");
+}
+
+
+.player-slot.yellow .damage-board.frenzy {
+    -fx-background-image: url("../assets/boards/dmg_yellow_frenzy.png");
+}
+
+.player-slot.cyan .damage-board.frenzy {
+    -fx-background-image: url("../assets/boards/dmg_cyan_frenzy.png");
+}
+
+.player-slot.magenta .damage-board.frenzy {
+    -fx-background-image: url("../assets/boards/dmg_magenta_frenzy.png");
+}
+
+.player-slot.gray .damage-board.frenzy {
+    -fx-background-image: url("../assets/boards/dmg_gray_frenzy.png");
+}
+
+.player-slot.green .damage-board.frenzy {
+    -fx-background-image: url("../assets/boards/dmg_green_frenzy.png");
+}
+
+
+.player-slot.yellow .action-board {
+    -fx-background-image: url("../assets/boards/act_yellow_normal.png");
+}
+
+.player-slot.cyan .action-board {
+    -fx-background-image: url("../assets/boards/act_cyan_normal.png");
+}
+
+.player-slot.magenta .action-board {
+    -fx-background-image: url("../assets/boards/act_magenta_normal.png");
+}
+
+.player-slot.gray .action-board {
+    -fx-background-image: url("../assets/boards/act_gray_normal.png");
+}
+
+.player-slot.green .action-board {
+    -fx-background-image: url("../assets/boards/act_green_normal.png");
+}
+
+
+.player-slot.yellow .action-board.frenzy {
+    -fx-background-image: url("../assets/boards/act_yellow_frenzy.png");
+}
+
+.player-slot.cyan .action-board.frenzy {
+    -fx-background-image: url("../assets/boards/act_cyan_frenzy.png");
+}
+
+.player-slot.magenta .action-board.frenzy {
+    -fx-background-image: url("../assets/boards/act_magenta_frenzy.png");
+}
+
+.player-slot.gray .action-board.frenzy {
+    -fx-background-image: url("../assets/boards/act_gray_frenzy.png");
+}
+
+.player-slot.green .action-board.frenzy {
+    -fx-background-image: url("../assets/boards/act_green_frenzy.png");
 }
 
 
@@ -324,4 +486,8 @@
 
 .card-viewer.powerup-cards {
     -fx-pref-height: 150;
+}
+
+.card-viewer.weapon-cards .needs-reload {
+    -fx-rotate: 90;
 }

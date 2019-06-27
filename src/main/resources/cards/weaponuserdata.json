@@ -1,0 +1,319 @@
+{
+  "cards": {
+    "card-1": {
+      "screenName": "Lock Rifle",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Second Lock",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-2": {
+      "screenName": "Electroscythe",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Reaper Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-3": {
+      "screenName": "Machine Gun",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Focus Shot",
+          "location": "left"
+        },
+        "effect-2": {
+          "screenName": "Turret Tripod",
+          "location": "right"
+        }
+      }
+    },
+    "card-4": {
+      "screenName": "Tractor Beam",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Punisher Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-5": {
+      "screenName": "Vortex Cannon",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Black Hole",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-6": {
+      "screenName": "T.H.O.R.",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Chain Reaction",
+          "location": "left"
+        },
+        "effect-2": {
+          "screenName": "High Voltage",
+          "location": "right"
+        }
+      }
+    },
+    "card-7": {
+      "screenName": "Furnace",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Cozy Fire Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-8": {
+      "screenName": "Plasma Gun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Phase Glide",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Charged Shot",
+          "location": "right"
+        }
+      }
+    },
+    "card-9": {
+      "screenName": "Heatseeker",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        }
+      }
+    },
+    "card-10": {
+      "screenName": "Whisper",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        }
+      }
+    },
+    "card-11": {
+      "screenName": "Hellion",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Nano-Tracer Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-12": {
+      "screenName": "Flamethrower",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Barbecue Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-13": {
+      "screenName": "ZX-2",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Scanner Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-14": {
+      "screenName": "Grenade Launcher",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top-left"
+        },
+        "effect-1": {
+          "screenName": "Move Target",
+          "location": "top-right"
+        },
+        "effect-2": {
+          "screenName": "Extra Grenade",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-15": {
+      "screenName": "Shotgun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Long Barrel Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-16": {
+      "screenName": "Rocket Launcher",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Rocket Jump",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Fragmenting Warhead",
+          "location": "right"
+        }
+      }
+    },
+    "card-17": {
+      "screenName": "Power Glove",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Rocket Fist Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-18": {
+      "screenName": "Railgun",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Piercing Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-19": {
+      "screenName": "Shockwave",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Tsunami Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-20": {
+      "screenName": "Cyberblade",
+      "fragments": {
+        "effect-1": {
+          "screenName": "Basic Effect",
+          "location": "top"
+        },
+        "effect-2": {
+          "screenName": "Shadowstep",
+          "location": "left"
+        },
+        "effect-3": {
+          "screenName": "Slice and Dice",
+          "location": "right"
+        }
+      }
+    },
+    "card-21": {
+      "screenName": "Sledgehammer",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Pulverizer Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-22": {
+      "screenName": "Chainsaw",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Doom Mode",
+          "location": "bottom"
+        }
+      }
+    },
+    "card-23": {
+      "screenName": "Laser Magnum",
+      "fragments": {
+        "effect-0": {
+          "screenName": "Basic Mode",
+          "location": "top"
+        },
+        "effect-1": {
+          "screenName": "Gigawatt Mode",
+          "location": "bottom"
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
@@ -7,32 +8,42 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 public final class NullPlayerListener implements PlayerListener {
 
     @Override
-    public void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker) {
+    public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {
 
     }
 
     @Override
-    public void playerDidDrawPowerUpCard(PowerUpCard powerUpCard) {
+    public void playerDidDiscardPowerUpCard(Player player, PowerUpCard powerUpCard) {
 
     }
 
     @Override
-    public void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard) {
+    public void playerDidReceiveWeaponCard(Player player, WeaponCard weaponCard) {
 
     }
 
     @Override
-    public void playerDidGrabDrop(DropInstance dropInstance) {
+    public void playerDidDiscardWeaponCard(Player player, WeaponCard weaponCard) {
 
     }
 
     @Override
-    public void playerDidGrabWeapon(WeaponCard weaponCard) {
+    public void playerDidReceiveAmmos(Player player, AmmoSet ammos) {
 
     }
 
     @Override
-    public void playerDidDiscardWeapon(WeaponCard weaponCard) {
+    public void playerDidDiscardAmmos(Player player, AmmoSet ammos) {
+
+    }
+
+    @Override
+    public void playerDidUnloadWeaponCard(Player player, WeaponCard weaponCard) {
+
+    }
+
+    @Override
+    public void playerDidReloadWeaponCard(Player player, WeaponCard weaponCard) {
 
     }
 }

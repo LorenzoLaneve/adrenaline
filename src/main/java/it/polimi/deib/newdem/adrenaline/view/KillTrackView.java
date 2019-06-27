@@ -10,8 +10,8 @@ public interface KillTrackView {
     void registerKill(PlayerColor pColor, int amount);
 
     /**
-     * Notifies that the game passed to frenzy mode.
+     * Notifies that the last kill was undone by the kill track.
      */
-    void goFrenzy();
+    void undoLastKill();
 
 }

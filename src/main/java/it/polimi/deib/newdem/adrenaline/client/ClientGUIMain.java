@@ -19,6 +19,9 @@ public class ClientGUIMain extends Application {
         clientThread.start();
     }
 
+    /**
+     * Starts the ClientInstance object, this should be called in a separate thread and NOT in the JavaFX thread.
+     */
     private void setupClient() {
         try (ClientInstance client = new ClientInstance(new GUIViewMaker(this))) {
             client.start();
@@ -28,6 +31,9 @@ public class ClientGUIMain extends Application {
     }
 
 
+    /**
+     * Starts a new client instance with Graphics User Interface.
+     */
     public static void main(String[] args) {
         launch(args);
 

@@ -70,11 +70,6 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
-    public void takeDamage(int dmgAmount, int mrkAmount, PlayerColor dealer) {
-        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), dealer, dmgAmount, mrkAmount));
-    }
-
-    @Override
     public void addAmmoSet(int yellowAmount, int redAmount, int blueAmount) {
         gameView.sendEvent(new PlayerReceiveAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
     }
@@ -85,35 +80,53 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
-    public void playerDidTakeDamage(int dmgAmount, int mrkAmount, Player attacker) {
-        gameView.sendEvent(new PlayerDamageEvent(player.getColor(), attacker.getColor(), dmgAmount, mrkAmount));
+    public void reloadWeaponCard(int cardID) {
+        gameView.sendEvent(new WeaponReloadEvent(cardID));
     }
 
     @Override
-    public void playerDidDrawPowerUpCard(PowerUpCard powerUpCard) {
+    public void unloadWeaponCard(int cardID) {
+        gameView.sendEvent(new WeaponUnloadEvent(cardID));
+    }
+
+
+    @Override
+    public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {
         addPowerUpCard(powerUpCard.getCardID());
     }
 
     @Override
-    public void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard) {
+    public void playerDidDiscardPowerUpCard(Player player, PowerUpCard powerUpCard) {
         removePowerUpCard(powerUpCard.getCardID());
     }
 
     @Override
-    public void playerDidGrabDrop(DropInstance dropInstance) {
-        AmmoSet ammos = dropInstance.getAmmos();
-
-        addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
-    }
-
-    @Override
-    public void playerDidGrabWeapon(WeaponCard weaponCard) {
+    public void playerDidReceiveWeaponCard(Player player, WeaponCard weaponCard) {
         addWeaponCard(weaponCard.getCardID());
     }
 
     @Override
-    public void playerDidDiscardWeapon(WeaponCard weaponCard) {
+    public void playerDidDiscardWeaponCard(Player player, WeaponCard weaponCard) {
         removeWeaponCard(weaponCard.getCardID());
+    }
 
+    @Override
+    public void playerDidReceiveAmmos(Player player, AmmoSet ammos) {
+        addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
+    }
+
+    @Override
+    public void playerDidDiscardAmmos(Player player, AmmoSet ammos) {
+        removeAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
+    }
+
+    @Override
+    public void playerDidUnloadWeaponCard(Player player, WeaponCard weaponCard) {
+        unloadWeaponCard(weaponCard.getCardID());
+    }
+
+    @Override
+    public void playerDidReloadWeaponCard(Player player, WeaponCard weaponCard) {
+        reloadWeaponCard(weaponCard.getCardID());
     }
 }
