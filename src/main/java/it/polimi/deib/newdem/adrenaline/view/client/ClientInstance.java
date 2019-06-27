@@ -113,7 +113,7 @@ public class ClientInstance implements AutoCloseable {
         UserEventSubscriber<EnterLobbyEvent> addSub = ((conn, event) -> lobbyView.addUser(event.getUsername()));
         UserEventSubscriber<ExitLobbyEvent> remSub = ((conn, event) -> lobbyView.removeUser(event.getUsername()));
         UserEventSubscriber<LobbyTimerStartEvent> timerStartSub = ((conn, event) -> lobbyView.startTimer(event.getSecondsLeft()));
-        UserEventSubscriber<LobbyTimerUpdateEvent> timerUpdateSub = ((conn, event) -> lobbyView.startTimer(event.getSecondsLeft()));
+        UserEventSubscriber<LobbyTimerUpdateEvent> timerUpdateSub = ((conn, event) -> lobbyView.syncTimer(event.getSecondsLeft()));
         UserEventSubscriber<LobbyTimerAbortEvent> timerAbortSub = ((conn, event) -> lobbyView.abortTimer());
 
         clientConnection.subscribeEvent(EnterLobbyEvent.class, addSub);
@@ -129,6 +129,7 @@ public class ClientInstance implements AutoCloseable {
             Thread.currentThread().interrupt();
             throw new ClosedException("Close requested.");
         }
+        lobbyView.startGame();
 
         clientConnection.unsubscribeEvent(EnterLobbyEvent.class, addSub);
         clientConnection.unsubscribeEvent(ExitLobbyEvent.class, remSub);
