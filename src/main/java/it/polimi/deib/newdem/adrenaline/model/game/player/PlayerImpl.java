@@ -8,6 +8,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
+import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -70,6 +71,11 @@ public class PlayerImpl implements Player {
     @Override
     public Game getGame() {
         return this.game;
+    }
+
+    @Override
+    public PlayerListener getListener() {
+        return listener;
     }
 
     /**
@@ -279,9 +285,9 @@ public class PlayerImpl implements Player {
     @Override
     public void drawCard() {
         try {
-            game.getPowerUpDeck().draw();
+            getInventory().addPowerUp(game.getPowerUpDeck().draw());
         }
-        catch (NoDrawableCardException e) {
+        catch (NoDrawableCardException | OutOfSlotsException e) {
             // this should never happen
             throw new IllegalStateException(e);
         }

@@ -11,6 +11,8 @@ public interface Player {
 
     Game getGame();
 
+    PlayerListener getListener();
+
     String getName();
 
     Tile getTile();

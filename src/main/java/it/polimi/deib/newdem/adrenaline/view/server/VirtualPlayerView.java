@@ -79,30 +79,44 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
         gameView.sendEvent(new PlayerDiscardAmmoEvent(player.getColor(), yellowAmount, redAmount, blueAmount));
     }
 
+
     @Override
-    public void playerDidDrawPowerUpCard(PowerUpCard powerUpCard) {
+    public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {
         addPowerUpCard(powerUpCard.getCardID());
     }
 
     @Override
-    public void playerDidDiscardPowerUpCard(PowerUpCard powerUpCard) {
+    public void playerDidDiscardPowerUpCard(Player player, PowerUpCard powerUpCard) {
         removePowerUpCard(powerUpCard.getCardID());
     }
 
     @Override
-    public void playerDidGrabDrop(DropInstance dropInstance) {
-        AmmoSet ammos = dropInstance.getAmmos();
-
-        addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
-    }
-
-    @Override
-    public void playerDidGrabWeapon(WeaponCard weaponCard) {
+    public void playerDidReceiveWeaponCard(Player player, WeaponCard weaponCard) {
         addWeaponCard(weaponCard.getCardID());
     }
 
     @Override
-    public void playerDidDiscardWeapon(WeaponCard weaponCard) {
+    public void playerDidDiscardWeaponCard(Player player, WeaponCard weaponCard) {
         removeWeaponCard(weaponCard.getCardID());
+    }
+
+    @Override
+    public void playerDidReceiveAmmos(Player player, AmmoSet ammos) {
+        addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
+    }
+
+    @Override
+    public void playerDidDiscardAmmos(Player player, AmmoSet ammos) {
+        removeAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
+    }
+
+    @Override
+    public void playerDidUnloadWeaponCard(Player player, WeaponCard weaponCard) {
+        // TODO
+    }
+
+    @Override
+    public void playerDidReloadWeaponCard(Player player, WeaponCard weaponCard) {
+        // TODO
     }
 }
