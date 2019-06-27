@@ -45,4 +45,9 @@ public class CLILobbyView implements LobbyView {
         out.println("Timer has been aborted due to insufficient players.");
     }
 
+    @Override
+    public void startGame() {
+        out.println("Game will start now.");
+    }
+
 }

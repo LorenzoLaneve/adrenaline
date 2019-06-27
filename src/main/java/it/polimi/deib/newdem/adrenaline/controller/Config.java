@@ -1,5 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileReader;
+
 public final class Config {
 
     protected boolean useSockets = true;
@@ -8,12 +14,12 @@ public final class Config {
 
     protected int socketPort = 9700;
 
-    protected int RMIPort = 9701;
+    protected int rmiPort = 9701;
 
-    protected String RMIIdentifier = "adrenaline";
+    protected String rmiIdentifier = "adrenaline";
 
 
-    protected int timerLength = 60;
+    protected int timerLength = 3;
 
     protected int minPlayers = 3;
 
@@ -25,15 +31,42 @@ public final class Config {
 
     private Config() {  }
 
+
+    private static JsonElement getMember(JsonObject object, String id) throws InvalidConfigException {
+        JsonElement elem = object.get(id);
+        if (elem == null) throw new InvalidConfigException("Missing value for "+ id);
+        return elem;
+    }
+
     /**
      * Parses the given configuration file into a new configuration info object.
      * @param fileName the filename of the configuration file that has to be read.
      * @return a new {@code Config} object containing all the information retrieved by the given file.
      */
-    public static Config fromFile(String fileName){
-        //TODO file reading
-        return new Config();
+    public static Config fromFile(String fileName) throws InvalidConfigException {
+        Config config = new Config();
+
+        try (FileReader fread = new FileReader(fileName)) {
+            JsonObject configJson = new JsonParser().parse(fread).getAsJsonObject();
+
+            config.useSockets = getMember(configJson, "useSockets").getAsBoolean();
+            config.useRMI = getMember(configJson, "useRMI").getAsBoolean();
+            config.socketPort = getMember(configJson, "socketPort").getAsInt();
+            config.rmiPort = getMember(configJson, "rmiPort").getAsInt();
+            config.rmiIdentifier = getMember(configJson, "rmiIdentifier").getAsString();
+
+            config.timerLength = getMember(configJson, "timerLength").getAsInt();
+            config.minPlayers = getMember(configJson, "minPlayers").getAsInt();
+            config.maxPlayers = getMember(configJson, "maxPlayers").getAsInt();
+            config.turnTime = getMember(configJson, "turnTime").getAsInt();
+
+        } catch (Exception x) {
+            throw new InvalidConfigException(x.getMessage());
+        }
+
+        return config;
     }
+
 
     /**
      * Returns the hardcoded default configuration.
@@ -74,12 +107,12 @@ public final class Config {
     /**
      * Returns the TCP port the socket of the server should listen to new RMI connections from.
      */
-    public int getRMIPort() { return RMIPort; }
+    public int getRMIPort() { return rmiPort; }
 
     /**
      * Return the URI for the server object that will wait for new RMI user connections.
      */
-    public String getRMIIdentifier() { return RMIIdentifier; }
+    public String getRMIIdentifier() { return rmiIdentifier; }
 
     /**
      * Returns whether the socket module should be added to the modules used by the server instance.

@@ -5,7 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public final class NullGameListener implements GameListener {
     @Override
-    public void gameWillStart(Game game) {
+    public void gameDidInit(Game game, GameData gameData) {
 
     }
 

@@ -36,7 +36,6 @@ public class PlayerInventory {
         ammos.put(RED, 0);
         ammos.put(BLUE, 0);
         ammos.put(YELLOW, 0);
-
     }
 
     /**

@@ -1,18 +1,28 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
 
 public class GUIGameWindowHelper {
 
@@ -201,5 +211,61 @@ public class GUIGameWindowHelper {
     public static Pane getPlayerPin(Scene scene, PlayerColor color) {
         return (Pane) scene.lookup(".player-pin."+ toStyleClass(color));
     }
+
+
+
+
+
+    public static void setActiveWeaponCard(Scene scene, int cardID) {
+        StackPane activeCardSlot = (StackPane) scene.lookup("#activeCardSlot");
+        activeCardSlot.getChildren().clear();
+
+        activeCardSlot.getChildren().add(createWeaponCardPane(cardID));
+        activeCardSlot.getChildren().add(createActiveCardGrid(cardID));
+    }
+
+    private static Node createActiveCardGrid(int cardID) {
+        try {
+            GridPane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/active-card-grid.fxml"));
+
+            try (FileReader fread = new FileReader(FileUtils.getAbsoluteDecodedFilePath("cards/weaponuserdata.json", GUIGameWindowHelper.class))) {
+                JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
+
+                JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();
+
+                for (Map.Entry<String, JsonElement> entry : cardDict.get("fragments").getAsJsonObject().entrySet()) {
+                    String id = entry.getKey();
+                    String location = entry.getValue().getAsJsonObject().get("location").getAsString();
+
+                    Pane fragmentPane = new Pane();
+                    fragmentPane.getStyleClass().add(id);
+                    fragmentPane.getStyleClass().add(location);
+                    fragmentPane.getStyleClass().add("selectable"); // TODO remove this, just for test
+
+                    Pane destPane;
+                    switch (location) {
+                        case "top":
+                        case "top-left":
+                        case "top-right":
+                            destPane = (Pane) tilePane.lookup(".top-buttons");
+                            destPane.getChildren().add(fragmentPane);
+                            break;
+                        default:
+                            destPane = (Pane) tilePane.lookup(".bottom-buttons");
+                            destPane.getChildren().add(fragmentPane);
+                            break;
+                    }
+                }
+
+            } catch (Exception x) {
+                // TODO notify?
+            }
+
+            return tilePane;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
 
 }

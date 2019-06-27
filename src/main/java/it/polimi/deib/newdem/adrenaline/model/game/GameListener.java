@@ -5,7 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 public interface GameListener {
 
-    void gameWillStart(Game game);
+    void gameDidInit(Game game, GameData gameData);
 
     void gameWillEnd(Game game);
 

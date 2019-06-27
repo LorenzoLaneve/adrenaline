@@ -6,12 +6,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.layout.StackPane?>
-<Pane styleClass="map-pane" xmlns="http://javafx.com/javafx/8.0.172-ea">
+
+<Pane styleClass="map-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@styles/general.css" />
         <URL value="@styles/game.css" />
@@ -36,7 +33,7 @@
                         <RowConstraints prefHeight="188.0" />
                     </rowConstraints>
                     <children>
-                        <FlowPane id="blueSpawnPointCards" styleClass="v-card-slots" hgap="16.5" prefWidth="362.0" GridPane.columnIndex="1" />
+                        <FlowPane id="blueSpawnPointCards" hgap="16.5" prefWidth="362.0" styleClass="v-card-slots" GridPane.columnIndex="1" />
                         <GridPane GridPane.columnIndex="0">
                             <columnConstraints>
                                 <ColumnConstraints prefWidth="79.0" />
@@ -49,32 +46,32 @@
                             <children>
                                 <FlowPane hgap="4.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot1" hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                        <FlowPane id="killTrackSlot1" alignment="CENTER" hgap="-9.0" vgap="-40.0">
                                             <Pane styleClass="dmg,magenta" />
                                         </FlowPane>
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot2" hgap="-9.0" vgap="-40.0" alignment="CENTER">
+                                        <FlowPane id="killTrackSlot2" alignment="CENTER" hgap="-9.0" vgap="-40.0">
                                             <Pane styleClass="dmg,yellow" />
                                         </FlowPane>
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot3" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot3" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot4" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot4" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot5" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot5" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot6" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot6" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot7" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot7" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot8" hgap="-9.0" vgap="-40.0" alignment="CENTER" />
+                                        <FlowPane id="killTrackSlot8" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot,additional-kills">
                                         <FlowPane id="killTrackSlot9" hgap="-9.0" vgap="-40.0" />
@@ -119,7 +116,7 @@
                            <RowConstraints prefHeight="173.0" />
                        </rowConstraints>
                        <children>
-                           <FlowPane id="redSpawnPointCards" styleClass="h-card-slots" prefHeight="362.0" vgap="16.5" GridPane.rowIndex="1" />
+                           <FlowPane id="redSpawnPointCards" prefHeight="362.0" styleClass="h-card-slots" vgap="16.5" GridPane.rowIndex="1" />
                        </children>
                    </GridPane>
                    <GridPane GridPane.columnIndex="2">
@@ -132,7 +129,7 @@
                            <RowConstraints prefHeight="360.0" />
                        </rowConstraints>
                        <children>
-                           <FlowPane id="yellowSpawnPointCards" styleClass="h-card-slots" prefHeight="362.0" vgap="16.5" GridPane.rowIndex="2" />
+                           <FlowPane id="yellowSpawnPointCards" prefHeight="362.0" styleClass="h-card-slots" vgap="16.5" GridPane.rowIndex="2" />
                            <GridPane>
                                <columnConstraints>
                                    <ColumnConstraints prefWidth="13.0" />
@@ -144,23 +141,13 @@
                                </rowConstraints>
                                <children>
                                    <FlowPane prefHeight="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <StackPane id="activeCardSlot" styleClass="v-card-slots">
-                                           <Group>
-                                               <children>
-                                                   <ImageView fitWidth="104" fitHeight="158">
-                                                       <image>
-                                                           <Image url="@assets/cards/weapon_flipped.png" />
-                                                       </image>
-                                                   </ImageView>
-                                               </children>
-                                           </Group>
-                                       </StackPane>
+                                       <StackPane id="activeCardSlot" styleClass="v-card-slots" />
                                    </FlowPane>
                                </children>
                            </GridPane>
                        </children>
                    </GridPane>
-                  <FlowPane hgap="10.0" vgap="10.0" id="mapGrid" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <FlowPane id="mapGrid" hgap="10.0" vgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <children>
                           <Pane id="tileSlot0_0" styleClass="tile-slot">
                               <GridPane>
@@ -176,11 +163,11 @@
                                       <ColumnConstraints prefWidth="20" />
                                   </columnConstraints>
                                   <children>
-                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-players-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                           <Pane styleClass="player-pin,gray" />
                                           <Pane styleClass="player-pin,green" />
                                       </FlowPane>
-                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-drops-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                           <Pane styleClass="drop-icon,red-ammo" />
                                           <Pane styleClass="drop-icon,red-ammo" />
                                           <Pane styleClass="drop-icon,yellow-ammo" />
@@ -202,12 +189,12 @@
                                       <ColumnConstraints prefWidth="20" />
                                   </columnConstraints>
                                   <children>
-                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-players-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                           <Pane styleClass="player-pin,yellow" />
-                                          <Pane styleClass="player-pin,cyan" />
-                                          <Pane styleClass="player-pin,magenta" />
+                                          <Pane styleClass="player-pin,cyan,dead" />
+                                          <Pane styleClass="player-pin,magenta,selectable" />
                                       </FlowPane>
-                                      <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-drops-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                           <Pane styleClass="drop-icon,blue-ammo" />
                                           <Pane styleClass="drop-icon,blue-ammo" />
                                           <Pane styleClass="drop-icon,powerup" />

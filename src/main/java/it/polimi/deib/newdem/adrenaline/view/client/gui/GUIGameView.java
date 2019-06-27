@@ -18,7 +18,13 @@ public class GUIGameView implements GameView {
 
     @Override
     public void setGameData(GameData data) {
-        // TODO
+        Platform.runLater(() -> {
+            window.getScene().getRoot().applyCss();
+
+
+
+            window.show();
+        });
     }
 
     @Override

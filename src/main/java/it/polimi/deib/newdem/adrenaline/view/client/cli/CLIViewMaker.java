@@ -46,22 +46,22 @@ public class CLIViewMaker implements ViewMaker {
 
     @Override
     public MapView makeMapView() {
-        return null;
+        return new CLIMapView(out);
     }
 
     @Override
     public KillTrackView makeKillTrackView() {
-        return null;
+        return new CLIKillTrackView(out);
     }
 
     @Override
     public PlayerView makePlayerView(PlayerColor playerColor) {
-        return null;
+        return new CLIPlayerView(playerColor, out);
     }
 
     @Override
     public DamageBoardView makeDamageBoardView(PlayerColor playerColor) {
-        return null;
+        return new CLIDamageBoardView(playerColor, out);
     }
 
 }

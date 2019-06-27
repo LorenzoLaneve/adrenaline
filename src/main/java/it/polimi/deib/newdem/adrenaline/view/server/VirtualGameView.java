@@ -39,9 +39,10 @@ public class VirtualGameView implements GameView, GameListener {
         return this.users.get(color);
     }
 
+
     @Override
-    public void gameWillStart(Game game) {
-        sendEvent(new GameStartEvent());
+    public void gameDidInit(Game game, GameData gameData) {
+        setGameData(gameData);
     }
 
     @Override

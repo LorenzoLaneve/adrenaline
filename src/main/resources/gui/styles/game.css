@@ -39,6 +39,43 @@
     -fx-rotate: 90;
 }
 
+
+.top-buttons Pane, .bottom-buttons Pane {
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-pref-height: 49.0;
+}
+
+.top-buttons Pane.top, .bottom-buttons Pane.bottom {
+    -fx-pref-width: 104;
+}
+
+.bottom-buttons Pane.left, .bottom-buttons Pane.right {
+    -fx-pref-width: 51;
+}
+
+.top-buttons Pane.top-left {
+    -fx-pref-width: 68;
+}
+
+.top-buttons Pane.top-right {
+    -fx-pref-width: 34;
+}
+
+.top-buttons Pane.selectable, .bottom-buttons Pane.selectable {
+    -fx-border-color: green;
+}
+
+.top-buttons Pane.selectable:hover, .bottom-buttons Pane.selectable:hover {
+    -fx-border-color: white;
+}
+
+.top-buttons Pane.selectable:pressed, .bottom-buttons Pane.selectable:pressed {
+    -fx-border-color: red;
+}
+
+
 .kill-track-slot, .kill-track-slot FlowPane {
     -fx-pref-width: 42;
     -fx-pref-height: 58;
@@ -101,6 +138,27 @@
     -fx-border-radius: 15;
 
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.player-pin.dead {
+    -fx-border-style: dashed;
+    -fx-border-color: red;
+    -fx-border-width: 5;
+}
+
+.player-pin.selectable {
+    -fx-border-style: dashed;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-cursor: hand;
+}
+
+.player-pin.selectable:hover {
+    -fx-border-color: white;
+}
+
+.player-pin.selectable:pressed {
+    -fx-border-color: red;
 }
 
 .player-pin.yellow {

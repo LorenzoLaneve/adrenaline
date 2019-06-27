@@ -26,7 +26,7 @@ public class CLIGameView implements GameView {
 
     @Override
     public void enablePlayer(PlayerColor color) {
-        out.println("It's "+ CLIHelper.colorToString(color) +" player turn.");
+        out.println("Player "+ CLIHelper.colorToString(color) +" player turn.");
     }
 
 }

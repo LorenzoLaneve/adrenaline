@@ -13,6 +13,8 @@ public class LobbyImpl implements Lobby {
 
     private int secondsLeft;
 
+    private boolean inGame;
+
 
     /**
      * Creates a new and empty lobby.
@@ -20,6 +22,8 @@ public class LobbyImpl implements Lobby {
     public LobbyImpl() {
         this.users = new ArrayList<>();
         this.timerActive = false;
+
+        this.inGame = false;
     }
 
     @Override
@@ -65,6 +69,15 @@ public class LobbyImpl implements Lobby {
     }
 
     @Override
+    public void startGame() {
+        this.inGame = true;
+
+        if (listener != null) {
+            listener.lobbyWillStartGame();
+        }
+    }
+
+    @Override
     public void abortTimer() {
         this.timerActive = false;
 
@@ -76,6 +89,11 @@ public class LobbyImpl implements Lobby {
     @Override
     public List<User> getUsers() {
         return new ArrayList<>(users);
+    }
+
+    @Override
+    public boolean isInGame() {
+        return inGame;
     }
 
 }

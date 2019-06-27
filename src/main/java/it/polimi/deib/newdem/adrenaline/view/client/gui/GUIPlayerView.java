@@ -35,6 +35,7 @@ public class GUIPlayerView implements PlayerView {
     }
 
     private void setupPane() {
+        window.getScene().getRoot().applyCss();
         Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
 
         try {

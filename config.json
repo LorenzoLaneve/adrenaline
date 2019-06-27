@@ -1,0 +1,15 @@
+{
+  "useSockets": true,
+  "useRMI": true,
+
+  "socketPort": 9700,
+
+  "rmiPort": 9701,
+  "rmiIdentifier": "adrenaline",
+
+  "timerLength": 3,
+  "minPlayers": 3,
+  "maxPlayers": 5,
+
+  "turnTime": 1
+}
