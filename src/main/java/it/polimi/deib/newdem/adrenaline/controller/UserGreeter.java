@@ -76,7 +76,7 @@ public class UserGreeter {
      */
     public void start() throws InvalidStateException {
         if (!ready) {
-            throw new InvalidStateException("Instance not initialized. Please call init() on this object first.");
+            throw new InvalidStateException("Instance not initialized. Please discharge init() on this object first.");
         }
 
         for (IncomingUserModule module : modules) {
@@ -102,7 +102,7 @@ public class UserGreeter {
 
     /**
      * Closes all the associated modules by killing the threads and then calls, for each module, IncomingUserModule.close() on the current thread.
-     * @implNote if close() is called on an already closed user greeter, the call will be ignored.
+     * @implNote if close() is called on an already closed user greeter, the discharge will be ignored.
      */
     public synchronized void close() {
         if (!closeRequested) {

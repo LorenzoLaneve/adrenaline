@@ -1,9 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
-import it.polimi.deib.newdem.adrenaline.model.items.Card;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.List;
@@ -17,29 +15,21 @@ public class ShootAtom extends AtomContext {
 
     @Override
     public void execute() throws ConnectionException {
-        List<WeaponCard> availableWeapons;
-        availableWeapons = getActor().getInventory().getReadyWeapons().getWeapons();
 
-        WeaponCard selectedWeapon = selectWeapon(availableWeapons);
+        List<Weapon> availableWeapons = getActor().getInventory().getLoadedWeapons();
 
-        boolean effectResolved = false;
+        Weapon selectedWeapon = selectWeapon(availableWeapons);
 
-        do {
-            try {
-                selectedWeapon.getEffect().apply(new EffectManager(this), getActor());
-                effectResolved = true;
-            }
-            catch (UndoException e) {
-                // do nothing, effectResolve is already false
-            }
-        }
-        while (!effectResolved);
+        selectedWeapon.discharge();
+
+        applyEffect(selectedWeapon.getCard().getEffect());
+
     }
 
-    private WeaponCard selectWeapon(List<WeaponCard> availableWeaponCards) {
+    private Weapon selectWeapon(List<Weapon> availableWeaponCards) {
         int selectedId = -1;
         List<Integer> availableWeaponsIds = availableWeaponCards.stream()
-                .map(WeaponCard::getCardID)
+                .map(weapon -> weapon.getCard().getCardID())
                 .collect(Collectors.toList());
 
         // select weapon card
@@ -56,89 +46,27 @@ public class ShootAtom extends AtomContext {
         while (-1 == selectedId);
 
         // get weapon from ID in starting list
-        for(WeaponCard w : availableWeaponCards) {
-            if(w.getCardID() == selectedId) {
+        for(Weapon w : availableWeaponCards) {
+            if(w.getCard().getCardID() == selectedId) {
                 return w;
             }
         }
 
         throw new IllegalStateException();
     }
-/*
-    @Override
-    public void applyGameChange(GameChange gameChange) {
-        gameChange.update(parent.getGame());
-    }
 
-    @Override
-    public void revertGameChange(GameChange gameChange) {
-        gameChange.revert(parent.getGame());
-    }
-
-    @Override
-    public Player getActor() {
-        return getActor();
-    }
-
-    @Override
-    public Player getAttacker() {
-        // contesto danno ricevuto
-        return null;
-        // TODO
-    }
-
-    @Override
-    public Player getVictim() {
-        // contesto di danno arrecato
-        return null;
-        // TODO
-    }
-
-    @Override
-    public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
-        Player selectedPlayer;
+    private void applyEffect(Effect effect) {
+        boolean effectResolved = false;
 
         do {
-            selectedPlayer = parent.getDataSource().actionDidRequestPlayer(
-                    player, selector
-            );
+            try {
+                effect.apply(new EffectManager(this), getActor());
+                effectResolved = true;
+            }
+            catch (UndoException e) {
+                // do nothing, effectResolve is already false
+            }
         }
-        while ((null == selectedPlayer) && forceChoice);
-        return selectedPlayer;
+        while (!effectResolved);
     }
-
-    @Override
-    public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
-        Tile selectedTile;
-
-        do {
-            selectedTile = parent.getDataSource().actionDidRequestTile(selector);
-        }
-        while ((null == selectedTile) && forceChoice);
-
-        return selectedTile;
-    }
-
-    @Override
-    public Integer chooseFragment(List<Integer> choices) throws UndoException {
-        // TODO add to ADS
-        return 0;
-    }
-
-    @Override
-    public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
-        return parent.getDataSource().actionDidRequestPayment(price);
-        // FIXME Integer choice?
-    }
-
-    @Override
-    public void damageDealtTrigger(Player attacker, Player victim) {
-
-    }
-
-    @Override
-    public void damageTakenTrigger(Player attacker, Player victim) {
-
-    }
-    */
 }

@@ -138,7 +138,7 @@ public class TimedExecutor implements TimerListener {
 
     /**
      * Pauses the timer of the TimedExecutor associated to the current thread.
-     * If the current thread has not been launched by a TimedExecutor this call will be ignored.
+     * If the current thread has not been launched by a TimedExecutor this discharge will be ignored.
      */
     public static void pauseTimer() {
         TimedExecutor executor;
@@ -152,7 +152,7 @@ public class TimedExecutor implements TimerListener {
 
     /**
      * Resumes the timer of the TimedExecutor associated to the current thread.
-     * If the current thread has not been launched by a TimedExecutor this call will be ignored.
+     * If the current thread has not been launched by a TimedExecutor this discharge will be ignored.
      */
     public static void resumeTimer() {
         TimedExecutor executor;

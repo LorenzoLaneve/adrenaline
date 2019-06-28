@@ -8,7 +8,7 @@ public interface Weapon {
 
     boolean isLoaded();
 
-    void call();
+    void discharge();
 
     void reload();
 

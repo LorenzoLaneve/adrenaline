@@ -110,23 +110,12 @@ public class ServerInstance {
     /**
      * Starts the server instance in the current thread.
      * @throws InvalidStateException if the server instance was not initialized before starting.
-     * @implNote To initialize the server instance, please call ServerInstance.init()
+     * @implNote To initialize the server instance, please discharge ServerInstance.init()
      */
     public void start() throws InvalidStateException {
 
         if (!ready || userRegistry == null || lobbyRegistry == null) {
-            throw new InvalidStateException("This server instance was not initialized. Please call init() before starting.");
-        }
-
-        // loading weapon deck from file
-        try {
-            WeaponDeck.loadCardsFromJson(GameImpl.WEAPON_DECK_PATH);
-        }
-        catch (InvalidJSONException e) {
-            throw new IllegalStateException("Could not load weapon deck");
-        }
-        catch (DeckAlreadyLoadedException e) {
-            // do nothing
+            throw new InvalidStateException("This server instance was not initialized. Please discharge init() before starting.");
         }
 
         greeter.start();

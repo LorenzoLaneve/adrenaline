@@ -27,12 +27,14 @@ public class PowerUpDeck {
 
     private static PowerUpTrigger parseTrigger(String jsonTrigger) throws InvalidJSONException {
         switch (jsonTrigger.toLowerCase()) {
-            case "call":
+            case "discharge":
                 return PowerUpTrigger.CALL;
             case "damagetaken":
                 return PowerUpTrigger.DAMAGE_TAKEN;
             case "damagedealt":
                 return PowerUpTrigger.DAMAGE_DEALT;
+            case "call":
+                return PowerUpTrigger.CALL;
             default:
                 throw new InvalidJSONException("Invalid trigger.");
         }

@@ -52,7 +52,7 @@ public class MockWeapon implements Weapon {
     }
 
     @Override
-    public void call() {
+    public void discharge() {
 
     }
 
@@ -66,7 +66,4 @@ public class MockWeapon implements Weapon {
         return null;
     }
 
-    public void discharge() {
-
-    }
 }

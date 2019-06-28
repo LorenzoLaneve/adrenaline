@@ -24,7 +24,7 @@ public class WeaponImpl implements Weapon {
     }
 
     @Override
-    public void call() {
+    public void discharge() {
         if(isLoaded){
             isLoaded = false;
             player.getListener().playerDidUnloadWeaponCard(player, card);
@@ -43,4 +43,6 @@ public class WeaponImpl implements Weapon {
     public Player returnOwner() {
         return player;
     }
+
+
 }

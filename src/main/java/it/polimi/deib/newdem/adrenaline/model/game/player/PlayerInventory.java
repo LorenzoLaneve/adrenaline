@@ -39,7 +39,7 @@ public class PlayerInventory {
     }
 
     /**
-     * Get a reference to the owner of this inventory
+     * Get a reference to the owner of this inventory as a WeaponSet
      *
      * @return owner
      */
@@ -65,6 +65,19 @@ public class PlayerInventory {
              }
          }
          return ws;
+    }
+
+    /**
+     * Return the Weapon objects of the loaded weapons
+     */
+    public List<Weapon> getLoadedWeapons() {
+        ArrayList<Weapon> ready = new ArrayList<>();
+        for(Weapon w : weapons) {
+            if (w.isLoaded()) {
+                ready.add(w);
+            }
+        }
+        return ready;
     }
 
     /**
