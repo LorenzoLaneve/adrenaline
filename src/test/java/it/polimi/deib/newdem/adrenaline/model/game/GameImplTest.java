@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.NullKillTrackLister;
@@ -11,6 +12,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +38,8 @@ public class GameImplTest {
 
     @Before
     public void setUp() throws Exception {
+        TestingUtils.loadSingleton();
+
         gp = new GameParameters();
         String encodedPath = getClass().getClassLoader().getResource("Map0_0.json").getFile();
         String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
@@ -97,6 +104,13 @@ public class GameImplTest {
         game.init();  //<<<<<
 
         Player p2 = game.getPlayerFromColor(PlayerColor.GREEN);
+
+        VirtualGameView vgv = new NullVirtualGameView();
+
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
+        p2.getDamageBoard().setListener(new VirtualDamageBoardView(p2, vgv));
         // p2.init();
 
         map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
@@ -144,6 +158,11 @@ public class GameImplTest {
         Player p2 = new MockPlayer();
         p2.init();
         Player p3 = game.getPlayerFromColor(PlayerColor.MAGENTA);
+        VirtualGameView vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
+        p3.getDamageBoard().setListener(new VirtualDamageBoardView(p3, vgv));
         p3.getDamageBoard().setMarksFromPlayer(2,p2);
         game.goFrenzy();
         assertEquals(2, p3.getMarksFromPlayer(p2));
@@ -314,11 +333,20 @@ public class GameImplTest {
         g.init();
         Turn t = g.getNextTurn();
         Player p = t.getActivePlayer();
+
+        VirtualGameView vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
+        p.getDamageBoard().setListener(new VirtualDamageBoardView(p, vgv));
+
         List<Player> opponents = g.getPlayers();
         opponents.remove(p);
         assertEquals(2, opponents.size());
         Player o1 = opponents.get(0);
+        o1.getDamageBoard().setListener(new VirtualDamageBoardView(o1, vgv));
         Player o2 = opponents.get(1);
+        o2.getDamageBoard().setListener(new VirtualDamageBoardView(o2, vgv));
         Map m = g.getMap();
         Tile spawn = m.getSpawnPointFromColor(AmmoColor.RED);
         m.movePlayer(p, spawn);

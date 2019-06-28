@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
@@ -9,35 +10,71 @@ import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class DamageBoardImplTest {
 
     private Player p1;
+    private Player p2;
+    private Player p3;
+    private Player p4;
     private LegacyDamageBoardAdapter dmgb;
     private Game game;
+    private VirtualGameView vgv;
 
     @Before
     public void setUp() {
+        TestingUtils.loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setColorUserOrder(Arrays.asList(
-                new ColorUserPair(PlayerColor.YELLOW, new User())
-        ));
+        ColorUserPair colorUserPair1 = new ColorUserPair(PlayerColor.YELLOW, new User());
+        ColorUserPair colorUserPair2 = new ColorUserPair(PlayerColor.GREEN, new User());
+        ColorUserPair colorUserPair3 = new ColorUserPair(PlayerColor.GRAY, new User());
+        ColorUserPair colorUserPair4 = new ColorUserPair(PlayerColor.MAGENTA, new User());
+        List<ColorUserPair> listPairs = new ArrayList<>();
+        listPairs.add(colorUserPair1);
+        listPairs.add(colorUserPair2);
+        listPairs.add(colorUserPair3);
+        listPairs.add(colorUserPair4);
+
+        gp.setColorUserOrder(listPairs);
+
         gp.setMinPlayers(1);
         gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
         game = new GameImpl(gp);
+
+        vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
         game.init();
         p1 = game.getPlayerFromColor(PlayerColor.YELLOW);
+        p2 = game.getPlayerFromColor(PlayerColor.GREEN);
+        p3 = game.getPlayerFromColor(PlayerColor.GRAY);
+        p4 = game.getPlayerFromColor(PlayerColor.MAGENTA);
+
+        p1.getDamageBoard().setListener(new VirtualDamageBoardView(p1, vgv));
+        p2.getDamageBoard().setListener(new VirtualDamageBoardView(p2, vgv));
+        p3.getDamageBoard().setListener(new VirtualDamageBoardView(p3, vgv));
+        p4.getDamageBoard().setListener(new VirtualDamageBoardView(p4, vgv));
         Map m = game.getMap();
         Tile spawn = m.getSpawnPointFromColor(AmmoColor.RED);
         m.movePlayer(p1, spawn);
 
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
+        DamageBoard pDmgb = new OrdinaryDamageBoard(p1);
+        pDmgb.setListener(new VirtualDamageBoardView(p1, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
+        p1.registerDamageBoard(dmgb);
     }
 
     @Test
@@ -47,7 +84,6 @@ public class DamageBoardImplTest {
 
     @Test
     public void testTakeDamagePositive() {
-        Player p2 = new MockPlayer(PlayerColor.GRAY);
 
         dmgb.takeDamage(2,p2);
         dmgb.getTotalDamageFromPlayer(p2);
@@ -81,7 +117,6 @@ public class DamageBoardImplTest {
 
     @Test
     public void testGetTotalDamageFromPlayerPositive() {
-        Player p2 = new MockPlayer(PlayerColor.GRAY);
 
         dmgb.takeDamage(1,p1);
         dmgb.takeDamage(2,p2);
@@ -96,7 +131,6 @@ public class DamageBoardImplTest {
 
     @Test
     public void testGetTotalMarksFromPlayerPositive(){
-        Player p2 = new MockPlayer(PlayerColor.GRAY);
 
         dmgb.takeMark(1,p1);
         dmgb.takeMark(2,p2);
@@ -108,15 +142,12 @@ public class DamageBoardImplTest {
 
     @Test
     public void testComparator()  {
-        Player p2 = new MockPlayer(PlayerColor.GRAY);
-        Player p3 = new MockPlayer(PlayerColor.MAGENTA);
 
-        dmgb.takeDamage(1,p1);
+        dmgb.takeDamage(1, p4);
         dmgb.takeDamage(1,p2);
         dmgb.takeDamage(1,p3);
 
-
-        assertEquals(9, dmgb.getScoreForPlayer(p1));
+        assertEquals(9, dmgb.getScoreForPlayer(p4));
         assertEquals(6, dmgb.getScoreForPlayer(p2));
         assertEquals(4, dmgb.getScoreForPlayer(p3));
 
@@ -124,50 +155,51 @@ public class DamageBoardImplTest {
         // ((MockPlayer) p1).die();
         p1.reportDeath(true);
         p1.addSkull();
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
+        DamageBoard pDmgb = new OrdinaryDamageBoard(p1);
+        pDmgb.setListener(new VirtualDamageBoardView(p1, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p1.registerDamageBoard(dmgb);
 
+        dmgb.takeDamage(1, p4);
         dmgb.takeDamage(1,p2);
-        dmgb.takeDamage(1,p1);
         dmgb.takeDamage(1,p3);
 
-        assertEquals(4, dmgb.getScoreForPlayer(p1));
-        assertEquals(7, dmgb.getScoreForPlayer(p2));
+        assertEquals(7, dmgb.getScoreForPlayer(p4));
+        assertEquals(4, dmgb.getScoreForPlayer(p2));
         assertEquals(2, dmgb.getScoreForPlayer(p3));
 
         // ((MockPlayer) p1).die();
         p1.reportDeath(true);
         p1.addSkull();
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
+        pDmgb = new OrdinaryDamageBoard(p1);
+        pDmgb.setListener(new VirtualDamageBoardView(p1, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p1.registerDamageBoard(dmgb);
 
-        dmgb.takeDamage(2,p1);
+        dmgb.takeDamage(2,p3);
         dmgb.takeDamage(1,p2);
 
-        assertEquals(5, dmgb.getScoreForPlayer(p1));
+        assertEquals(5, dmgb.getScoreForPlayer(p3));
         assertEquals(2, dmgb.getScoreForPlayer(p2));
 
         // ((MockPlayer) p1).die();
         p1.reportDeath(true);
         p1.addSkull();
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p1));
+        pDmgb = new OrdinaryDamageBoard(p1);
+        pDmgb.setListener(new VirtualDamageBoardView(p1, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p1.registerDamageBoard(dmgb);
 
-        dmgb.takeDamage(1,p1);
+        dmgb.takeDamage(1,p3);
         dmgb.takeDamage(2,p2);
 
-        assertEquals(2, dmgb.getScoreForPlayer(p1));
+        assertEquals(2, dmgb.getScoreForPlayer(p3));
         assertEquals(2, dmgb.getScoreForPlayer(p2));
     }
 
     @Test
     public void testGetMarkMapPositive() {
-        PlayerImpl p1 = new PlayerImpl(PlayerColor.MAGENTA, new MockGame());
-        PlayerImpl p2 = new PlayerImpl(PlayerColor.GRAY, new MockGame());
-        DamageBoard d = new OrdinaryDamageBoard(p1);
-        p1.init();
-        p1.registerDamageBoard(d);
-        p2.init();
+        DamageBoard d = p1.getDamageBoard();
 
         p1.getDamageBoard().setMarksFromPlayer(1, p2);
         assertNotNull(d.getMarksMap());
@@ -228,7 +260,7 @@ public class DamageBoardImplTest {
 
     @Test
     public void testPopDamage() throws Exception {
-        DamageBoard dmgb = new OrdinaryDamageBoard(p1);
+        DamageBoard dmgb = p1.getDamageBoard();
         p1.registerDamageBoard(dmgb);
 
         try{
@@ -241,9 +273,8 @@ public class DamageBoardImplTest {
             fail();
         }
 
-        Player p2 = new MockPlayer();
         p1.getDamageBoard().appendDamage(p2);
-        Player p3 = dmgb.popDamage();
-        assertEquals(p3, p2);
+        Player p5 = dmgb.popDamage();
+        assertEquals(p5, p2);
     }
 }

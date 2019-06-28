@@ -14,6 +14,7 @@ import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
 
 import java.util.ArrayList;
 import java.util.List;

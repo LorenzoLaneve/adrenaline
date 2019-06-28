@@ -68,6 +68,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         }
     }
 
+    @Override
     public void setListener(DamageBoardListener listener) {
         this.listener = listener;
     }

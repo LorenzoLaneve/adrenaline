@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -8,6 +9,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,9 +24,11 @@ public class OrdinaryDamageBoardTest {
 
     private Player p;
     private LegacyDamageBoardAdapter dmgb;
+    VirtualGameView vgv;
 
     @Before
     public void setUp(){
+        TestingUtils.loadSingleton();
         // p = new MockPlayer(PlayerColor.YELLOW);
         GameParameters gp = new GameParameters();
         gp.setColorUserOrder(Arrays.asList(
@@ -33,10 +40,15 @@ public class OrdinaryDamageBoardTest {
         ));
         gp.setGameMap(Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " ")));
         Game game = new GameImpl(gp);
+        vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
         game.init();
 
         p = game.getPlayerFromColor(PlayerColor.YELLOW);
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        p.getDamageBoard().setListener(new VirtualDamageBoardView(p, vgv));
+        dmgb = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(dmgb);
     }
 
@@ -46,6 +58,10 @@ public class OrdinaryDamageBoardTest {
         Player p1 = g.getPlayerFromColor(PlayerColor.GRAY);
         Player p2 = g.getPlayerFromColor(PlayerColor.CYAN);
         Player p3 = g.getPlayerFromColor(PlayerColor.GREEN);
+
+        p1.getDamageBoard().setListener(new VirtualDamageBoardView(p1, vgv));
+        p2.getDamageBoard().setListener(new VirtualDamageBoardView(p2, vgv));
+        p3.getDamageBoard().setListener(new VirtualDamageBoardView(p3, vgv));
 
         dmgb.takeDamage(2, p3);
         dmgb.takeDamage(6, p1);
@@ -62,12 +78,15 @@ public class OrdinaryDamageBoardTest {
         p.reportDeath(true);
         p.addSkull();
 
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        DamageBoard pDmgb = new OrdinaryDamageBoard(p);
+        pDmgb.setListener(new VirtualDamageBoardView(p, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p1);
         dmgb.takeDamage(4, p2);
 
+        //FIXME
         assertEquals(7, dmgb.getScoreForPlayer(p1));
         assertEquals(4,dmgb.getScoreForPlayer(p2));
         assertEquals(0, dmgb.getScoreForPlayer(p3));
@@ -77,7 +96,7 @@ public class OrdinaryDamageBoardTest {
 
         p.reportDeath(true);
         p.addSkull();
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        dmgb = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p1);
@@ -89,7 +108,9 @@ public class OrdinaryDamageBoardTest {
 
         p.reportDeath(true);
         p.addSkull();
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        pDmgb = new OrdinaryDamageBoard(p);
+        pDmgb.setListener(new VirtualDamageBoardView(p, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p2);
@@ -105,7 +126,9 @@ public class OrdinaryDamageBoardTest {
         p.addSkull();
         p.addSkull();
 
-        dmgb = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        pDmgb = new OrdinaryDamageBoard(p);
+        pDmgb.setListener(new VirtualDamageBoardView(p, vgv));
+        dmgb = new LegacyDamageBoardAdapter(pDmgb);
         p.registerDamageBoard(dmgb);
 
         dmgb.takeDamage(5, p2);
