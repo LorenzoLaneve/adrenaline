@@ -208,6 +208,7 @@ public class GameImpl implements Game {
         init = true;
 
         listener.gameDidInit(this, generateGameData());
+        // listenerThing.thingDidInit(thing, thing,generateThingData())
     }
 
     private GameData generateGameData() {

@@ -3,6 +3,8 @@ package it.polimi.deib.newdem.adrenaline.model.game.turn;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -62,5 +64,10 @@ public class ScriptedDataSource implements TurnDataSource {
     @Override
     public void actionDidEmitGameChange(GameChange gameChange) {
 
+    }
+
+    @Override
+    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice) {
+        return null;
     }
 }

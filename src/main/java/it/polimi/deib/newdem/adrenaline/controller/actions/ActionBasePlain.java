@@ -13,14 +13,14 @@ import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ActionBaseImpl implements Action, EffectContext {
+public abstract class ActionBasePlain implements Action {
 
     protected ActionDataSource listener;
     protected Game game;
     protected Player actor;
     private List<AtomicAction> atomicActions;
 
-    public ActionBaseImpl(Player actor, ActionDataSource actionDataSource, Game game) {
+    public ActionBasePlain(Player actor, ActionDataSource actionDataSource, Game game) {
         this.actor = actor;
         this.listener = actionDataSource;
         this.game = game;
@@ -42,56 +42,5 @@ public abstract class ActionBaseImpl implements Action, EffectContext {
     @Override
     public Player getActor() {
         return actor;
-    }
-
-
-    // deprecated
-    /*
-    @Override
-    public Effect getEffect() {
-        return null;
-    }
-    */
-
-    @Override
-    public void applyGameChange(GameChange gameChange) {
-        gameChange.update(actor.getGame());
-    }
-
-    @Override
-    public void revertGameChange(GameChange gameChange) {
-        gameChange.revert(actor.getGame());
-    }
-
-    @Override
-    public Player getAttacker() {
-        return actor;
-    }
-
-    // more than 1 victim?
-    // scope / grenade?
-    @Override
-    public Player getVictim() {
-        return null;
-    }
-
-    @Override
-    public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public Integer chooseFragment(List<Integer> choices) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
-        return null;
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
@@ -24,4 +26,9 @@ public interface ActionDataSource {
     int actionDidRequestRevengeMark(Player attackedPlayer);
 
     void actionDidEmitGameChange(GameChange gameChange);
+
+    // TODO add payment
+    // TODO add choiche fragment
+
+    PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice);
 }

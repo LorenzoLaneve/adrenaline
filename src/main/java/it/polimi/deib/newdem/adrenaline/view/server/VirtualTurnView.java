@@ -4,6 +4,8 @@ import it.polimi.deib.newdem.adrenaline.controller.InterruptExecutionException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -138,6 +140,11 @@ public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
     @Override
     public int askForChoice(List<Integer> allowedChoices) {
         return 0;
+    }
+
+    @Override
+    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice) {
+        return null;
     }
 
     // missing methods for action elements

@@ -13,7 +13,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionContainer implements Action, AtomsContainer, EffectContext {
+public class ActionContainer implements Action, AtomsContainer {
 
     protected ActionDataSource actionDataSource;
     protected Game game;
@@ -49,59 +49,5 @@ public class ActionContainer implements Action, AtomsContainer, EffectContext {
     @Override
     public Game getGame() {
         return game;
-    }
-
-    @Override
-    public void applyGameChange(GameChange gameChange) {
-        gameChange.update(game);
-    }
-
-    @Override
-    public void revertGameChange(GameChange gameChange) {
-        gameChange.revert(game);
-    }
-
-    @Override
-    public Player getAttacker() {
-        // TODO ???
-        // attacker is always the actor?
-        //
-        return actor;
-        // return null;
-    }
-
-    @Override
-    public Player getVictim() {
-        return null;
-    }
-
-    @Override
-    public Player choosePlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public Tile chooseTile(TileSelector selector, boolean forceChoice) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public Integer chooseFragment(List<Integer> choices) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
-        return null;
-    }
-
-    @Override
-    public void damageDealtTrigger(Player attacker, Player victim) {
-
-    }
-
-    @Override
-    public void damageTakenTrigger(Player attacker, Player victim) {
-
     }
 }

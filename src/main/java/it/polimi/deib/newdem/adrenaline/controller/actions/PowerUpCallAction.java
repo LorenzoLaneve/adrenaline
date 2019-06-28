@@ -1,10 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
-public class PowerUpCallAction extends ActionBaseImpl {
+public class PowerUpCallAction extends ActionBasePlain {
 
     private PowerUpCard card;
     /*
@@ -18,16 +17,6 @@ public class PowerUpCallAction extends ActionBaseImpl {
         super(actor, actionDataSource, actor.getGame());
         this.card = card;
         // TODO implement
-
-    }
-
-    @Override
-    public void damageDealtTrigger(Player attacker, Player victim) {
-
-    }
-
-    @Override
-    public void damageTakenTrigger(Player attacker, Player victim) {
 
     }
 }
