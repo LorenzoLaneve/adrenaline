@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.DamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerConvertMarksEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDamageEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerPopDamageEvent;

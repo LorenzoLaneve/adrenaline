@@ -10,6 +10,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,6 +42,12 @@ public class PlayerDataTest {
                 new ColorUserPair(PlayerColor.GREEN, new User())
         ));
         game = new GameImpl(gp);
+
+
+        VirtualGameView vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
         game.init();
 
         player = game.getPlayerFromColor(PlayerColor.MAGENTA);
@@ -51,6 +61,7 @@ public class PlayerDataTest {
         inventory.addWeapon(w2);
         pup = new MockPowerUpCard();
         inventory.addPowerUp(pup);
+        player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
         player.getDamageBoard().appendDamage(game.getPlayerFromColor(PlayerColor.GREEN));
         player.getDamageBoard().setMarksFromPlayer(1, game.getPlayerFromColor(PlayerColor.GREEN));
         playerData = player.generatePlayerData();

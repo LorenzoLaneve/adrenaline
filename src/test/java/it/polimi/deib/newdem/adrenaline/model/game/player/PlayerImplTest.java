@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
@@ -9,6 +10,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.NullMapListener;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +35,7 @@ public class PlayerImplTest {
 
     @Before
     public void setUp() throws Exception {
+        TestingUtils.loadSingleton();
         GameParameters gp = new GameParameters();
         // p1 = new PlayerImpl(PlayerColor.MAGENTA);
         String encodedPath = getClass().getClassLoader().getResource("TestMap.json").getFile();
@@ -45,12 +51,20 @@ public class PlayerImplTest {
         ));
         gp.setMinPlayers(2);
         g = new GameImpl(gp);
+        VirtualGameView vgv = new NullVirtualGameView();
+        g.setGameListener(vgv);
+        g.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
         g.init();
         //p = new PlayerImpl(YELLOW, g,"Larry");
         //p.init();
         p = g.getPlayerFromColor(YELLOW);
         //q = new PlayerImpl(GRAY, g, "Carl"); // q is not initialized
         q = g.getPlayerFromColor(GRAY);
+
+        p.getDamageBoard().setListener(new VirtualDamageBoardView(p, vgv));
+        q.getDamageBoard().setListener(new VirtualDamageBoardView(q, vgv));
+
         t2 = new ActionType(MOVE1, SHOOT);
         t1 = new ActionType(MOVE2, GRAB);
     }
@@ -100,7 +114,7 @@ public class PlayerImplTest {
         }
         catch (OutOfSlotsException e) {fail();}
         // take some damage, test for updated moves
-        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter( new OrdinaryDamageBoard(p));
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter( p.getDamageBoard());
         p.registerDamageBoard(d);
         d.takeDamage(3, p2);
 
@@ -137,7 +151,7 @@ public class PlayerImplTest {
     public void testGetTotalDamage() {
         // how do I take damage at all?
         assertEquals(0,p.getTotalDamage());
-        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(d);
         d.takeDamage(5,new MockPlayer());
         assertEquals(5, p.getTotalDamage());
@@ -146,7 +160,7 @@ public class PlayerImplTest {
     @Test
     public void testGetDamager() {
         Player p2 = new MockPlayer();
-        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(d);
         d.takeDamage(2,p2);
         assertEquals(p2, p.getDamager(0));
@@ -155,7 +169,7 @@ public class PlayerImplTest {
     @Test
     public void testGetDamageFromPlayer() {
         Player p2 = new MockPlayer();
-        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(d);
         d.takeDamage(2,p2);
         assertEquals(2, p.getDamageFromPlayer(p2));
@@ -164,7 +178,7 @@ public class PlayerImplTest {
     @Test
     public void testGetMarksFromPlayer() {
         Player p2 = new MockPlayer();
-        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(new OrdinaryDamageBoard(p));
+        LegacyDamageBoardAdapter d = new LegacyDamageBoardAdapter(p.getDamageBoard());
         p.registerDamageBoard(d);
         d.takeMark(2,p2);
         assertEquals(2, p.getMarksFromPlayer(p2));

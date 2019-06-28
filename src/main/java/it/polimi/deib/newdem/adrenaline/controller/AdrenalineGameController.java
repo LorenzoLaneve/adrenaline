@@ -9,6 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualTurnView;
@@ -75,6 +76,10 @@ public class AdrenalineGameController implements GameController {
         vgv = new VirtualGameView();
         game.setGameListener(vgv);
         game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+        for(Player player:game.getPlayers()){
+            player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
+        }
+
         game.init(); // (VirtualGameView)
 
         buildTurnDataSources(game);

@@ -68,6 +68,11 @@ public abstract class DamageBoardImpl implements DamageBoard {
         }
     }
 
+    @Override
+    public void setListener(DamageBoardListener listener) {
+        this.listener = listener;
+    }
+
     /**
      * Calculates total damage taken from {@code Player}.
      * @param player damage source
@@ -149,21 +154,33 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamage(Player player) throws DamageTrackFullException {
+        int currMarks = getTotalMarksFromPlayer(player);
+        if(currMarks >0){
+            listener.boardDidConvertMarks(player);
+        }
+        while (currMarks > 0){
+            appendDamage(player);
+            currMarks--;
+        }
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
         damages.add(player);
+        listener.boardDidTakeDamage(1, 0, player);
     }
 
     public Player popDamage() throws DamageTrackEmptyException {
         if(damages.isEmpty()) {
             throw new DamageTrackEmptyException();
         }
+        listener.boardDidPopDamage();
         return damages.remove(damages.size() - 1);
+
     }
 
     @Override
     public void setMarksFromPlayer(int totalMarks, Player player) {
         marks.put(player, totalMarks);
+        listener.boardDidTakeDamage(0,totalMarks, player);
     }
 }

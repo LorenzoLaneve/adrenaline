@@ -74,4 +74,6 @@ public interface DamageBoard {
     Player popDamage() throws DamageTrackEmptyException;
 
     boolean isFrenzy();
+
+    void setListener(DamageBoardListener listener);
 }

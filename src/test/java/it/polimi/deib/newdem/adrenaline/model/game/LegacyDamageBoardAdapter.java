@@ -13,6 +13,7 @@ import static java.lang.Math.min;
 public class LegacyDamageBoardAdapter implements DamageBoard {
 
     private DamageBoard innerDmgb;
+    private DamageBoardListener listener;
 
     public LegacyDamageBoardAdapter(DamageBoard innerDmgb) {
         this.innerDmgb = innerDmgb;
@@ -122,5 +123,11 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     @Override
     public boolean isFrenzy() {
         return innerDmgb.isFrenzy();
+    }
+
+    @Override
+    public void setListener(DamageBoardListener listener) {
+
+        this.listener = listener;
     }
 }
