@@ -14,6 +14,9 @@ import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import java.util.*;
 import java.util.List;
 
+/**
+ * GameController implementation for Adrenaline games handled by the server.
+ */
 public class AdrenalineGameController implements GameController {
 
     private Game game;
@@ -24,12 +27,19 @@ public class AdrenalineGameController implements GameController {
 
     protected java.util.Map<Player, TurnDataSource> playerDataSourceMap;
 
+    /**
+     * Initializes the GameController with the LobbyController that hosts the game.
+     */
     public AdrenalineGameController(LobbyController lobbyController) {
         this.lobbyController = lobbyController;
     }
 
-    public Player getPlayer(User user){
-        //TODO
+    private Player getPlayer(User user) {
+        for (Player player : game.getPlayers()) {
+            if (user == game.getUserByPlayer(player)) {
+                return player;
+            }
+        }
         return null;
     }
 
@@ -40,12 +50,12 @@ public class AdrenalineGameController implements GameController {
      */
     @Override
     public void setupGame(List<User> users) {
-        //TODO notifica listener
         GameParameters gp = GameParameters.fromConfig(lobbyController.getConfig());
         if(users.isEmpty() || users.size() > lobbyController.getConfig().getMaxPlayers()) {
             throw new IllegalArgumentException();
         }
 
+        // TODO random map
         String s = this.getClass().getClassLoader().getResource("maps/Map0_0.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
 
@@ -71,7 +81,7 @@ public class AdrenalineGameController implements GameController {
 
     @Override
     public void recoverGame() {
-
+        // TODO persistency
     }
 
     private List<ColorUserPair> generateColorUserOrder(List<User> users){
@@ -121,12 +131,18 @@ public class AdrenalineGameController implements GameController {
 
     @Override
     public void userDidDisconnect(User user) {
-        // TODO
+        Player disconnectedPlayer = getPlayer(user);
+        if (disconnectedPlayer != null) {
+            vgv.userDidExitGame(user, disconnectedPlayer);
+        }
     }
 
     @Override
     public void userDidReconnect(User user) {
-        // TODO
+        Player reconnectedPlayer = getPlayer(user);
+        if (reconnectedPlayer != null) {
+            vgv.userDidExitGame(user, reconnectedPlayer);
+        }
     }
 
     protected void buildTurnDataSources(Game game){
