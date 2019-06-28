@@ -45,4 +45,6 @@ public interface Map {
 
     void sendMapData();
 
+    void updatePlayerState(Player player, boolean alive);
+
 }
