@@ -30,6 +30,7 @@ public abstract class TurnBaseImpl implements Turn {
 
     @Override
     public void execute() {
+        turnDataSource.turnDidStart(getActivePlayer());
         performInitialActions();
         performCoreActions();
         // performClosingActions(); outsourced to game.concludeTurn()
@@ -56,11 +57,19 @@ public abstract class TurnBaseImpl implements Turn {
         // t.bindDataSource(this.getTurnViewFromPlayerColor(ap.getC()));
         //
         while (executedActions < activePlayer.getMovesAmount()) {
-            ActionType aType = turnDataSource.chooseAction(
-                    activePlayer.getMoves()
-                            .stream()
-                            .map(ActionFactory::getType)
-                            .collect(Collectors.toList()));
+            ActionType aType = null;
+            do {
+                try{
+                    aType = turnDataSource.chooseAction(
+                            activePlayer.getMoves()
+                                    .stream()
+                                    .map(ActionFactory::getType)
+                                    .collect(Collectors.toList()));
+                }
+                catch (UndoException e) {
+                    // do nothing
+                }
+            } while (null == aType);
 
             Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {

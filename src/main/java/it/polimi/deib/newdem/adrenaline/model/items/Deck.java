@@ -112,4 +112,26 @@ public class Deck<T extends Card> {
         }
         return new DeckData(this.drawableCards.size(), discardedCardsIDs);
     }
+
+    public T getCardFromId(int cardId) {
+        /*
+        private Deque<T> drawableCards;
+
+        private HashSet<T> discardedCards;
+        private HashSet<T> activeCards;
+        */
+        for(T card  : drawableCards) {
+            if(card.getCardID() == cardId) return card;
+        }
+
+        for(T card : discardedCards) {
+            if (card.getCardID() == cardId) return card;
+        }
+
+        for(T card : discardedCards) {
+            if (card.getCardID() == cardId) return card;
+        }
+
+        return null;
+    }
 }

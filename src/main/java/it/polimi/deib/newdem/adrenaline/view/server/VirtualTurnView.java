@@ -2,16 +2,14 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 
 import it.polimi.deib.newdem.adrenaline.controller.InterruptExecutionException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
-import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
-import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
+import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -27,7 +25,7 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.PowerUpCardSelectionReq
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
+public class VirtualTurnView implements TurnListener, TurnView { // ActionView
 
     private User user;
     private boolean powerUpReceived;
@@ -39,9 +37,8 @@ public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
         this.receivedPowerUpCardId = -1;
     }
 
-
     @Override
-    public synchronized ActionType chooseAction(List<ActionType> actionTypeList) {
+    public synchronized ActionType userDidRequestActionChoice(List<ActionType> actionTypeList) {
         if (actionTypeList == null) {
             throw new IllegalArgumentException("Action type list must not be null");
         }
@@ -62,12 +59,14 @@ public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
     }
 
     @Override
-    public synchronized PowerUpCard chooseCard(List<PowerUpCard> cards) {
-        if (cards == null) {
+    public synchronized int choosePowerUpCard(List<Integer> cardsIDs) {
+        // TODO handle illegal or absent choiche (ID -1)
+        if (cardsIDs == null) {
             throw new IllegalArgumentException("Card list must not be null");
         }
 
-        List<Integer> cardList = cards.stream().map(PowerUpCard::getCardID).collect(Collectors.toList());
+        // List<Integer> cardList = cardsIDs.stream().map(PowerUpCard::getCardID).collect(Collectors.toList());
+        List<Integer> cardList = cardsIDs;
 
         PowerUpCardSelectionEvent event;
 
@@ -81,49 +80,18 @@ public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
             throw new InterruptExecutionException("Time out on powerup request");
         }
 
-        for (PowerUpCard card : cards) {
-            if (card.getCardID() == event.getSelectedCardID()) {
-                return card;
+        for (Integer id : cardsIDs) {
+            if (id == event.getSelectedCardID()) {
+                return id;
             }
         }
-        return null;
+        return -1;
     }
 
     private synchronized void receivePowerUp(UserConnection connection, PowerUpCardSelectionEvent event) {
         this.powerUpReceived = true;
         this.receivedPowerUpCardId = event.getSelectedCardID();
         notifyAll();
-    }
-
-    @Override
-    public Player actionDidRequestPlayerBinding(MetaPlayer metaPlayer, PlayerSelector selector) {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public Tile actionDidRequestTile(TileSelector selector) {
-        return null;
-    }
-
-    @Override
-    public int actionDidRequestChoiche(List<Effect> choices) {
-        return 0;
-    }
-
-    @Override
-    public int actionDidRequestAdditionalDamage() {
-        return 0;
-    }
-
-    @Override
-    public int actionDidRequestRevengeMark(Player attackedPlayer) {
-        return 0;
-    }
-
-    @Override
-    public void actionDidEmitGameChange(GameChange gameChange) {
-
     }
 
     // \/ VIEW
@@ -143,7 +111,27 @@ public class VirtualTurnView implements TurnDataSource, TurnView { // ActionView
     }
 
     @Override
-    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice) {
+    public void turnDidStart(Player actor) {
+        // TODO implement
+    }
+
+    @Override
+    public Player actionDidRequestPlayer(List<Player> legalPlayers) throws UndoException {
+        return null;
+    }
+
+    @Override
+    public Tile actionDidRequestTile(List<Tile> legalTiles) throws UndoException {
+        return null;
+    }
+
+    @Override
+    public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
+        return 0;
+    }
+
+    @Override
+    public PaymentReceiptData actionDidRequestPayment(PaymentInvoice invoice, int choice) throws UndoException {
         return null;
     }
 

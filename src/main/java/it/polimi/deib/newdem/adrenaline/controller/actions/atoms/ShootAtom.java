@@ -1,18 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.Card;
+import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShootAtom extends AtomBase implements EffectContext {
+public class ShootAtom extends AtomContext {
 
     public ShootAtom(AtomsContainer parent) {
         super(parent);
@@ -20,17 +17,16 @@ public class ShootAtom extends AtomBase implements EffectContext {
 
     @Override
     public void execute() throws ConnectionException {
-        List<Effect> availableWeaponEffects;
-        availableWeaponEffects = getActor().getInventory().getReadyWeapons().getWeapons().stream()
-                .map(WeaponCard::getEffect)
-                .collect(Collectors.toList());
-        int selectedIndex = parent.getDataSource().actionDidRequestChoiche(availableWeaponEffects);
-        Effect selectedEffect = availableWeaponEffects.get(selectedIndex);
+        List<WeaponCard> availableWeapons;
+        availableWeapons = getActor().getInventory().getReadyWeapons().getWeapons();
+
+        WeaponCard selectedWeapon = selectWeapon(availableWeapons);
 
         boolean effectResolved = false;
+
         do {
             try {
-                selectedEffect.apply(new EffectManager(this), getActor());
+                selectedWeapon.getEffect().apply(new EffectManager(this), getActor());
                 effectResolved = true;
             }
             catch (UndoException e) {
@@ -38,9 +34,37 @@ public class ShootAtom extends AtomBase implements EffectContext {
             }
         }
         while (!effectResolved);
-
     }
 
+    private WeaponCard selectWeapon(List<WeaponCard> availableWeaponCards) {
+        int selectedId = -1;
+        List<Integer> availableWeaponsIds = availableWeaponCards.stream()
+                .map(WeaponCard::getCardID)
+                .collect(Collectors.toList());
+
+        // select weapon card
+        do{
+            try{
+                selectedId = parent.getDataSource().actionDidRequestChoice(
+                        availableWeaponsIds
+                );
+            }
+            catch (UndoException e) {
+                // not allowed, do not propagate and repeat
+            }
+        }
+        while (-1 == selectedId);
+
+        // get weapon from ID in starting list
+        for(WeaponCard w : availableWeaponCards) {
+            if(w.getCardID() == selectedId) {
+                return w;
+            }
+        }
+
+        throw new IllegalStateException();
+    }
+/*
     @Override
     public void applyGameChange(GameChange gameChange) {
         gameChange.update(parent.getGame());
@@ -75,7 +99,7 @@ public class ShootAtom extends AtomBase implements EffectContext {
         Player selectedPlayer;
 
         do {
-            selectedPlayer = parent.getDataSource().actionDidRequestPlayerBinding(
+            selectedPlayer = parent.getDataSource().actionDidRequestPlayer(
                     player, selector
             );
         }
@@ -102,7 +126,7 @@ public class ShootAtom extends AtomBase implements EffectContext {
     }
 
     @Override
-    public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+    public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
         return parent.getDataSource().actionDidRequestPayment(price);
         // FIXME Integer choice?
     }
@@ -116,4 +140,5 @@ public class ShootAtom extends AtomBase implements EffectContext {
     public void damageTakenTrigger(Player attacker, Player victim) {
 
     }
+    */
 }

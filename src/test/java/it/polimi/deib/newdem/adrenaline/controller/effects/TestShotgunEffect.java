@@ -65,7 +65,7 @@ public class TestShotgunEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;

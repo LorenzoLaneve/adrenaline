@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
@@ -31,7 +32,16 @@ public class OrdinaryTurn extends TurnBaseImpl {
         Map m = p.getGame().getMap();
 
         p.drawCard();
-        PowerUpCard choiche = getDataSource().chooseCard(p.getInventory().getPowerUps());
+        PowerUpCard choice = null;
+        do {
+            try{
+                choice = getDataSource().chooseCard(p.getInventory().getPowerUps());
+            }
+            catch (UndoException e) {
+                // do nothing
+            }
+        }
+        while (null == choice);
         // map.setPos(map.getSpawnPosition(choiche.getColor()));
         // ^ not implemented
     }

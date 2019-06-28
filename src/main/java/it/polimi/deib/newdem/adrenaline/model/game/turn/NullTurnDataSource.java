@@ -2,10 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
 import it.polimi.deib.newdem.adrenaline.controller.TimeoutException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
-import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
-import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
+import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -27,7 +24,7 @@ public class NullTurnDataSource implements TurnDataSource {
     }
 
     @Override
-    public Player actionDidRequestPlayerBinding(MetaPlayer metaPlayer, PlayerSelector selector) {
+    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) {
         return null;
     }
 
@@ -37,27 +34,17 @@ public class NullTurnDataSource implements TurnDataSource {
     }
 
     @Override
-    public int actionDidRequestChoiche(List<Effect> choices) {
+    public void turnDidStart(Player actor) {
+
+    }
+
+    @Override
+    public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
         return 0;
     }
 
     @Override
-    public int actionDidRequestAdditionalDamage() {
-        return 0;
-    }
-
-    @Override
-    public int actionDidRequestRevengeMark(Player attackedPlayer) {
-        return 0;
-    }
-
-    @Override
-    public void actionDidEmitGameChange(GameChange gameChange) {
-
-    }
-
-    @Override
-    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice) {
+    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         return null;
     }
 }

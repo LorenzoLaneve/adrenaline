@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -26,7 +27,16 @@ public class MoveAction extends ActionBasePlain {
         // basically implement MoveEffect
         // but without effect
         TileSelector selector = new NearTileSelector(actor, minDist, maxDist);
-        Tile target = listener.actionDidRequestTile(selector);
+        Tile target = null;
+        do {
+            try{
+                target = listener.actionDidRequestTile(selector);
+            }
+            catch (UndoException e) {
+                // nothing
+            }
+        }
+        while (null == target);
         GameChange gc = new MovementGameChange(actor, target);
         gc.update(game);
     }

@@ -29,7 +29,7 @@ public interface EffectContext {
 
     Integer chooseFragment(List<Integer> choices) throws UndoException;
 
-    PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException;
+    PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException;
 
 
     void damageDealtTrigger(Player attacker, Player victim);

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -22,11 +23,19 @@ public class PickupAction extends ActionBasePlain {
         TileSelector selector = new NearTileSelector(actor, minDist, maxDist);
         // may pickup weapon OR drop
         // first, select tile (drop or spawn)
-        Tile target = listener.actionDidRequestTile(selector);
+        Tile target = null;
+        do {
+            try{
+                target = listener.actionDidRequestTile(selector);
+            }
+            catch (UndoException e) {
+                // do nothing
+            }
+        } while (null == target);
         if(target.hasSpawnPoint()) {
             // is spawnpoint -> weapons
             // missing listener endponit
-            // listener.actionDidRequestChoiche();
+            // listener.actionDidRequestChoice();
         }
     }
 

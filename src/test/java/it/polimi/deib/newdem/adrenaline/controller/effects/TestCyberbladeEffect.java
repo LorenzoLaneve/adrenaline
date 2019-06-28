@@ -63,7 +63,7 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(0,0,1, powerUpCards);
@@ -136,7 +136,7 @@ public class TestCyberbladeEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             return null;
         }
 

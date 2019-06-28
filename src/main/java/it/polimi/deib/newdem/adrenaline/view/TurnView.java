@@ -16,11 +16,11 @@ public interface TurnView {
 
 
     /*
-    Player actionDidRequestPlayerBinding(MetaPlayer metaPlayer, PlayerSelector selector);
+    Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector);
 
     Tile actionDidRequestTile(TileSelector selector);
 
-    int actionDidRequestChoiche(List<Effect> choices);
+    int actionDidRequestChoice(List<Effect> choices);
 
     int actionDidRequestAdditionalDamage();
 

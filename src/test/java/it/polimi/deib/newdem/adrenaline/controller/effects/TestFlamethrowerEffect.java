@@ -65,7 +65,7 @@ public class TestFlamethrowerEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(0,0,2, powerUpCards);
@@ -140,7 +140,7 @@ public class TestFlamethrowerEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;

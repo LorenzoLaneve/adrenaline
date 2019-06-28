@@ -6,10 +6,12 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.NullTurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualTurnView;
 
 import java.util.*;
 import java.util.List;
@@ -73,7 +75,6 @@ public class AdrenalineGameController implements GameController {
         vgv = new VirtualGameView();
         game.setGameListener(vgv);
         game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
-
         game.init(); // (VirtualGameView)
 
         buildTurnDataSources(game);
@@ -104,7 +105,14 @@ public class AdrenalineGameController implements GameController {
     public void runGame() {
         while (!game.isOver()) {
             Turn turn = game.getNextTurn();
-            turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
+            // turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
+            // turn.bindDataSource(new VirtualTurnView(game.getUserByPlayer(turn.getActivePlayer())));
+            /* turn.bindDataSource(
+                    new TurnDataSourceImpl(
+                    new VirtualTurnView(
+                            game.getUserByPlayer(turn.getActivePlayer()
+                    ))), game);
+                    */
             if(!turn.getActivePlayer().isConnected()) {
                 game.concludeTurn(turn);
                 if(!isAnyPlayerConnected())
