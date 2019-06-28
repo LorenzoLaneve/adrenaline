@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+
 public interface Weapon {
 
     WeaponCard getCard();
@@ -9,4 +11,6 @@ public interface Weapon {
     void call();
 
     void reload();
+
+    Player returnOwner();
 }

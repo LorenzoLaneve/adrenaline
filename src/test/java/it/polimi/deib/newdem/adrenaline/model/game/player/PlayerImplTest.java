@@ -301,8 +301,7 @@ public class PlayerImplTest {
 
     @Test
     public void testDrawCard() throws Exception {
-        // TODO come back to thins once decks can be loaded
-        // p.drawCard();
+        p.drawCard();
     }
 
     @Test

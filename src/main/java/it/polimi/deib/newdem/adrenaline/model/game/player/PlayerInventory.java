@@ -123,7 +123,25 @@ public class PlayerInventory {
     public void addAmmo(AmmoColor color, int amount) {
         if(amount < 0) throw new IllegalArgumentException();
         ammos.put(color, min(ammos.get(color) + amount, MAX_AMMO));
+
+        AmmoSet ammoSet = new AmmoSet(0,0,0);
+
+        switch (color){
+            case RED:
+                ammoSet = new AmmoSet(amount, 0, 0);
+                break;
+            case BLUE:
+                ammoSet = new AmmoSet(0, 0, amount);
+                break;
+            case YELLOW:
+                ammoSet = new AmmoSet(0,amount, 0);
+                break;
+        }
+
+        player.getListener().playerDidReceiveAmmos(player, ammoSet);
      }
+
+
 
     /**
      * Adds a {@code Weapon} to this inventory.
@@ -132,8 +150,10 @@ public class PlayerInventory {
      */
     public void addWeapon(Weapon weapon) {
         if (null == weapon) throw new IllegalArgumentException();
-        if(weapons.size() < MAX_WEAPONS) weapons.add(weapon);
-        else throw new IllegalStateException();
+        if(weapons.size() < MAX_WEAPONS){
+            weapons.add(weapon);
+            player.getListener().playerDidReceiveWeaponCard(player, weapon.getCard());
+        } else throw new IllegalStateException();
     }
 
     /**
@@ -146,6 +166,7 @@ public class PlayerInventory {
             if(w.getCard().equals(weapon.getCard())){
                 //TODO enrich .equals()
                 weapons.remove(w);
+                player.getListener().playerDidDiscardWeaponCard(player, weapon.getCard());
                 break;
             }
         }
@@ -159,14 +180,36 @@ public class PlayerInventory {
         if(null == card) throw new IllegalArgumentException();
         if(!canAcceptPowerUp()) throw new OutOfSlotsException();
         powerUpCards.add(card);
+        player.getListener().playerDidDiscardPowerUpCard(player, card);
     }
 
     public void removeAmmo(AmmoColor color, int amount){
         if(amount < 0) throw new IllegalArgumentException();
         ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO));
+
+        AmmoSet ammoSet = new AmmoSet(0,0,0);
+
+        switch (color){
+            case RED:
+                ammoSet = new AmmoSet(amount, 0, 0);
+                break;
+            case BLUE:
+                ammoSet = new AmmoSet(0, 0, amount);
+                break;
+            case YELLOW:
+                ammoSet = new AmmoSet(0,amount, 0);
+                break;
+        }
+
+        player.getListener().playerDidDiscardAmmos(player, ammoSet);
+
     }
 
     public void removePowerUp(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
+        for(PowerUpCard card: powerUpCardList){
+            player.getListener().playerDidReceivePowerUpCard(player, card);
+        }
+
     }
 }

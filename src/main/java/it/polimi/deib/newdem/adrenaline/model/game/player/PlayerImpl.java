@@ -9,6 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -285,7 +286,9 @@ public class PlayerImpl implements Player {
     @Override
     public void drawCard() {
         try {
-            getInventory().addPowerUp(game.getPowerUpDeck().draw());
+            PowerUpCard card = game.getPowerUpDeck().draw();
+            getInventory().addPowerUp(card);
+            listener.playerDidReceivePowerUpCard(this,card);
         }
         catch (NoDrawableCardException | OutOfSlotsException e) {
             // this should never happen
