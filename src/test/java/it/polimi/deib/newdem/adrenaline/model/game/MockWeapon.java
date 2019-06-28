@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
@@ -8,6 +9,7 @@ public class MockWeapon implements Weapon {
     private String name;
     private boolean ready;
     private WeaponCard card;
+    private Player player;
 
     public MockWeapon(WeaponCard card, boolean ready) {
         this.ready = ready;
@@ -57,6 +59,11 @@ public class MockWeapon implements Weapon {
     @Override
     public void reload() {
 
+    }
+
+    @Override
+    public Player returnOwner() {
+        return null;
     }
 
     public void discharge() {
