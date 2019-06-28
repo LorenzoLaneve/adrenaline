@@ -2,6 +2,10 @@ package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
+/**
+ * Lobby state that represents a lobby hosting an ongoing game.
+ * No new users are accepted and new users cannot modify the lobby state.
+ */
 public class InGameLobbyState implements LobbyState {
 
     InGameLobbyState() {
@@ -25,7 +29,7 @@ public class InGameLobbyState implements LobbyState {
 
     @Override
     public void lobbyDidExitState(LobbyController lobbyController) {
-        // TODO
+        // nothing to do here
     }
 
     @Override

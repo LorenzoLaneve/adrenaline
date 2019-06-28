@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Object that keeps all the connected users, and manages user identification.
+ */
 public class UserRegistry implements UserListener {
 
     private List<User> unnamedUsers;
@@ -17,6 +20,9 @@ public class UserRegistry implements UserListener {
 
     private ServerInstance core;
 
+    /**
+     * Initializes the user registry object with the ServerInstance object that has to be associated with it.
+     */
     public UserRegistry(ServerInstance core){
         this.unnamedUsers = new ArrayList<>();
         this.userNames = new HashMap<>();
@@ -24,6 +30,11 @@ public class UserRegistry implements UserListener {
         this.core = core;
     }
 
+    /**
+     * Registers the given user to the registry and asks them for a username.
+     * Also the registry registers itself as a listener to the user for name change event
+     * (that will continue the registration) and disconnection event (that will unregister the user).
+     */
     public void registerUser(User user) {
         core.getLogger().info(String.format("User %s joined the server.", user.hashCode()));
 
@@ -38,6 +49,10 @@ public class UserRegistry implements UserListener {
         setNameForUser(event.getNewUsername(), connection.getUser());
     }
 
+    /**
+     * Attempts to assign the given name to the given user. If the name is already taken,
+     * the user will be prompted for a new name, otherwise the registration of the user will end successfully.
+     */
     private synchronized void setNameForUser(String name, User user) {
         if (userNames.get(name) != null) {
             User oldUser = userNames.get(name);
@@ -65,6 +80,9 @@ public class UserRegistry implements UserListener {
         }
     }
 
+    /**
+     * Unregisters the given user from the registry.
+     */
     public void unregisterUser(User user) {
         core.getLogger().info(String.format("User %s left the server.", user.hashCode()));
 
@@ -77,6 +95,9 @@ public class UserRegistry implements UserListener {
 
     }
 
+    /**
+     * Returns the name for the user, as stored in the registry.
+     */
     public User getUserByName(String name){
         return userNames.get(name);
     }

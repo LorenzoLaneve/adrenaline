@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+/**
+ * A Timer object calls methods on a given TimerListener object with time criteria.
+ */
 public class Timer {
 
     private TimerListener listener;

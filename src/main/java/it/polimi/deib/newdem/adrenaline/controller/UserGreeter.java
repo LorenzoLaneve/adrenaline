@@ -6,6 +6,11 @@ import it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The user greeter is an object that takes various user modules that accept new users based on different criterias.
+ * For example, the user greeter will listen from new users coming from different sources (i.e.: ServerSocket or RMI).
+ * This class deals with sincronization, allocation and deallocation of the modules, and the wait for new users.
+ */
 public class UserGreeter {
 
     private List<IncomingUserModule> modules;
