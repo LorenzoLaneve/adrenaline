@@ -1,12 +1,16 @@
 package it.polimi.deib.newdem.adrenaline.model.items;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+
 public class WeaponImpl implements Weapon {
 
     private WeaponCard card;
+    private Player player;
+    private boolean isLoaded;
 
-    public WeaponImpl(WeaponCard card) {
+    public WeaponImpl(WeaponCard card, Player player) {
         this.card = card;
-        // TODO implement
+        this.player = player;
     }
 
     @Override
@@ -16,17 +20,27 @@ public class WeaponImpl implements Weapon {
 
     @Override
     public boolean isLoaded() {
-        // TODO implement
-        return false;
+        return isLoaded;
     }
 
     @Override
     public void call() {
-        // TODO implement
+        if(isLoaded){
+            isLoaded = false;
+            player.getListener().playerDidUnloadWeaponCard(player, card);
+        }
     }
 
     @Override
     public void reload() {
-        // TODO implement
+        if(!isLoaded){
+            isLoaded = true;
+            player.getListener().playerDidReloadWeaponCard(player, card);
+        }
+    }
+
+    @Override
+    public Player returnOwner() {
+        return player;
     }
 }

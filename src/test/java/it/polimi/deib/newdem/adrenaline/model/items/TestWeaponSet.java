@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.WeaponAlreadyPresentException;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class TestWeaponSet {
         }
 
         @Override
-        public Weapon makeWeapon() {
+        public Weapon makeWeapon(Player player) {
             return null;
         }
 

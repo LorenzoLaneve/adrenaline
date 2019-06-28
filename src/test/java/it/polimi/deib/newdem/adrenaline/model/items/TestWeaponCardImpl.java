@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.MachineGunEffect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,7 +54,8 @@ public class TestWeaponCardImpl {
 
     @Test
     public void makeWeapon() {
-        assertEquals(3, drawnCard.makeWeapon().getCard().getCardID());
+        Player player = null;
+        assertEquals(3, drawnCard.makeWeapon(player).getCard().getCardID());
     }
 
     @Test
