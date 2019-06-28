@@ -295,4 +295,13 @@ public class ConcreteMap implements Map {
     public void sendMapData() {
         mapListener.mapDidRestoreData(generateMapData());
     }
+
+    @Override
+    public void updatePlayerState(Player player, boolean alive) {
+        if (alive){
+            mapListener.playerDidResurrect(player);
+        }else{
+            mapListener.playerDidDie(player);
+        }
+    }
 }
