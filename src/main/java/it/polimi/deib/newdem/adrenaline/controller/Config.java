@@ -6,28 +6,31 @@ import com.google.gson.JsonParser;
 
 import java.io.FileReader;
 
+/**
+ * A configuration object mantaining all the information used by the server.
+ */
 public final class Config {
 
-    protected boolean useSockets = true;
+    private boolean useSockets = true;
 
-    protected boolean useRMI = true;
+    private boolean useRMI = true;
 
-    protected int socketPort = 9700;
+    private int socketPort = 9700;
 
-    protected int rmiPort = 9701;
+    private int rmiPort = 9701;
 
-    protected String rmiIdentifier = "adrenaline";
+    private String rmiIdentifier = "adrenaline";
 
 
-    protected int timerLength = 3;
+    private int timerLength = 3;
 
-    protected int minPlayers = 3;
+    private int minPlayers = 3;
 
-    protected int maxPlayers = 5;
+    private int maxPlayers = 5;
 
-    protected int turnTime = 1;
+    private int turnTime = 1;
 
-    protected GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
+    private GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
 
     private Config() {  }
 

@@ -13,6 +13,9 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Server instance object representing the whole server, with its configuration, connected users and lobbies.
+ */
 public class ServerInstance {
 
     private Logger log;

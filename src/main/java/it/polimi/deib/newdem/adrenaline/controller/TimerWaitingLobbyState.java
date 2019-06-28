@@ -15,7 +15,7 @@ public class TimerWaitingLobbyState implements LobbyState {
     public LobbyState userDidEnterLobby(User user, LobbyController lobbyController) {
         Lobby lobby = lobbyController.getLobby();
 
-        if (lobby.getUsers().size() > lobbyController.getMaxPlayers()) {
+        if (lobby.getUsers().size() > lobbyController.getConfig().getMaxPlayers()) {
             return new InGameLobbyState();
         }
 
@@ -26,7 +26,7 @@ public class TimerWaitingLobbyState implements LobbyState {
     public LobbyState userDidExitLobby(User user, LobbyController lobbyController) {
         Lobby lobby = lobbyController.getLobby();
 
-        if (lobby.getUsers().size() < lobbyController.getMinPlayers()) {
+        if (lobby.getUsers().size() < lobbyController.getConfig().getMinPlayers()) {
             return new ReadyLobbyState();
         }
 

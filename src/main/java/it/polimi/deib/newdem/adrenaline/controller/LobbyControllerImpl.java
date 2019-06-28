@@ -16,16 +16,10 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     private GameController gameController;
 
-    private int minPlayers;
-    private int maxPlayers;
-
     LobbyControllerImpl(Config config) {
         this.config = config;
 
         this.lobby = new LobbyImpl();
-
-        this.minPlayers = config.getMinPlayers();
-        this.maxPlayers = config.getMaxPlayers();
 
         VirtualLobbyView view = new VirtualLobbyView(lobby);
         this.lobby.setListener(view);
@@ -35,6 +29,9 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
         this.switchState(new ReadyLobbyState());
     }
 
+    /**
+     * Changes the state of the lobby to the given state.
+     */
     private synchronized void switchState(LobbyState newState) {
         if (newState != this.lobbyState) {
             if (lobbyState != null) {
@@ -66,16 +63,6 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
         user.removeListener(this);
 
         this.switchState(lobbyState.userDidExitLobby(user, this));
-    }
-
-    @Override
-    public int getMinPlayers() {
-        return minPlayers;
-    }
-
-    @Override
-    public int getMaxPlayers() {
-        return maxPlayers;
     }
 
     @Override
