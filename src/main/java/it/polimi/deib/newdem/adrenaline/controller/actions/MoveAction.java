@@ -1,7 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
-import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -9,8 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-// Effectcontext?
-public class MoveAction extends ActionBaseImpl {
+public class MoveAction extends ActionBasePlain {
 
     private int minDist;
     private int maxDist;
@@ -21,7 +18,6 @@ public class MoveAction extends ActionBaseImpl {
         super(actor, actionDataSource, actor.getGame());
         this.minDist = minDist;
         this.maxDist = maxDist;
-        // TODO implement
     }
 
     @Override
@@ -32,16 +28,8 @@ public class MoveAction extends ActionBaseImpl {
         TileSelector selector = new NearTileSelector(actor, minDist, maxDist);
         Tile target = listener.actionDidRequestTile(selector);
         GameChange gc = new MovementGameChange(actor, target);
-        gc.update(this.game);
+        gc.update(game);
     }
 
-    @Override
-    public void damageDealtTrigger(Player attacker, Player victim) {
 
-    }
-
-    @Override
-    public void damageTakenTrigger(Player attacker, Player victim) {
-
-    }
 }
