@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
@@ -17,6 +18,8 @@ public class EffectManager {
 
     private EnumMap<MetaPlayer, Player> boundPlayers;
 
+    private List<MetaPlayer> notBoundablePlayers;
+
     private EffectContext context;
 
 
@@ -27,6 +30,7 @@ public class EffectManager {
 
         this.reportedChanges = new ArrayList<>();
         this.boundPlayers = new EnumMap<>(MetaPlayer.class);
+        this.notBoundablePlayers = new ArrayList<>();
 
         this.context = context;
     }
@@ -95,14 +99,21 @@ public class EffectManager {
 
     public Player bindPlayer(MetaPlayer player, PlayerSelector selector, boolean forceChoice) throws UndoException {
         Player p = boundPlayers.get(player);
-        // FIXME not boundable players is necessary.
 
-        if (p == null) {
-            // FIXME exclude already bound players and actor.
-            p = context.choosePlayer(player, selector, forceChoice);
+        if (p == null && !notBoundablePlayers.contains(player)) {
+            List<Player> excludedPlayers = new ArrayList<>();
+            excludedPlayers.add(getActor()); // exclude yourself
+            excludedPlayers.addAll(boundPlayers.values()); // exclude players you have already chosen
+
+            PlayerSelector finalSelector = new BlackListFilterPlayerSelector(excludedPlayers, selector);
+
+            p = context.choosePlayer(player, finalSelector, forceChoice);
 
             if (p != null) {
                 boundPlayers.put(player, p);
+            } else {
+                notBoundablePlayers.add(player);
+                // the user chose not to associate anybody to this meta player.
             }
         }
         return p;
