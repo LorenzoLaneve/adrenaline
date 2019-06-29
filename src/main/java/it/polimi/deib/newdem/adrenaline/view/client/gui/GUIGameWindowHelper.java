@@ -163,18 +163,6 @@ public class GUIGameWindowHelper {
         return pane;
     }
 
-    public static Pane createPlayerPanel(PlayerColor color) {
-        try {
-            Pane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/player-view.fxml"));
-            tilePane.getStyleClass().add(toStyleClass(color));
-
-            return tilePane;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-
     public static Pane lookupTilePane(Scene scene, TilePosition position) {
         return (Pane) scene.lookup("#tileSlot"+ position.getX() +"_"+ position.getY());
     }
