@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.WeaponAlreadyPresentException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.BLUE;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
@@ -17,9 +18,9 @@ public class PlayerInventory {
     private Player player;
     private List<PowerUpCard> powerUpCards;
     private List<Weapon> weapons;
-    private static final int MAX_EQUIPMENT = 4;
-    private static final int MAX_WEAPONS = 3;
-    private static final int MAX_AMMO = 3;
+    public static final int MAX_EQUIPMENT = 4;
+    public static final int MAX_WEAPONS = 3;
+    public static final int MAX_AMMO_PER_COLOR = 3;
     private EnumMap<AmmoColor, Integer> ammos;
 
     /**
@@ -135,7 +136,7 @@ public class PlayerInventory {
      */
     public void addAmmo(AmmoColor color, int amount) {
         if(amount < 0) throw new IllegalArgumentException();
-        ammos.put(color, min(ammos.get(color) + amount, MAX_AMMO));
+        ammos.put(color, min(ammos.get(color) + amount, MAX_AMMO_PER_COLOR));
 
         AmmoSet ammoSet = new AmmoSet(0,0,0);
 
@@ -198,7 +199,7 @@ public class PlayerInventory {
 
     public void removeAmmo(AmmoColor color, int amount){
         if(amount < 0) throw new IllegalArgumentException();
-        ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO));
+        ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO_PER_COLOR));
 
         AmmoSet ammoSet = new AmmoSet(0,0,0);
 
@@ -223,6 +224,43 @@ public class PlayerInventory {
         for(PowerUpCard card: powerUpCardList){
             player.getListener().playerDidReceivePowerUpCard(player, card);
         }
+
+    }
+
+    public int getWeaponAmount() {
+        return weapons.size();
+    }
+
+    public List<WeaponCard> getAllWeaponCards() {
+        return weapons.stream().map(Weapon::getCard).collect(Collectors.toList());
+    }
+
+    public void removeWeaponFromCard(WeaponCard card) {
+        if(null == card) throw new IllegalArgumentException();
+        for(Weapon w : weapons) {
+            if(w.getCard().equals(card)){
+                //TODO enrich .equals()
+                weapons.remove(w);
+                player.getListener().playerDidDiscardWeaponCard(player, card);
+                break;
+            }
+        }
+    }
+
+    public void addDrop(DropInstance drop) {
+        addAmmoSet(drop.getAmmos());
+        try {
+            addPowerUp(getPlayer().getGame().getPowerUpDeck().draw());
+        }
+        catch (NoDrawableCardException | OutOfSlotsException e) {
+            // too bad, no new powerup added :(
+        }
+    }
+
+    public void addAmmoSet(AmmoSet ammoSet) {
+        addAmmo(AmmoColor.RED, ammoSet.getRedAmmos());
+        addAmmo(AmmoColor.BLUE, ammoSet.getBlueAmmos());
+        addAmmo(AmmoColor.YELLOW, ammoSet.getYellowAmmos());
 
     }
 }

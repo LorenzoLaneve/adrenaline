@@ -1,13 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.MoveAtom;
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ShootAtom;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.*;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
-
-import java.util.ArrayList;
 
 
 public class ConcreteActionFactory implements ActionFactory {
@@ -25,22 +19,34 @@ public class ConcreteActionFactory implements ActionFactory {
 
     @Override
     public Action makeAction(Player actor, ActionDataSource actionDataSource) {
-        //TODO implement
         // make container
         ActionContainer container = new ActionContainer(actor, actionDataSource);
 
         // fill container with ordered atoms from atomic action types
         AtomicAction currentAtomicAction = null;
-        // TODO redo w/ monolithic actions
         for (AtomicActionType aat : actionType.getAtomicTypes()) {
             switch (aat) {
                 case MOVE1:
                     currentAtomicAction = new MoveAtom(container, 0,1);
                     break;
+                case MOVE2:
+                    currentAtomicAction = new MoveAtom(container, 0,2);
+                    break;
+                case MOVE3:
+                    currentAtomicAction = new MoveAtom(container, 0,3);
+                    break;
+                case MOVE4:
+                    currentAtomicAction = new MoveAtom(container, 0,4);
+                    break;
                 case SHOOT:
                     currentAtomicAction = new ShootAtom(container);
                     break;
-                // TODO add cases
+                case GRAB:
+                    currentAtomicAction = new GrabAtom(container);
+                    break;
+                case USE_POWERUP:
+                    currentAtomicAction = new PowerUpAtom(container);
+                    break;
                 default:
                     currentAtomicAction = null;
                     break;

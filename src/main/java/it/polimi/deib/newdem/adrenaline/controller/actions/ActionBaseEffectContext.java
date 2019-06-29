@@ -18,12 +18,12 @@ public class ActionBaseEffectContext extends ActionBasePlain implements EffectCo
 
     @Override
     public void applyGameChange(GameChange gameChange) {
-
+        gameChange.update(game);
     }
 
     @Override
     public void revertGameChange(GameChange gameChange) {
-
+        gameChange.revert(game);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class ActionBaseEffectContext extends ActionBasePlain implements EffectCo
 
     @Override
     public void damageDealtTrigger(Player attacker, Player victim) {
-
+        //TODO
     }
 
     @Override
     public void damageTakenTrigger(Player attacker, Player victim) {
-
+        //TODO
     }
 }
