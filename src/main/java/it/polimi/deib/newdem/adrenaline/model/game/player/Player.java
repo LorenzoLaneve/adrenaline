@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.player;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
@@ -62,6 +63,8 @@ public interface Player {
     void drawCard();
 
     DamageBoard getDamageBoard();
+
+    ActionBoard getActionBoard();
 
     void reportDeath(boolean isDead);
 

@@ -56,7 +56,7 @@ public class AdrenalineGameController implements GameController {
         }
 
         // TODO random map
-        String s = this.getClass().getClassLoader().getResource("maps/Map0_0.json").getFile().replace("%20", " ");
+        String s = this.getClass().getClassLoader().getResource("maps/Map0_1.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);
@@ -75,10 +75,13 @@ public class AdrenalineGameController implements GameController {
 
         game.init(); // (VirtualGameView)
 
-        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+        game.getMap().setListener(new VirtualMapView(vgv));
+
+        game.setKillTrackListener(new VirtualKillTrackView(vgv));
         for(Player player : game.getPlayers()) {
             player.setListener(new VirtualPlayerView(vgv, player));
             player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
+            player.getActionBoard().setListener(new VirtualActionBoardView(player, vgv));
         }
 
         buildTurnDataSources(game);

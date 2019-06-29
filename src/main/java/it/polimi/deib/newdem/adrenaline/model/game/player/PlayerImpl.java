@@ -305,6 +305,11 @@ public class PlayerImpl implements Player {
     }
 
     @Override
+    public ActionBoard getActionBoard() {
+        return actionBoard;
+    }
+
+    @Override
     public void reportDeath(boolean isDead) {
         if (isDead) {
             Map map = getTile().getMap();
