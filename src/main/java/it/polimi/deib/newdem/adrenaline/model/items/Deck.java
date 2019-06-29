@@ -121,6 +121,7 @@ public class Deck<T extends Card> {
         private HashSet<T> activeCards;
         */
         for(T card  : drawableCards) {
+            int id = card.getCardID();
             if(card.getCardID() == cardId) return card;
         }
 
@@ -128,7 +129,7 @@ public class Deck<T extends Card> {
             if (card.getCardID() == cardId) return card;
         }
 
-        for(T card : discardedCards) {
+        for(T card : activeCards) {
             if (card.getCardID() == cardId) return card;
         }
 
