@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
+import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
@@ -22,8 +23,8 @@ public class GameClientManager {
     private UserConnection connection;
 
     private GameView gameView;
-
     private MapView mapView;
+    private KillTrackView killTrackView;
 
     private EnumMap<PlayerColor, PlayerView> playerViews;
 
@@ -51,6 +52,8 @@ public class GameClientManager {
     public void loadData() {
         gameView = viewMaker.makeGameView();
         mapView = viewMaker.makeMapView();
+        killTrackView = viewMaker.makeKillTrackView();
+
         playerViews = new EnumMap<>(PlayerColor.class);
 
         GameData gameData = waitForEvent(GameDataEvent.class).getData();
@@ -60,6 +63,8 @@ public class GameClientManager {
             playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
 
         connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
+
+        killTrackView.restoreView(waitForEvent(KillTrackDataEvent.class).getData());
 
         mapView.updateView(waitForEvent(MapDataEvent.class).getData());
     }

@@ -46,14 +46,10 @@
                             <children>
                                 <FlowPane hgap="4.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot1" alignment="CENTER" hgap="-9.0" vgap="-40.0">
-                                            <Pane styleClass="dmg,magenta" />
-                                        </FlowPane>
+                                        <FlowPane id="killTrackSlot1" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
-                                        <FlowPane id="killTrackSlot2" alignment="CENTER" hgap="-9.0" vgap="-40.0">
-                                            <Pane styleClass="dmg,yellow" />
-                                        </FlowPane>
+                                        <FlowPane id="killTrackSlot2" alignment="CENTER" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                     <Pane styleClass="kill-track-slot">
                                         <FlowPane id="killTrackSlot3" alignment="CENTER" hgap="-9.0" vgap="-40.0" />

@@ -22,6 +22,6 @@ public class KillTrackDataTest {
     public void testGetCells() throws Exception {
         Player p = new MockPlayer();
         killTrack.addKill(new MockPlayer(), 1);
-        assertEquals(p.getColor(), killTrack.generateKillTrackData().getCells().get(0).getKiller().getColor());
+        assertEquals(p.getColor(), killTrack.generateKillTrackData().getKills().get(0).getKiller());
     }
 }
