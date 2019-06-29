@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 import javafx.application.Platform;
@@ -15,6 +16,20 @@ public class GUIKillTrackView implements KillTrackView {
         this.window = window;
 
         this.currentSlot = 1;
+    }
+
+    @Override
+    public void restoreView(KillTrackData data) {
+        Platform.runLater(() -> {
+
+            for (KillTrackData.KillData cell : data.getKills()) {
+                Pane slot = (Pane) window.getScene().lookup("#killTrackSlot"+ currentSlot++);
+
+                for (int i = 0; i < cell.getAmount(); i++) {
+                    slot.getChildren().add(GUIGameWindowHelper.createDamageIcon(cell.getKiller()));
+                }
+            }
+        });
     }
 
     @Override

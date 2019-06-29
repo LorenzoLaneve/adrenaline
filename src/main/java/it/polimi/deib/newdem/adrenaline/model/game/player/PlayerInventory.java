@@ -33,9 +33,9 @@ public class PlayerInventory {
         powerUpCards = new ArrayList<>(MAX_EQUIPMENT);
         weapons = new ArrayList<>(MAX_WEAPONS);
         ammos = new EnumMap<>(AmmoColor.class);
-        ammos.put(RED, 0);
-        ammos.put(BLUE, 0);
-        ammos.put(YELLOW, 0);
+        ammos.put(RED, 3);
+        ammos.put(BLUE, 3);
+        ammos.put(YELLOW, 3);
     }
 
     /**

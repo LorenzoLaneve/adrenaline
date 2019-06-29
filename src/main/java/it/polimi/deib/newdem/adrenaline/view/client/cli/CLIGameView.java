@@ -16,17 +16,20 @@ public class CLIGameView implements GameView {
 
     @Override
     public void setGameData(GameData data) {
-        // TODO
+        out.println("Players in game:");
+        for (GameData.UserColorPair pair : data.getPlayers()) {
+            out.println("+ User " + pair.getUsername() + " is player " + CLIHelper.colorToString(pair.getColor()));
+        }
     }
 
     @Override
     public void disablePlayer(PlayerColor color) {
-        // TODO
+        out.println("Player "+ CLIHelper.colorToString(color) +" disconnected.");
     }
 
     @Override
     public void enablePlayer(PlayerColor color) {
-        out.println("Player "+ CLIHelper.colorToString(color) +" player turn.");
+        out.println("Player "+ CLIHelper.colorToString(color) +" reconnected.");
     }
 
 }

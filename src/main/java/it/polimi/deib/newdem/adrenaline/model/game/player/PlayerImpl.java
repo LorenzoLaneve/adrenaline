@@ -271,6 +271,9 @@ public class PlayerImpl implements Player {
     @Override
     public void setListener(PlayerListener listener) {
         this.listener = listener;
+        if (listener != null) {
+            listener.playerDidInit(generatePlayerData());
+        }
     }
 
     @Override

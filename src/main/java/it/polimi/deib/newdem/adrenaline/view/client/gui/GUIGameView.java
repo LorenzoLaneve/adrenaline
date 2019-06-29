@@ -4,7 +4,11 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 
 public class GUIGameView implements GameView {
 
@@ -21,7 +25,22 @@ public class GUIGameView implements GameView {
         Platform.runLater(() -> {
             window.getScene().getRoot().applyCss();
 
+            Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
+            playerSlots.getChildren().clear();
 
+            for (GameData.UserColorPair pair : data.getPlayers()) {
+                try {
+                    Pane playerSlot = FXMLLoader.load(getClass().getResource("/gui/player-view.fxml"));
+                    playerSlot.getStyleClass().add(GUIGameWindowHelper.toStyleClass(pair.getColor()));
+
+                    Label playerName = (Label) playerSlot.lookup(".player-name");
+                    playerName.setText(pair.getUsername());
+
+                    playerSlots.getChildren().add(playerSlot);
+                } catch (IOException x) {
+                    // nothing to do here.
+                }
+            }
 
             window.show();
         });

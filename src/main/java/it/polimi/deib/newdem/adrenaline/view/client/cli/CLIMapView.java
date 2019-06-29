@@ -3,6 +3,7 @@ package it.polimi.deib.newdem.adrenaline.view.client.cli;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
+import it.polimi.deib.newdem.adrenaline.model.map.PlayerTilePair;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
 import it.polimi.deib.newdem.adrenaline.view.MapViewEventListener;
@@ -20,22 +21,12 @@ public class CLIMapView implements MapView {
     }
 
     @Override
-    public void addEventListener(MapViewEventListener listener) {
-        // TODO
-    }
-
-    @Override
-    public void removeEventListener(MapViewEventListener listener) {
-        // TODO
-    }
-
-    @Override
     public void updateView(MapData data) {
         out.println("Using map with ID "+ data.getMapID() +" for this game.");
 
         out.println("Tiles: ");
         for (TilePosition tile : data.getTiles()) {
-            out.print(CLIHelper.tilePositionToString(tile) + " with " + CLIHelper.dropInstanceToString(data.getDropInTile(tile)));
+            out.println(CLIHelper.tilePositionToString(tile) + " with " + CLIHelper.dropInstanceToString(data.getDropInTile(tile)));
         }
         out.println();
 
@@ -56,6 +47,10 @@ public class CLIMapView implements MapView {
         out.println(" with weapons:");
         for (int cardID : data.getYellowWeaponSet()) {
             out.println(cardID +" - "+ CLIHelper.getWeaponName(cardID));
+        }
+
+        for (PlayerTilePair pair : data.getPlayerLocations()) {
+            out.println("Player "+ CLIHelper.colorToString(pair.getPlayer()) +" is at "+ CLIHelper.tilePositionToString(pair.getTile()));
         }
 
     }

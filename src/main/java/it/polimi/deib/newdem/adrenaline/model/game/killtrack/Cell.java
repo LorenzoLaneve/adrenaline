@@ -4,8 +4,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 import java.io.Serializable;
 
-// package-private
+//package-private
 class Cell implements Serializable {
+
     private final Player killer;
     private final int amount;
 

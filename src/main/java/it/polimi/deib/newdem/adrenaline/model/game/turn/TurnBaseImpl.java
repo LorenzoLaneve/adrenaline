@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
-import it.polimi.deib.newdem.adrenaline.controller.TimeoutException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
@@ -8,13 +7,13 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class TurnBaseImpl implements Turn {
 
     private Player activePlayer;
     private TurnDataSource turnDataSource;
+
     public TurnBaseImpl(Player activePlayer) {
         this.activePlayer = activePlayer;
     }

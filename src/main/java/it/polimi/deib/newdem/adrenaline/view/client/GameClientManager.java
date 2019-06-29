@@ -2,8 +2,10 @@ package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
+import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
@@ -21,10 +23,21 @@ public class GameClientManager {
     private UserConnection connection;
 
     private GameView gameView;
-
     private MapView mapView;
+    private KillTrackView killTrackView;
 
     private EnumMap<PlayerColor, PlayerView> playerViews;
+
+
+    private <T extends UserEvent> T waitForEvent(Class<T> eventClass) {
+        UserEventLocker<T> gameDataLocker = new UserEventLocker<>();
+        try {
+            return gameDataLocker.waitOnEvent(eventClass, connection);
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+            throw new ClosedException("Close requested.");
+        }
+    }
 
 
     public GameClientManager(ViewMaker viewMaker, UserConnection connection) {
@@ -39,33 +52,20 @@ public class GameClientManager {
     public void loadData() {
         gameView = viewMaker.makeGameView();
         mapView = viewMaker.makeMapView();
+        killTrackView = viewMaker.makeKillTrackView();
+
         playerViews = new EnumMap<>(PlayerColor.class);
 
-        UserEventLocker<GameDataEvent> gameDataLocker = new UserEventLocker<>();
-        GameData gameData;
-        try {
-            gameData = gameDataLocker.waitOnEvent(GameDataEvent.class, connection).getData();
-        } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
-            throw new ClosedException("Close requested.");
-        }
+        GameData gameData = waitForEvent(GameDataEvent.class).getData();
         gameView.setGameData(gameData);
 
-        for (GameData.UserColorPair player : gameData.getPlayers()) {
-            PlayerView pView = viewMaker.makePlayerView(player.getColor());
-            pView.setName(player.getUsername());
-            playerViews.put(player.getColor(), pView);
-        }
+        for (GameData.UserColorPair player : gameData.getPlayers())
+            playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
 
-        UserEventLocker<MapDataEvent> mapDataLocker = new UserEventLocker<>();
-        MapData mapData;
-        try {
-            mapData = mapDataLocker.waitOnEvent(MapDataEvent.class, connection).getData();
-        } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
-            throw new ClosedException("Close requested.");
-        }
-        mapView.updateView(mapData);
+        killTrackView.restoreView(waitForEvent(KillTrackDataEvent.class).getData());
+        mapView.updateView(waitForEvent(MapDataEvent.class).getData());
+
+        connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
     }
 
     public void linkViews() {
