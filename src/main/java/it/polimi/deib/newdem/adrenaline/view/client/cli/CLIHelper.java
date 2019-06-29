@@ -39,9 +39,23 @@ class CLIHelper {
 
             return cardDict.get("screenName").getAsString();
         } catch (Exception x) {
-            return "No name";
+            return "No name found";
         }
     }
+
+    public static String getPowerUpName(int cardID) {
+        try (FileReader fread = new FileReader(FileUtils.getAbsoluteDecodedFilePath("cards/powerupuserdata.json", CLIHelper.class))) {
+            JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
+
+            JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();
+
+            return cardDict.get("screenName").getAsString();
+        } catch (Exception x) {
+            return "No name found";
+        }
+    }
+
+
 
     public static String tilePositionToString(TilePosition pos) {
         return "("+ pos.getX() +", "+ pos.getY() +")";

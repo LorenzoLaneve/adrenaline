@@ -1,12 +1,15 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -17,9 +20,9 @@ public class GUIPlayerView implements PlayerView {
 
     private PlayerColor color;
 
-    private Group weaponsPane;
+    private FlowPane weaponsPane;
 
-    private Group powerUpsPane;
+    private FlowPane powerUpsPane;
 
     private Pane playerPane;
 
@@ -28,8 +31,13 @@ public class GUIPlayerView implements PlayerView {
         this.window = window;
         this.color = color;
 
-        this.weaponsPane = new Group();
-        this.powerUpsPane = new Group();
+        this.weaponsPane = new FlowPane();
+        this.weaponsPane.setHgap(10);
+        this.weaponsPane.setAlignment(Pos.CENTER);
+
+        this.powerUpsPane = new FlowPane();
+        this.powerUpsPane.setHgap(10);
+        this.powerUpsPane.setAlignment(Pos.CENTER);
 
         Platform.runLater(this::setupPane);
     }
@@ -52,6 +60,13 @@ public class GUIPlayerView implements PlayerView {
         return (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
     }
 
+
+    @Override
+    public void setPlayerData(PlayerData data) {
+        Platform.runLater(() -> {
+            // TODO
+        });
+    }
 
     @Override
     public void setName(String name) {
@@ -131,10 +146,10 @@ public class GUIPlayerView implements PlayerView {
             redAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) + redAmount));
 
             Label blueAmmoLabel = (Label) getPlayerPane().lookup(".ammo-amt.blue");
-            blueAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) + blueAmount));
+            blueAmmoLabel.setText(""+ (Integer.valueOf(blueAmmoLabel.getText()) + blueAmount));
 
             Label yellowAmmoLabel = (Label) getPlayerPane().lookup(".ammo-amt.yellow");
-            yellowAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) + yellowAmount));
+            yellowAmmoLabel.setText(""+ (Integer.valueOf(yellowAmmoLabel.getText()) + yellowAmount));
         });
     }
 
@@ -145,10 +160,10 @@ public class GUIPlayerView implements PlayerView {
             redAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) - redAmount));
 
             Label blueAmmoLabel = (Label) getPlayerPane().lookup(".ammo-amt.blue");
-            blueAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) - blueAmount));
+            blueAmmoLabel.setText(""+ (Integer.valueOf(blueAmmoLabel.getText()) - blueAmount));
 
             Label yellowAmmoLabel = (Label) getPlayerPane().lookup(".ammo-amt.yellow");
-            yellowAmmoLabel.setText(""+ (Integer.valueOf(redAmmoLabel.getText()) - yellowAmount));
+            yellowAmmoLabel.setText(""+ (Integer.valueOf(yellowAmmoLabel.getText()) - yellowAmount));
         });
     }
 

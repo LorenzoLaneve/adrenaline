@@ -213,23 +213,14 @@ public class GameImpl implements Game {
     }
 
     private GameData generateGameData() {
-
         GameData gameData = new GameData();
-
         for (Player p : players) {
             User playerUser = getUserByPlayer(p);
 
             gameData.addUser(playerUser.getName(), p.getColor(), playerUser.isConnected());
-            gameData.addPlayer(p);
         }
 
-        gameData.addKillTrack(killTrack);
-        gameData.addMap(map);
-        gameData.addDropDeck(dropDeck);
-        gameData.addPowerUpDeck(powerUpDeck);
-        gameData.addWeaponCardDeck(weaponDeck);
         gameData.setFinalized();
-
         return gameData;
     }
 

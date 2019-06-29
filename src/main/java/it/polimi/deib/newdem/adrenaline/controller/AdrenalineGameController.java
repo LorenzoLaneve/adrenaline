@@ -9,10 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualTurnView;
+import it.polimi.deib.newdem.adrenaline.view.server.*;
 
 import java.util.*;
 import java.util.List;
@@ -75,12 +72,14 @@ public class AdrenalineGameController implements GameController {
 
         vgv = new VirtualGameView();
         game.setGameListener(vgv);
-        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
-        for(Player player:game.getPlayers()){
-            player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
-        }
 
         game.init(); // (VirtualGameView)
+
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+        for(Player player : game.getPlayers()) {
+            player.setListener(new VirtualPlayerView(vgv, player));
+            player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
+        }
 
         buildTurnDataSources(game);
     }
@@ -147,6 +146,7 @@ public class AdrenalineGameController implements GameController {
         Player disconnectedPlayer = getPlayer(user);
         if (disconnectedPlayer != null) {
             vgv.userDidExitGame(user, disconnectedPlayer);
+            // TODO method in model
         }
     }
 
@@ -154,7 +154,8 @@ public class AdrenalineGameController implements GameController {
     public void userDidReconnect(User user) {
         Player reconnectedPlayer = getPlayer(user);
         if (reconnectedPlayer != null) {
-            vgv.userDidExitGame(user, reconnectedPlayer);
+            vgv.userDidEnterGame(user, reconnectedPlayer);
+            // TODO method in model + data send to the reconnected client
         }
     }
 

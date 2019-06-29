@@ -23,6 +23,7 @@ public class GUIGameView implements GameView {
 
 
 
+
             window.show();
         });
     }

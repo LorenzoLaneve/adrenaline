@@ -23,7 +23,7 @@ public class FrenzyDoubleActionBoardBehavior extends FrenzyCommonBehavior {
                 AtomicActionType.MOVE2,
                 AtomicActionType.GRAB
         ));
-        //TODO listeners?
+
         return factories;
     }
 

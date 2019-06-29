@@ -16,17 +16,17 @@ public class CLIGameView implements GameView {
 
     @Override
     public void setGameData(GameData data) {
-        // TODO
+        
     }
 
     @Override
     public void disablePlayer(PlayerColor color) {
-        // TODO
+        out.println("Player "+ CLIHelper.colorToString(color) +" disconnected.");
     }
 
     @Override
     public void enablePlayer(PlayerColor color) {
-        out.println("Player "+ CLIHelper.colorToString(color) +" player turn.");
+        out.println("Player "+ CLIHelper.colorToString(color) +" reconnected.");
     }
 
 }

@@ -8,6 +8,11 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 public final class NullPlayerListener implements PlayerListener {
 
     @Override
+    public void playerDidInit(PlayerData data) {
+
+    }
+
+    @Override
     public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {
 
     }

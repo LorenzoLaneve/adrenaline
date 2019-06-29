@@ -1,87 +1,101 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerData implements Serializable {
-    private List<Integer> powerUpCards;
-    private List<Integer> readyWeaponCards;
-    private List<Integer> unloadedWeaponCards;
-    private Map<AmmoColor, Integer> ammos;
+
+    private ArrayList<Integer> powerUpCards;
+    private ArrayList<Integer> readyWeaponCards;
+    private ArrayList<Integer> unloadedWeaponCards;
+
+    private EnumMap<AmmoColor, Integer> ammos;
+
     private boolean isActionBoardFrenzy;
     private boolean isDamageBoardFrenzy;
-    private List<PlayerColor> damages;
-    private Map<PlayerColor, Integer> marks;
+
+    private ArrayList<PlayerColor> damages;
+
+    private EnumMap<PlayerColor, Integer> marks;
+
     private PlayerColor color;
+
     private TilePosition position;
+
     private int deaths;
     private boolean isDead;
     private boolean hasFirstPlayerCard;
     private int score;
 
     PlayerData(Player player) {
+        this.color = player.getColor();
+
         PlayerInventory inventory = player.getInventory();
 
-        powerUpCards = new ArrayList<>();
-        for(int i = 0; i < inventory.getPowerUps().size(); i++){
-            powerUpCards.add(inventory.getPowerUps().get(i).getCardID());
+        this.powerUpCards = new ArrayList<>();
+        for(PowerUpCard powerUpCard : inventory.getPowerUps()){
+            this.powerUpCards.add(powerUpCard.getCardID());
         }
 
-        readyWeaponCards = new ArrayList<>();
-        for(int i = 0; i < inventory.getReadyWeapons().getWeapons().size(); i++){
-            readyWeaponCards.add(inventory.getReadyWeapons().getWeapons().get(i).getCardID());
+        this.readyWeaponCards = new ArrayList<>();
+        for(WeaponCard weapon : inventory.getReadyWeapons().getWeapons()){
+            this.readyWeaponCards.add(weapon.getCardID());
         }
-        unloadedWeaponCards = new ArrayList<>();
-        for(int i = 0; i < inventory.getUnloadedWeapons().getWeapons().size(); i++){
-            unloadedWeaponCards.add(inventory.getUnloadedWeapons().getWeapons().get(i).getCardID());
+
+        this.unloadedWeaponCards = new ArrayList<>();
+        for(WeaponCard weapon : inventory.getUnloadedWeapons().getWeapons()){
+            this.unloadedWeaponCards.add(weapon.getCardID());
         }
-        ammos = new EnumMap<>(AmmoColor.class);
-        ammos.put(AmmoColor.RED, inventory.getRed());
-        ammos.put(AmmoColor.BLUE, inventory.getBlue());
-        ammos.put(AmmoColor.YELLOW, inventory.getYellow());
-        isActionBoardFrenzy = player.isActionBoardFrenzy();
-        isDamageBoardFrenzy = player.getDamageBoard().isFrenzy();
-        damages = new ArrayList<>();
+
+        this.ammos = new EnumMap<>(AmmoColor.class);
+        this.ammos.put(AmmoColor.RED, inventory.getRed());
+        this.ammos.put(AmmoColor.BLUE, inventory.getBlue());
+        this.ammos.put(AmmoColor.YELLOW, inventory.getYellow());
+
+        this.isActionBoardFrenzy = player.isActionBoardFrenzy();
+        this.isDamageBoardFrenzy = player.getDamageBoard().isFrenzy();
+
+        this.damages = new ArrayList<>();
         for(int i = 0; i < player.getDamageBoard().getTotalDamage(); i++){
-            damages.add(player.getDamageBoard().getDamager(i).getColor());
+            this.damages.add(player.getDamageBoard().getDamager(i).getColor());
         }
-        marks = new EnumMap<>(PlayerColor.class);
+
+        this.marks = new EnumMap<>(PlayerColor.class);
         for(Map.Entry<Player, Integer> e : player.getDamageBoard().getMarksMap().entrySet()) {
-            marks.put(e.getKey().getColor(), e.getValue());
+            this.marks.put(e.getKey().getColor(), e.getValue());
         }
-        color = player.getColor();
+
         if(null != player.getTile()) {
-            position = player.getTile().getPosition();
+            this.position = player.getTile().getPosition();
+        } else {
+            this.position = null;
         }
-        else {
-            position = new TilePosition(0,0);
-        }
-        deaths = player.getDeaths();
-        isDead = player.isDead();
-        hasFirstPlayerCard = player.hasFirstPlayerCard();
-        score = player.getScore();
+
+        this.deaths = player.getDeaths();
+        this.isDead = player.isDead();
+        this.hasFirstPlayerCard = player.hasFirstPlayerCard();
+        this.score = player.getScore();
     }
 
     public List<Integer> getPowerUpCards() {
-        return powerUpCards;
+        return new ArrayList<>(powerUpCards);
     }
 
     public List<Integer> getReadyWeaponCards() {
-        return readyWeaponCards;
+        return new ArrayList<>(readyWeaponCards);
     }
 
     public List<Integer> getUnloadedWeaponCards() {
-        return unloadedWeaponCards;
+        return new ArrayList<>(unloadedWeaponCards);
     }
 
     public Map<AmmoColor, Integer> getAmmos() {
-        return ammos;
+        return new EnumMap<>(ammos);
     }
 
     public boolean isActionBoardFrenzy() {
@@ -93,11 +107,11 @@ public class PlayerData implements Serializable {
     }
 
     public List<PlayerColor> getDamages() {
-        return damages;
+        return new ArrayList<>(damages);
     }
 
     public Map<PlayerColor, Integer> getMarks() {
-        return marks;
+        return new EnumMap<>(marks);
     }
 
     public PlayerColor getColor() {
@@ -123,4 +137,5 @@ public class PlayerData implements Serializable {
     public int getScore() {
         return score;
     }
+
 }
