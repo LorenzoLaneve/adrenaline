@@ -9,17 +9,6 @@ import java.util.List;
 
 public interface MapView {
 
-
-    /**
-     * Adds the given object as listener for this view, so that it will receive events from this view.
-     */
-    void addEventListener(MapViewEventListener listener);
-
-    /**
-     * Removes this object so it will no longer receive events from this view.
-     */
-    void removeEventListener(MapViewEventListener listener);
-
     /**
      * Updates the view with the given map data.
      */

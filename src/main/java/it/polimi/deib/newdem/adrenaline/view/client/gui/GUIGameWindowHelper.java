@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -71,8 +72,11 @@ public class GUIGameWindowHelper {
 
     public static Pane createTilePane(TilePosition tilePosition) {
         try {
-            Pane tilePane = (Pane) FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/lobby.fxml"));
+            Pane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/tile.fxml"));
             tilePane.setId("tileSlot"+ tilePosition.getX() +"_"+ tilePosition.getY());
+
+            Pane playersPane = (Pane) tilePane.lookup(".tile-players-pane");
+            playersPane.getChildren().add(new Label("("+ tilePosition.getX() +", "+ tilePosition.getY() +")"));
 
             return tilePane;
         } catch (IOException e) {
@@ -177,7 +181,7 @@ public class GUIGameWindowHelper {
 
 
     public static void addDropsToTilePane(Scene scene, TilePosition tile, DropInstance drop) {
-        Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup("tile-drops-pane");
+        Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup(".tile-drops-pane");
 
         int reds = drop.getAmmos().getRedAmmos();
         while (reds > 0) {

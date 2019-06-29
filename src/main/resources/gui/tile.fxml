@@ -17,16 +17,8 @@
             <ColumnConstraints prefWidth="20" />
         </columnConstraints>
         <children>
-            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                <Pane styleClass="player-pin,yellow" />
-                <Pane styleClass="player-pin,cyan" />
-                <Pane styleClass="player-pin,magenta" />
-            </FlowPane>
-            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1">
-                <Pane styleClass="drop-icon,blue-ammo" />
-                <Pane styleClass="drop-icon,blue-ammo" />
-                <Pane styleClass="drop-icon,powerup" />
-            </FlowPane>
+            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-players-pane" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            <FlowPane hgap="5" vgap="5" alignment="CENTER" styleClass="tile-drops-pane" GridPane.rowIndex="2" GridPane.columnIndex="1" />
         </children>
     </GridPane>
 </Pane>

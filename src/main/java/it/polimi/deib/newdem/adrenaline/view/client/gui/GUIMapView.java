@@ -4,13 +4,16 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
+import it.polimi.deib.newdem.adrenaline.model.map.PlayerTilePair;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
 import it.polimi.deib.newdem.adrenaline.view.MapViewEventListener;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,42 +22,31 @@ public class GUIMapView implements MapView {
 
     private GUIGameWindow window;
 
-    private List<MapViewEventListener> listeners;
-
     private HashMap<TilePosition, AmmoColor> spawnPointLocs;
 
     public GUIMapView(GUIGameWindow window) {
         this.window = window;
 
-        this.listeners = new ArrayList<>();
         this.spawnPointLocs = new HashMap<>();
-
-        Platform.runLater(() -> {
-            // GUI events subscribing
-        });
     }
 
-
-    @Override
-    public void addEventListener(MapViewEventListener listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void removeEventListener(MapViewEventListener listener) {
-        listeners.remove(listener);
-    }
 
     @Override
     public void updateView(MapData data) {
         Platform.runLater(() -> {
+            String relPath = "gui/assets/tables/"+ data.getMapID() +".png";
+
+            String mapImagePath = getClass().getClassLoader().getResource(relPath).toExternalForm();
+
             window.getScene().lookup(".map-pane")
-                    .setStyle("-fx-background-image: url(\"assets/tables/"+ data.getMapID() +".png\");");
+                    .setStyle("-fx-background-image: url('"+ mapImagePath +"');");
+
+
 
             Pane mapGrid = (Pane) window.getScene().lookup("#mapGrid");
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 3; j++) {
-                    mapGrid.getChildren().add(GUIGameWindowHelper.createTilePane(new TilePosition(i, j)));
+            for (int i = 2; i >= 0; i--) {
+                for (int j = 0; j < 4; j++) {
+                    mapGrid.getChildren().add(GUIGameWindowHelper.createTilePane(new TilePosition(j, i)));
                 }
             }
 
@@ -68,6 +60,28 @@ public class GUIMapView implements MapView {
             spawnPointLocs.put(data.getRedSpawnPoint(), AmmoColor.RED);
             spawnPointLocs.put(data.getBlueSpawnPoint(), AmmoColor.BLUE);
             spawnPointLocs.put(data.getYellowSpawnPoint(), AmmoColor.YELLOW);
+
+            for (Integer wCard : data.getRedWeaponSet()) {
+                Pane spawnPointCards = (Pane) window.getScene().lookup("#redSpawnPointCards");
+                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+            }
+
+            for (Integer wCard : data.getBlueWeaponSet()) {
+                Pane spawnPointCards = (Pane) window.getScene().lookup("#blueSpawnPointCards");
+                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+            }
+
+            for (Integer wCard : data.getYellowWeaponSet()) {
+                Pane spawnPointCards = (Pane) window.getScene().lookup("#yellowSpawnPointCards");
+                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+            }
+
+            for (PlayerTilePair pair : data.getPlayerLocations()) {
+                Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), pair.getPlayer());
+                if (playerPin != null) ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
+
+                GUIGameWindowHelper.addPlayerToTilePane(window.getScene(), pair.getPlayer(), pair.getTile());
+            }
         });
     }
 

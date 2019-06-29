@@ -62,11 +62,10 @@ public class GameClientManager {
         for (GameData.UserColorPair player : gameData.getPlayers())
             playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
 
-        connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
-
         killTrackView.restoreView(waitForEvent(KillTrackDataEvent.class).getData());
-
         mapView.updateView(waitForEvent(MapDataEvent.class).getData());
+
+        connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
     }
 
     public void linkViews() {

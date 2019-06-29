@@ -143,73 +143,7 @@
                            </GridPane>
                        </children>
                    </GridPane>
-                  <FlowPane id="mapGrid" hgap="10.0" vgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                      <children>
-                          <Pane id="tileSlot0_0" styleClass="tile-slot">
-                              <GridPane>
-                                  <rowConstraints>
-                                      <RowConstraints prefHeight="20" />
-                                      <RowConstraints prefHeight="65" />
-                                      <RowConstraints prefHeight="65" />
-                                      <RowConstraints prefHeight="20" />
-                                  </rowConstraints>
-                                  <columnConstraints>
-                                      <ColumnConstraints prefWidth="20" />
-                                      <ColumnConstraints prefWidth="130" />
-                                      <ColumnConstraints prefWidth="20" />
-                                  </columnConstraints>
-                                  <children>
-                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-players-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                          <Pane styleClass="player-pin,gray" />
-                                          <Pane styleClass="player-pin,green" />
-                                      </FlowPane>
-                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-drops-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                          <Pane styleClass="drop-icon,red-ammo" />
-                                          <Pane styleClass="drop-icon,red-ammo" />
-                                          <Pane styleClass="drop-icon,yellow-ammo" />
-                                      </FlowPane>
-                                  </children>
-                              </GridPane>
-                          </Pane>
-                          <Pane id="tileSlot1_0" styleClass="tile-slot">
-                              <GridPane>
-                                  <rowConstraints>
-                                      <RowConstraints prefHeight="20" />
-                                      <RowConstraints prefHeight="65" />
-                                      <RowConstraints prefHeight="65" />
-                                      <RowConstraints prefHeight="20" />
-                                  </rowConstraints>
-                                  <columnConstraints>
-                                      <ColumnConstraints prefWidth="20" />
-                                      <ColumnConstraints prefWidth="130" />
-                                      <ColumnConstraints prefWidth="20" />
-                                  </columnConstraints>
-                                  <children>
-                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-players-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                          <Pane styleClass="player-pin,yellow" />
-                                          <Pane styleClass="player-pin,cyan,dead" />
-                                          <Pane styleClass="player-pin,magenta,selectable" />
-                                      </FlowPane>
-                                      <FlowPane alignment="CENTER" hgap="5" styleClass="tile-drops-pane" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                          <Pane styleClass="drop-icon,blue-ammo" />
-                                          <Pane styleClass="drop-icon,blue-ammo" />
-                                          <Pane styleClass="drop-icon,powerup" />
-                                      </FlowPane>
-                                  </children>
-                              </GridPane>
-                          </Pane>
-                          <Pane id="tileSlot2_0" styleClass="tile-slot" />
-                          <Pane id="tileSlot3_0" styleClass="tile-slot" />
-                          <Pane id="tileSlot0_1" styleClass="tile-slot" />
-                          <Pane id="tileSlot1_1" styleClass="tile-slot" />
-                          <Pane id="tileSlot2_1" styleClass="tile-slot" />
-                          <Pane id="tileSlot3_1" styleClass="tile-slot" />
-                          <Pane id="tileSlot0_2" styleClass="tile-slot" />
-                          <Pane id="tileSlot1_2" styleClass="tile-slot" />
-                          <Pane id="tileSlot2_2" styleClass="tile-slot" />
-                          <Pane id="tileSlot3_2" styleClass="tile-slot" />
-                      </children>
-                  </FlowPane>
+                  <FlowPane id="mapGrid" hgap="10.0" vgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                </children>
                 </GridPane>
             </children>
