@@ -14,9 +14,9 @@
     </columnConstraints>
     <children>
         <FlowPane GridPane.rowIndex="1">
-            <Pane styleClass="action-board-button" />
-            <Pane styleClass="action-board-button" />
-            <Pane styleClass="action-board-button" />
+            <Pane styleClass="action-board-button,button-0" />
+            <Pane styleClass="action-board-button,button-1" />
+            <Pane styleClass="action-board-button,button-2" />
         </FlowPane>
     </children>
 </GridPane>

@@ -16,7 +16,10 @@ public class CLIGameView implements GameView {
 
     @Override
     public void setGameData(GameData data) {
-        
+        out.println("Players in game:");
+        for (GameData.UserColorPair pair : data.getPlayers()) {
+            out.println("+ User " + pair.getUsername() + " is player " + CLIHelper.colorToString(pair.getColor()));
+        }
     }
 
     @Override

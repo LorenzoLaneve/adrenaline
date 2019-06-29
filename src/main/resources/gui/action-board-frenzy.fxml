@@ -6,23 +6,23 @@
 
 <GridPane>
     <rowConstraints>
-        <RowConstraints maxHeight="23.0" minHeight="15.0" prefHeight="19.0" />
-        <RowConstraints maxHeight="46.0" minHeight="22.0" prefHeight="27.0" />
-        <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="24.0" />
-        <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="35.0" />
+        <RowConstraints prefHeight="19.0" />
+        <RowConstraints prefHeight="27.0" />
+        <RowConstraints prefHeight="24.0" />
+        <RowConstraints prefHeight="35.0" />
     </rowConstraints>
     <columnConstraints>
         <ColumnConstraints prefWidth="32.0" />
     </columnConstraints>
     <children>
         <FlowPane GridPane.rowIndex="1">
-            <Pane styleClass="action-board-button" />
-            <Pane styleClass="action-board-button" />
-            <Pane styleClass="action-board-button" />
+            <Pane styleClass="action-board-button,button-0" />
+            <Pane styleClass="action-board-button,button-1" />
+            <Pane styleClass="action-board-button,button-2" />
         </FlowPane>
         <FlowPane GridPane.rowIndex="3">
-            <Pane styleClass="action-board-button" />
-            <Pane styleClass="action-board-button" />
+            <Pane styleClass="action-board-button,button-3" />
+            <Pane styleClass="action-board-button,button-4" />
         </FlowPane>
     </children>
 </GridPane>

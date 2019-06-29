@@ -67,7 +67,7 @@ public class CLIPlayerView implements PlayerView {
 
     @Override
     public void setName(String name) {
-        out.println("User "+ name +" is player "+ CLIHelper.colorToString(color));
+        out.println("Player "+ CLIHelper.colorToString(color) +" is now "+ name);
     }
 
     @Override

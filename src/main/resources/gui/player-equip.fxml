@@ -9,9 +9,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.Group?>
+
 <FlowPane styleClass="overlay-dialog,player-equip" vgap="10.0" prefHeight="400.0" prefWidth="600.0" maxHeight="400.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@styles/general.css" />
@@ -27,50 +25,13 @@
                 <ColumnConstraints prefWidth="90.0" />
             </columnConstraints>
             <children>
-                <Label styleClass="overlay-dialog-title" text="Yellow's Equipment" GridPane.columnIndex="0" />
-                <Button text="Done" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" />
+                <Button styleClass="close-button" text="Done" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
 
-        <FlowPane id="weaponCardsViewer" hgap="10.0" styleClass="card-viewer,weapon-cards" alignment="CENTER">
-            <Group>
-                <ImageView rotate="90" fitWidth="102.0" fitHeight="160.0">
-                    <Image url="@assets/cards/weapon_flipped.png" />
-                </ImageView>
-            </Group>
-            <Group>
-                <ImageView fitWidth="102.0" fitHeight="160.0">
-                    <Image url="@assets/cards/weapon_flipped.png" />
-                </ImageView>
-            </Group>
-            <Group>
-                <ImageView rotate="90" fitWidth="102.0" fitHeight="160.0">
-                    <Image url="@assets/cards/weapon_flipped.png" />
-                </ImageView>
-            </Group>
-        </FlowPane>
+        <FlowPane id="weaponCardsViewer" hgap="10.0" styleClass="card-viewer,weapon-cards" alignment="CENTER" />
 
-        <FlowPane id="powerUpsViewer" hgap="10.0" styleClass="card-viewer,powerup-cards" alignment="CENTER">
-            <Group>
-                <ImageView fitWidth="83.0" fitHeight="130.0">
-                    <Image url="@assets/cards/powerup_flipped.png" />
-                </ImageView>
-            </Group>
-            <Group>
-                <ImageView fitWidth="83.0" fitHeight="130.0">
-                    <Image url="@assets/cards/powerup_flipped.png" />
-                </ImageView>
-            </Group>
-            <Group>
-                <ImageView fitWidth="83.0" fitHeight="130.0">
-                    <Image url="@assets/cards/powerup_flipped.png" />
-                </ImageView>
-            </Group>
-            <Group>
-                <ImageView fitWidth="83.0" fitHeight="130.0">
-                    <Image url="@assets/cards/powerup_flipped.png" />
-                </ImageView>
-            </Group>
-        </FlowPane>
+        <FlowPane id="powerUpsViewer" hgap="10.0" styleClass="card-viewer,powerup-cards" alignment="CENTER" />
     </children>
 </FlowPane>

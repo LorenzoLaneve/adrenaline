@@ -1,9 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
+import it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,6 +58,31 @@ public class GUIGameWindow {
     public void show() {
         stage.show();
         Platform.setImplicitExit(true);
+    }
+
+
+    public void showDialog(Dialog dialog) {
+        StackPane overlayPane = (StackPane) scene.lookup("#overlay-pane");
+
+        StackPane overlayBackground = new StackPane();
+        overlayBackground.getStyleClass().add("overlay-pane");
+
+        Node pane = dialog.createDialogPane(this);
+
+        overlayBackground.getChildren().add(pane);
+
+        Node closeButton = pane.lookup(".close-button");
+        if (closeButton != null) {
+            closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                overlayPane.getChildren().remove(overlayBackground);
+            });
+        }
+
+        overlayPane.getChildren().add(overlayBackground);
+    }
+
+    public void closeDialog(Dialog dialog) {
+        dialog.close();
     }
 
 }

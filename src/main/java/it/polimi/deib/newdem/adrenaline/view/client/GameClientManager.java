@@ -39,9 +39,6 @@ public class GameClientManager {
     }
 
 
-
-
-
     public GameClientManager(ViewMaker viewMaker, UserConnection connection) {
         this.viewMaker = viewMaker;
         this.connection = connection;
@@ -59,11 +56,8 @@ public class GameClientManager {
         GameData gameData = waitForEvent(GameDataEvent.class).getData();
         gameView.setGameData(gameData);
 
-        for (GameData.UserColorPair player : gameData.getPlayers()) {
-            PlayerView pView = viewMaker.makePlayerView(player.getColor());
-            pView.setName(player.getUsername());
-            playerViews.put(player.getColor(), pView);
-        }
+        for (GameData.UserColorPair player : gameData.getPlayers())
+            playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
 
         connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
 
