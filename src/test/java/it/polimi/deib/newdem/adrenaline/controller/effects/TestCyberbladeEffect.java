@@ -251,7 +251,7 @@ public class TestCyberbladeEffect {
 
         }
 
-        assertEquals(0,player1.getInventory().getYellow());
+        assertEquals(2,player1.getInventory().getYellow());
         assertEquals(2,player2.getDamageFromPlayer(player1));
         assertEquals(2,player3.getDamageFromPlayer(player1));
         assertEquals(map.getTile(new TilePosition(1,0)), player1.getTile());
@@ -271,7 +271,7 @@ public class TestCyberbladeEffect {
             fail();
         }
 
-        assertEquals(0,player1.getInventory().getBlue());
+        assertEquals(3,player1.getInventory().getBlue());
         assertEquals(2,player2.getDamageFromPlayer(player1));
         assertEquals(0,player3.getDamageFromPlayer(player1));
 
