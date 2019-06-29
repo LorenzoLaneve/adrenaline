@@ -169,7 +169,12 @@ public class GUIPlayerView implements PlayerView {
             if (cardID < 0) {
                 powerUpsPane.getChildren().remove(powerUpsPane.lookup(".equipPowerUpHidden"));
             } else {
-                powerUpsPane.getChildren().remove(powerUpsPane.lookup(".equipPowerUp"+ cardID));
+                Node toRemove = powerUpsPane.lookup(".equipPowerUp"+ cardID);
+                if (toRemove == null) {
+                    toRemove = powerUpsPane.lookup(".equipPowerUpHidden");
+                }
+
+                powerUpsPane.getChildren().remove(toRemove);
             }
         });
     }

@@ -1,31 +1,57 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceiptData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface TurnView {
 
-    PlayerColor askForPlayer(MetaPlayer metaPlayer, List<PlayerColor> allowedPlayers);
+    class ValOrUndo<T> implements Serializable {
 
-    TilePosition askForTile(List<TilePosition> legalTiles);
+        private T value;
+        private boolean undo;
 
-    int askForChoice(List<Integer> allowedChoices);
+        public ValOrUndo() {
+            this.undo = true;
+        }
+
+        public ValOrUndo(T value) {
+            this.value = value;
+            this.undo = false;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public boolean shouldUndo() {
+            return undo;
+        }
+
+    }
 
 
-    /*
-    Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector);
+    void startTurn(PlayerColor actor);
 
-    Tile actionDidRequestTile(TileSelector selector);
+    void endTurn(PlayerColor actor);
 
-    int actionDidRequestChoice(List<Effect> choices);
+    ValOrUndo<ActionType> chooseAction(List<ActionType> availableActions);
 
-    int actionDidRequestAdditionalDamage();
+    ValOrUndo<Integer> choosePowerUpCard(List<Integer> cardIDs);
 
-    int actionDidRequestRevengeMark(Player attackedPlayer);
+    ValOrUndo<PlayerColor> choosePlayer(MetaPlayer metaPlayer, List<PlayerColor> legalPlayers, boolean forceChoice);
 
-    void actionDidEmitGameChange(GameChange gameChange);
-    */
+    ValOrUndo<TilePosition> chooseTile(List<TilePosition> legalTiles, boolean forceChoice);
+
+    ValOrUndo<Integer> chooseCardFragment(List<Integer> fragments, boolean forceChoice);
+
+    ValOrUndo<PaymentReceiptData> choosePayment(PaymentInvoice invoice, int fragmentToPay);
+
+
 }

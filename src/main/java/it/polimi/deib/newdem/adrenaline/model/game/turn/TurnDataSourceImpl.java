@@ -14,7 +14,6 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TurnDataSourceImpl implements TurnDataSource {
 
@@ -32,15 +31,7 @@ public class TurnDataSourceImpl implements TurnDataSource {
 
     @Override
     public PowerUpCard chooseCard(List<PowerUpCard> cards) throws UndoException {
-        List<Integer> IDs = cards.stream().map(Card::getCardID).collect(Collectors.toList());
-        do {
-            int selectedId = listener.choosePowerUpCard(IDs);
-            for(PowerUpCard card : cards) {
-                if(card.getCardID() == selectedId) {
-                    return card;
-                }
-            }
-        } while (true);
+        return listener.actionDidRequestPowerUpCard(cards);
     }
 
     @Override
@@ -53,11 +44,11 @@ public class TurnDataSourceImpl implements TurnDataSource {
             }
         }
 
-        return listener.actionDidRequestPlayer(selectables);
+        return listener.actionDidRequestPlayer(metaPlayer, selectables);
     }
 
     @Override
-    public Tile actionDidRequestTile(TileSelector selector) throws UndoException{
+    public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
         List<Tile> selectables = new ArrayList<>();
         Map m = game.getMap();
 
@@ -72,12 +63,13 @@ public class TurnDataSourceImpl implements TurnDataSource {
 
     @Override
     public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
-        return listener.actionDidRequestChoice(choices);
+        return listener.actionDidRequestCardFragment(choices);
     }
 
     @Override
     public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         PaymentReceiptData receiptData = listener.actionDidRequestPayment(invoice, choice);
+        if (receiptData == null) return null;
         return receiptData.makeRich(game.getPowerUpDeck());
     }
 

@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.model.items.Card;
 import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
