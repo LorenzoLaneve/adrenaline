@@ -51,6 +51,7 @@ public class PlayerDataTest {
         game.init();
 
         player = game.getPlayerFromColor(PlayerColor.MAGENTA);
+        game.getMap().movePlayer(player, game.getMap().getTile(new TilePosition(0,0)));
         PlayerInventory inventory = player.getInventory();
         inventory.addAmmo(AmmoColor.RED, 1);
         inventory.addAmmo(AmmoColor.BLUE, 1);
@@ -84,7 +85,7 @@ public class PlayerDataTest {
 
     @Test
     public void testGetAmmos() throws Exception {
-        Integer[] arr = {1,1,1};
+        Integer[] arr = {3,3,3};
         assertArrayEquals(playerData.getAmmos().values().toArray(), arr);
     }
 

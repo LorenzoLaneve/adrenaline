@@ -69,22 +69,23 @@ public class PlayerInventoryTest {
 
     @Test
     public void testGetRed() {
-        assertEquals(0,inv.getRed());
+        assertEquals(3,inv.getRed());
     }
 
     @Test
     public void testGetBlue() {
-        assertEquals(0,inv.getBlue());
+        assertEquals(3,inv.getBlue());
     }
 
     @Test
     public void testGetYellow() {
-        assertEquals(0,inv.getYellow());
+        assertEquals(3,inv.getYellow());
     }
 
     @Test
     public void testAddAmmo() {
-        assertEquals(0, inv.getRed());
+        assertEquals(3, inv.getRed());
+        inv.removeAmmo(RED, 3);
         inv.addAmmo(RED, 2);
         assertEquals(2, inv.getRed());
     }
