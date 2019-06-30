@@ -13,8 +13,6 @@ public class MoveAtom extends AtomBase {
     private int minDist;
     private int maxDist;
 
-    private GameChange gc;
-
     public MoveAtom(AtomsContainer parent, int minDist, int maxDist) {
         super(parent);
         this.minDist = minDist;
@@ -33,7 +31,7 @@ public class MoveAtom extends AtomBase {
                 // force user selection
             }
         }while (null == target);
-        gc = new MovementGameChange(parent.getActor(), target);
+        GameChange gc = new MovementGameChange(parent.getActor(), target);
         gc.update(parent.getGame());
     }
 }

@@ -9,6 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,14 @@ public class ActionContainer implements Action, AtomsContainer {
 
     @Override
     public void start() throws UndoException {
-        // TODO implement?
+        for(AtomicAction atom : atomicActions) {
+            try {
+                atom.execute();
+            }
+            catch (ConnectionException e) {
+                // do what now
+            }
+        }
     }
 
     @Override
