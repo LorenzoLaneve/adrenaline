@@ -1,18 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-public class ReloadAction extends ActionBaseImpl {
+public class ReloadAction extends ActionBasePlain {
 
-    public ReloadAction(Player actor) {
-        super(actor);
+    public ReloadAction(Player actor, ActionDataSource actionDataSource) {
+        super(actor, actionDataSource, actor.getGame());
         // TODO implement
     }
 
-    @Override
-    public Effect getEffect() {
-        //TODO implement
-        return null;
-    }
 }

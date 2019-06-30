@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +12,7 @@ import static java.lang.Math.min;
 public class LegacyDamageBoardAdapter implements DamageBoard {
 
     private DamageBoard innerDmgb;
+    private DamageBoardListener listener;
 
     public LegacyDamageBoardAdapter(DamageBoard innerDmgb) {
         this.innerDmgb = innerDmgb;
@@ -117,5 +117,21 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     @Override
     public Player popDamage() throws DamageTrackEmptyException {
         return innerDmgb.popDamage();
+    }
+
+    @Override
+    public boolean isFrenzy() {
+        return innerDmgb.isFrenzy();
+    }
+
+    @Override
+    public void setListener(DamageBoardListener listener) {
+        innerDmgb.setListener(listener);
+        this.listener = listener;
+    }
+
+    @Override
+    public DamageBoardListener getListener() {
+        return innerDmgb.getListener();
     }
 }

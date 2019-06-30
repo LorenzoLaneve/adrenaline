@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public class WeaponCardImpl implements WeaponCard {
 
@@ -34,8 +35,8 @@ public class WeaponCardImpl implements WeaponCard {
     }
 
     @Override
-    public Weapon makeWeapon() {
-        return new WeaponImpl(this);
+    public Weapon makeWeapon(Player player) {
+        return new WeaponImpl(this, player);
     }
 
     @Override

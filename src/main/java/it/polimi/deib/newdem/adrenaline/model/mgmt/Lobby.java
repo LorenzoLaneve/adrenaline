@@ -37,7 +37,7 @@ public interface Lobby {
     void abortTimer();
 
     /**
-     * Returns a list of the users that are in the lobby at the moment of the call.
+     * Returns a list of the users that are in the lobby at the moment of the discharge.
      * Please note that no assumption will be made on the order.
      */
     List<User> getUsers();

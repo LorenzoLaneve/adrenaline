@@ -22,4 +22,14 @@ public interface DamageBoardListener {
      */
     void boardDidPopDamage();
 
+    /**
+     * Notifies that the damage board has switched to frenzy mode.
+     */
+    void boardDidSwitchToFrenzy();
+
+    /**
+     * Notifies that a new damage board was added
+     */
+    void boardDidClear();
+
 }

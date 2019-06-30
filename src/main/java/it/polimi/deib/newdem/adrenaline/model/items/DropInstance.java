@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class DropInstance implements Serializable {
+public class DropInstance implements Serializable, Card {
 
     private final AmmoSet ammoSet;
     private final boolean hasPowerUp;
@@ -79,5 +79,17 @@ public class DropInstance implements Serializable {
      */
     public DropInstance copyDrop(){
         return new DropInstance(this.ammoSet, this.hasPowerUp());
+    }
+
+    /**
+     * Returns this drop's unique id.
+     * @return drop id
+     */
+    @Override
+    public int getCardID() {
+        return  ammoSet.getBlueAmmos() +
+                10 * ammoSet.getRedAmmos() +
+                100 * ammoSet.getYellowAmmos() +
+                1000 * (hasPowerUp ? 1 : 0);
     }
 }

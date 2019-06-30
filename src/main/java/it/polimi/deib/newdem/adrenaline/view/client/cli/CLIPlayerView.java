@@ -1,9 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 public class CLIPlayerView implements PlayerView {
 
@@ -18,13 +21,53 @@ public class CLIPlayerView implements PlayerView {
 
 
     @Override
-    public void setName(String name) {
-        out.println("User "+ name +" is player "+ CLIHelper.colorToString(color));
+    public void setPlayerData(PlayerData data) {
+        Map<AmmoColor, Integer> ammos = data.getAmmos();
+        out.print("Player "+ CLIHelper.colorToString(color) +" has ");
+        out.print(ammos.get(AmmoColor.RED) +" red ammo(s), ");
+        out.print(ammos.get(AmmoColor.BLUE) +" blue ammo(s), and ");
+        out.println(ammos.get(AmmoColor.YELLOW) +" yellow ammo(s).");
+
+        out.println("Player "+ CLIHelper.colorToString(color) +" has the following powerups:");
+        for (Integer powerUp : data.getPowerUpCards()) {
+            out.println(powerUp +" - "+ CLIHelper.getPowerUpName(powerUp));
+        }
+
+        out.println("Player "+ CLIHelper.colorToString(color) +" has the following weapons:");
+        for (Integer powerUp : data.getReadyWeaponCards()) {
+            out.println("+ "+ powerUp +" - "+ CLIHelper.getWeaponName(powerUp) + " (loaded)");
+        }
+        for (Integer powerUp : data.getUnloadedWeaponCards()) {
+            out.println("+ "+ powerUp +" - "+ CLIHelper.getWeaponName(powerUp) + " (unloaded)");
+        }
+
+
+        out.println("Player "+ CLIHelper.colorToString(color) +"'s action board is "+ (!data.isActionBoardFrenzy() ? "NOT " : "") +"in frenzy mode.");
+        out.println("Player "+ CLIHelper.colorToString(color) +"'s damage board is "+ (!data.isDamageBoardFrenzy() ? "NOT " : "") +"in frenzy mode.");
+
+        out.println("Player "+ CLIHelper.colorToString(color) +" has the following damages:");
+        for (PlayerColor damager : data.getDamages()) {
+            out.print(CLIHelper.colorToString(damager).charAt(0) +" ");
+        }
+        out.println();
+
+        out.println("Player "+ CLIHelper.colorToString(color) +" has the following marks:");
+        for (Map.Entry<PlayerColor, Integer> marks : data.getMarks().entrySet()) {
+            out.println("+ "+ marks.getValue() +" from "+ CLIHelper.colorToString(marks.getKey()));
+        }
+        out.println();
+
+        if (data.getPosition() != null) {
+            out.println("Player " + CLIHelper.colorToString(color) + " is at location " + CLIHelper.tilePositionToString(data.getPosition()));
+        } else {
+            out.println("Player " + CLIHelper.colorToString(color) + " is not in map.");
+        }
+        out.println("Player "+ CLIHelper.colorToString(color) +"'s current score is "+ data.getScore());
     }
 
     @Override
-    public void takeControl() {
-        out.println("It's player "+ CLIHelper.colorToString(color) +"'s turn.");
+    public void setName(String name) {
+        out.println("Player "+ CLIHelper.colorToString(color) +" is now "+ name);
     }
 
     @Override

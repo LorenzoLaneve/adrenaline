@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.server;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.controller.InvalidStateException;
 import it.polimi.deib.newdem.adrenaline.controller.ServerInstance;
+import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
+import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
+import it.polimi.deib.newdem.adrenaline.model.items.InvalidJSONException;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -32,6 +36,16 @@ public class ServerMain {
         }
         Logger.getGlobal().info("Config file successfully loaded from "+ configFile.getAbsolutePath());
 
+        // loading weapon deck from file
+        try {
+            WeaponDeck.loadCardsFromJson(GameImpl.WEAPON_DECK_PATH);
+        }
+        catch (InvalidJSONException e) {
+            throw new IllegalStateException("Could not load weapon deck");
+        }
+        catch (DeckAlreadyLoadedException e) {
+            // do nothing
+        }
 
         ServerInstance instance = new ServerInstance(Logger.getGlobal(), serverConf);
         instance.init();

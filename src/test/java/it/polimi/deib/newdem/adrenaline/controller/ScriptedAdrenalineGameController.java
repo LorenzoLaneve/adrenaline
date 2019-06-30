@@ -1,10 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
-import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.turn.ScriptedDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 import java.util.HashMap;

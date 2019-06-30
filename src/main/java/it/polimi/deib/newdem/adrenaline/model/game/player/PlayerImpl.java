@@ -2,20 +2,18 @@ package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
-import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.Game;
-import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
+import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 
 public class PlayerImpl implements Player {
 
@@ -209,11 +207,24 @@ public class PlayerImpl implements Player {
 
     /**
      * Bind a {@code DamageBoard} to this player
+     * Note that if a previous damage board was set, its listener will be passed to the new damage board.
      *
      * @param damageBoard the board to register.
      */
     @Override
     public void registerDamageBoard(DamageBoard damageBoard) {
+        DamageBoardListener damageBoardListener = this.damageBoard.getListener();
+
+        if (damageBoardListener != null) {
+            damageBoardListener.boardDidClear();
+            this.damageBoard.setListener(null);
+            damageBoard.setListener(damageBoardListener);
+
+            if (damageBoard.isFrenzy()) {
+                damageBoardListener.boardDidSwitchToFrenzy();
+            }
+        }
+
         this.damageBoard = damageBoard;
     }
 
@@ -270,6 +281,9 @@ public class PlayerImpl implements Player {
     @Override
     public void setListener(PlayerListener listener) {
         this.listener = listener;
+        if (listener != null) {
+            listener.playerDidInit(generatePlayerData());
+        }
     }
 
     @Override
@@ -285,7 +299,9 @@ public class PlayerImpl implements Player {
     @Override
     public void drawCard() {
         try {
-            getInventory().addPowerUp(game.getPowerUpDeck().draw());
+            PowerUpCard card = game.getPowerUpDeck().draw();
+            getInventory().addPowerUp(card);
+            listener.playerDidReceivePowerUpCard(this,card);
         }
         catch (NoDrawableCardException | OutOfSlotsException e) {
             // this should never happen
@@ -296,6 +312,11 @@ public class PlayerImpl implements Player {
     @Override
     public DamageBoard getDamageBoard() {
         return damageBoard;
+    }
+
+    @Override
+    public ActionBoard getActionBoard() {
+        return actionBoard;
     }
 
     @Override
@@ -318,5 +339,15 @@ public class PlayerImpl implements Player {
     @Override
     public void addSkull() {
         deaths++;
+    }
+
+    @Override
+    public boolean isActionBoardFrenzy() {
+        return actionBoard.isFrenzy();
+    }
+
+    @Override
+    public PlayerData generatePlayerData() {
+        return new PlayerData(this);
     }
 }

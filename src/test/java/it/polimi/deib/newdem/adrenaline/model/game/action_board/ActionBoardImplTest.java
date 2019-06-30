@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType.*;
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 import static org.junit.Assert.*;
 
 public class ActionBoardImplTest {
@@ -25,7 +25,8 @@ public class ActionBoardImplTest {
     @Test
     public void testSetListener() {
         VirtualGameView vgv = new VirtualGameView();
-        cab.setListener(new VirtualActionBoardView(vgv, (new MockPlayer()).getColor()));
+        cab.setListener(new VirtualActionBoardView(new MockPlayer(), vgv));
+
     }
 
     @Test
@@ -52,7 +53,7 @@ public class ActionBoardImplTest {
         VirtualGameView vgv = new VirtualGameView();
         cab.goFrenzy(false);
         cab = new ActionBoardImpl();
-        cab.setListener(new VirtualActionBoardView(vgv, (new MockPlayer()).getColor()));
+        cab.setListener(new VirtualActionBoardView(new MockPlayer(), vgv));
         cab.goFrenzy(true);
     }
 

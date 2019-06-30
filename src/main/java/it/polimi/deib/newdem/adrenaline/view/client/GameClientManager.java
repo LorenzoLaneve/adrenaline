@@ -2,10 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.map.MapData;
-import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.PlayerView;
+import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
@@ -21,10 +18,23 @@ public class GameClientManager {
     private UserConnection connection;
 
     private GameView gameView;
-
     private MapView mapView;
+    private KillTrackView killTrackView;
 
     private EnumMap<PlayerColor, PlayerView> playerViews;
+    private EnumMap<PlayerColor, ActionBoardView> actionBoardViews;
+    private EnumMap<PlayerColor, DamageBoardView> damageBoardViews;
+
+
+    private <T extends UserEvent> T waitForEvent(Class<T> eventClass) {
+        UserEventLocker<T> eventLocker = new UserEventLocker<>();
+        try {
+            return eventLocker.waitOnEvent(eventClass, connection);
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+            throw new ClosedException("Close requested.");
+        }
+    }
 
 
     public GameClientManager(ViewMaker viewMaker, UserConnection connection) {
@@ -36,39 +46,39 @@ public class GameClientManager {
         return playerViews.get(color);
     }
 
+    private ActionBoardView getActionView(PlayerColor color) {
+        return actionBoardViews.get(color);
+    }
+
+    private DamageBoardView getDamageBoard(PlayerColor color) {
+        return damageBoardViews.get(color);
+    }
+
     public void loadData() {
         gameView = viewMaker.makeGameView();
         mapView = viewMaker.makeMapView();
+        killTrackView = viewMaker.makeKillTrackView();
+
         playerViews = new EnumMap<>(PlayerColor.class);
 
-        UserEventLocker<GameDataEvent> gameDataLocker = new UserEventLocker<>();
-        GameData gameData;
-        try {
-            gameData = gameDataLocker.waitOnEvent(GameDataEvent.class, connection).getData();
-        } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
-            throw new ClosedException("Close requested.");
-        }
+        GameData gameData = waitForEvent(GameDataEvent.class).getData();
         gameView.setGameData(gameData);
 
         for (GameData.UserColorPair player : gameData.getPlayers()) {
-            PlayerView pView = viewMaker.makePlayerView(player.getColor());
-            pView.setName(player.getUsername());
-            playerViews.put(player.getColor(), pView);
+            playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
+            actionBoardViews.put(player.getColor(), viewMaker.makeActionBoardView(player.getColor()));
+            damageBoardViews.put(player.getColor(), viewMaker.makeDamageBoardView(player.getColor()));
         }
 
-        UserEventLocker<MapDataEvent> mapDataLocker = new UserEventLocker<>();
-        MapData mapData;
-        try {
-            mapData = mapDataLocker.waitOnEvent(MapDataEvent.class, connection).getData();
-        } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
-            throw new ClosedException("Close requested.");
-        }
-        mapView.updateView(mapData);
+        killTrackView.restoreView(waitForEvent(KillTrackDataEvent.class).getData());
+        mapView.updateView(waitForEvent(MapDataEvent.class).getData());
+
+        connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
     }
 
     public void linkViews() {
+        // FIXME ViewLinker class that links views to connection events.
+
         connection.subscribeEvent(PlayerDisconnectEvent.class, (conn, event) ->
                 gameView.disablePlayer(event.getPlayerColor()));
         connection.subscribeEvent(PlayerReconnectEvent.class, (conn, event) ->
@@ -106,14 +116,34 @@ public class GameClientManager {
         connection.subscribeEvent(PlayerDiscardAmmoEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayer()).removeAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
 
-        connection.subscribeEvent(TurnStartEvent.class, (conn, e) -> setupTurn());
+        connection.subscribeEvent(ActionBoardFlipEvent.class, (conn, e) ->
+                getActionView(e.getColor()).flipActionBoard());
+
+        connection.subscribeEvent(PlayerDamageEvent.class, (conn, e) ->
+                getDamageBoard(e.getDamagedPlayer()).registerDamage(e.getDamageAmount(), e.getMarkAmount(), e.getAttacker()));
+        connection.subscribeEvent(PlayerConvertMarksEvent.class, (conn, e) ->
+                getDamageBoard(e.getDamagedPlayer()).convertMarks(e.getDealer()));
+        connection.subscribeEvent(PlayerPopDamageEvent.class, (conn, e) ->
+                getDamageBoard(e.getColor()).popDamage());
+        connection.subscribeEvent(DamageBoardFlipEvent.class, (conn, e) ->
+                getDamageBoard(e.getColor()).goFrenzy());
+        connection.subscribeEvent(DamageBoardClearEvent.class, (conn, e) ->
+                getDamageBoard(e.getPlayerColor()).clearBoard());
+
+        connection.subscribeEvent(KillTrackAddKillEvent.class, (conn, e) ->
+                killTrackView.registerKill(e.getColor(), e.getAmount()));
+        connection.subscribeEvent(KillTrackUndoKillEvent.class, (conn, e) ->
+                killTrackView.undoLastKill());
+
+        connection.subscribeEvent(TurnStartEvent.class, (conn, e) -> handleTurn(e.getTurnActor()));
     }
 
 
-    private void setupTurn() {
+    private void handleTurn(PlayerColor actor) {
+        TurnView tView = viewMaker.makeTurnView();
 
-
-
+        TurnClientManager turnManager = new TurnClientManager(connection, tView, actor);
+        turnManager.start();
     }
 
 }

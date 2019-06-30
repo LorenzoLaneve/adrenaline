@@ -2,10 +2,11 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentReceipt {
+public class PaymentReceipt implements Serializable {
 
     private List<PowerUpCard> powerUps;
 

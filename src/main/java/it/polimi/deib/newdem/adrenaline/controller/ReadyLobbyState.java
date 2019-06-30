@@ -15,11 +15,11 @@ public class ReadyLobbyState implements LobbyState {
 
         int usersCount = lobby.getUsers().size();
 
-        if (usersCount >= lobbyController.getMaxPlayers()) {
+        if (usersCount >= lobbyController.getConfig().getMaxPlayers()) {
             return new InGameLobbyState();
         }
 
-        if (lobbyController.getMinPlayers() <= usersCount) {
+        if (lobbyController.getConfig().getMinPlayers() <= usersCount) {
             return new TimerWaitingLobbyState();
         }
 

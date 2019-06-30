@@ -8,9 +8,18 @@ public interface ActionBoard {
 
     List<ActionFactory> getBasicActions();
 
+    /**
+     * @return Numbers of actions to do in a turn.
+     */
     int getIterations();
 
     void setListener(ActionBoardListener listener);
 
+    /**
+     * Changes the state of the board.
+     * @param precedesFirstPlayer player before the first in the frenzy turn.
+     */
     void goFrenzy(boolean precedesFirstPlayer);
+
+    boolean isFrenzy();
 }

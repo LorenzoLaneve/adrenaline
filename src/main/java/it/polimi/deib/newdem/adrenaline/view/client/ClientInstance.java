@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.view.client;
 
-import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;

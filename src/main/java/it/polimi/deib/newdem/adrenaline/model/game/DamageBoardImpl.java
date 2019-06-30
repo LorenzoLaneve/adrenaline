@@ -21,8 +21,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
     // Arrays start at zero
 
-    // TODO add listener member
-    private DamageBoardListener listener; //???????????????????????????????
+    private DamageBoardListener listener;
 
     /** Builds a {@code DamageBoardImplementation} bound to {@code player}.
      *
@@ -66,6 +65,16 @@ public abstract class DamageBoardImpl implements DamageBoard {
         else {
             return damages.get(index);
         }
+    }
+
+    @Override
+    public void setListener(DamageBoardListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public DamageBoardListener getListener() {
+        return listener;
     }
 
     /**
@@ -149,21 +158,33 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamage(Player player) throws DamageTrackFullException {
+        int currMarks = getTotalMarksFromPlayer(player);
+        if(currMarks >0){
+            listener.boardDidConvertMarks(player);
+        }
+        while (currMarks > 0){
+            appendDamage(player);
+            currMarks--;
+        }
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
         damages.add(player);
+        listener.boardDidTakeDamage(1, 0, player);
     }
 
     public Player popDamage() throws DamageTrackEmptyException {
         if(damages.isEmpty()) {
             throw new DamageTrackEmptyException();
         }
+        listener.boardDidPopDamage();
         return damages.remove(damages.size() - 1);
+
     }
 
     @Override
     public void setMarksFromPlayer(int totalMarks, Player player) {
         marks.put(player, totalMarks);
+        listener.boardDidTakeDamage(0,totalMarks, player);
     }
 }

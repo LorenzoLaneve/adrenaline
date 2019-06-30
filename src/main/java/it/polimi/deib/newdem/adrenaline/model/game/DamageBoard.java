@@ -72,4 +72,11 @@ public interface DamageBoard {
      * @throws DamageTrackEmptyException if no damage is present in the damage board.
      */
     Player popDamage() throws DamageTrackEmptyException;
+
+    boolean isFrenzy();
+
+    void setListener(DamageBoardListener listener);
+
+    DamageBoardListener getListener();
+
 }

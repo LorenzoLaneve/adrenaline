@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.utils.FileUtils;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -13,9 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -72,8 +72,11 @@ public class GUIGameWindowHelper {
 
     public static Pane createTilePane(TilePosition tilePosition) {
         try {
-            Pane tilePane = (Pane) FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/lobby.fxml"));
+            Pane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/tile.fxml"));
             tilePane.setId("tileSlot"+ tilePosition.getX() +"_"+ tilePosition.getY());
+
+            Pane playersPane = (Pane) tilePane.lookup(".tile-players-pane");
+            playersPane.getChildren().add(new Label("("+ tilePosition.getX() +", "+ tilePosition.getY() +")"));
 
             return tilePane;
         } catch (IOException e) {
@@ -160,25 +163,13 @@ public class GUIGameWindowHelper {
         return pane;
     }
 
-    public static Pane createPlayerPanel(PlayerColor color) {
-        try {
-            Pane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/player-view.fxml"));
-            tilePane.getStyleClass().add(toStyleClass(color));
-
-            return tilePane;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-
     public static Pane lookupTilePane(Scene scene, TilePosition position) {
         return (Pane) scene.lookup("#tileSlot"+ position.getX() +"_"+ position.getY());
     }
 
 
     public static void addDropsToTilePane(Scene scene, TilePosition tile, DropInstance drop) {
-        Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup("tile-drops-pane");
+        Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup(".tile-drops-pane");
 
         int reds = drop.getAmmos().getRedAmmos();
         while (reds > 0) {
@@ -240,7 +231,6 @@ public class GUIGameWindowHelper {
                     Pane fragmentPane = new Pane();
                     fragmentPane.getStyleClass().add(id);
                     fragmentPane.getStyleClass().add(location);
-                    fragmentPane.getStyleClass().add("selectable"); // TODO remove this, just for test
 
                     Pane destPane;
                     switch (location) {

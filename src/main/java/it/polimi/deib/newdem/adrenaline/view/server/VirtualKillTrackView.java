@@ -1,10 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackAddKillEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackDataEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackUndoKillEvent;
 
 public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
@@ -16,6 +18,11 @@ public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
     }
 
     @Override
+    public void killTrackDidUpdate(KillTrackData data) {
+        restoreView(data);
+    }
+
+    @Override
     public void playerDidKill(Player player, int amount) {
         registerKill(player.getColor(), amount);
     }
@@ -23,6 +30,12 @@ public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
     @Override
     public void killTrackDidUndoLastKill() {
         undoLastKill();
+    }
+
+
+    @Override
+    public void restoreView(KillTrackData data) {
+        vgv.sendEvent(new KillTrackDataEvent(data));
     }
 
     @Override

@@ -6,14 +6,17 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.NullTurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
+import it.polimi.deib.newdem.adrenaline.view.server.*;
 
 import java.util.*;
 import java.util.List;
 
+/**
+ * GameController implementation for Adrenaline games handled by the server.
+ */
 public class AdrenalineGameController implements GameController {
 
     private Game game;
@@ -24,12 +27,19 @@ public class AdrenalineGameController implements GameController {
 
     protected java.util.Map<Player, TurnDataSource> playerDataSourceMap;
 
+    /**
+     * Initializes the GameController with the LobbyController that hosts the game.
+     */
     public AdrenalineGameController(LobbyController lobbyController) {
         this.lobbyController = lobbyController;
     }
 
-    public Player getPlayer(User user){
-        //TODO
+    private Player getPlayer(User user) {
+        for (Player player : game.getPlayers()) {
+            if (user == game.getUserByPlayer(player)) {
+                return player;
+            }
+        }
         return null;
     }
 
@@ -40,13 +50,13 @@ public class AdrenalineGameController implements GameController {
      */
     @Override
     public void setupGame(List<User> users) {
-        //TODO notifica listener
         GameParameters gp = GameParameters.fromConfig(lobbyController.getConfig());
         if(users.isEmpty() || users.size() > lobbyController.getConfig().getMaxPlayers()) {
             throw new IllegalArgumentException();
         }
 
-        String s = this.getClass().getClassLoader().getResource("maps/Map0_0.json").getFile().replace("%20", " ");
+        // TODO random map
+        String s = this.getClass().getClassLoader().getResource("maps/Map0_1.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);
@@ -62,16 +72,24 @@ public class AdrenalineGameController implements GameController {
 
         vgv = new VirtualGameView();
         game.setGameListener(vgv);
-        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
         game.init(); // (VirtualGameView)
+
+        game.getMap().setListener(new VirtualMapView(vgv));
+
+        game.setKillTrackListener(new VirtualKillTrackView(vgv));
+        for(Player player : game.getPlayers()) {
+            player.setListener(new VirtualPlayerView(vgv, player));
+            player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
+            player.getActionBoard().setListener(new VirtualActionBoardView(player, vgv));
+        }
 
         buildTurnDataSources(game);
     }
 
     @Override
     public void recoverGame() {
-
+        // TODO persistency
     }
 
     private List<ColorUserPair> generateColorUserOrder(List<User> users){
@@ -94,7 +112,14 @@ public class AdrenalineGameController implements GameController {
     public void runGame() {
         while (!game.isOver()) {
             Turn turn = game.getNextTurn();
-            turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
+            // turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
+            // turn.bindDataSource(new VirtualTurnView(game.getUserByPlayer(turn.getActivePlayer())));
+            /* turn.bindDataSource(
+                    new TurnDataSourceImpl(
+                    new VirtualTurnView(
+                            game.getUserByPlayer(turn.getActivePlayer()
+                    ))), game);
+                    */
             if(!turn.getActivePlayer().isConnected()) {
                 game.concludeTurn(turn);
                 if(!isAnyPlayerConnected())
@@ -121,12 +146,20 @@ public class AdrenalineGameController implements GameController {
 
     @Override
     public void userDidDisconnect(User user) {
-        // TODO
+        Player disconnectedPlayer = getPlayer(user);
+        if (disconnectedPlayer != null) {
+            vgv.userDidExitGame(user, disconnectedPlayer);
+            // TODO method in model
+        }
     }
 
     @Override
     public void userDidReconnect(User user) {
-        // TODO
+        Player reconnectedPlayer = getPlayer(user);
+        if (reconnectedPlayer != null) {
+            vgv.userDidEnterGame(user, reconnectedPlayer);
+            // TODO method in model + data send to the reconnected client
+        }
     }
 
     protected void buildTurnDataSources(Game game){

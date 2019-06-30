@@ -1,22 +1,22 @@
 package it.polimi.deib.newdem.adrenaline.view.server;
 
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.view.ActionBoardView;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardFlipEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ActionBoardFlipEvent;
 
 public class VirtualActionBoardView implements ActionBoardView, ActionBoardListener {
 
-    // does this need to know who's damageboard its flipping?
-
-
-    public VirtualActionBoardView(VirtualGameView gameView, PlayerColor owner) {
-        this.gameView = gameView;
-        this.owner = owner;
-    }
+    private Player owner;
 
     private VirtualGameView gameView;
-    private PlayerColor owner;
+
+
+    public VirtualActionBoardView(Player owner, VirtualGameView gameView) {
+        this.owner = owner;
+        this.gameView = gameView;
+    }
+
 
     @Override
     public void boardDidFlip() {
@@ -25,6 +25,6 @@ public class VirtualActionBoardView implements ActionBoardView, ActionBoardListe
 
     @Override
     public void flipActionBoard() {
-        gameView.sendEvent(new DamageBoardFlipEvent(owner));
+        gameView.sendEvent(new ActionBoardFlipEvent(owner.getColor()));
     }
 }

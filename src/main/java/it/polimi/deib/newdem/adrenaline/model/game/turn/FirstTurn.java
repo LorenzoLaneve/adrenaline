@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
@@ -28,7 +29,15 @@ public class FirstTurn extends TurnBaseImpl {
         p.drawCard();
 
         // select spawn card
-        PowerUpCard selection = getDataSource().chooseCard(p.getInventory().getPowerUps());
+        PowerUpCard selection = null;
+        do {
+            try {
+                selection = getDataSource().chooseCard(p.getInventory().getPowerUps());
+            }
+            catch (UndoException e) {
+                // do nothing
+            }
+        }while (null == selection);
 
         // get set pos in map
         Tile target = map.getSpawnPointFromColor(selection.getEquivalentAmmo());
@@ -38,11 +47,6 @@ public class FirstTurn extends TurnBaseImpl {
 
     public FirstTurn(Player activePlayer) {
         super(activePlayer);
-        //TODO implement
-        // requires action anc listeners
-    }
-
-    public void start() {
         //TODO implement
         // requires action anc listeners
     }

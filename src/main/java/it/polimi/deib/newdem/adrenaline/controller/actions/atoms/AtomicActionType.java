@@ -1,4 +1,4 @@
-package it.polimi.deib.newdem.adrenaline.controller.actions;
+package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 public enum AtomicActionType {
     /**

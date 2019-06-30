@@ -10,10 +10,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
-import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.MapViewEventListener;
-import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 import java.util.ArrayList;
@@ -23,61 +20,15 @@ public class VirtualMapView implements MapView, MapListener {
 
     private VirtualGameView gameView;
 
-    private final List<MapViewEventListener> eventListeners;
-
-
     public VirtualMapView(VirtualGameView gameView) {
         this.gameView = gameView;
-
-        this.eventListeners = new ArrayList<>();
-
-        for (User user : gameView.getUsers()) {
-            user.subscribeEvent(TileSelectionEvent.class, this::tileSelected);
-            user.subscribeEvent(PlayerSelectionEvent.class, this::playerSelected);
-        }
     }
 
-    private void tileSelected(UserConnection connection, TileSelectionEvent event) {
-        User user = connection.getUser();
-
-        if (event.getX() >= 0 && event.getY() >= 0) {
-            synchronized (eventListeners) {
-                for (MapViewEventListener listener : eventListeners) {
-                    listener.userDidSelectTile(user, new TilePosition(event.getX(), event.getY()));
-                }
-            }
-        }
-    }
-
-    private void playerSelected(UserConnection connection, PlayerSelectionEvent event) {
-        User user = connection.getUser();
-
-        if (event.getSelectedPlayer() != null) {
-            synchronized (eventListeners) {
-                for (MapViewEventListener listener : eventListeners) {
-                    listener.userDidSelectPlayer(user, event.getSelectedPlayer());
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public synchronized void addEventListener(MapViewEventListener listener) {
-        this.eventListeners.add(listener);
-    }
-
-    @Override
-    public synchronized void removeEventListener(MapViewEventListener listener) {
-        this.eventListeners.remove(listener);
-    }
 
     @Override
     public void updateView(MapData data) {
         gameView.sendEvent(new MapDataEvent(data));
     }
-
-
 
     @Override
     public void playerDidResurrect(Player player) {

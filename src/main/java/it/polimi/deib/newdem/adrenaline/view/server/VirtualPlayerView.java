@@ -2,9 +2,9 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
-import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
@@ -23,13 +23,13 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
 
 
     @Override
-    public void setName(String name) {
-        gameView.sendEvent(new PlayerNameEvent(player.getColor(), name));
+    public void setPlayerData(PlayerData data) {
+        gameView.sendEvent(new PlayerDataEvent(data));
     }
 
     @Override
-    public void takeControl() {
-        gameView.sendEvent(new PlayerActiveEvent(player.getColor()));
+    public void setName(String name) {
+        gameView.sendEvent(new PlayerNameEvent(player.getColor(), name));
     }
 
     @Override
@@ -89,6 +89,12 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
         gameView.sendEvent(new WeaponUnloadEvent(cardID));
     }
 
+
+
+    @Override
+    public void playerDidInit(PlayerData data) {
+        setPlayerData(data);
+    }
 
     @Override
     public void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard) {

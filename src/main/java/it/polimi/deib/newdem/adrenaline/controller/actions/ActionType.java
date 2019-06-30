@@ -1,6 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +42,7 @@ public class ActionType implements Serializable {
     }
 
     /**
-     *This takes the order into account
+     * This takes the order into account
      *
      * @param obj
      * @return
@@ -81,6 +84,10 @@ public class ActionType implements Serializable {
         }
 
         return false;
+    }
+
+    public List<AtomicActionType> getAtomicTypes() {
+        return new ArrayList<>(atoms);
     }
 
 }

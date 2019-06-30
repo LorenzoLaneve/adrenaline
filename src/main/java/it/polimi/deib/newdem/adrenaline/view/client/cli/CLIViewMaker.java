@@ -5,7 +5,6 @@ import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.client.ViewMaker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.logging.Logger;
 
@@ -15,9 +14,9 @@ public class CLIViewMaker implements ViewMaker {
 
     private PrintStream out;
 
-    private InputStream in;
+    private CLIReader in;
 
-    public CLIViewMaker(Logger log, PrintStream out, InputStream in) {
+    public CLIViewMaker(Logger log, PrintStream out, CLIReader in) {
         this.log = log;
         this.out = out;
         this.in = in;
@@ -31,7 +30,7 @@ public class CLIViewMaker implements ViewMaker {
 
     @Override
     public UsernameView makeUsernameView() {
-        return new CLIUsernameView(log, out, in);
+        return new CLIUsernameView(out, in);
     }
 
     @Override
@@ -62,6 +61,16 @@ public class CLIViewMaker implements ViewMaker {
     @Override
     public DamageBoardView makeDamageBoardView(PlayerColor playerColor) {
         return new CLIDamageBoardView(playerColor, out);
+    }
+
+    @Override
+    public ActionBoardView makeActionBoardView(PlayerColor color) {
+        return new CLIActionBoardView(color, out);
+    }
+
+    @Override
+    public TurnView makeTurnView() {
+        return new CLITurnView(out, in);
     }
 
 }

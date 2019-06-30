@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
-import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
@@ -51,5 +51,10 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
     @Override
     public boolean shouldAssignFirstBlood() {
         return true;
+    }
+
+    @Override
+    public boolean isFrenzy() {
+        return false;
     }
 }

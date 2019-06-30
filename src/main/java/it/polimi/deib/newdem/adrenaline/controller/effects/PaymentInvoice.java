@@ -1,6 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-public class PaymentInvoice {
+import java.io.Serializable;
+
+public class PaymentInvoice implements Serializable {
 
     int redAmmos;
     int blueAmmos;

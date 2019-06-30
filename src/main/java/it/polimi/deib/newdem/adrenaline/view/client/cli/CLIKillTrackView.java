@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 
@@ -11,6 +12,15 @@ public class CLIKillTrackView implements KillTrackView {
 
     public CLIKillTrackView(PrintStream out) {
         this.out = out;
+    }
+
+    @Override
+    public void restoreView(KillTrackData data) {
+        out.println("These points are on the kill track:");
+
+        for (KillTrackData.KillData cell : data.getKills()) {
+            out.println("+ "+ CLIHelper.colorToString(cell.getKiller()) +" x"+ cell.getAmount());
+        }
     }
 
     @Override

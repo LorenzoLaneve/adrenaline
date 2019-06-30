@@ -1,19 +1,22 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.MockGame;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,7 +59,7 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             return null;
         }
 
@@ -120,7 +123,7 @@ public class TestElectroscytheEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,1,0, powerUpCards);
@@ -165,6 +168,7 @@ public class TestElectroscytheEffect {
 
     @Before
     public void setUp() throws Exception {
+        TestingUtils.loadSingleton();
         map =  Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
@@ -183,11 +187,19 @@ public class TestElectroscytheEffect {
 
         game = new GameImpl(gp);
 
+        VirtualGameView vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+
         game.init();
 
         player1 = game.getPlayerFromColor(PlayerColor.YELLOW);
         player2 = game.getPlayerFromColor(PlayerColor.GREEN);
         player3 = game.getPlayerFromColor(PlayerColor.GRAY);
+
+        player1.getDamageBoard().setListener(new VirtualDamageBoardView(player1, vgv));
+        player2.getDamageBoard().setListener(new VirtualDamageBoardView(player2, vgv));
+        player3.getDamageBoard().setListener(new VirtualDamageBoardView(player3, vgv));
 
         player1.getInventory().addAmmo(AmmoColor.BLUE, 1);
         player1.getInventory().addAmmo(AmmoColor.RED, 1);
@@ -217,7 +229,7 @@ public class TestElectroscytheEffect {
             fail();
         }
 
-        assertEquals(0,player1.getInventory().getBlue());
+        assertEquals(2,player1.getInventory().getBlue());
         assertEquals(2,player2.getDamageFromPlayer(player1));
         assertEquals(2,player3.getDamageFromPlayer(player1));
 

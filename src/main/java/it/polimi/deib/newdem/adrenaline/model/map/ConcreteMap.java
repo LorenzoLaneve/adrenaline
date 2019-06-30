@@ -88,29 +88,8 @@ public class ConcreteMap implements Map {
     @Override
     public void setListener(MapListener listener) {
         this.mapListener = listener;
-        if(mapListener != null){
-
-            /*
-            List<Tile> tileList = new ArrayList<>();
-            List<Tile> spawnPointTileList = new ArrayList<>();
-
-            for(Tile[] tileRow: matrixMap){
-                for (Tile tile : tileRow){
-                    if(tile!= null){
-                        tileList.add(tile);
-                        if(tile.hasSpawnPoint()){
-                            spawnPointTileList.add(tile);
-                        }
-                    }
-                }
-            }*/
-
-            // TODO data creation
-            MapData data = generateMapData();
-
-
-            mapListener.mapDidRestoreData(data);
-
+        if (mapListener != null) {
+            mapListener.mapDidRestoreData(generateMapData());
         }
     }
 
@@ -246,10 +225,10 @@ public class ConcreteMap implements Map {
             redWeaponSet.add(card.getCardID());
         }
         for(WeaponCard card: weaponCardsBLUE){
-            redWeaponSet.add(card.getCardID());
+            blueWeaponSet.add(card.getCardID());
         }
         for(WeaponCard card: weaponCardsYELLOW){
-            redWeaponSet.add(card.getCardID());
+            yellowWeaponSet.add(card.getCardID());
         }
 
         mapData.setWeaponSets(redWeaponSet, blueWeaponSet, yellowWeaponSet);
@@ -283,8 +262,8 @@ public class ConcreteMap implements Map {
 
         TilePosition position = null;
 
-        for (Tile tile:getAllTiles()){
-            if(tile.getPlayers().contains(player)){
+        for (Tile tile : getAllTiles()) {
+            if (tile.getPlayers().contains(player)) {
                 position = tile.getPosition();
             }
         }
@@ -294,5 +273,14 @@ public class ConcreteMap implements Map {
     @Override
     public void sendMapData() {
         mapListener.mapDidRestoreData(generateMapData());
+    }
+
+    @Override
+    public void updatePlayerState(Player player, boolean alive) {
+        if (alive){
+            mapListener.playerDidResurrect(player);
+        }else{
+            mapListener.playerDidDie(player);
+        }
     }
 }

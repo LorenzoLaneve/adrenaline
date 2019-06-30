@@ -30,4 +30,14 @@ public class CLIDamageBoardView implements DamageBoardView {
     public void popDamage() {
         out.println("Player "+ CLIHelper.colorToString(color) +"'s last damage was removed.");
     }
+
+    @Override
+    public void goFrenzy() {
+        out.println("Player "+ CLIHelper.colorToString(color) +"'s damage board switched to frenzy mode.");
+    }
+
+    @Override
+    public void clearBoard() {
+        out.println("Player "+ CLIHelper.colorToString(color) +"'s damage board was cleared.");
+    }
 }

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
@@ -12,6 +13,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
+import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,7 +71,7 @@ public class TestLaserMagnumEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return new PaymentReceipt(1,1,1, powerUpCards);
@@ -140,7 +145,7 @@ public class TestLaserMagnumEffect {
         }
 
         @Override
-        public PaymentReceipt choosePayment(PaymentInvoice price, Integer choice) throws UndoException {
+        public PaymentReceipt choosePayment(PaymentInvoice price, int choice) throws UndoException {
             List<PowerUpCard> powerUpCards = new ArrayList<>();
 
             return null;
@@ -202,8 +207,13 @@ public class TestLaserMagnumEffect {
         gp.setColorUserOrder(listPairs);
 
         gp.setGameMap(map);
+        TestingUtils.loadSingleton();
 
         game = new GameImpl(gp);
+
+        VirtualGameView vgv = new NullVirtualGameView();
+        game.setGameListener(vgv);
+        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
         game.init();
 
@@ -211,6 +221,11 @@ public class TestLaserMagnumEffect {
         player2 = game.getPlayerFromColor(PlayerColor.GREEN);
         player3 = game.getPlayerFromColor(PlayerColor.GRAY);
         player4 = game.getPlayerFromColor(PlayerColor.MAGENTA);
+
+        player1.getDamageBoard().setListener(new VirtualDamageBoardView(player1, vgv));
+        player2.getDamageBoard().setListener(new VirtualDamageBoardView(player2, vgv));
+        player3.getDamageBoard().setListener(new VirtualDamageBoardView(player3, vgv));
+        player4.getDamageBoard().setListener(new VirtualDamageBoardView(player4, vgv));
 
         player1.getInventory().addAmmo(AmmoColor.RED, 1);
         player2.getInventory().addAmmo(AmmoColor.BLUE, 1);

@@ -1,14 +1,14 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+
+/**
+ * Object that create a new game controller. Please note that this interface is agnostic to the specific game controller
+ */
 public interface GameControllerFactory {
 
-    GameController makeGameController(LobbyController lobbyController);
-
     /**
-     * Returns a game manager factory of the appropriate class according to the given configuration.
+     * Creates a new game controller that will be hosted by the given lobby controller.
      */
-    static GameControllerFactory create() {
-        return new AdrenalineGameControllerFactory();
-    }
+    GameController makeGameController(LobbyController lobbyController);
 
 }

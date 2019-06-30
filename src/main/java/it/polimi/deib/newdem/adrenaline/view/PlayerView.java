@@ -1,16 +1,18 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
+
 public interface PlayerView {
+
+    /**
+     * Restores the view to the given data sent by the model.
+     */
+    void setPlayerData(PlayerData data);
 
     /**
      * Notifies the name of the player associated to the view.
      */
     void setName(String name);
-
-    /**
-     * Notifies that the player acquired the control of the game (i.e. it is their turn).
-     */
-    void takeControl();
 
     /**
      * Notifies an update of the score of the player associated to this view.

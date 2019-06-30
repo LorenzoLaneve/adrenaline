@@ -1,5 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
+import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
+import it.polimi.deib.newdem.adrenaline.model.items.InvalidJSONException;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule;
 import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserModule;
@@ -9,6 +13,9 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Server instance object representing the whole server, with its configuration, connected users and lobbies.
+ */
 public class ServerInstance {
 
     private Logger log;
@@ -103,12 +110,12 @@ public class ServerInstance {
     /**
      * Starts the server instance in the current thread.
      * @throws InvalidStateException if the server instance was not initialized before starting.
-     * @implNote To initialize the server instance, please call ServerInstance.init()
+     * @implNote To initialize the server instance, please discharge ServerInstance.init()
      */
     public void start() throws InvalidStateException {
 
         if (!ready || userRegistry == null || lobbyRegistry == null) {
-            throw new InvalidStateException("This server instance was not initialized. Please call init() before starting.");
+            throw new InvalidStateException("This server instance was not initialized. Please discharge init() before starting.");
         }
 
         greeter.start();

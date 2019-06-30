@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+/**
+ * A Timer object calls methods on a given TimerListener object with time criteria.
+ */
 public class Timer {
 
     private TimerListener listener;
@@ -124,7 +127,7 @@ public class Timer {
 
     /**
      * Puts the timer in pause state, freezing the countdown until {@code Timer#resume()} is called.
-     * Calling this method on a Timer in pause state will cause the call to be ignored.
+     * Calling this method on a Timer in pause state will cause the discharge to be ignored.
      */
     public void pause() {
         this.paused = true;
@@ -132,7 +135,7 @@ public class Timer {
 
     /**
      * Resumes a timer that previously switched to a pause state by {@code Timer#pause()}.
-     * Calling this method on an ongoing Timer will cause the call to be ignored.
+     * Calling this method on an ongoing Timer will cause the discharge to be ignored.
      */
     public synchronized void resume() {
         this.paused = false;

@@ -1,0 +1,72 @@
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.net.URL?>
+<FlowPane styleClass="overlay-dialog,payment-dialog" vgap="10.0" prefHeight="300.0" prefWidth="600.0" maxHeight="300.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea">
+    <stylesheets>
+        <URL value="@styles/general.css" />
+        <URL value="@styles/game.css" />
+    </stylesheets>
+    <children>
+        <GridPane>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints prefWidth="490.0" />
+                <ColumnConstraints prefWidth="90.0" />
+            </columnConstraints>
+            <children>
+                <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" />
+                <Button styleClass="close-button" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            </children>
+        </GridPane>
+
+        <GridPane>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints prefWidth="290.0" />
+                <ColumnConstraints prefWidth="290.0" />
+            </columnConstraints>
+            <children>
+                <Label text="Required:" GridPane.columnIndex="0" />
+                <FlowPane alignment="CENTER" hgap="5.0" styleClass="ammo-panel" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER">
+                    <Label id="redInvoice" styleClass="ammo-amt,red" text="0" />
+                    <Label id="blueInvoice"  styleClass="ammo-amt,blue" text="0" />
+                    <Label id="yellowInvoice"  styleClass="ammo-amt,yellow" text="0" />
+                    <Label styleClass="status" />
+                </FlowPane>
+                <Label text="You will pay:" GridPane.columnIndex="1" />
+                <FlowPane alignment="CENTER" hgap="5.0" styleClass="ammo-panel" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                    <Label id="redReceipt" styleClass="ammo-amt,red" text="0" />
+                    <Label id="blueReceipt"  styleClass="ammo-amt,blue" text="0" />
+                    <Label id="yellowReceipt"  styleClass="ammo-amt,yellow" text="0" />
+                    <Label id="powerUpReceipt"  styleClass="ammo-amt,powerup" text="0" />
+                    <Label styleClass="status" />
+                </FlowPane>
+            </children>
+        </GridPane>
+
+
+        <FlowPane id="powerUpsViewer" hgap="10.0" styleClass="card-viewer,powerup-cards" alignment="CENTER" />
+
+        <GridPane>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints prefWidth="490.0" />
+                <ColumnConstraints prefWidth="90.0" />
+            </columnConstraints>
+            <children>
+                <Button styleClass="pay-button" text="Pay" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            </children>
+        </GridPane>
+    </children>
+</FlowPane>

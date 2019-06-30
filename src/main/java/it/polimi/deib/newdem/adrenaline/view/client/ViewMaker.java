@@ -22,4 +22,8 @@ public interface ViewMaker {
 
     DamageBoardView makeDamageBoardView(PlayerColor playerColor);
 
+    ActionBoardView makeActionBoardView(PlayerColor color);
+
+    TurnView makeTurnView();
+
 }

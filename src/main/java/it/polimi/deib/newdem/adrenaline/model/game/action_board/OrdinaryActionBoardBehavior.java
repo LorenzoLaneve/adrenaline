@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game.action_board;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
-import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
 
 import java.util.ArrayList;

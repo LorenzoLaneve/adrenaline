@@ -2,8 +2,11 @@ package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-// package-private
-class Cell {
+import java.io.Serializable;
+
+//package-private
+class Cell implements Serializable {
+
     private final Player killer;
     private final int amount;
 

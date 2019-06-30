@@ -69,4 +69,25 @@ public class GUIDamageBoardView implements DamageBoardView {
         });
     }
 
+    @Override
+    public void goFrenzy() {
+        Platform.runLater(() -> {
+            Pane damageBoardPane = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .damage-board");
+            damageBoardPane.getStyleClass().add("frenzy");
+        });
+    }
+
+    @Override
+    public void clearBoard() {
+        Platform.runLater(() -> {
+            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+
+            Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
+            dmgSigns.getChildren().clear();
+
+            Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
+            markSigns.getChildren().clear();
+        });
+    }
+
 }

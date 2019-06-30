@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 public interface KillTrack {
@@ -15,4 +16,6 @@ public interface KillTrack {
     void setListener(KillTrackListener listener);
 
     int getScoreForPlayer(Player player);
+
+    KillTrackData generateKillTrackData();
 }

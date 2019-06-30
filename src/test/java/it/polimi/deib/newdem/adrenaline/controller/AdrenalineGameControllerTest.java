@@ -2,25 +2,30 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
-import it.polimi.deib.newdem.adrenaline.controller.actions.AtomicActionType;
-import it.polimi.deib.newdem.adrenaline.model.game.MockPowerUpCard;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.ScriptedDataSource;
+import it.polimi.deib.newdem.adrenaline.model.items.Deck;
+import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class AdrenalineGameControllerTest {
 
     AdrenalineGameController agc;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+        try {
+            WeaponDeck.loadCardsFromJson(GameImpl.WEAPON_DECK_PATH);
+        }
+        catch (DeckAlreadyLoadedException e) {
+            // ok, do not abort
+        }
         Config config = Config.getDefaultConfig(); // config
         agc = new AdrenalineGameController(new LobbyControllerImpl(config));
         doSetUpGame();

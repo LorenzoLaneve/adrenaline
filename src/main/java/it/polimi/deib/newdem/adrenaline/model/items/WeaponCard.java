@@ -2,8 +2,9 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-public interface WeaponCard {
+public interface WeaponCard extends Card{
 
     PaymentInvoice getPickupPrice();
 
@@ -11,7 +12,5 @@ public interface WeaponCard {
 
     Effect getEffect();
 
-    Weapon makeWeapon();
-
-    int getCardID();
+    Weapon makeWeapon(Player player);
 }

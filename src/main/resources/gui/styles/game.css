@@ -6,7 +6,6 @@
 
 .map-pane {
     -fx-background-color: rgb(27, 26, 20);
-    -fx-background-image: url("../assets/tables/Map0_0.png");
     -fx-background-repeat: none;
     -fx-background-position: left top;
     -fx-background-size: 1100 833;
@@ -249,7 +248,7 @@
     -fx-padding: 4 0 4 10
 }
 
-.player-slot .player-panel .ammo-panel .ammo-amt {
+.ammo-panel .ammo-amt {
     -fx-pref-width: 30;
 
     -fx-padding: 2 0 2 0;
@@ -261,19 +260,23 @@
     -fx-background-size: 20 17;
 }
 
-.player-slot .player-panel .ammo-panel .ammo-amt.red {
+.ammo-panel .ammo-amt.red {
     -fx-background-image: url("../assets/red_ammo.png");
 }
 
-.player-slot .player-panel .ammo-panel .ammo-amt.blue {
+.ammo-panel .ammo-amt.blue {
     -fx-background-image: url("../assets/blue_ammo.png");
 }
 
-.player-slot .player-panel .ammo-panel .ammo-amt.yellow {
+.ammo-panel .ammo-amt.yellow {
     -fx-background-image: url("../assets/yellow_ammo.png");
 }
 
-.player-slot .player-panel .ammo-panel .ammo-amt.powerup {
+.ammo-panel .ammo-amt.any {
+    -fx-background-image: url("../assets/any_ammo.png");
+}
+
+.ammo-panel .ammo-amt.powerup {
     -fx-background-size: 20 25;
     -fx-background-image: url("../assets/powerup.png");
 }
@@ -488,6 +491,14 @@
     -fx-pref-height: 150;
 }
 
-.card-viewer.weapon-cards .needs-reload {
+.card-viewer.weapon-cards .needs-reload ImageView {
     -fx-rotate: 90;
+}
+
+.card-viewer .selected Pane {
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-background-color: rgba(0, 255, 0, 0.4);
+    -fx-pref-width: 83;
+    -fx-pref-height: 130;
 }
