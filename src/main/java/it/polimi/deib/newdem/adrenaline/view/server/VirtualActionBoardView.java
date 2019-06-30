@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.view.ActionBoardView;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardFlipEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.ActionBoardFlipEvent;
 
 public class VirtualActionBoardView implements ActionBoardView, ActionBoardListener {
 
@@ -25,6 +25,6 @@ public class VirtualActionBoardView implements ActionBoardView, ActionBoardListe
 
     @Override
     public void flipActionBoard() {
-        gameView.sendEvent(new DamageBoardFlipEvent(owner.getColor()));
+        gameView.sendEvent(new ActionBoardFlipEvent(owner.getColor()));
     }
 }

@@ -12,7 +12,8 @@ public class GUIActionBoardView implements ActionBoardView {
 
     private PlayerColor owner;
 
-    public GUIActionBoardView(PlayerColor owner) {
+    public GUIActionBoardView(GUIGameWindow window, PlayerColor owner) {
+        this.window = window;
         this.owner = owner;
     }
 

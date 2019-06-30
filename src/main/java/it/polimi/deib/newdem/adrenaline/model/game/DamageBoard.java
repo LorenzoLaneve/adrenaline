@@ -76,4 +76,7 @@ public interface DamageBoard {
     boolean isFrenzy();
 
     void setListener(DamageBoardListener listener);
+
+    DamageBoardListener getListener();
+
 }

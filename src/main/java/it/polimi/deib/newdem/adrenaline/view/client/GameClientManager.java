@@ -4,10 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
-import it.polimi.deib.newdem.adrenaline.view.GameView;
-import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
-import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.PlayerView;
+import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
@@ -27,6 +24,8 @@ public class GameClientManager {
     private KillTrackView killTrackView;
 
     private EnumMap<PlayerColor, PlayerView> playerViews;
+    private EnumMap<PlayerColor, ActionBoardView> actionBoardViews;
+    private EnumMap<PlayerColor, DamageBoardView> damageBoardViews;
 
 
     private <T extends UserEvent> T waitForEvent(Class<T> eventClass) {
@@ -59,8 +58,11 @@ public class GameClientManager {
         GameData gameData = waitForEvent(GameDataEvent.class).getData();
         gameView.setGameData(gameData);
 
-        for (GameData.UserColorPair player : gameData.getPlayers())
+        for (GameData.UserColorPair player : gameData.getPlayers()) {
             playerViews.put(player.getColor(), viewMaker.makePlayerView(player.getColor()));
+            actionBoardViews.put(player.getColor(), viewMaker.makeActionBoardView(player.getColor()));
+            damageBoardViews.put(player.getColor(), viewMaker.makeDamageBoardView(player.getColor()));
+        }
 
         killTrackView.restoreView(waitForEvent(KillTrackDataEvent.class).getData());
         mapView.updateView(waitForEvent(MapDataEvent.class).getData());
@@ -106,11 +108,14 @@ public class GameClientManager {
         connection.subscribeEvent(PlayerDiscardAmmoEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayer()).removeAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
 
-        connection.subscribeEvent(TurnStartEvent.class, (conn, e) -> setupTurn());
+        connection.subscribeEvent(TurnStartEvent.class, (conn, e) -> handleTurn(e.getTurnActor()));
     }
 
 
-    private void setupTurn() {
+    private void handleTurn(PlayerColor actor) {
+
+
+
 
 
 

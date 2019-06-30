@@ -64,4 +64,9 @@ public class CLIViewMaker implements ViewMaker {
         return new CLIDamageBoardView(playerColor, out);
     }
 
+    @Override
+    public ActionBoardView makeActionBoardView(PlayerColor color) {
+        return new CLIActionBoardView(color, out);
+    }
+
 }

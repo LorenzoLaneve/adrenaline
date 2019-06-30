@@ -4,9 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.DamageBoardView;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerConvertMarksEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDamageEvent;
-import it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerPopDamageEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListener {
 
@@ -35,6 +33,16 @@ public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListe
         popDamage();
     }
 
+    @Override
+    public void boardDidSwitchToFrenzy() {
+        goFrenzy();
+    }
+
+    @Override
+    public void boardDidClear() {
+        clearBoard();
+    }
+
 
     @Override
     public void registerDamage(int damageAmount, int markAmount, PlayerColor dealer) {
@@ -49,6 +57,16 @@ public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListe
     @Override
     public void popDamage() {
         gameView.sendEvent(new PlayerPopDamageEvent(owner.getColor()));
+    }
+
+    @Override
+    public void goFrenzy() {
+        gameView.sendEvent(new DamageBoardFlipEvent(owner.getColor()));
+    }
+
+    @Override
+    public void clearBoard() {
+        gameView.sendEvent(new DamageBoardClearEvent(owner.getColor()));
     }
 
 }

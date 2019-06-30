@@ -21,8 +21,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
     // Arrays start at zero
 
-    // TODO add listener member
-    private DamageBoardListener listener; //???????????????????????????????
+    private DamageBoardListener listener;
 
     /** Builds a {@code DamageBoardImplementation} bound to {@code player}.
      *
@@ -71,6 +70,11 @@ public abstract class DamageBoardImpl implements DamageBoard {
     @Override
     public void setListener(DamageBoardListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public DamageBoardListener getListener() {
+        return listener;
     }
 
     /**

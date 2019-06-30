@@ -64,4 +64,9 @@ public class GUIViewMaker implements ViewMaker {
         return new GUIDamageBoardView(gameWindow, playerColor);
     }
 
+    @Override
+    public ActionBoardView makeActionBoardView(PlayerColor color) {
+        return new GUIActionBoardView(gameWindow, color);
+    }
+
 }

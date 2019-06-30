@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -127,7 +126,12 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
 
     @Override
     public void setListener(DamageBoardListener listener) {
-
+        innerDmgb.setListener(listener);
         this.listener = listener;
+    }
+
+    @Override
+    public DamageBoardListener getListener() {
+        return innerDmgb.getListener();
     }
 }

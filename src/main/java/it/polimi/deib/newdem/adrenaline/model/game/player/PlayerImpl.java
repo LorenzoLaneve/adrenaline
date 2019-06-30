@@ -2,10 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
-import it.polimi.deib.newdem.adrenaline.model.game.DamageBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard;
-import it.polimi.deib.newdem.adrenaline.model.game.Game;
-import it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard;
+import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
@@ -210,11 +207,24 @@ public class PlayerImpl implements Player {
 
     /**
      * Bind a {@code DamageBoard} to this player
+     * Note that if a previous damage board was set, its listener will be passed to the new damage board.
      *
      * @param damageBoard the board to register.
      */
     @Override
     public void registerDamageBoard(DamageBoard damageBoard) {
+        DamageBoardListener damageBoardListener = this.damageBoard.getListener();
+
+        if (damageBoardListener != null) {
+            damageBoardListener.boardDidClear();
+            this.damageBoard.setListener(null);
+            damageBoard.setListener(damageBoardListener);
+
+            if (damageBoard.isFrenzy()) {
+                damageBoardListener.boardDidSwitchToFrenzy();
+            }
+        }
+
         this.damageBoard = damageBoard;
     }
 

@@ -22,4 +22,14 @@ public interface DamageBoardView {
      */
     void popDamage();
 
+    /**
+     * Notifies that the damage board switched to frenzy mode.
+     */
+    void goFrenzy();
+
+    /**
+     * Notifies that the damage board was cleared.
+     */
+    void clearBoard();
+
 }
