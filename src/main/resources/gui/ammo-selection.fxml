@@ -22,7 +22,7 @@
             </columnConstraints>
             <children>
                 <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" />
-                <Button styleClass="close-button" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Button styleClass="no-pay-button" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
 

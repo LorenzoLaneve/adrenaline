@@ -126,23 +126,6 @@ public class GUIPlayerView implements PlayerView {
     }
 
     @Override
-    public void takeControl() {
-        Platform.runLater(() -> {
-            Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
-
-            for (Node child : playerSlots.getChildren()) {
-                Label status = (Label) child.lookup(".status");
-
-                if (child.getStyleClass().contains(GUIGameWindowHelper.toStyleClass(color))) {
-                    status.setText("Their turn");
-                } else if (!child.getStyleClass().contains("offline")) {
-                    status.setText("");
-                }
-            }
-        });
-    }
-
-    @Override
     public void setScore(int score) {
         Platform.runLater(() -> {
             Label scoreLabel = (Label) getPlayerPane().lookup(".score-amt");

@@ -33,11 +33,6 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
-    public void takeControl() {
-        gameView.sendEvent(new PlayerActiveEvent(player.getColor()));
-    }
-
-    @Override
     public void setScore(int score) {
         gameView.sendEvent(new PlayerScoreEvent(player.getColor(), score));
     }

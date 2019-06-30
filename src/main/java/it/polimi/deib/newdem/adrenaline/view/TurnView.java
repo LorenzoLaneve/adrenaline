@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceiptData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.io.Serializable;
@@ -41,6 +42,8 @@ public interface TurnView {
 
     void endTurn(PlayerColor actor);
 
+    ValOrUndo<Integer> chooseWeaponCard(List<Integer> cardIDs);
+
     ValOrUndo<ActionType> chooseAction(List<ActionType> availableActions);
 
     ValOrUndo<Integer> choosePowerUpCard(List<Integer> cardIDs);
@@ -49,9 +52,9 @@ public interface TurnView {
 
     ValOrUndo<TilePosition> chooseTile(List<TilePosition> legalTiles, boolean forceChoice);
 
-    ValOrUndo<Integer> chooseCardFragment(List<Integer> fragments, boolean forceChoice);
+    ValOrUndo<Integer> chooseCardFragment(Integer cardID, List<Integer> fragments, boolean forceChoice);
 
-    ValOrUndo<PaymentReceiptData> choosePayment(PaymentInvoice invoice, int fragmentToPay);
+    ValOrUndo<PaymentReceiptData> choosePayment(PaymentInvoice invoice, AmmoSet playerInv, List<Integer> cardIDs, int fragmentToPay);
 
 
 }

@@ -24,4 +24,6 @@ public interface ViewMaker {
 
     ActionBoardView makeActionBoardView(PlayerColor color);
 
+    TurnView makeTurnView();
+
 }

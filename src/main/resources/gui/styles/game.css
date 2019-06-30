@@ -6,7 +6,6 @@
 
 .map-pane {
     -fx-background-color: rgb(27, 26, 20);
-    -fx-background-image: url("../assets/tables/Map0_0.png");
     -fx-background-repeat: none;
     -fx-background-position: left top;
     -fx-background-size: 1100 833;

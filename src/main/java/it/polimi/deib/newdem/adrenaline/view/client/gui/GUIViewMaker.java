@@ -69,4 +69,9 @@ public class GUIViewMaker implements ViewMaker {
         return new GUIActionBoardView(gameWindow, color);
     }
 
+    @Override
+    public TurnView makeTurnView() {
+        return new GUITurnView(gameWindow);
+    }
+
 }

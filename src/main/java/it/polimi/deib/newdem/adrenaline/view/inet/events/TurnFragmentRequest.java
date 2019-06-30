@@ -7,12 +7,18 @@ import java.util.List;
 
 public class TurnFragmentRequest implements UserEvent {
 
+    private Integer cardID;
     private ArrayList<Integer> fragments;
     private boolean forceChoice;
 
-    public TurnFragmentRequest(List<Integer> fragments, boolean forceChoice) {
+    public TurnFragmentRequest(Integer cardID, List<Integer> fragments, boolean forceChoice) {
+        this.cardID = cardID;
         this.fragments = new ArrayList<>(fragments);
         this.forceChoice = forceChoice;
+    }
+
+    public Integer getCardID() {
+        return cardID;
     }
 
     public List<Integer> getSelectableFragments() {

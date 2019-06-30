@@ -1,12 +1,14 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceiptData;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -18,6 +20,15 @@ import java.util.List;
 
 public class PaymentSelectionDialog implements Dialog {
 
+    @FunctionalInterface
+    public interface Listener {
+
+        void paymentChosen(PaymentReceiptData receipt);
+
+    }
+
+    private Listener listener;
+
     private PaymentInvoice invoice;
 
     private String reason;
@@ -26,8 +37,6 @@ public class PaymentSelectionDialog implements Dialog {
 
     private List<Integer> selectedPowerUps;
 
-    private List<AmmoColor> equivalentAmmos;
-
     private AmmoSet playerInv;
 
     private EnumMap<AmmoColor, Label> receiptLabels;
@@ -35,20 +44,41 @@ public class PaymentSelectionDialog implements Dialog {
     private Label powerupReceipt;
 
 
-    public PaymentSelectionDialog(PaymentInvoice invoice, AmmoSet playerInv, List<Integer> powerUps, List<AmmoColor> equivalentAmmos, String reason) {
+    private static AmmoColor getEquivalentAmmo(int cardID) {
+        // FIXME this should not be done as it is not general. It should be better to use a json file for the client.
+        switch (cardID % 6) {
+            case 0:
+            case 1:
+                return AmmoColor.BLUE;
+            case 2:
+            case 3:
+                return AmmoColor.RED;
+            case 4:
+            case 5:
+                return AmmoColor.YELLOW;
+            default:
+                return null;
+        }
+    }
+
+
+    public PaymentSelectionDialog(PaymentInvoice invoice, AmmoSet playerInv, List<Integer> powerUps, String reason) {
         this.invoice = invoice;
         this.playerInv = new AmmoSet(playerInv.getRedAmmos(), playerInv.getYellowAmmos(), playerInv.getBlueAmmos());
         this.powerUps = new ArrayList<>(powerUps);
         this.selectedPowerUps = new ArrayList<>();
-        this.equivalentAmmos = new ArrayList<>(equivalentAmmos);
         this.receiptLabels = new EnumMap<>(AmmoColor.class);
         this.reason = reason;
+    }
+
+    public void setPaymentCallback(Listener listener) {
+        this.listener = listener;
     }
 
 
     private StackPane createStackPane(int i) {
         int cardID = powerUps.get(i);
-        AmmoColor equivalentAmmo = equivalentAmmos.get(i);
+        AmmoColor equivalentAmmo = getEquivalentAmmo(cardID);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(GUIGameWindowHelper.createPowerUpCardPane(cardID));
@@ -113,15 +143,46 @@ public class PaymentSelectionDialog implements Dialog {
             receiptLabels.put(AmmoColor.BLUE, blueAmmosLabel);
             receiptLabels.put(AmmoColor.YELLOW, yellowAmmosLabel);
 
+            final Label redReceipt = redAmmosLabel;
+            final Label blueReceipt = blueAmmosLabel;
+            final Label yellowReceipt = yellowAmmosLabel;
+            Button payButton = (Button) dialogPane.lookup(".pay-button");
+            payButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                boolean ok = true;
+
+                int redAmmos = Integer.valueOf(redReceipt.getText());
+                if (redAmmos > playerInv.getRedAmmos()) {
+                    redReceipt.setStyle("-fx-fill-color: red;");
+                    ok = false;
+                } else {
+                    redReceipt.setStyle("-fx-fill-color: black;");
+                }
+
+                int blueAmmos = Integer.valueOf(blueReceipt.getText());
+                if (blueAmmos > playerInv.getBlueAmmos()) {
+                    blueReceipt.setStyle("-fx-fill-color: red;");
+                    ok = false;
+                } else {
+                    blueReceipt.setStyle("-fx-fill-color: black;");
+                }
+
+                int yellowAmmos = Integer.valueOf(yellowReceipt.getText());
+                if (yellowAmmos > playerInv.getYellowAmmos()) {
+                    yellowReceipt.setStyle("-fx-fill-color: red;");
+                    ok = false;
+                } else {
+                    yellowReceipt.setStyle("-fx-fill-color: black;");
+                }
+
+                if (ok) {
+                    listener.paymentChosen(new PaymentReceiptData(redAmmos, blueAmmos, yellowAmmos, selectedPowerUps));
+                }
+            });
+
             return dialogPane;
         } catch (Exception x) {
             return null;
         }
-    }
-
-    @Override
-    public void close() {
-        // TODO
     }
 
 }

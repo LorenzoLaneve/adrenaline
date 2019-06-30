@@ -7,6 +7,4 @@ public interface Dialog {
 
     Node createDialogPane(GUIGameWindow window);
 
-    void close();
-
 }

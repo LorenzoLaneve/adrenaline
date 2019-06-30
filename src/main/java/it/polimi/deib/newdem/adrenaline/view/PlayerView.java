@@ -15,11 +15,6 @@ public interface PlayerView {
     void setName(String name);
 
     /**
-     * Notifies that the player acquired the control of the game (i.e. it is their turn).
-     */
-    void takeControl();
-
-    /**
      * Notifies an update of the score of the player associated to this view.
      */
     void setScore(int score);

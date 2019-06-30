@@ -71,11 +71,6 @@ public class CLIPlayerView implements PlayerView {
     }
 
     @Override
-    public void takeControl() {
-        out.println("It's player "+ CLIHelper.colorToString(color) +"'s turn.");
-    }
-
-    @Override
     public void setScore(int score) {
         out.println("Player "+ CLIHelper.colorToString(color) +"'s score is now "+ score);
     }

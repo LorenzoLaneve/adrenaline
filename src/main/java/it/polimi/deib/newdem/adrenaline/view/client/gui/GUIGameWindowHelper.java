@@ -231,7 +231,6 @@ public class GUIGameWindowHelper {
                     Pane fragmentPane = new Pane();
                     fragmentPane.getStyleClass().add(id);
                     fragmentPane.getStyleClass().add(location);
-                    fragmentPane.getStyleClass().add("selectable"); // TODO remove this, just for test
 
                     Pane destPane;
                     switch (location) {

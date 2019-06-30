@@ -81,8 +81,11 @@ public class GUIGameWindow {
         overlayPane.getChildren().add(overlayBackground);
     }
 
-    public void closeDialog(Dialog dialog) {
-        dialog.close();
+    public void closeDialog() {
+        StackPane overlayPane = (StackPane) scene.lookup("#overlay-pane");
+        if (overlayPane.getChildren().size() > 1) {
+            overlayPane.getChildren().remove(overlayPane.getChildren().size() - 1);
+        }
     }
 
 }

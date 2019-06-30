@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs;
 
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
@@ -15,6 +16,16 @@ import java.util.List;
 
 public class AmmoSelectionDialog implements Dialog {
 
+    @FunctionalInterface
+    public interface Listener {
+
+        void ammoChosen(AmmoColor ammo, Integer powerUp);
+
+    }
+
+
+    private Listener listener;
+
     private String reason;
 
     private List<Integer> powerUps;
@@ -28,6 +39,10 @@ public class AmmoSelectionDialog implements Dialog {
         this.reason = reason;
     }
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
 
     private StackPane createStackPane(int i) {
         int cardID = powerUps.get(i);
@@ -37,7 +52,7 @@ public class AmmoSelectionDialog implements Dialog {
         stackPane.getChildren().add(new Pane());
 
         stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            // TODO cardID selected
+            listener.ammoChosen(null, cardID);
         });
 
         return stackPane;
@@ -61,7 +76,7 @@ public class AmmoSelectionDialog implements Dialog {
                 redAmmosLabel.setVisible(false);
             } else {
                 redAmmosLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    // TODO red selected
+                    listener.ammoChosen(AmmoColor.RED, null);
                 });
             }
 
@@ -70,7 +85,7 @@ public class AmmoSelectionDialog implements Dialog {
                 blueAmmosLabel.setVisible(false);
             } else {
                 blueAmmosLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    // TODO blue selected
+                    listener.ammoChosen(AmmoColor.BLUE, null);
                 });
             }
 
@@ -79,7 +94,7 @@ public class AmmoSelectionDialog implements Dialog {
                 yellowAmmosLabel.setVisible(false);
             } else {
                 yellowAmmosLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    // TODO yellow selected
+                    listener.ammoChosen(AmmoColor.YELLOW, null);
                 });
             }
 
@@ -87,11 +102,6 @@ public class AmmoSelectionDialog implements Dialog {
         } catch (Exception x) {
             return null;
         }
-    }
-
-    @Override
-    public void close() {
-        // TODO
     }
 
 }

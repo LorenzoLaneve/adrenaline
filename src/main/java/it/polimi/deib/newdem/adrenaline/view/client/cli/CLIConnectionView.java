@@ -11,13 +11,13 @@ public class CLIConnectionView implements ConnectionView {
 
     private Logger log;
     private PrintStream out;
-    private InputStream in;
+    private CLIReader in;
 
     private String host;
     private int port;
     private ConnectionType type;
 
-    public CLIConnectionView(Logger log, PrintStream out, InputStream in) {
+    public CLIConnectionView(Logger log, PrintStream out, CLIReader in) {
         this.log = log;
         this.out = out;
         this.in = in;
@@ -42,18 +42,25 @@ public class CLIConnectionView implements ConnectionView {
     public void prompt() {
         type = null;
 
-        Scanner sc = new Scanner(in);
-
         out.print("Server host: ");
-        host = sc.next();
+        host = in.nextLine();
 
-        out.print("Server port: ");
-        port = sc.nextInt();
+        boolean portOk = false;
+        do {
+            try {
+                out.print("Server port: ");
+                port = Integer.valueOf(in.nextLine());
+                portOk = true;
+            } catch (Exception x) {
+                out.println("Error: port must be a valid number.");
+            }
+        } while (!portOk);
+
 
         do {
             out.print("(S)ockets or (R)MI? ");
 
-            switch (sc.next().toLowerCase()) {
+            switch (in.nextLine().toLowerCase()) {
                 case "s":
                     type = ConnectionType.SOCKETS;
                     break;

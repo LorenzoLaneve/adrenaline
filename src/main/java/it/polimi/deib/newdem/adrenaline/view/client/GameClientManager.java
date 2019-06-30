@@ -27,9 +27,9 @@ public class GameClientManager {
 
 
     private <T extends UserEvent> T waitForEvent(Class<T> eventClass) {
-        UserEventLocker<T> gameDataLocker = new UserEventLocker<>();
+        UserEventLocker<T> eventLocker = new UserEventLocker<>();
         try {
-            return gameDataLocker.waitOnEvent(eventClass, connection);
+            return eventLocker.waitOnEvent(eventClass, connection);
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
             throw new ClosedException("Close requested.");
@@ -140,12 +140,10 @@ public class GameClientManager {
 
 
     private void handleTurn(PlayerColor actor) {
+        TurnView tView = viewMaker.makeTurnView();
 
-
-
-
-
-
+        TurnClientManager turnManager = new TurnClientManager(connection, tView, actor);
+        turnManager.start();
     }
 
 }
