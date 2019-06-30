@@ -2,8 +2,6 @@ package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
-import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
@@ -48,6 +46,14 @@ public class GameClientManager {
         return playerViews.get(color);
     }
 
+    private ActionBoardView getActionView(PlayerColor color) {
+        return actionBoardViews.get(color);
+    }
+
+    private DamageBoardView getDamageBoard(PlayerColor color) {
+        return damageBoardViews.get(color);
+    }
+
     public void loadData() {
         gameView = viewMaker.makeGameView();
         mapView = viewMaker.makeMapView();
@@ -71,6 +77,8 @@ public class GameClientManager {
     }
 
     public void linkViews() {
+        // FIXME ViewLinker class that links views to connection events.
+
         connection.subscribeEvent(PlayerDisconnectEvent.class, (conn, event) ->
                 gameView.disablePlayer(event.getPlayerColor()));
         connection.subscribeEvent(PlayerReconnectEvent.class, (conn, event) ->
@@ -107,6 +115,25 @@ public class GameClientManager {
                 getPlayerView(e.getPlayer()).addAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
         connection.subscribeEvent(PlayerDiscardAmmoEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayer()).removeAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
+
+        connection.subscribeEvent(ActionBoardFlipEvent.class, (conn, e) ->
+                getActionView(e.getColor()).flipActionBoard());
+
+        connection.subscribeEvent(PlayerDamageEvent.class, (conn, e) ->
+                getDamageBoard(e.getDamagedPlayer()).registerDamage(e.getDamageAmount(), e.getMarkAmount(), e.getAttacker()));
+        connection.subscribeEvent(PlayerConvertMarksEvent.class, (conn, e) ->
+                getDamageBoard(e.getDamagedPlayer()).convertMarks(e.getDealer()));
+        connection.subscribeEvent(PlayerPopDamageEvent.class, (conn, e) ->
+                getDamageBoard(e.getColor()).popDamage());
+        connection.subscribeEvent(DamageBoardFlipEvent.class, (conn, e) ->
+                getDamageBoard(e.getColor()).goFrenzy());
+        connection.subscribeEvent(DamageBoardClearEvent.class, (conn, e) ->
+                getDamageBoard(e.getPlayerColor()).clearBoard());
+
+        connection.subscribeEvent(KillTrackAddKillEvent.class, (conn, e) ->
+                killTrackView.registerKill(e.getColor(), e.getAmount()));
+        connection.subscribeEvent(KillTrackUndoKillEvent.class, (conn, e) ->
+                killTrackView.undoLastKill());
 
         connection.subscribeEvent(TurnStartEvent.class, (conn, e) -> handleTurn(e.getTurnActor()));
     }

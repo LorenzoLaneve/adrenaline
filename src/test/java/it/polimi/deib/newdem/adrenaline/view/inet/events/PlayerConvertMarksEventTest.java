@@ -12,12 +12,17 @@ public class PlayerConvertMarksEventTest {
 
     @Before
     public void setUp() throws Exception {
-        e = new PlayerConvertMarksEvent(PlayerColor.YELLOW);
+        e = new PlayerConvertMarksEvent(PlayerColor.YELLOW, PlayerColor.CYAN);
     }
 
     @Test
     public void testGetDamagedPlayer() throws Exception {
         assertEquals(PlayerColor.YELLOW, e.getDamagedPlayer());
+    }
+
+    @Test
+    public void testGetDealer() throws Exception {
+        assertEquals(PlayerColor.CYAN, e.getDealer());
     }
 
     @Test

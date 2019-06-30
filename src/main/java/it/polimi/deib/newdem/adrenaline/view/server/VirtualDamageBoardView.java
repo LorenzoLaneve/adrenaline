@@ -51,7 +51,7 @@ public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListe
 
     @Override
     public void convertMarks(PlayerColor dealer) {
-        gameView.sendEvent(new PlayerConvertMarksEvent(owner.getColor()));
+        gameView.sendEvent(new PlayerConvertMarksEvent(owner.getColor(), dealer));
     }
 
     @Override
