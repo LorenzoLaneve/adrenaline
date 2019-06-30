@@ -42,7 +42,8 @@ public class OrdinaryTurn extends TurnBaseImpl {
             }
         }
         while (null == choice);
-        // map.setPos(map.getSpawnPosition(choiche.getColor()));
-        // ^ not implemented
+
+        m.movePlayer(p, m.getSpawnPointFromColor(choice.getEquivalentAmmo()));
+
     }
 }
