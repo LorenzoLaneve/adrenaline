@@ -8,11 +8,22 @@ public interface ActionBoardBehavior {
 
     List<ActionFactory> getBasicActions();
 
+    /**
+     * @return Numbers of actions to do in a turn.
+     */
     int getIterations();
 
     boolean isFrenzy();
 
+    /**
+     *Run routines associated with setting a behavior.
+     * @param actionBoard
+     */
     void onEnter(ActionBoardImpl actionBoard);
 
+    /**
+     * Run routines associated with releasing a behavior.
+     * @param actionBoard
+     */
     void onLeave(ActionBoardImpl actionBoard);
 }

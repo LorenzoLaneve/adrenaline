@@ -8,6 +8,9 @@ public interface Weapon {
 
     boolean isLoaded();
 
+    /**
+     * Used to
+     */
     void discharge();
 
     void reload();

@@ -22,6 +22,7 @@ public class TurnDataSourceImpl implements TurnDataSource {
 
     public TurnDataSourceImpl(TurnListener listener, Game game) {
         this.listener = listener;
+        this.game = game;
     }
 
     @Override

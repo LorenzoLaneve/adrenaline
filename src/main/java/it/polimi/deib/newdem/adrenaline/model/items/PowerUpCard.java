@@ -9,13 +9,17 @@ public interface PowerUpCard extends Card{
      */
     int HIDDEN = -1;
 
-
     Effect getEffect();
 
 
-
+    /**
+     * @return the event that triggers a possible call to the powerup.
+     */
     PowerUpTrigger getTrigger();
 
+    /**
+     * @return the color of the card.
+     */
     AmmoColor getEquivalentAmmo();
 
 }
