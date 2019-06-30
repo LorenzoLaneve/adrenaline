@@ -7,18 +7,29 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelecto
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
+import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScriptedDataSource implements TurnDataSource {
 
     ActionType[] arr;
+    List<Tile> tiles;
+    List<Integer> pups;
     int i;
+    private static final int UNDO_TILE_X = 90;
+    private static final int UNDO_TILE_Y = 90;
+
 
     public ScriptedDataSource(ActionType ... types) {
         arr = types;
         i = 0;
+        tiles = new ArrayList<>();
+        pups = new ArrayList<>();
     }
 
     @Override
@@ -28,9 +39,25 @@ public class ScriptedDataSource implements TurnDataSource {
         return out;
     }
 
+    public static Tile getUndoTile() {
+        return new OrdinaryTile(new TilePosition(UNDO_TILE_X, UNDO_TILE_Y));
+    }
+
+    // Tile (90, 90) means throw undo exception
+    public void pushTile(Tile tile) {
+        tiles.add(tile);
+    }
+
+    public void pushPupIndex(Integer i) {
+        pups.add(i);
+    }
+
     @Override
     public PowerUpCard chooseCard(List<PowerUpCard> cards) {
-        return null;
+
+        PowerUpCard pup = cards.get(pups.remove(pups.size() - 1));
+        if(null == pup) throw new IllegalStateException();
+        return pup;
     }
 
     @Override
@@ -39,8 +66,11 @@ public class ScriptedDataSource implements TurnDataSource {
     }
 
     @Override
-    public Tile actionDidRequestTile(TileSelector selector) {
-        return null;
+    public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
+        Tile tile = tiles.remove(tiles.size() - 1);
+        if(null == tile) throw new IllegalStateException();
+        if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
+        return tile;
     }
 
     @Override

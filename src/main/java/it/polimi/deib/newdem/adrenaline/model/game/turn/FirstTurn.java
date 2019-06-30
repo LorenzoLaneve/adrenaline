@@ -51,11 +51,6 @@ public class FirstTurn extends TurnBaseImpl {
         // requires action anc listeners
     }
 
-    public void start() {
-        //TODO implement
-        // requires action anc listeners
-    }
-
     public void turnWillStart() {
         //TODO implement
         // requires action anc listeners
