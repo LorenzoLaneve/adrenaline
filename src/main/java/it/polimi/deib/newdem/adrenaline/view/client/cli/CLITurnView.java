@@ -285,95 +285,106 @@ public class CLITurnView implements TurnView {
         ammosToPay.put(AmmoColor.YELLOW, invoice.getYellowAmmos());
 
         out.println("You have the following payment invoice:");
-        out.println("+ "+ ammosToPay.get(AmmoColor.RED) +" red ammo(s) (You have "+ playerInv.getRedAmmos() +")");
-        out.println("+ "+ ammosToPay.get(AmmoColor.BLUE) +" blue ammo(s) (You have "+ playerInv.getBlueAmmos() +")");
-        out.println("+ "+ ammosToPay.get(AmmoColor.YELLOW) +" yellow ammo(s) (You have "+ playerInv.getYellowAmmos() +")");
+        out.println("+ " + ammosToPay.get(AmmoColor.RED) + " red ammo(s) (You have " + playerInv.getRedAmmos() + ")");
+        out.println("+ " + ammosToPay.get(AmmoColor.BLUE) + " blue ammo(s) (You have " + playerInv.getBlueAmmos() + ")");
+        out.println("+ " + ammosToPay.get(AmmoColor.YELLOW) + " yellow ammo(s) (You have " + playerInv.getYellowAmmos() + ")");
 
-        for (int cardID : cardIDs) if (ammosToPay.get(getEquivalentAmmo(cardID)) > 0) {
-            Boolean choice = null;
-            do {
-                out.println("Do you want to use "+ CLIHelper.getPowerUpName(cardID) +" to pay? [y/n]");
-                choice = stringToYesNo(in.nextLine());
-            } while (choice == null);
+        for (int cardID : cardIDs) {
+            if (ammosToPay.get(getEquivalentAmmo(cardID)) > 0) {
+                Boolean choice = null;
+                do {
+                    out.println("Do you want to use " + CLIHelper.getPowerUpName(cardID) + " to pay? [y/n]");
+                    choice = stringToYesNo(in.nextLine());
+                } while (choice == null);
 
-            if (choice) {
-                selectedPowerUps.add(cardID);
+                if (choice) {
+                    selectedPowerUps.add(cardID);
+                }
             }
         }
 
-        out.println("You need to pay an ammo of any color:");
-        if (ammosToPay.get(AmmoColor.RED) > playerInv.getRedAmmos()) {
-            Boolean choice;
-            do {
-                out.println("Do you want to use a red ammo to pay? [y/n]");
-                choice = stringToYesNo(in.nextLine());
-            } while (choice == null);
+        if (invoice.getAnyAmmos() > 0) {
+            out.println("You need to pay an ammo of any color:");
+            if (ammosToPay.get(AmmoColor.RED) > playerInv.getRedAmmos()) {
+                Boolean choice;
+                do {
+                    out.println("Do you want to use a red ammo to pay? [y/n]");
+                    choice = stringToYesNo(in.nextLine());
+                } while (choice == null);
 
-            if (choice) {
-                ammosToPay.put(AmmoColor.RED, ammosToPay.get(AmmoColor.RED) + 1);
-                return new ValOrUndo<>(new PaymentReceiptData(
-                        ammosToPay.get(AmmoColor.RED),
-                        ammosToPay.get(AmmoColor.BLUE),
-                        ammosToPay.get(AmmoColor.YELLOW),
-                        selectedPowerUps));
+                if (choice) {
+                    ammosToPay.put(AmmoColor.RED, ammosToPay.get(AmmoColor.RED) + 1);
+                    return new ValOrUndo<>(new PaymentReceiptData(
+                            ammosToPay.get(AmmoColor.RED),
+                            ammosToPay.get(AmmoColor.BLUE),
+                            ammosToPay.get(AmmoColor.YELLOW),
+                            selectedPowerUps));
+                }
             }
+
+            if (ammosToPay.get(AmmoColor.BLUE) > playerInv.getBlueAmmos()) {
+                Boolean choice;
+                do {
+                    out.println("Do you want to use a blue ammo to pay? [y/n]");
+                    choice = stringToYesNo(in.nextLine());
+                } while (choice == null);
+
+                if (choice) {
+                    ammosToPay.put(AmmoColor.BLUE, ammosToPay.get(AmmoColor.BLUE) + 1);
+                    return new ValOrUndo<>(new PaymentReceiptData(
+                            ammosToPay.get(AmmoColor.RED),
+                            ammosToPay.get(AmmoColor.BLUE),
+                            ammosToPay.get(AmmoColor.YELLOW),
+                            selectedPowerUps));
+                }
+            }
+
+            if (ammosToPay.get(AmmoColor.YELLOW) > playerInv.getYellowAmmos()) {
+                Boolean choice;
+                do {
+                    out.println("Do you want to use a yellow ammo to pay? [y/n]");
+                    choice = stringToYesNo(in.nextLine());
+                } while (choice == null);
+
+                if (choice) {
+                    ammosToPay.put(AmmoColor.YELLOW, ammosToPay.get(AmmoColor.YELLOW) + 1);
+                    return new ValOrUndo<>(new PaymentReceiptData(
+                            ammosToPay.get(AmmoColor.RED),
+                            ammosToPay.get(AmmoColor.BLUE),
+                            ammosToPay.get(AmmoColor.YELLOW),
+                            selectedPowerUps));
+                }
+            }
+
+            List<Integer> remainingCards = new ArrayList<>(cardIDs);
+            cardIDs.removeAll(selectedPowerUps);
+
+            for (int cardID : remainingCards) {
+                Boolean choice;
+                do {
+                    out.println("Do you want to use " + CLIHelper.getPowerUpName(cardID) + " to pay? [y/n]");
+                    choice = stringToYesNo(in.nextLine());
+                } while (choice == null);
+
+                if (choice) {
+                    selectedPowerUps.add(cardID);
+                    return new ValOrUndo<>(new PaymentReceiptData(
+                            ammosToPay.get(AmmoColor.RED),
+                            ammosToPay.get(AmmoColor.BLUE),
+                            ammosToPay.get(AmmoColor.YELLOW),
+                            selectedPowerUps));
+                }
+            }
+
+            out.println("The payment will be cancelled.");
+            return new ValOrUndo<>(null);
         }
 
-        if (ammosToPay.get(AmmoColor.BLUE) > playerInv.getBlueAmmos()) {
-            Boolean choice;
-            do {
-                out.println("Do you want to use a blue ammo to pay? [y/n]");
-                choice = stringToYesNo(in.nextLine());
-            } while (choice == null);
-
-            if (choice) {
-                ammosToPay.put(AmmoColor.BLUE, ammosToPay.get(AmmoColor.BLUE) + 1);
-                return new ValOrUndo<>(new PaymentReceiptData(
-                        ammosToPay.get(AmmoColor.RED),
-                        ammosToPay.get(AmmoColor.BLUE),
-                        ammosToPay.get(AmmoColor.YELLOW),
-                        selectedPowerUps));
-            }
-        }
-
-        if (ammosToPay.get(AmmoColor.YELLOW) > playerInv.getYellowAmmos()) {
-            Boolean choice;
-            do {
-                out.println("Do you want to use a yellow ammo to pay? [y/n]");
-                choice = stringToYesNo(in.nextLine());
-            } while (choice == null);
-
-            if (choice) {
-                ammosToPay.put(AmmoColor.YELLOW, ammosToPay.get(AmmoColor.YELLOW) + 1);
-                return new ValOrUndo<>(new PaymentReceiptData(
-                        ammosToPay.get(AmmoColor.RED),
-                        ammosToPay.get(AmmoColor.BLUE),
-                        ammosToPay.get(AmmoColor.YELLOW),
-                        selectedPowerUps));
-            }
-        }
-
-        List<Integer> remainingCards = new ArrayList<>(cardIDs);
-        cardIDs.removeAll(selectedPowerUps);
-
-        for (int cardID : remainingCards) {
-            Boolean choice;
-            do {
-                out.println("Do you want to use "+ CLIHelper.getPowerUpName(cardID) +" to pay? [y/n]");
-                choice = stringToYesNo(in.nextLine());
-            } while (choice == null);
-
-            if (choice) {
-                selectedPowerUps.add(cardID);
-                return new ValOrUndo<>(new PaymentReceiptData(
-                        ammosToPay.get(AmmoColor.RED),
-                        ammosToPay.get(AmmoColor.BLUE),
-                        ammosToPay.get(AmmoColor.YELLOW),
-                        selectedPowerUps));
-            }
-        }
-
-        out.println("The payment will be cancelled.");
-        return new ValOrUndo<>(null);
+        return new ValOrUndo<>(new PaymentReceiptData(
+                ammosToPay.get(AmmoColor.RED),
+                ammosToPay.get(AmmoColor.BLUE),
+                ammosToPay.get(AmmoColor.YELLOW),
+                selectedPowerUps
+        ));
     }
 }
