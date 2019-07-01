@@ -60,7 +60,7 @@ public class CLIMapView implements MapView {
         out.print("A new drop ");
         out.print(CLIHelper.getStringFromDropType(drop1) + CLIHelper.getStringFromDropType(drop2) + CLIHelper.getStringFromDropType(drop3));
 
-        out.print("has spawned in tile "+ CLIHelper.tilePositionToString(tile));
+        out.print(" has spawned in tile "+ CLIHelper.tilePositionToString(tile));
         out.println();
     }
 
@@ -93,11 +93,11 @@ public class CLIMapView implements MapView {
 
     @Override
     public void addWeapon(TilePosition tilePosition, int cardId) {
-        out.println("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") has spawned in tile "+ CLIHelper.tilePositionToString(tilePosition));
+        out.println("Weapon "+ cardId +" ("+ CLIHelper.getWeaponName(cardId) +") has spawned in tile "+ CLIHelper.tilePositionToString(tilePosition));
     }
 
     @Override
     public void removeWeapon(TilePosition tilePosition, int cardId) {
-        out.println("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") was removed from tile "+ CLIHelper.tilePositionToString(tilePosition));
+        out.println("Weapon "+ cardId +" ("+ CLIHelper.getWeaponName(cardId) +") was removed from tile "+ CLIHelper.tilePositionToString(tilePosition));
     }
 }

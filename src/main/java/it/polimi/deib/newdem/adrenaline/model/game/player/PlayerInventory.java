@@ -219,12 +219,16 @@ public class PlayerInventory {
         player.getListener().playerDidReceivePowerUpCard(player, card);
     }
 
+    public void removePowerUp(PowerUpCard card) {
+        powerUpCards.remove(card);
+        player.getListener().playerDidDiscardPowerUpCard(player, card);
+    }
+
     public void removePowerUp(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
         for(PowerUpCard card: powerUpCardList){
             player.getListener().playerDidDiscardPowerUpCard(player, card);
         }
-
     }
 
     public int getWeaponAmount() {
