@@ -9,39 +9,54 @@ import java.util.logging.Logger;
 import static org.junit.Assert.*;
 
 public class TestServerInstance {
-/*
+
     Logger logger;
     Config currentConfig;
     ServerInstance instance;
 
     @Before
     public void setUp() throws Exception {
-        logger = null;
+        logger = Logger.getGlobal();
+        currentConfig = Config.getDefaultConfig();
+    }
 
-        File configFile = new File("config.json");
+    @Test
+    public void testStartSuccess() {
+        instance = new ServerInstance(Logger.getGlobal(), currentConfig);
 
-        Config serverConf = Config.fromFile("config.json");
-
-        instance = new ServerInstance(Logger.getGlobal(), serverConf);
+        assertNull(instance.getUserRegistry());
+        assertNull(instance.getLobbyRegistry());
         instance.init();
-        instance.start();
+        assertNotNull(instance.getUserRegistry());
+        assertNotNull(instance.getLobbyRegistry());
 
+        new Thread(() -> {
+            try {
+                Thread.sleep(100);
+                // just to let the instance call start
+            } catch (InterruptedException x) {
+                //nothing to do here.
+            }
+
+            instance.kill();
+        }).start();
+
+        try {
+            instance.start();
+        } catch (InvalidStateException x) {
+            fail();
+        }
     }
 
     @Test
-    public void getUserRegistry() {
+    public void testStartFailure() {
+        instance = new ServerInstance(Logger.getGlobal(), Config.getDefaultConfig());
+
+        try {
+            instance.start();
+        } catch (InvalidStateException x) {
+            // ok.
+        }
     }
 
-    @Test
-    public void getLobbyRegistry() {
-    }
-
-    @Test
-    public void getLogger() {
-    }
-
-    @Test
-    public void getCurrentConfig() {
-    }
-*/
 }

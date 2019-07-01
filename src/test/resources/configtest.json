@@ -1,0 +1,15 @@
+{
+  "useSockets": false,
+  "useRMI": true,
+
+  "socketPort": 450,
+
+  "rmiPort": 356,
+  "rmiIdentifier": "test",
+
+  "timerLength": 7,
+  "minPlayers": 3,
+  "maxPlayers": 5,
+
+  "turnTime": 92
+}
