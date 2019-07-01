@@ -54,10 +54,10 @@ public class UserRegistryTest {
         registry.registerUser(user1);
         MockConnection connection1 = new MockConnection(user1);
         connection1.publishEvent(new UpdateUsernameResponse("name1"));
-        try {
-            Thread.sleep(100); // just to let the event propagate
-        } catch (InterruptedException x) {
-            // nothing to do...
+        try{
+            Thread.sleep(500);
+        }catch (InterruptedException e){
+
         }
         assertEquals(user1, registry.getUserByName("name1"));
 
@@ -69,7 +69,7 @@ public class UserRegistryTest {
         connection2.publishEvent(new UpdateUsernameResponse("name2"));
 
         try {
-            Thread.sleep(100); // just to let the event propagate
+            Thread.sleep(800); // just to let the event propagate
         } catch (InterruptedException x) {
             // nothing to do...
         }
