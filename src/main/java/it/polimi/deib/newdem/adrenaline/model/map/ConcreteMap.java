@@ -168,6 +168,7 @@ public class ConcreteMap implements Map {
         toVisit = getAllTiles();
 
         visiting.add(source);
+        toVisit.remove(source);
         distDict.put(source,0);
 
         queue.add(source);
