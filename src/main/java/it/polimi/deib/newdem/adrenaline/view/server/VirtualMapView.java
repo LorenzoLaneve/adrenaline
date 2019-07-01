@@ -59,7 +59,7 @@ public class VirtualMapView implements MapView, MapListener {
             drops.add(GameData.DropType.RED_AMMO);
         }
 
-        for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
+        for (int i = 0; i < ammoSet.getYellowAmmos(); i++) {
             drops.add(GameData.DropType.YELLOW_AMMO);
         }
 

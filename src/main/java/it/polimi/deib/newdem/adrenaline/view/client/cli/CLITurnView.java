@@ -175,7 +175,7 @@ public class CLITurnView implements TurnView {
 
         PlayerColor chosenPlayer = null;
         do {
-            out.println("Enter the ID of the power up or [u]ndo: ");
+            out.println("Enter the color of the player or [u]ndo: ");
             String line = in.nextLine();
             if (line.equalsIgnoreCase("u"))
                 return new ValOrUndo<>();

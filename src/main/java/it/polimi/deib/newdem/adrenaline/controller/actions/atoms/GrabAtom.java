@@ -7,11 +7,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponImpl;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.NotOrdinaryTileException;
+import it.polimi.deib.newdem.adrenaline.model.map.NotSpawnPointTileException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,23 +40,40 @@ public class GrabAtom extends AtomBase {
     }
 
     private void handleSpawn(Tile tile) throws UndoException {
-    // choose new weapon
-    WeaponCard newCard = chooseWeapon(tile.inspectWeaponSet().getWeapons());
-        // pay for it
-        performPayment(newCard);
-        if (parent.getActor().getInventory().getWeaponAmount() >= PlayerInventory.MAX_WEAPONS) {
-            // drop old weapon
-            discardWeapon();
+        try {
+            WeaponCard cardToPickup = chooseWeapon(tile.inspectWeaponSet().getWeapons());
+            PaymentReceipt receipt = parent.getDataSource().requestPayment(cardToPickup.getPickupPrice(), cardToPickup.getCardID());
+
+            WeaponCard weaponToSwap = null;
+            if (parent.getActor().getInventory().getWeaponAmount() >= PlayerInventory.MAX_WEAPONS) {
+                weaponToSwap = parent.getDataSource().chooseWeaponCard(tile.inspectWeaponSet().getWeapons());
+                if (weaponToSwap != null) {
+                    parent.getActor().getInventory().removeWeaponFromCard(weaponToSwap);
+                }
+            }
+
+            if (parent.getActor().getInventory().getWeaponAmount() < PlayerInventory.MAX_WEAPONS) {
+                tile.grabWeapon(cardToPickup);
+
+                parent.getActor().getInventory().addWeapon(new WeaponImpl(cardToPickup, parent.getActor()));
+
+                if (weaponToSwap != null) {
+                    tile.addWeapon(weaponToSwap);
+                }
+
+                new PaymentGameChange(parent.getActor(), receipt).update(parent.getGame());
+            }
+        } catch (Exception x) {
+            // nothing to do here
         }
-        parent.getActor().getInventory().addWeapon(new WeaponImpl(newCard, parent.getActor()));
     }
 
-    private WeaponCard chooseWeapon(List<WeaponCard> availableweapons) {
+    private WeaponCard chooseWeapon(List<WeaponCard> availableWeapons) {
         WeaponCard selectedWeapon = null;
 
         do{
             try{
-                selectedWeapon = chooseWeaponUndoable(availableweapons);
+                selectedWeapon = parent.getDataSource().chooseWeaponCard(availableWeapons);
             }
             catch (UndoException e) {
                 // do nothing
@@ -67,58 +83,5 @@ public class GrabAtom extends AtomBase {
         return selectedWeapon;
     }
 
-    private WeaponCard chooseWeaponUndoable(List<WeaponCard> availableWeapons) throws UndoException {
-        return parent.getDataSource().chooseWeaponCard(availableWeapons);
-    }
-
-    private void discardWeapon() {
-        WeaponCard discardedCard = null;
-        do {
-            try {
-                discardedCard = chooseWeaponUndoable(parent.getActor().getInventory().getAllWeaponCards());
-                parent.getActor().getInventory().removeWeaponFromCard(discardedCard);
-            } catch (UndoException e) {
-                // do not undo, try again until success
-            }
-        } while (null == discardedCard);
-    }
-
-    // what does this do?
-    private void doWhatNow(Tile tile) {
-        try {
-            WeaponCard cardToPickup = parent.getDataSource().chooseWeaponCard(tile.inspectWeaponSet().getWeapons());
-            if (cardToPickup != null) {
-                PaymentReceipt receipt = parent.getDataSource().requestPayment(cardToPickup.getPickupPrice(), cardToPickup.getCardID());
-
-                WeaponCard weaponToSwap = null;
-                if (parent.getActor().getInventory().getWeaponAmount() >= PlayerInventory.MAX_WEAPONS) {
-                    weaponToSwap = parent.getDataSource().chooseWeaponCard(tile.inspectWeaponSet().getWeapons());
-                    if (weaponToSwap != null) {
-                        parent.getActor().getInventory().removeWeaponFromCard(weaponToSwap);
-                    }
-                }
-
-                if (parent.getActor().getInventory().getWeaponAmount() < PlayerInventory.MAX_WEAPONS) {
-                    tile.grabWeapon(cardToPickup);
-
-                    parent.getActor().getInventory().addWeapon(new WeaponImpl(cardToPickup, parent.getActor()));
-
-                    if (weaponToSwap != null) {
-                        tile.addWeapon(weaponToSwap);
-                    }
-
-                    new PaymentGameChange(parent.getActor(), receipt).update(parent.getGame());
-                }
-
-            }
-        } catch (Exception x) {
-            // nothing to do here
-        }
-
-    }
-
-    private void performPayment(WeaponCard card) throws UndoException {
-        parent.getDataSource().requestPayment(card.getPickupPrice(), card.getCardID());
-    }
 }
 
