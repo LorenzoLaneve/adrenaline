@@ -7,6 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
@@ -40,10 +41,11 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void addPowerUpCard(int cardID) {
         for (PlayerColor color : gameView.getPlayers()) {
+            User user = gameView.getUserFromColor(color);
             if (color == player.getColor()) {
-                gameView.sendEvent(new PlayerAcquirePowerUpEvent(player.getColor(), cardID));
+                user.sendEvent(new PlayerAcquirePowerUpEvent(player.getColor(), cardID));
             } else {
-                gameView.sendEvent(new PlayerAcquirePowerUpEvent(player.getColor(), PowerUpCard.HIDDEN));
+                user.sendEvent(new PlayerAcquirePowerUpEvent(player.getColor(), PowerUpCard.HIDDEN));
             }
         }
     }
@@ -51,10 +53,11 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     @Override
     public void removePowerUpCard(int cardID) {
         for (PlayerColor color : gameView.getPlayers()) {
+            User user = gameView.getUserFromColor(color);
             if (color == player.getColor()) {
-                gameView.sendEvent(new PlayerDiscardPowerUpEvent(player.getColor(), cardID));
+                user.sendEvent(new PlayerDiscardPowerUpEvent(player.getColor(), cardID));
             } else {
-                gameView.sendEvent(new PlayerDiscardPowerUpEvent(player.getColor(), PowerUpCard.HIDDEN));
+                user.sendEvent(new PlayerDiscardPowerUpEvent(player.getColor(), PowerUpCard.HIDDEN));
             }
         }
     }

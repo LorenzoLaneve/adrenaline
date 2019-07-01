@@ -40,7 +40,7 @@ public class WeaponImpl implements Weapon {
     }
 
     @Override
-    public Player returnOwner() {
+    public Player getOwner() {
         return player;
     }
 

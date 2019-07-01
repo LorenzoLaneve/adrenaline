@@ -62,7 +62,7 @@ public class MockWeapon implements Weapon {
     }
 
     @Override
-    public Player returnOwner() {
+    public Player getOwner() {
         return null;
     }
 

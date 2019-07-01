@@ -301,7 +301,6 @@ public class PlayerImpl implements Player {
         try {
             PowerUpCard card = game.getPowerUpDeck().draw();
             getInventory().addPowerUp(card);
-            listener.playerDidReceivePowerUpCard(this,card);
         }
         catch (NoDrawableCardException | OutOfSlotsException e) {
             // this should never happen

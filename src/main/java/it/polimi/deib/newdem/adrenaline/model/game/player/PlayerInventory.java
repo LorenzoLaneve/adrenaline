@@ -201,13 +201,10 @@ public class PlayerInventory {
      */
     public void removeWeapon(Weapon weapon) {
         if(null == weapon) throw new IllegalArgumentException();
-        for(Weapon w : weapons) {
-            if(w.getCard().equals(weapon.getCard())){
-                //TODO enrich .equals()
-                weapons.remove(w);
-                player.getListener().playerDidDiscardWeaponCard(player, weapon.getCard());
-                break;
-            }
+
+        if (weapons.contains(weapon)) {
+            weapons.remove(weapon);
+            player.getListener().playerDidDiscardWeaponCard(player, weapon.getCard());
         }
     }
 
@@ -219,13 +216,13 @@ public class PlayerInventory {
         if(null == card) throw new IllegalArgumentException();
         if(!canAcceptPowerUp()) throw new OutOfSlotsException();
         powerUpCards.add(card);
-        player.getListener().playerDidDiscardPowerUpCard(player, card);
+        player.getListener().playerDidReceivePowerUpCard(player, card);
     }
 
     public void removePowerUp(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
         for(PowerUpCard card: powerUpCardList){
-            player.getListener().playerDidReceivePowerUpCard(player, card);
+            player.getListener().playerDidDiscardPowerUpCard(player, card);
         }
 
     }
@@ -243,8 +240,8 @@ public class PlayerInventory {
         for(Weapon w : weapons) {
             if(w.getCard().equals(card)){
                 //TODO enrich .equals()
-                weapons.remove(w);
-                player.getListener().playerDidDiscardWeaponCard(player, card);
+
+                removeWeapon(w);
                 break;
             }
         }
