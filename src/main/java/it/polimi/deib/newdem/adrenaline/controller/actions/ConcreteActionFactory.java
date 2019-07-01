@@ -47,6 +47,9 @@ public class ConcreteActionFactory implements ActionFactory {
                 case USE_POWERUP:
                     currentAtomicAction = new PowerUpAtom(container);
                     break;
+                case RELOAD:
+                    currentAtomicAction = new ReloadAtom(container);
+                    break;
                 default:
                     currentAtomicAction = null;
                     break;

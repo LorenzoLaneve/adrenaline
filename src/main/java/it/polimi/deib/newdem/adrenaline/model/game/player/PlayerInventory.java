@@ -293,4 +293,13 @@ public class PlayerInventory {
         return new AmmoSet(ammos.get(RED), ammos.get(YELLOW), ammos.get(BLUE));
     }
 
+    public List<Weapon> getDischargedWeapons() {
+        ArrayList<Weapon> weapons = new ArrayList<>();
+        for(Weapon w : weapons) {
+            if(!w.isLoaded()) {
+                weapons.add(w);
+            }
+        }
+        return weapons;
+    }
 }

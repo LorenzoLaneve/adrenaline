@@ -21,4 +21,8 @@ public class TestingMapBuilder {
         }
         return map;
     }
+
+    public static TilePosition getDropTilePos() {
+        return new TilePosition(1,0);
+    }
 }

@@ -333,7 +333,7 @@ public class PlayerImplTest {
 
         p.reportDeath(false);
 
-        assertEquals(0,p.getDeaths());
+        assertEquals(1,p.getDeaths());
         assertFalse(p.isDead());
 
         g.getMap().setListener(new NullMapListener());

@@ -11,6 +11,7 @@ public class WeaponImpl implements Weapon {
     public WeaponImpl(WeaponCard card, Player player) {
         this.card = card;
         this.player = player;
+        this.isLoaded = true;
     }
 
     @Override

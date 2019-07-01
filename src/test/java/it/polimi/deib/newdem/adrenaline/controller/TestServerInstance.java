@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class TestServerInstance {
     public void testStartSuccess() {
         Config c;
         try {
-            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+            c = Config.fromFile(FileUtils.getAbsoluteDecodedFilePath("configtest.json", this.getClass()));
         } catch (InvalidConfigException e) {
             fail();
             return;
@@ -73,7 +74,7 @@ public class TestServerInstance {
     public void testStartFailure() {
         Config c;
         try {
-            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+            c = Config.fromFile(FileUtils.getAbsoluteDecodedFilePath("configtest.json", this.getClass()));
         } catch (InvalidConfigException e) {
             fail();
             return;

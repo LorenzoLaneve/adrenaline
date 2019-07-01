@@ -1,5 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
+import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
+import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
@@ -276,6 +280,8 @@ public class GameImpl implements Game {
     public void concludeTurn(Turn turn) {
         //TODO
         // EOT actions
+        // reload
+        reload(turn);
 
         // extra point for multiple kills
         for(Player p :players) {
@@ -306,7 +312,6 @@ public class GameImpl implements Game {
         // refill tiles
         // both drops
         // and weapons
-        // TODO load decks from json
         refillTiles(); // needs non-empty drop deck
 
         // add new turn
@@ -464,6 +469,16 @@ public class GameImpl implements Game {
                 // this should NOT happen, so we report it
                 throw new IllegalStateException(e);
             }
+        }
+    }
+
+    private void reload(Turn turn) {
+        Action reloadAction = new ConcreteActionFactory(AtomicActionType.RELOAD).makeAction(turn.getActivePlayer(), turn.getDataSource());
+        try {
+            reloadAction.start();
+        }
+        catch (UndoException e) {
+            // done.
         }
     }
 }
