@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
@@ -21,9 +22,7 @@ public class PaymentGameChange implements GameChange {
     @Override
     public void update(Game game) {
 
-        player.getInventory().removeAmmo(AmmoColor.YELLOW, receipt.getPayedYellowAmmos());
-        player.getInventory().removeAmmo(AmmoColor.RED, receipt.getPayedRedAmmos());
-        player.getInventory().removeAmmo(AmmoColor.BLUE, receipt.getPayedBlueAmmos());
+        player.getInventory().removeAmmoSet(new AmmoSet(receipt.getPayedRedAmmos(), receipt.getPayedYellowAmmos(), receipt.getPayedBlueAmmos()));
 
         if(receipt.getPayedPowerUpCards()!= null){
             player.getInventory().removePowerUp(receipt.getPayedPowerUpCards());
@@ -34,9 +33,7 @@ public class PaymentGameChange implements GameChange {
     @Override
     public void revert(Game game) {
 
-        player.getInventory().addAmmo(AmmoColor.YELLOW, receipt.getPayedYellowAmmos());
-        player.getInventory().addAmmo(AmmoColor.RED, receipt.getPayedRedAmmos());
-        player.getInventory().addAmmo(AmmoColor.BLUE, receipt.getPayedBlueAmmos());
+        player.getInventory().addAmmoSet(new AmmoSet(receipt.getPayedRedAmmos(), receipt.getPayedYellowAmmos(), receipt.getPayedBlueAmmos()));
 
         if(receipt.getPayedPowerUpCards()!= null){
 

@@ -136,24 +136,49 @@ public class PlayerInventory {
      */
     public void addAmmo(AmmoColor color, int amount) {
         if(amount < 0) throw new IllegalArgumentException();
+        int delta = ammos.get(color);
         ammos.put(color, min(ammos.get(color) + amount, MAX_AMMO_PER_COLOR));
+        delta = ammos.get(color) - delta;
 
         AmmoSet ammoSet = new AmmoSet(0,0,0);
 
         switch (color){
             case RED:
-                ammoSet = new AmmoSet(amount, 0, 0);
+                ammoSet = new AmmoSet(delta, 0, 0);
                 break;
             case BLUE:
-                ammoSet = new AmmoSet(0, 0, amount);
+                ammoSet = new AmmoSet(0, 0, delta);
                 break;
             case YELLOW:
-                ammoSet = new AmmoSet(0,amount, 0);
+                ammoSet = new AmmoSet(0, delta, 0);
                 break;
         }
 
         player.getListener().playerDidReceiveAmmos(player, ammoSet);
      }
+
+     public void removeAmmo(AmmoColor color, int amount){
+        if(amount < 0) throw new IllegalArgumentException();
+        int delta = ammos.get(color);
+        ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO_PER_COLOR));
+        delta -= ammos.get(color);
+
+        AmmoSet ammoSet = new AmmoSet(0,0,0);
+
+        switch (color){
+            case RED:
+                ammoSet = new AmmoSet(delta, 0, 0);
+                break;
+            case BLUE:
+                ammoSet = new AmmoSet(0, 0, delta);
+                break;
+            case YELLOW:
+                ammoSet = new AmmoSet(0, delta, 0);
+                break;
+        }
+
+        player.getListener().playerDidDiscardAmmos(player, ammoSet);
+    }
 
 
 
@@ -197,28 +222,6 @@ public class PlayerInventory {
         player.getListener().playerDidDiscardPowerUpCard(player, card);
     }
 
-    public void removeAmmo(AmmoColor color, int amount){
-        if(amount < 0) throw new IllegalArgumentException();
-        ammos.put(color, min(ammos.get(color) - amount, MAX_AMMO_PER_COLOR));
-
-        AmmoSet ammoSet = new AmmoSet(0,0,0);
-
-        switch (color){
-            case RED:
-                ammoSet = new AmmoSet(amount, 0, 0);
-                break;
-            case BLUE:
-                ammoSet = new AmmoSet(0, 0, amount);
-                break;
-            case YELLOW:
-                ammoSet = new AmmoSet(0,amount, 0);
-                break;
-        }
-
-        player.getListener().playerDidDiscardAmmos(player, ammoSet);
-
-    }
-
     public void removePowerUp(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
         for(PowerUpCard card: powerUpCardList){
@@ -258,9 +261,35 @@ public class PlayerInventory {
     }
 
     public void addAmmoSet(AmmoSet ammoSet) {
-        addAmmo(AmmoColor.RED, ammoSet.getRedAmmos());
-        addAmmo(AmmoColor.BLUE, ammoSet.getBlueAmmos());
-        addAmmo(AmmoColor.YELLOW, ammoSet.getYellowAmmos());
+        int deltaRed = ammos.get(RED);
+        int deltaBlue = ammos.get(BLUE);
+        int deltaYellow = ammos.get(YELLOW);
+
+        ammos.put(RED, min(ammos.get(RED) + ammoSet.getRedAmmos(), MAX_AMMO_PER_COLOR));
+        ammos.put(BLUE, min(ammos.get(BLUE) + ammoSet.getBlueAmmos(), MAX_AMMO_PER_COLOR));
+        ammos.put(YELLOW, min(ammos.get(YELLOW) + ammoSet.getYellowAmmos(), MAX_AMMO_PER_COLOR));
+
+        deltaRed = ammos.get(RED) - deltaRed;
+        deltaBlue = ammos.get(BLUE) - deltaBlue;
+        deltaYellow = ammos.get(YELLOW) - deltaYellow;
+
+        player.getListener().playerDidReceiveAmmos(player, new AmmoSet(deltaRed, deltaYellow, deltaBlue));
+    }
+
+    public void removeAmmoSet(AmmoSet ammoSet) {
+        int deltaRed = ammos.get(RED);
+        int deltaBlue = ammos.get(BLUE);
+        int deltaYellow = ammos.get(YELLOW);
+
+        ammos.put(RED, min(ammos.get(RED) - ammoSet.getRedAmmos(), MAX_AMMO_PER_COLOR));
+        ammos.put(BLUE, min(ammos.get(BLUE) - ammoSet.getBlueAmmos(), MAX_AMMO_PER_COLOR));
+        ammos.put(YELLOW, min(ammos.get(YELLOW) - ammoSet.getYellowAmmos(), MAX_AMMO_PER_COLOR));
+
+        deltaRed -= ammos.get(RED);
+        deltaBlue -= ammos.get(BLUE);
+        deltaYellow -= ammos.get(YELLOW);
+
+        player.getListener().playerDidDiscardAmmos(player, new AmmoSet(deltaRed, deltaYellow, deltaBlue));
     }
 
     public AmmoSet getAmmoSet() {
