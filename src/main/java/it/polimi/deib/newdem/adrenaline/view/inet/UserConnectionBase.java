@@ -44,6 +44,7 @@ public abstract class UserConnectionBase implements UserConnection {
             List<UserEvent> eventList = pendingEvents.get(eventClass);
             if (eventList != null) {
                 for (UserEvent event : eventList) notifyEvent(event);
+                eventList.clear();
             }
         }
     }
