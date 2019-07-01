@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,19 +12,42 @@ import static org.junit.Assert.*;
 
 public class TestServerInstance {
 
-    Logger logger;
-    Config currentConfig;
-    ServerInstance instance;
+    class MockModule implements IncomingUserModule {
 
-    @Before
-    public void setUp() throws Exception {
-        logger = Logger.getGlobal();
-        currentConfig = Config.getDefaultConfig();
+        @Override
+        public void init() {
+
+        }
+
+        @Override
+        public User newUser() throws InterruptedException {
+            return null;
+        }
+
+        @Override
+        public void close() {
+
+        }
     }
+
 
     @Test
     public void testStartSuccess() {
-        instance = new ServerInstance(Logger.getGlobal(), currentConfig);
+        Config c;
+        try {
+            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+        } catch (InvalidConfigException e) {
+            fail();
+            return;
+        }
+
+        ServerInstance instance = new ServerInstance(Logger.getGlobal(), c);
+
+        try {
+            instance.getUserGreeter().addUserModule(new MockModule());
+        } catch (InvalidStateException x) {
+            fail();
+        }
 
         assertNull(instance.getUserRegistry());
         assertNull(instance.getLobbyRegistry());
@@ -30,16 +55,12 @@ public class TestServerInstance {
         assertNotNull(instance.getUserRegistry());
         assertNotNull(instance.getLobbyRegistry());
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(100);
-                // just to let the instance call start
-            } catch (InterruptedException x) {
-                //nothing to do here.
-            }
-
-            instance.kill();
-        }).start();
+        try {
+            instance.getUserGreeter().addUserModule(new MockModule());
+            fail();
+        } catch (InvalidStateException x) {
+            // ok
+        }
 
         try {
             instance.start();
@@ -50,7 +71,15 @@ public class TestServerInstance {
 
     @Test
     public void testStartFailure() {
-        instance = new ServerInstance(Logger.getGlobal(), Config.getDefaultConfig());
+        Config c;
+        try {
+            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+        } catch (InvalidConfigException e) {
+            fail();
+            return;
+        }
+
+        ServerInstance instance = new ServerInstance(Logger.getGlobal(), Config.getDefaultConfig());
 
         try {
             instance.start();

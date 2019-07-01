@@ -1,6 +1,6 @@
 {
   "useSockets": false,
-  "useRMI": true,
+  "useRMI": false,
 
   "socketPort": 450,
 

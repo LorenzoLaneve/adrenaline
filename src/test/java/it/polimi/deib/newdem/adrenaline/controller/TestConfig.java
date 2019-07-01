@@ -17,7 +17,7 @@ public class TestConfig {
         }
 
         assertFalse(c.isSocketActive());
-        assertTrue(c.isRMIActive());
+        assertFalse(c.isRMIActive());
 
         assertEquals(450, c.getSocketPort());
         assertEquals(356, c.getRMIPort());

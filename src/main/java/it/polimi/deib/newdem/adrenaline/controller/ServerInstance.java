@@ -95,6 +95,10 @@ public class ServerInstance {
         return currentConfig;
     }
 
+    UserGreeter getUserGreeter() {
+        return greeter;
+    }
+
     /**
      * Initializes the server instance.
      */
@@ -133,13 +137,6 @@ public class ServerInstance {
             }
         }
 
-        greeter.close();
-    }
-
-    /**
-     * Immediately kills the user greeter associated to this server instance object, causing the instance itself to close.
-     */
-    void kill() {
         greeter.close();
     }
 
