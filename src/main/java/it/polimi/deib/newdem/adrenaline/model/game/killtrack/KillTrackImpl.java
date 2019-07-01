@@ -93,7 +93,7 @@ public class KillTrackImpl implements KillTrack {
     public void setListener(KillTrackListener listener) {
         this.listener = listener;
         if (listener != null) {
-            listener.killTrackDidUpdate(generateKillTrackData());
+            listener.killTrackDidRestore(generateKillTrackData());
         }
     }
 

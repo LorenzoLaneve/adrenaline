@@ -6,6 +6,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 public interface PlayerListener {
 
+    /**
+     * Notify when a player is initialized by Game.
+     * @param data initial state of the player.
+     */
     void playerDidInit(PlayerData data);
 
     void playerDidReceivePowerUpCard(Player player, PowerUpCard powerUpCard);

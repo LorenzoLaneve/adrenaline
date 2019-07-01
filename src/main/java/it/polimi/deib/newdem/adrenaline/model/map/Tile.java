@@ -23,8 +23,14 @@ public interface Tile {
 
     boolean hasSpawnPoint();
 
+    /**
+     * @return DropInstance in the OrdinaryTile without removing it.
+     */
     DropInstance inspectDrop();
 
+    /**
+     * @return weaponSet in the SpawnPointTile without removing it.
+     */
     WeaponSet inspectWeaponSet();
 
     void addDrop(DropInstance drop) throws DropAlreadyPresentException, NotOrdinaryTileException;

@@ -10,10 +10,13 @@ public interface Room {
 
     Map getMap();
 
-    // discussed on Discord
     List<Player> getPlayers();
 
     void addTiles(Tile tile);
 
+    /**
+     * Used because the Room is initialized before the map.
+     * @param map
+     */
     void setMap(Map map);
 }

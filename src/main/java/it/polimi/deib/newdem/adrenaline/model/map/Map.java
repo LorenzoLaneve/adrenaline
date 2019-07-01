@@ -12,6 +12,9 @@ public interface Map {
 
     Tile getTile(TilePosition p);
 
+    /**Used to set the map of the rooms in rooms since they are created
+     * before the Map to which they belong is initialised. It should always be called right after the constructor.
+     */
     void bindRooms();
 
     void movePlayer(Player player, Tile destination);
@@ -22,6 +25,11 @@ public interface Map {
 
     void removePlayer(Player player);
 
+    /**
+     * Used to extract selectable tiles in the map based on the selector.
+     * @param selector the conditions the tiles have to meet.
+     * @return the tile that meet the condition.
+     */
     List<Tile> selectTiles(TileSelector selector);
 
     Tile getSpawnPointFromColor(AmmoColor ammoColor);
@@ -35,6 +43,9 @@ public interface Map {
 
     int getDistance(Tile source, Tile destination);
 
+    /**
+     * @return Generate the MapData used to update the views.
+     */
     MapData generateMapData();
 
     String getMapID();
@@ -43,6 +54,9 @@ public interface Map {
 
     TilePosition getPlayerPosition(Player player);
 
+    /**
+     * sends through the listener the MapData used to update the views.
+     */
     void sendMapData();
 
     void updatePlayerState(Player player, boolean alive);

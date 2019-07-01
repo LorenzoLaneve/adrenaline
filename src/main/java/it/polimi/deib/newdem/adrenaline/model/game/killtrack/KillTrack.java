@@ -7,6 +7,9 @@ public interface KillTrack {
 
     Player getKiller(int killIndex);
 
+    /**
+     * @return number of cell on the killtrack.
+     */
     int getTrackLength();
 
     void addKill(Player player, int amount);
@@ -17,5 +20,8 @@ public interface KillTrack {
 
     int getScoreForPlayer(Player player);
 
+    /**
+     * @return initial player state to be sent to the listener.
+     */
     KillTrackData generateKillTrackData();
 }

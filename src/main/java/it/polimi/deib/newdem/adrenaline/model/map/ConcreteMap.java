@@ -55,7 +55,6 @@ public class ConcreteMap implements Map {
 
     /**Used to set the map of the rooms in rooms since they are created
      * before the Map to which they belong is initialised. It should always be called right after the constructor.
-     *
      */
     @Override
     public void bindRooms() {
