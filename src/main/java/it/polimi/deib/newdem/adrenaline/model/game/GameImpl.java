@@ -312,7 +312,6 @@ public class GameImpl implements Game {
         // refill tiles
         // both drops
         // and weapons
-        // TODO load decks from json
         refillTiles(); // needs non-empty drop deck
 
         // add new turn

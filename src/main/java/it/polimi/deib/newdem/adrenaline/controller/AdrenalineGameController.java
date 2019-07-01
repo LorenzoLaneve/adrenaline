@@ -134,6 +134,9 @@ public class AdrenalineGameController implements GameController {
                 // nothing to do here?
                 // player disconnected during their turn
             }
+            finally {
+                game.concludeTurn(turn);
+            }
         }
         lobbyController.endGame(); // /snap/
     }
