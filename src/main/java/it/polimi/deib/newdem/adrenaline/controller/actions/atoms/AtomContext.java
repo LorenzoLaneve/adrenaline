@@ -23,17 +23,17 @@ public abstract class AtomContext extends AtomBase implements EffectContext {
 
     @Override
     public void applyGameChange(GameChange gameChange) {
-
+        gameChange.update(parent.getGame());
     }
 
     @Override
     public void revertGameChange(GameChange gameChange) {
-
+        gameChange.revert(parent.getGame());
     }
 
     @Override
     public Player getActor() {
-        return getActor();
+        return parent.getActor();
     }
 
     @Override
