@@ -1,0 +1,78 @@
+{
+  "cards": {
+    "card-0": {
+      "screenName": "Teleport (blue)"
+    },
+    "card-1": {
+      "screenName": "Teleport (blue)"
+    },
+    "card-2": {
+      "screenName": "Teleport (red)"
+    },
+    "card-3": {
+      "screenName": "Teleport (red)"
+    },
+    "card-4": {
+      "screenName": "Teleport (yellow)"
+    },
+    "card-5": {
+      "screenName": "Teleport (yellow)"
+    },
+    "card-6": {
+      "screenName": "Newton (blue)"
+    },
+    "card-7": {
+      "screenName": "Newton (blue)"
+    },
+    "card-8": {
+      "screenName": "Newton (red)"
+    },
+    "card-9": {
+      "screenName": "Newton (red)"
+    },
+    "card-10": {
+      "screenName": "Newton (yellow)"
+    },
+    "card-11": {
+      "screenName": "Newton (yellow)"
+    },
+    "card-12": {
+      "screenName": "Tagback Grenade (blue)"
+    },
+    "card-13": {
+      "screenName": "Tagback Grenade (blue)"
+    },
+    "card-14": {
+      "screenName": "Tagback Grenade (red)"
+    },
+    "card-15": {
+      "screenName": "Tagback Grenade (red)"
+    },
+    "card-16": {
+      "screenName": "Tagback Grenade (yellow)"
+    },
+    "card-17": {
+      "screenName": "Tagback Grenade (yellow)"
+    },
+    "card-18": {
+      "screenName": "Targeting Scope (blue)"
+    },
+    "card-19": {
+      "screenName": "Targeting Scope (blue)"
+    },
+    "card-20": {
+      "screenName": "Targeting Scope (red)"
+    },
+    "card-21": {
+      "screenName": "Targeting Scope (red)"
+    },
+    "card-22": {
+      "screenName": "Targeting Scope (yellow)"
+    },
+    "card-23": {
+      "screenName": "Targeting Scope (yellow)"
+    }
+
+  }
+
+}

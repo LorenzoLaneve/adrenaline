@@ -220,9 +220,8 @@ public class GUITurnView implements TurnView {
         GUILocker<ValOrUndo<Integer>> locker = new GUILocker<>();
         this.currentLocker = locker;
 
-        GUIGameWindowHelper.setActiveWeaponCard(window.getScene(), cardID);
-
         Platform.runLater(() -> {
+            GUIGameWindowHelper.setActiveWeaponCard(window.getScene(), cardID);
 
             Pane activeCardSlot = (Pane) window.getScene().lookup("#activeCardSlot");
             for (int fragID : fragments) {
