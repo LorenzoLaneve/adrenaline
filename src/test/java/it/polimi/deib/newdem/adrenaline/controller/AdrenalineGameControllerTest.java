@@ -17,6 +17,9 @@ import java.util.Arrays;
 public class AdrenalineGameControllerTest {
 
     AdrenalineGameController agc;
+    User u1;
+    User u2;
+    User u3;
 
     @Before
     public void setUp() throws Exception {
@@ -28,7 +31,11 @@ public class AdrenalineGameControllerTest {
         }
         Config config = Config.getDefaultConfig(); // config
         agc = new AdrenalineGameController(new LobbyControllerImpl(config));
+        u1 = new User();
+        u2 = new User();
+        u3 = new User();
         doSetUpGame();
+
     }
 
     @Test
@@ -48,10 +55,6 @@ public class AdrenalineGameControllerTest {
     }
 
     private void doSetUpGame(){
-
-        User u1 = new User();
-        User u2 = new User();
-        User u3 = new User();
         u1.setName("Carl");
         u2.setName("Larry");
         u3.setName("Steve");
@@ -71,5 +74,12 @@ public class AdrenalineGameControllerTest {
 
         agc.setupGame(Arrays.asList(new User(), new User(), new User()));
         agc.runGame();
+    }
+
+    @Test
+    public void testUserDisconnect() throws Exception {
+        doSetUpGame();
+        agc.userDidDisconnect(u1);
+        agc.userDidReconnect(u1);
     }
 }

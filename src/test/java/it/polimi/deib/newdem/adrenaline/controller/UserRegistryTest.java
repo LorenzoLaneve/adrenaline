@@ -54,6 +54,11 @@ public class UserRegistryTest {
         registry.registerUser(user1);
         MockConnection connection1 = new MockConnection(user1);
         connection1.publishEvent(new UpdateUsernameResponse("name1"));
+        try {
+            Thread.sleep(100); // just to let the event propagate
+        } catch (InterruptedException x) {
+            // nothing to do...
+        }
         assertEquals(user1, registry.getUserByName("name1"));
 
         registry.registerUser(user2);

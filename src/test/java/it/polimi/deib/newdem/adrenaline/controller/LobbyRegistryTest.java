@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import org.junit.Test;
 
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ public class LobbyRegistryTest {
     public void getLobbyByUserTest() {
         Config c;
         try {
-            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+            c = Config.fromFile(FileUtils.getAbsoluteDecodedFilePath("configtest.json", this.getClass()));
         } catch (InvalidConfigException e) {
             fail();
             return;

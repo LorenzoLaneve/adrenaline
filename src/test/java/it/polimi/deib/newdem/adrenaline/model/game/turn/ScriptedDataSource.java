@@ -14,6 +14,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ScriptedDataSource implements TurnDataSource {
@@ -21,6 +22,7 @@ public class ScriptedDataSource implements TurnDataSource {
     ActionType[] arr;
     List<Tile> tiles;
     List<Integer> pups;
+    List<Integer> weaponCardIndex;
     int i;
     private static final int UNDO_TILE_X = 90;
     private static final int UNDO_TILE_Y = 90;
@@ -31,8 +33,16 @@ public class ScriptedDataSource implements TurnDataSource {
         i = 0;
         tiles = new ArrayList<>();
         pups = new ArrayList<>();
+        weaponCardIndex = new ArrayList<>();
     }
-
+/*
+    @Override
+    public ActionType chooseAction(List<ActionType> actionTypeList) {
+        ActionType out = arr[i];
+        i++;
+        return out;
+    }
+    */
 
     public static Tile getUndoTile() {
         return new OrdinaryTile(new TilePosition(UNDO_TILE_X, UNDO_TILE_Y));
@@ -69,10 +79,20 @@ public class ScriptedDataSource implements TurnDataSource {
     public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
         return null;
     }
+/*
+    @Override
+    public PowerUpCard chooseCard(List<PowerUpCard> cards) {
+        return null;
+    }
+*/
+    public void pushWeaponCardIndex(int i) {
+        weaponCardIndex.add(i);
+    }
 
     @Override
     public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
-        return null;
+        int index = weaponCardIndex.remove(weaponCardIndex.size() - 1);
+        return cards.get(index);
     }
 
     @Override
@@ -82,14 +102,32 @@ public class ScriptedDataSource implements TurnDataSource {
         return pup;
     }
 
+        @Override
+        public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
+            Tile tile = tiles.remove(tiles.size() - 1);
+            if(null == tile) throw new IllegalStateException();
+            if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
+            return tile;
+        }
+/*
     @Override
-    public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
+    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) {
+        return null;
+    }
+
+    @Override
+    public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
         Tile tile = tiles.remove(tiles.size() - 1);
         if(null == tile) throw new IllegalStateException();
         if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
         return tile;
     }
 
+        @Override
+        public void turnDidStart(Player actor) {
+
+        }
+*/
     @Override
     public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
         return null;
@@ -97,6 +135,7 @@ public class ScriptedDataSource implements TurnDataSource {
 
     @Override
     public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
-        return null;
+        return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
     }
+
 }

@@ -331,7 +331,6 @@ public class PlayerImpl implements Player {
         }
         else {
             this.isDead = false;
-            this.deaths--;
         }
     }
 

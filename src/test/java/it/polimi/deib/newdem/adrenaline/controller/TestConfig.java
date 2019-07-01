@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,7 +11,7 @@ public class TestConfig {
     public void jsonReadTestSuccess() {
         Config c;
         try {
-            c = Config.fromFile(getClass().getClassLoader().getResource("configtest.json").getFile());
+            c = Config.fromFile(FileUtils.getAbsoluteDecodedFilePath("configtest.json", this.getClass()));
         } catch (InvalidConfigException e) {
             fail();
             return;

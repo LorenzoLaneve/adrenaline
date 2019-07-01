@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.TurnFragmentRequest;
 
 public interface Turn {
 
@@ -9,4 +10,6 @@ public interface Turn {
     void execute();
 
     void bindDataSource(TurnDataSource turnDataSource);
+
+    TurnDataSource getDataSource();
 }

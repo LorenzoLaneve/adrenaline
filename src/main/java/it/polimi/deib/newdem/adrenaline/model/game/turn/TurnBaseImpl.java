@@ -73,7 +73,8 @@ public abstract class TurnBaseImpl implements Turn {
         }
     }
 
-    protected TurnDataSource getDataSource(){
+    @Override
+    public TurnDataSource getDataSource(){
         return turnDataSource;
     }
 }
