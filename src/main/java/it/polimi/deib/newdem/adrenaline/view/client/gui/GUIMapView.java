@@ -140,12 +140,25 @@ public class GUIMapView implements MapView {
         });
     }
 
+
+    private static String ammoToID(AmmoColor ammoColor) {
+        switch (ammoColor) {
+            case RED:
+                return "red";
+            case BLUE:
+                return "blue";
+            case YELLOW:
+                return "yellow";
+        }
+        return null;
+    }
+
     @Override
     public void addWeapon(TilePosition tilePosition, int cardId) {
         Platform.runLater(() -> {
             AmmoColor spawnPointColor = spawnPointLocs.get(tilePosition);
             if (spawnPointColor != null) {
-                Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ GUIGameWindowHelper.toStyleClass(spawnPointColor) +"SpawnPointCards");
+                Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ ammoToID(spawnPointColor) +"SpawnPointCards");
                 spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(cardId));
             }
         });
@@ -156,7 +169,8 @@ public class GUIMapView implements MapView {
         Platform.runLater(() -> {
             AmmoColor spawnPointColor = spawnPointLocs.get(tilePosition);
             if (spawnPointColor != null) {
-                Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ GUIGameWindowHelper.toStyleClass(spawnPointColor) +"SpawnPointCards");
+                window.getScene().getRoot().applyCss();
+                Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ ammoToID(spawnPointColor) +"SpawnPointCards");
                 spawnPointCards.getChildren().remove(spawnPointCards.lookup(".weapon-"+ cardId));
             }
         });
