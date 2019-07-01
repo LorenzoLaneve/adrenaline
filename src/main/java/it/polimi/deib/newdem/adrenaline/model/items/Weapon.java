@@ -15,5 +15,5 @@ public interface Weapon {
 
     void reload();
 
-    Player returnOwner();
+    Player getOwner();
 }

@@ -80,7 +80,7 @@ public class CLIPlayerView implements PlayerView {
         if (cardID < 0) {
             out.println("Player "+ CLIHelper.colorToString(color) +" acquired a new power up card.");
         } else {
-            out.println("Player "+ CLIHelper.colorToString(color) +" acquired power up with ID "+ cardID);
+            out.println("Player "+ CLIHelper.colorToString(color) +" acquired a new power up with ID "+ cardID);
         }
     }
 

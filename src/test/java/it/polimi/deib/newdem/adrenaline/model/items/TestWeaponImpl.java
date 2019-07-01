@@ -10,7 +10,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.SpawnPointTile;
-import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
@@ -103,6 +102,6 @@ public class TestWeaponImpl {
 
     @Test
     public void returnOwner() {
-        assertEquals(p1, weapon.returnOwner());
+        assertEquals(p1, weapon.getOwner());
     }
 }
