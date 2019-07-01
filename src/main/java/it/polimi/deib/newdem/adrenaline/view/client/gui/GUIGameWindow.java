@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -79,14 +81,39 @@ public class GUIGameWindow {
             });
         }
 
+        Node hideButton = pane.lookup(".hide-button");
+        if (hideButton != null) {
+            hideButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                Node currDialog = overlayPane.getChildren().remove(overlayPane.getChildren().size() - 1);
+
+                Button showButton = new Button("Show Dialog");
+                showButton.getStyleClass().add("dialog-show-button");
+
+                Pane controlButtons = (Pane) scene.lookup(".control-buttons");
+                showButton.addEventHandler(MouseEvent.MOUSE_CLICKED, h -> {
+                    controlButtons.getChildren().remove(showButton);
+                    overlayPane.getChildren().add(currDialog);
+                });
+                controlButtons.getChildren().add(showButton);
+            });
+        }
+
         overlayPane.getChildren().add(overlayBackground);
     }
 
     public void closeDialog() {
         StackPane overlayPane = (StackPane) scene.lookup("#overlay-pane");
-        if (overlayPane.getChildren().size() > 1) {
+        while (overlayPane.getChildren().size() > 1) {
             overlayPane.getChildren().remove(overlayPane.getChildren().size() - 1);
         }
+
+        Node showButton;
+        do {
+            showButton = scene.lookup(".dialog-show-button");
+            if (showButton != null) {
+                ((Pane) showButton.getParent()).getChildren().remove(showButton);
+            }
+        } while (showButton != null);
     }
 
     public void notifyDisconnection() {

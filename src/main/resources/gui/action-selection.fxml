@@ -16,12 +16,15 @@
                 <RowConstraints />
             </rowConstraints>
             <columnConstraints>
-                <ColumnConstraints prefWidth="490.0" />
-                <ColumnConstraints prefWidth="90.0" />
+                <ColumnConstraints prefWidth="380.0" />
+                <ColumnConstraints prefWidth="200.0" />
             </columnConstraints>
             <children>
                 <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" text="Choose an action" />
-                <Button styleClass="end-turn-button" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <FlowPane GridPane.columnIndex="1" GridPane.halignment="RIGHT" alignment="CENTER_RIGHT">
+                    <Button styleClass="hide-button" text="Hide Dialog" />
+                    <Button styleClass="end-turn-button" text="End Turn" />
+                </FlowPane>
             </children>
         </GridPane>
 
