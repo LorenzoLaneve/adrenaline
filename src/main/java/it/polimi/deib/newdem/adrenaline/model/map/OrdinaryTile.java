@@ -94,7 +94,7 @@ public class OrdinaryTile extends ConcreteTile {
         if(!missingDrop){
             missingDrop = true;
             if(getMap().getListener() != null){
-                getMap().getListener().dropDidSpawn(this, dropInstance.copyDrop());
+                getMap().getListener().dropDidDespawn(this);
             }
             return dropInstance.copyDrop();
         }

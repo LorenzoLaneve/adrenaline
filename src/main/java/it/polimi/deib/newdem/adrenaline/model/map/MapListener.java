@@ -13,6 +13,8 @@ public interface MapListener {
 
     void dropDidSpawn(Tile tile, DropInstance drop);
 
+    void dropDidDespawn(Tile tile);
+
     void playerDidDie(Player player);
 
     void playerDidResurrect(Player player);
@@ -24,7 +26,5 @@ public interface MapListener {
     void weaponDidSpawn(Tile tile, WeaponCard weapon);
 
     void weaponDidDespawn(Tile tile, WeaponCard weapon);
-
-    void playerDidGrabDrop(Player player, DropInstance drop, Tile tile );
 
 }

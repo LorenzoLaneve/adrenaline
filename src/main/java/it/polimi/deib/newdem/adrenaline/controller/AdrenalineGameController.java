@@ -112,14 +112,8 @@ public class AdrenalineGameController implements GameController {
     public void runGame() {
         while (!game.isOver()) {
             Turn turn = game.getNextTurn();
-            // turn.bindDataSource(playerDataSourceMap.get(turn.getActivePlayer()));
-            // turn.bindDataSource(new VirtualTurnView(game.getUserByPlayer(turn.getActivePlayer())));
-            /* turn.bindDataSource(
-                    new TurnDataSourceImpl(
-                    new VirtualTurnView(
-                            game.getUserByPlayer(turn.getActivePlayer()
-                    ))), game);
-                    */
+            turn.bindDataSource(new TurnDataSourceImpl(new VirtualTurnView(vgv), game));
+
             if(!turn.getActivePlayer().isConnected()) {
                 game.concludeTurn(turn);
                 if(!isAnyPlayerConnected())

@@ -48,6 +48,11 @@ public class NullMapListenerTest {
     }
 
     @Test
+    public void testDropDidDespawn() throws Exception {
+        l.dropDidDespawn(t1);
+    }
+
+    @Test
     public void testPlayerDidDie() throws Exception {
         l.playerDidDie(new MockPlayer());
     }
@@ -70,10 +75,5 @@ public class NullMapListenerTest {
     @Test
     public void testWeaponDidSpawn() throws Exception {
         l.weaponDidSpawn(t1, new MockWeaponCard("gun"));
-    }
-
-    @Test
-    public void testPlayerDidGrabDrop() throws Exception {
-        l.playerDidGrabDrop(new MockPlayer(), dropInstance, t1);
     }
 }

@@ -72,6 +72,11 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
+    public void dropDidDespawn(Tile tile) {
+        removeDrops(tile.getPosition());
+    }
+
+    @Override
     public void playerDidDie(Player player) {
         killPlayer(player.getColor());
     }
@@ -96,32 +101,6 @@ public class VirtualMapView implements MapView, MapListener {
         removeWeapon(tile.getPosition(), weapon.getCardID());
     }
 
-    @Override
-    public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
-        List<GameData.DropType> drops = new ArrayList<>();
-
-        AmmoSet ammoSet = drop.getAmmos();
-
-        for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(GameData.DropType.BLUE_AMMO);
-        }
-
-        for (int i = 0; i < ammoSet.getRedAmmos(); i++) {
-            drops.add(GameData.DropType.RED_AMMO);
-        }
-
-        for (int i = 0; i < ammoSet.getBlueAmmos(); i++) {
-            drops.add(GameData.DropType.YELLOW_AMMO);
-        }
-
-        if(drop.hasPowerUp()){
-            drops.add(GameData.DropType.POWER_UP);
-        }
-
-
-        acquireDrop(tile.getPosition(), player.getColor(), drops.get(0), drops.get(1), drops.get(2));
-    }
-
 
     /// MapView methods
 
@@ -130,6 +109,11 @@ public class VirtualMapView implements MapView, MapListener {
     @Override
     public void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
         gameView.sendEvent(new SpawnDropEvent(drop1, drop2, drop3, tile));
+    }
+
+    @Override
+    public void removeDrops(TilePosition tile) {
+        gameView.sendEvent(new DespawnDropEvent(tile));
     }
 
     @Override
@@ -160,11 +144,6 @@ public class VirtualMapView implements MapView, MapListener {
     @Override
     public void removeWeapon(TilePosition tilePosition, int cardId) {
         gameView.sendEvent(new DespawnWeaponEvent(tilePosition, cardId));
-    }
-
-    @Override
-    public void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
-        gameView.sendEvent(new DropPickupEvent(drop1, drop2, drop3, tile, player));
     }
 
 }

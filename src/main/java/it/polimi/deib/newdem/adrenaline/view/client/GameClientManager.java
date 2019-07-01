@@ -60,6 +60,8 @@ public class GameClientManager {
         killTrackView = viewMaker.makeKillTrackView();
 
         playerViews = new EnumMap<>(PlayerColor.class);
+        actionBoardViews = new EnumMap<>(PlayerColor.class);
+        damageBoardViews = new EnumMap<>(PlayerColor.class);
 
         GameData gameData = waitForEvent(GameDataEvent.class).getData();
         gameView.setGameData(gameData);
@@ -86,6 +88,8 @@ public class GameClientManager {
 
         connection.subscribeEvent(SpawnDropEvent.class, (conn, e) ->
                 mapView.addDrops(e.getTilePosition(), e.getDrop1(), e.getDrop2(), e.getDrop3()));
+        connection.subscribeEvent(DespawnDropEvent.class, (conn, e) ->
+                mapView.removeDrops(e.getTilePosition()));
         connection.subscribeEvent(MovePlayerEvent.class, (conn, e) ->
                 mapView.movePlayer(e.getPlayerColor(), e.getDestination()));
         connection.subscribeEvent(SpawnPlayerEvent.class, (conn, e) ->
@@ -98,8 +102,6 @@ public class GameClientManager {
                 mapView.addWeapon(e.getTilePosition(), e.getWeaponCardID()));
         connection.subscribeEvent(DespawnWeaponEvent.class, (conn, e) ->
                 mapView.removeWeapon(e.getTilePosition(), e.getCardID()));
-        connection.subscribeEvent(DropPickupEvent.class, (conn, e) ->
-                mapView.acquireDrop(e.getTilePosition(), e.getPlayer(), e.getDrop1(), e.getDrop2(), e.getDrop3()));
 
         connection.subscribeEvent(PlayerScoreEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayerColor()).setScore(e.getNewScore()));

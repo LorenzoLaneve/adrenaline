@@ -15,6 +15,20 @@
 
 .tile-pane {
     -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+}
+
+.tile-pane.selectable {
+    -fx-border-color: green;
+}
+
+.tile-pane.selectable:hover {
+    -fx-border-color: white;
+}
+
+.tile-pane.selectable:pressed {
+    -fx-border-color: red;
 }
 
 .v-card-slots Group {

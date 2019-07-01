@@ -30,10 +30,9 @@ public class VirtualTurnView implements TurnView, TurnListener {
 
     private User activeUser;
 
-    public VirtualTurnView(VirtualGameView gameView, User user) {
+    public VirtualTurnView(VirtualGameView gameView) {
         this.gameView = gameView;
         this.usersOnHold = new ArrayList<>();
-        this.activeUser = user;
     }
 
     private <T extends UserEvent> T waitOnEvent(Class<T> eventClass) {

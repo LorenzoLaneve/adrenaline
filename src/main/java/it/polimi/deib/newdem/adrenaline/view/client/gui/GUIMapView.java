@@ -98,6 +98,16 @@ public class GUIMapView implements MapView {
     }
 
     @Override
+    public void removeDrops(TilePosition tile) {
+        Platform.runLater(() -> {
+            Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+
+            Pane dropsPane = (Pane) tilePane.lookup(".tile-drops-pane");
+            dropsPane.getChildren().clear();
+        });
+    }
+
+    @Override
     public void movePlayer(PlayerColor player, TilePosition destTile) {
         Platform.runLater(() -> {
             Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), player);
@@ -149,17 +159,6 @@ public class GUIMapView implements MapView {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ GUIGameWindowHelper.toStyleClass(spawnPointColor) +"SpawnPointCards");
                 spawnPointCards.getChildren().remove(spawnPointCards.lookup(".weapon-"+ cardId));
             }
-        });
-    }
-
-    @Override
-    public void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
-        Platform.runLater(() -> {
-            Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
-
-            Pane dropsPane = (Pane) tilePane.lookup(".tile-drops-pane");
-            dropsPane.getChildren().clear();
-            // TODO anything else?
         });
     }
 

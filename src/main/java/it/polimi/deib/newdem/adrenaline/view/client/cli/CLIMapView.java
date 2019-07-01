@@ -65,6 +65,11 @@ public class CLIMapView implements MapView {
     }
 
     @Override
+    public void removeDrops(TilePosition tile) {
+        out.print("Drops in tile "+ CLIHelper.tilePositionToString(tile) +" were removed.");
+    }
+
+    @Override
     public void movePlayer(PlayerColor player, TilePosition destTile) {
         out.print("Player "+ CLIHelper.colorToString(player) +" moved to tile "+ CLIHelper.tilePositionToString(destTile));
         out.println();
@@ -94,13 +99,5 @@ public class CLIMapView implements MapView {
     @Override
     public void removeWeapon(TilePosition tilePosition, int cardId) {
         out.println("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") was removed from tile "+ CLIHelper.tilePositionToString(tilePosition));
-    }
-
-    @Override
-    public void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
-        out.print("Player "+ CLIHelper.colorToString(player) +" has picked up the drop ");
-        out.print(CLIHelper.getStringFromDropType(drop1) + CLIHelper.getStringFromDropType(drop2) + CLIHelper.getStringFromDropType(drop3));
-        out.print(" in tile "+ CLIHelper.tilePositionToString(tile));
-        out.println();
     }
 }

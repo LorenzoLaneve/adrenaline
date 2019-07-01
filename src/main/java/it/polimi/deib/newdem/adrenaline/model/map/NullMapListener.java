@@ -22,6 +22,11 @@ public class NullMapListener implements MapListener {
     }
 
     @Override
+    public void dropDidDespawn(Tile tile) {
+
+    }
+
+    @Override
     public void playerDidDie(Player player) {
 
     }
@@ -51,8 +56,4 @@ public class NullMapListener implements MapListener {
 
     }
 
-    @Override
-    public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
-
-    }
 }
