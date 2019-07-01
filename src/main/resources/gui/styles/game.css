@@ -13,21 +13,21 @@
     -fx-pref-height: 833;
 }
 
-.tile-pane {
+.tile-slot {
     -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-border-radius: 5;
     -fx-border-width: 2;
 }
 
-.tile-pane.selectable {
+.tile-slot.selectable {
     -fx-border-color: green;
 }
 
-.tile-pane.selectable:hover {
+.tile-slot.selectable:hover {
     -fx-border-color: white;
 }
 
-.tile-pane.selectable:pressed {
+.tile-slot.selectable:pressed {
     -fx-border-color: red;
 }
 

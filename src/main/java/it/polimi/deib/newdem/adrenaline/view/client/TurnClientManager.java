@@ -37,6 +37,7 @@ public class TurnClientManager {
     }
 
     public void start() {
+        turnView.startTurn(actor);
 
         connection.subscribeEvent(TurnActionRequest.class, actionSubscriber);
         connection.subscribeEvent(TurnWeaponRequest.class, weaponSubscriber);
