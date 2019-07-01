@@ -190,11 +190,7 @@ public class VirtualTurnView implements TurnView, TurnListener {
     public ValOrUndo<Integer> choosePowerUpCard(List<Integer> cardIDs) {
         int i = 0;
         activeUser.sendEvent(new TurnPowerUpRequest(cardIDs));
-        // return waitOnEvent(TurnPowerUpResponse.class).getValue();
-        ValOrUndo<Integer> out = waitOnEvent(TurnPowerUpResponse.class).getValue();
-        System.out.println(i++);
-        int j = 0;
-        return out;
+        return waitOnEvent(TurnPowerUpResponse.class).getValue();
     }
 
     @Override

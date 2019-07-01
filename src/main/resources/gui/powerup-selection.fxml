@@ -25,7 +25,7 @@
                 <ColumnConstraints prefWidth="90.0" />
             </columnConstraints>
             <children>
-                <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" />
+                <Label styleClass="overlay-dialog-title" text="Choose a Power Up" GridPane.columnIndex="0" />
                 <Button styleClass="no-card-button" text="No card" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
