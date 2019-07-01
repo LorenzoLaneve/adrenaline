@@ -77,7 +77,7 @@ public class TestConcreteMap {
 
         mapOld.movePlayer(player, destination);
 
-        map =  Map.createMap(this.getClass().getClassLoader().getResource("Map0_0.json").getFile().replace("%20", " "));
+        map =  Map.createMap(this.getClass().getClassLoader().getResource("Map0_1.json").getFile().replace("%20", " "));
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
 
