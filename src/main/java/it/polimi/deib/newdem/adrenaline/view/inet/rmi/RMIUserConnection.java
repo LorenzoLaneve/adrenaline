@@ -52,6 +52,8 @@ public class RMIUserConnection extends UserConnectionBase {
 
     @Override
     public void close() {
+        if (closeRequested) return;
+
         synchronized (this) {
             closeRequested = true;
         }

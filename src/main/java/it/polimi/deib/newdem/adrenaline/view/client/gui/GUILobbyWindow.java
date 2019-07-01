@@ -135,4 +135,14 @@ public class GUILobbyWindow {
         this.stage.hide();
     }
 
+    public void notifyDisconnection() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Adrenaline");
+        alert.setHeaderText(null);
+        alert.setContentText("Connection to server lost.");
+
+        alert.showAndWait();
+
+        Platform.exit();
+    }
 }

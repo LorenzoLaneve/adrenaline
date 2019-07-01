@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener;
 import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
@@ -14,11 +15,15 @@ import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class ClientInstance implements AutoCloseable {
+public class ClientInstance implements AutoCloseable, UserListener {
 
     private ViewMaker viewMaker;
 
     private UserConnection clientConnection;
+
+    private boolean closeOnConnection;
+
+    private Thread clientThread;
 
 
     public ClientInstance(ViewMaker viewMaker) {
@@ -26,10 +31,30 @@ public class ClientInstance implements AutoCloseable {
     }
 
     public void start() {
-        createConnection();
-        askUsername();
-        waitLobby();
-        playGame();
+        this.clientThread = new Thread(this::runClient);
+        this.clientThread.start();
+
+        try {
+            this.clientThread.join();
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+            // nothing to do here.
+        }
+    }
+
+    private void runClient() {
+        try {
+            createConnection();
+
+            this.closeOnConnection = true;
+            clientConnection.getUser().addListener(this);
+
+            askUsername();
+            waitLobby();
+            playGame();
+        } catch (ClosedException x) {
+            // ok
+        }
     }
 
     private void createConnection() {
@@ -159,6 +184,19 @@ public class ClientInstance implements AutoCloseable {
         if (clientConnection != null) {
             clientConnection.close();
         }
+    }
+
+    @Override
+    public void userDidChangeConnection(User user, UserConnection oldConnection, UserConnection newConnection) {
+        if (!user.isConnected() && closeOnConnection) {
+            clientThread.interrupt();
+            viewMaker.notifyDisconnection();
+        }
+    }
+
+    @Override
+    public void userDidChangeName(User user, String name) {
+        // nothing to do here.
     }
 
 }

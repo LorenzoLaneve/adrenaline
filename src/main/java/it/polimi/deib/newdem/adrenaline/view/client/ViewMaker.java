@@ -26,4 +26,6 @@ public interface ViewMaker {
 
     TurnView makeTurnView();
 
+    void notifyDisconnection();
+
 }

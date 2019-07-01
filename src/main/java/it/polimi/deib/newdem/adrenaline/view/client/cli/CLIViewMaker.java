@@ -73,4 +73,12 @@ public class CLIViewMaker implements ViewMaker {
         return new CLITurnView(out, in);
     }
 
+    @Override
+    public void notifyDisconnection() {
+        out.println();
+        out.println("Connection to server lost.");
+
+        System.exit(1);
+    }
+
 }

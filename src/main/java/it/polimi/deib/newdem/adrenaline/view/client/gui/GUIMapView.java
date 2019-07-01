@@ -41,8 +41,6 @@ public class GUIMapView implements MapView {
             window.getScene().lookup(".map-pane")
                     .setStyle("-fx-background-image: url('"+ mapImagePath +"');");
 
-
-
             Pane mapGrid = (Pane) window.getScene().lookup("#mapGrid");
             for (int i = 2; i >= 0; i--) {
                 for (int j = 0; j < 4; j++) {
@@ -82,6 +80,8 @@ public class GUIMapView implements MapView {
 
                 GUIGameWindowHelper.addPlayerToTilePane(window.getScene(), pair.getPlayer(), pair.getTile());
             }
+
+            window.closeDialog(); // close loading data
         });
     }
 

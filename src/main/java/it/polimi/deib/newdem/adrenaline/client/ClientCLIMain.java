@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.client;
 
 import it.polimi.deib.newdem.adrenaline.view.client.ClientInstance;
+import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 import it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader;
 import it.polimi.deib.newdem.adrenaline.view.client.cli.CLIViewMaker;
 
@@ -17,6 +18,8 @@ public class ClientCLIMain {
 
         try (ClientInstance cm = new ClientInstance(new CLIViewMaker(Logger.getGlobal(), System.out, in))) {
             cm.start();
+        } catch (ClosedException x) {
+            // that's ok
         } catch (Exception x) {
             Logger.getGlobal().severe("Exception thrown: "+ x.getMessage());
         }

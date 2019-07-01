@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
 import it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.DisconnectionDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -88,4 +89,7 @@ public class GUIGameWindow {
         }
     }
 
+    public void notifyDisconnection() {
+        showDialog(new DisconnectionDialog());
+    }
 }

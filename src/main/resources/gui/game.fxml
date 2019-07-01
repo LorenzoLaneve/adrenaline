@@ -45,8 +45,22 @@
             </center>
         </BorderPane>
 
-        <!-- <StackPane styleClass="overlay-pane">
-            <fx:include source="player-equip.fxml" />
-        </StackPane> -->
+        <StackPane styleClass="overlay-pane">
+            <FlowPane styleClass="overlay-dialog" vgap="10.0" prefHeight="100.0" prefWidth="400.0" maxHeight="100.0" maxWidth="400.0">
+                <children>
+                    <GridPane>
+                        <rowConstraints>
+                            <RowConstraints />
+                        </rowConstraints>
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="380.0" />
+                        </columnConstraints>
+                        <children>
+                            <Label styleClass="overlay-dialog-title" text="Loading data..." />
+                        </children>
+                    </GridPane>
+                </children>
+            </FlowPane>
+        </StackPane>
     </children>
 </StackPane>

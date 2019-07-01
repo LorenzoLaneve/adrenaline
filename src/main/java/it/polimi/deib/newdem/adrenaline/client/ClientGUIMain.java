@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.client;
 
 
 import it.polimi.deib.newdem.adrenaline.view.client.ClientInstance;
+import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIViewMaker;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,6 +26,8 @@ public class ClientGUIMain extends Application {
     private void setupClient() {
         try (ClientInstance client = new ClientInstance(new GUIViewMaker(this))) {
             client.start();
+        } catch (ClosedException x) {
+            // that's ok.
         } catch (Exception x) {
             Logger.getGlobal().severe("Exception thrown: "+ x.getMessage());
         }

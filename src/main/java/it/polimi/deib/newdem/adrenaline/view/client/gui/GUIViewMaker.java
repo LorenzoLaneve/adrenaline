@@ -5,6 +5,7 @@ import it.polimi.deib.newdem.adrenaline.view.*;
 import it.polimi.deib.newdem.adrenaline.view.client.ViewMaker;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 import javafx.application.Application;
+import javafx.application.Platform;
 
 public class GUIViewMaker implements ViewMaker {
 
@@ -72,6 +73,19 @@ public class GUIViewMaker implements ViewMaker {
     @Override
     public TurnView makeTurnView() {
         return new GUITurnView(gameWindow);
+    }
+
+    @Override
+    public void notifyDisconnection() {
+        if (gameWindow != null) {
+            Platform.runLater(() -> {
+                gameWindow.notifyDisconnection();
+            });
+        } else if (lobbyWindow != null) {
+            Platform.runLater(() -> {
+                lobbyWindow.notifyDisconnection();
+            });
+        }
     }
 
 }

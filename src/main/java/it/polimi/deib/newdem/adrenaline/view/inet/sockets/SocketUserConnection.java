@@ -54,12 +54,13 @@ public class SocketUserConnection extends UserConnectionBase {
             output.writeObject(event);
         } catch (Exception x) {
             close();
-            // TODO is this a good behaviour?
         }
     }
 
     @Override
     public void close() {
+        if (closeRequested) return;
+
         synchronized (this) {
             closeRequested = true;
         }
