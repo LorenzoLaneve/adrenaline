@@ -9,7 +9,7 @@ public interface Weapon {
     boolean isLoaded();
 
     /**
-     * Used to
+     * Used to change the state of the weapon after it has been used.
      */
     void discharge();
 

@@ -18,7 +18,7 @@ public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
     }
 
     @Override
-    public void killTrackDidUpdate(KillTrackData data) {
+    public void killTrackDidRestore(KillTrackData data) {
         restoreView(data);
     }
 

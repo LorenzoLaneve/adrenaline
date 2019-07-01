@@ -9,6 +9,10 @@ public interface Turn {
 
     void execute();
 
+    /**
+     * Assign to the turn the source of user input.
+     * @param turnDataSource source of user input.
+     */
     void bindDataSource(TurnDataSource turnDataSource);
 
     TurnDataSource getDataSource();
