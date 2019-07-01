@@ -516,3 +516,7 @@
     -fx-pref-width: 83;
     -fx-pref-height: 130;
 }
+
+.control-buttons {
+    -fx-padding: 0 30 0 0;
+}

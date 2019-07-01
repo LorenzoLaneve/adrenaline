@@ -19,7 +19,7 @@ public class CLIMapView implements MapView {
     public CLIMapView(PrintStream out) {
         this.out = out;
     }
-
+    
     @Override
     public void updateView(MapData data) {
         out.println("Using map with ID "+ data.getMapID() +" for this game.");

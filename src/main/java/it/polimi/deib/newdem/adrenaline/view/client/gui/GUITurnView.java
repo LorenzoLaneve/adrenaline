@@ -45,12 +45,14 @@ public class GUITurnView implements TurnView {
         Platform.runLater(() -> {
             Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
 
-            Node playerSlot = playerSlots.lookup("."+ GUIGameWindowHelper.toStyleClass(activePlayer));
+            Node playerSlot = window.getScene().lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
+            playerSlot.applyCss();
             Label playerStatus = (Label) playerSlot.lookup(".status");
             playerStatus.setText("It's their turn!");
 
             for (PlayerColor color : playersOnHold) {
                 playerSlot = playerSlots.lookup("."+ GUIGameWindowHelper.toStyleClass(color));
+                playerSlot.applyCss();
                 playerStatus = (Label) playerSlot.lookup(".status");
                 playerStatus.setText("Waiting...");
             }
@@ -72,9 +74,8 @@ public class GUITurnView implements TurnView {
         }
 
         Platform.runLater(() -> {
-            Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
-
-            Node playerSlot = playerSlots.lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
+            Node playerSlot = window.getScene().lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
+            playerSlot.applyCss();
             Label playerStatus = (Label) playerSlot.lookup(".status");
             if (!playerSlot.getStyleClass().contains("offline")) {
                 playerStatus.setText("");

@@ -41,7 +41,8 @@
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints prefHeight="42.0" />
-                                <RowConstraints prefHeight="146.0" />
+                                <RowConstraints prefHeight="66.0" />
+                                <RowConstraints prefHeight="80.0" />
                             </rowConstraints>
                             <children>
                                 <FlowPane hgap="4.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -73,6 +74,7 @@
                                         <FlowPane id="killTrackSlot9" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                 </FlowPane>
+                                <FlowPane styleClass="control-buttons" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
                         <GridPane GridPane.columnIndex="2">
