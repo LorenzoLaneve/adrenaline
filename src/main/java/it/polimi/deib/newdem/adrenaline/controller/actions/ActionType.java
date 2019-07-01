@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 
 import java.io.Serializable;
@@ -70,7 +71,13 @@ public class ActionType implements Serializable {
      * using this action type allows to do all the moves allowed by the given action type.
      */
     public boolean covers(ActionType actionType) {
-
+        for (AtomicActionType aat : actionType.getAtomicTypes()) {
+            if(!this.atoms.contains(aat)) {
+                return false;
+            }
+        }
+        return true;
+        /*
         int k = 0;
         List<AtomicActionType> typesToCover = actionType.atoms;
 
@@ -79,11 +86,12 @@ public class ActionType implements Serializable {
                 return true;
             }
 
-            while (!aType.covers(typesToCover.get(k))) { k++; }
+            while (k < typesToCover.size() && !aType.covers(typesToCover.get(k))) { k++; }
             k++;
         }
 
         return false;
+        */
     }
 
     public List<AtomicActionType> getAtomicTypes() {
