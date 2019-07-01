@@ -18,11 +18,11 @@ public class NullTurnDataSourceTest {
 
     @Test
     public void testChooseCard() throws Exception {
-        tds.chooseCard(new ArrayList<>());
+        tds.choosePowerUpCard(new ArrayList<>());
     }
 
     @Test
     public void testChooseAction() throws Exception {
-        tds.chooseAction(new ArrayList<>());
+        tds.requestAction(new ArrayList<>());
     }
 }

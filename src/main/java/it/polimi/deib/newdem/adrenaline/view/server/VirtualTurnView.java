@@ -99,10 +99,10 @@ public class VirtualTurnView implements TurnView, TurnListener {
     }
 
     @Override
-    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers) throws UndoException {
+    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers, boolean forceChoice) throws UndoException {
         List<PlayerColor> playerColors = legalPlayers.stream().map(Player::getColor).collect(Collectors.toList());
 
-        ValOrUndo<PlayerColor> ret = choosePlayer(metaPlayer, playerColors, false);
+        ValOrUndo<PlayerColor> ret = choosePlayer(metaPlayer, playerColors, forceChoice);
         if (ret.shouldUndo()) throw new UndoException();
 
         if (ret.getValue() != null) {
@@ -116,10 +116,10 @@ public class VirtualTurnView implements TurnView, TurnListener {
     }
 
     @Override
-    public Tile actionDidRequestTile(List<Tile> legalTiles) throws UndoException {
+    public Tile actionDidRequestTile(List<Tile> legalTiles, boolean forceChoice) throws UndoException {
         List<TilePosition> tilePositions = legalTiles.stream().map(Tile::getPosition).collect(Collectors.toList());
 
-        ValOrUndo<TilePosition> ret = chooseTile(tilePositions, false);
+        ValOrUndo<TilePosition> ret = chooseTile(tilePositions, forceChoice);
         if (ret.shouldUndo()) throw new UndoException();
 
         if (ret.getValue() != null) {
@@ -133,8 +133,8 @@ public class VirtualTurnView implements TurnView, TurnListener {
     }
 
     @Override
-    public Integer actionDidRequestCardFragment(Integer cardID, List<Integer> choices) throws UndoException {
-        ValOrUndo<Integer> ret = chooseCardFragment(cardID, choices, false);
+    public Integer actionDidRequestCardFragment(Integer cardID, List<Integer> choices, boolean forceChoice) throws UndoException {
+        ValOrUndo<Integer> ret = chooseCardFragment(cardID, choices, forceChoice);
         if (ret.shouldUndo()) throw new UndoException();
 
         return ret.getValue();

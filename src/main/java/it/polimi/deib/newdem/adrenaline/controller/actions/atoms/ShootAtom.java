@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.List;
@@ -14,11 +15,12 @@ public class ShootAtom extends AtomContext {
     }
 
     @Override
-    public void execute() throws ConnectionException {
+    public void execute() throws UndoException {
 
         List<Weapon> availableWeapons = getActor().getInventory().getLoadedWeapons();
 
         Weapon selectedWeapon = selectWeapon(availableWeapons);
+        this.usedWeapon = selectedWeapon.getCard();
 
         selectedWeapon.discharge();
 
@@ -27,27 +29,20 @@ public class ShootAtom extends AtomContext {
     }
 
     private Weapon selectWeapon(List<Weapon> availableWeaponCards) {
-        int selectedId = -1;
-        List<Integer> availableWeaponsIds = availableWeaponCards.stream()
-                .map(weapon -> weapon.getCard().getCardID())
-                .collect(Collectors.toList());
+        List<WeaponCard> selectables = availableWeaponCards.stream().map(Weapon::getCard).collect(Collectors.toList());
 
-        // select weapon card
-        do{
-            try{
-                selectedId = parent.getDataSource().actionDidRequestChoice(
-                        availableWeaponsIds
-                );
-            }
-            catch (UndoException e) {
+        WeaponCard selectedCard = null;
+        do {
+            try {
+                selectedCard = parent.getDataSource().chooseWeaponCard(selectables);
+            } catch (UndoException e) {
                 // not allowed, do not propagate and repeat
             }
-        }
-        while (-1 == selectedId);
+        } while (selectedCard == null);
 
         // get weapon from ID in starting list
         for(Weapon w : availableWeaponCards) {
-            if(w.getCard().getCardID() == selectedId) {
+            if(w.getCard().getCardID() == selectedCard.getCardID()) {
                 return w;
             }
         }

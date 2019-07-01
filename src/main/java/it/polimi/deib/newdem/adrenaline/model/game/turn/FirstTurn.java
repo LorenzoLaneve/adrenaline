@@ -32,7 +32,7 @@ public class FirstTurn extends TurnBaseImpl {
         PowerUpCard selection = null;
         do {
             try {
-                selection = getDataSource().chooseCard(p.getInventory().getPowerUps());
+                selection = getDataSource().choosePowerUpCard(p.getInventory().getPowerUps());
             }
             catch (UndoException e) {
                 // do nothing

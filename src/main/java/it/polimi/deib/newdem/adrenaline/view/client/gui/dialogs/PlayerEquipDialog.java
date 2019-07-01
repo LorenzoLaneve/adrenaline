@@ -41,9 +41,4 @@ public class PlayerEquipDialog implements Dialog {
         }
     }
 
-    @Override
-    public void close() {
-        // TODO
-    }
-
 }

@@ -43,6 +43,8 @@ public interface MapView {
 
     void addWeapon(TilePosition tilePosition, int cardId);
 
+    void removeWeapon(TilePosition tilePosition, int cardId);
+
     void acquireDrop(TilePosition tile, PlayerColor player, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3);
 
 }

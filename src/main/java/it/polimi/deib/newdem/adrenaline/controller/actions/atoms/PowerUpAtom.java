@@ -2,9 +2,8 @@ package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.items.Card;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,28 +15,21 @@ public class PowerUpAtom extends AtomContext {
     }
 
     @Override
-    public void execute() throws ConnectionException {
+    public void execute() throws UndoException {
         // choose pup card
-        List<PowerUpCard> availablePups = getActor().getInventory().getPowerUps();
-        List<Integer> ids = availablePups.stream().map(Card::getCardID).collect(Collectors.toList());
-        PowerUpCard selectedPup = null;
+        List<PowerUpCard> availablePups = getActor().getInventory().getPowerUps()
+                .stream()
+                .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
+                .collect(Collectors.toList());
 
-        do {
+        PowerUpCard selectedPup = parent.getDataSource().choosePowerUpCard(availablePups);
+        if (selectedPup != null) {
             try {
-                int selectedId = parent.getDataSource().actionDidRequestChoice(ids);
-                for (PowerUpCard pup : availablePups) {
-                    if (pup.getCardID() == selectedId) {
-                        selectedPup = pup;
-                    }
-                    if (null == selectedPup) throw new IllegalStateException();
-
-                    // run it
-                    selectedPup.getEffect().apply(new EffectManager(this), getActor());
-                }
-            } catch (UndoException e) {
-                // force choice
+                EffectManager manager = new EffectManager(this);
+                manager.execute(selectedPup.getEffect());
+            } catch (UndoException x) {
+                // nothing to do here
             }
         }
-        while (null != selectedPup);
     }
 }

@@ -33,7 +33,7 @@ public abstract class ActionBasePlain implements Action {
             try {
                 atom.execute();
             }
-            catch (ConnectionException e) {
+            catch (UndoException e) {
                 // terminate
             }
         }

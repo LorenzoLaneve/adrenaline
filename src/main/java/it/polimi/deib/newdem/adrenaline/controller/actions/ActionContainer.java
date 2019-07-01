@@ -38,12 +38,12 @@ public class ActionContainer implements Action, AtomsContainer {
     }
 
     @Override
-    public void start() throws UndoException {
+    public void start() {
         for(AtomicAction atom : atomicActions) {
             try {
                 atom.execute();
             }
-            catch (ConnectionException e) {
+            catch (UndoException e) {
                 // do what now
             }
         }

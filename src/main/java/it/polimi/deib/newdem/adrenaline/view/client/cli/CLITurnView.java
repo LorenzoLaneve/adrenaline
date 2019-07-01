@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
-import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer;

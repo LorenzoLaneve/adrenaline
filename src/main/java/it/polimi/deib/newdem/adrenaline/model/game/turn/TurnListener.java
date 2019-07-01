@@ -25,11 +25,11 @@ public interface TurnListener {
 
     PowerUpCard actionDidRequestPowerUpCard(List<PowerUpCard> availableCards) throws UndoException;
 
-    Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers) throws UndoException;
+    Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers, boolean forceChoice) throws UndoException;
 
-    Tile actionDidRequestTile(List<Tile> legalTiles) throws UndoException;
+    Tile actionDidRequestTile(List<Tile> legalTiles, boolean forceChoice) throws UndoException;
 
-    Integer actionDidRequestCardFragment(Integer cardID, List<Integer> choices) throws UndoException;
+    Integer actionDidRequestCardFragment(Integer cardID, List<Integer> choices, boolean forceChoice) throws UndoException;
 
     PaymentReceiptData actionDidRequestPayment(PaymentInvoice invoice, AmmoSet playerAmmos, List<Integer> powerUps, int fragmentToPay) throws UndoException;
 

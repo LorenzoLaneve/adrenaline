@@ -261,6 +261,10 @@ public class PlayerInventory {
         addAmmo(AmmoColor.RED, ammoSet.getRedAmmos());
         addAmmo(AmmoColor.BLUE, ammoSet.getBlueAmmos());
         addAmmo(AmmoColor.YELLOW, ammoSet.getYellowAmmos());
-
     }
+
+    public AmmoSet getAmmoSet() {
+        return new AmmoSet(ammos.get(RED), ammos.get(YELLOW), ammos.get(BLUE));
+    }
+
 }

@@ -23,10 +23,8 @@ public interface MapListener {
 
     void weaponDidSpawn(Tile tile, WeaponCard weapon);
 
+    void weaponDidDespawn(Tile tile, WeaponCard weapon);
+
     void playerDidGrabDrop(Player player, DropInstance drop, Tile tile );
-
-
-    // TODO methods definition for other map events.
-
 
 }

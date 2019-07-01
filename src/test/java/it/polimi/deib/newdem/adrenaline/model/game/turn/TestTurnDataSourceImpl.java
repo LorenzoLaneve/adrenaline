@@ -16,7 +16,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameParameters;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -56,8 +58,13 @@ public class TestTurnDataSourceImpl {
         }
 
         @Override
-        public ActionType userDidRequestActionChoice(List<ActionType> actionTypeList) throws UndoException {
+        public ActionType turnDidRequestAction(List<ActionType> actionTypeList) throws UndoException {
             return new ActionType(AtomicActionType.MOVE1);
+        }
+
+        @Override
+        public WeaponCard actionDidRequestWeaponCard(List<WeaponCard> availableCards) throws UndoException {
+            return null;
         }
 
         @Override
@@ -66,24 +73,25 @@ public class TestTurnDataSourceImpl {
         }
 
         @Override
-        public Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers) throws UndoException {
-            return player1;
+        public Player actionDidRequestPlayer(MetaPlayer metaPlayer, List<Player> legalPlayers, boolean forceChoice) throws UndoException {
+            return player3;
         }
 
         @Override
-        public Tile actionDidRequestTile(List<Tile> legalTiles) throws UndoException {
-            return map.getTile(new TilePosition(0,0));
+        public Tile actionDidRequestTile(List<Tile> legalTiles, boolean forceChoice) throws UndoException {
+            return map.getTile(new TilePosition(0,2));
         }
 
         @Override
-        public Integer actionDidRequestCardFragment(List<Integer> choices) throws UndoException {
+        public Integer actionDidRequestCardFragment(Integer cardID, List<Integer> choices, boolean forceChoice) throws UndoException {
             return 1;
         }
 
         @Override
-        public PaymentReceiptData actionDidRequestPayment(PaymentInvoice invoice, int choice) throws UndoException {
+        public PaymentReceiptData actionDidRequestPayment(PaymentInvoice invoice, AmmoSet playerAmmos, List<Integer> powerUps, int fragmentToPay) throws UndoException {
             return new PaymentReceiptData(1, 1, 1, new ArrayList<>());
         }
+
     }
 
     @Before
@@ -160,7 +168,7 @@ public class TestTurnDataSourceImpl {
         actionTypeList.add(actionType);
 
         try {
-            dataSource.chooseAction(actionTypeList);
+            dataSource.requestAction(actionTypeList);
         }catch (UndoException e){
             fail();
         }
@@ -175,7 +183,7 @@ public class TestTurnDataSourceImpl {
         powerUpCardList.add(card1);
         powerUpCardList.add(card2);
         try {
-            dataSource.chooseCard(powerUpCardList);
+            dataSource.choosePowerUpCard(powerUpCardList);
         }catch (UndoException e){
             fail();
         }
@@ -187,8 +195,8 @@ public class TestTurnDataSourceImpl {
 
        try {
            PlayerSelector selector = new NearPlayerSelector(player1, 1, 2);
-           Player p = dataSource.actionDidRequestPlayer(MetaPlayer.RED, selector);
-           assertEquals(player1, p);
+           Player p = dataSource.requestPlayer(MetaPlayer.RED, selector, true);
+           assertEquals(player3, p);
        }catch (UndoException e){
            fail();
        }
@@ -198,8 +206,8 @@ public class TestTurnDataSourceImpl {
     public void actionDidRequestTile() {
         try{
             TileSelector tileSelector = new NearTileSelector(player1.getTile(), 1, 2);
-            Tile tile = dataSource.actionDidRequestTile(tileSelector);
-            assertEquals(map.getTile(new TilePosition(0,0)), tile);
+            Tile tile = dataSource.requestTile(tileSelector, true);
+            assertEquals(map.getTile(new TilePosition(0,2)), tile);
         }catch (UndoException e){
             fail();
         }
@@ -207,8 +215,11 @@ public class TestTurnDataSourceImpl {
 
     @Test
     public void actionDidRequestChoice() {
+        List<Integer> choices = new ArrayList<>();
+        choices.add(1);
+
         try {
-            int choice = dataSource.actionDidRequestChoice(null);
+            int choice = dataSource.requestFragment(1, choices, true);
             assertEquals(1, choice);
         }catch (UndoException e){
             fail();
@@ -217,8 +228,9 @@ public class TestTurnDataSourceImpl {
 
     @Test
     public void actionDidRequestPayment() {
+        dataSource.pushActor(player1);
         try{
-            PaymentReceipt paymentReceipt = dataSource.actionDidRequestPayment(
+            PaymentReceipt paymentReceipt = dataSource.requestPayment(
                     new PaymentInvoice(1,1,1,0),
                     1);
             assertEquals(1, paymentReceipt.getPayedBlueAmmos());
@@ -231,6 +243,6 @@ public class TestTurnDataSourceImpl {
 
     @Test
     public void turnDidStart() {
-        dataSource.turnDidStart(player1);
+        dataSource.pushActor(player1);
     }
 }

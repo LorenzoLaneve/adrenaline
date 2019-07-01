@@ -7,6 +7,7 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelecto
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -32,12 +33,6 @@ public class ScriptedDataSource implements TurnDataSource {
         pups = new ArrayList<>();
     }
 
-    @Override
-    public ActionType chooseAction(List<ActionType> actionTypeList) {
-        ActionType out = arr[i];
-        i++;
-        return out;
-    }
 
     public static Tile getUndoTile() {
         return new OrdinaryTile(new TilePosition(UNDO_TILE_X, UNDO_TILE_Y));
@@ -52,21 +47,43 @@ public class ScriptedDataSource implements TurnDataSource {
         pups.add(i);
     }
 
-    @Override
-    public PowerUpCard chooseCard(List<PowerUpCard> cards) {
 
+    @Override
+    public ActionType requestAction(List<ActionType> actionTypeList) throws UndoException {
+        ActionType out = arr[i];
+        i++;
+        return out;
+    }
+
+    @Override
+    public void pushActor(Player actor) {
+
+    }
+
+    @Override
+    public void popActor(Player actor) {
+
+    }
+
+    @Override
+    public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
+        return null;
+    }
+
+    @Override
+    public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
+        return null;
+    }
+
+    @Override
+    public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
         PowerUpCard pup = cards.get(pups.remove(pups.size() - 1));
         if(null == pup) throw new IllegalStateException();
         return pup;
     }
 
     @Override
-    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) {
-        return null;
-    }
-
-    @Override
-    public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
+    public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
         Tile tile = tiles.remove(tiles.size() - 1);
         if(null == tile) throw new IllegalStateException();
         if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
@@ -74,17 +91,12 @@ public class ScriptedDataSource implements TurnDataSource {
     }
 
     @Override
-    public void turnDidStart(Player actor) {
-
+    public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
+        return null;
     }
 
     @Override
-    public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
-        return 0;
-    }
-
-    @Override
-    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
+    public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         return null;
     }
 }

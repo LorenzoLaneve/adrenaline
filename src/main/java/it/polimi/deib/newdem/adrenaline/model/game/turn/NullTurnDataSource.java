@@ -8,43 +8,55 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelecto
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
 public class NullTurnDataSource implements TurnDataSource {
+
     @Override
-    public PowerUpCard chooseCard(List<PowerUpCard> cards) {
+    public ActionType requestAction(List<ActionType> actionTypeList) throws UndoException {
         return null;
     }
 
     @Override
-    public ActionType chooseAction(List<ActionType> actionTypeList) {
+    public void pushActor(Player actor) {
+
+    }
+
+    @Override
+    public void popActor(Player actor) {
+
+    }
+
+    @Override
+    public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
         return null;
     }
 
     @Override
-    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) {
+    public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
         return null;
     }
 
     @Override
-    public Tile actionDidRequestTile(TileSelector selector) {
+    public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
         return null;
     }
 
     @Override
-    public void turnDidStart(Player actor) {
-
+    public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
+        return null;
     }
 
     @Override
-    public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
-        return 0;
+    public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
+        return null;
     }
 
     @Override
-    public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
+    public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         return null;
     }
 }

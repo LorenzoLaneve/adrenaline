@@ -110,7 +110,9 @@ public class GUIGameWindowHelper {
             imgView.setFitWidth(104);
             imgView.setFitHeight(158);
 
-            return new Group(imgView);
+            Group g = new Group(imgView);
+            g.getStyleClass().add("weapon-"+ cardID);
+            return g;
         } catch (IOException e) {
             return null;
         }

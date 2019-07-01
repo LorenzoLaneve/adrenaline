@@ -5,10 +5,8 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReloadAtom extends AtomContext {
 
@@ -17,40 +15,26 @@ public class ReloadAtom extends AtomContext {
     }
 
     @Override
-    public void execute() throws ConnectionException {
+    public void execute() {
         PlayerInventory inventory = parent.getActor().getInventory();
         try {
 
             while (!inventory.getUnloadedWeapons().getWeapons().isEmpty()) {
-                List<Integer> ids = inventory
-                        .getUnloadedWeapons()
-                        .getWeapons()
-                        .stream()
-                        .map(WeaponCard::getCardID)
-                        .collect(Collectors.toList());
+                List<WeaponCard> selectables = inventory.getUnloadedWeapons().getWeapons();
 
-                int selectedId = parent.getDataSource().actionDidRequestChoice(ids);
+                WeaponCard selectedWeaponCard = parent.getDataSource().chooseWeaponCard(selectables);
+                if (selectedWeaponCard == null) break;
 
-                WeaponCard selectedWeaponCard = null;
-                for(WeaponCard w : inventory.getUnloadedWeapons().getWeapons()) {
-                    if(w.getCardID() == selectedId) {
-                        selectedWeaponCard = w;
-                    }
-                }
-
-                if(null == selectedWeaponCard) throw new IllegalStateException();
-
-                PaymentReceipt receipt = parent
-                        .getDataSource()
-                        .actionDidRequestPayment(
+                PaymentReceipt receipt = parent.getDataSource().requestPayment(
                                 selectedWeaponCard.getPickupPrice(),
-                                selectedWeaponCard.getCardID());
+                                selectedWeaponCard.getCardID()
+                );
 
                 applyGameChange(new PaymentGameChange(getActor(), receipt));
             }
         }
-        catch(UndoException e) {
-                // exit while loop
+        catch (UndoException e) {
+            // nothing to do here.
         }
     }
 }

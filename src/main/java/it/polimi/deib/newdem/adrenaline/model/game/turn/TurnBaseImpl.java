@@ -29,9 +29,10 @@ public abstract class TurnBaseImpl implements Turn {
 
     @Override
     public void execute() {
-        turnDataSource.turnDidStart(getActivePlayer());
+        turnDataSource.pushActor(getActivePlayer());
         performInitialActions();
         performCoreActions();
+        turnDataSource.popActor(getActivePlayer());
         // performClosingActions(); outsourced to game.concludeTurn()
     }
 
@@ -39,27 +40,12 @@ public abstract class TurnBaseImpl implements Turn {
 
     protected void performCoreActions() {
         int executedActions = 0;
-        /*
 
-        This serves as a high-level idea of how Turn should work.
-        None of it is implemented at the time of commit,
-        buit it's a template worth remembering.
-           */
-        // TurnView new every turn
-        // OR Tv forall players, passed to turn in construction
-        // No turnlistener (returns data), TurnDataSource
-        // TV handles dialogs
-
-        // controller holds tds
-        // @Controller
-        // Turn t = game.getNetTurn();
-        // t.bindDataSource(this.getTurnViewFromPlayerColor(ap.getC()));
-        //
         while (executedActions < activePlayer.getMovesAmount()) {
             ActionType aType = null;
             do {
                 try{
-                    aType = turnDataSource.chooseAction(
+                    aType = turnDataSource.requestAction(
                             activePlayer.getMoves()
                                     .stream()
                                     .map(ActionFactory::getType)

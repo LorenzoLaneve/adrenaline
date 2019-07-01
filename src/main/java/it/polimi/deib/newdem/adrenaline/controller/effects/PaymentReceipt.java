@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
+import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.io.Serializable;
@@ -23,6 +24,19 @@ public class PaymentReceipt implements Serializable {
 
         this.powerUps = new ArrayList<>(powerUps);
     }
+
+    public static PaymentReceipt fromData(PaymentReceiptData receiptData, Deck<PowerUpCard> powerUpDeck) {
+        List<PowerUpCard> powerUpCards = new ArrayList<>();
+
+        for(Integer cardID : receiptData.getPowerUps()) {
+            powerUpCards.add(powerUpDeck.getCardFromId(cardID));
+        }
+
+        return new PaymentReceipt(receiptData.getPayedRedAmmos(), receiptData.getPayedBlueAmmos(), receiptData.getPayedYellowAmmos(), powerUpCards);
+    }
+
+
+
 
     public int getPayedRedAmmos() {
         return redAmmos;

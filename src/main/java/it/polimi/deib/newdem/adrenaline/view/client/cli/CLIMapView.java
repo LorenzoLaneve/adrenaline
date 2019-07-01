@@ -88,8 +88,12 @@ public class CLIMapView implements MapView {
 
     @Override
     public void addWeapon(TilePosition tilePosition, int cardId) {
-        out.print("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") has spawned in tile "+ CLIHelper.tilePositionToString(tilePosition));
-        out.println();
+        out.println("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") has spawned in tile "+ CLIHelper.tilePositionToString(tilePosition));
+    }
+
+    @Override
+    public void removeWeapon(TilePosition tilePosition, int cardId) {
+        out.println("Weapon "+ cardId +"("+ CLIHelper.getWeaponName(cardId) +") was removed from tile "+ CLIHelper.tilePositionToString(tilePosition));
     }
 
     @Override

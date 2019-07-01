@@ -94,6 +94,10 @@ public class SpawnPointTile extends ConcreteTile {
     public WeaponCard grabWeapon(WeaponCard weaponCard) {
         if(this.weaponSet.getWeapons().contains(weaponCard)){
             this.weaponSet.removeWeapon(weaponCard);
+
+            if(getMap().getListener() != null) {
+                getMap().getListener().weaponDidDespawn(this, weaponCard);
+            }
             return weaponCard;
         }
         else{

@@ -4,7 +4,6 @@ import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionDataSource;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
-import it.polimi.deib.newdem.adrenaline.controller.actions.MoveAction;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
@@ -17,6 +16,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -49,22 +49,32 @@ public class TestTurnBaseImpl {
     private class MockActionDataSource implements ActionDataSource{
 
         @Override
-        public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) throws UndoException {
+        public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
             return player1;
         }
 
         @Override
-        public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
-            return map.getTile(new TilePosition(1,0));
+        public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
+            return null;
         }
 
         @Override
-        public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
+        public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
+            return null;
+        }
+
+        @Override
+        public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
+            return map.getTile(new TilePosition(3, 0));
+        }
+
+        @Override
+        public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
             return 1;
         }
 
         @Override
-        public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
+        public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
             return new PaymentReceipt(1, 0, 0, new ArrayList<>());
         }
     }
@@ -72,38 +82,48 @@ public class TestTurnBaseImpl {
     private class MockTurnDataSource implements TurnDataSource{
 
         @Override
-        public ActionType chooseAction(List<ActionType> actionTypeList) throws UndoException {
+        public ActionType requestAction(List<ActionType> actionTypeList) throws UndoException {
             actionDataSource = new MockActionDataSource();
             return new ActionType(AtomicActionType.MOVE1);
         }
 
         @Override
-        public PowerUpCard chooseCard(List<PowerUpCard> cards) throws UndoException {
+        public void pushActor(Player actor) {
+
+        }
+
+        @Override
+        public void popActor(Player actor) {
+
+        }
+
+        @Override
+        public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
+            return null;
+        }
+
+        @Override
+        public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
+            return null;
+        }
+
+        @Override
+        public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
             return game.getPowerUpDeck().getCardFromId(5);
         }
 
         @Override
-        public void turnDidStart(Player actor) {
-
+        public Tile requestTile(TileSelector selector, boolean forceChoice) throws UndoException {
+            return map.getTile(new TilePosition(3, 0));
         }
 
         @Override
-        public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) throws UndoException {
+        public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
             return null;
         }
 
         @Override
-        public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
-            return null;
-        }
-
-        @Override
-        public int actionDidRequestChoice(List<Integer> choices) throws UndoException {
-            return 0;
-        }
-
-        @Override
-        public PaymentReceipt actionDidRequestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
+        public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
             return null;
         }
     }

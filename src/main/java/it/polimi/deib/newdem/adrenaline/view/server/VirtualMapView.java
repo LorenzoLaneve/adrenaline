@@ -92,6 +92,11 @@ public class VirtualMapView implements MapView, MapListener {
     }
 
     @Override
+    public void weaponDidDespawn(Tile tile, WeaponCard weapon) {
+        removeWeapon(tile.getPosition(), weapon.getCardID());
+    }
+
+    @Override
     public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
         List<GameData.DropType> drops = new ArrayList<>();
 
@@ -150,6 +155,11 @@ public class VirtualMapView implements MapView, MapListener {
     @Override
     public void addWeapon(TilePosition tilePosition, int cardId) {
         gameView.sendEvent(new SpawnWeaponEvent(tilePosition, cardId));
+    }
+
+    @Override
+    public void removeWeapon(TilePosition tilePosition, int cardId) {
+        gameView.sendEvent(new DespawnWeaponEvent(tilePosition, cardId));
     }
 
     @Override

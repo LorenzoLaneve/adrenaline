@@ -42,9 +42,9 @@ public interface TurnView {
 
     void endTurn(PlayerColor actor);
 
-    ValOrUndo<Integer> chooseWeaponCard(List<Integer> cardIDs);
-
     ValOrUndo<ActionType> chooseAction(List<ActionType> availableActions);
+
+    ValOrUndo<Integer> chooseWeaponCard(List<Integer> cardIDs);
 
     ValOrUndo<Integer> choosePowerUpCard(List<Integer> cardIDs);
 

@@ -35,7 +35,7 @@ public class OrdinaryTurn extends TurnBaseImpl {
         PowerUpCard choice = null;
         do {
             try{
-                choice = getDataSource().chooseCard(p.getInventory().getPowerUps());
+                choice = getDataSource().choosePowerUpCard(p.getInventory().getPowerUps());
             }
             catch (UndoException e) {
                 // do nothing

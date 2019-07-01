@@ -43,6 +43,11 @@ public class MockMapListener implements MapListener {
     }
 
     @Override
+    public void weaponDidDespawn(Tile tile, WeaponCard weapon) {
+
+    }
+
+    @Override
     public void playerDidGrabDrop(Player player, DropInstance drop, Tile tile) {
 
     }

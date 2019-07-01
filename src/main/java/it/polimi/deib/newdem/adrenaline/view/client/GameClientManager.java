@@ -96,11 +96,11 @@ public class GameClientManager {
                 mapView.removePlayer(e.getPlayerColor()));
         connection.subscribeEvent(SpawnWeaponEvent.class, (conn, e) ->
                 mapView.addWeapon(e.getTilePosition(), e.getWeaponCardID()));
+        connection.subscribeEvent(DespawnWeaponEvent.class, (conn, e) ->
+                mapView.removeWeapon(e.getTilePosition(), e.getCardID()));
         connection.subscribeEvent(DropPickupEvent.class, (conn, e) ->
                 mapView.acquireDrop(e.getTilePosition(), e.getPlayer(), e.getDrop1(), e.getDrop2(), e.getDrop3()));
 
-        connection.subscribeEvent(PlayerActiveEvent.class, (conn, e) ->
-                getPlayerView(e.getPlayerColor()).takeControl());
         connection.subscribeEvent(PlayerScoreEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayerColor()).setScore(e.getNewScore()));
         connection.subscribeEvent(PlayerAcquirePowerUpEvent.class, (conn, e) ->
