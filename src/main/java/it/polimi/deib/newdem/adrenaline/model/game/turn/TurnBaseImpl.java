@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
@@ -59,7 +60,11 @@ public abstract class TurnBaseImpl implements Turn {
             Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {
                 action.start();
-                executedActions++;
+                boolean isPup = aType.covers(new ActionType(AtomicActionType.USE_POWERUP));
+                if(!isPup) {
+                    // something's wrong here
+                    executedActions++;
+                }
             }
             catch (UndoException e) {
                 // do not increment executedActions
