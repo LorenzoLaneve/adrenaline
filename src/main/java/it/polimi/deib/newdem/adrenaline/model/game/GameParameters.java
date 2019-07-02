@@ -22,15 +22,14 @@ public class GameParameters {
     private int maxPlayers;
 
     public static final int KILLTRACK_STARTING_SIZE_DEFAULT = 5;
-    public static final int TURN_TIME_MS_DEFAULT = 60000;
+    public static final int TURN_TIME_S_DEFAULT = 120;
     public static final int MAX_PLAYERS_DEFAULT = 5;
     public static final int MIN_PLAYERS_DEFAULT = 3;
-    public static final int MS_S_CONVERTON_RATE = 1000;
 
 
     public static GameParameters fromConfig(Config config) {
         GameParameters gp = new GameParameters();
-        gp.turnTime = config.getTurnTime() * MS_S_CONVERTON_RATE;
+        gp.turnTime = config.getTurnTime();
         gp.minPlayers = config.getMinPlayers();
         gp.maxPlayers = config.getMaxPlayers();
 
@@ -44,7 +43,7 @@ public class GameParameters {
         // will be set explicitly
 
         killTrackInitialLength = KILLTRACK_STARTING_SIZE_DEFAULT;
-        turnTime = TURN_TIME_MS_DEFAULT;
+        turnTime = TURN_TIME_S_DEFAULT;
         minPlayers = MIN_PLAYERS_DEFAULT;
         maxPlayers = MAX_PLAYERS_DEFAULT;
 
