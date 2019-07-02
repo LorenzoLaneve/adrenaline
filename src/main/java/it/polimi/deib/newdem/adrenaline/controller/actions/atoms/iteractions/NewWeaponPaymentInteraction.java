@@ -24,6 +24,9 @@ public class NewWeaponPaymentInteraction extends InteractionBase {
                 newCard.getPickupPrice(),
                 newCard.getCardID());
 
+        if (receipt == null)
+            throw new UndoException();
+
         paymentGC = new PaymentGameChange(context.getActor(), receipt);
         paymentGC.update(context.getGame());
 
