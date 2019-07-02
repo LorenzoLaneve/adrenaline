@@ -15,7 +15,7 @@ public class TimerWaitingLobbyState implements LobbyState {
     public LobbyState userDidEnterLobby(User user, LobbyController lobbyController) {
         Lobby lobby = lobbyController.getLobby();
 
-        if (lobby.getUsers().size() > lobbyController.getConfig().getMaxPlayers()) {
+        if (lobby.getUsers().size() >= lobbyController.getConfig().getMaxPlayers()) {
             return new InGameLobbyState();
         }
 
@@ -41,7 +41,7 @@ public class TimerWaitingLobbyState implements LobbyState {
 
     @Override
     public void lobbyDidExitState(LobbyController lobbyController) {
-        if (timer.isOver() && !timer.isOver()) {
+        if (!timer.isOver()) {
             timer.abort();
         }
     }

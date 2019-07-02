@@ -105,7 +105,11 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     @Override
     public void timerDidFinish() {
-        this.switchState(new InGameLobbyState());
+        if (lobby.getUsers().size() >= config.getMinPlayers()) {
+            this.switchState(new InGameLobbyState());
+        } else {
+            this.switchState(new TimerWaitingLobbyState());
+        }
     }
 
     @Override

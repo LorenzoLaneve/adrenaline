@@ -36,6 +36,13 @@ public class GUITurnView implements TurnView {
         this.activePlayer = null;
     }
 
+
+
+    private Label getStatusLabel(PlayerColor color) {
+        return (Label) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+    }
+
+
     @Override
     public void startTurn(PlayerColor actor) {
         if (activePlayer != null) {
@@ -44,18 +51,10 @@ public class GUITurnView implements TurnView {
         this.activePlayer = actor;
 
         Platform.runLater(() -> {
-            Pane playerSlots = (Pane) window.getScene().lookup("#playerSlots");
-
-            Node playerSlot = window.getScene().lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
-            playerSlot.applyCss();
-            Label playerStatus = (Label) playerSlot.lookup(".status");
-            playerStatus.setText("It's their turn!");
+            getStatusLabel(actor).setText("It's their turn!");
 
             for (PlayerColor color : playersOnHold) {
-                playerSlot = playerSlots.lookup("."+ GUIGameWindowHelper.toStyleClass(color));
-                playerSlot.applyCss();
-                playerStatus = (Label) playerSlot.lookup(".status");
-                playerStatus.setText("Waiting...");
+                getStatusLabel(color).setText("Waiting...");
             }
         });
     }
@@ -76,10 +75,9 @@ public class GUITurnView implements TurnView {
 
         Platform.runLater(() -> {
             Node playerSlot = window.getScene().lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
-            playerSlot.applyCss();
-            Label playerStatus = (Label) playerSlot.lookup(".status");
+
             if (!playerSlot.getStyleClass().contains("offline")) {
-                playerStatus.setText("");
+                getStatusLabel(actor).setText(" ");
             }
         });
     }
