@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -119,4 +120,11 @@ public class GUIGameWindow {
     public void notifyDisconnection() {
         showDialog(new DisconnectionDialog());
     }
+
+
+    public void setHint(String hint) {
+        Label hintLabel = (Label) scene.lookup("#hintLabel");
+        hintLabel.setText(hint);
+    }
+
 }

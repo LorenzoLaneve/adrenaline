@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.control.Label?>
 <Pane styleClass="map-pane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@styles/general.css" />
@@ -74,7 +75,9 @@
                                         <FlowPane id="killTrackSlot9" hgap="-9.0" vgap="-40.0" />
                                     </Pane>
                                 </FlowPane>
-                                <FlowPane styleClass="control-buttons" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <FlowPane styleClass="control-buttons" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label id="hintLabel" />
+                                </FlowPane>
                             </children>
                         </GridPane>
                         <GridPane GridPane.columnIndex="2">

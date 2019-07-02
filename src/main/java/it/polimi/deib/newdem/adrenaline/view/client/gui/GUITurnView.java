@@ -12,6 +12,7 @@ import it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -150,12 +151,38 @@ public class GUITurnView implements TurnView {
         }
     }
 
+
+    private static String metaPlayerToString(MetaPlayer player) {
+        switch (player) {
+            case RED:
+                return "RED";
+            case GREEN:
+                return "GREEN";
+            case YELLOW:
+                return "YELLOW";
+            case BLUE:
+                return "BLUE";
+            case ATTACKER:
+                return "ATTACKER";
+        }
+        return null;
+    }
+
     @Override
     public ValOrUndo<PlayerColor> choosePlayer(MetaPlayer metaPlayer, List<PlayerColor> legalPlayers, boolean forceChoice) {
         GUILocker<ValOrUndo<PlayerColor>> locker = new GUILocker<>();
         this.currentLocker = locker;
 
-        // TODO show somewhere the meta player.
+        Platform.runLater(() -> window.setHint("Choose "+ metaPlayerToString(metaPlayer) +" player."));
+
+        Button noChoiceButton = null;
+        if (!forceChoice) {
+            noChoiceButton = new Button("No player");
+            noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
+
+            Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
+            controlButtons.getChildren().add(noChoiceButton);
+        }
 
         Map<PlayerColor, EventHandler<MouseEvent>> handlerMap = new EnumMap<>(PlayerColor.class);
 
@@ -181,6 +208,12 @@ public class GUITurnView implements TurnView {
                     playerPin.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(player));
                 }
             }
+
+            Platform.runLater(() -> window.setHint(""));
+
+            if (noChoiceButton != null) {
+                ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
+            }
         }
     }
 
@@ -190,6 +223,17 @@ public class GUITurnView implements TurnView {
         this.currentLocker = locker;
 
         Map<TilePosition, EventHandler<MouseEvent>> handlerMap = new HashMap<>();
+
+        Platform.runLater(() -> window.setHint("Choose a tile."));
+
+        Button noChoiceButton = null;
+        if (!forceChoice) {
+            noChoiceButton = new Button("No tile");
+            noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
+
+            Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
+            controlButtons.getChildren().add(noChoiceButton);
+        }
 
         for (TilePosition tile : legalTiles) {
             Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
@@ -213,6 +257,12 @@ public class GUITurnView implements TurnView {
                     tilePane.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(tile));
                 }
             }
+
+            Platform.runLater(() -> window.setHint(""));
+
+            if (noChoiceButton != null) {
+                ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
+            }
         }
     }
 
@@ -222,6 +272,17 @@ public class GUITurnView implements TurnView {
         this.currentLocker = locker;
 
         Platform.runLater(() -> {
+            window.setHint("Choose a fragment in the card on the right.");
+
+            if (!forceChoice) {
+                Button noChoiceButton = new Button("No fragment");
+                noChoiceButton.getStyleClass().add("no-choice-button");
+                noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
+
+                Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
+                controlButtons.getChildren().add(noChoiceButton);
+            }
+
             GUIGameWindowHelper.setActiveWeaponCard(window.getScene(), cardID);
 
             Pane activeCardSlot = (Pane) window.getScene().lookup("#activeCardSlot");
@@ -241,6 +302,13 @@ public class GUITurnView implements TurnView {
             Platform.runLater(() -> {
                 Pane activeCardSlot = (Pane) window.getScene().lookup("#activeCardSlot");
                 activeCardSlot.getChildren().clear();
+
+                window.setHint("");
+
+                Button noChoiceButton = (Button) window.getScene().lookup(".no-choice-button");
+                if (noChoiceButton != null) {
+                    ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
+                }
             });
         }
     }
