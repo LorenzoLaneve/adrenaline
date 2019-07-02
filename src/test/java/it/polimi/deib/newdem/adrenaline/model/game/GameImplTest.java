@@ -198,9 +198,10 @@ public class GameImplTest {
         assertNotNull(p3);
 
 
-        assertEquals(3, p1.getMoves().size());
-        assertEquals(3, p2.getMoves().size());
-        assertEquals(3, p3.getMoves().size());
+        // shoot is disabled due to absence of loaded weapon
+        assertEquals(3 - 1, p1.getMoves().size());
+        assertEquals(3 - 1, p2.getMoves().size());
+        assertEquals(3 - 1, p3.getMoves().size());
 
         Turn lastTurn = myGame.getNextTurn();
         Player lastPlayer = lastTurn.getActivePlayer();
@@ -211,7 +212,6 @@ public class GameImplTest {
         assertEquals(2, p3.getMoves().size());
         assertEquals(3, p1.getMoves().size());
         assertEquals(2, p2.getMoves().size());
-        //assertEquals(2, p3.getMoves().size());
 
     }
 

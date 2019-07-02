@@ -1,8 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.TestingUtils;
+import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
@@ -19,7 +22,9 @@ import org.junit.Test;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.*;
@@ -65,7 +70,8 @@ public class PlayerImplTest {
         p.getDamageBoard().setListener(new VirtualDamageBoardView(p, vgv));
         q.getDamageBoard().setListener(new VirtualDamageBoardView(q, vgv));
 
-        t2 = new ActionType(MOVE1, SHOOT);
+        t2 = new ActionType(MOVE4);
+        // t2 = new ActionType(MOVE1, SHOOT);
         t1 = new ActionType(MOVE2, GRAB);
     }
 
@@ -99,9 +105,12 @@ public class PlayerImplTest {
         Player p2 = new MockPlayer(GREEN);
         assertNotNull(p);
         assertNotNull(p.getMoves());
-        assertTrue(p.getMoves().containsAll(
-                (new ActionBoardImpl()).getBasicActions()
-        ));
+
+        ActionType shootType = new ActionType(AtomicActionType.SHOOT);
+        List<ActionFactory> expectedMoves = (new ActionBoardImpl()).getBasicActions();
+        expectedMoves.removeIf(e -> shootType.covers(e.getType()));
+
+        assertTrue(p.getMoves().containsAll(expectedMoves));
         assertFalse(p.getMoves().contains(
                 new ConcreteActionFactory(t1)
         ));
@@ -120,10 +129,10 @@ public class PlayerImplTest {
 
 
         assertTrue(p.getMoves().containsAll(
-                (new ActionBoardImpl()).getBasicActions()
+                expectedMoves
         ));
         assertTrue(p.getMoves().contains(
-                new ConcreteActionFactory(t1)
+                new ConcreteActionFactory(MOVE2, GRAB)
         ));
         assertTrue(p.getMoves().contains(
                 new ConcreteActionFactory(USE_POWERUP)
@@ -132,13 +141,13 @@ public class PlayerImplTest {
         d.takeDamage(3, p2);
 
         assertTrue(p.getMoves().containsAll(
-                (new ActionBoardImpl()).getBasicActions()
+                expectedMoves
         ));
         assertTrue(p.getMoves().contains(
                 new ConcreteActionFactory(t1)
         ));
         assertTrue(p.getMoves().contains(
-                new ConcreteActionFactory(t2)
+                new ConcreteActionFactory(MOVE2, GRAB)
         ));
     }
 

@@ -1,7 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
@@ -132,6 +135,12 @@ public class PlayerImpl implements Player {
         factories.addAll(damageBoard.getAdditionalActions());
         if(!this.inventory.getAllPowerUps().isEmpty()){
             factories.add(new ConcreteActionFactory(USE_POWERUP));
+        }
+
+        // if no weapon is loaded, remove any shoot action
+        ActionType shootType = new ActionType(AtomicActionType.SHOOT);
+        if(inventory.getLoadedWeapons().isEmpty()) {
+            factories.removeIf(e -> shootType.covers(e.getType()));
         }
         return factories;
     }
