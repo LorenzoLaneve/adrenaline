@@ -321,7 +321,7 @@ public class PlayerImpl implements Player {
     @Override
     public void reportDeath(boolean isDead) {
         if (isDead) {
-            Map map = getTile().getMap();
+            Map map = getGame().getMap();
             if (map.getListener() != null) {
                 map.getListener().playerDidDie(this);
             }

@@ -101,8 +101,12 @@ public class ConcreteMap implements Map {
     public void removePlayer(Player player) {
         Tile tile = player.getTile();
 
-        tile.removePlayer(player);
-        mapListener.playerDidLeaveMap(player);
+        if (tile != null) {
+            tile.removePlayer(player);
+        }
+        if (mapListener != null) {
+            mapListener.playerDidLeaveMap(player);
+        }
     }
 
 
