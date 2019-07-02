@@ -146,9 +146,11 @@ public class ConcreteMap implements Map {
 
         for (int i = 0; i < matrixMap.length && matrixMap[i] != null; i++) {
 
-            for (int j = 0; j < matrixMap.length && matrixMap[i][j] != null; j++) {
+            for (int j = 0; (j < matrixMap.length && matrixMap[i][j] != null) || (i == 0 && j < matrixMap.length); j++) {
                 Tile tile = matrixMap[i][j];
-                tiles.add(tile);
+                if(tile!= null){
+                    tiles.add(tile);
+                }
             }
         }
 
