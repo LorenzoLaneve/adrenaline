@@ -32,27 +32,38 @@ public abstract class TurnBaseImpl implements Turn {
     @Override
     public void execute() {
         turnDataSource.pushActor(getActivePlayer());
-        performInitialActions();
-        performCoreActions();
-        performClosingActions();
+        try {
+            performInitialActions();
+            performCoreActions();
+            performClosingActions();
+        }
+        catch (TurnTerminatedByUserException e) {
+            // do nothing, terminate gracefully.
+        }
         turnDataSource.popActor(getActivePlayer());
-        // performClosingActions(); outsourced to game.concludeTurn()
+        // refilling tiles and assigning scores are outsourced to Game::concludeTurn
     }
 
     protected abstract void performInitialActions();
 
-    protected void performClosingActions() {
+    protected void performClosingActions() throws TurnTerminatedByUserException {
 
         // use powerup
-        ActionType aType = null;
         if(!activePlayer.getInventory().getCallablePowerUps().isEmpty()) {
             try{
+                /*
                 aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.USE_POWERUP)));
 
                 if(null == aType) { throw new UndoException(); }
 
                 Action action = new ConcreteActionFactory(aType).makeAction(activePlayer, turnDataSource);
                 action.start();
+                */
+                // here I can use one or more pups
+                // start a pupAction
+                ActionFactory powerUpActionFactory = new ConcreteActionFactory(AtomicActionType.USE_POWERUP);
+                Action powerUpAction = powerUpActionFactory.makeAction(activePlayer, turnDataSource);
+                powerUpAction.start();
             }
             catch (UndoException e) {
                 // terminate gracefully
@@ -62,7 +73,7 @@ public abstract class TurnBaseImpl implements Turn {
         // reload
         if(!activePlayer.getInventory().getDischargedWeapons().isEmpty()) {
             try {
-                aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
+                ActionType aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
 
                 if (null == aType) {
                     throw new UndoException();
@@ -76,7 +87,7 @@ public abstract class TurnBaseImpl implements Turn {
         }
     }
 
-    protected void performCoreActions() {
+    protected void performCoreActions() throws TurnTerminatedByUserException {
         int executedActions = 0;
 
         while (executedActions < activePlayer.getMovesAmount()) {
@@ -91,11 +102,12 @@ public abstract class TurnBaseImpl implements Turn {
 
                 if (null == aType) {
                     // user wishes to terminate turn
-                    return;
+                    throw new TurnTerminatedByUserException();
                 }
             }
             catch (UndoException e) {
-                // do not wish to terminate turn
+                // this should never happen
+                throw new IllegalStateException();
             }
 
             /*
@@ -112,7 +124,6 @@ public abstract class TurnBaseImpl implements Turn {
                     // do nothing
                 }
             } while (null == aType);
-            // TODO
             // aType == null -> user wishes to terminate turn?
             */
 
@@ -127,14 +138,7 @@ public abstract class TurnBaseImpl implements Turn {
             }
             catch (UndoException e) {
                 // do not increment executedActions
-                System.out.println("Hello");
             }
-            finally {}
-            // catch (TimeoutException | InterruptedException e){
-                // do stuff
-                // undo stuff
-                // terminate
-            // }
         }
     }
 
