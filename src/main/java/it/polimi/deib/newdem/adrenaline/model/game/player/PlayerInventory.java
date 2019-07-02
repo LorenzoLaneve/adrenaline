@@ -298,13 +298,13 @@ public class PlayerInventory {
     }
 
     public List<Weapon> getDischargedWeapons() {
-        ArrayList<Weapon> weapons = new ArrayList<>();
+        ArrayList<Weapon> dischargedWeapons = new ArrayList<>();
         for(Weapon w : weapons) {
             if(!w.isLoaded()) {
-                weapons.add(w);
+                dischargedWeapons.add(w);
             }
         }
-        return weapons;
+        return dischargedWeapons;
     }
 
     /**

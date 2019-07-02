@@ -81,6 +81,25 @@ public abstract class TurnBaseImpl implements Turn {
 
         while (executedActions < activePlayer.getMovesAmount()) {
             ActionType aType = null;
+            try{
+                aType = turnDataSource.requestAction(
+                        activePlayer.getMoves()
+                        .stream()
+                        .map(ActionFactory::getType)
+                        .collect(Collectors.toList())
+                );
+
+                if (null == aType) {
+                    // user wishes to terminate turn
+                    return;
+                }
+            }
+            catch (UndoException e) {
+                // do not wish to terminate turn
+            }
+
+            /*
+            ActionType aType = null;
             do {
                 try{
                     aType = turnDataSource.requestAction(
@@ -95,6 +114,7 @@ public abstract class TurnBaseImpl implements Turn {
             } while (null == aType);
             // TODO
             // aType == null -> user wishes to terminate turn?
+            */
 
             Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {
