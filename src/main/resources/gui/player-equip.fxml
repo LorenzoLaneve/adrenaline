@@ -30,7 +30,7 @@
             </children>
         </GridPane>
 
-        <FlowPane id="weaponCardsViewer" hgap="10.0" styleClass="card-viewer,weapon-cards" alignment="CENTER" />
+        <FlowPane id="weaponCardsViewer" hgap="10.0" styleClass="card-viewer,newCard-cards" alignment="CENTER" />
 
         <FlowPane id="powerUpsViewer" hgap="10.0" styleClass="card-viewer,powerup-cards" alignment="CENTER" />
     </children>

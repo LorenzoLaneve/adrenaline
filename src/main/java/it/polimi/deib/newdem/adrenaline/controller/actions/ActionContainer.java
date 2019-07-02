@@ -2,14 +2,11 @@ package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequence;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequenceImpl;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
-import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.map.Tile;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +17,14 @@ public class ActionContainer implements Action, AtomsContainer {
     protected Game game;
     protected Player actor;
     private List<AtomicAction> atomicActions;
+    private AtomsRunSequence atomsRunSequence;
 
     public ActionContainer(Player actor, ActionDataSource actionDataSource) {
         this.actor = actor;
         this.actionDataSource = actionDataSource;
         this.game = actor.getGame();
         this.atomicActions = new ArrayList<>();
+        this.atomsRunSequence = new AtomsRunSequenceImpl();
     }
 
     void addAtom(AtomicAction atomicAction) {
@@ -38,16 +37,22 @@ public class ActionContainer implements Action, AtomsContainer {
     }
 
     @Override
-    public void start() {
-        for(AtomicAction atom : atomicActions) {
-            try {
-                atom.execute();
-            }
-            catch (UndoException e) {
-                // do what now
-            }
+    public void start() throws UndoException {
+        buildAtomsRunSequence();
+        atomsRunSequence.executeFromStart();
+    }
+
+    private void buildAtomsRunSequence() {
+        for(int i = 0; i < atomicActions.size(); i++) {
+            atomsRunSequence.append(atomicActions.get(i));
         }
     }
+    /*
+    private void buildAtomsRunStack() {
+        for(int i = atomicActions.size() - 1; i >= 0; i--) {
+            atomsRunSequence.append(atomicActions.get(i));
+        }
+    }*/
 
     @Override
     public ActionDataSource getDataSource() {

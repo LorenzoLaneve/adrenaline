@@ -28,7 +28,8 @@ public class ReloadAtomTest {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
         source = new ScriptedDataSource(
                 new ActionType(AtomicActionType.MOVE3, AtomicActionType.GRAB),
-                new ActionType(AtomicActionType.MOVE3)
+                new ActionType(AtomicActionType.MOVE3),
+                new ActionType(AtomicActionType.MOVE1)
         );
     }
 

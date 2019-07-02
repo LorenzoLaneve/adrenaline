@@ -13,9 +13,12 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static sun.swing.MenuItemLayoutHelper.max;
 
 public class ScriptedDataSource implements TurnDataSource {
 
@@ -24,8 +27,12 @@ public class ScriptedDataSource implements TurnDataSource {
     List<Integer> pups;
     List<Integer> weaponCardIndex;
     int i;
+    int paymentsToUndo;
+
     private static final int UNDO_TILE_X = 90;
     private static final int UNDO_TILE_Y = 90;
+    private static final int UNDO_WEAPON_CARD_INDEX = 10;
+    private static final int UNDO_PUP_INDEX = 42;
 
 
     public ScriptedDataSource(ActionType ... types) {
@@ -34,15 +41,8 @@ public class ScriptedDataSource implements TurnDataSource {
         tiles = new ArrayList<>();
         pups = new ArrayList<>();
         weaponCardIndex = new ArrayList<>();
+        paymentsToUndo = 0;
     }
-/*
-    @Override
-    public ActionType chooseAction(List<ActionType> actionTypeList) {
-        ActionType out = arr[i];
-        i++;
-        return out;
-    }
-    */
 
     public static Tile getUndoTile() {
         return new OrdinaryTile(new TilePosition(UNDO_TILE_X, UNDO_TILE_Y));
@@ -55,6 +55,10 @@ public class ScriptedDataSource implements TurnDataSource {
 
     public void pushPupIndex(Integer i) {
         pups.add(i);
+    }
+
+    public static int getUndoPupIndex() {
+        return UNDO_PUP_INDEX;
     }
 
 
@@ -85,19 +89,31 @@ public class ScriptedDataSource implements TurnDataSource {
         return null;
     }
 */
+
+    public static int getUndoWeaponCardIndex() {
+        return UNDO_WEAPON_CARD_INDEX;
+    }
+
     public void pushWeaponCardIndex(int i) {
         weaponCardIndex.add(i);
+    }
+
+    public int getWeaponCardLeftovers() {
+        return weaponCardIndex.size();
     }
 
     @Override
     public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
         int index = weaponCardIndex.remove(weaponCardIndex.size() - 1);
+        if(UNDO_WEAPON_CARD_INDEX == index) throw new UndoException();
         return cards.get(index);
     }
 
     @Override
     public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
-        PowerUpCard pup = cards.get(pups.remove(pups.size() - 1));
+        int index = pups.remove(pups.size() - 1);
+        if(UNDO_PUP_INDEX == index) throw new UndoException();
+        PowerUpCard pup = cards.get(index);
         if(null == pup) throw new IllegalStateException();
         return pup;
     }
@@ -133,8 +149,20 @@ public class ScriptedDataSource implements TurnDataSource {
         return null;
     }
 
+    public void undoNextPayment() {
+        paymentsToUndo = max(paymentsToUndo, 1);
+    }
+
+    public void addScheduledUndoPayment() {
+        paymentsToUndo++;
+    }
+
     @Override
     public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
+        if(paymentsToUndo > 0) {
+            paymentsToUndo--;
+            throw new UndoException();
+        }
         return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
     }
 

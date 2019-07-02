@@ -1,25 +1,30 @@
-package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
+package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
-import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
 import java.util.List;
 
-public class ReloadAtom extends AtomContext {
+public class SelectReloadWeaponInteraction extends InteractionBase {
 
-    public ReloadAtom(AtomsContainer parent) {
-        super(parent, EntryPointType.RELOAD);
+    public SelectReloadWeaponInteraction(InteractionContext context) {
+        super(context);
     }
-/*
+
     @Override
-    public void executeFromStart() {
-        PlayerInventory inventory = parent.getActor().getInventory();
+    public void execute() throws UndoException {
+        Player player = context.getActor();
+
+        List<WeaponCard> selectables = player.getInventory().getUnloadedWeapons().getWeapons();
+
+        if(!selectables.isEmpty()) {
+            WeaponCard selectedWeaponCard = context.getDataSource().chooseWeaponCard(selectables);
+
+            context.pushInteraction(new ReloadPaymentInteraction(context, selectedWeaponCard));
+        }
+        /*
+        * PlayerInventory inventory = parent.getActor().getInventory();
         try {
 
             while (!inventory.getDischargedWeapons().isEmpty()) {
@@ -46,6 +51,16 @@ public class ReloadAtom extends AtomContext {
         catch (UndoException e) {
             // nothing to do here.
         }
+        * */
     }
-    */
+
+    @Override
+    public void revert() {
+        // nothing to revert
+    }
+
+    @Override
+    public boolean requiresInput() {
+        return true;
+    }
 }

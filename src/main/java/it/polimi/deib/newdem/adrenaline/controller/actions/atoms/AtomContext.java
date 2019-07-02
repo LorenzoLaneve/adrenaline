@@ -3,6 +3,9 @@ package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 import it.polimi.deib.newdem.adrenaline.controller.AbortedException;
 import it.polimi.deib.newdem.adrenaline.controller.TimedExecutor;
 import it.polimi.deib.newdem.adrenaline.controller.TimeoutException;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStackImpl;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
@@ -17,8 +20,24 @@ public abstract class AtomContext extends AtomBase implements EffectContext {
 
     protected WeaponCard usedWeapon;
 
-    public AtomContext(AtomsContainer parent) {
-        super(parent);
+    public AtomContext(AtomsContainer parent, EntryPointType entryPointType) {
+        super(parent, new EntryPointFactory(entryPointType));
+    }
+
+    private void registerContext(InteractionStackImpl stack, EffectContext context) {
+        stack.registerContext(context);
+    }
+
+    @Override
+    public void executeFromStart() throws UndoException {
+        registerContext(interactionsStack, this);
+        super.executeFromStart();
+    }
+
+    @Override
+    public void executeFromLatest() throws UndoException {
+        registerContext(interactionsStack, this);
+        super.executeFromLatest();
     }
 
     @Override
@@ -90,6 +109,11 @@ public abstract class AtomContext extends AtomBase implements EffectContext {
 
     private void revenge() {
         // TODO
+    }
+
+    @Override
+    public EffectContext getEffectContext() {
+        return this;
     }
 
 }
