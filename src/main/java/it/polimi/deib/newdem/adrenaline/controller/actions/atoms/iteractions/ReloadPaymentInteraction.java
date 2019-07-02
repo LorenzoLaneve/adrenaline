@@ -19,7 +19,7 @@ public class ReloadPaymentInteraction extends InteractionBase {
     @Override
     public void execute() throws UndoException {
         PaymentReceipt receipt = context.getDataSource().requestPayment(
-                selectedWeapon.getPickupPrice(),
+                selectedWeapon.getReloadPrice(),
                 selectedWeapon.getCardID()
         );
 
