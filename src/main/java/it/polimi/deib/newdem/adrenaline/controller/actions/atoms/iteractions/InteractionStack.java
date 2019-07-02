@@ -27,5 +27,10 @@ public interface InteractionStack {
      */
     void revisit() throws UndoException;
 
+    /**
+     * Registers the given {@code AtomEffectContext} for later use by {@code Interaction}s
+     * within this stack.
+     * @param context to be registered
+     */
     void registerContext(AtomEffectContext context);
 }

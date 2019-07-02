@@ -13,6 +13,10 @@ import java.util.NoSuchElementException;
 
 public class InteractionStackImpl implements InteractionContext, InteractionStack {
 
+    /**
+     * An implementation of InteractionStack
+     *
+     */
     private Deque<Interaction> runningStack;
     private AtomsContainer ancestor;
     private AtomEffectContext effectContext;

@@ -21,7 +21,11 @@ public class SelectReloadWeaponInteraction extends InteractionBase {
         if(!selectables.isEmpty()) {
             WeaponCard selectedWeaponCard = context.getDataSource().chooseWeaponCard(selectables);
 
-            if(null == selectedWeaponCard) { throw new UndoException(); }
+            if(null == selectedWeaponCard) {
+                // due to InteractionStack's design, terminating gracefully
+                // without pushing anything will cause the context's visit to terminate.
+                return;
+            }
 
             context.pushInteraction(new ReloadPaymentInteraction(context, selectedWeaponCard));
         }
