@@ -33,14 +33,16 @@ public abstract class TurnBaseImpl implements Turn {
     public void execute() {
         turnDataSource.pushActor(getActivePlayer());
         try {
-            performInitialActions();
-            performCoreActions();
-            performClosingActions();
+            try {
+                performInitialActions();
+                performCoreActions();
+                performClosingActions();
+            } catch (TurnTerminatedByUserException e) {
+                // do nothing, terminate gracefully.
+            }
+        } finally {
+            turnDataSource.popActor(getActivePlayer());
         }
-        catch (TurnTerminatedByUserException e) {
-            // do nothing, terminate gracefully.
-        }
-        turnDataSource.popActor(getActivePlayer());
         // refilling tiles and assigning scores are outsourced to Game::concludeTurn
     }
 

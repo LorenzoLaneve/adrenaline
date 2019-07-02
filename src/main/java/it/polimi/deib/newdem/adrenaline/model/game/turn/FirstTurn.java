@@ -9,6 +9,8 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
+import java.util.Random;
+
 public class FirstTurn extends TurnBaseImpl {
 
     /**
@@ -21,10 +23,8 @@ public class FirstTurn extends TurnBaseImpl {
      */
     @Override
     protected void performInitialActions() {
-        //TODO implement
         Player p = getActivePlayer();
         Map map = p.getGame().getMap();
-        // requires action anc listeners
 
         // draw card
         p.drawCard();
@@ -46,11 +46,11 @@ public class FirstTurn extends TurnBaseImpl {
             Tile target = map.getSpawnPointFromColor(selection.getEquivalentAmmo());
             map.movePlayer(getActivePlayer(), target);
         } catch (InterruptExecutionException x) {
+            PowerUpCard selection = p.getInventory().getPowerUps().get(new Random().nextInt() % p.getInventory().getPowerUps().size());
 
-            // spawn the player in random location
-            AmmoColor randomColor = AmmoColor.values()[(int)(Math.random()*3)];
+            p.getInventory().removePowerUp(selection);
 
-            Tile target = map.getSpawnPointFromColor(randomColor);
+            Tile target = map.getSpawnPointFromColor(selection.getEquivalentAmmo());
             map.movePlayer(getActivePlayer(), target);
             throw x;
         }
