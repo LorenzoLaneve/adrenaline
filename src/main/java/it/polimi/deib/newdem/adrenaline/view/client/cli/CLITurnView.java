@@ -82,10 +82,10 @@ public class CLITurnView implements TurnView {
 
         int choice = -1;
         do {
-            out.println("Enter the ID of the action or [u]ndo: ");
+            out.println("Enter the ID of the action or [e]nd turn: ");
             String line = in.nextLine();
-            if (line.equalsIgnoreCase("u"))
-                return new ValOrUndo<>();
+            if (line.equalsIgnoreCase("e"))
+                return new ValOrUndo<>(null);
 
             try {
                 choice = Integer.valueOf(line);
@@ -106,10 +106,10 @@ public class CLITurnView implements TurnView {
 
         String line;
         do {
-            out.println("Enter the ID of the weapon or [u]ndo: ");
+            out.println("Enter the ID of the weapon or [n]o card: ");
             line = in.nextLine();
-            if (line.equalsIgnoreCase("u"))
-                return new ValOrUndo<>();
+            if (line.equalsIgnoreCase("n"))
+                return new ValOrUndo<>(null);
 
         } while (!cardIDs.stream().map(x -> Integer.toString(x)).collect(Collectors.toList()).contains(line));
         return new ValOrUndo<>(Integer.valueOf(line));
@@ -124,9 +124,9 @@ public class CLITurnView implements TurnView {
 
         String line;
         do {
-            out.println("Enter the ID of the power up or [u]ndo: ");
+            out.println("Enter the ID of the power up or [n]o card: ");
             line = in.nextLine();
-            if (line.equalsIgnoreCase("u"))
+            if (line.equalsIgnoreCase("n"))
                 return new ValOrUndo<>();
 
         } while (!cardIDs.stream().map(x -> Integer.toString(x)).collect(Collectors.toList()).contains(line));
@@ -175,10 +175,10 @@ public class CLITurnView implements TurnView {
 
         PlayerColor chosenPlayer = null;
         do {
-            out.println("Enter the color of the player or [u]ndo: ");
+            out.println("Enter the color of the player or [n]o player: ");
             String line = in.nextLine();
-            if (line.equalsIgnoreCase("u"))
-                return new ValOrUndo<>();
+            if (line.equalsIgnoreCase("n"))
+                return new ValOrUndo<>(null);
 
             chosenPlayer = stringToColor(line);
         } while (chosenPlayer == null || !legalPlayers.contains(chosenPlayer));
@@ -194,14 +194,14 @@ public class CLITurnView implements TurnView {
 
         TilePosition chosenTile = null;
         do {
-            out.println("Enter the X coord of the tile or [u]ndo: ");
+            out.println("Enter the X coord of the tile or [n]o tile: ");
             String lineX = in.nextLine();
-            if (lineX.equalsIgnoreCase("u"))
+            if (lineX.equalsIgnoreCase("n"))
                 return new ValOrUndo<>();
 
-            out.println("Enter the Y coord of the tile or [u]ndo: ");
+            out.println("Enter the Y coord of the tile or [n]o tile: ");
             String lineY = in.nextLine();
-            if (lineY.equalsIgnoreCase("u"))
+            if (lineY.equalsIgnoreCase("n"))
                 return new ValOrUndo<>();
 
             try {
@@ -228,9 +228,9 @@ public class CLITurnView implements TurnView {
 
         Integer chosenFrag = null;
         do {
-            out.println("Enter the ID of the fragment or [u]ndo: ");
+            out.println("Enter the ID of the fragment or [n]one: ");
             String line = in.nextLine();
-            if (line.equalsIgnoreCase("u"))
+            if (line.equalsIgnoreCase("n"))
                 return new ValOrUndo<>();
 
             try {
@@ -288,9 +288,17 @@ public class CLITurnView implements TurnView {
         out.println("+ " + ammosToPay.get(AmmoColor.BLUE) + " blue ammo(s) (You have " + playerInv.getBlueAmmos() + ")");
         out.println("+ " + ammosToPay.get(AmmoColor.YELLOW) + " yellow ammo(s) (You have " + playerInv.getYellowAmmos() + ")");
 
+        Boolean wantToPay = null;
+        do {
+            out.println("Do you want to pay for frag ID "+ fragmentToPay +"? [y/n]");
+            wantToPay = stringToYesNo(in.nextLine());
+        } while (wantToPay == null);
+
+        if (!wantToPay) return new ValOrUndo<>(null);
+
         for (int cardID : cardIDs) {
             if (ammosToPay.get(getEquivalentAmmo(cardID)) > 0) {
-                Boolean choice = null;
+                Boolean choice;
                 do {
                     out.println("Do you want to use " + CLIHelper.getPowerUpName(cardID) + " to pay? [y/n]");
                     choice = stringToYesNo(in.nextLine());

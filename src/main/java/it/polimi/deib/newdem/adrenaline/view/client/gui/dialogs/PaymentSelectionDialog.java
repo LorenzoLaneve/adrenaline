@@ -179,6 +179,11 @@ public class PaymentSelectionDialog implements Dialog {
                 }
             });
 
+            Button cancelButton = (Button) dialogPane.lookup(".cancel-button");
+            cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                listener.paymentChosen(null);
+            });
+
             return dialogPane;
         } catch (Exception x) {
             return null;

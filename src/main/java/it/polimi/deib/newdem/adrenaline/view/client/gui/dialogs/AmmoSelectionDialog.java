@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -97,6 +98,11 @@ public class AmmoSelectionDialog implements Dialog {
                     listener.ammoChosen(AmmoColor.YELLOW, null);
                 });
             }
+
+            Button cancelButton = (Button) dialogPane.lookup(".cancel-button");
+            cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                listener.ammoChosen(null, null);
+            });
 
             return dialogPane;
         } catch (Exception x) {

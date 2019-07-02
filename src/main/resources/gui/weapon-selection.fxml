@@ -27,7 +27,7 @@
                 <Label styleClass="overlay-dialog-title" text="Choose a Weapon" GridPane.columnIndex="0" />
                 <FlowPane GridPane.columnIndex="1" GridPane.halignment="RIGHT" alignment="CENTER_RIGHT">
                     <Button styleClass="hide-button" text="Hide Dialog" />
-                    <Button styleClass="no-card-button" text="No card" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Button styleClass="no-card-button" text="No card" />
                 </FlowPane>
             </children>
         </GridPane>
