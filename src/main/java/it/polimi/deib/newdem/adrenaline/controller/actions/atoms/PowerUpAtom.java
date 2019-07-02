@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
@@ -11,11 +12,12 @@ import java.util.stream.Collectors;
 public class PowerUpAtom extends AtomContext {
 
     public PowerUpAtom(AtomsContainer parent) {
-        super(parent);
+        super(parent, EntryPointType.POWERUP);
     }
 
+    /*
     @Override
-    public void execute() throws UndoException {
+    public void executeFromStart() throws UndoException {
         // choose pup card
         List<PowerUpCard> availablePups = getActor().getInventory().getPowerUps()
                 .stream()
@@ -32,4 +34,5 @@ public class PowerUpAtom extends AtomContext {
             }
         }
     }
+    */
 }

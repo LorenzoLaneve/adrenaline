@@ -281,7 +281,8 @@ public class GameImpl implements Game {
         //TODO
         // EOT actions
         // reload
-        reload(turn);
+        // reload(turn);
+        // tentatively moved to TurnBaseImpl::performClosingActions()
 
         // extra point for multiple kills
         for(Player p :players) {
@@ -471,7 +472,7 @@ public class GameImpl implements Game {
             }
         }
     }
-
+/*
     private void reload(Turn turn) {
         Action reloadAction = new ConcreteActionFactory(AtomicActionType.RELOAD).makeAction(turn.getActivePlayer(), turn.getDataSource());
         try {
@@ -481,4 +482,5 @@ public class GameImpl implements Game {
             // done.
         }
     }
+    */
 }

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects.selection;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
@@ -8,10 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameParameters;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
-import it.polimi.deib.newdem.adrenaline.model.map.Direction;
-import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.Tile;
-import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
+import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class TestUnionTileSelector {
 
     @Before
     public void setUp() throws Exception {
-
+        TestingUtils.loadSingleton();
         map =  Map.createMap(this.getClass().getClassLoader().getResource("Map0_0.json").getFile().replace("%20", " "));
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());

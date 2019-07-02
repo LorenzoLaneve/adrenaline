@@ -250,7 +250,7 @@ public class PlayerInventory {
             }
         }
     }
-
+/*
     public void addDrop(DropInstance drop) {
         addAmmoSet(drop.getAmmos());
         try {
@@ -260,7 +260,7 @@ public class PlayerInventory {
             // too bad, no new powerup added :(
         }
     }
-
+*/
     public void addAmmoSet(AmmoSet ammoSet) {
         int deltaRed = ammos.get(RED);
         int deltaBlue = ammos.get(BLUE);
@@ -305,5 +305,21 @@ public class PlayerInventory {
             }
         }
         return weapons;
+    }
+
+    /**
+     * Returns a list of all the {@code Weapon}s in this inventory.
+     *
+     * @return all the weapons
+     */
+    public List<Weapon> getAllWeapons() {
+        return new ArrayList<>(weapons);
+    }
+
+    public List<PowerUpCard> getCallablePowerUps() {
+        return getPowerUps()
+                .stream()
+                .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
+                .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.*;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 
@@ -25,18 +27,25 @@ public class ConcreteActionFactory implements ActionFactory {
         // fill container with ordered atoms from atomic action types
         AtomicAction currentAtomicAction = null;
         for (AtomicActionType aat : actionType.getAtomicTypes()) {
+            EntryPointFactory epfm = new EntryPointFactory(EntryPointType.MOVEMENT);
+            epfm.setMinDist(0);
+
             switch (aat) {
                 case MOVE1:
-                    currentAtomicAction = new MoveAtom(container, 0,1);
+                    epfm.setMaxDist(1);
+                    currentAtomicAction = new MoveAtom(container, epfm);
                     break;
                 case MOVE2:
-                    currentAtomicAction = new MoveAtom(container, 0,2);
+                    epfm.setMaxDist(2);
+                    currentAtomicAction = new MoveAtom(container, epfm);
                     break;
                 case MOVE3:
-                    currentAtomicAction = new MoveAtom(container, 0,3);
+                    epfm.setMaxDist(3);
+                    currentAtomicAction = new MoveAtom(container, epfm);
                     break;
                 case MOVE4:
-                    currentAtomicAction = new MoveAtom(container, 0,4);
+                    epfm.setMaxDist(4);
+                    currentAtomicAction = new MoveAtom(container, epfm);
                     break;
                 case SHOOT:
                     currentAtomicAction = new ShootAtom(container);

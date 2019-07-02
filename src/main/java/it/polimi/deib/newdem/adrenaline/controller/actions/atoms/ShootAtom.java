@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
@@ -9,15 +10,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShootAtom extends AtomContext {
-
+    // TODO     IMPLEMENT ENTRYPOINT AND EVERYTHING ELSE
+    // FIXME
     public ShootAtom(AtomsContainer parent) {
-        super(parent);
+        super(parent, EntryPointType.SHOOT);
     }
 
+    /*
     @Override
-    public void execute() throws UndoException {
+    public void executeFromStart() throws UndoException {
 
         List<Weapon> availableWeapons = getActor().getInventory().getLoadedWeapons();
+
+        if (availableWeapons.isEmpty()) throw new UndoException();
 
         Weapon selectedWeapon = selectWeapon(availableWeapons);
         this.usedWeapon = selectedWeapon.getCard();
@@ -52,7 +57,6 @@ public class ShootAtom extends AtomContext {
 
     private void applyEffect(Effect effect) {
         boolean effectResolved = false;
-
         do {
             try {
                 effect.apply(new EffectManager(this), getActor());
@@ -64,4 +68,5 @@ public class ShootAtom extends AtomContext {
         }
         while (!effectResolved);
     }
+    */
 }

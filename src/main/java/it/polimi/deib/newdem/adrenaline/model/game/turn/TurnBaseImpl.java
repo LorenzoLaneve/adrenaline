@@ -8,6 +8,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionTyp
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class TurnBaseImpl implements Turn {
@@ -33,11 +34,47 @@ public abstract class TurnBaseImpl implements Turn {
         turnDataSource.pushActor(getActivePlayer());
         performInitialActions();
         performCoreActions();
+        performClosingActions();
         turnDataSource.popActor(getActivePlayer());
         // performClosingActions(); outsourced to game.concludeTurn()
     }
 
     protected abstract void performInitialActions();
+
+    protected void performClosingActions() {
+
+        // use powerup
+        ActionType aType = null;
+        if(!activePlayer.getInventory().getCallablePowerUps().isEmpty()) {
+            try{
+                aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.USE_POWERUP)));
+
+                if(null == aType) { throw new UndoException(); }
+
+                Action action = new ConcreteActionFactory(aType).makeAction(activePlayer, turnDataSource);
+                action.start();
+            }
+            catch (UndoException e) {
+                // terminate gracefully
+            }
+        }
+
+        // reload
+        if(!activePlayer.getInventory().getDischargedWeapons().isEmpty()) {
+            try {
+                aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
+
+                if (null == aType) {
+                    throw new UndoException();
+                }
+
+                Action reloadAction = new ConcreteActionFactory(aType).makeAction(activePlayer, turnDataSource);
+                reloadAction.start();
+            } catch (UndoException e) {
+                // terminate gracefully
+            }
+        }
+    }
 
     protected void performCoreActions() {
         int executedActions = 0;
@@ -56,6 +93,8 @@ public abstract class TurnBaseImpl implements Turn {
                     // do nothing
                 }
             } while (null == aType);
+            // TODO
+            // aType == null -> user wishes to terminate turn?
 
             Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {
@@ -68,6 +107,7 @@ public abstract class TurnBaseImpl implements Turn {
             }
             catch (UndoException e) {
                 // do not increment executedActions
+                System.out.println("Hello");
             }
             finally {}
             // catch (TimeoutException | InterruptedException e){

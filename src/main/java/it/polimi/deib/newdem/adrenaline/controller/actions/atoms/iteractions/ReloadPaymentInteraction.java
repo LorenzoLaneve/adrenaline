@@ -1,25 +1,36 @@
-package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
+package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
+import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
-import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
-import java.util.List;
+public class ReloadPaymentInteraction extends InteractionBase {
 
-public class ReloadAtom extends AtomContext {
+    private WeaponCard selectedWeapon;
+    private GameChange paymentGC;
 
-    public ReloadAtom(AtomsContainer parent) {
-        super(parent, EntryPointType.RELOAD);
+    public ReloadPaymentInteraction(InteractionContext context, WeaponCard selectedWeapon) {
+        super(context);
+        this.selectedWeapon = selectedWeapon;
     }
-/*
+
     @Override
-    public void executeFromStart() {
-        PlayerInventory inventory = parent.getActor().getInventory();
+    public void execute() throws UndoException {
+        PaymentReceipt receipt = context.getDataSource().requestPayment(
+                selectedWeapon.getPickupPrice(),
+                selectedWeapon.getCardID()
+        );
+
+        if(null == receipt) { throw new UndoException(); }
+
+        paymentGC = new PaymentGameChange(context.getActor(), receipt);
+        paymentGC.update(context.getGame());
+
+        context.pushInteraction(new ReloadActivationInteraction(context, selectedWeapon));
+        /*
+        * PlayerInventory inventory = parent.getActor().getInventory();
         try {
 
             while (!inventory.getDischargedWeapons().isEmpty()) {
@@ -46,6 +57,16 @@ public class ReloadAtom extends AtomContext {
         catch (UndoException e) {
             // nothing to do here.
         }
+        * */
     }
-    */
+
+    @Override
+    public void revert() {
+        paymentGC.revert(context.getGame());
+    }
+
+    @Override
+    public boolean requiresInput() {
+        return true;
+    }
 }

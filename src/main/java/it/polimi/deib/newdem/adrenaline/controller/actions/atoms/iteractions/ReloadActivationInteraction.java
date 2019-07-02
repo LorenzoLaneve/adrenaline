@@ -1,25 +1,33 @@
-package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
+package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 
-import java.util.List;
+public class ReloadActivationInteraction extends InteractionBase {
 
-public class ReloadAtom extends AtomContext {
+    private WeaponCard selectedWeapon;
 
-    public ReloadAtom(AtomsContainer parent) {
-        super(parent, EntryPointType.RELOAD);
+    public ReloadActivationInteraction(InteractionContext context, WeaponCard selectedWeapon) {
+        super(context);
+        this.selectedWeapon = selectedWeapon;
     }
-/*
+
     @Override
-    public void executeFromStart() {
-        PlayerInventory inventory = parent.getActor().getInventory();
+    public void execute() throws UndoException {
+        PlayerInventory inventory = context.getActor().getInventory();
+        for(Weapon weapon : inventory.getDischargedWeapons()) {
+            if(weapon.getCard().equals(selectedWeapon)) {
+                weapon.reload();
+
+                if(!inventory.getDischargedWeapons().isEmpty()) {
+                    context.pushInteraction(new SelectReloadWeaponInteraction(context));
+                }
+            }
+        }
+        /*
+        * PlayerInventory inventory = parent.getActor().getInventory();
         try {
 
             while (!inventory.getDischargedWeapons().isEmpty()) {
@@ -46,6 +54,16 @@ public class ReloadAtom extends AtomContext {
         catch (UndoException e) {
             // nothing to do here.
         }
+        * */
     }
-    */
+
+    @Override
+    public void revert() {
+
+    }
+
+    @Override
+    public boolean requiresInput() {
+        return false;
+    }
 }

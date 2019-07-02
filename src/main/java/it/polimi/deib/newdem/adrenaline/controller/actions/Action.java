@@ -11,7 +11,7 @@ public interface Action {
     Player getActor();
 
     /**
-     * Starts to execute the action.
+     * Starts to executeFromStart the action.
      * @throws UndoException if the user requested to undo the action.
      */
     void start() throws UndoException;
