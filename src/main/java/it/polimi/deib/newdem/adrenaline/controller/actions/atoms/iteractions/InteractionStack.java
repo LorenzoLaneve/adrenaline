@@ -1,6 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 
 public interface InteractionStack {
@@ -27,5 +27,5 @@ public interface InteractionStack {
      */
     void revisit() throws UndoException;
 
-    void registerContext(EffectContext context);
+    void registerContext(AtomEffectContext context);
 }

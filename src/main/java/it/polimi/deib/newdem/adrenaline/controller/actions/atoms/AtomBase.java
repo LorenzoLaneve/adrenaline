@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.*;
-import it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 
 public abstract class AtomBase implements AtomicAction {
@@ -28,7 +27,7 @@ public abstract class AtomBase implements AtomicAction {
     }
 
     @Override
-    public EffectContext getEffectContext() {
+    public AtomEffectContext getEffectContext() {
         return null;
     }
 }

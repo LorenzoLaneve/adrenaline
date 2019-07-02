@@ -21,6 +21,7 @@ public class SelectShootWeaponInteraction extends InteractionBase {
 
         Weapon selectedWeapon = selectWeapon(availableWeapons);
 
+        context.getEffectContext().setSelectedWeaponCard(selectedWeapon.getCard());
         context.pushInteraction(new DischargeInteraction(context, selectedWeapon));
     }
 
@@ -30,6 +31,8 @@ public class SelectShootWeaponInteraction extends InteractionBase {
         WeaponCard selectedCard = null;
 
         selectedCard = context.getDataSource().chooseWeaponCard(selectables);
+
+        if(null == selectedCard)  {throw new UndoException(); }
 
         // get weapon from ID in starting list
         for (Weapon w : availableWeaponCards) {

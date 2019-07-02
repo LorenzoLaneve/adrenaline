@@ -139,7 +139,7 @@ public final class Config {
     }
 
     /**
-     * Returns the time for an ordinary turn
+     * Returns the time for an ordinary turn in seconds
      */
     public int getTurnTime(){
         return turnTime;

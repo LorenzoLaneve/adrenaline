@@ -79,7 +79,7 @@ public interface Game {
     void declareOver();
 
     /**
-     * Returns the time allowed for turns.
+     * Returns the time allowed for turns in seconds
      */
     int getTurnTime();
 

@@ -16,7 +16,7 @@ public class GameParameters {
     private List<ColorUserPair> colorUserOrder;
     private it.polimi.deib.newdem.adrenaline.model.map.Map gameMap;
     private int killTrackInitialLength;
-    private int turnTime;
+    private int turnTimeSeconds;
     private List<PlayerColor> playerOrder;
     private int minPlayers;
     private int maxPlayers;
@@ -29,7 +29,7 @@ public class GameParameters {
 
     public static GameParameters fromConfig(Config config) {
         GameParameters gp = new GameParameters();
-        gp.turnTime = config.getTurnTime();
+        gp.turnTimeSeconds = config.getTurnTime();
         gp.minPlayers = config.getMinPlayers();
         gp.maxPlayers = config.getMaxPlayers();
 
@@ -43,7 +43,7 @@ public class GameParameters {
         // will be set explicitly
 
         killTrackInitialLength = KILLTRACK_STARTING_SIZE_DEFAULT;
-        turnTime = TURN_TIME_S_DEFAULT;
+        turnTimeSeconds = TURN_TIME_S_DEFAULT;
         minPlayers = MIN_PLAYERS_DEFAULT;
         maxPlayers = MAX_PLAYERS_DEFAULT;
 
@@ -115,12 +115,16 @@ public class GameParameters {
         this.playerOrder = playerOrder;
     }
 
+    /**
+     * Returns the turn time in seconds
+     * @return turn time in seconds
+     */
     public int getTurnTime() {
-        return turnTime;
+        return turnTimeSeconds;
     }
 
     public void setTurnTime(int turnTime) {
-        this.turnTime = turnTime;
+        this.turnTimeSeconds = turnTime;
     }
 
     public int getMinPlayers() {

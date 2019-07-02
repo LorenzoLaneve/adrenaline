@@ -16,7 +16,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
-public abstract class AtomContext extends AtomBase implements EffectContext {
+public abstract class AtomContext extends AtomBase implements AtomEffectContext {
 
     protected WeaponCard usedWeapon;
 
@@ -24,7 +24,12 @@ public abstract class AtomContext extends AtomBase implements EffectContext {
         super(parent, new EntryPointFactory(entryPointType));
     }
 
-    private void registerContext(InteractionStackImpl stack, EffectContext context) {
+    @Override
+    public void setSelectedWeaponCard(WeaponCard card) {
+        usedWeapon = card;
+    }
+
+    private void registerContext(InteractionStackImpl stack, AtomEffectContext context) {
         stack.registerContext(context);
     }
 
@@ -112,7 +117,7 @@ public abstract class AtomContext extends AtomBase implements EffectContext {
     }
 
     @Override
-    public EffectContext getEffectContext() {
+    public AtomEffectContext getEffectContext() {
         return this;
     }
 

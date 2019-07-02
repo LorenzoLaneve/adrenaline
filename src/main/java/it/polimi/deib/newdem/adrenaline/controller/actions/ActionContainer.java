@@ -47,12 +47,6 @@ public class ActionContainer implements Action, AtomsContainer {
             atomsRunSequence.append(atomicActions.get(i));
         }
     }
-    /*
-    private void buildAtomsRunStack() {
-        for(int i = atomicActions.size() - 1; i >= 0; i--) {
-            atomsRunSequence.append(atomicActions.get(i));
-        }
-    }*/
 
     @Override
     public ActionDataSource getDataSource() {

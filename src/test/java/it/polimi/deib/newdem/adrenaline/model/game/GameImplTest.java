@@ -6,7 +6,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.NullKillTrackLister;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;

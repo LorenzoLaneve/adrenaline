@@ -1,9 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
-import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
-import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
@@ -18,7 +14,6 @@ import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
-import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +29,7 @@ public class GameImpl implements Game {
     private List<Player> players;
     private boolean isFrenzy; // BAD, enum or states
     private boolean isOver;
-    private int turnTime;
+    private int turnTimeSeconds;
     private Deck<PowerUpCard> powerUpDeck;
     private Deck<WeaponCard> weaponDeck;
     private Deck<DropInstance> dropDeck;
@@ -63,7 +58,7 @@ public class GameImpl implements Game {
         // ^ no players added
         turnQueue = new RoundRobin<>();
         isOver = false;
-        turnTime = parameters.getTurnTime();
+        turnTimeSeconds = parameters.getTurnTime();
         listenerRegistry = new ListenerRegistry();
         init = false;
         minPlayers = parameters.getMinPlayers();
@@ -397,7 +392,7 @@ public class GameImpl implements Game {
 
     @Override
     public int getTurnTime() {
-        return turnTime;
+        return turnTimeSeconds;
     }
 
     @Override

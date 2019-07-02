@@ -1,8 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionDataSource;
+import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer;
-import it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -15,7 +15,7 @@ public class InteractionStackImpl implements InteractionContext, InteractionStac
 
     private Deque<Interaction> runningStack;
     private AtomsContainer ancestor;
-    private EffectContext effectContext;
+    private AtomEffectContext effectContext;
 
     public InteractionStackImpl(AtomsContainer ancestor) {
         this.runningStack = new ArrayDeque<>();
@@ -121,12 +121,12 @@ public class InteractionStackImpl implements InteractionContext, InteractionStac
     }
 
     @Override
-    public void registerContext(EffectContext context) {
+    public void registerContext(AtomEffectContext context) {
         this.effectContext = context;
     }
 
     @Override
-    public EffectContext getEffectContext() {
+    public AtomEffectContext getEffectContext() {
         return effectContext;
     }
 }

@@ -25,6 +25,7 @@ public class ServerMain {
         Config serverConf;
 
         File configFile = new File("config.json");
+        System.out.println(configFile.getAbsolutePath());
         if (!configFile.exists()) {
             Logger.getGlobal().severe("Could not load config: no such file or directory in "+ configFile.getAbsolutePath());
             return;

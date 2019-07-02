@@ -7,9 +7,9 @@
   "rmiPort": 9701,
   "rmiIdentifier": "adrenaline",
 
-  "timerLength": 3,
+  "timerLength": 5,
   "minPlayers": 3,
   "maxPlayers": 5,
 
-  "turnTime": 50
+  "turnTime": 300
 }

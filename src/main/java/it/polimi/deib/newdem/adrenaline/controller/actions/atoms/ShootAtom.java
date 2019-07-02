@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShootAtom extends AtomContext {
-    // TODO     IMPLEMENT ENTRYPOINT AND EVERYTHING ELSE
-    // FIXME
+
     public ShootAtom(AtomsContainer parent) {
         super(parent, EntryPointType.SHOOT);
     }
