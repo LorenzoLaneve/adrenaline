@@ -276,7 +276,6 @@ public class GameImpl implements Game {
         //TODO
         // EOT actions
         // reload
-        // reload(turn);
         // tentatively moved to TurnBaseImpl::performClosingActions()
 
         // extra point for multiple kills
@@ -380,6 +379,7 @@ public class GameImpl implements Game {
 
     private void registerDeath(Player p) {
         p.addSkull();
+        map.removePlayer(p);
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
         int killtrackMarkAmount = 1;
         killtrackMarkAmount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;

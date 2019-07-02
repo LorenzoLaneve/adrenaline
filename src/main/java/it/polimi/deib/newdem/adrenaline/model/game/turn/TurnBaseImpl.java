@@ -53,14 +53,6 @@ public abstract class TurnBaseImpl implements Turn {
         // use powerup
         if(!activePlayer.getInventory().getCallablePowerUps().isEmpty()) {
             try{
-                /*
-                aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.USE_POWERUP)));
-
-                if(null == aType) { throw new UndoException(); }
-
-                Action action = new ConcreteActionFactory(aType).makeAction(activePlayer, turnDataSource);
-                action.start();
-                */
                 // here I can use one or more pups
                 // start a pupAction
                 ActionFactory powerUpActionFactory = new ConcreteActionFactory(AtomicActionType.USE_POWERUP);
@@ -111,23 +103,6 @@ public abstract class TurnBaseImpl implements Turn {
                 // this should never happen
                 throw new IllegalStateException();
             }
-
-            /*
-            ActionType aType = null;
-            do {
-                try{
-                    aType = turnDataSource.requestAction(
-                            activePlayer.getMoves()
-                                    .stream()
-                                    .map(ActionFactory::getType)
-                                    .collect(Collectors.toList()));
-                }
-                catch (UndoException e) {
-                    // do nothing
-                }
-            } while (null == aType);
-            // aType == null -> user wishes to terminate turn?
-            */
 
             Action action = (new ConcreteActionFactory(aType)).makeAction(activePlayer, turnDataSource);
             try {
