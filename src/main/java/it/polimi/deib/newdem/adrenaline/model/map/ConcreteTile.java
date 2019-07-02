@@ -134,6 +134,7 @@ public abstract class ConcreteTile implements Tile {
     public  void removePlayer(Player player){
         if(players.contains(player)){
             players.remove(player);
+            player.setTile(null);
         }
         else{
             throw new IllegalArgumentException("Player not found");

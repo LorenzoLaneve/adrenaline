@@ -22,6 +22,8 @@ public class NearPlayerSelector implements PlayerSelector {
 
     @Override
     public boolean isSelectable(Map map, Player player) {
+        if (player.getTile() == null) return false;
+
         int distance = sourceTile.distanceFrom(player.getTile());
 
         return minDistance <= distance && distance <= maxDistance;

@@ -56,7 +56,7 @@ public class AdrenalineGameController implements GameController {
         }
 
         // TODO random map
-        String s = this.getClass().getClassLoader().getResource("maps/Map0_1.json").getFile().replace("%20", " ");
+        String s = this.getClass().getClassLoader().getResource("maps/Map1_1.json").getFile().replace("%20", " ");
         Map myMap = Map.createMap( s );
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);

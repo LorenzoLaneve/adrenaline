@@ -27,6 +27,7 @@ public class DirectionalPlayerSelector implements PlayerSelector {
 
     @Override
     public boolean isSelectable(Map map, Player player) {
+        if (player.getTile() == null) return false;
 
         List<Tile> tilesSelectablePlayers = new ArrayList<>();
 

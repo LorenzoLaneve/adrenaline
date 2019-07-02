@@ -18,6 +18,10 @@ public class VisiblePlayerSelector implements PlayerSelector {
 
     @Override
     public boolean isSelectable(Map map, Player player) {
+        if (player.getTile() == null) {
+            return false;
+        }
+
         List<Room> visibleRooms = new ArrayList<>();
         visibleRooms.add(sourcePlayer.getTile().getRoom());
 
