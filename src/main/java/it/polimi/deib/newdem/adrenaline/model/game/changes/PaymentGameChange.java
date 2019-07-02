@@ -4,7 +4,6 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
@@ -25,7 +24,7 @@ public class PaymentGameChange implements GameChange {
         player.getInventory().removeAmmoSet(new AmmoSet(receipt.getPayedRedAmmos(), receipt.getPayedYellowAmmos(), receipt.getPayedBlueAmmos()));
 
         if(receipt.getPayedPowerUpCards()!= null){
-            player.getInventory().removePowerUp(receipt.getPayedPowerUpCards());
+            player.getInventory().removePowerUps(receipt.getPayedPowerUpCards());
         }
 
     }

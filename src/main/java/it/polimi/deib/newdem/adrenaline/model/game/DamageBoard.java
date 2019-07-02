@@ -79,4 +79,5 @@ public interface DamageBoard {
 
     DamageBoardListener getListener();
 
+    void renewDamageBoard();
 }

@@ -273,10 +273,8 @@ public class GameImpl implements Game {
      */
     @Override
     public void concludeTurn(Turn turn) {
-        //TODO
-        // EOT actions
-        // reload
-        // tentatively moved to TurnBaseImpl::performClosingActions()
+        // EOT powerups and reload are handled in
+        // TurnBaseImpl::performClosingActions()
 
         // extra point for multiple kills
         for(Player p :players) {
@@ -293,16 +291,7 @@ public class GameImpl implements Game {
         }
 
         // register kills
-        for(Player p : players) {
-            if(p.isDead()) {
-                distributeScore(p); // assigns the due score to damagers
-                registerDeath(p);   // updates killtrack
-
-                //TODO
-                // remove player from map
-                // setup respawn (if not implicit in turn)
-            }
-        }
+        registerKills();
 
         // refill tiles
         // both drops
@@ -317,6 +306,19 @@ public class GameImpl implements Game {
         //go to frenzy if required
         if(shouldGoFrenzy()) {
             goFrenzy();
+        }
+    }
+
+    private void registerKills() {
+        for(Player p : players) {
+            if(p.isDead()) {
+                distributeScore(p); // assigns the due score to damagers
+                registerDeath(p);   // updates killtrack, removes from map, empties damageboard
+
+                //TODO
+                // remove player from map
+                // setup respawn (if not implicit in turn)
+            }
         }
     }
 
@@ -379,11 +381,15 @@ public class GameImpl implements Game {
 
     private void registerDeath(Player p) {
         p.addSkull();
-        map.removePlayer(p);
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
+
+        //TODO prettify, wrap \/ in one method
         int killtrackMarkAmount = 1;
         killtrackMarkAmount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
         killTrack.addKill(killer, killtrackMarkAmount);
+
+        map.removePlayer(p);
+        p.getDamageBoard().renewDamageBoard();
     }
 
     public boolean isOver() {
@@ -467,15 +473,4 @@ public class GameImpl implements Game {
             }
         }
     }
-/*
-    private void reload(Turn turn) {
-        Action reloadAction = new ConcreteActionFactory(AtomicActionType.RELOAD).makeAction(turn.getActivePlayer(), turn.getDataSource());
-        try {
-            reloadAction.start();
-        }
-        catch (UndoException e) {
-            // done.
-        }
-    }
-    */
 }

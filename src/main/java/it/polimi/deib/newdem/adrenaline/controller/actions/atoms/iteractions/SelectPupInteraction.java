@@ -34,7 +34,7 @@ public class SelectPupInteraction extends InteractionBase {
         }
         */
         /*
-        * List<PowerUpCard> availablePups = getActor().getInventory().getPowerUps()
+        * List<PowerUpCard> availablePups = getActor().getInventory().getAllPowerUps()
                 .stream()
                 .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
                 .collect(Collectors.toList());

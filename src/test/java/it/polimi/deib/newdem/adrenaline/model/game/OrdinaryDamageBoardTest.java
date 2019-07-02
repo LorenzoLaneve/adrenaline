@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 import static org.junit.Assert.*;
 
 public class OrdinaryDamageBoardTest {
@@ -180,5 +181,13 @@ public class OrdinaryDamageBoardTest {
         dmgb.takeMark(2,p2);
 
         assertEquals(5, dmgb.getTotalDamage());
+    }
+
+    @Test
+    public void testRenew() throws Exception {
+        java.util.Map oldMarks = p.getDamageBoard().getMarksMap();
+        p.getDamageBoard().renewDamageBoard();
+        assertNotEquals(dmgb, p.getDamageBoard());
+        assertEquals(oldMarks, p.getDamageBoard().getMarksMap());
     }
 }

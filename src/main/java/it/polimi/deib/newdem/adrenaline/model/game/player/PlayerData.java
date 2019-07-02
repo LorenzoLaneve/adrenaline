@@ -38,7 +38,7 @@ public class PlayerData implements Serializable {
         PlayerInventory inventory = player.getInventory();
 
         this.powerUpCards = new ArrayList<>();
-        for(PowerUpCard powerUpCard : inventory.getPowerUps()){
+        for(PowerUpCard powerUpCard : inventory.getAllPowerUps()){
             this.powerUpCards.add(powerUpCard.getCardID());
         }
 

@@ -55,4 +55,9 @@ public class FrenzyDamageBoard extends DamageBoardImpl {
     public boolean isFrenzy() {
         return true;
     }
+
+    @Override
+    protected DamageBoard makeNewBoard() {
+        return new FrenzyDamageBoard(player);
+    }
 }

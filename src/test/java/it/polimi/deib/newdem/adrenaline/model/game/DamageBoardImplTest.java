@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
+import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
@@ -10,6 +11,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
 import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
@@ -55,7 +57,7 @@ public class DamageBoardImplTest {
 
         vgv = new NullVirtualGameView();
         game.setGameListener(vgv);
-        game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
+        game.setKillTrackListener(new VirtualKillTrackView(vgv));
 
         game.init();
         p1 = game.getPlayerFromColor(PlayerColor.YELLOW);
@@ -276,5 +278,21 @@ public class DamageBoardImplTest {
         p1.getDamageBoard().appendDamage(p2);
         Player p5 = dmgb.popDamage();
         assertEquals(p5, p2);
+    }
+
+    @Test
+    public void testMarkConvert() throws Exception {
+        // TODO
+        // p1.getDamageBoard().setMarksFromPlayer();
+    }
+
+    @Test
+    public void testAddMark() throws Exception {
+        // DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt)
+        GameChange gc1 = new DamageGameChange(p2, p1, 0, 1);
+        GameChange gc2 = new DamageGameChange(p2, p1, 0, 1);
+        gc1.update(game);
+        gc2.update(game);
+        assertEquals(2, p1.getMarksFromPlayer(p2));
     }
 }

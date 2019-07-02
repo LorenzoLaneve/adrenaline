@@ -123,7 +123,7 @@ public class TurnDataSourceImpl implements TurnDataSource {
     public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         AmmoSet playerInv = activePlayer.getInventory().getAmmoSet();
 
-        List<Integer> powerUpIDs = activePlayer.getInventory().getPowerUps().stream().map(PowerUpCard::getCardID).collect(Collectors.toList());
+        List<Integer> powerUpIDs = activePlayer.getInventory().getAllPowerUps().stream().map(PowerUpCard::getCardID).collect(Collectors.toList());
 
         PaymentReceipt receipt;
         do {
@@ -133,7 +133,7 @@ public class TurnDataSourceImpl implements TurnDataSource {
 
             receipt = PaymentReceipt.fromData(receiptData, game.getPowerUpDeck());
             for (PowerUpCard card : receipt.getPayedPowerUpCards()) {
-                if (!activePlayer.getInventory().getPowerUps().contains(card)) {
+                if (!activePlayer.getInventory().getAllPowerUps().contains(card)) {
                     receipt = null;
                     break;
                 }

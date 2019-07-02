@@ -23,7 +23,7 @@ public class PowerUpCardDiscardGameChange implements GameChange {
 
     @Override
     public void update(Game game) {
-        player.getInventory().removePowerUp(discardedPowerUps);
+        player.getInventory().removePowerUps(discardedPowerUps);
     }
 
     @Override

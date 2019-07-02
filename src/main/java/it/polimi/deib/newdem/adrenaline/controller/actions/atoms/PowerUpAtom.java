@@ -19,7 +19,7 @@ public class PowerUpAtom extends AtomContext {
     @Override
     public void executeFromStart() throws UndoException {
         // choose pup card
-        List<PowerUpCard> availablePups = getActor().getInventory().getPowerUps()
+        List<PowerUpCard> availablePups = getActor().getInventory().getAllPowerUps()
                 .stream()
                 .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
                 .collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import com.sun.corba.se.impl.oa.toa.TOA;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.Scoreboard;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;
@@ -14,10 +15,11 @@ public abstract class DamageBoardImpl implements DamageBoard {
     protected Player player;
     protected List<Player> damages;
     protected ArrayList<Integer> score; // this member must be populated by concrete classes
-    protected HashMap<Player, Integer> marks;
+    protected Map<Player, Integer> marks;
     // integer max size of damage vector
     public static final int MAX_LIFE = 11;
     public static final int DEATH_SHOT_INDEX = 9;
+    public static final int MAX_MARKS = 3;
     public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
     // Arrays start at zero
 
@@ -31,11 +33,17 @@ public abstract class DamageBoardImpl implements DamageBoard {
         if(null == player) {
             throw new IllegalArgumentException("player must not be null");
         }
-        //TODO complete
-        // how do I check that a player already has a damageBoard? Do I even need to?
-        damages = new ArrayList<>(MAX_LIFE);
-        marks = new HashMap<>();
+
         this.player = player;
+        damages = new ArrayList<>(MAX_LIFE);
+
+        // preserve old marks if applicable
+        if(null != player.getDamageBoard()) {
+            this.marks = player.getDamageBoard().getMarksMap();
+        }
+        else {
+            this.marks = new HashMap<>();
+        }
     }
 
     /**
@@ -158,19 +166,42 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamage(Player player) throws DamageTrackFullException {
+        /*
         int currMarks = getTotalMarksFromPlayer(player);
-        if(currMarks >0){
-            listener.boardDidConvertMarks(player);
-        }
+
         while (currMarks > 0){
             appendDamage(player);
             currMarks--;
         }
+
+        if(currMarks >0){
+            listener.boardDidConvertMarks(player);
+        }
+        */
+
+        // convertMarksFromPlayerHelper(player);
+        // mark conversion functionality is handled by DamageGameChange
+
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
         damages.add(player);
         listener.boardDidTakeDamage(1, 0, player);
+    }
+
+    private void convertMarksFromPlayerHelper(Player p) throws DamageTrackFullException {
+        int currMarks = getTotalMarksFromPlayer(p);
+        boolean didConvert = currMarks > 0;
+
+        while (currMarks > 0){
+            appendDamage(p);
+            currMarks--;
+        }
+
+        if(didConvert){
+            marks.put(p, 0);
+            listener.boardDidConvertMarks(player);
+        }
     }
 
     public Player popDamage() throws DamageTrackEmptyException {
@@ -184,7 +215,18 @@ public abstract class DamageBoardImpl implements DamageBoard {
 
     @Override
     public void setMarksFromPlayer(int totalMarks, Player player) {
+        if(totalMarks > MAX_MARKS) {
+            throw new IllegalStateException(String.format("Attempted to set %d marks, more than the maximum allowed (%d)",
+                    totalMarks, MAX_MARKS));
+        }
         marks.put(player, totalMarks);
         listener.boardDidTakeDamage(0,totalMarks, player);
+    }
+
+    protected abstract DamageBoard makeNewBoard();
+
+    @Override
+    public void renewDamageBoard() {
+        player.registerDamageBoard(makeNewBoard());
     }
 }

@@ -8,7 +8,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
@@ -69,7 +68,7 @@ public class TestPowerUpCardDiscardGameChange {
 
         p1.getInventory().addAmmo(AmmoColor.BLUE, 2);
 
-        powerUpCardList = p1.getInventory().getPowerUps();
+        powerUpCardList = p1.getInventory().getAllPowerUps();
 
         gameChange = new PowerUpCardDiscardGameChange(p1, powerUpCardList);
     }
@@ -77,6 +76,6 @@ public class TestPowerUpCardDiscardGameChange {
     @Test
     public void revert() {
         gameChange.revert(game);
-        assertEquals(powerUpCardList, p1.getInventory().getPowerUps());
+        assertEquals(powerUpCardList, p1.getInventory().getAllPowerUps());
     }
 }

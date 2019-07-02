@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
+import it.polimi.deib.newdem.adrenaline.controller.InterruptExecutionException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.Action;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
@@ -7,8 +8,13 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
+import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponSet;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class TurnBaseImpl implements Turn {
@@ -37,7 +43,7 @@ public abstract class TurnBaseImpl implements Turn {
                 performInitialActions();
                 performCoreActions();
                 performClosingActions();
-            } catch (TurnTerminatedByUserException e) {
+            } catch (TurnInterruptedException e) {
                 // do nothing, terminate gracefully.
             }
         } finally {
@@ -46,9 +52,9 @@ public abstract class TurnBaseImpl implements Turn {
         // refilling tiles and assigning scores are outsourced to Game::concludeTurn
     }
 
-    protected abstract void performInitialActions();
+    protected abstract void performInitialActions() throws TurnInterruptedException;
 
-    protected void performClosingActions() throws TurnTerminatedByUserException {
+    protected void performClosingActions() throws TurnInterruptedException {
 
         // use powerup
         if(!activePlayer.getInventory().getCallablePowerUps().isEmpty()) {
@@ -65,7 +71,9 @@ public abstract class TurnBaseImpl implements Turn {
         }
 
         // reload
+
         if(!activePlayer.getInventory().getDischargedWeapons().isEmpty()) {
+            // have at least one reloadable weapon
             try {
                 ActionType aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
 
@@ -81,7 +89,7 @@ public abstract class TurnBaseImpl implements Turn {
         }
     }
 
-    protected void performCoreActions() throws TurnTerminatedByUserException {
+    protected void performCoreActions() throws TurnInterruptedException {
         int executedActions = 0;
 
         while (executedActions < activePlayer.getMovesAmount()) {
@@ -117,6 +125,20 @@ public abstract class TurnBaseImpl implements Turn {
                 // do not increment executedActions
             }
         }
+    }
+
+    protected PowerUpCard askPowerUpToHuman(List<PowerUpCard> availableChoiches) throws InterruptExecutionException {
+        PowerUpCard chosenCard = null;
+        do {
+            try{
+                chosenCard = getDataSource().choosePowerUpCard(availableChoiches);
+            }
+            catch (UndoException e) {
+                // undo not allowed here. Repeat.
+            }
+        }
+        while (null == chosenCard);
+        return chosenCard;
     }
 
     @Override

@@ -130,7 +130,7 @@ public class PlayerImpl implements Player {
         List<ActionFactory> factories = new ArrayList<>();
         factories.addAll(this.actionBoard.getBasicActions());
         factories.addAll(damageBoard.getAdditionalActions());
-        if(!this.inventory.getPowerUps().isEmpty()){
+        if(!this.inventory.getAllPowerUps().isEmpty()){
             factories.add(new ConcreteActionFactory(USE_POWERUP));
         }
         return factories;

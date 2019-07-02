@@ -134,4 +134,9 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     public DamageBoardListener getListener() {
         return innerDmgb.getListener();
     }
+
+    @Override
+    public void renewDamageBoard() {
+        innerDmgb.renewDamageBoard();
+    }
 }

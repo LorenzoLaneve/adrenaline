@@ -4,8 +4,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.MockPlayer;
 import it.polimi.deib.newdem.adrenaline.model.game.MockPowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.game.MockWeapon;
 import it.polimi.deib.newdem.adrenaline.model.game.MockWeaponCard;
-import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,11 +58,11 @@ public class PlayerInventoryTest {
 
     @Test
     public void testGetPowerUps() throws Exception {
-        assertEquals(0, inv.getPowerUps().size());
+        assertEquals(0, inv.getAllPowerUps().size());
         PowerUpCard c1 = new MockPowerUpCard();
         inv.addPowerUp(c1);
-        assertTrue(inv.getPowerUps().contains(c1));
-        assertEquals(1,inv.getPowerUps().size());
+        assertTrue(inv.getAllPowerUps().contains(c1));
+        assertEquals(1,inv.getAllPowerUps().size());
     }
 
     @Test
@@ -109,10 +107,10 @@ public class PlayerInventoryTest {
 
     @Test
     public void testAddPowerUp() throws Exception{
-        assertEquals(0,inv.getPowerUps().size());
+        assertEquals(0,inv.getAllPowerUps().size());
         PowerUpCard c1 = new MockPowerUpCard();
         inv.addPowerUp(c1);
-        assertTrue(inv.getPowerUps().contains(c1));
+        assertTrue(inv.getAllPowerUps().contains(c1));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -193,6 +191,6 @@ public class PlayerInventoryTest {
 
     @Test
     public void testRemovePowerUp() throws Exception {
-        inv.removePowerUp(new ArrayList<>());
+        inv.removePowerUps(new ArrayList<>());
     }
 }

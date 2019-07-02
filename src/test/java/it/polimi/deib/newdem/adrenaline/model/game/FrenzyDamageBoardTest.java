@@ -118,4 +118,12 @@ public class FrenzyDamageBoardTest {
         dmgb.takeDamage(7,p1);
         assertEquals(0, dmgb.getAdditionalActions().size());
     }
+
+    @Test
+    public void testRenew() throws Exception {
+        java.util.Map oldMarks = p.getDamageBoard().getMarksMap();
+        p.getDamageBoard().renewDamageBoard();
+        assertNotEquals(dmgb, p.getDamageBoard());
+        assertEquals(oldMarks, p.getDamageBoard().getMarksMap());
+    }
 }

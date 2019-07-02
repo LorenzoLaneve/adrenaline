@@ -106,7 +106,7 @@ public class PlayerInventory {
      *
      * @return powerups
      */
-    public List<PowerUpCard> getPowerUps(){
+    public List<PowerUpCard> getAllPowerUps(){
         List<PowerUpCard> cards = new ArrayList<>();
         for(PowerUpCard p : powerUpCards) {
             cards.add(p);
@@ -219,12 +219,16 @@ public class PlayerInventory {
         player.getListener().playerDidReceivePowerUpCard(player, card);
     }
 
+    /**
+     * Removes the goven {@code PowerUpCard} from this inventory, if it is present (optional operation).
+     * @param card Powerup to be removed from this inventory, if present
+     */
     public void removePowerUp(PowerUpCard card) {
         powerUpCards.remove(card);
         player.getListener().playerDidDiscardPowerUpCard(player, card);
     }
 
-    public void removePowerUp(List<PowerUpCard> powerUpCardList){
+    public void removePowerUps(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
         for(PowerUpCard card: powerUpCardList){
             player.getListener().playerDidDiscardPowerUpCard(player, card);
@@ -317,7 +321,7 @@ public class PlayerInventory {
     }
 
     public List<PowerUpCard> getCallablePowerUps() {
-        return getPowerUps()
+        return getAllPowerUps()
                 .stream()
                 .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
                 .collect(Collectors.toList());

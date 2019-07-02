@@ -33,7 +33,8 @@ public class Deck<T extends Card> {
      * If no card is drawable, the discard pile is shuffled into the deck,
      * then a card is drawn.
      *
-     * @return the drawn card
+     * @return the drawn card. Not null.
+     * @throws NoDrawableCardException no card to be drawn and no card in the discard pile.
      */
     public T draw() throws NoDrawableCardException {
         if(this.isEmpty()) {
@@ -114,14 +115,8 @@ public class Deck<T extends Card> {
     }
 
     public T getCardFromId(int cardId) {
-        /*
-        private Deque<T> drawableCards;
 
-        private HashSet<T> discardedCards;
-        private HashSet<T> activeCards;
-        */
         for(T card  : drawableCards) {
-            int id = card.getCardID();
             if(card.getCardID() == cardId) return card;
         }
 

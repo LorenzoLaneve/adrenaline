@@ -12,7 +12,7 @@ import static java.lang.Math.multiplyExact;
 public class DamageGameChange implements GameChange {
 
     private Player attacker;
-    private Player attacked;
+    private Player victim;
     private int desiredDmg;
     private int desiredMrk;
     private int actualDmg;
@@ -21,7 +21,7 @@ public class DamageGameChange implements GameChange {
 
 
     public DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt){
-        this.attacked = attacked;
+        this.victim = attacked;
         this.attacker = attacker;
         this.desiredDmg = dmgAmt;
         this.desiredMrk = mrkAmt;
@@ -30,52 +30,58 @@ public class DamageGameChange implements GameChange {
 
     @Override
     public void update(Game game) {
-        // apply
-        DamageBoard dmgb = attacked.getDamageBoard();
+        int damageToDeal = desiredDmg;
+        DamageBoard victimBoard = victim.getDamageBoard();
 
-        // if dmg > 0, convert mark
-        previousMrk = dmgb.getTotalMarksFromPlayer(attacker);
+        previousMrk = victim.getMarksFromPlayer(attacker);
 
-        if(desiredDmg > 0) {
-            dmgb.setMarksFromPlayer(0,attacker);
-        }
+        if(damageToDeal > 0) {
+            if(desiredMrk > 0) {
+                damageToDeal += victimBoard.getTotalMarksFromPlayer(attacker);
+                victimBoard.setMarksFromPlayer(0, attacker);
+                victimBoard.getListener().boardDidConvertMarks(attacker);
+            }
 
-        // apply as much of new damage as possible
-        int damageLeft = desiredDmg;
-        try {
-            while (damageLeft > 0) {
-                dmgb.appendDamage(attacker);
-                damageLeft--;
+            try {
+                while (damageToDeal > 0) {
+                    victimBoard.appendDamage(attacker);
+                    damageToDeal--;
+                }
+            }
+            catch (DamageTrackFullException e) {
+                // that's ok
+            }
+            finally {
+                actualDmg = desiredDmg - damageToDeal;
+            }
+
+            int newMarks = min(desiredMrk + victimBoard.getTotalMarksFromPlayer(attacker), DamageBoardImpl.MAX_MARKS);
+            victimBoard.setMarksFromPlayer(newMarks, attacker);
+
+            if(victimBoard.getTotalDamage() > DEATH_SHOT_INDEX) {
+                victim.reportDeath(true);
+                didDie = true;
             }
         }
-        catch (DamageTrackFullException e) {
-            // ok
-        }
-        finally {
-            actualDmg = desiredDmg - damageLeft;
-        }
-
-        // apply new mark
-        dmgb.setMarksFromPlayer(desiredMrk, attacker);
-
-        // declare death if applicable
-        if(dmgb.getTotalDamage() > DEATH_SHOT_INDEX) {
-            attacked.reportDeath(true);
-            didDie = true;
+        else{
+            // just marks
+            int newMarks = min(desiredMrk + victimBoard.getTotalMarksFromPlayer(attacker), DamageBoardImpl.MAX_MARKS);
+            victimBoard.setMarksFromPlayer(newMarks, attacker);
+            actualDmg = 0;
         }
     }
 
     @Override
     public void revert(Game game) {
         //TODO
-        DamageBoard dmgb = attacked.getDamageBoard();
+        DamageBoard dmgb = victim.getDamageBoard();
 
         // rez
         if(didDie) {
-            attacked.reportDeath(false);
+            victim.reportDeath(false);
             MapListener mapListener = game.getMap().getListener();
             if(null != mapListener) {
-                mapListener.playerDidResurrect(attacked);
+                mapListener.playerDidResurrect(victim);
             }
         }
 

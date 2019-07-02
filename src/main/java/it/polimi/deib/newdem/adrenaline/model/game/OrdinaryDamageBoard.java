@@ -57,4 +57,9 @@ public class OrdinaryDamageBoard extends DamageBoardImpl {
     public boolean isFrenzy() {
         return false;
     }
+
+    @Override
+    protected DamageBoard makeNewBoard() {
+        return new OrdinaryDamageBoard(player);
+    }
 }
