@@ -222,11 +222,10 @@ public class GUIGameWindowHelper {
         try {
             GridPane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/active-card-grid.fxml"));
 
-            InputStream res = GUIGameWindowHelper.class.getResource("/cards/weaponuserdata.json").openStream();
+            URL res = GUIGameWindowHelper.class.getResource("/cards/weaponuserdata.json");
 
-            try (InputStreamReader fread = new InputStreamReader(res)) {
+            try (Reader fread = new InputStreamReader(res.openStream())) {
                 JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
-
                 JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();
 
                 for (Map.Entry<String, JsonElement> entry : cardDict.get("fragments").getAsJsonObject().entrySet()) {
@@ -244,6 +243,7 @@ public class GUIGameWindowHelper {
                         case "top-right":
                             destPane = (Pane) tilePane.lookup(".top-buttons");
                             destPane.getChildren().add(fragmentPane);
+
                             break;
                         default:
                             destPane = (Pane) tilePane.lookup(".bottom-buttons");
@@ -252,25 +252,25 @@ public class GUIGameWindowHelper {
                     }
                 }
 
-            } catch (Exception x) {
-                Alert a = new Alert(Alert.AlertType.ERROR);
+            } catch (Exception | Error x) {
+                // nothing to do here.
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
 
-                StringWriter s = new StringWriter();
-                x.printStackTrace(new PrintWriter(s));
-
-                a.setContentText(s.toString());
+                StringWriter d = new StringWriter();
+                x.printStackTrace(new PrintWriter(d));
+                a.setContentText(d.toString());
                 a.showAndWait();
             }
 
             return tilePane;
-        } catch (IOException e) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
+        } catch (IOException | Error e) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
 
-            StringWriter s = new StringWriter();
-            e.printStackTrace(new PrintWriter(s));
-
-            a.setContentText(s.toString());
+            StringWriter d = new StringWriter();
+            e.printStackTrace(new PrintWriter(d));
+            a.setContentText(d.toString());
             a.showAndWait();
+
             return null;
         }
     }

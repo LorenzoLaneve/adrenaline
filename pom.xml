@@ -25,8 +25,8 @@
         <sonar.language>java</sonar.language>
 
         <sonar.host.url>http://localhost:9000/</sonar.host.url>
-        <!--sonar.login>admin</sonar.login>
-        <sonar.password>admin</sonar.password-->
+        <sonar.login>admin</sonar.login>
+        <sonar.password>admin</sonar.password>
 
     </properties>
 
@@ -62,6 +62,25 @@
 
         <plugins>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/libs
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Export the project as a runnable JAR, with the provided mainClass -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -70,16 +89,40 @@
 
                 <executions>
                     <execution>
-                        <id>build-client-jar</id>
+                        <id>build-client-gui-jar</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <classifier>client</classifier>
+                            <classifier>client-GUI</classifier>
                             <archive>
                                 <manifest>
-                                    <mainClass>it.polimi.deib.newdem.adrenaline.client.ClientMain</mainClass>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>libs/</classpathPrefix>
+                                    <mainClass>it.polimi.deib.newdem.adrenaline.client.ClientGUIMain</mainClass>
+                                </manifest>
+                            </archive>
+                            <excludes>
+                                <exclude>**/server</exclude>
+                                <exclude>**/server/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>build-client-cli-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>client-CLI</classifier>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>libs/</classpathPrefix>
+                                    <mainClass>it.polimi.deib.newdem.adrenaline.client.ClientCLIMain</mainClass>
                                 </manifest>
                             </archive>
                             <excludes>
@@ -99,6 +142,8 @@
                             <classifier>server</classifier>
                             <archive>
                                 <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>libs/</classpathPrefix>
                                     <mainClass>it.polimi.deib.newdem.adrenaline.server.ServerMain</mainClass>
                                 </manifest>
                             </archive>
