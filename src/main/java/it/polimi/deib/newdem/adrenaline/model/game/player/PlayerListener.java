@@ -20,6 +20,8 @@ public interface PlayerListener {
 
     void playerDidDiscardWeaponCard(Player player, WeaponCard weaponCard);
 
+    void playerDidUpdateScore(Player player, int newScore);
+
     void playerDidReceiveAmmos(Player player, AmmoSet ammos);
 
     void playerDidDiscardAmmos(Player player, AmmoSet ammos);

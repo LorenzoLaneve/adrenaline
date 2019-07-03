@@ -33,6 +33,11 @@ public final class NullPlayerListener implements PlayerListener {
     }
 
     @Override
+    public void playerDidUpdateScore(Player player, int newScore) {
+
+    }
+
+    @Override
     public void playerDidReceiveAmmos(Player player, AmmoSet ammos) {
 
     }

@@ -305,6 +305,9 @@ public class PlayerImpl implements Player {
     @Override
     public void addScore(int points) {
         score += points;
+        if (listener != null) {
+            listener.playerDidUpdateScore(this, score);
+        }
     }
 
     @Override

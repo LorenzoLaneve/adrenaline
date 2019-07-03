@@ -120,6 +120,11 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
     }
 
     @Override
+    public void playerDidUpdateScore(Player player, int newScore) {
+        setScore(newScore);
+    }
+
+    @Override
     public void playerDidReceiveAmmos(Player player, AmmoSet ammos) {
         addAmmoSet(ammos.getYellowAmmos(), ammos.getRedAmmos(), ammos.getBlueAmmos());
     }
