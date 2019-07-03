@@ -18,11 +18,4 @@ public class ScriptedAdrenalineGameController extends AdrenalineGameController{
         this.source = turnDataSource;
     }
 
-    @Override
-    protected void buildTurnDataSources(Game game) {
-        playerDataSourceMap = new HashMap<>();
-        for(Player p : game.getPlayers()){
-            playerDataSourceMap.put(p, source);
-        }
-    }
 }
