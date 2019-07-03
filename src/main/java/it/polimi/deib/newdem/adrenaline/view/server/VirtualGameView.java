@@ -59,16 +59,17 @@ public class VirtualGameView implements GameView, GameListener {
     @Override
     public void userDidEnterGame(User user, Player player) {
         this.users.put(player.getColor(), user);
+
+        enablePlayer(player.getColor());
     }
 
     @Override
     public void userDidExitGame(User user, Player player) {
-        this.users.remove(player.getColor());
+        disablePlayer(player.getColor());
     }
 
     @Override
     public void playerRestoredMatchData(Game game, Player player) {
-        //TODO
         User reconnectingUser = game.getUserByPlayer(player);
 
         this.users.put(player.getColor(), reconnectingUser);
