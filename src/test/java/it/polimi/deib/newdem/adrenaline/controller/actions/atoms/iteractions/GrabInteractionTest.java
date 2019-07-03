@@ -9,14 +9,12 @@ import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import sun.security.krb5.SCDynamicStoreConfig;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.GRAB;
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.MOVE2;
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.MOVE3;
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAGENTA;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
-import static org.junit.Assert.*;
 
 public class GrabInteractionTest {
 
@@ -85,7 +83,7 @@ public class GrabInteractionTest {
         // undo grab, roll back to move
         sds.pushWeaponCardIndex(ScriptedDataSource.getUndoWeaponCardIndex());
         // fail to pay
-        sds.addScheduledUndoPayment();
+        sds.pushUndoPayment();
         sds.pushWeaponCardIndex(0);
         // attempt to grab weapon
         sds.pushTile(game.getMap().getSpawnPointFromColor(RED));

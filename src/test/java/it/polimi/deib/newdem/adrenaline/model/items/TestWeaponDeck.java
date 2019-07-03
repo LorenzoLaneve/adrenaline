@@ -19,7 +19,7 @@ public class TestWeaponDeck {
     @Test
     public void fromJson() {
         try{
-            WeaponDeck wDeck = WeaponDeck.fromJson("cards/weapons.json");
+            WeaponDeck wDeck = WeaponDeck.makeFactoryFromJson("cards/weapons.json");
         }catch (Exception e){
             fail();
         }

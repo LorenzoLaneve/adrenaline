@@ -77,8 +77,39 @@ public class WeaponDeck {
         }
     }
 
+    public static Deck<WeaponCard> newPlayableDeckFromJson(String jsonFile) throws InvalidJSONException {
+        ArrayList<WeaponCard> cards;
+        cards = new ArrayList<>();
+
+        try (Reader reader = FileUtils.getResourceReader(jsonFile)) {
+            JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
+
+            JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();
+
+            for (JsonElement object : cardsJsonArray) {
+                JsonObject cardObject = object.getAsJsonObject();
+
+                int cardID = cardObject.get("id").getAsInt();
+
+                PaymentInvoice pickupPrice = parseInvoice(cardObject.get("pickupPrice"));
+                PaymentInvoice reloadPrice = parseInvoice(cardObject.get("reloadPrice"));
+
+                String effectClassName = cardObject.get("effectClass").getAsString();
+                Effect cardEffect = EffectLoader.fromClass(effectClassName);
+
+                WeaponCard card = new WeaponCardImpl(cardID, pickupPrice, reloadPrice, cardEffect);
+                cards.add(card);
+            }
+
+        } catch (Exception e) {
+            throw new InvalidJSONException(e.getMessage());
+        }
+
+        return new Deck<WeaponCard>(cards);
+    }
+
     // deprecated
-    public static WeaponDeck fromJson(String jsonFile) throws InvalidJSONException {
+    public static WeaponDeck makeFactoryFromJson(String jsonFile) throws InvalidJSONException {
         List<WeaponCard> cards = new ArrayList<>();
 
         try (Reader reader = FileUtils.getResourceReader(jsonFile)) {

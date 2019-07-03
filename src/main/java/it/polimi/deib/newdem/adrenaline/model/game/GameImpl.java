@@ -426,7 +426,7 @@ public class GameImpl implements Game {
         return powerUpDeck;
     }
 
-    private void refillTiles(){
+    protected void refillTiles(){
         for(Tile t : map.getAllTiles()){
             if(t.hasSpawnPoint()) {
                 refillSpawn(t);
@@ -440,21 +440,21 @@ public class GameImpl implements Game {
     }
 
     private void refillSpawn(Tile t) {
+        try {
         while (t.inspectWeaponSet().getWeapons().size() < 3) {
-            try {
                 t.addWeapon(weaponDeck.draw());
             }
-            catch (NoDrawableCardException e) {
-                // this CAN happen, and that's ok.
-                // We just ignore it and move on,
-                // as designed in game.
-            }
-            catch (OutOfSlotsException |
-                    WeaponAlreadyPresentException |
-                    NotSpawnPointTileException e) {
-                // this should NOT happen, so we report it
-                throw new IllegalStateException(e);
-            }
+        }
+        catch (NoDrawableCardException e) {
+        // this CAN happen, and that's ok.
+        // We just ignore it and move on,
+        // as designed in game.
+        }
+        catch (OutOfSlotsException |
+                WeaponAlreadyPresentException |
+                NotSpawnPointTileException e) {
+            // this should NOT happen, so we report it
+            throw new IllegalStateException(e);
         }
 
     }

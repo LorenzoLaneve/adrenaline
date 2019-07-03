@@ -9,7 +9,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.ScriptedDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
-import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -76,7 +75,7 @@ public class GrabAtomTest {
         turn.bindDataSource(source);
 
         for(int i = 0; i < 50; i++) {
-            if(i % 2 == 0) { source.addScheduledUndoPayment(); }
+            if(i % 2 == 0) { source.pushUndoPayment(); }
             source.pushWeaponCardIndex(0);
             source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
         }

@@ -1,18 +1,24 @@
 package it.polimi.deib.newdem.adrenaline.model.game.turn;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import static sun.swing.MenuItemLayoutHelper.max;
 
@@ -21,9 +27,12 @@ public class ScriptedDataSource implements TurnDataSource {
     ActionType[] arr;
     List<Tile> tiles;
     List<Integer> pups;
-    List<Integer> weaponCardIndex;
+    WeaponIndexQueue weaponCardIndex;
     int i;
-    int paymentsToUndo;
+    // int paymentsToUndo;
+    Deque<SheduledPaymentType> paymentUndoQ;
+    Deque<Integer> fragmentQ;
+    Deque<Player> playerFromMetaQ;
 
     private static final int UNDO_TILE_X = 90;
     private static final int UNDO_TILE_Y = 90;
@@ -36,8 +45,11 @@ public class ScriptedDataSource implements TurnDataSource {
         i = 0;
         tiles = new ArrayList<>();
         pups = new ArrayList<>();
-        weaponCardIndex = new ArrayList<>();
-        paymentsToUndo = 0;
+        weaponCardIndex = new WeaponIndexQueue();
+        // paymentsToUndo = 0;
+        paymentUndoQ = new ArrayDeque<>();
+        fragmentQ = new ArrayDeque<>();
+        playerFromMetaQ = new ArrayDeque<>();
     }
 
     public static Tile getUndoTile() {
@@ -75,9 +87,14 @@ public class ScriptedDataSource implements TurnDataSource {
 
     }
 
+    public void pushPlayerFromMeta(Player p) {
+        playerFromMetaQ.push(p);
+    }
+
     @Override
     public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
-        return null;
+        if(playerFromMetaQ.isEmpty()) return null;
+        return playerFromMetaQ.pop();
     }
 /*
     @Override
@@ -91,7 +108,11 @@ public class ScriptedDataSource implements TurnDataSource {
     }
 
     public void pushWeaponCardIndex(int i) {
-        weaponCardIndex.add(i);
+        weaponCardIndex.pushIndex(i);
+    }
+
+    public void pushWeaponCardId(int id) {
+        weaponCardIndex.pushWeaponCardId(id);
     }
 
     public int getWeaponCardLeftovers() {
@@ -100,9 +121,20 @@ public class ScriptedDataSource implements TurnDataSource {
 
     @Override
     public WeaponCard chooseWeaponCard(List<WeaponCard> cards) throws UndoException {
-        int index = weaponCardIndex.remove(weaponCardIndex.size() - 1);
-        if(UNDO_WEAPON_CARD_INDEX == index) throw new UndoException();
-        return cards.get(index);
+        IndexOrId unknown = weaponCardIndex.pop();
+        if(unknown.isIndex()) {
+            int index = unknown.getVal();
+            if (UNDO_WEAPON_CARD_INDEX == index) throw new UndoException();
+            return cards.get(index);
+        }
+        else {
+            for(WeaponCard card : cards) {
+                if (card.getCardID() == unknown.getVal()){
+                    return card;
+                }
+            }
+        }
+        throw new IllegalStateException();
     }
 
     @Override
@@ -140,24 +172,27 @@ public class ScriptedDataSource implements TurnDataSource {
 
         }
 */
+    public void pushFragment(Integer fragment) {
+        fragmentQ.push(fragment);
+    }
+
     @Override
     public Integer requestFragment(int cardID, List<Integer> fragments, boolean forceChoice) throws UndoException {
-        return null;
+        if (fragmentQ.isEmpty()) return null;
+        return fragmentQ.pop();
     }
 
-    public void undoNextPayment() {
-        paymentsToUndo = max(paymentsToUndo, 1);
-    }
-
-    public void addScheduledUndoPayment() {
-        paymentsToUndo++;
+    public void pushUndoPayment() {
+        paymentUndoQ.push(SheduledPaymentType.UNDO);
     }
 
     @Override
     public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
-        if(paymentsToUndo > 0) {
-            paymentsToUndo--;
-            throw new UndoException();
+        if (paymentUndoQ.isEmpty()) return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
+        switch (paymentUndoQ.pop()) {
+            case NULL: return null;
+            case UNDO: throw new UndoException();
+            case ACCEPT: return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
         }
         return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
     }
