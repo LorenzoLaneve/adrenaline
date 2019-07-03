@@ -35,10 +35,9 @@ public class ReloadAtomTest {
 
     @Test
     public void testExecute() throws Exception {
-        // FIXME non determinism
-        /*
         Turn turn = game.getNextTurn();
         turn.bindDataSource(source);
+        turn.setAllowClosingPowerUps(false);
 
         source.pushPupIndex(0);
         source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
@@ -56,7 +55,6 @@ public class ReloadAtomTest {
 
         refillAmmos(turn.getActivePlayer());
         game.concludeTurn(turn); // implies reload
-        */
     }
 
     private void pickUpWeaponHere() {

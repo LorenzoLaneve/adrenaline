@@ -18,4 +18,6 @@ public interface Turn {
     TurnDataSource getDataSource();
 
     void setRunClosingActions(boolean flag);
+
+    void setAllowClosingPowerUps(boolean flag);
 }

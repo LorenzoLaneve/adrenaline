@@ -22,10 +22,12 @@ public abstract class TurnBaseImpl implements Turn {
     private Player activePlayer;
     private TurnDataSource turnDataSource;
     private boolean runClosingAction;
+    private boolean allowClosingPowerup;
 
     public TurnBaseImpl(Player activePlayer) {
         this.activePlayer = activePlayer;
         runClosingAction = true;
+        allowClosingPowerup = true;
     }
 
     public void bindDataSource(TurnDataSource turnDataSource){
@@ -61,7 +63,7 @@ public abstract class TurnBaseImpl implements Turn {
     protected void performClosingActions() throws TurnInterruptedException {
 
         // use powerup
-        if(!activePlayer.getInventory().getCallablePowerUps().isEmpty()) {
+        if(!activePlayer.getInventory().getCallablePowerUps().isEmpty() && allowClosingPowerup) {
             try{
                 // here I can use one or more pups
                 // start a pupAction
@@ -152,5 +154,10 @@ public abstract class TurnBaseImpl implements Turn {
     @Override
     public void setRunClosingActions(boolean flag) {
         runClosingAction = flag;
+    }
+
+    @Override
+    public void setAllowClosingPowerUps(boolean flag) {
+        allowClosingPowerup = flag;
     }
 }

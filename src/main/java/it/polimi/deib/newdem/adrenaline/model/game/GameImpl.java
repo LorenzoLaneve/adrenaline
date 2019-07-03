@@ -30,9 +30,9 @@ public class GameImpl implements Game {
     private boolean isFrenzy; // BAD, enum or states
     private boolean isOver;
     private int turnTimeSeconds;
-    private Deck<PowerUpCard> powerUpDeck;
-    private Deck<WeaponCard> weaponDeck;
-    private Deck<DropInstance> dropDeck;
+    protected Deck<PowerUpCard> powerUpDeck;
+    protected Deck<WeaponCard> weaponDeck;
+    protected Deck<DropInstance> dropDeck;
     private GameListener listener;
     private java.util.Map<PlayerColor, User> colorUserMap;
     private boolean init;

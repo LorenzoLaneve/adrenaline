@@ -31,6 +31,9 @@ public class GrabAtomTest {
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
+                new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
+                new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
+                new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB)
                 );
     }
@@ -41,8 +44,6 @@ public class GrabAtomTest {
 
     @Test
     public void testGrabUndoNNewCardSelection() throws Exception {
-        // FIXME this test is no-deterministic
-/*
         source.pushWeaponCardIndex(0);
         source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
         source.pushWeaponCardIndex(0);
@@ -60,23 +61,21 @@ public class GrabAtomTest {
         Turn turn = game.getNextTurn();
         turn.bindDataSource(source);
         refillAmmos(turn.getActivePlayer());
+        turn.setRunClosingActions(false);
         turn.execute();
         game.concludeTurn(turn);
 
         assertEquals(0, source.getWeaponCardLeftovers());
-        */
     }
 
     @Test
     public void testGrabUndoNPayments() throws Exception {
-        // FIXME non deterministic
-        /*
         // i want to try to start an attempt to grab, then undo and redo new weapon selection n > 10 times
 
         Turn turn = game.getNextTurn();
         turn.bindDataSource(source);
 
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 50; i++) {
             if(i % 2 == 0) { source.addScheduledUndoPayment(); }
             source.pushWeaponCardIndex(0);
             source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
@@ -91,18 +90,17 @@ public class GrabAtomTest {
         source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED)); // move to red spawnpoint tile
         source.pushPupIndex(0); // spawn // spawn at a random spawnpoint
 
+        turn.setRunClosingActions(false);
         turn.execute();
         game.concludeTurn(turn);
-        */
 
-/*
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 4; i++) {
             turn = game.getNextTurn();
             turn.bindDataSource(source);
-            turn.executeFromStart();
+            turn.setAllowClosingPowerUps(false);
+            turn.execute();
             game.concludeTurn(turn);
         }
-*/
     }
 
     @Test
