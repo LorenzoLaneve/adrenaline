@@ -47,12 +47,7 @@ public class TestAdrenalineGameController {
 
         @Override
         public Config getConfig() {
-            Config currentConfig;
-            try{
-                return Config.fromFile("config.json");
-            }catch (Exception e){
-                return null;
-            }
+            return Config.getDefaultConfig();
         }
 
         @Override
