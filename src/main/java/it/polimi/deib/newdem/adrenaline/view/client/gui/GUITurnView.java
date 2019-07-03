@@ -74,9 +74,8 @@ public class GUITurnView implements TurnView {
         }
 
         Platform.runLater(() -> {
-            Node playerSlot = window.getScene().lookup("."+ GUIGameWindowHelper.toStyleClass(actor));
-
-            if (!playerSlot.getStyleClass().contains("offline")) {
+            Label statusLabel = getStatusLabel(actor);
+            if (!statusLabel.getStyleClass().contains("offline")) {
                 getStatusLabel(actor).setText(" ");
             }
         });

@@ -20,6 +20,11 @@ public class GUIGameView implements GameView {
     }
 
 
+
+    private Label getStatusLabel(PlayerColor color) {
+        return (Label) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+    }
+
     @Override
     public void setGameData(GameData data) {
         Platform.runLater(() -> {
@@ -49,18 +54,18 @@ public class GUIGameView implements GameView {
     @Override
     public void disablePlayer(PlayerColor color) {
         Platform.runLater(() -> {
-            Label label = (Label) window.getScene().lookup(".player-panel."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
-            label.getStyleClass().add("offline");
-            label.setText("");
+            Label statusLabel = getStatusLabel(color);
+            statusLabel.getStyleClass().add("offline");
+            statusLabel.setText("Offline");
         });
     }
 
     @Override
     public void enablePlayer(PlayerColor color) {
         Platform.runLater(() -> {
-            Label label = (Label) window.getScene().lookup(".player-panel."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
-            label.getStyleClass().remove("offline");
-            label.setText("Offline");
+            Label statusLabel = getStatusLabel(color);
+            statusLabel.getStyleClass().remove("offline");
+            statusLabel.setText(" ");
         });
     }
 
