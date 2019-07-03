@@ -156,7 +156,11 @@ public class VirtualTurnView implements TurnView, TurnListener {
         }
         this.activeUser = gameView.getUserFromColor(actor);
 
-        gameView.sendEvent(new TurnStartEvent(actor));
+        if (usersOnHold.isEmpty()) {
+            gameView.sendEvent(new TurnStartEvent(actor));
+        } else {
+            gameView.sendEvent(new RevengeStartEvent(actor));
+        }
     }
 
     @Override
@@ -169,7 +173,11 @@ public class VirtualTurnView implements TurnView, TurnListener {
             } else activeUser = null;
         }
 
-        gameView.sendEvent(new TurnEndEvent(actor));
+        if (activeUser == null) {
+            gameView.sendEvent(new TurnEndEvent(actor));
+        } else {
+            gameView.sendEvent(new RevengeEndEvent(actor));
+        }
     }
 
     @Override
@@ -186,7 +194,6 @@ public class VirtualTurnView implements TurnView, TurnListener {
 
     @Override
     public ValOrUndo<Integer> choosePowerUpCard(List<Integer> cardIDs) {
-        int i = 0;
         activeUser.sendEvent(new TurnPowerUpRequest(cardIDs));
         return waitOnEvent(TurnPowerUpResponse.class).getValue();
     }
