@@ -25,4 +25,6 @@ public interface GameListener {
      */
     void userDidExitGame(User user, Player player);
 
+    void playerRestoredMatchData(Game game, Player player);
+
 }

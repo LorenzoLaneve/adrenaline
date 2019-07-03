@@ -3,14 +3,19 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
+import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.List;
 
 public class VirtualGameView implements GameView, GameListener {
 
@@ -61,7 +66,30 @@ public class VirtualGameView implements GameView, GameListener {
         this.users.remove(player.getColor());
     }
 
+    @Override
+    public void playerRestoredMatchData(Game game, Player player) {
+        //TODO
+        User reconnectingUser = game.getUserByPlayer(player);
 
+        this.users.put(player.getColor(), reconnectingUser);
+
+        reconnectingUser.sendEvent(new GameStartEvent());
+
+        GameData gameData = game.generateGameData();
+        reconnectingUser.sendEvent(new GameDataEvent(gameData));
+
+        MapData mapData = game.getMap().generateMapData();
+        reconnectingUser.sendEvent(new MapDataEvent(mapData));
+
+        KillTrackData killTrackData = game.generateKillTrackData();
+        reconnectingUser.sendEvent(new KillTrackDataEvent(killTrackData));
+
+
+        for (Player otherPlayer : game.getPlayers()){
+            reconnectingUser.sendEvent(new PlayerDataEvent(otherPlayer.generatePlayerData()));
+        }
+
+    }
 
     @Override
     public void setGameData(GameData data) {

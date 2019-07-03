@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
@@ -87,4 +88,8 @@ public interface Game {
      * Returns the deck of power up cards used in the game.
      */
     Deck<PowerUpCard> getPowerUpDeck();
+
+    GameData generateGameData();
+
+    KillTrackData generateKillTrackData();
 }

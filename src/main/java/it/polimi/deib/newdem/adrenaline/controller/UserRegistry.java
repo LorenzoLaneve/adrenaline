@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
+import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +64,11 @@ public class UserRegistry implements UserListener {
                 unnamedUsers.remove(user);
 
                 oldUser.takeOverConnection(user);
+
+                oldUser.sendEvent(new RegisterUsernameEvent(true));
+                core.getLogger().info(String.format("User %s successfully reconnected with name to %s.", oldUser.hashCode(), name));
+                core.getLobbyRegistry().assignLobby(oldUser);
+
             } else {
                 core.getLogger().info(String.format("User %s tried to update their name to %s, which is already taken.", user.hashCode(), name));
                 user.sendEvent(new RegisterUsernameEvent(false));

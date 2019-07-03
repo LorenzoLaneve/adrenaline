@@ -154,6 +154,8 @@ public class AdrenalineGameController implements GameController {
         if (reconnectedPlayer != null) {
             vgv.userDidEnterGame(user, reconnectedPlayer);
             // TODO method in model + data send to the reconnected client
+
+            vgv.playerRestoredMatchData(game, reconnectedPlayer);
         }
     }
 

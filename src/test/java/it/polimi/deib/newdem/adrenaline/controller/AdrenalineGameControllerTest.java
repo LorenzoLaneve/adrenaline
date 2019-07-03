@@ -15,7 +15,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class AdrenalineGameControllerTest {
-
+/*
     AdrenalineGameController agc;
     User u1;
     User u2;
@@ -82,4 +82,5 @@ public class AdrenalineGameControllerTest {
         agc.userDidDisconnect(u1);
         agc.userDidReconnect(u1);
     }
+    */
 }

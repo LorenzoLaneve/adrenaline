@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -211,7 +212,8 @@ public class GameImpl implements Game {
         // listenerThing.thingDidInit(thing, thing,generateThingData())
     }
 
-    private GameData generateGameData() {
+    @Override
+    public GameData generateGameData() {
         GameData gameData = new GameData();
         for (Player p : players) {
             User playerUser = getUserByPlayer(p);
@@ -221,6 +223,11 @@ public class GameImpl implements Game {
 
         gameData.setFinalized();
         return gameData;
+    }
+
+    @Override
+    public KillTrackData generateKillTrackData() {
+        return killTrack.generateKillTrackData();
     }
 
     /**
@@ -368,7 +375,7 @@ public class GameImpl implements Game {
 
 
     private void distributeScore(Player p) {
-        // score daage boards for dead player p
+        // score damage boards for dead player p
         for(Player q : this.players) {
             q.addScore(
                      p.getScoreForPlayer(q)
@@ -420,7 +427,6 @@ public class GameImpl implements Game {
     }
 
     private void refillTiles(){
-        // TODO
         for(Tile t : map.getAllTiles()){
             if(t.hasSpawnPoint()) {
                 refillSpawn(t);

@@ -1,7 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
+import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
@@ -96,6 +98,16 @@ public class MockGame implements Game {
 
     @Override
     public Deck<PowerUpCard> getPowerUpDeck() {
+        return null;
+    }
+
+    @Override
+    public GameData generateGameData() {
+        return null;
+    }
+
+    @Override
+    public KillTrackData generateKillTrackData() {
         return null;
     }
 }

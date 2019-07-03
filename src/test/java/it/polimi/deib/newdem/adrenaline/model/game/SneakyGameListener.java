@@ -30,4 +30,9 @@ public class SneakyGameListener implements GameListener {
     public void userDidExitGame(User user, Player player) {
 
     }
+
+    @Override
+    public void playerRestoredMatchData(Game game, Player player) {
+
+    }
 }
