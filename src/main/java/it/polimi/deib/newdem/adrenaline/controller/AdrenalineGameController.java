@@ -3,9 +3,7 @@ package it.polimi.deib.newdem.adrenaline.controller;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.turn.NullTurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
-import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
@@ -25,7 +23,8 @@ public class AdrenalineGameController implements GameController {
 
     private VirtualGameView vgv;
 
-    protected java.util.Map<Player, TurnDataSource> playerDataSourceMap;
+    private TimedExecutor currentExecutor;
+    private Turn currentTurn;
 
     /**
      * Initializes the GameController with the LobbyController that hosts the game.
@@ -84,7 +83,6 @@ public class AdrenalineGameController implements GameController {
             player.getActionBoard().setListener(new VirtualActionBoardView(player, vgv));
         }
 
-        buildTurnDataSources(game);
     }
 
     @Override
@@ -100,10 +98,7 @@ public class AdrenalineGameController implements GameController {
         Collections.shuffle(users);
 
         for(int i = 0; i < users.size(); i++) {
-            listCup.add(new ColorUserPair(
-                    colors.get(i),
-                    users.get(i)
-            ));
+            listCup.add(new ColorUserPair(colors.get(i), users.get(i)));
         }
         return listCup;
     }
@@ -124,9 +119,12 @@ public class AdrenalineGameController implements GameController {
                 continue;
             }
 
-            TimedExecutor te = new TimedExecutor(turn::execute);
+            synchronized (this) {
+                currentTurn = turn;
+                currentExecutor = new TimedExecutor(turn::execute);
+            }
             try {
-                te.execute(game.getTurnTime());
+                currentExecutor.execute(game.getTurnTime());
             }
             catch (TimeoutException | AbortedException e) {
                 // nothing to do here.
@@ -134,6 +132,10 @@ public class AdrenalineGameController implements GameController {
                 Thread.currentThread().interrupt();
             } finally {
                 game.concludeTurn(turn);
+            }
+            synchronized (this) {
+                currentTurn = null;
+                currentExecutor = null;
             }
         }
         lobbyController.endGame(); // /snap/
@@ -143,8 +145,13 @@ public class AdrenalineGameController implements GameController {
     public void userDidDisconnect(User user) {
         Player disconnectedPlayer = getPlayer(user);
         if (disconnectedPlayer != null) {
+            synchronized (this) {
+                if (currentTurn != null && currentTurn.getActivePlayer() == disconnectedPlayer) {
+                    currentExecutor.abort();
+                }
+            }
+
             vgv.userDidExitGame(user, disconnectedPlayer);
-            // TODO method in model
         }
     }
 
@@ -153,19 +160,7 @@ public class AdrenalineGameController implements GameController {
         Player reconnectedPlayer = getPlayer(user);
         if (reconnectedPlayer != null) {
             vgv.userDidEnterGame(user, reconnectedPlayer);
-            // TODO method in model + data send to the reconnected client
-
             vgv.playerRestoredMatchData(game, reconnectedPlayer);
-        }
-    }
-
-    protected void buildTurnDataSources(Game game){
-        playerDataSourceMap = new HashMap<>();
-        for(PlayerColor c : PlayerColor.values()){
-            Player p = game.getPlayerFromColor(c);
-            if(null != p){
-                playerDataSourceMap.put(p, new NullTurnDataSource());
-            }
         }
     }
 
