@@ -3,13 +3,10 @@ package it.polimi.deib.newdem.adrenaline.model.items;
 import com.google.gson.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectLoader;
-import it.polimi.deib.newdem.adrenaline.controller.effects.InvalidEffectException;
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
 import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.Reader;
 import java.util.*;
 
 public class WeaponDeck {
@@ -18,8 +15,8 @@ public class WeaponDeck {
     private static List<WeaponCard> cards;
 
     // deprecated
-    private WeaponDeck(List<WeaponCard> cards) {
-        this.cards = new ArrayList<>(cards);
+    private WeaponDeck(List<WeaponCard> cardList) {
+        cards = new ArrayList<>(cardList);
     }
 
     /**
@@ -55,9 +52,7 @@ public class WeaponDeck {
         if(null != cards) throw new DeckAlreadyLoadedException();
         cards = new ArrayList<>();
 
-        String path = FileUtils.getAbsoluteDecodedFilePath(jsonFile, WeaponDeck.class);
-
-        try (FileReader reader = new FileReader(path)) {
+        try (Reader reader = FileUtils.getResourceReader(jsonFile)) {
             JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
 
             JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();
@@ -86,7 +81,7 @@ public class WeaponDeck {
     public static WeaponDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<WeaponCard> cards = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(jsonFile)) {
+        try (Reader reader = FileUtils.getResourceReader(jsonFile)) {
             JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
 
             JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();

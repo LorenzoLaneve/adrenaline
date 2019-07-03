@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.ConnectionCloseEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.HeartbeatEvent;

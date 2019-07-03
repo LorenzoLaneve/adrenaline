@@ -48,6 +48,9 @@ public class TimedExecutorTest {
             fail();
         } catch (AbortedException e) {
             // ok
+        } catch (InterruptedException x) {
+            fail();
+            Thread.currentThread().interrupt();
         } catch (TimeoutException e) {
             fail();
         }

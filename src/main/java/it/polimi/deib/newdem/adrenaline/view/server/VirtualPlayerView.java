@@ -84,12 +84,12 @@ public class VirtualPlayerView implements PlayerView, PlayerListener {
 
     @Override
     public void reloadWeaponCard(int cardID) {
-        gameView.sendEvent(new WeaponReloadEvent(cardID));
+        gameView.sendEvent(new WeaponReloadEvent(player.getColor(), cardID));
     }
 
     @Override
     public void unloadWeaponCard(int cardID) {
-        gameView.sendEvent(new WeaponUnloadEvent(cardID));
+        gameView.sendEvent(new WeaponUnloadEvent(player.getColor(), cardID));
     }
 
 

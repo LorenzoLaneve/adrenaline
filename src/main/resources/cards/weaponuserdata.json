@@ -89,11 +89,11 @@
     "card-7": {
       "screenName": "Furnace",
       "fragments": {
-        "effect-0": {
+        "effect-1": {
           "screenName": "Basic Effect",
           "location": "top"
         },
-        "effect-1": {
+        "effect-2": {
           "screenName": "Cozy Fire Mode",
           "location": "bottom"
         }

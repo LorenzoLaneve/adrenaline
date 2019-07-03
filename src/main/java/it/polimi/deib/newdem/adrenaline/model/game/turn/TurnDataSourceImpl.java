@@ -116,7 +116,7 @@ public class TurnDataSourceImpl implements TurnDataSource {
             choice = listener.actionDidRequestCardFragment(cardID, fragments, forceChoice);
         } while (forceChoice && (choice == null || !fragments.contains(choice)));
 
-        return listener.actionDidRequestCardFragment(cardID, fragments, forceChoice);
+        return choice;
     }
 
     @Override

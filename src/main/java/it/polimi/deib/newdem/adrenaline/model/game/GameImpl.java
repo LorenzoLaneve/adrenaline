@@ -241,10 +241,9 @@ public class GameImpl implements Game {
     }
 
     private void importPowerUpDeck(String filePath) {
-        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
         PowerUpDeck factory;
         try {
-            factory = PowerUpDeck.fromJson(decodedPath);
+            factory = PowerUpDeck.fromJson(filePath);
         }
         catch(InvalidJSONException e) {
             throw new IllegalStateException();
@@ -253,12 +252,10 @@ public class GameImpl implements Game {
     }
 
     private void importDropDeck(String filePath) {
-        String decodedPath = FileUtils.getAbsoluteDecodedFilePath(filePath, this.getClass());
         DropDeck factory;
         try {
-            factory = DropDeck.fromJson(decodedPath);
-        }
-        catch(InvalidJSONException e) {
+            factory = DropDeck.fromJson(filePath);
+        } catch (InvalidJSONException e) {
             throw new IllegalStateException();
         }
         dropDeck = factory.createNewDeck();

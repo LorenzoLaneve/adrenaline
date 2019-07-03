@@ -17,19 +17,19 @@ public class TestPowerUpDeck {
         PowerUpDeck powerUpDeck = null;
 
         try{
-            powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("cards/powerups.json").getFile().replace("%20", " "));
+            powerUpDeck = PowerUpDeck.fromJson("cards/powerups.json");
         }catch (InvalidJSONException e){
             fail();
         }
 
-        Deck<PowerUpCard> actualDeck = powerUpDeck.createNewDeck();
+        powerUpDeck.createNewDeck();
     }
 
     @Test
     public void fromJson() {
 
         try{
-            PowerUpDeck powerUpDeck = PowerUpDeck.fromJson(this.getClass().getClassLoader().getResource("cards/powerups.json").getFile().replace("%20", " "));
+            PowerUpDeck powerUpDeck = PowerUpDeck.fromJson("cards/powerups.json");
         }catch (InvalidJSONException e){
             fail();
         }

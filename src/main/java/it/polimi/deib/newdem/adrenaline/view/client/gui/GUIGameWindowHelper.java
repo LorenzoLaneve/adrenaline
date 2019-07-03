@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,8 +21,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.Map;
 
 public class GUIGameWindowHelper {
@@ -221,7 +222,9 @@ public class GUIGameWindowHelper {
         try {
             GridPane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/active-card-grid.fxml"));
 
-            try (FileReader fread = new FileReader(FileUtils.getAbsoluteDecodedFilePath("cards/weaponuserdata.json", GUIGameWindowHelper.class))) {
+            InputStream res = GUIGameWindowHelper.class.getResource("/cards/weaponuserdata.json").openStream();
+
+            try (InputStreamReader fread = new InputStreamReader(res)) {
                 JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
 
                 JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();
@@ -250,11 +253,24 @@ public class GUIGameWindowHelper {
                 }
 
             } catch (Exception x) {
-                // TODO notify?
+                Alert a = new Alert(Alert.AlertType.ERROR);
+
+                StringWriter s = new StringWriter();
+                x.printStackTrace(new PrintWriter(s));
+
+                a.setContentText(s.toString());
+                a.showAndWait();
             }
 
             return tilePane;
         } catch (IOException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+
+            StringWriter s = new StringWriter();
+            e.printStackTrace(new PrintWriter(s));
+
+            a.setContentText(s.toString());
+            a.showAndWait();
             return null;
         }
     }

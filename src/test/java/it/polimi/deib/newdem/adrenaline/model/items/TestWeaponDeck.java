@@ -19,9 +19,7 @@ public class TestWeaponDeck {
     @Test
     public void fromJson() {
         try{
-            WeaponDeck wDeck = WeaponDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("cards/weapons.json").getFile().replace("%20", " ")
-            );
+            WeaponDeck wDeck = WeaponDeck.fromJson("cards/weapons.json");
         }catch (Exception e){
             fail();
         }

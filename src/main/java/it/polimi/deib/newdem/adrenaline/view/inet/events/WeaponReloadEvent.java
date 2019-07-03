@@ -1,17 +1,24 @@
 package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
 public class WeaponReloadEvent implements UserEvent {
 
+    private PlayerColor color;
     private int cardID;
 
-    public WeaponReloadEvent(int cardID) {
+    public WeaponReloadEvent(PlayerColor color, int cardID) {
+        this.color = color;
         this.cardID = cardID;
     }
 
     public int getCardID() {
         return cardID;
+    }
+
+    public PlayerColor getOwnerColor() {
+        return color;
     }
 
     @Override

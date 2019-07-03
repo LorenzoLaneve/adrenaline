@@ -6,8 +6,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectLoader;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 
 import java.io.FileReader;
+import java.io.Reader;
 import java.util.*;
 
 public class PowerUpDeck {
@@ -57,7 +59,7 @@ public class PowerUpDeck {
     public static PowerUpDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<PowerUpCard> cards = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(jsonFile)) {
+        try (Reader reader = FileUtils.getResourceReader(jsonFile)) {
             JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
 
             JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();

@@ -117,6 +117,10 @@ public class GameClientManager {
                 getPlayerView(e.getPlayer()).addAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
         connection.subscribeEvent(PlayerDiscardAmmoEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayer()).removeAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
+        connection.subscribeEvent(WeaponUnloadEvent.class, (conn, e) ->
+                getPlayerView(e.getOwnerColor()).unloadWeaponCard(e.getCardID()));
+        connection.subscribeEvent(WeaponReloadEvent.class, (conn, e) ->
+                getPlayerView(e.getOwnerColor()).reloadWeaponCard(e.getCardID()));
 
         connection.subscribeEvent(ActionBoardFlipEvent.class, (conn, e) ->
                 getActionView(e.getColor()).flipActionBoard());

@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.Scoreboard;
 import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;

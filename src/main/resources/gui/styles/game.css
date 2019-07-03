@@ -505,7 +505,7 @@
     -fx-pref-height: 150;
 }
 
-.card-viewer.weapon-cards .needs-reload ImageView {
+.needs-reload ImageView {
     -fx-rotate: 90;
 }
 

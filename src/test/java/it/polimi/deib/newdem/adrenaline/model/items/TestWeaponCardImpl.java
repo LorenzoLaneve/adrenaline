@@ -14,11 +14,13 @@ public class TestWeaponCardImpl {
 
     @Before
     public void setUp() throws Exception {
-        WeaponDeck wDeck = WeaponDeck.fromJson(
-                this.getClass().getClassLoader().getResource("cards/weapons.json").getFile().replace("%20", " ")
-        );
+        try {
+            WeaponDeck.loadCardsFromJson("cards/weapons.json");
+        } catch (DeckAlreadyLoadedException x) {
+            // ok
+        }
 
-        Deck<WeaponCard> actualDeck = wDeck.createNewDeck();
+        Deck<WeaponCard> actualDeck = WeaponDeck.createNewDeck();
 
         drawnCard = actualDeck.draw();
 

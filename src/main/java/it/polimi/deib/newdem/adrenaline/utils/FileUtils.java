@@ -1,11 +1,21 @@
 package it.polimi.deib.newdem.adrenaline.utils;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 public class FileUtils {
+
+    private FileUtils() {  }
+
+    public static Reader getResourceReader(String resourcePath) {
+        return new InputStreamReader(FileUtils.class.getClassLoader().getResourceAsStream(resourcePath));
+    }
+
+
 
     public static String getAbsoluteDecodedFilePath(String relativePath, Class c) {
         String encodedPath, decodedPath;

@@ -4,8 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 
-import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DropDeck {
 
         JsonArray ammoArray = cardObject.get("ammo").getAsJsonArray();
 
-        for (JsonElement ammoElem : ammoArray ){
+        for (JsonElement ammoElem : ammoArray) {
 
             String ammoString = ammoElem.getAsString();
 
@@ -42,6 +43,7 @@ public class DropDeck {
                 case ("yellow"):
                     yellow++;
                     break;
+                default: break;
             }
         }
 
@@ -53,7 +55,7 @@ public class DropDeck {
     public static DropDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<DropInstance> cards = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(jsonFile)) {
+        try (Reader reader = FileUtils.getResourceReader(jsonFile)) {
             JsonObject deckJsonObject = new JsonParser().parse(reader).getAsJsonObject();
 
             JsonArray cardsJsonArray = deckJsonObject.get("cards").getAsJsonArray();
@@ -61,7 +63,6 @@ public class DropDeck {
             for (JsonElement object : cardsJsonArray) {
                 JsonObject cardObject = object.getAsJsonObject();
 
-                int cardID = cardObject.get("id").getAsInt();
                 boolean hasPowerUp = cardObject.get("powerUp").getAsBoolean();
 
                 AmmoSet ammoSet = parseAmmoSet(cardObject);

@@ -9,6 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
 import java.io.FileReader;
+import java.io.Reader;
 
 class CLIHelper {
 
@@ -32,7 +33,7 @@ class CLIHelper {
     }
 
     public static String getWeaponName(int cardID) {
-        try (FileReader fread = new FileReader(FileUtils.getAbsoluteDecodedFilePath("cards/weaponuserdata.json", CLIHelper.class))) {
+        try (Reader fread = FileUtils.getResourceReader("cards/weaponuserdata.json")) {
             JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
 
             JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();
@@ -44,7 +45,7 @@ class CLIHelper {
     }
 
     public static String getPowerUpName(int cardID) {
-        try (FileReader fread = new FileReader(FileUtils.getAbsoluteDecodedFilePath("cards/powerupuserdata.json", CLIHelper.class))) {
+        try (Reader fread = FileUtils.getResourceReader("cards/powerupuserdata.json")) {
             JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
 
             JsonObject cardDict = userData.get("cards").getAsJsonObject().get("card-"+ cardID).getAsJsonObject();

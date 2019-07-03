@@ -16,23 +16,19 @@ public class TestDropDeck {
         DropDeck dDeck = null;
 
         try{
-            dDeck = DropDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("cards/drops.json").getFile().replace("%20", " ")
-            );
+            dDeck = DropDeck.fromJson("cards/drops.json");
         }catch (InvalidJSONException e){
             fail();
         }
 
-        Deck<DropInstance> actualDeck = dDeck.createNewDeck();
+        dDeck.createNewDeck();
     }
 
     @Test
     public void fromJson() {
 
         try{
-            DropDeck dDeck = DropDeck.fromJson(
-                    this.getClass().getClassLoader().getResource("cards/drops.json").getFile().replace("%20", " ")
-            );
+            DropDeck dDeck = DropDeck.fromJson("cards/drops.json");
         }catch (InvalidJSONException e){
             fail();
         }
