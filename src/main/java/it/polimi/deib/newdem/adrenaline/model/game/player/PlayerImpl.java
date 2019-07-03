@@ -10,6 +10,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
 import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -142,6 +143,30 @@ public class PlayerImpl implements Player {
         if(inventory.getLoadedWeapons().isEmpty()) {
             factories.removeIf(e -> shootType.covers(e.getType()));
         }
+
+        // if this player is not elegible for it, remove reload action
+        ActionType reloadType = new ActionType(RELOAD);
+        if(!canReload()) {
+            factories.removeIf(e -> reloadType.covers(e.getType()));
+        }
+
+        // if an action is completely covered by another one, remove it
+        /*
+        for(int i = factories.size() - 1; i >= 0; i--) {
+            ActionType ti = factories.get(i).getType();
+            for(int j = factories.size() - 1; j >= 0; j--) {
+                if( j == i ) {
+                    j--;
+                }
+                ActionType tj = factories.get(j).getType();
+                if(ti.covers(tj)) {
+                    factories.remove(j);
+                }
+            }
+        }
+        */
+
+
         return factories;
     }
 
@@ -356,5 +381,15 @@ public class PlayerImpl implements Player {
     @Override
     public PlayerData generatePlayerData() {
         return new PlayerData(this);
+    }
+
+    @Override
+    public boolean canReload() {
+        for(Weapon w : inventory.getDischargedWeapons()) {
+            if(inventory.canPay(w.getCard().getReloadPrice())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

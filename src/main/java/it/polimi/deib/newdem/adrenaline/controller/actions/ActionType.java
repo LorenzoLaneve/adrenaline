@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
+
 public class ActionType implements Serializable {
     /**
      * Represent the composite type of an action.
@@ -72,7 +74,10 @@ public class ActionType implements Serializable {
      */
     public boolean covers(ActionType actionType) {
         for (AtomicActionType aat : actionType.getAtomicTypes()) {
-            if(!this.atoms.contains(aat)) {
+            /*if(!this.atoms.contains(aat)) {
+                return false;
+            }*/
+            if(!this.atoms.stream().anyMatch(ownAtom -> ownAtom.covers(aat))) {
                 return false;
             }
         }

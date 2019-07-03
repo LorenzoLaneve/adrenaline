@@ -24,18 +24,10 @@ public class MovmentInteraction extends InteractionBase {
     public void execute() throws UndoException {
         TileSelector selector = new NearTileSelector(context.getActor(), minDist, maxDist);
 
-        Tile target = context.getDataSource().requestTile(selector, true);
-        /*
-        Tile target = null;
-        do {
-            try {
-                target = parent.getDataSource().requestTile(selector, true);
-            } catch (UndoException e) {
-                // do not exit, do not propagate.
-                // force user selection
-            }
-        }while (null == target);
-        */
+
+        Tile target = context.getDataSource().requestTile(selector, false);
+
+        if(null == target) { throw new UndoException(); }
 
         movmentGC = new MovementGameChange(context.getActor(), target);
         movmentGC.update(context.getGame());

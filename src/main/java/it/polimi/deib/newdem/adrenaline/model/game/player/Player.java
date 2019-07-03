@@ -115,4 +115,10 @@ public interface Player {
      * @return initial player state to be sent to the listener.
      */
     PlayerData generatePlayerData();
+
+    /**
+     * Verifies if this player is eligible for a reload action
+     * @return is this player eligible for a reload action
+     */
+    boolean canReload();
 }

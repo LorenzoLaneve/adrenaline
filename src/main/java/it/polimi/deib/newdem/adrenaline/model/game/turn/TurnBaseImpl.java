@@ -72,8 +72,7 @@ public abstract class TurnBaseImpl implements Turn {
 
         // reload
 
-        if(!activePlayer.getInventory().getDischargedWeapons().isEmpty()) {
-            // have at least one reloadable weapon
+        if(activePlayer.canReload()) {
             try {
                 ActionType aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
 

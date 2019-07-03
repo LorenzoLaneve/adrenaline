@@ -18,7 +18,7 @@ public class SelectReloadWeaponInteraction extends InteractionBase {
 
         List<WeaponCard> selectables = player.getInventory().getUnloadedWeapons().getWeapons();
 
-        if(!selectables.isEmpty()) {
+        if(player.canReload()) {
             WeaponCard selectedWeaponCard = context.getDataSource().chooseWeaponCard(selectables);
 
             if(null == selectedWeaponCard) {
@@ -29,35 +29,6 @@ public class SelectReloadWeaponInteraction extends InteractionBase {
 
             context.pushInteraction(new ReloadPaymentInteraction(context, selectedWeaponCard));
         }
-        /*
-        * PlayerInventory inventory = parent.getActor().getInventory();
-        try {
-
-            while (!inventory.getDischargedWeapons().isEmpty()) {
-                List<WeaponCard> selectables = inventory.getUnloadedWeapons().getWeapons();
-
-                WeaponCard selectedWeaponCard = parent.getDataSource().chooseWeaponCard(selectables);
-                if (selectedWeaponCard == null) break;
-
-                PaymentReceipt receipt = parent.getDataSource().requestPayment(
-                                selectedWeaponCard.getPickupPrice(),
-                                selectedWeaponCard.getCardID()
-                );
-
-                applyGameChange(new PaymentGameChange(getActor(), receipt));
-
-                for(Weapon weapon : inventory.getDischargedWeapons()) {
-                    if(weapon.getCard().equals(selectedWeaponCard)) {
-                        weapon.reload();
-                    }
-                }
-                // ^ this is important
-            }
-        }
-        catch (UndoException e) {
-            // nothing to do here.
-        }
-        * */
     }
 
     @Override

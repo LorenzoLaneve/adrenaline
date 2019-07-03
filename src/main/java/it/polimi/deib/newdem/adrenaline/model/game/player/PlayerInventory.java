@@ -1,5 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
+import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.WeaponAlreadyPresentException;
 
@@ -102,7 +104,7 @@ public class PlayerInventory {
     }
 
     /**
-     * Get all the powerups vurrently in the inventory
+     * Get all the powerups currently in the inventory
      *
      * @return powerups
      */
@@ -325,5 +327,37 @@ public class PlayerInventory {
                 .stream()
                 .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Checks if this inventory has sufficient resources
+     * to pay for the given ammoSet
+     * @param invoice
+     * @return can this inventory pay the given ammoSet
+     */
+    public boolean canPay(PaymentInvoice invoice) {
+
+        int availableRed = getRed() + getColorCount(getAllPowerUps(), RED);
+        if(availableRed < invoice.getRedAmmos()) return false;
+
+        int availableYellow = getYellow() + getColorCount(getAllPowerUps(), YELLOW);
+        if(availableYellow < invoice.getRedAmmos()) return false;
+
+        int availableBlue = getBlue() + getColorCount(getAllPowerUps(), BLUE);
+        if(availableBlue < invoice.getRedAmmos()) return false;
+
+        return true;
+
+
+    }
+
+    private int getColorCount(List<PowerUpCard> list, AmmoColor color) {
+        int i = 0;
+        for(PowerUpCard e : list) {
+            if(e.getEquivalentAmmo() == color) {
+                i++;
+            }
+        }
+        return i;
     }
 }
