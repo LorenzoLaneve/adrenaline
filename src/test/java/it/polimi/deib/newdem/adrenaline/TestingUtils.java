@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.GameParameters;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
+import it.polimi.deib.newdem.adrenaline.model.game.rigged.GameRigged;
 import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
 import it.polimi.deib.newdem.adrenaline.model.items.InvalidJSONException;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
@@ -36,6 +37,22 @@ public class TestingUtils {
         );
         gp.setMinPlayers(color.length);
         Game g = new GameImpl(gp);
+        g.init();
+        return g;
+    }
+
+    public static GameRigged makeRiggedGame(PlayerColor ... color) {
+        loadSingleton();
+        GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
+        gp.setGameMap(TestingMapBuilder.getNewMap(TestingUtils.class));
+        gp.setColorUserOrder(
+                Arrays.stream(color)
+                        .map(c -> new ColorUserPair(c, new User()))
+                        .collect(Collectors.toList())
+        );
+        gp.setMinPlayers(color.length);
+        gp.setTurnTime(1);
+        GameRigged g = new GameRigged(gp);
         g.init();
         return g;
     }

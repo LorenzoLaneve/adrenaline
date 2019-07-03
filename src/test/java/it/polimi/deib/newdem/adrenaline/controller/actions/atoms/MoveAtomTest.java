@@ -42,11 +42,10 @@ public class MoveAtomTest {
 
     @Test
     public void testExecute() throws Exception {
-        // FIXME this test is non-deterministic
-        /*
         Turn turn = game.getNextTurn();
+        turn.setRunClosingActions(false);
         turn.bindDataSource(source);
         turn.execute();
-        */
+
     }
 }

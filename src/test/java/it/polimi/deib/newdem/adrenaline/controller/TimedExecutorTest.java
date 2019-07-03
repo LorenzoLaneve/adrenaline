@@ -54,6 +54,10 @@ public class TimedExecutorTest {
         } catch (TimeoutException e) {
             fail();
         }
+        catch (InterruptedException e) {
+            fail();
+            // I guess?
+        }
 
     }
 

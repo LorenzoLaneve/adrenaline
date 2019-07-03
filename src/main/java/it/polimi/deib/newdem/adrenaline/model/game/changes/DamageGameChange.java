@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.MapListener;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.MAX_LIFE;
+import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.MAX_MARKS;
 import static java.lang.Math.min;
 import static java.lang.Math.multiplyExact;
 
@@ -30,6 +31,27 @@ public class DamageGameChange implements GameChange {
 
     @Override
     public void update(Game game) {
+        DamageBoard victimBoard = victim.getDamageBoard();
+
+        try {
+            for (int i = desiredDmg; i > 0; i--) {
+                victimBoard.appendDamage(attacker);
+                // ^ implies resolution of previous marks if applicable
+                // note that for desiredDmg = 0; it's never called
+                // and marks are not reset
+            }
+        }
+        catch (DamageTrackFullException e) {
+            // do nothing
+        }
+
+        victimBoard.setMarksFromPlayer(
+                min(victimBoard.getTotalMarksFromPlayer(attacker) + desiredMrk, MAX_MARKS),
+                attacker
+        );
+
+
+        /*
         int damageToDeal = desiredDmg;
         DamageBoard victimBoard = victim.getDamageBoard();
 
@@ -69,6 +91,7 @@ public class DamageGameChange implements GameChange {
             victimBoard.setMarksFromPlayer(newMarks, attacker);
             actualDmg = 0;
         }
+        */
     }
 
     @Override

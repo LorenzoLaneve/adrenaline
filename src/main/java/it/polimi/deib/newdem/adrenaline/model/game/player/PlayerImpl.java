@@ -355,13 +355,13 @@ public class PlayerImpl implements Player {
     @Override
     public void reportDeath(boolean isDead) {
         if (isDead) {
+            this.isDead = true;
             Map map = getGame().getMap();
             if (map.getListener() != null) {
                 map.getListener().playerDidDie(this);
+                // DO not do this.deaths += 1; here
+                // ^ EOT
             }
-            this.isDead = true;
-            // DO not do this.deaths += 1; here
-            // ^ EOT
         }
         else {
             this.isDead = false;

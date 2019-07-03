@@ -178,28 +178,46 @@ public abstract class DamageBoardImpl implements DamageBoard {
         }
         */
 
-        // convertMarksFromPlayerHelper(player);
-        // mark conversion functionality is handled by DamageGameChange
+        convertMarksFromPlayerHelper(player);
+        // mark conversion functionality is NOT handled by DamageGameChange
 
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
-        damages.add(player);
-        listener.boardDidTakeDamage(1, 0, player);
+
+        appendDamageTrivial(player);
+        // damages.add(player);
+        // listener.boardDidTakeDamage(1, 0, player);
     }
 
     private void convertMarksFromPlayerHelper(Player p) throws DamageTrackFullException {
         int currMarks = getTotalMarksFromPlayer(p);
         boolean didConvert = currMarks > 0;
 
-        while (currMarks > 0){
-            appendDamage(p);
-            currMarks--;
+        try {
+            while (currMarks > 0) {
+                // damages.add(p);
+                appendDamageTrivial(p);
+                currMarks--;
+            }
         }
+        catch (DamageTrackFullException e) {
+            // ok
+        }
+        finally {
+            if (didConvert) {
+                listener.boardDidConvertMarks(p);
+                marks.put(p, 0);
+            }
+        }
+    }
 
-        if(didConvert){
-            marks.put(p, 0);
-            listener.boardDidConvertMarks(player);
+    public void appendDamageTrivial(Player p) throws DamageTrackFullException {
+        if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
+        damages.add(p);
+        listener.boardDidTakeDamage(1, 0, p);
+        if(player.getTotalDamage() > DEATH_SHOT_INDEX) {
+            player.reportDeath(true);
         }
     }
 

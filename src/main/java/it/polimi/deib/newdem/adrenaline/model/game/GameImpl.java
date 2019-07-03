@@ -30,9 +30,9 @@ public class GameImpl implements Game {
     private boolean isFrenzy; // BAD, enum or states
     private boolean isOver;
     private int turnTimeSeconds;
-    private Deck<PowerUpCard> powerUpDeck;
-    private Deck<WeaponCard> weaponDeck;
-    private Deck<DropInstance> dropDeck;
+    protected Deck<PowerUpCard> powerUpDeck;
+    protected Deck<WeaponCard> weaponDeck;
+    protected Deck<DropInstance> dropDeck;
     private GameListener listener;
     private java.util.Map<PlayerColor, User> colorUserMap;
     private boolean init;
@@ -310,7 +310,7 @@ public class GameImpl implements Game {
         for(Player p : players) {
             if(p.isDead()) {
                 distributeScore(p); // assigns the due score to damagers
-                registerDeath(p);   // updates killtrack, removes from map, empties damageboard
+                scoreDamageboard(p);   // updates killtrack, removes from map, empties damageboard
 
                 //TODO
                 // remove player from map
@@ -376,7 +376,7 @@ public class GameImpl implements Game {
         }
     }
 
-    private void registerDeath(Player p) {
+    private void scoreDamageboard(Player p) {
         p.addSkull();
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
 
