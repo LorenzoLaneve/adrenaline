@@ -44,11 +44,11 @@ public class GUIDamageBoardView implements DamageBoardView {
         Platform.runLater(() -> {
             List<Node> marks = new ArrayList<>();
 
-            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(dealer));
+            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
 
             Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
             Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
-            for (Node child : playerSlot.getChildren()) {
+            for (Node child : markSigns.getChildren()) {
                 if (child.getStyleClass().contains(GUIGameWindowHelper.toStyleClass(dealer))) {
                     marks.add(child);
                 }

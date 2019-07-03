@@ -53,4 +53,9 @@ public class MockConnectionSender implements UserConnection {
     public void close() {
 
     }
+
+    @Override
+    public void resetHeartbeat() {
+
+    }
 }

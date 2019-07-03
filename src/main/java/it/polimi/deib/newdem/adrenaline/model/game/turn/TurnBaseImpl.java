@@ -21,9 +21,11 @@ public abstract class TurnBaseImpl implements Turn {
 
     private Player activePlayer;
     private TurnDataSource turnDataSource;
+    private boolean runClosingAction;
 
     public TurnBaseImpl(Player activePlayer) {
         this.activePlayer = activePlayer;
+        runClosingAction = true;
     }
 
     public void bindDataSource(TurnDataSource turnDataSource){
@@ -42,7 +44,9 @@ public abstract class TurnBaseImpl implements Turn {
             try {
                 performInitialActions();
                 performCoreActions();
-                performClosingActions();
+                if(runClosingAction) {
+                    performClosingActions();
+                }
             } catch (TurnInterruptedException e) {
                 // do nothing, terminate gracefully.
             }
@@ -143,5 +147,10 @@ public abstract class TurnBaseImpl implements Turn {
     @Override
     public TurnDataSource getDataSource(){
         return turnDataSource;
+    }
+
+    @Override
+    public void setRunClosingActions(boolean flag) {
+        runClosingAction = flag;
     }
 }

@@ -313,7 +313,7 @@ public class GameImpl implements Game {
         for(Player p : players) {
             if(p.isDead()) {
                 distributeScore(p); // assigns the due score to damagers
-                registerDeath(p);   // updates killtrack, removes from map, empties damageboard
+                scoreDamageboard(p);   // updates killtrack, removes from map, empties damageboard
 
                 //TODO
                 // remove player from map
@@ -379,7 +379,7 @@ public class GameImpl implements Game {
         }
     }
 
-    private void registerDeath(Player p) {
+    private void scoreDamageboard(Player p) {
         p.addSkull();
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
 
