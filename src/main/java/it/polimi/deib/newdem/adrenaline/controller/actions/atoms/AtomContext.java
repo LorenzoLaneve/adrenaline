@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms;
 
 import it.polimi.deib.newdem.adrenaline.controller.AbortedException;
+import it.polimi.deib.newdem.adrenaline.controller.InterruptExecutionException;
 import it.polimi.deib.newdem.adrenaline.controller.TimedExecutor;
 import it.polimi.deib.newdem.adrenaline.controller.TimeoutException;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory;
@@ -11,6 +12,7 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelec
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnInterruptedException;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -95,25 +97,32 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
 
     @Override
     public void damageDealtTrigger(Player attacker, Player victim) {
-        // TODO
+        // TODO choose power up and execute it
     }
 
     @Override
     public void damageTakenTrigger(Player attacker, Player victim) {
         TimedExecutor.pauseTimer();
 
-        TimedExecutor revengeExecutor = new TimedExecutor(this::revenge);
+        parent.getDataSource().pushActor(victim);
+
+        TimedExecutor revengeExecutor = new TimedExecutor(() -> revenge(victim, attacker));
         try {
             revengeExecutor.execute(15);
         } catch (TimeoutException | AbortedException e) {
             // nothing to do maybe.
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new InterruptExecutionException();
         } finally {
+            parent.getDataSource().popActor(victim);
             TimedExecutor.resumeTimer();
         }
     }
 
-    private void revenge() {
-        // TODO
+    private void revenge(Player revenger, Player attacker) {
+        // TODO choose a power up.
+        // note: you can use parent.getDataSource()
     }
 
     @Override

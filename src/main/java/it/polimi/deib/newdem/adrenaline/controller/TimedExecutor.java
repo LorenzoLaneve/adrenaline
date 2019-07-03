@@ -48,8 +48,9 @@ public class TimedExecutor implements TimerListener {
      * @param seconds The time limit given to finish the execution.
      * @throws TimeoutException If the time is up and the execution has not ended.
      * @throws AbortedException If abort() was called on this object during the execution.
+     * @throws InterruptedException If the current thread has been interrupted during the execution.
      */
-    public void execute(int seconds) throws TimeoutException, AbortedException {
+    public void execute(int seconds) throws TimeoutException, AbortedException, InterruptedException {
         if (abort && !isOver) {
             throw new AbortedException("The execution was aborted by an external thread.");
         }
@@ -69,7 +70,13 @@ public class TimedExecutor implements TimerListener {
                 while (!isOver && !abort && !timeout) wait();
             }
         } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
+            executionThread.interrupt();
+            try {
+                executionThread.join();
+                Thread.currentThread().interrupt();
+            } catch (InterruptedException y) {
+                Thread.currentThread().interrupt();
+            }
         }
 
         if (isOver || abort) {

@@ -4,6 +4,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.*;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 
 public class ConcreteActionFactory implements ActionFactory {
@@ -20,9 +21,9 @@ public class ConcreteActionFactory implements ActionFactory {
     }
 
     @Override
-    public Action makeAction(Player actor, ActionDataSource actionDataSource) {
+    public Action makeAction(Player actor, TurnDataSource dataSource) {
         // make container
-        ActionContainer container = new ActionContainer(actor, actionDataSource);
+        ActionContainer container = new ActionContainer(actor, dataSource);
 
         // fill container with ordered atoms from atomic action types
         AtomicAction currentAtomicAction = null;
