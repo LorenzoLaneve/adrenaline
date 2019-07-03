@@ -49,7 +49,7 @@ public enum AtomicActionType {
 
     public boolean covers(AtomicActionType that) {
         if (this.isMoveAction() && that.isMoveAction()) {
-            return this.getMoveDistance() < that.getMoveDistance();
+            return this.getMoveDistance() >= that.getMoveDistance();
         }
         return this == that;
     }
