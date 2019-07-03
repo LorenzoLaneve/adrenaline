@@ -6,6 +6,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -115,7 +116,7 @@ public class InteractionStackImpl implements InteractionContext, InteractionStac
     }
 
     @Override
-    public ActionDataSource getDataSource() {
+    public TurnDataSource getDataSource() {
         return ancestor.getDataSource();
     }
 

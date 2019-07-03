@@ -7,21 +7,22 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequenc
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActionContainer implements Action, AtomsContainer {
 
-    protected ActionDataSource actionDataSource;
+    protected TurnDataSource dataSource;
     protected Game game;
     protected Player actor;
     private List<AtomicAction> atomicActions;
     private AtomsRunSequence atomsRunSequence;
 
-    public ActionContainer(Player actor, ActionDataSource actionDataSource) {
+    public ActionContainer(Player actor, TurnDataSource dataSource) {
         this.actor = actor;
-        this.actionDataSource = actionDataSource;
+        this.dataSource = dataSource;
         this.game = actor.getGame();
         this.atomicActions = new ArrayList<>();
         this.atomsRunSequence = new AtomsRunSequenceImpl();
@@ -49,8 +50,8 @@ public class ActionContainer implements Action, AtomsContainer {
     }
 
     @Override
-    public ActionDataSource getDataSource() {
-        return actionDataSource;
+    public TurnDataSource getDataSource() {
+        return dataSource;
     }
 
     @Override

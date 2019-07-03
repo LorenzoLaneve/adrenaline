@@ -128,13 +128,11 @@ public class AdrenalineGameController implements GameController {
             try {
                 te.execute(game.getTurnTime());
             }
-            catch (TimeoutException e) {
-                // revert?
-            } catch (AbortedException e) {
-                // nothing to do here?
-                // player disconnected during their turn
-            }
-            finally {
+            catch (TimeoutException | AbortedException e) {
+                // nothing to do here.
+            } catch (InterruptedException x) {
+                Thread.currentThread().interrupt();
+            } finally {
                 game.concludeTurn(turn);
             }
         }

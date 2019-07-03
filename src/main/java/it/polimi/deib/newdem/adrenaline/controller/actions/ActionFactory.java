@@ -1,11 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
-// TODO cross reference
 public interface ActionFactory {
 
-    Action makeAction(Player actor, ActionDataSource actionDataSource);
+    Action makeAction(Player actor, TurnDataSource dataSource);
 
     ActionType getType();
 }
