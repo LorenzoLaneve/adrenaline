@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller;
 
+import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
@@ -12,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class TestAdrenalineGameController {
-/*
+
     private AdrenalineGameController gameController;
 
     private User user;
@@ -67,7 +68,7 @@ public class TestAdrenalineGameController {
 
     @Before
     public void setUp() throws Exception {
-
+        TestingUtils.loadSingleton();
         LobbyController lobbyController = new MockLobbyController();
         gameController = new AdrenalineGameController(lobbyController);
 
@@ -102,5 +103,4 @@ public class TestAdrenalineGameController {
         gameController.userDidDisconnect(user);
         gameController.userDidReconnect(user);
     }
-    */
 }
