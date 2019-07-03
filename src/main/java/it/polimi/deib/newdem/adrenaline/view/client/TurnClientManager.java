@@ -15,6 +15,10 @@ public class TurnClientManager {
 
     private PlayerColor actor;
 
+    private UserEventSubscriber<RevengeStartEvent> pushSubscriber = this::pushRevenge;
+
+    private UserEventSubscriber<RevengeEndEvent> popSubscriber = this::popRevenge;
+
     private UserEventSubscriber<TurnActionRequest> actionSubscriber = this::askAction;
 
     private UserEventSubscriber<TurnWeaponRequest> weaponSubscriber = this::askWeapon;
@@ -39,6 +43,8 @@ public class TurnClientManager {
     public void start() {
         turnView.startTurn(actor);
 
+        connection.subscribeEvent(RevengeStartEvent.class, pushSubscriber);
+        connection.subscribeEvent(RevengeEndEvent.class, popSubscriber);
         connection.subscribeEvent(TurnActionRequest.class, actionSubscriber);
         connection.subscribeEvent(TurnWeaponRequest.class, weaponSubscriber);
         connection.subscribeEvent(TurnPowerUpRequest.class, powerUpSubscriber);
@@ -57,6 +63,8 @@ public class TurnClientManager {
             Thread.currentThread().interrupt();
             throw new ClosedException("Close requested.");
         } finally {
+            connection.unsubscribeEvent(RevengeStartEvent.class, pushSubscriber);
+            connection.unsubscribeEvent(RevengeEndEvent.class, popSubscriber);
             connection.unsubscribeEvent(TurnActionRequest.class, actionSubscriber);
             connection.unsubscribeEvent(TurnWeaponRequest.class, weaponSubscriber);
             connection.unsubscribeEvent(TurnPowerUpRequest.class, powerUpSubscriber);
@@ -67,6 +75,15 @@ public class TurnClientManager {
         }
 
         turnView.endTurn(actor);
+    }
+
+
+    private void pushRevenge(UserConnection connection, RevengeStartEvent event) {
+        turnView.startTurn(event.getActor());
+    }
+
+    private void popRevenge(UserConnection connection, RevengeEndEvent event) {
+        turnView.endTurn(event.getActor());
     }
 
     private void askAction(UserConnection connection, TurnActionRequest request) {

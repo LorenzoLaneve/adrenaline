@@ -25,6 +25,8 @@ public class ClientInstance implements AutoCloseable, UserListener {
 
     private Thread clientThread;
 
+    private GameClientManager gameManager;
+
 
     public ClientInstance(ViewMaker viewMaker) {
         this.viewMaker = viewMaker;
@@ -164,10 +166,10 @@ public class ClientInstance implements AutoCloseable, UserListener {
     }
 
     private void playGame() {
-        GameClientManager manager = new GameClientManager(viewMaker, clientConnection);
+        gameManager = new GameClientManager(viewMaker, clientConnection);
 
-        manager.loadData();
-        manager.linkViews();
+        gameManager.loadData();
+        gameManager.linkViews();
 
         UserEventLocker<GameEndEvent> gameEndLocker = new UserEventLocker<>();
         try {
@@ -184,6 +186,9 @@ public class ClientInstance implements AutoCloseable, UserListener {
         if (clientConnection != null) {
             clientConnection.close();
         }
+
+        clientThread.interrupt();
+        if (gameManager != null) gameManager.interrupt();
     }
 
     @Override
@@ -191,6 +196,8 @@ public class ClientInstance implements AutoCloseable, UserListener {
         if (!user.isConnected() && closeOnConnection) {
             clientThread.interrupt();
             viewMaker.notifyDisconnection();
+
+            if (gameManager != null) gameManager.interrupt();
         }
     }
 

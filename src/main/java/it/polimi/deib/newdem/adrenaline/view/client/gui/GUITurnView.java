@@ -51,10 +51,10 @@ public class GUITurnView implements TurnView {
         this.activePlayer = actor;
 
         Platform.runLater(() -> {
-            getStatusLabel(actor).setText("It's their turn!");
-
-            for (PlayerColor color : playersOnHold) {
-                getStatusLabel(color).setText("Waiting...");
+            if (playersOnHold.isEmpty()) {
+                getStatusLabel(actor).setText("It's their turn!");
+            } else {
+                getStatusLabel(actor).setText("Choosing a revenge...");
             }
         });
     }

@@ -25,6 +25,8 @@ public class GameClientManager {
     private EnumMap<PlayerColor, ActionBoardView> actionBoardViews;
     private EnumMap<PlayerColor, DamageBoardView> damageBoardViews;
 
+    private Thread turnThread;
+
 
     private <T extends UserEvent> T waitForEvent(Class<T> eventClass) {
         UserEventLocker<T> eventLocker = new UserEventLocker<>();
@@ -146,10 +148,18 @@ public class GameClientManager {
 
 
     private void handleTurn(PlayerColor actor) {
+        turnThread = Thread.currentThread();
+
         TurnView tView = viewMaker.makeTurnView();
 
         TurnClientManager turnManager = new TurnClientManager(connection, tView, actor);
         turnManager.start();
+    }
+
+    public void interrupt() {
+        if (turnThread != null) {
+            turnThread.interrupt();
+        }
     }
 
 }
