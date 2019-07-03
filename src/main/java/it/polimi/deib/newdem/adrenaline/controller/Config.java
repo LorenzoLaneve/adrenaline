@@ -32,6 +32,8 @@ public final class Config {
 
     private GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
 
+    private boolean debugMode = false;
+
     private Config() {  }
 
 
@@ -62,6 +64,10 @@ public final class Config {
             config.minPlayers = getMember(configJson, "minPlayers").getAsInt();
             config.maxPlayers = getMember(configJson, "maxPlayers").getAsInt();
             config.turnTime = getMember(configJson, "turnTime").getAsInt();
+
+            if (configJson.get("debugMode") != null) {
+                config.debugMode = getMember(configJson, "debugMode").getAsBoolean();
+            }
 
         } catch (Exception x) {
             throw new InvalidConfigException(x.getMessage());
@@ -145,4 +151,10 @@ public final class Config {
         return turnTime;
     }
 
+    /**
+     * Returns whether the server instance that uses this configuration should run in debug mode.
+     */
+    public boolean isDebugMode() {
+        return debugMode;
+    }
 }

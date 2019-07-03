@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.view.inet;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.ConnectionCloseEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.HeartbeatEvent;
@@ -39,8 +40,11 @@ public abstract class UserConnectionBase implements UserConnection {
 
     @Override
     public void start() {
-        //this.heartbeatThread = new Thread(this::doHeartbeat);
-        //this.heartbeatThread.start();
+        //if (!Boolean.getBoolean("debugMode")) {
+        //    this.heartbeatThread = new Thread(this::doHeartbeat);
+        //    this.heartbeatThread.start();
+        //}
+
         // TODO REMOVE COMMENTS. heartbeat is disabled for testing purposes.
     }
 
@@ -86,8 +90,10 @@ public abstract class UserConnectionBase implements UserConnection {
     public void close() {
         notifyEvent(new ConnectionCloseEvent());
 
-        this.heartbeatThread.interrupt();
-        this.heartbeatThread = null;
+        if (heartbeatThread != null) {
+            this.heartbeatThread.interrupt();
+            this.heartbeatThread = null;
+        }
 
         // empty subscribers
         synchronized (subsMutex) {

@@ -7,10 +7,8 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
 import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
 import it.polimi.deib.newdem.adrenaline.model.items.InvalidJSONException;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
-import org.omg.SendingContext.RunTime;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +36,11 @@ public class ServerMain {
             return;
         }
         Logger.getGlobal().info("Config file successfully loaded from "+ configFile.getAbsolutePath());
+
+        if (serverConf.isDebugMode()) {
+            Logger.getGlobal().info("Warning: debug mode is enabled");
+            System.setProperty("debugMode", "true");
+        }
 
         // loading weapon deck from file
         try {

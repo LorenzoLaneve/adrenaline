@@ -11,5 +11,7 @@
   "minPlayers": 3,
   "maxPlayers": 5,
 
-  "turnTime": 92
+  "turnTime": 92,
+
+  "debugMode": true
 }
