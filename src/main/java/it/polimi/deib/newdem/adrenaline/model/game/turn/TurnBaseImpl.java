@@ -78,7 +78,7 @@ public abstract class TurnBaseImpl implements Turn {
 
         // reload
 
-        if(activePlayer.canReload()) {
+        if(activePlayer.canReload() && !activePlayer.getActionBoard().isFrenzy()) {
             try {
                 ActionType aType = turnDataSource.requestAction(Arrays.asList(new ActionType(AtomicActionType.RELOAD)));
 
