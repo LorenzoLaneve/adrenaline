@@ -171,47 +171,52 @@ public class GUITurnView implements TurnView {
         GUILocker<ValOrUndo<PlayerColor>> locker = new GUILocker<>();
         this.currentLocker = locker;
 
-        Platform.runLater(() -> window.setHint("Choose "+ metaPlayerToString(metaPlayer) +" player."));
-
-        Button noChoiceButton = null;
-        if (!forceChoice) {
-            noChoiceButton = new Button("No player");
-            noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
-
-            Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
-            controlButtons.getChildren().add(noChoiceButton);
-        }
-
         Map<PlayerColor, EventHandler<MouseEvent>> handlerMap = new EnumMap<>(PlayerColor.class);
 
-        for (PlayerColor player : legalPlayers) {
-            Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
-            if (playerPin != null) {
-                playerPin.getStyleClass().add("selectable");
+        Platform.runLater(() -> {
+            window.setHint("Choose "+ metaPlayerToString(metaPlayer) +" player.");
 
-                EventHandler<MouseEvent> handler = e -> locker.deliver(new ValOrUndo<>(player));
-                handlerMap.put(player, handler);
+            if (!forceChoice) {
+                Button noChoiceButton = new Button("No player");
+                noChoiceButton.getStyleClass().add("no-choice-button");
+                noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
 
-                playerPin.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
+                controlButtons.getChildren().add(noChoiceButton);
             }
-        }
+
+            for (PlayerColor player : legalPlayers) {
+                Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
+                if (playerPin != null) {
+                    playerPin.getStyleClass().add("selectable");
+
+                    EventHandler<MouseEvent> handler = e -> locker.deliver(new ValOrUndo<>(player));
+                    handlerMap.put(player, handler);
+
+                    playerPin.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                }
+            }
+        });
 
         try {
             return locker.waitForValue();
         } finally {
-            for (PlayerColor player : legalPlayers) {
-                Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
-                if (playerPin != null) {
-                    playerPin.getStyleClass().remove("selectable");
-                    playerPin.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(player));
+            Platform.runLater(() -> {
+                for (PlayerColor player : legalPlayers) {
+                    Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
+                    if (playerPin != null) {
+                        playerPin.getStyleClass().remove("selectable");
+                        playerPin.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(player));
+                    }
                 }
-            }
 
-            Platform.runLater(() -> window.setHint(""));
+                window.setHint("");
 
-            if (noChoiceButton != null) {
-                ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
-            }
+                Button noChoiceButton = (Button) window.getScene().lookup(".no-choice-button");
+                if (noChoiceButton != null) {
+                    ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
+                }
+            });
         }
     }
 
@@ -222,45 +227,50 @@ public class GUITurnView implements TurnView {
 
         Map<TilePosition, EventHandler<MouseEvent>> handlerMap = new HashMap<>();
 
-        Platform.runLater(() -> window.setHint("Choose a tile."));
+        Platform.runLater(() -> {
+            window.setHint("Choose a tile.");
 
-        Button noChoiceButton = null;
-        if (!forceChoice) {
-            noChoiceButton = new Button("No tile");
-            noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
+            if (!forceChoice) {
+                Button noChoiceButton = new Button("No tile");
+                noChoiceButton.getStyleClass().add("no-choice-button");
+                noChoiceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> locker.deliver(new ValOrUndo<>(null)));
 
-            Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
-            controlButtons.getChildren().add(noChoiceButton);
-        }
-
-        for (TilePosition tile : legalTiles) {
-            Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
-            if (tilePane != null) {
-                tilePane.getStyleClass().add("selectable");
-
-                EventHandler<MouseEvent> handler = e -> locker.deliver(new ValOrUndo<>(tile));
-                handlerMap.put(tile, handler);
-
-                tilePane.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                Pane controlButtons = (Pane) window.getScene().lookup(".control-buttons");
+                controlButtons.getChildren().add(noChoiceButton);
             }
-        }
+
+            for (TilePosition tile : legalTiles) {
+                Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+                if (tilePane != null) {
+                    tilePane.getStyleClass().add("selectable");
+
+                    EventHandler<MouseEvent> handler = e -> locker.deliver(new ValOrUndo<>(tile));
+                    handlerMap.put(tile, handler);
+
+                    tilePane.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                }
+            }
+        });
 
         try {
             return locker.waitForValue();
         } finally {
-            for (TilePosition tile : legalTiles) {
-                Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
-                if (tilePane != null) {
-                    tilePane.getStyleClass().remove("selectable");
-                    tilePane.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(tile));
+            Platform.runLater(() -> {
+                for (TilePosition tile : legalTiles) {
+                    Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+                    if (tilePane != null) {
+                        tilePane.getStyleClass().remove("selectable");
+                        tilePane.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(tile));
+                    }
                 }
-            }
 
-            Platform.runLater(() -> window.setHint(""));
+                window.setHint("");
 
-            if (noChoiceButton != null) {
-                ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
-            }
+                Button noChoiceButton = (Button) window.getScene().lookup(".no-choice-button");
+                if (noChoiceButton != null) {
+                    ((Pane) noChoiceButton.getParent()).getChildren().remove(noChoiceButton);
+                }
+            });
         }
     }
 

@@ -136,7 +136,9 @@ public class GUIMapView implements MapView {
     public void removePlayer(PlayerColor player) {
         Platform.runLater(() -> {
             Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), player);
-            ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
+            if (playerPin != null) {
+                ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
+            }
         });
     }
 

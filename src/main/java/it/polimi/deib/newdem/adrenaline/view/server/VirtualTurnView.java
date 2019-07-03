@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 
 public class VirtualTurnView implements TurnView, TurnListener {
 
-    // TODO forceChoice flags
-
     private VirtualGameView gameView;
 
     private List<User> usersOnHold;

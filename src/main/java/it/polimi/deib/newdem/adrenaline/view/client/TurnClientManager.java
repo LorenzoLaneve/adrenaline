@@ -70,44 +70,72 @@ public class TurnClientManager {
     }
 
     private void askAction(UserConnection connection, TurnActionRequest request) {
-        connection.sendEvent(new TurnActionResponse(turnView.chooseAction(request.getAvailableActions())));
+        try {
+            connection.sendEvent(new TurnActionResponse(turnView.chooseAction(request.getAvailableActions())));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askWeapon(UserConnection connection, TurnWeaponRequest request) {
-        connection.sendEvent(new TurnWeaponResponse(turnView.chooseWeaponCard(request.getAvailableCardIDs())));
+        try {
+            connection.sendEvent(new TurnWeaponResponse(turnView.chooseWeaponCard(request.getAvailableCardIDs())));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askPowerUp(UserConnection connection, TurnPowerUpRequest request) {
-        connection.sendEvent(new TurnPowerUpResponse(turnView.choosePowerUpCard(request.getAvailableCards())));
+        try {
+            connection.sendEvent(new TurnPowerUpResponse(turnView.choosePowerUpCard(request.getAvailableCards())));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askPlayer(UserConnection connection, TurnPlayerRequest request) {
-        connection.sendEvent(new TurnPlayerResponse(
-                turnView.choosePlayer(request.getMetaPlayer(), request.getSelectablePlayers(), request.isChoiceForced())
-        ));
+        try {
+            connection.sendEvent(new TurnPlayerResponse(
+                    turnView.choosePlayer(request.getMetaPlayer(), request.getSelectablePlayers(), request.isChoiceForced())
+            ));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askTile(UserConnection connection, TurnTileRequest request) {
-        connection.sendEvent(
-                new TurnTileResponse(turnView.chooseTile(request.getSelectableTiles(), request.isChoiceForced()))
-        );
+        try {
+            connection.sendEvent(
+                    new TurnTileResponse(turnView.chooseTile(request.getSelectableTiles(), request.isChoiceForced()))
+            );
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askFragment(UserConnection connection, TurnFragmentRequest request) {
-        connection.sendEvent(new TurnFragmentResponse(
-                turnView.chooseCardFragment(request.getCardID(), request.getSelectableFragments(), request.isChoiceForced())
-        ));
+        try {
+            connection.sendEvent(new TurnFragmentResponse(
+                    turnView.chooseCardFragment(request.getCardID(), request.getSelectableFragments(), request.isChoiceForced())
+            ));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
     private void askPayment(UserConnection connection, TurnPaymentRequest request) {
-        connection.sendEvent(new TurnPaymentResponse(
-                turnView.choosePayment(
-                        request.getInvoice(),
-                        request.getPlayerAmmos(),
-                        request.getAvailablePowerUps(),
-                        request.getFragmentToPay()
-                )
-        ));
+        try {
+            connection.sendEvent(new TurnPaymentResponse(
+                    turnView.choosePayment(
+                            request.getInvoice(),
+                            request.getPlayerAmmos(),
+                            request.getAvailablePowerUps(),
+                            request.getFragmentToPay()
+                    )
+            ));
+        } catch (Exception x) {
+            // no problem
+        }
     }
 
 }
