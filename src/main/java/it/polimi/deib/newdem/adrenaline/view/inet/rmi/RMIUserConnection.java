@@ -43,6 +43,8 @@ public class RMIUserConnection extends UserConnectionBase {
 
         this.listeningThread = new Thread(this::listen);
         this.listeningThread.start();
+
+        super.start();
     }
 
     @Override

@@ -2,6 +2,7 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.ConnectionCloseEvent;
+import it.polimi.deib.newdem.adrenaline.view.inet.events.HeartbeatEvent;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public abstract class UserConnectionBase implements UserConnection {
 
     private final Object subsMutex = new Object();
 
+    private Thread heartbeatThread;
+    private int heartbeatCount;
+
 
     public UserConnectionBase(User user) {
         this.subscribers = new HashMap<>();
@@ -33,6 +37,12 @@ public abstract class UserConnectionBase implements UserConnection {
         return user;
     }
 
+    @Override
+    public void start() {
+        //this.heartbeatThread = new Thread(this::doHeartbeat);
+        //this.heartbeatThread.start();
+        // TODO REMOVE COMMENTS. heartbeat is disabled for testing purposes.
+    }
 
     @Override
     public <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber) {
@@ -76,6 +86,9 @@ public abstract class UserConnectionBase implements UserConnection {
     public void close() {
         notifyEvent(new ConnectionCloseEvent());
 
+        this.heartbeatThread.interrupt();
+        this.heartbeatThread = null;
+
         // empty subscribers
         synchronized (subsMutex) {
             this.subscribers = new HashMap<>();
@@ -117,4 +130,30 @@ public abstract class UserConnectionBase implements UserConnection {
         }
     }
 
+    private void doHeartbeat() {
+        try {
+            resetHeartbeat();
+
+            do {
+                Thread.sleep(1000);
+
+                this.heartbeatCount -= 1;
+                if (heartbeatCount <= 0) {
+                    close();
+                    break;
+                }
+
+                sendEvent(new HeartbeatEvent());
+            } while (true);
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+        } catch (Exception x) {
+            // no problem, kill the thread.
+        }
+    }
+
+    @Override
+    public void resetHeartbeat() {
+        this.heartbeatCount = 5;
+    }
 }

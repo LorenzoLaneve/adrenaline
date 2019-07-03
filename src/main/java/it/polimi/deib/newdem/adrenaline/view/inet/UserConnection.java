@@ -57,4 +57,9 @@ public interface UserConnection {
      */
     void close();
 
+    /**
+     * Resets the heartbeat count (i.e. a new heartbeat is received and the timer to close the connection has to be reset)
+     */
+    void resetHeartbeat();
+
 }
