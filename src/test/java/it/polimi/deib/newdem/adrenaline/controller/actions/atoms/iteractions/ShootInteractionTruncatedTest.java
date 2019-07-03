@@ -31,12 +31,19 @@ public class ShootInteractionTruncatedTest {
                     new ActionType(MOVE3)
             );
 
-            // select weapon, undo
-            sds.pushWeaponCardIndex(0);
+            // done.
+            sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.BLUE));
+            // start action 3
+            // end action 2
+            // then undo move too, killing the current action
+            sds.pushTile(ScriptedDataSource.getUndoTile());
+            // at weapon selection screen, undo from weapon selection
+            sds.pushWeaponCardIndex(ScriptedDataSource.getUndoWeaponCardIndex());
             // move to position
             sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
             // end action 1
-            // grab weapon
+            // STDS automates payment
+            // grab random weapon
             sds.pushWeaponCardIndex(0);
             // move to spawn
             sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
@@ -46,6 +53,10 @@ public class ShootInteractionTruncatedTest {
             t.setRunClosingActions(false);
             t.bindDataSource(sds);
             t.execute();
+
+            assertEquals(
+                    game.getMap().getSpawnPointFromColor(AmmoColor.BLUE).getPosition(),
+                    t.getActivePlayer().getTile().getPosition());
         }
 
         @Test
