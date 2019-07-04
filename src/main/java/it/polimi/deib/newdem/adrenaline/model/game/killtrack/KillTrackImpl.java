@@ -14,8 +14,8 @@ public class KillTrackImpl implements KillTrack {
     private KillTrackListener listener;
     private int[] score;
 
-    public static final int MIN_KILLTRACK_SIZE = 5 - 1; // arrays start at zero
-    public static final int MAX_KILLTRACK_SIZE = 8 - 1;
+    public static final int MIN_KILLTRACK_SIZE = 5;
+    public static final int MAX_KILLTRACK_SIZE = 8;
 
     /** Creates a new {@code KillTrack} with {@code trackLength} initial skulls on it.
      *

@@ -13,5 +13,7 @@
 
   "turnTime": 92,
 
+  "killTrackLength": 5,
+
   "debugMode": true
 }

@@ -67,6 +67,7 @@ public class AdrenalineGameController implements GameController {
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);
 
+        gp.setKillTrackInitialLength(lobbyController.getConfig().getKillTrackLength());
         gp.setGameMap(myMap);
         gp.setColorUserOrder(listCup);
         Config config = lobbyController.getConfig();
@@ -195,7 +196,7 @@ public class AdrenalineGameController implements GameController {
             }
         }
 
-        /*
+
         if (names.contains("ezkills")) {
             Player p0 = players.get(0);
             for (Player p : players) if (p != p0) {
@@ -205,7 +206,7 @@ public class AdrenalineGameController implements GameController {
                     //nothing to do here.
                 }
             }
-        }*/
+        }
 
     }
 
