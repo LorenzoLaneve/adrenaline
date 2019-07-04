@@ -200,6 +200,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamageTrivial(Player p) throws DamageTrackFullException {
+        // this does not trigger any listener
         if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
         damages.add(p);
         listener.boardDidTakeDamage(1, 0, p);
