@@ -129,8 +129,6 @@ public class GameClientManager {
 
         connection.subscribeEvent(PlayerDamageEvent.class, (conn, e) ->
                 getDamageBoard(e.getDamagedPlayer()).registerDamage(e.getDamageAmount(), e.getMarkAmount(), e.getAttacker()));
-        connection.subscribeEvent(PlayerConvertMarksEvent.class, (conn, e) ->
-                getDamageBoard(e.getDamagedPlayer()).convertMarks(e.getDealer()));
         connection.subscribeEvent(PlayerPopDamageEvent.class, (conn, e) ->
                 getDamageBoard(e.getColor()).popDamage());
         connection.subscribeEvent(DamageBoardFlipEvent.class, (conn, e) ->

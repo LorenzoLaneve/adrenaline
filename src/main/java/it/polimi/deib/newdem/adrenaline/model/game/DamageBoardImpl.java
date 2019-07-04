@@ -194,8 +194,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         }
         finally {
             if (didConvert) {
-                if (listener != null) listener.boardDidConvertMarks(p);
-                marks.put(p, 0);
+                setMarksFromPlayer(0, p);
             }
         }
     }
