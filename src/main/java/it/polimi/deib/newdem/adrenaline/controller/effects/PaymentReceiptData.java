@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A serializable version of PaymentReceipt.
+ * @see PaymentReceipt
+ */
 public class PaymentReceiptData implements Serializable {
 
     private List<Integer> powerUps;

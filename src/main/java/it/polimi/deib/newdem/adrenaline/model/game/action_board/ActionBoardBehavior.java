@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
 import java.util.List;
 
+/**
+ * Strategy pattern used in ActionBoardImpl
+ * @see ActionBoardImpl to see how this interface is used.
+ */
 public interface ActionBoardBehavior {
 
     List<ActionFactory> getBasicActions();
