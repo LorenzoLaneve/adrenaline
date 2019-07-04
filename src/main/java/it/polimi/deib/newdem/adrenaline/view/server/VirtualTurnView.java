@@ -221,5 +221,4 @@ public class VirtualTurnView implements TurnView, TurnListener {
         activeUser.sendEvent(new TurnPaymentRequest(invoice, playerInv, cardIDs, fragmentToPay));
         return waitOnEvent(TurnPaymentResponse.class).getValue();
     }
-
 }

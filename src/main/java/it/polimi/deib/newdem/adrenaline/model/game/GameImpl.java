@@ -332,11 +332,19 @@ public class GameImpl implements Game {
         if(shouldGoFrenzy()) {
             goFrenzy();
         }
+
+        resetTurnDeathFlags();
+    }
+
+    private void resetTurnDeathFlags() {
+        for(Player p : players) {
+            p.resetTurnDeath();
+        }
     }
 
     private void registerKills() {
         for(Player p : players) {
-            if(p.isDead()) {
+            if(p.diedThisTurn()) {
                 distributeScore(p); // assigns the due score to damagers
                 scoreDamageboard(p);   // updates killtrack, removes from map, empties damageboard
 

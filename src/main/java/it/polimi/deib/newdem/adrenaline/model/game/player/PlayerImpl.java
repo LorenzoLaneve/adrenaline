@@ -3,7 +3,6 @@ package it.polimi.deib.newdem.adrenaline.model.game.player;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory;
-import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
@@ -29,6 +28,7 @@ public class PlayerImpl implements Player {
     private boolean isDead; // maybe inferred?
     private boolean isInit;
     private boolean hasFirstPlayerCard;
+    private boolean diedThisTurn;
     private int score;
 
     public static Player makePlayer(PlayerColor color, Game game) {
@@ -359,6 +359,7 @@ public class PlayerImpl implements Player {
     public void reportDeath(boolean isDead) {
         if (isDead) {
             this.isDead = true;
+            this.diedThisTurn = true;
             Map map = getGame().getMap();
             if (map.getListener() != null) {
                 map.getListener().playerDidDie(this);
@@ -368,6 +369,7 @@ public class PlayerImpl implements Player {
         }
         else {
             this.isDead = false;
+            this.diedThisTurn = false;
         }
     }
 
@@ -394,5 +396,15 @@ public class PlayerImpl implements Player {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean diedThisTurn() {
+        return diedThisTurn;
+    }
+
+    @Override
+    public void resetTurnDeath() {
+        diedThisTurn = false;
     }
 }

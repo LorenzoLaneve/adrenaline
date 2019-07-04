@@ -121,4 +121,12 @@ public interface Player {
      * @return is this player eligible for a reload action
      */
     boolean canReload();
+
+    /**
+     * Chechs if the player died this turn
+     * @return did this player die this turn
+     */
+    boolean diedThisTurn();
+
+    void resetTurnDeath();
 }
