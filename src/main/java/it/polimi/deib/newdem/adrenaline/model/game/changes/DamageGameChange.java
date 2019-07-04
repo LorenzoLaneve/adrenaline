@@ -22,6 +22,7 @@ public class DamageGameChange implements GameChange {
     private int actualDmg;
     private int previousMrk;
     private boolean didDie;
+    private boolean canRealizeMarks;
 
 
     public DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt){
@@ -30,6 +31,12 @@ public class DamageGameChange implements GameChange {
         this.desiredDmg = dmgAmt;
         this.desiredMrk = mrkAmt;
         didDie = false;
+        canRealizeMarks = true;
+    }
+
+    public DamageGameChange(Player attacker, Player victim, int desiredDmg, int desiredMrk, boolean canRealizeMarks) {
+        this(attacker, victim, desiredDmg, desiredMrk);
+        this.canRealizeMarks = canRealizeMarks;
     }
 
     @Override
@@ -38,7 +45,7 @@ public class DamageGameChange implements GameChange {
 
         try {
             for (int i = desiredDmg; i > 0; i--) {
-                victimBoard.appendDamage(attacker);
+                victimBoard.appendDamage(attacker, canRealizeMarks);
                 // ^ implies resolution of previous marks if applicable
                 // note that for desiredDmg = 0; it's never called
                 // and marks are not reset

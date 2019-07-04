@@ -97,9 +97,38 @@ public class EffectManager {
      * Registers a the given damage and marks from the {@code attacker} to the {@code victim}.
      * Note that this may trigger events to ask players for power ups that can be used in particular
      * situations.
+     *
+     * This will realize any pre-existing marks of {@code victim} from {@code attacker}
+     *
+     * @param attacker Player dealing damage
+     * @param victim Player receiving damage
+     * @param damageAmount amount of damage dealt
+     * @param markAmount amount of marks dealt
      */
     public void damagePlayer(Player attacker, Player victim, int damageAmount, int markAmount) {
+        damagePlayer(attacker, victim, damageAmount, markAmount, true);
+        /*
         reportGameChange(new DamageGameChange(attacker, victim, damageAmount, markAmount));
+
+        if (damageAmount > 0) {
+            context.damageTakenTrigger(attacker, victim);
+            context.damageDealtTrigger(attacker, victim);
+        }*/
+    }
+
+    /**
+     * Registers a the given damage and marks from the {@code attacker} to the {@code victim}.
+     * Note that this may trigger events to ask players for power ups that can be used in particular
+     * situations.
+     *
+     * @param attacker Player dealing damage
+     * @param victim Player receiving damage
+     * @param damageAmount amount of damage dealt
+     * @param markAmount amount of marks dealt
+     * @param canRealizeMarks can this damage realize previous marks
+     */
+    public void damagePlayer(Player attacker, Player victim, int damageAmount, int markAmount, boolean canRealizeMarks) {
+        reportGameChange(new DamageGameChange(attacker, victim, damageAmount, markAmount, canRealizeMarks));
 
         if (damageAmount > 0) {
             context.damageTakenTrigger(attacker, victim);
