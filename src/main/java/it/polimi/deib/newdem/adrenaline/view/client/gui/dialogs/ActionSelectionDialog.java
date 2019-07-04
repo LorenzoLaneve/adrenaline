@@ -57,10 +57,10 @@ public class ActionSelectionDialog implements Dialog {
     private static String screenNameForAction(ActionType action) {
         StringBuilder builder = new StringBuilder();
         for (AtomicActionType atom : action.getAtomicTypes()) {
-            builder.append(" ");
+            builder.append(", ");
             builder.append(screenNameForAtomicAction(atom));
         }
-        return builder.toString();
+        return builder.toString().substring(2);
     }
 
     @Override
