@@ -28,12 +28,14 @@ public class GrabDropInteraction extends InteractionBase {
         try {
              dropInstance = dropTIle.grabDrop();
              if(null == dropInstance)  { return; }
-             player.getInventory().addAmmoSet(dropInstance.getAmmos());
 
+             player.getInventory().addAmmoSet(dropInstance.getAmmos());
              if(player.getInventory().canAcceptPowerUp() &&
                 dropInstance.hasPowerUp()) {
                  attemptDraw();
              }
+
+             context.getGame().getDropDeck().discard(dropInstance);
         }
         catch (NotOrdinaryTileException e) {
             throw new IllegalStateException(e);

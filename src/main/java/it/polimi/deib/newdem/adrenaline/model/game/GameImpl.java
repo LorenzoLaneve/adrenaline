@@ -521,4 +521,9 @@ public class GameImpl implements Game {
             }
         }
     }
+
+    @Override
+    public Deck<DropInstance> getDropDeck() {
+        return dropDeck;
+    }
 }
