@@ -26,6 +26,8 @@ public class SelectAdditionalDamagePowerupInteraction extends InteractionBase {
             // if undo, terminate this interaction stack.
         }
 
+        if(null == selectedPup) { return; }
+
         context.pushInteraction(new SelectAdditionalDamageVictimInteraction(context, selectedPup));
     }
 

@@ -18,6 +18,8 @@ public class SelectPupInteraction extends InteractionBase {
     public void execute() throws UndoException {
         List<PowerUpCard> availablePups = context.getActor().getInventory().getPowerUpByTrigger(PowerUpTrigger.CALL);
 
+        if(availablePups.isEmpty()) { return; }
+
         PowerUpCard selectedPup = context.getDataSource().choosePowerUpCard(availablePups);
 
         if(null != selectedPup) {

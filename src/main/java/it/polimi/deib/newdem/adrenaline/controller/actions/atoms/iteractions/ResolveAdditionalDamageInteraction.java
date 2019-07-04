@@ -1,8 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
+import it.polimi.deib.newdem.adrenaline.controller.InterruptExecutionException;
 import it.polimi.deib.newdem.adrenaline.controller.effects.Effect;
 import it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
+import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 public class ResolveAdditionalDamageInteraction extends InteractionBase {
@@ -18,10 +20,17 @@ public class ResolveAdditionalDamageInteraction extends InteractionBase {
     public void execute() throws UndoException {
 
         Effect effect = selectedPup.getEffect();
-        effect.apply(new EffectManager(context.getEffectContext()), context.getActor());
 
-        context.getActor().getInventory().removePowerUp(selectedPup);
-        context.getGame().getPowerUpDeck().discard(selectedPup);
+        try {
+            context.getActor().getInventory().removePowerUp(selectedPup);
+            effect.apply(new EffectManager(context.getEffectContext()), context.getActor());
+        }
+        catch (InterruptExecutionException e) {
+            // go to finally
+        }
+        finally {
+            context.getGame().getPowerUpDeck().discard(selectedPup);
+        }
 
         context.pushInteraction(new AdditionalDamageInteraction(context));
     }
