@@ -170,7 +170,9 @@ public abstract class DamageBoardImpl implements DamageBoard {
             throw new DamageTrackFullException();
         }
 
-        convertMarksFromPlayerHelper(player);
+        if(canRealizeMarks) {
+            convertMarksFromPlayerHelper(player);
+        }
         // mark conversion functionality is NOT handled by DamageGameChange
 
         appendDamageTrivial(player);
