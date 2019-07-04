@@ -224,8 +224,10 @@ public abstract class DamageBoardImpl implements DamageBoard {
             throw new IllegalStateException(String.format("Attempted to set %d marks, more than the maximum allowed (%d)",
                     totalMarks, MAX_MARKS));
         }
+
+        int delta = totalMarks - getTotalMarksFromPlayer(player);
         marks.put(player, totalMarks);
-        if (listener != null) listener.boardDidTakeDamage(0,totalMarks, player);
+        if (listener != null) listener.boardDidTakeDamage(0, delta, player);
     }
 
     protected abstract DamageBoard makeNewBoard();

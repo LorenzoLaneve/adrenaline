@@ -18,7 +18,12 @@ public class CLIDamageBoardView implements DamageBoardView {
 
     @Override
     public void registerDamage(int damageAmount, int markAmount, PlayerColor dealer) {
-        out.println("Player "+ CLIHelper.colorToString(color) +" got "+ damageAmount +"x damage and "+ markAmount +"x marks from Player "+ CLIHelper.colorToString(dealer));
+        if (damageAmount > 0) {
+            out.println("Player " + CLIHelper.colorToString(color) + " got " + damageAmount + "x damage from Player " + CLIHelper.colorToString(dealer));
+        }
+        if (markAmount != 0) {
+            out.println("Player " + CLIHelper.colorToString(color) + " got " + markAmount + "x marks from Player " + CLIHelper.colorToString(dealer));
+        }
     }
 
     @Override

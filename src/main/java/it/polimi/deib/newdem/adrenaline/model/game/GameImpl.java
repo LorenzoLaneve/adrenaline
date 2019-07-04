@@ -119,7 +119,7 @@ public class GameImpl implements Game {
     @Override
     public boolean shouldGoFrenzy() {
         return !isFrenzy &&
-                killTrack.getTotalKills() > killTrack.getTrackLength();
+                killTrack.getTotalKills() >= killTrack.getTrackLength();
     }
 
     private void bindElementsListeners() {
