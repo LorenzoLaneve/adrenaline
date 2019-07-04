@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange</node>
+    <node x="0.0" y="271.0">it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange</node>
+    <node x="0.0" y="432.0">it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange</node>
+    <node x="203.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange</node>
+    <node x="306.0" y="271.0">it.polimi.deib.newdem.adrenaline.model.game.changes.AmmoLossGameChange</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
