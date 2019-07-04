@@ -99,6 +99,9 @@ public class UserRegistry implements UserListener {
             unnamedUsers.remove(user);
         }
 
+        if (user.isConnected()) {
+            user.getBoundConnection().close();
+        }
     }
 
     /**

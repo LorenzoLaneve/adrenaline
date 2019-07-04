@@ -172,7 +172,7 @@ public class GUIPlayerView implements PlayerView {
     @Override
     public void removeWeaponCard(int cardID) {
         Platform.runLater(() -> {
-            powerUpsPane.getChildren().remove(powerUpsPane.lookup(".equipWeapon"+ cardID));
+            weaponsPane.getChildren().remove(weaponsPane.lookup(".equipWeapon"+ cardID));
         });
     }
 

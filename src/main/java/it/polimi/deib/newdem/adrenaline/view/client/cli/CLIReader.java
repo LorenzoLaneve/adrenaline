@@ -2,31 +2,41 @@ package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
 import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class CLIReader {
 
     private String line;
 
-    private Scanner scanner;
+    private InputStream in;
+
+    private Thread readerThread;
 
     public CLIReader(InputStream in) {
         this.line = null;
-        this.scanner = new Scanner(in);
+        this.in = in;
     }
 
     public void start() {
-        (new Thread(this::runReader)).start();
+        readerThread = (new Thread(this::runReader));
+        readerThread.start();
     }
 
     private void runReader() {
-        while (scanner.hasNext()) {
-            String newLine = scanner.next();
-            synchronized (this) {
-                this.line = newLine;
-                notifyAll();
+        try {
+            BufferedReader scanner = new BufferedReader(new InputStreamReader(in));
+            while (true) {
+                String newLine = scanner.readLine();
+                synchronized (this) {
+                    this.line = newLine;
+                    notifyAll();
+                }
             }
+        } catch (Exception x) {
+            // just end the thread.
         }
     }
 
@@ -47,7 +57,12 @@ public class CLIReader {
 
 
     public void close() {
-        scanner.close();
+        try {
+            in.close();
+        } catch (Exception x) {
+            //no problem
+        }
+        if (readerThread.isAlive()) readerThread.interrupt();
     }
 
 }

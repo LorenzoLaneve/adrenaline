@@ -206,7 +206,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         }
         finally {
             if (didConvert) {
-                listener.boardDidConvertMarks(p);
+                if (listener != null) listener.boardDidConvertMarks(p);
                 marks.put(p, 0);
             }
         }
@@ -215,7 +215,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     public void appendDamageTrivial(Player p) throws DamageTrackFullException {
         if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
         damages.add(p);
-        listener.boardDidTakeDamage(1, 0, p);
+        if (listener != null) listener.boardDidTakeDamage(1, 0, p);
         if(player.getTotalDamage() > DEATH_SHOT_INDEX) {
             player.reportDeath(true);
         }
@@ -225,7 +225,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         if(damages.isEmpty()) {
             throw new DamageTrackEmptyException();
         }
-        listener.boardDidPopDamage();
+        if (listener != null) listener.boardDidPopDamage();
         return damages.remove(damages.size() - 1);
 
     }
@@ -237,7 +237,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
                     totalMarks, MAX_MARKS));
         }
         marks.put(player, totalMarks);
-        listener.boardDidTakeDamage(0,totalMarks, player);
+        if (listener != null) listener.boardDidTakeDamage(0,totalMarks, player);
     }
 
     protected abstract DamageBoard makeNewBoard();

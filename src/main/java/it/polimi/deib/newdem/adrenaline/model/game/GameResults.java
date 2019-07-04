@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GameResults implements Serializable {
 
-    public class PlayerScoreRecord {
+    public class PlayerScoreRecord implements Serializable {
 
         private PlayerColor player;
         private Integer score;

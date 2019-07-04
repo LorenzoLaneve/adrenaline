@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -112,5 +113,10 @@ public class MockGame implements Game {
     @Override
     public void concludeGame() {
 
+    }
+
+    @Override
+    public KillTrack getKillTrack() {
+        return null;
     }
 }

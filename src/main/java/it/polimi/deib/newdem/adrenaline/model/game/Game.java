@@ -1,5 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game;
 
+import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
@@ -96,4 +97,7 @@ public interface Game {
     GameResults generateResults();
 
     void concludeGame();
+
+    KillTrack getKillTrack();
+
 }
