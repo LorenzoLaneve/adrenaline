@@ -237,7 +237,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
                     totalMarks, MAX_MARKS));
         }
 
-        int delta = totalMarks - marks.get(player);
+        int delta = totalMarks - getTotalMarksFromPlayer(player);
         marks.put(player, totalMarks);
         if (listener != null) listener.boardDidTakeDamage(0, delta, player);
     }
