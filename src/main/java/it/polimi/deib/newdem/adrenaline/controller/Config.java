@@ -32,6 +32,9 @@ public final class Config {
 
     private GameControllerFactory gameMaker = new AdrenalineGameControllerFactory();
 
+    private int killTrackLength = 8;
+
+
     private boolean debugMode = false;
 
     private Config() {  }
@@ -64,6 +67,8 @@ public final class Config {
             config.minPlayers = getMember(configJson, "minPlayers").getAsInt();
             config.maxPlayers = getMember(configJson, "maxPlayers").getAsInt();
             config.turnTime = getMember(configJson, "turnTime").getAsInt();
+
+            config.killTrackLength = getMember(configJson, "killTrackLength").getAsInt();
 
             if (configJson.get("debugMode") != null) {
                 config.debugMode = getMember(configJson, "debugMode").getAsBoolean();
@@ -157,4 +162,12 @@ public final class Config {
     public boolean isDebugMode() {
         return debugMode;
     }
+
+    /**
+     * Returns the length of the kill tracks used in Adrenaline games.
+     */
+    public int getKillTrackLength() {
+        return killTrackLength;
+    }
+
 }

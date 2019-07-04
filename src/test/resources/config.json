@@ -11,5 +11,8 @@
   "minPlayers": 3,
   "maxPlayers": 5,
 
-  "turnTime": 1
+  "turnTime": 1,
+
+  "killTrackLength": 5
+
 }

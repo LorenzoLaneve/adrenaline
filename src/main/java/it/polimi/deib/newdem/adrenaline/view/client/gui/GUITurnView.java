@@ -54,7 +54,7 @@ public class GUITurnView implements TurnView {
             if (playersOnHold.isEmpty()) {
                 getStatusLabel(actor).setText("It's their turn!");
             } else {
-                getStatusLabel(actor).setText("Choosing a revenge...");
+                getStatusLabel(actor).setText("Revenging...");
             }
         });
     }
