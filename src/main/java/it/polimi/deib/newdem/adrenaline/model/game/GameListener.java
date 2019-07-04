@@ -13,7 +13,7 @@ public interface GameListener {
     /**
      * Notifies that the game is about to be over.
      */
-    void gameWillEnd(Game game);
+    void gameWillEnd(Game game, GameResults gameResults);
 
     /**
      * Notifies that the given user/player has reconnected to the game.

@@ -11,7 +11,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
-import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.*;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
@@ -230,6 +229,22 @@ public class GameImpl implements Game {
         return killTrack.generateKillTrackData();
     }
 
+    @Override
+    public GameResults generateResults() {
+        GameResults results = new GameResults();
+
+        for (Player p : players) {
+            results.addPlayer(p.getColor(), p.getScore());
+        }
+
+        return results;
+    }
+
+    @Override
+    public void concludeGame() {
+        listener.gameWillEnd(this, generateResults());
+    }
+
     /**
      * Returns the next turn.
      *
@@ -387,7 +402,6 @@ public class GameImpl implements Game {
         p.addSkull();
         Player killer = p.getDamager(DEATH_SHOT_INDEX);
 
-        //TODO prettify, wrap \/ in one method
         int killtrackMarkAmount = 1;
         killtrackMarkAmount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
         killTrack.addKill(killer, killtrackMarkAmount);

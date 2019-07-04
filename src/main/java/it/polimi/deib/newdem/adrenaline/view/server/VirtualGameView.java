@@ -3,19 +3,17 @@ package it.polimi.deib.newdem.adrenaline.view.server;
 import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.GameListener;
+import it.polimi.deib.newdem.adrenaline.model.game.GameResults;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
-import java.util.List;
 
 public class VirtualGameView implements GameView, GameListener {
 
@@ -51,9 +49,8 @@ public class VirtualGameView implements GameView, GameListener {
     }
 
     @Override
-    public void gameWillEnd(Game game) {
-        sendEvent(new GameEndEvent());
-        // FIXME additional info on game over?
+    public void gameWillEnd(Game game, GameResults gameResults) {
+        endGame(gameResults);
     }
 
     @Override
@@ -105,6 +102,11 @@ public class VirtualGameView implements GameView, GameListener {
     @Override
     public void enablePlayer(PlayerColor color) {
         sendEvent(new PlayerReconnectEvent(color));
+    }
+
+    @Override
+    public void endGame(GameResults results) {
+        sendEvent(new GameEndEvent(results));
     }
 
 }

@@ -1,6 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
+import it.polimi.deib.newdem.adrenaline.model.game.GameResults;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
 
@@ -30,6 +31,17 @@ public class CLIGameView implements GameView {
     @Override
     public void enablePlayer(PlayerColor color) {
         out.println("Player "+ CLIHelper.colorToString(color) +" reconnected.");
+    }
+
+    @Override
+    public void endGame(GameResults results) {
+        out.println("The game is over!");
+
+        out.println("\nResults: ");
+        for (GameResults.PlayerScoreRecord record : results.getRecords()) {
+            out.println(CLIHelper.colorToString(record.getPlayer()) +" with a score of "+ record.getScore());
+        }
+        out.println();
     }
 
 }

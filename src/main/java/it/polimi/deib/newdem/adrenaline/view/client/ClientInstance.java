@@ -54,6 +54,7 @@ public class ClientInstance implements AutoCloseable, UserListener {
             askUsername();
             waitLobby();
             playGame();
+            this.closeOnConnection = false;
         } catch (ClosedException x) {
             // ok
         }

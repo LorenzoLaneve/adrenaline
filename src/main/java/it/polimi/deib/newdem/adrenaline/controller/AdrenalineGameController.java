@@ -144,6 +144,7 @@ public class AdrenalineGameController implements GameController {
                 currentExecutor = null;
             }
         }
+        game.concludeGame();
         lobbyController.endGame(); // /snap/
     }
 

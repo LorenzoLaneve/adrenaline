@@ -92,4 +92,8 @@ public interface Game {
     GameData generateGameData();
 
     KillTrackData generateKillTrackData();
+
+    GameResults generateResults();
+
+    void concludeGame();
 }

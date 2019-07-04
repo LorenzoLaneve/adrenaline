@@ -1,8 +1,10 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui;
 
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
+import it.polimi.deib.newdem.adrenaline.model.game.GameResults;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.GameView;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.GameResultsDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -67,6 +69,11 @@ public class GUIGameView implements GameView {
             statusLabel.getStyleClass().remove("offline");
             statusLabel.setText(" ");
         });
+    }
+
+    @Override
+    public void endGame(GameResults results) {
+        Platform.runLater(() -> window.showDialog(new GameResultsDialog(results)));
     }
 
 }
