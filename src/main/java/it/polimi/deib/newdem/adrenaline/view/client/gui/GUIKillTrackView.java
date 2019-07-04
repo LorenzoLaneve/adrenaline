@@ -12,10 +12,13 @@ public class GUIKillTrackView implements KillTrackView {
 
     private int currentSlot;
 
+    private int killTrackLength;
+
     public GUIKillTrackView(GUIGameWindow window) {
         this.window = window;
 
         this.currentSlot = 1;
+        this.killTrackLength = 8;
     }
 
     @Override
@@ -28,6 +31,8 @@ public class GUIKillTrackView implements KillTrackView {
                 for (int i = 0; i < cell.getAmount(); i++) {
                     slot.getChildren().add(GUIGameWindowHelper.createDamageIcon(cell.getKiller()));
                 }
+
+                this.killTrackLength = data.getInitialLength();
             }
         });
     }
@@ -35,7 +40,12 @@ public class GUIKillTrackView implements KillTrackView {
     @Override
     public void registerKill(PlayerColor pColor, int amount) {
         Platform.runLater(() -> {
-            Pane slot = (Pane) window.getScene().lookup("#killTrackSlot"+ currentSlot++);
+            Pane slot = (Pane) window.getScene().lookup("#killTrackSlot"+ currentSlot);
+
+            if (currentSlot <= killTrackLength) {
+                currentSlot++;
+            }
+
 
             for (int i = 0; i < amount; i++) {
                 slot.getChildren().add(GUIGameWindowHelper.createDamageIcon(pColor));
