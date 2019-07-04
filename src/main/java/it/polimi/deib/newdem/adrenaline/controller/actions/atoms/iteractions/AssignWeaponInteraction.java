@@ -48,6 +48,7 @@ public class AssignWeaponInteraction extends InteractionBase {
             // 3. if a weapon was discarded by player, put it on spawn
             if(null != discardedWeapon) {
                 spawnpoint.addWeapon(discardedWeapon.getCard());
+                player.getListener().playerDidDiscardWeaponCard(player, discardedWeapon.getCard());
             }
         }
         catch (NotSpawnPointTileException | OutOfSlotsException | WeaponAlreadyPresentException e) {

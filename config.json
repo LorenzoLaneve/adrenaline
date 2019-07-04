@@ -9,7 +9,7 @@
 
   "timerLength": 3,
   "minPlayers": 2,
-  "maxPlayers": 5,
+  "maxPlayers": 2,
 
   "turnTime": 60
 }

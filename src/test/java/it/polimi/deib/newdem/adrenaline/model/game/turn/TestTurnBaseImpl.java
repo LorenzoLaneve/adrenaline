@@ -126,6 +126,11 @@ public class TestTurnBaseImpl {
         public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
             return null;
         }
+
+        @Override
+        public Player peekActor() {
+            return null;
+        }
     }
 
     @Before

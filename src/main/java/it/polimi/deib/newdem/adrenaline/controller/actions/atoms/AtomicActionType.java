@@ -14,7 +14,8 @@ public enum AtomicActionType {
     GRAB(11),
     SHOOT(13),
     RELOAD(19),
-    USE_POWERUP(23);
+    USE_POWERUP(23),
+    REVENGE(29);
 
     // note to self: following primes are 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,...
 

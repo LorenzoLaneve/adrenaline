@@ -6,8 +6,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
-import it.polimi.deib.newdem.adrenaline.model.items.Deck;
-import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
@@ -89,6 +88,11 @@ public interface Game {
      * Returns the deck of power up cards used in the game.
      */
     Deck<PowerUpCard> getPowerUpDeck();
+
+    /**
+     * Returns the deck of weapon cards used in the game.
+     */
+    Deck<WeaponCard> getWeaponDeck();
 
     GameData generateGameData();
 

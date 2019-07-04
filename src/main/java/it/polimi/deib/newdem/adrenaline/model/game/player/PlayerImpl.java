@@ -7,10 +7,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.game.action_board.*;
-import it.polimi.deib.newdem.adrenaline.model.items.NoDrawableCardException;
-import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
-import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
-import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
+import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
@@ -134,7 +131,10 @@ public class PlayerImpl implements Player {
         List<ActionFactory> factories = new ArrayList<>();
         factories.addAll(this.actionBoard.getBasicActions());
         factories.addAll(damageBoard.getAdditionalActions());
-        if(!this.inventory.getAllPowerUps().isEmpty()){
+
+        // if no callable powerups are in this player's inventory,
+        // do not ak for them.
+        if(!this.inventory.getPowerUpByTrigger(PowerUpTrigger.CALL).isEmpty()){
             factories.add(new ConcreteActionFactory(USE_POWERUP));
         }
 

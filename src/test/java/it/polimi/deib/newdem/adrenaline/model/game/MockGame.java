@@ -8,6 +8,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
+import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
@@ -117,6 +118,11 @@ public class MockGame implements Game {
 
     @Override
     public KillTrack getKillTrack() {
+        return null;
+    }
+
+    @Override
+    public Deck<WeaponCard> getWeaponDeck() {
         return null;
     }
 }

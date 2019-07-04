@@ -8,10 +8,7 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
-import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
-import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
-import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponSet;
+import it.polimi.deib.newdem.adrenaline.model.items.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +60,7 @@ public abstract class TurnBaseImpl implements Turn {
     protected void performClosingActions() throws TurnInterruptedException {
 
         // use powerup
-        if(!activePlayer.getInventory().getCallablePowerUps().isEmpty() && allowClosingPowerup) {
+        if(!activePlayer.getInventory().getPowerUpByTrigger(PowerUpTrigger.CALL).isEmpty() && allowClosingPowerup) {
             try{
                 // here I can use one or more pups
                 // start a pupAction
@@ -160,4 +157,5 @@ public abstract class TurnBaseImpl implements Turn {
     public void setAllowClosingPowerUps(boolean flag) {
         allowClosingPowerup = flag;
     }
+
 }

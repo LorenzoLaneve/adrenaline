@@ -50,6 +50,10 @@ public class DamageGameChange implements GameChange {
                 attacker
         );
 
+        if(victimBoard.getTotalDamage() > DEATH_SHOT_INDEX) {
+            victim.reportDeath(true);
+            didDie = true;
+        }
 
         /*
         int damageToDeal = desiredDmg;

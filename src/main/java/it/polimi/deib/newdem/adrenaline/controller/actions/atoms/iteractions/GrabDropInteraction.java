@@ -27,6 +27,7 @@ public class GrabDropInteraction extends InteractionBase {
 
         try {
              dropInstance = dropTIle.grabDrop();
+             if(null == dropInstance)  { return; }
              player.getInventory().addAmmoSet(dropInstance.getAmmos());
 
              if(player.getInventory().canAcceptPowerUp() &&

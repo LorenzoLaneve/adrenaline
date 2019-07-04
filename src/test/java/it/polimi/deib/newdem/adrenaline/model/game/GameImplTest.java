@@ -95,12 +95,11 @@ public class GameImplTest {
         gameParameters.setColorUserOrder(colorUserPairs);
         gameParameters.setGameMap(map);
 
-        // map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
-
         gameParameters.setMinPlayers(1);
         game = new GameImpl(gameParameters);
-        game.init();  //<<<<<
+        game.init();
 
+        Player p1 = game.getPlayerFromColor(PlayerColor.MAGENTA);
         Player p2 = game.getPlayerFromColor(PlayerColor.GREEN);
 
         VirtualGameView vgv = new NullVirtualGameView();
@@ -109,23 +108,36 @@ public class GameImplTest {
         game.setKillTrackListener(new VirtualKillTrackView(vgv)); //???
 
         p2.getDamageBoard().setListener(new VirtualDamageBoardView(p2, vgv));
-        // p2.init();
+
 
         map.movePlayer(p2, map.getTile(new TilePosition(0,0)));
 
         assertFalse(game.shouldGoFrenzy());
-        for(int i = 0; i <= GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT; i++) {
-            Turn t = game.getNextTurn();
-            for(int z = 0; z < 10; z++) {
-                try {
+
+        Turn t;
+        for(int i = 0; i <= 4 * GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT + 2; i++) {
+            t = game.getNextTurn();
+            if(t.getActivePlayer() != p1) {
+                // this would normally be in turn:performInitialActions
+                if(t.getActivePlayer().isDead()) {
+                    t.getActivePlayer().reportDeath(false);
+                    map.movePlayer(t.getActivePlayer(), map.getSpawnPointFromColor(AmmoColor.RED));
+                }
+                game.concludeTurn(t);
+                continue;
+            }
+            /*
+            try {
+                for (int z = 0; z < 10; z++) {
                     p2.getDamageBoard().appendDamage(p1);
                 }
-                catch (DamageTrackFullException e) {
-                    // ok
-                }
-                p2.reportDeath(true);
             }
-
+            catch(DamageTrackFullException e) {
+                // rip
+            }
+            p2.reportDeath(true);
+            */
+            new DamageGameChange(p1, p2,8,0).update(game);
             game.concludeTurn(t);
         }
         assertTrue(game.isInFrenzy());

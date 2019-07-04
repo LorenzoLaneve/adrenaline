@@ -256,17 +256,7 @@ public class PlayerInventory {
             }
         }
     }
-/*
-    public void addDrop(DropInstance drop) {
-        addAmmoSet(drop.getAmmos());
-        try {
-            addPowerUp(getPlayer().getGame().getPowerUpDeck().draw());
-        }
-        catch (NoDrawableCardException | OutOfSlotsException e) {
-            // too bad, no new powerup added :(
-        }
-    }
-*/
+
     public void addAmmoSet(AmmoSet ammoSet) {
         int deltaRed = ammos.get(RED);
         int deltaBlue = ammos.get(BLUE);
@@ -322,11 +312,20 @@ public class PlayerInventory {
         return new ArrayList<>(weapons);
     }
 
+    /*
     public List<PowerUpCard> getCallablePowerUps() {
         return getAllPowerUps()
                 .stream()
                 .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
                 .collect(Collectors.toList());
+    }
+    */
+
+    public List<PowerUpCard> getPowerUpByTrigger(PowerUpTrigger trigger) {
+            return getAllPowerUps()
+                    .stream()
+                    .filter(card -> card.getTrigger() == trigger)
+                    .collect(Collectors.toList());
     }
 
     /**
