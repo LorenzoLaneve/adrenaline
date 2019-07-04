@@ -39,7 +39,7 @@ public class OrdinaryDamageBoardTest {
                 new ColorUserPair(PlayerColor.GREEN, new User())
 
         ));
-        gp.setGameMap(Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " ")));
+        gp.setGameMap(Map.createMap("TestMap.json"));
         Game game = new GameImpl(gp);
         vgv = new NullVirtualGameView();
         game.setGameListener(vgv);

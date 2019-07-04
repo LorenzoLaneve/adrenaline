@@ -43,9 +43,8 @@ public class PlayerImplTest {
         TestingUtils.loadSingleton();
         GameParameters gp = new GameParameters();
         // p1 = new PlayerImpl(PlayerColor.MAGENTA);
-        String encodedPath = getClass().getClassLoader().getResource("TestMap.json").getFile();
-        String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
-        gp.setGameMap(Map.createMap(decodedPath));
+
+        gp.setGameMap(Map.createMap("TestMap.json"));
         User user1 = new User();
         user1.setName("Larry");
         User user2 = new User();

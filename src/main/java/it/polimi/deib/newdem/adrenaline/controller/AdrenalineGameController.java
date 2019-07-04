@@ -42,6 +42,13 @@ public class AdrenalineGameController implements GameController {
         return null;
     }
 
+    private static String getRandomMapID() {
+        Random r = new Random();
+        int x = r.nextBoolean() ? 1 : 0;
+        int y = r.nextBoolean() ? 1 : 0;
+        return "Map"+ x +"_"+ y;
+    }
+
     /**
      * Sets up a new game, not restored from disk.
      *
@@ -54,9 +61,8 @@ public class AdrenalineGameController implements GameController {
             throw new IllegalArgumentException();
         }
 
-        // TODO random map
-        String s = this.getClass().getClassLoader().getResource("maps/Map1_1.json").getFile().replace("%20", " ");
-        Map myMap = Map.createMap( s );
+        String mapID = getRandomMapID();
+        Map myMap = Map.createMap("maps/"+ mapID +".json");
 
         List<ColorUserPair> listCup = generateColorUserOrder(users);
 

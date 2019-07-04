@@ -60,7 +60,7 @@ public class TestOrdinaryTile {
     @Before
     public void initTest(){
 
-        MapBuilder mapBuilder = new MapBuilder(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
+        MapBuilder mapBuilder = new MapBuilder("TestMap.json");
 
         Map map = mapBuilder.buildMap();
 

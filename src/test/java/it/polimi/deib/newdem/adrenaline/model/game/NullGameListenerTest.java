@@ -15,7 +15,7 @@ public class NullGameListenerTest {
 
     @Test
     public void testGameWillEnd() throws Exception {
-        l.gameWillEnd(new MockGame());
+        l.gameWillEnd(new MockGame(), new GameResults());
     }
 
     @Test

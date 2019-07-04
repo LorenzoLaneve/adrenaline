@@ -119,7 +119,7 @@ public class TestFurnaceEffect {
     @Before
     public void setUp() throws Exception {
         TestingUtils.loadSingleton();
-        map =  Map.createMap(this.getClass().getClassLoader().getResource("Map0_0.json").getFile().replace("%20", " "));
+        map =  Map.createMap("Map0_0.json");
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
 

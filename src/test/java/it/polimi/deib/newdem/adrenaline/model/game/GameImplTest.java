@@ -40,9 +40,8 @@ public class GameImplTest {
         TestingUtils.loadSingleton();
 
         gp = new GameParameters();
-        String encodedPath = getClass().getClassLoader().getResource("Map0_0.json").getFile();
-        String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8.name());
-        map = Map.createMap(decodedPath);
+
+        map = Map.createMap("Map0_0.json");
         colorUserPairs = new ArrayList<>(MAX_PLAYERS_PER_GAME);
         colorUserPairs.add(new ColorUserPair(PlayerColor.MAGENTA, new User()));
 

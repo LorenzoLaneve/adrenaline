@@ -103,4 +103,14 @@ public class MockGame implements Game {
     public KillTrackData generateKillTrackData() {
         return null;
     }
+
+    @Override
+    public GameResults generateResults() {
+        return null;
+    }
+
+    @Override
+    public void concludeGame() {
+
+    }
 }

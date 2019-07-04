@@ -2,8 +2,10 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 
 import com.google.gson.Gson;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 
 import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +26,7 @@ public class MapBuilder {
      */
     public MapBuilder(String mapJsonData){
 
-        try (FileReader reader = new FileReader(mapJsonData)) {
+        try (Reader reader = FileUtils.getResourceReader(mapJsonData)) {
 
             Gson gson = new Gson();
             JsonData jsonData = gson.fromJson(reader,JsonData.class );

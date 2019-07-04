@@ -34,7 +34,7 @@ public class FrenzyDamageBoardTest {
     @Before
     public void setUp(){
         TestingUtils.loadSingleton();
-        map =  Map.createMap(this.getClass().getClassLoader().getResource("TestMap.json").getFile().replace("%20", " "));
+        map =  Map.createMap("TestMap.json");
 
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
 
