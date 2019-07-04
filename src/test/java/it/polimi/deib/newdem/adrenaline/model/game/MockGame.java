@@ -7,6 +7,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.Deck;
+import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
@@ -122,7 +123,7 @@ public class MockGame implements Game {
     }
 
     @Override
-    public Deck<WeaponCard> getWeaponDeck() {
+    public Deck<DropInstance> getDropDeck() {
         return null;
     }
 }
