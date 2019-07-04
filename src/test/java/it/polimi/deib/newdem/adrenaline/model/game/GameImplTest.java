@@ -115,7 +115,7 @@ public class GameImplTest {
         assertFalse(game.shouldGoFrenzy());
 
         Turn t;
-        for(int i = 0; i <= 4 * GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT + 2; i++) {
+        for(int i = 0; i <= 4 * GameParameters.KILLTRACK_STARTING_SIZE_DEFAULT; i++) {
             t = game.getNextTurn();
             if(t.getActivePlayer() != p1) {
                 // this would normally be in turn:performInitialActions

@@ -27,11 +27,6 @@ public class CLIDamageBoardView implements DamageBoardView {
     }
 
     @Override
-    public void convertMarks(PlayerColor dealer) {
-        out.println("Player "+ CLIHelper.colorToString(color) +" got marks from "+ CLIHelper.colorToString(dealer) +" converted into damage.");
-    }
-
-    @Override
     public void popDamage() {
         out.println("Player "+ CLIHelper.colorToString(color) +"'s last damage was removed.");
     }

@@ -59,26 +59,6 @@ public class GUIDamageBoardView implements DamageBoardView {
     }
 
     @Override
-    public void convertMarks(PlayerColor dealer) {
-        Platform.runLater(() -> {
-            List<Node> marks = new ArrayList<>();
-
-            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
-
-            Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
-            Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
-            for (Node child : markSigns.getChildren()) {
-                if (child.getStyleClass().contains(GUIGameWindowHelper.toStyleClass(dealer))) {
-                    marks.add(child);
-                }
-            }
-
-            markSigns.getChildren().removeAll(marks);
-            dmgSigns.getChildren().addAll(marks);
-        });
-    }
-
-    @Override
     public void popDamage() {
         Platform.runLater(() -> {
             Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));

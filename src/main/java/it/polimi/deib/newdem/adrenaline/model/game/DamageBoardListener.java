@@ -13,11 +13,6 @@ public interface DamageBoardListener {
     void boardDidTakeDamage(int damageAmount, int markAmount, Player dealer);
 
     /**
-     * Notifies that the damage board has converted all the marks of the given player into damage.
-     */
-    void boardDidConvertMarks(Player dealer);
-
-    /**
      * Notifies that the damage board removed the last damage.
      */
     void boardDidPopDamage();

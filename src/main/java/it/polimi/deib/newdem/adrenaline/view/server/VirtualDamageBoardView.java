@@ -24,11 +24,6 @@ public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListe
     }
 
     @Override
-    public void boardDidConvertMarks(Player dealer) {
-        convertMarks(dealer.getColor());
-    }
-
-    @Override
     public void boardDidPopDamage() {
         popDamage();
     }
@@ -49,10 +44,6 @@ public class VirtualDamageBoardView implements DamageBoardView, DamageBoardListe
         gameView.sendEvent(new PlayerDamageEvent(owner.getColor(), dealer, damageAmount, markAmount));
     }
 
-    @Override
-    public void convertMarks(PlayerColor dealer) {
-        gameView.sendEvent(new PlayerConvertMarksEvent(owner.getColor(), dealer));
-    }
 
     @Override
     public void popDamage() {
