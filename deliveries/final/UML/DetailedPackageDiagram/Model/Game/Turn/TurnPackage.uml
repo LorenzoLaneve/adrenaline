@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="645.875" y="286.0">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl</node>
+    <node x="138.5" y="33.0">it.polimi.deib.newdem.adrenaline.model.game.turn.Turn</node>
+    <node x="0.0" y="821.0">it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin</node>
+    <node x="341.0" y="661.0">it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn</node>
+    <node x="425.625" y="66.0">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource</node>
+    <node x="0.0" y="672.0">it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn</node>
+    <node x="733.625" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener</node>
+    <node x="202.5" y="275.0">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.Turn">
+      <point x="-89.25" y="-168.0" />
+      <point x="291.75" y="250.0" />
+      <point x="269.5" y="250.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl">
+      <point x="0.0" y="-46.5" />
+      <point x="160.5" y="636.0" />
+      <point x="291.75" y="636.0" />
+      <point x="-89.25" y="168.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource">
+      <point x="-89.5" y="-157.0" />
+      <point x="735.375" y="250.0" />
+      <point x="641.625" y="250.0" />
+      <point x="72.0" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener">
+      <point x="89.5" y="-157.0" />
+      <point x="914.375" y="250.0" />
+      <point x="1008.125" y="250.0" />
+      <point x="0.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource">
+      <point x="89.25" y="-168.0" />
+      <point x="470.25" y="250.0" />
+      <point x="497.625" y="250.0" />
+      <point x="-72.0" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl">
+      <point x="0.0" y="-57.5" />
+      <point x="601.5" y="636.0" />
+      <point x="470.25" y="636.0" />
+      <point x="89.25" y="168.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

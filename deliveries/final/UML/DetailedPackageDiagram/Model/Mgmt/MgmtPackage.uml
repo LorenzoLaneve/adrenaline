@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="121.0">it.polimi.deib.newdem.adrenaline.model.mgmt.User</node>
+    <node x="20.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener</node>
+    <node x="505.0" y="529.0">it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyImpl</node>
+    <node x="489.0" y="220.5">it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyListener</node>
+    <node x="752.0" y="187.5">it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyImpl" target="it.polimi.deib.newdem.adrenaline.model.mgmt.User">
+      <point x="-70.33333333333331" y="-168.0" />
+      <point x="540.1666666666667" y="504.0" />
+      <point x="234.5" y="504.0" />
+      <point x="0.0" y="179.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyImpl" target="it.polimi.deib.newdem.adrenaline.model.mgmt.Lobby">
+      <point x="70.33333333333331" y="-168.0" />
+      <point x="680.8333333333333" y="504.0" />
+      <point x="857.5" y="504.0" />
+      <point x="0.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.mgmt.User" target="it.polimi.deib.newdem.adrenaline.model.mgmt.UserListener">
+      <point x="0.0" y="-179.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyImpl" target="it.polimi.deib.newdem.adrenaline.model.mgmt.LobbyListener">
+      <point x="0.0" y="-168.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="272.0" y="442.99999999999994" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

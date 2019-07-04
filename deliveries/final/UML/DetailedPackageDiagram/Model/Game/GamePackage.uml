@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1211.4354838709676" y="1009.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack</node>
+    <node x="10.5" y="550.0">it.polimi.deib.newdem.adrenaline.model.game.GameChange</node>
+    <node x="1968.4354838709678" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.GameData</node>
+    <node x="1367.4354838709676" y="1615.5">it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard</node>
+    <node x="605.2291666666666" y="965.0">it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair</node>
+    <node x="1655.4354838709676" y="1604.0">it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard</node>
+    <node x="391.88776881720435" y="1362.0">it.polimi.deib.newdem.adrenaline.model.game.GameParameters</node>
+    <node x="533.4354838709676" y="572.0">it.polimi.deib.newdem.adrenaline.model.game.player</node>
+    <node x="604.7305107526881" y="2056.0">it.polimi.deib.newdem.adrenaline.model.game.GameImpl</node>
+    <node x="471.18548387096763" y="220.0">it.polimi.deib.newdem.adrenaline.model.game.action_board</node>
+    <node x="72.375" y="1009.5">it.polimi.deib.newdem.adrenaline.model.game.changes</node>
+    <node x="1446.3823924731182" y="44.0">it.polimi.deib.newdem.adrenaline.model.game.DamageBoard</node>
+    <node x="809.4805107526881" y="954.5">it.polimi.deib.newdem.adrenaline.model.game.GameListener</node>
+    <node x="1657.8823924731182" y="517.0">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener</node>
+    <node x="2274.435483870968" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.GameResults</node>
+    <node x="1499.4805107526881" y="734.0">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl</node>
+    <node x="1088.4354838709676" y="1604.0">it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry</node>
+    <node x="792.4354838709676" y="1615.5">it.polimi.deib.newdem.adrenaline.model.game.NullGameListener</node>
+    <node x="277.87298387096763" y="1009.5">it.polimi.deib.newdem.adrenaline.model.game.turn</node>
+    <node x="469.22916666666663" y="1009.5">it.polimi.deib.newdem.adrenaline.model.game.utils</node>
+    <node x="133.45631720430106" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.Game</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn">
+      <point x="-64.5" y="-630.0" />
+      <point x="669.2305107526881" y="2026.0" />
+      <point x="368.70631720430106" y="2026.0" />
+      <point x="36.33333333333337" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="36.333333333333314" y="-13.5" />
+      <point x="368.70631720430094" y="694.0" />
+      <point x="579.5604838709676" y="694.0" />
+      <point x="-15.375" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player" target="it.polimi.deib.newdem.adrenaline.model.game.Game">
+      <point x="-41.0" y="-13.5" />
+      <point x="553.9354838709676" y="497.0" />
+      <point x="359.20631720430106" y="497.0" />
+      <point x="96.75" y="233.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="-56.375" y="13.5" />
+      <point x="538.5604838709676" y="619.0" />
+      <point x="513.4354838709676" y="619.0" />
+      <point x="513.4354838709676" y="592.25" />
+      <point x="-61.5" y="6.75" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player" target="it.polimi.deib.newdem.adrenaline.model.game.action_board">
+      <point x="0.0" y="-13.5" />
+      <point x="41.25" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.NullGameListener" target="it.polimi.deib.newdem.adrenaline.model.game.GameListener">
+      <point x="0.0" y="-68.5" />
+      <point x="930.4354838709676" y="1337.0" />
+      <point x="947.4805107526881" y="1337.0" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoard">
+      <point x="41.0" y="-13.5" />
+      <point x="635.9354838709676" y="497.0" />
+      <point x="1513.3823924731182" y="497.0" />
+      <point x="-67.0" y="189.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="0.0" y="-58.0" />
+      <point x="682.7291666666666" y="714.0" />
+      <point x="610.3104838709676" y="714.0" />
+      <point x="15.375" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl">
+      <point x="0.0" y="-80.0" />
+      <point x="1789.4354838709676" y="1337.0" />
+      <point x="1701.9805107526881" y="1337.0" />
+      <point x="67.5" y="289.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.Game">
+      <point x="-107.5" y="-630.0" />
+      <point x="626.2305107526881" y="2036.0" />
+      <point x="0.0" y="2036.0" />
+      <point x="0.0" y="487.0" />
+      <point x="165.70631720430106" y="487.0" />
+      <point x="-96.75" y="233.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="-33.75" y="-289.0" />
+      <point x="1600.7305107526881" y="674.0" />
+      <point x="651.3104838709676" y="674.0" />
+      <point x="56.375" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl">
+      <point x="0.0" y="-68.5" />
+      <point x="1501.4354838709676" y="1337.0" />
+      <point x="1566.9805107526881" y="1337.0" />
+      <point x="-67.5" y="289.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn" target="it.polimi.deib.newdem.adrenaline.model.game.Game">
+      <point x="-36.33333333333337" y="-13.5" />
+      <point x="296.0396505376343" y="497.0" />
+      <point x="294.70631720430106" y="497.0" />
+      <point x="32.25" y="233.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn" target="it.polimi.deib.newdem.adrenaline.model.game.turn">
+      <point x="0.0" y="13.5" />
+      <point x="332.37298387096763" y="1066.5" />
+      <point x="247.87298387096757" y="1066.5" />
+      <point x="247.87298387096757" y="1016.25" />
+      <point x="-54.5" y="-6.75" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.GameListener">
+      <point x="21.5" y="-630.0" />
+      <point x="755.2305107526881" y="2036.0" />
+      <point x="781.9354838709676" y="2036.0" />
+      <point x="781.9354838709676" y="1337.0" />
+      <point x="855.4805107526881" y="1337.0" />
+      <point x="-92.0" y="68.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry" target="it.polimi.deib.newdem.adrenaline.model.game.GameListener">
+      <point x="-64.5" y="-80.0" />
+      <point x="1152.9354838709676" y="1337.0" />
+      <point x="1039.4805107526881" y="1337.0" />
+      <point x="92.0" y="68.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board" target="it.polimi.deib.newdem.adrenaline.model.game.action_board">
+      <point x="-41.25" y="13.5" />
+      <point x="512.4354838709676" y="267.0" />
+      <point x="451.18548387096763" y="267.0" />
+      <point x="451.18548387096763" y="233.5" />
+      <point x="-82.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="-21.5" y="-630.0" />
+      <point x="712.2305107526881" y="2026.0" />
+      <point x="770.7291666666666" y="2026.0" />
+      <point x="770.7291666666666" y="704.0" />
+      <point x="620.5604838709676" y="704.0" />
+      <point x="25.625" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.utils" target="it.polimi.deib.newdem.adrenaline.model.game.utils">
+      <point x="-29.0" y="13.5" />
+      <point x="498.22916666666663" y="1056.5" />
+      <point x="449.22916666666663" y="1056.5" />
+      <point x="449.22916666666663" y="1029.75" />
+      <point x="-58.0" y="6.75" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoard">
+      <point x="33.75" y="-289.0" />
+      <point x="1668.2305107526881" y="714.0" />
+      <point x="1647.3823924731182" y="714.0" />
+      <point x="67.0" y="189.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="48.75" y="-13.5" />
+      <point x="186.125" y="674.0" />
+      <point x="559.0604838709676" y="674.0" />
+      <point x="-35.875" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry">
+      <point x="64.5" y="-630.0" />
+      <point x="798.2305107526881" y="2026.0" />
+      <point x="1217.4354838709676" y="2026.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="0.0" y="-13.5" />
+      <point x="1283.4354838709676" y="694.0" />
+      <point x="630.8104838709676" y="694.0" />
+      <point x="35.875" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes" target="it.polimi.deib.newdem.adrenaline.model.game.Game">
+      <point x="16.25" y="-13.5" />
+      <point x="153.625" y="714.0" />
+      <point x="160.0" y="714.0" />
+      <point x="160.0" y="497.0" />
+      <point x="230.20631720430106" y="497.0" />
+      <point x="-32.25" y="233.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameParameters" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="-68.5" y="-322.0" />
+      <point x="460.38776881720435" y="1337.0" />
+      <point x="422.5396505376343" y="1337.0" />
+      <point x="422.5396505376343" y="704.0" />
+      <point x="589.8104838709676" y="704.0" />
+      <point x="-5.125" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.utils" target="it.polimi.deib.newdem.adrenaline.model.game.player">
+      <point x="5.6843418860808015E-14" y="-13.5" />
+      <point x="527.2291666666667" y="714.0" />
+      <point x="600.0604838709676" y="714.0" />
+      <point x="5.125" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener">
+      <point x="101.25" y="-289.0" />
+      <point x="1735.7305107526881" y="714.0" />
+      <point x="1788.3823924731182" y="714.0" />
+      <point x="0.0" y="68.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes" target="it.polimi.deib.newdem.adrenaline.model.game.changes">
+      <point x="0.0" y="13.5" />
+      <point x="137.375" y="1056.5" />
+      <point x="52.375" y="1056.5" />
+      <point x="52.375" y="1023.0" />
+      <point x="-65.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameParameters" target="it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair">
+      <point x="68.5" y="-322.0" />
+      <point x="597.3877688172043" y="1337.0" />
+      <point x="682.7291666666666" y="1337.0" />
+      <point x="0.0" y="58.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack">
+      <point x="64.5" y="-80.0" />
+      <point x="1281.9354838709676" y="1337.0" />
+      <point x="1301.4354838709676" y="1337.0" />
+      <point x="18.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack">
+      <point x="107.5" y="-630.0" />
+      <point x="841.2305107526881" y="2036.0" />
+      <point x="1356.9354838709676" y="2036.0" />
+      <point x="1356.9354838709676" y="1337.0" />
+      <point x="1337.4354838709676" y="1337.0" />
+      <point x="54.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
+      <point x="-16.25" y="-13.5" />
+      <point x="121.125" y="714.0" />
+      <point x="114.75" y="714.0" />
+      <point x="34.75" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack">
+      <point x="-18.0" y="13.5" />
+      <point x="1265.4354838709676" y="1066.5" />
+      <point x="1181.4354838709676" y="1066.5" />
+      <point x="1181.4354838709676" y="1016.25" />
+      <point x="-72.0" y="-6.75" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="1015.7142857142856" y="631.4285714285713" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
