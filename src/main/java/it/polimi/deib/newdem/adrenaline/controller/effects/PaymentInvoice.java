@@ -75,6 +75,16 @@ public class PaymentInvoice implements Serializable {
             }
         }
 
-        return redAmmos == pRedAmmos && blueAmmos == pBlueAmmos && yellowAmmos == pYellowAmmos;
+        pRedAmmos -= this.redAmmos;
+        pBlueAmmos -= this.blueAmmos;
+        pYellowAmmos -= this.yellowAmmos;
+
+        if( pRedAmmos < 0  ||
+            pBlueAmmos < 0 ||
+            pYellowAmmos < 0) {
+                return false;
+        }
+
+        return pRedAmmos + pBlueAmmos + pYellowAmmos == this.anyAmmos;
     }
 }

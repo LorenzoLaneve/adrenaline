@@ -10,7 +10,7 @@ import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShootAtom extends AtomContext {
+public class ShootAtom extends AtomContext { // atomEffectContext
 
     private Player victim;
 
