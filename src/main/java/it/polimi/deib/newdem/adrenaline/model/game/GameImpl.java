@@ -243,7 +243,14 @@ public class GameImpl implements Game {
 
     @Override
     public void concludeGame() {
+        assignScoreFromKillTrack();
         listener.gameWillEnd(this, generateResults());
+    }
+
+    private void assignScoreFromKillTrack() {
+        for(Player p : players) {
+            p.addScore(killTrack.getScoreForPlayer(p));
+        }
     }
 
     @Override
@@ -432,7 +439,8 @@ public class GameImpl implements Game {
     }
 
     public boolean isOver() {
-        return isOver;
+        // return isOver;
+        return turnQueue.isEmpty();
     }
 
     @Override
