@@ -413,8 +413,8 @@ public class GameImpl implements Game {
         Player overkiller = deadPlayer.getDamager(OVERKILL_SHOT_INDEX);
         if(null != overkiller) {
             killtrackMarkAmount++;
-            int oldMarks = deadPlayer.getMarksFromPlayer(overkiller);
-            deadPlayer.getDamageBoard().setMarksFromPlayer(min(oldMarks + 1, 3), overkiller);
+            int oldMarks = overkiller.getMarksFromPlayer(deadPlayer);
+            overkiller.getDamageBoard().setMarksFromPlayer(min(oldMarks + 1, 3), deadPlayer);
         }
 
         killTrack.addKill(killer, killtrackMarkAmount);
