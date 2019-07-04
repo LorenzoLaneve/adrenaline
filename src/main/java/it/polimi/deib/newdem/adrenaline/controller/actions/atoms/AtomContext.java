@@ -15,14 +15,19 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AtomContext extends AtomBase implements AtomEffectContext {
 
     protected WeaponCard usedWeapon;
+    private List<Player> damagedPlayers;
+    private boolean enableDamageTriggers;
 
     public AtomContext(AtomsContainer parent, EntryPointType entryPointType) {
         super(parent, new EntryPointFactory(entryPointType));
+        damagedPlayers = new ArrayList<>();
+        enableDamageTriggers = true;
     }
 
     @Override
@@ -95,21 +100,39 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
     }
 
     @Override
+    public void setEnableDamageTriggers(boolean flag) {
+        enableDamageTriggers = flag;
+    }
+
+    @Override
     public void damageDealtTrigger(Player attacker, Player victim) {
+        if(!enableDamageTriggers) { return; }
         // TODO choose power up and execute it
-        // Additional damage
+        // adds player which receives damage > 0 from active player
+        damagedPlayers.add(victim);
+        // does not create action
+        /*
+        // Additional damage, scope
+        // from the calling interaction, this is encapsulated by effect.apply()
+        // this triggers a new action on the same player of this context's parent,
+        // which can be reused.
+
+        ConcreteActionFactory damageDealtFactory = new ConcreteActionFactory(AtomicActionType.USE_POWERUP);
+        // proceed only if there are one or more onDamage triggered pups
+        */
+    }
+
+    @Override
+    public List<Player> getDamagedPlayers() {
+        return new ArrayList<>(damagedPlayers);
     }
 
     @Override
     public void damageTakenTrigger(Player attacker, Player victim) {
+        if(!enableDamageTriggers) { return; }
         TimedExecutor.pauseTimer();
 
 
-
-        // TimedExecutor revengeExecutor = new TimedExecutor(() -> revenge(victim, attacker));
-
-
-        // TODO
         // turn, i.e. context, needs to change here.
         // need to take the datasource of the victim and refer to it for the "revenge turn"
         ConcreteActionFactory revengeFactory = new ConcreteActionFactory(AtomicActionType.REVENGE);
@@ -133,11 +156,6 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
         }
     }
 
-    private void revenge(Player revenger, Player attacker) {
-        // TODO choose a power up.
-        // note: you can use parent.getDataSource()
-    }
-
     @Override
     public AtomEffectContext getEffectContext() {
         return this;
@@ -152,4 +170,8 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
         }
     }
 
+    @Override
+    public void setVictim(Player victim) {
+
+    }
 }

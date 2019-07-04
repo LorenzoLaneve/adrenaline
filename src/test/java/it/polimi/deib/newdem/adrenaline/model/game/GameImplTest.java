@@ -126,17 +126,6 @@ public class GameImplTest {
                 game.concludeTurn(t);
                 continue;
             }
-            /*
-            try {
-                for (int z = 0; z < 10; z++) {
-                    p2.getDamageBoard().appendDamage(p1);
-                }
-            }
-            catch(DamageTrackFullException e) {
-                // rip
-            }
-            p2.reportDeath(true);
-            */
             new DamageGameChange(p1, p2,8,0).update(game);
             game.concludeTurn(t);
         }

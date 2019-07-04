@@ -9,4 +9,5 @@ public enum MetaPlayer {
     BLUE,
     GREEN,
     YELLOW,
+    VICTIM
 }

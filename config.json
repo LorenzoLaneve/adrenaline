@@ -9,7 +9,9 @@
 
   "timerLength": 3,
   "minPlayers": 2,
-  "maxPlayers": 2,
+  "maxPlayers": 3,
 
-  "turnTime": 60
+  "turnTime": 60,
+  "debugMode": true,
+  "killTrackLength":8
 }

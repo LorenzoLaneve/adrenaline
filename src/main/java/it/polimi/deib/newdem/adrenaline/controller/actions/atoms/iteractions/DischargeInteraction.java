@@ -19,8 +19,11 @@ public class DischargeInteraction extends InteractionBase {
         weapon.discharge();
         Effect effect = weapon.getCard().getEffect();
         effect.apply(new EffectManager(context.getEffectContext()), context.getActor());
+        // ^ effect manager reports to context (atom) which players were damaged
 
+        context.pushInteraction(new AdditionalDamageInteraction(context));
         // push nothing, is terminal.
+
     }
 
     @Override

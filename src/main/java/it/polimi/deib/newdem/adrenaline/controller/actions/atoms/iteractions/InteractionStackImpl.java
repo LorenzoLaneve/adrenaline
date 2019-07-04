@@ -1,6 +1,5 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
-import it.polimi.deib.newdem.adrenaline.controller.actions.ActionDataSource;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext;
 import it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
@@ -10,6 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class InteractionStackImpl implements InteractionContext, InteractionStack {
@@ -51,7 +51,10 @@ public class InteractionStackImpl implements InteractionContext, InteractionStac
         }
     }
 
-    // gattini;
+    @Override
+    public List<Player> getDamagedPlayers() {
+        return effectContext.getDamagedPlayers();
+    }
 
     @Override
     public void revisit() throws UndoException {
@@ -133,5 +136,17 @@ public class InteractionStackImpl implements InteractionContext, InteractionStac
     @Override
     public AtomEffectContext getEffectContext() {
         return effectContext;
+    }
+
+    @Override
+    public void setVictim(Player victim) {
+        if(null == effectContext) return;
+        effectContext.setVictim(victim);
+    }
+
+    @Override
+    public Player getVictim() {
+        if (null == effectContext) return null;
+        return effectContext.getVictim();
     }
 }
