@@ -15,24 +15,4 @@ public class PowerUpAtom extends AtomContext {
         super(parent, EntryPointType.POWERUP);
     }
 
-    /*
-    @Override
-    public void executeFromStart() throws UndoException {
-        // choose pup card
-        List<PowerUpCard> availablePups = getActor().getInventory().getAllPowerUps()
-                .stream()
-                .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
-                .collect(Collectors.toList());
-
-        PowerUpCard selectedPup = parent.getDataSource().choosePowerUpCard(availablePups);
-        if (selectedPup != null) {
-            try {
-                EffectManager manager = new EffectManager(this);
-                manager.execute(selectedPup.getEffect());
-            } catch (UndoException x) {
-                // nothing to do here
-            }
-        }
-    }
-    */
 }

@@ -56,6 +56,10 @@ public class TurnDataSourceImpl implements TurnDataSource {
         listener.turnWillEnd(actor);
     }
 
+    @Override
+    public Player peekActor() {
+        return activePlayer;
+    }
 
     @Override
     public ActionType requestAction(List<ActionType> actionTypeList) throws UndoException {

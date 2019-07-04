@@ -17,7 +17,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
     protected Map<Player, Integer> marks;
     // integer max size of damage vector
     public static final int MAX_LIFE = 11;
-    public static final int DEATH_SHOT_INDEX = 9;
+    public static final int DEATH_SHOT_INDEX = 10;
     public static final int MAX_MARKS = 3;
     public static final int OVERKILL_SHOT_INDEX = DEATH_SHOT_INDEX + 1;
     // Arrays start at zero
@@ -165,25 +165,13 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamage(Player player) throws DamageTrackFullException {
-        /*
-        int currMarks = getTotalMarksFromPlayer(player);
-
-        while (currMarks > 0){
-            appendDamage(player);
-            currMarks--;
-        }
-
-        if(currMarks >0){
-            listener.boardDidConvertMarks(player);
-        }
-        */
-
-        convertMarksFromPlayerHelper(player);
-        // mark conversion functionality is NOT handled by DamageGameChange
 
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
+
+        convertMarksFromPlayerHelper(player);
+        // mark conversion functionality is NOT handled by DamageGameChange
 
         appendDamageTrivial(player);
         // damages.add(player);
@@ -215,8 +203,8 @@ public abstract class DamageBoardImpl implements DamageBoard {
     public void appendDamageTrivial(Player p) throws DamageTrackFullException {
         if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
         damages.add(p);
-        if (listener != null) listener.boardDidTakeDamage(1, 0, p);
-        if(player.getTotalDamage() > DEATH_SHOT_INDEX) {
+        listener.boardDidTakeDamage(1, 0, p);
+        if(player.getTotalDamage() > DEATH_SHOT_INDEX + 1) {
             player.reportDeath(true);
         }
     }

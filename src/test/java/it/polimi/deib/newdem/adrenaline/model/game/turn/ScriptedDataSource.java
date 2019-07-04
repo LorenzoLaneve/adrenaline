@@ -153,25 +153,7 @@ public class ScriptedDataSource implements TurnDataSource {
             if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
             return tile;
         }
-/*
-    @Override
-    public Player actionDidRequestPlayer(MetaPlayer metaPlayer, PlayerSelector selector) {
-        return null;
-    }
 
-    @Override
-    public Tile actionDidRequestTile(TileSelector selector) throws UndoException {
-        Tile tile = tiles.remove(tiles.size() - 1);
-        if(null == tile) throw new IllegalStateException();
-        if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
-        return tile;
-    }
-
-        @Override
-        public void turnDidStart(Player actor) {
-
-        }
-*/
     public void pushFragment(Integer fragment) {
         fragmentQ.push(fragment);
     }
@@ -197,4 +179,8 @@ public class ScriptedDataSource implements TurnDataSource {
         return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
     }
 
+    @Override
+    public Player peekActor() {
+        return null;
+    }
 }

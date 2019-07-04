@@ -25,6 +25,7 @@ public class AdrenalineGameController implements GameController {
     private VirtualGameView vgv;
 
     private TimedExecutor currentExecutor;
+
     private Turn currentTurn;
 
     /**

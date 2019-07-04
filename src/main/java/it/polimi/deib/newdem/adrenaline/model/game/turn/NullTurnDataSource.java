@@ -59,4 +59,9 @@ public class NullTurnDataSource implements TurnDataSource {
     public PaymentReceipt requestPayment(PaymentInvoice invoice, Integer choice) throws UndoException {
         return null;
     }
+
+    @Override
+    public Player peekActor() {
+        return null;
+    }
 }

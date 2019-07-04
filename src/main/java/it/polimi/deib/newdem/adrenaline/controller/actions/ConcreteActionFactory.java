@@ -10,6 +10,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 public class ConcreteActionFactory implements ActionFactory {
 
     private ActionType actionType;
+    private Player attacker;
 
     public ConcreteActionFactory(ActionType type) {
         this.actionType = type;
@@ -19,6 +20,8 @@ public class ConcreteActionFactory implements ActionFactory {
     public ConcreteActionFactory(AtomicActionType...atoms) {
         this.actionType = new ActionType(atoms);
     }
+
+    public void setAttacker(Player attacker) { this.attacker = attacker; }
 
     @Override
     public Action makeAction(Player actor, TurnDataSource dataSource) {
@@ -60,8 +63,9 @@ public class ConcreteActionFactory implements ActionFactory {
                 case RELOAD:
                     currentAtomicAction = new ReloadAtom(container);
                     break;
-                default:
-                    currentAtomicAction = null;
+                case REVENGE:
+                    if(null == attacker) throw new IllegalArgumentException();
+                    currentAtomicAction = new RevengeAtom(container, attacker);
                     break;
             }
             container.addAtom(currentAtomicAction);

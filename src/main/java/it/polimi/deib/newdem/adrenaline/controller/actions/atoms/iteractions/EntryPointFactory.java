@@ -1,11 +1,14 @@
 package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
+import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
+
 public class EntryPointFactory {
 
     private EntryPointType type;
 
     private Integer minDist;
     private Integer maxDist;
+    private Player attacker;
 
     public EntryPointFactory(EntryPointType type) {
         this.type = type;
@@ -18,6 +21,9 @@ public class EntryPointFactory {
     public void setMaxDist(int maxDist) {
         this.maxDist = maxDist;
     }
+
+    public void setAttacker(Player attacker) {
+        this.attacker = attacker; }
 
     public Interaction makeInteraction(InteractionContext context) {
         switch (type) {
@@ -32,6 +38,8 @@ public class EntryPointFactory {
                 return new SelectPupInteraction(context);
             case RELOAD:
                 return new SelectReloadWeaponInteraction(context);
+            case REVENGE:
+                return new SelectRevengePupInteraction(context);
             default:
                 return null;
         }

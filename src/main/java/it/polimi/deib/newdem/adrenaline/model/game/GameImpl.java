@@ -20,6 +20,7 @@ import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.DEATH_SHOT_INDEX;
 import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.OVERKILL_SHOT_INDEX;
+import static java.lang.Integer.min;
 
 public class GameImpl implements Game {
 
@@ -403,16 +404,23 @@ public class GameImpl implements Game {
         }
     }
 
-    private void scoreDamageboard(Player p) {
-        p.addSkull();
-        Player killer = p.getDamager(DEATH_SHOT_INDEX);
+    private void scoreDamageboard(Player deadPlayer) {
+        deadPlayer.addSkull();
+        Player killer = deadPlayer.getDamager(DEATH_SHOT_INDEX);
+        // player mist not be null
 
         int killtrackMarkAmount = 1;
-        killtrackMarkAmount += null == p.getDamager(OVERKILL_SHOT_INDEX) ? 0 : 1;
+        Player overkiller = deadPlayer.getDamager(OVERKILL_SHOT_INDEX);
+        if(null != overkiller) {
+            killtrackMarkAmount++;
+            int oldMarks = deadPlayer.getMarksFromPlayer(overkiller);
+            deadPlayer.getDamageBoard().setMarksFromPlayer(min(oldMarks + 1, 3), overkiller);
+        }
+
         killTrack.addKill(killer, killtrackMarkAmount);
 
-        map.removePlayer(p);
-        p.getDamageBoard().renewDamageBoard();
+        map.removePlayer(deadPlayer);
+        deadPlayer.getDamageBoard().renewDamageBoard();
     }
 
     public boolean isOver() {
@@ -444,6 +452,8 @@ public class GameImpl implements Game {
     public Deck<PowerUpCard> getPowerUpDeck() {
         return powerUpDeck;
     }
+
+    public Deck<WeaponCard> getWeaponDeck() {return weaponDeck; }
 
     protected void refillTiles(){
         for(Tile t : map.getAllTiles()){

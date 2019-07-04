@@ -29,35 +29,6 @@ public class ReloadPaymentInteraction extends InteractionBase {
         paymentGC.update(context.getGame());
 
         context.pushInteraction(new ReloadActivationInteraction(context, selectedWeapon));
-        /*
-        * PlayerInventory inventory = parent.getActor().getInventory();
-        try {
-
-            while (!inventory.getDischargedWeapons().isEmpty()) {
-                List<WeaponCard> selectables = inventory.getUnloadedWeapons().getWeapons();
-
-                WeaponCard selectedWeaponCard = parent.getDataSource().chooseWeaponCard(selectables);
-                if (selectedWeaponCard == null) break;
-
-                PaymentReceipt receipt = parent.getDataSource().requestPayment(
-                                selectedWeaponCard.getPickupPrice(),
-                                selectedWeaponCard.getCardID()
-                );
-
-                applyGameChange(new PaymentGameChange(getActor(), receipt));
-
-                for(Weapon weapon : inventory.getDischargedWeapons()) {
-                    if(weapon.getCard().equals(selectedWeaponCard)) {
-                        weapon.reload();
-                    }
-                }
-                // ^ this is important
-            }
-        }
-        catch (UndoException e) {
-            // nothing to do here.
-        }
-        * */
     }
 
     @Override

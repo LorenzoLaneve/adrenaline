@@ -15,4 +15,6 @@ public interface TurnDataSource extends ActionDataSource {
 
     void popActor(Player actor);
 
+    Player peekActor();
+
 }
