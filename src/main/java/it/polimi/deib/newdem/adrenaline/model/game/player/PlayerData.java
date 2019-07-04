@@ -8,6 +8,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Data object representing a snapshot of the state of a player.
+ * @see Player for further information.
+ */
 public class PlayerData implements Serializable {
 
     private ArrayList<Integer> powerUpCards;
@@ -32,6 +36,9 @@ public class PlayerData implements Serializable {
     private boolean hasFirstPlayerCard;
     private int score;
 
+    /**
+     * Initializes the player data object with information about the given player.
+     */
     PlayerData(Player player) {
         this.color = player.getColor();
 

@@ -8,6 +8,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.OutOfSlotsException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
+/**
+ * GameChange object that performs a payment, removing the resources specified in the given PaymentReceipt object
+ * from the given player's inventory.
+ */
 public class PaymentGameChange implements GameChange {
 
     private PaymentReceipt receipt;

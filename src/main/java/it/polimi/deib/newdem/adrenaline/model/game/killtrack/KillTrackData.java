@@ -6,8 +6,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Serializable object containing a snapshot of the state of a KillTrack object.
+ */
 public class KillTrackData implements Serializable {
 
+    /**
+     * Serializable record used in the outer class to represent kills.
+     */
     public static class KillData implements Serializable {
 
         private final PlayerColor killer;
@@ -35,7 +41,7 @@ public class KillTrackData implements Serializable {
         kills = new ArrayList<>();
     }
 
-    void addKill(KillData kill){
+    void addKill(KillData kill) {
         kills.add(kill);
     }
 

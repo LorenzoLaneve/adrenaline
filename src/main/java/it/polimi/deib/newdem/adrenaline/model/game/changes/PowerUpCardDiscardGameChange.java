@@ -8,6 +8,9 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.util.List;
 
+/**
+ * GameChange object that removes power up cards from the given player's inventory.
+ */
 public class PowerUpCardDiscardGameChange implements GameChange {
 
     private Player player;

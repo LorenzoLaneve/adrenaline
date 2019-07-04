@@ -1,7 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.model.game.player;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice;
-import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt;
 import it.polimi.deib.newdem.adrenaline.model.items.*;
 import it.polimi.deib.newdem.adrenaline.model.map.WeaponAlreadyPresentException;
 
@@ -15,6 +14,10 @@ import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.YELLOW;
 import static java.lang.Integer.min;
 
+/**
+ * Object containing all the resources a player can have in an Adrenaline game,
+ * including ammos, power up cards, and weapon cards.
+ */
 public class PlayerInventory {
 
     private Player player;
@@ -311,15 +314,6 @@ public class PlayerInventory {
     public List<Weapon> getAllWeapons() {
         return new ArrayList<>(weapons);
     }
-
-    /*
-    public List<PowerUpCard> getCallablePowerUps() {
-        return getAllPowerUps()
-                .stream()
-                .filter(card -> card.getTrigger() == PowerUpTrigger.CALL)
-                .collect(Collectors.toList());
-    }
-    */
 
     public List<PowerUpCard> getPowerUpByTrigger(PowerUpTrigger trigger) {
             return getAllPowerUps()

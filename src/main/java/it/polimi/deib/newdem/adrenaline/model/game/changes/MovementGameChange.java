@@ -5,6 +5,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * GameChange object that moves the given player to the given Tile.
+ */
 public class MovementGameChange implements GameChange {
 
     private Player player;

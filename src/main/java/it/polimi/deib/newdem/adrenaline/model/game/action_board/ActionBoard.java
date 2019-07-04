@@ -4,8 +4,15 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
 import java.util.List;
 
+/**
+ * An action board is an object representing the board of a player
+ * defining the possible actions that can be made during a turn.
+ */
 public interface ActionBoard {
 
+    /**
+     * Returns a list of actions provided by the action board in case of zero damage taken.
+     */
     List<ActionFactory> getBasicActions();
 
     /**
@@ -21,5 +28,9 @@ public interface ActionBoard {
      */
     void goFrenzy(boolean precedesFirstPlayer);
 
+    /**
+     * Returns whether this action board is used in frenzy mode.
+     */
     boolean isFrenzy();
+
 }

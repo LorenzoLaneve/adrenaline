@@ -53,6 +53,9 @@ public class PaymentInvoice implements Serializable {
         return anyAmmos;
     }
 
+    /**
+     * Returns whether the given payment receipt contains the exact amount of ammos required by the invoice.
+     */
     public boolean matches(PaymentReceipt receipt) {
         int pRedAmmos = receipt.getPayedRedAmmos();
         int pBlueAmmos = receipt.getPayedBlueAmmos();

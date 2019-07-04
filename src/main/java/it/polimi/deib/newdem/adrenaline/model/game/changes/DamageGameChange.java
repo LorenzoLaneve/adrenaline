@@ -10,6 +10,9 @@ import static it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl.MAX_MA
 import static java.lang.Math.min;
 import static java.lang.Math.multiplyExact;
 
+/**
+ * GameChanges that deals damage from a player to another player in the specified amount.
+ */
 public class DamageGameChange implements GameChange {
 
     private Player attacker;

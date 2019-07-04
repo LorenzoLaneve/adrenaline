@@ -5,6 +5,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 
+/**
+ * GameChange object that removes the given ammos from the given player.
+ */
 public class AmmoLossGameChange implements GameChange {
 
     private Player player;
