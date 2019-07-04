@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 public class AnyTileSelector implements TileSelector {
 
+    /**
+     * Selects all the tiles.
+     * @see TileSelector for further information
+     */
     public AnyTileSelector() {
         // nothing to do here
     }

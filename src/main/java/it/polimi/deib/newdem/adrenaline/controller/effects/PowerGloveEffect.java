@@ -6,6 +6,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerS
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 
+/**
+ * Card effect that implements Adrenaline' Power Glove weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class PowerGloveEffect implements Effect {
 
     private static final int ROCKET_FIST = 1;

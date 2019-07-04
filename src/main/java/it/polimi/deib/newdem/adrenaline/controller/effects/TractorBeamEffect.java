@@ -1,11 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.*;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Card effect that implements Adrenaline' Tractor Beam weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class TractorBeamEffect implements Effect {
 
     private static final int PUNISHER_MODE = 1;

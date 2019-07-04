@@ -7,6 +7,11 @@ public class NegatedPlayerSelector implements PlayerSelector {
 
     private PlayerSelector innerSelector;
 
+    /**
+     * Selects all the tiles in all the fourth directions in the given distance range
+     * @param ignoreWalls whether walls in map should be ignored or not by this selector.
+     * @see TileSelector for further information
+     */
     public NegatedPlayerSelector(PlayerSelector innerSelector){
         this.innerSelector = innerSelector;
     }

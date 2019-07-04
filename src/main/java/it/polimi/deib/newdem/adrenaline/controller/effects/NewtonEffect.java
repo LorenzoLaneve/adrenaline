@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyPlayerSe
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' Newton power up card.
+ * @see Effect for further information about the card effects.
+ */
 public class NewtonEffect implements Effect {
 
     @Override

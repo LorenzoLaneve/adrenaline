@@ -2,14 +2,14 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Room;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Card effect that implements Adrenaline' Furnace weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class FurnaceEffect implements Effect {
 
     private static final int BASIC_MODE = 1;

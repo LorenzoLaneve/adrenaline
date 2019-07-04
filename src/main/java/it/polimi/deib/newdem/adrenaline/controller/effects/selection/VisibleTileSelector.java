@@ -13,10 +13,18 @@ public class VisibleTileSelector implements TileSelector{
 
     private Tile sourceTile;
 
+    /**
+     * Selects all the tiles that are visible from the given tile, according to Adrenaline rules.
+     * @see TileSelector for further information
+     */
     public VisibleTileSelector(Tile tile) {
         this.sourceTile = tile;
     }
 
+    /**
+     * Selects all the tiles that are visible by the given player, according to Adrenaline rules.
+     * @see TileSelector for further information
+     */
     public VisibleTileSelector(Player player) {
         this(player.getTile());
     }

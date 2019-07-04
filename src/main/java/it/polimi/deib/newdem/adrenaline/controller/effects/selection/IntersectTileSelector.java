@@ -8,6 +8,10 @@ public class IntersectTileSelector implements TileSelector {
     private TileSelector firstOp;
     private TileSelector secondOp;
 
+    /**
+     * Selects all the tiles selected by BOTH the given selectors.
+     * @see TileSelector for further information
+     */
     public IntersectTileSelector(TileSelector firstOp, TileSelector secondOp) {
         this.firstOp = firstOp;
         this.secondOp = secondOp;

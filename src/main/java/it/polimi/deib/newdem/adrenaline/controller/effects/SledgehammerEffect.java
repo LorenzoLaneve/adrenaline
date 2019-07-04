@@ -1,8 +1,6 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector;
-import it.polimi.deib.newdem.adrenaline.controller.effects.*;
-import it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;

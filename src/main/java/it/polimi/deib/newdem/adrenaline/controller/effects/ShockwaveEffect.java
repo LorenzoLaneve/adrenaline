@@ -1,11 +1,13 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.*;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Card effect that implements Adrenaline' Shockwave weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class ShockwaveEffect implements Effect {
 
     private static final int TSUNAMI_MODE = 1;

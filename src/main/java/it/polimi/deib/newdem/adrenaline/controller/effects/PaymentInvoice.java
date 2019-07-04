@@ -4,13 +4,20 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.io.Serializable;
 
+/**
+ * Represents a payment invoice containing a price for an action or card.
+ */
 public class PaymentInvoice implements Serializable {
 
-    int redAmmos;
-    int blueAmmos;
-    int yellowAmmos;
-    int anyAmmos;
+    private int redAmmos;
+    private int blueAmmos;
+    private int yellowAmmos;
+    private int anyAmmos;
 
+    /**
+     * Initializes the invoice with the given ammo prices.
+     * @param anyAmmos The number of ammos that have to be paid without color requirement.
+     */
     public PaymentInvoice(int redAmmos, int blueAmmos, int yellowAmmos, int anyAmmos) {
         this.redAmmos = redAmmos;
         this.blueAmmos = blueAmmos;
@@ -18,18 +25,30 @@ public class PaymentInvoice implements Serializable {
         this.anyAmmos = anyAmmos;
     }
 
+    /**
+     * Returns the number of red ammos that have to be paid.
+     */
     public int getRedAmmos() {
         return redAmmos;
     }
 
+    /**
+     * Returns the number of blue ammos that have to be paid.
+     */
     public int getBlueAmmos() {
         return blueAmmos;
     }
 
+    /**
+     * Returns the number of yellow ammos that have to be paid.
+     */
     public int getYellowAmmos() {
         return yellowAmmos;
     }
 
+    /**
+     * Returns the number of ammos that have to be paid without.
+     */
     public int getAnyAmmos() {
         return anyAmmos;
     }
