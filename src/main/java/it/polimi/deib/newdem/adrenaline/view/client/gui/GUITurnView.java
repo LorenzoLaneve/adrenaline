@@ -330,70 +330,52 @@ public class GUITurnView implements TurnView {
         GUILocker<ValOrUndo<PaymentReceiptData>> locker = new GUILocker<>();
         this.currentLocker = locker;
 
-        PaymentSelectionDialog selectionDialog = new PaymentSelectionDialog(invoice, playerInv, cardIDs, retrieveFragmentName(fragmentToPay));
-        selectionDialog.setPaymentCallback(receipt -> {
-            if (receipt == null) locker.deliver(new ValOrUndo<>(null));
-
-            if (invoice.getAnyAmmos() <= 0)
-                locker.deliver(new ValOrUndo<>(receipt));
-            else {
-                window.closeDialog();
-
-                AmmoSet newPlayerInv = new AmmoSet(
-                        playerInv.getRedAmmos() - receipt.getPayedRedAmmos(),
-                        playerInv.getYellowAmmos() - receipt.getPayedYellowAmmos(),
-                        playerInv.getBlueAmmos() - receipt.getPayedBlueAmmos());
-
-                List<Integer> remainingPowerUps = new ArrayList<>(cardIDs);
-                remainingPowerUps.removeAll(receipt.getPowerUps());
-
-                showAmmoSelection(receipt, newPlayerInv, remainingPowerUps, locker);
-            }
-        });
-
-        Platform.runLater(() -> {
-            window.showDialog(selectionDialog);
-        });
-
-
         try {
+            if (invoice.getAnyAmmos() > 0) {
+                AmmoSelectionDialog selectionDialog = new AmmoSelectionDialog(playerInv, cardIDs, "");
+                selectionDialog.setListener((ammo, powerUp) -> {
+                    if (powerUp != null) {
+                        List<Integer> powerUps = new ArrayList<>();
+                        powerUps.add(powerUp);
+
+                        locker.deliver(new ValOrUndo<>(new PaymentReceiptData(0, 0, 0, powerUps)));
+                        return;
+                    }
+
+                    if (ammo != null) {
+                        switch (ammo) {
+                            case RED:
+                                locker.deliver(new ValOrUndo<>(new PaymentReceiptData(1, 0, 0, new ArrayList<>())));
+                                break;
+                            case BLUE:
+                                locker.deliver(new ValOrUndo<>(new PaymentReceiptData(0, 1, 0, new ArrayList<>())));
+                                break;
+                            case YELLOW:
+                                locker.deliver(new ValOrUndo<>(new PaymentReceiptData(0, 0, 1, new ArrayList<>())));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    locker.deliver(new ValOrUndo<>(null));
+                });
+
+                Platform.runLater(() -> window.showDialog(selectionDialog));
+            } else {
+                PaymentSelectionDialog selectionDialog = new PaymentSelectionDialog(invoice, playerInv, cardIDs, retrieveFragmentName(fragmentToPay));
+                selectionDialog.setPaymentCallback(receipt -> {
+                    if (receipt == null) locker.deliver(new ValOrUndo<>(null));
+
+                    locker.deliver(new ValOrUndo<>(receipt));
+                });
+
+                Platform.runLater(() -> window.showDialog(selectionDialog));
+            }
             return locker.waitForValue();
         } finally {
-            Platform.runLater(() -> {
-                window.closeDialog();
-            });
+            Platform.runLater(() -> window.closeDialog());
         }
-    }
-
-    private void showAmmoSelection(PaymentReceiptData receipt, AmmoSet playerInv, List<Integer> powerUps, GUILocker<ValOrUndo<PaymentReceiptData>> locker) {
-        AmmoSelectionDialog selectionDialog = new AmmoSelectionDialog(playerInv, powerUps, "");
-        selectionDialog.setListener((ammo, powerUp) -> {
-            int redAmmos = receipt.getPayedRedAmmos();
-            int blueAmmos = receipt.getPayedBlueAmmos();
-            int yellowAmmos = receipt.getPayedYellowAmmos();
-            List<Integer> payedPowerUps = receipt.getPowerUps();
-
-            if (powerUp != null) {
-                payedPowerUps.add(powerUp);
-            }
-
-            switch (ammo) {
-                case RED:
-                    redAmmos++;
-                    break;
-                case BLUE:
-                    blueAmmos++;
-                    break;
-                case YELLOW:
-                    yellowAmmos++;
-                    break;
-                default: break;
-            }
-
-            locker.deliver(new ValOrUndo<>(new PaymentReceiptData(redAmmos, blueAmmos, yellowAmmos, payedPowerUps)));
-        });
-
-        window.showDialog(selectionDialog);
     }
 
 
