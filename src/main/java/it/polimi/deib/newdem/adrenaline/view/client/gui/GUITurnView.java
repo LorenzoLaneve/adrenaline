@@ -356,6 +356,7 @@ public class GUITurnView implements TurnView {
                             default:
                                 break;
                         }
+                        return;
                     }
 
                     locker.deliver(new ValOrUndo<>(null));

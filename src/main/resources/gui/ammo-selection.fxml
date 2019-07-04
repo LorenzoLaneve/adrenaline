@@ -44,20 +44,6 @@
             </children>
         </GridPane>
 
-
         <FlowPane id="powerUpsViewer" hgap="10.0" styleClass="card-viewer,powerup-cards" alignment="CENTER" />
-
-        <GridPane>
-            <rowConstraints>
-                <RowConstraints />
-            </rowConstraints>
-            <columnConstraints>
-                <ColumnConstraints prefWidth="490.0" />
-                <ColumnConstraints prefWidth="90.0" />
-            </columnConstraints>
-            <children>
-                <Button styleClass="pay-button" text="Pay" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            </children>
-        </GridPane>
     </children>
 </FlowPane>
