@@ -81,8 +81,6 @@ public class AdrenalineGameController implements GameController {
 
         game.init(); // (VirtualGameView)
 
-        if (Boolean.getBoolean("debugMode")) alterGame(game.getPlayers());
-
         game.getMap().setListener(new VirtualMapView(vgv));
 
         game.setKillTrackListener(new VirtualKillTrackView(vgv));
@@ -91,6 +89,8 @@ public class AdrenalineGameController implements GameController {
             player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
             player.getActionBoard().setListener(new VirtualActionBoardView(player, vgv));
         }
+
+        if (Boolean.getBoolean("debugMode")) alterGame(game.getPlayers());
 
     }
 
@@ -195,6 +195,7 @@ public class AdrenalineGameController implements GameController {
             }
         }
 
+        /*
         if (names.contains("ezkills")) {
             Player p0 = players.get(0);
             for (Player p : players) if (p != p0) {
@@ -204,7 +205,7 @@ public class AdrenalineGameController implements GameController {
                     //nothing to do here.
                 }
             }
-        }
+        }*/
 
     }
 

@@ -114,7 +114,7 @@ public class GameClientManager {
         connection.subscribeEvent(PlayerAcquireWeaponEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayerColor()).addWeaponCard(e.getWeaponCardID()));
         connection.subscribeEvent(PlayerDiscardWeaponEvent.class, (conn, e) ->
-                getPlayerView(e.getPlayer()).removePowerUpCard(e.getCardID()));
+                getPlayerView(e.getPlayer()).removeWeaponCard(e.getCardID()));
         connection.subscribeEvent(PlayerReceiveAmmoEvent.class, (conn, e) ->
                 getPlayerView(e.getPlayer()).addAmmoSet(e.getYellowAmount(), e.getRedAmount(), e.getBlueAmount()));
         connection.subscribeEvent(PlayerDiscardAmmoEvent.class, (conn, e) ->

@@ -20,9 +20,12 @@ public class SelectDiscardWeaponInteraction extends InteractionBase {
         List<WeaponCard> discardableCards = context.getActor().getInventory().getAllWeaponCards();
 
         WeaponCard discardedCard = context.getDataSource().chooseWeaponCard(discardableCards);
-        Weapon discardedWeapon = getWeaponFromCard(discardedCard, context.getActor().getInventory().getAllWeapons());
-
-        context.pushInteraction(new AssignWeaponInteraction(context, newWeaponCard, discardedWeapon));
+        if (discardedCard != null) {
+            Weapon discardedWeapon = getWeaponFromCard(discardedCard, context.getActor().getInventory().getAllWeapons());
+            context.pushInteraction(new AssignWeaponInteraction(context, newWeaponCard, discardedWeapon));
+        } else {
+            throw new UndoException();
+        }
     }
 
     @Override
