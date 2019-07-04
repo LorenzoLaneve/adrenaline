@@ -90,9 +90,11 @@ public interface Game {
     Deck<PowerUpCard> getPowerUpDeck();
 
     /**
-     * Returns the deck of weapon cards used in the game.
+     * Returns the deck of power up cards used in the game.
+     *
+     * @return this game's drop deck
      */
-    Deck<WeaponCard> getWeaponDeck();
+    Deck<DropInstance> getDropDeck();
 
     GameData generateGameData();
 

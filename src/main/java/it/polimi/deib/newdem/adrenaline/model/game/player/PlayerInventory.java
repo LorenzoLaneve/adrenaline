@@ -334,10 +334,10 @@ public class PlayerInventory {
         if(availableRed < invoice.getRedAmmos()) return false;
 
         int availableYellow = getYellow() + getColorCount(getAllPowerUps(), YELLOW);
-        if(availableYellow < invoice.getRedAmmos()) return false;
+        if(availableYellow < invoice.getYellowAmmos()) return false;
 
         int availableBlue = getBlue() + getColorCount(getAllPowerUps(), BLUE);
-        if(availableBlue < invoice.getRedAmmos()) return false;
+        if(availableBlue < invoice.getBlueAmmos()) return false;
 
         return true;
 
