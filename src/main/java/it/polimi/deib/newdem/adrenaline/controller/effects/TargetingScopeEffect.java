@@ -15,7 +15,7 @@ public class TargetingScopeEffect implements Effect {
 
     @Override
     public void apply(EffectManager manager, Player actor) throws UndoException {
-
+        // actor is attacker, victim comes form manager.
         if (manager.pay(ADDITIONAL_DAMAGE, ADDITIONAL_DAMAGE_PAYMENT)) {
             manager.damagePlayer(actor, manager.getVictim(), 1, 0);
         } else {

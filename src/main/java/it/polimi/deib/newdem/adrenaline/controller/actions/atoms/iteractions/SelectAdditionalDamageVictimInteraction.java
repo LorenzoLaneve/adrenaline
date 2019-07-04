@@ -35,6 +35,8 @@ public class SelectAdditionalDamageVictimInteraction extends InteractionBase {
 
         if(null == selectedPlayer) { return; }
 
+        context.setVictim(selectedPlayer);
+
         context.pushInteraction(new ResolveAdditionalDamageInteraction(context, selectedPup));
     }
 
