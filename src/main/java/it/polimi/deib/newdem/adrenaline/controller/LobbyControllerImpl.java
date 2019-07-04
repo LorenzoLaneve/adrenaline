@@ -6,6 +6,8 @@ import it.polimi.deib.newdem.adrenaline.view.server.VirtualLobbyView;
 
 public class LobbyControllerImpl implements LobbyController, TimerListener, UserListener {
 
+    private LobbyRegistry registry;
+
     private Config config;
 
     private Thread mainThread;
@@ -16,7 +18,9 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     private GameController gameController;
 
-    LobbyControllerImpl(Config config) {
+    LobbyControllerImpl(LobbyRegistry registry, Config config) {
+        this.registry = registry;
+
         this.config = config;
 
         this.lobby = new LobbyImpl();
@@ -91,6 +95,10 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
     @Override
     public void endGame() {
         switchState(new GameOverLobbyState());
+
+        if (registry != null) {
+            registry.freeLobbyController(this);
+        }
     }
 
     @Override

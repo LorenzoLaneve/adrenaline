@@ -30,7 +30,8 @@ public class AdrenalineGameControllerTest {
             // ok, do not abort
         }
         Config config = Config.getDefaultConfig(); // config
-        agc = new AdrenalineGameController(new LobbyControllerImpl(config));
+
+        agc = new AdrenalineGameController(new LobbyControllerImpl(null, config));
         u1 = new User();
         u2 = new User();
         u3 = new User();
@@ -41,7 +42,7 @@ public class AdrenalineGameControllerTest {
     @Test
     public void testSetupGame() throws Exception {
         GameController gameController =
-                new AdrenalineGameController(new LobbyControllerImpl(Config.getDefaultConfig()));
+                new AdrenalineGameController(new LobbyControllerImpl(null, Config.getDefaultConfig()));
 
         gameController.setupGame(Arrays.asList(
                 new User(), new User(), new User()
@@ -67,7 +68,7 @@ public class AdrenalineGameControllerTest {
     @Test
     public void testSctipted() throws Exception {
         AdrenalineGameController agc =
-                new ScriptedAdrenalineGameController(new LobbyControllerImpl(Config.getDefaultConfig()));
+                new ScriptedAdrenalineGameController(new LobbyControllerImpl(null, Config.getDefaultConfig()));
         ((ScriptedAdrenalineGameController) agc).injectTurnScripts(
                 new ScriptedDataSource(new ActionType(AtomicActionType.MOVE1))
         );

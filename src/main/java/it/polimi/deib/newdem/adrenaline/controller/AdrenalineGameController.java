@@ -11,6 +11,7 @@ import it.polimi.deib.newdem.adrenaline.view.server.*;
 
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * GameController implementation for Adrenaline games handled by the server.
@@ -80,6 +81,8 @@ public class AdrenalineGameController implements GameController {
 
         game.init(); // (VirtualGameView)
 
+        if (Boolean.getBoolean("debugMode")) alterGame(game.getPlayers());
+
         game.getMap().setListener(new VirtualMapView(vgv));
 
         game.setKillTrackListener(new VirtualKillTrackView(vgv));
@@ -117,10 +120,9 @@ public class AdrenalineGameController implements GameController {
 
             if (!turn.getActivePlayer().isConnected()) {
                 game.concludeTurn(turn);
-                if(!isAnyPlayerConnected())
-                {
+                if(!enoughPlayersConnected()) {
                     game.declareOver();
-                    lobbyController.endGame();
+                    break;
                 }
                 continue;
             }
@@ -152,13 +154,17 @@ public class AdrenalineGameController implements GameController {
     public void userDidDisconnect(User user) {
         Player disconnectedPlayer = getPlayer(user);
         if (disconnectedPlayer != null) {
+            vgv.userDidExitGame(user, disconnectedPlayer);
+
             synchronized (this) {
-                if (currentTurn != null && currentTurn.getActivePlayer() == disconnectedPlayer) {
+                if (!enoughPlayersConnected()) {
+                    game.declareOver();
+                    if (currentTurn != null) currentExecutor.abort();
+                } else if (currentTurn != null && currentTurn.getActivePlayer() == disconnectedPlayer) {
                     currentExecutor.abort();
                 }
             }
 
-            vgv.userDidExitGame(user, disconnectedPlayer);
         }
     }
 
@@ -171,14 +177,35 @@ public class AdrenalineGameController implements GameController {
         }
     }
 
-    private boolean isAnyPlayerConnected(){
-        for(Player p : game.getPlayers())
-        {
-            if(p.isConnected()) {
-                return true;
+    private boolean enoughPlayersConnected() {
+        int i = 0;
+        for(Player p : game.getPlayers()) {
+            if(p.isConnected()) i++;
+        }
+        return i >= lobbyController.getConfig().getMinPlayers();
+    }
+
+
+    private void alterGame(List<Player> players) {
+        List<String> names = players.stream().map(Player::getName).map(String::toLowerCase).collect(Collectors.toList());
+
+        if (names.contains("frenzypls")) {
+            for (int i = 0; i < game.getKillTrack().getTrackLength() - 1; i++) {
+                game.getKillTrack().addKill(players.get(0), 1);
             }
         }
-        return false;
+
+        if (names.contains("ezkills")) {
+            Player p0 = players.get(0);
+            for (Player p : players) if (p != p0) {
+                try {
+                    for (int j = 0; j < 9; j++) p.getDamageBoard().appendDamage(p0);
+                } catch (DamageTrackFullException x) {
+                    //nothing to do here.
+                }
+            }
+        }
+
     }
 
 }

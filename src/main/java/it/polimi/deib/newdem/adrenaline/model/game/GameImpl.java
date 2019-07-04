@@ -245,6 +245,11 @@ public class GameImpl implements Game {
         listener.gameWillEnd(this, generateResults());
     }
 
+    @Override
+    public KillTrack getKillTrack() {
+        return killTrack;
+    }
+
     /**
      * Returns the next turn.
      *

@@ -2,14 +2,10 @@ package it.polimi.deib.newdem.adrenaline.controller;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LobbyRegistry {
-
-    private List<LobbyController> lobbies;
 
     private Map<User, LobbyController> userLocations;
 
@@ -17,8 +13,7 @@ public class LobbyRegistry {
 
     private ServerInstance core;
 
-    public LobbyRegistry(ServerInstance core) {
-        this.lobbies = new ArrayList<>();
+    LobbyRegistry(ServerInstance core) {
         this.userLocations = new HashMap<>();
 
         this.core = core;
@@ -30,11 +25,20 @@ public class LobbyRegistry {
         }
 
         if (firstLobbyController == null) {
-            firstLobbyController = new LobbyControllerImpl(core.getCurrentConfig());
-            lobbies.add(firstLobbyController);
+            firstLobbyController = new LobbyControllerImpl(this, core.getCurrentConfig());
         }
 
         return firstLobbyController;
+    }
+
+    void freeLobbyController(LobbyController lobbyController) {
+        if (firstLobbyController == lobbyController) {
+            firstLobbyController = null;
+        }
+
+        for (User user : lobbyController.getLobby().getUsers()) {
+            core.getUserRegistry().unregisterUser(user);
+        }
     }
 
     private LobbyController getOrCreateLobbyController(User user) {

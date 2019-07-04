@@ -40,7 +40,6 @@ public class ClientInstance implements AutoCloseable, UserListener {
             this.clientThread.join();
         } catch (InterruptedException x) {
             Thread.currentThread().interrupt();
-            // nothing to do here.
         }
     }
 
@@ -172,13 +171,7 @@ public class ClientInstance implements AutoCloseable, UserListener {
         gameManager.loadData();
         gameManager.linkViews();
 
-        UserEventLocker<GameEndEvent> gameEndLocker = new UserEventLocker<>();
-        try {
-            gameEndLocker.waitOnEvent(GameEndEvent.class, clientConnection);
-        } catch (InterruptedException x) {
-            Thread.currentThread().interrupt();
-            throw new ClosedException("Close requested.");
-        }
+        gameManager.waitForEnd();
 
     }
 

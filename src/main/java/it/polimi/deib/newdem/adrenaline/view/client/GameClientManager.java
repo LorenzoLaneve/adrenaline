@@ -162,4 +162,17 @@ public class GameClientManager {
         }
     }
 
+    public void waitForEnd() {
+        UserEventLocker<GameEndEvent> gameEndLocker = new UserEventLocker<>();
+
+        GameEndEvent event;
+        try {
+            event = gameEndLocker.waitOnEvent(GameEndEvent.class, connection);
+        } catch (InterruptedException x) {
+            Thread.currentThread().interrupt();
+            throw new ClosedException("Close requested.");
+        }
+
+        gameView.endGame(event.getResults());
+    }
 }
