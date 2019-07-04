@@ -17,7 +17,7 @@ public class SelectShootWeaponInteraction extends InteractionBase {
     public void execute() throws UndoException {
         List<Weapon> availableWeapons = context.getActor().getInventory().getLoadedWeapons();
 
-        if (availableWeapons.isEmpty()) throw new UndoException();
+        if (availableWeapons.isEmpty()) return;
 
         Weapon selectedWeapon = selectWeapon(availableWeapons);
 

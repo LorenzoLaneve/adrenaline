@@ -8,10 +8,18 @@ public class SameRoomTileSelector implements TileSelector {
 
     private Tile sourceTile;
 
+    /**
+     * Selects all the tiles that are in the same room of the given tile.
+     * @see TileSelector for further information
+     */
     public SameRoomTileSelector(Tile sourceTile) {
         this.sourceTile = sourceTile;
     }
 
+    /**
+     * Selects all the tiles that are in the same room of the given player.
+     * @see TileSelector for further information
+     */
     public SameRoomTileSelector(Player sourcePlayer) {
         this(sourcePlayer.getTile());
     }

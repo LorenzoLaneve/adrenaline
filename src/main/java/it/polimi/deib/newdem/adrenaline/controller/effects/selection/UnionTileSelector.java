@@ -8,6 +8,10 @@ public class UnionTileSelector implements TileSelector {
     private TileSelector firstOp;
     private TileSelector secondOp;
 
+    /**
+     * Selects all the tiles that are selected by one of the given player selectors.
+     * @see TileSelector for further information
+     */
     public UnionTileSelector(TileSelector firstOp, TileSelector secondOp) {
         this.firstOp = firstOp;
         this.secondOp = secondOp;

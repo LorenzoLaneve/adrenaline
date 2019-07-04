@@ -8,6 +8,10 @@ public class UnionPlayerSelector implements PlayerSelector {
     private PlayerSelector firstOp;
     private PlayerSelector secondOp;
 
+    /**
+     * Selects all the players that are selected by one of the given selectors.
+     * @see PlayerSelector for further information
+     */
     public UnionPlayerSelector(PlayerSelector firstOp, PlayerSelector secondOp){
         this.firstOp = firstOp;
         this.secondOp = secondOp;

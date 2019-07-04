@@ -10,6 +10,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Card effect that implements Adrenaline' Grenade Launcher weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class GrenadeLauncherEffect implements Effect {
 
     private static final int MOVE_TARGET = 1;

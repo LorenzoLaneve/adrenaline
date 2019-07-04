@@ -3,7 +3,10 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
-
+/**
+ * Card effect that implements Adrenaline' Machine Gun weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class MachineGunEffect implements Effect {
 
     private static final int FOCUS_SHOT = 1;

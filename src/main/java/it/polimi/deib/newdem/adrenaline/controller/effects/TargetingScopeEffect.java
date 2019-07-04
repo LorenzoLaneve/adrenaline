@@ -2,6 +2,10 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' Targeting Scope power up card.
+ * @see Effect for further information about the card effects.
+ */
 public class TargetingScopeEffect implements Effect {
 
     private static final int ADDITIONAL_DAMAGE = 1;

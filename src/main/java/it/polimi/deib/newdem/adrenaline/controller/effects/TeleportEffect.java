@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyTileSele
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Card effect that implements Adrenaline' Chainsaw power up card.
+ * @see Effect for further information about the card effects.
+ */
 public class TeleportEffect implements Effect {
 
     @Override

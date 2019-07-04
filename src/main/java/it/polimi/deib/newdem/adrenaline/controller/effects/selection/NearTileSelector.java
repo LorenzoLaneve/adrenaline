@@ -10,6 +10,10 @@ public class NearTileSelector implements TileSelector {
     private int minDistance;
     private int maxDistance;
 
+    /**
+     * Selects all the tiles in the given distance range from the given tile.
+     * @see TileSelector for further information
+     */
     public NearTileSelector(Tile sourceTile, int minDist, int maxDist){
         this.sourceTile = sourceTile;
         this.minDistance = minDist;

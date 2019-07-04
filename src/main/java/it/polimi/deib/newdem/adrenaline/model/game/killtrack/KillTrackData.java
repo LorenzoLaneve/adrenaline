@@ -8,7 +8,7 @@ import java.util.List;
 
 public class KillTrackData implements Serializable {
 
-    public static class KillData {
+    public static class KillData implements Serializable {
 
         private final PlayerColor killer;
         private final int amount;

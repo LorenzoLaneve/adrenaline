@@ -5,7 +5,7 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 /**
  * A simple function that represents the behaviour of a card.
  * Thanks to reflection, implementations of this interface can be seen as importable assets.
- * @see EffectManager for possible features that can be used while creating a card effect.
+ * @see EffectManager for possible features that can be used to create a card effect.
  */
 @FunctionalInterface
 public interface Effect {

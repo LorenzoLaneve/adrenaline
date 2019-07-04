@@ -10,6 +10,10 @@ public class NearPlayerSelector implements PlayerSelector {
     private int minDistance;
     private int maxDistance;
 
+    /**
+     * Selects all the players in the given distance range from the given tile.
+     * @see PlayerSelector for further information
+     */
     public NearPlayerSelector(Tile sourceTile, int minDistance, int maxDistance){
         this.sourceTile = sourceTile;
         this.minDistance = minDistance;

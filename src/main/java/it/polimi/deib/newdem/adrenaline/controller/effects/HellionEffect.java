@@ -6,6 +6,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisibleTile
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Card effect that implements Adrenaline' Hellion weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class HellionEffect implements Effect {
 
     private static final int NANO_TRACER = 1;

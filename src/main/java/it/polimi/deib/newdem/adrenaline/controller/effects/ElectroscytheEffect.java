@@ -1,8 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' Electroscythe weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class ElectroscytheEffect implements Effect {
 
     private static final int REAPER_MODE = 1;
