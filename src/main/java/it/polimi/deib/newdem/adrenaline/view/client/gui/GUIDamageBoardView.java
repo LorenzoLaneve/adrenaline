@@ -103,9 +103,6 @@ public class GUIDamageBoardView implements DamageBoardView {
 
             Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
             dmgSigns.getChildren().clear();
-
-            Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
-            markSigns.getChildren().clear();
         });
     }
 
