@@ -9,7 +9,7 @@
 
   "timerLength": 30,
   "minPlayers": 2,
-  "maxPlayers": 3,
+  "maxPlayers": 2,
 
   "turnTime": 60,
   "debugMode": true,

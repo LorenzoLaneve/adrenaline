@@ -30,7 +30,7 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
         while(innerDmgb.getTotalDamage() <= MAX_LIFE && dmgAmount > 0) {
             // damages.add(attacker);
             try {
-                innerDmgb.appendDamage(attacker);
+                innerDmgb.appendDamage(attacker, true);
             }
             catch (DamageTrackFullException e) {
                 // do nothing
@@ -110,8 +110,8 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     }
 
     @Override
-    public void appendDamage(Player player) throws DamageTrackFullException {
-        innerDmgb.appendDamage(player);
+    public void appendDamage(Player player, boolean canRealizeMarks) throws DamageTrackFullException {
+        innerDmgb.appendDamage(player, true);
     }
 
     @Override

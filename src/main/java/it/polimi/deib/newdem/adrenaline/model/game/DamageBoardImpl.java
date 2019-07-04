@@ -164,7 +164,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         return new HashMap<>(marks);
     }
 
-    public void appendDamage(Player player) throws DamageTrackFullException {
+    public void appendDamage(Player player, boolean canRealizeMarks) throws DamageTrackFullException {
 
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
