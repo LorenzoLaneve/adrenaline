@@ -60,7 +60,7 @@ public abstract class TurnBaseImpl implements Turn {
     protected void performClosingActions() throws TurnInterruptedException {
 
         // use powerup
-        while(!activePlayer.getInventory().getPowerUpByTrigger(PowerUpTrigger.CALL).isEmpty() && allowClosingPowerup) {
+        if(!activePlayer.getInventory().getPowerUpByTrigger(PowerUpTrigger.CALL).isEmpty() && allowClosingPowerup) {
             try{
                 // here I can use one or more pups
                 // start a pupAction

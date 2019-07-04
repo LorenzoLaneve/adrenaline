@@ -13,22 +13,15 @@ public class OrdinaryTurn extends TurnBaseImpl {
 
     public OrdinaryTurn(Player activePlayer) {
         super(activePlayer);
-        // TODO implement
         // Or is it?
     }
 
     @Override
     protected void performInitialActions() throws TurnInterruptedException {
-        //TODO implement
-        // requires action anc listeners
         // if dead, spawn
         if(getActivePlayer().isDead()) {
             respawn();
         }
-    }
-
-    public void turnWillStart() {
-        // TODO implement
     }
 
     private void respawn() throws TurnInterruptedException {

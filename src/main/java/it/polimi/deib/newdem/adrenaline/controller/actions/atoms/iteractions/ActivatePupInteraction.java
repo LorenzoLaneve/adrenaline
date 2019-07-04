@@ -15,11 +15,14 @@ public class ActivatePupInteraction extends InteractionBase {
 
     @Override
     public void execute() throws UndoException {
-        context.getActor().getInventory().removePowerUp(pupCard);
-        context.getGame().getPowerUpDeck().discard(pupCard);
 
         EffectManager manager = new EffectManager(context.getEffectContext());
         manager.execute(pupCard.getEffect());
+
+        context.getActor().getInventory().removePowerUp(pupCard);
+        context.getGame().getPowerUpDeck().discard(pupCard);
+
+        context.pushInteraction(new SelectPupInteraction(context));
     }
 
     @Override
