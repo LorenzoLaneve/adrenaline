@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import java.net.URL?>
-<FlowPane styleClass="overlay-dialog,payment-dialog" vgap="10.0" prefHeight="100.0" prefWidth="600.0" maxHeight="100.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea">
+<FlowPane styleClass="overlay-dialog,payment-dialog" vgap="10.0" prefHeight="50.0" prefWidth="600.0" maxHeight="50.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea">
     <stylesheets>
         <URL value="@styles/general.css" />
         <URL value="@styles/game.css" />
@@ -20,7 +20,11 @@
                 <ColumnConstraints prefWidth="90.0" />
             </columnConstraints>
             <children>
-                <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" text="Connection to server lost" />
+                <FlowPane alignment="CENTER">
+                    <children>
+                        <Label styleClass="overlay-dialog-title" GridPane.columnIndex="0" text="Connection to server lost" />
+                    </children>
+                </FlowPane>
                 <Button styleClass="terminate-button" text="Close" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>

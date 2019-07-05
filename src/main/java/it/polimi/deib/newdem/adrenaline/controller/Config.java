@@ -74,11 +74,41 @@ public final class Config {
                 config.debugMode = getMember(configJson, "debugMode").getAsBoolean();
             }
 
+            config.checkIntegrity();
+
         } catch (Exception x) {
             throw new InvalidConfigException(x.getMessage());
         }
 
         return config;
+    }
+
+    private void checkIntegrity() throws InvalidConfigException {
+
+        if (!(0 <= socketPort && socketPort < 65536))
+            throw new InvalidConfigException("Socket port must be a valid port.");
+
+        if (!(0 <= rmiPort && rmiPort < 65536))
+            throw new InvalidConfigException("RMI port must be a valid port.");
+
+        if (timerLength <= 0)
+            throw new InvalidConfigException("Timer length must be positive.");
+
+        if (minPlayers > maxPlayers)
+            throw new InvalidConfigException("Min players must be lower than max players.");
+
+        if (minPlayers <= 0)
+            throw new InvalidConfigException("Min players must be positive.");
+
+        if (maxPlayers > 5)
+            throw new InvalidConfigException("Max players must be at most 5.");
+
+        if (turnTime <= 0)
+            throw new InvalidConfigException("Turn time must be positive.");
+
+        if (!(5 <= killTrackLength && killTrackLength <= 8))
+            throw new InvalidConfigException("Kill Track Length must be between 5 and 8 (inclusive).");
+
     }
 
 
