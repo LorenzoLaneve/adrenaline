@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * A simple implemntation of {@code KillTrack} useing {@code Cell}s.
+ *
+ * @see Cell
  */
 public class KillTrackImpl implements KillTrack {
 
