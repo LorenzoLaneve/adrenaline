@@ -3,55 +3,21 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="122.35714285714283" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.Player</node>
-    <node x="716.1428571428571" y="1827.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData</node>
-    <node x="739.0" y="1122.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor</node>
-    <node x="351.0" y="1067.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener</node>
-    <node x="296.3928571428571" y="1629.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl</node>
-    <node x="0.0" y="803.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory</node>
+    <node x="0.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.Player</node>
+    <node x="1429.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor</node>
+    <node x="719.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData</node>
+    <node x="1033.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener</node>
+    <node x="0.0" y="847.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl</node>
+    <node x="311.0" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
-      <point x="101.25" y="-520.0" />
-      <point x="532.6428571428571" y="1609.0" />
-      <point x="759.5" y="1609.0" />
-      <point x="-41.0" y="68.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener">
-      <point x="33.75" y="-520.0" />
-      <point x="465.1428571428571" y="1599.0" />
-      <point x="528.5" y="1599.0" />
-      <point x="0.0" y="123.5" />
-    </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
-      <point x="-33.75" y="-520.0" />
-      <point x="397.6428571428571" y="1609.0" />
-      <point x="340.5" y="1609.0" />
-      <point x="340.5" y="778.0" />
-      <point x="324.85714285714283" y="778.0" />
-      <point x="67.5" y="376.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
-      <point x="0.0" y="-388.0" />
-      <point x="165.0" y="778.0" />
-      <point x="189.85714285714283" y="778.0" />
-      <point x="-67.5" y="376.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory">
-      <point x="-101.25" y="-520.0" />
-      <point x="330.1428571428571" y="1609.0" />
-      <point x="165.0" y="1609.0" />
-      <point x="0.0" y="388.0" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
-      <point x="68.25" y="-322.0" />
-      <point x="920.8928571428571" y="1609.0" />
-      <point x="841.5" y="1609.0" />
-      <point x="41.0" y="68.5" />
+      <point x="0.0" y="-553.0" />
+      <point x="0.0" y="398.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="485.0" y="1017.0" />
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="713.0" y="454.5" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

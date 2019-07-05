@@ -3,23 +3,23 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="1155.0" y="130.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector</node>
-    <node x="808.5" y="0.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector</node>
-    <node x="976.0" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector</node>
-    <node x="924.0" y="141.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionTileSelector</node>
-    <node x="976.0" y="302.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector</node>
-    <node x="1733.0" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector</node>
-    <node x="1977.0" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectPlayerSelector</node>
-    <node x="462.0" y="152.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameRoomTileSelector</node>
-    <node x="244.0" y="421.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalPlayerSelector</node>
-    <node x="1464.0" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector</node>
-    <node x="1220.0" y="421.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector</node>
-    <node x="488.0" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedPlayerSelector</node>
-    <node x="1386.0" y="163.5">it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyTileSelector</node>
-    <node x="732.0" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionPlayerSelector</node>
-    <node x="231.0" y="152.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedTileSelector</node>
-    <node x="693.0" y="141.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectTileSelector</node>
-    <node x="1617.0" y="119.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector</node>
+    <node x="1538.0" y="130.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector</node>
+    <node x="778.5" y="0.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector</node>
+    <node x="1104.0" y="141.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionTileSelector</node>
+    <node x="919.9999999999999" y="302.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector</node>
+    <node x="459.9999999999999" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector</node>
+    <node x="689.9999999999999" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector</node>
+    <node x="229.9999999999999" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectPlayerSelector</node>
+    <node x="670.0" y="152.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameRoomTileSelector</node>
+    <node x="919.9999999999999" y="421.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalPlayerSelector</node>
+    <node x="1840.0" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector</node>
+    <node x="1610.0" y="421.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector</node>
+    <node x="1150.0" y="443.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedPlayerSelector</node>
+    <node x="217.0" y="163.5">it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyTileSelector</node>
+    <node x="1380.0" y="432.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionPlayerSelector</node>
+    <node x="887.0" y="152.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedTileSelector</node>
+    <node x="1321.0" y="141.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectTileSelector</node>
+    <node x="434.0" y="119.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector</node>
     <node x="0.0" y="454.5">it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyPlayerSelector</node>
     <node x="0.0" y="152.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisibleTileSelector</node>
   </nodes>
@@ -27,106 +27,106 @@
   <edges>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-47.0" />
-      <point x="844.0" y="401.0" />
-      <point x="1063.111111111111" y="401.0" />
-      <point x="-24.8888888888889" y="24.5" />
+      <point x="1485.0" y="391.0" />
+      <point x="1071.6666666666665" y="391.0" />
+      <point x="46.666666666666515" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-24.5" />
-      <point x="112.0" y="371.0" />
-      <point x="988.4444444444445" y="371.0" />
-      <point x="-99.55555555555556" y="24.5" />
+      <point x="105.0" y="371.0" />
+      <point x="931.6666666666665" y="371.0" />
+      <point x="-93.33333333333337" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameTilePlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-36.0" />
-      <point x="-1.4210854715202004E-14" y="24.5" />
+      <point x="564.9999999999999" y="391.0" />
+      <point x="978.3333333333333" y="391.0" />
+      <point x="-46.66666666666663" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-58.0" />
-      <point x="1332.0" y="401.0" />
-      <point x="1112.888888888889" y="401.0" />
-      <point x="24.888888888888857" y="24.5" />
+      <point x="1715.0" y="381.0" />
+      <point x="1095.0" y="381.0" />
+      <point x="70.0" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-58.0" />
-      <point x="1260.5" y="89.0" />
-      <point x="953.5625" y="89.0" />
-      <point x="39.5625" y="24.5" />
+      <point x="1636.5" y="69.0" />
+      <point x="963.1875" y="69.0" />
+      <point x="86.1875" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.UnionTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-47.0" />
-      <point x="1029.5" y="99.0" />
-      <point x="927.1875" y="99.0" />
-      <point x="13.1875" y="24.5" />
+      <point x="1202.5" y="89.0" />
+      <point x="913.9375" y="89.0" />
+      <point x="36.9375" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-47.0" />
-      <point x="798.5" y="99.0" />
-      <point x="900.8125" y="99.0" />
-      <point x="-13.1875" y="24.5" />
+      <point x="1419.5" y="79.0" />
+      <point x="938.5625" y="79.0" />
+      <point x="61.5625" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.DirectionalPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-58.0" />
-      <point x="356.0" y="381.0" />
-      <point x="1013.3333333333334" y="381.0" />
-      <point x="-74.66666666666667" y="24.5" />
+      <point x="0.0" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisibleTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-36.0" />
-      <point x="105.5" y="69.0" />
-      <point x="821.6875" y="69.0" />
-      <point x="-92.3125" y="24.5" />
+      <point x="98.5" y="69.0" />
+      <point x="790.8125" y="69.0" />
+      <point x="-86.1875" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-47.0" />
-      <point x="2089.0" y="371.0" />
-      <point x="1187.5555555555554" y="371.0" />
-      <point x="99.55555555555551" y="24.5" />
+      <point x="334.9999999999999" y="381.0" />
+      <point x="954.9999999999999" y="381.0" />
+      <point x="-70.0" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-36.0" />
-      <point x="336.5" y="79.0" />
-      <point x="848.0625" y="79.0" />
-      <point x="-65.9375" y="24.5" />
+      <point x="985.5" y="99.0" />
+      <point x="889.3125" y="99.0" />
+      <point x="12.3125" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-36.0" />
-      <point x="1845.0" y="381.0" />
-      <point x="1162.6666666666665" y="381.0" />
-      <point x="74.66666666666663" y="24.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
-      <point x="0.0" y="-36.0" />
-      <point x="600.0" y="391.0" />
-      <point x="1038.2222222222222" y="391.0" />
-      <point x="-49.777777777777786" y="24.5" />
+      <point x="794.9999999999999" y="401.0" />
+      <point x="1001.6666666666666" y="401.0" />
+      <point x="-23.333333333333258" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyDirectionalTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-69.0" />
-      <point x="1731.0" y="69.0" />
-      <point x="1006.3125" y="69.0" />
-      <point x="92.3125" y="24.5" />
+      <point x="542.0" y="89.0" />
+      <point x="840.0625" y="89.0" />
+      <point x="-36.9375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.NegatedPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
+      <point x="0.0" y="-36.0" />
+      <point x="1255.0" y="401.0" />
+      <point x="1048.333333333333" y="401.0" />
+      <point x="23.333333333333258" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.AnyTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-24.5" />
-      <point x="1491.5" y="79.0" />
-      <point x="979.9375" y="79.0" />
-      <point x="65.9375" y="24.5" />
+      <point x="315.5" y="79.0" />
+      <point x="815.4375" y="79.0" />
+      <point x="-61.5625" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.SameRoomTileSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector">
       <point x="0.0" y="-36.0" />
-      <point x="567.5" y="89.0" />
-      <point x="874.4375" y="89.0" />
-      <point x="-39.5625" y="24.5" />
+      <point x="768.5" y="99.0" />
+      <point x="864.6875" y="99.0" />
+      <point x="-12.3125" y="24.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection.BlackListFilterPlayerSelector" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector">
       <point x="0.0" y="-47.0" />
-      <point x="1588.5" y="391.0" />
-      <point x="1137.7777777777778" y="391.0" />
-      <point x="49.77777777777774" y="24.5" />
+      <point x="1958.5" y="371.0" />
+      <point x="1118.333333333333" y="371.0" />
+      <point x="93.33333333333326" y="24.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="1023.1785714285713" y="63.21428571428555" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
