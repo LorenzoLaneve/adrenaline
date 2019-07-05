@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory.INITIAL_AMMOS;
 import static org.junit.Assert.*;
 
 public class PlayerDataTest {
@@ -83,7 +84,7 @@ public class PlayerDataTest {
 
     @Test
     public void testGetAmmos() throws Exception {
-        Integer[] arr = {3,3,3};
+        Integer[] arr = {INITIAL_AMMOS + 1,INITIAL_AMMOS + 1,INITIAL_AMMOS + 1};
         assertArrayEquals(playerData.getAmmos().values().toArray(), arr);
     }
 

@@ -22,6 +22,7 @@ public class PlayerInventoryTest {
     public void setUp() {
         p = new MockPlayer();
         inv = new PlayerInventory(p);
+        inv.addAmmoSet(new AmmoSet(3,3,3));
     }
 
     @Test

@@ -13,6 +13,7 @@ import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.BLUE;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.YELLOW;
 import static java.lang.Integer.min;
+import static java.lang.Math.max;
 
 /**
  * Object containing all the resources a player can have in an Adrenaline game,
@@ -331,9 +332,9 @@ public class PlayerInventory {
         int deltaBlue = ammos.get(BLUE);
         int deltaYellow = ammos.get(YELLOW);
 
-        ammos.put(RED, min(ammos.get(RED) - ammoSet.getRedAmmos(), MAX_AMMO_PER_COLOR));
-        ammos.put(BLUE, min(ammos.get(BLUE) - ammoSet.getBlueAmmos(), MAX_AMMO_PER_COLOR));
-        ammos.put(YELLOW, min(ammos.get(YELLOW) - ammoSet.getYellowAmmos(), MAX_AMMO_PER_COLOR));
+        ammos.put(RED, max(ammos.get(RED) - ammoSet.getRedAmmos(), 0));
+        ammos.put(BLUE, max(ammos.get(BLUE) - ammoSet.getBlueAmmos(), 0));
+        ammos.put(YELLOW, max(ammos.get(YELLOW) - ammoSet.getYellowAmmos(), 0));
 
         deltaRed -= ammos.get(RED);
         deltaBlue -= ammos.get(BLUE);
