@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.model.game.killtrack;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
 /**
- * Object used in the implementation of KillTrackImpl to store information about a kill
+ * Object used in the implementation {@code KillTrackImpl} to store information about a kill
  * made by players during the game.
  */
 class Cell {
@@ -11,6 +11,11 @@ class Cell {
     private final Player killer;
     private final int amount;
 
+    /**
+     * Creates a new {@code Cell} with the given {@code Player} and {@code Color}
+     * @param killer player who dealt the killing shot
+     * @param amount amount of counters on this cell
+     */
     public Cell(Player killer, int amount) {
         this.killer = killer;
         this.amount = amount;
