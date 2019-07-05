@@ -12,16 +12,22 @@ import java.util.Deque;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * An implementation of {@coe InteractionStack} loosely based on Push Down Automata.
+ *
+ * This class presents itself as an {@code InteractionContext} to its inner interaction and
+ * as an {@code InteractionStack} to external classes.
+ */
 public class InteractionStackImpl implements InteractionContext, InteractionStack {
 
-    /**
-     * An implementation of InteractionStack
-     *
-     */
     private Deque<Interaction> runningStack;
     private AtomsContainer ancestor;
     private AtomEffectContext effectContext;
 
+    /**
+     * Builds a new {@code InteractionStackImpl} bound to the given {@code AtomsContainer}
+     * @param ancestor container to which this stack is bound
+     */
     public InteractionStackImpl(AtomsContainer ancestor) {
         this.runningStack = new ArrayDeque<>();
         this.ancestor = ancestor;

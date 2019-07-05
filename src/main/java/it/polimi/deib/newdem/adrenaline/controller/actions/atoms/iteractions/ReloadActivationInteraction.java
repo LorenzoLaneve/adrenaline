@@ -5,9 +5,16 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
+/**
+ * Interaction encapsulating the final application of a RELOAD atom.
+ *
+ * In here a weapon will switch from unloaded to loaded and any ammo used to to do
+ * will be remoed from te player's inventory
+ */
 public class ReloadActivationInteraction extends InteractionBase {
 
     private WeaponCard selectedWeapon;
+
 
     public ReloadActivationInteraction(InteractionContext context, WeaponCard selectedWeapon) {
         super(context);

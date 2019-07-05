@@ -20,6 +20,10 @@ public interface ActionBoard {
      */
     int getIterations();
 
+    /**
+     * Assigns the given {@code ActionBoardListener} to this {@code DamageBoard}
+     * @param listener to assign to this board
+     */
     void setListener(ActionBoardListener listener);
 
     /**

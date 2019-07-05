@@ -4,10 +4,18 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
+/**
+ * Interaction encapsulating the application of the effect of a powerup within a USE_POWERUP atom
+ */
 public class ActivatePupInteraction extends InteractionBase {
 
     private PowerUpCard pupCard;
 
+    /**
+     * Builds a new {@code ActivatePupInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param pupCard powerup to activate
+     */
     public ActivatePupInteraction(InteractionContext context, PowerUpCard pupCard) {
         super(context);
         this.pupCard = pupCard;

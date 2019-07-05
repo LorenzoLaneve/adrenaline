@@ -6,10 +6,18 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the choice of which weapon to discard within a GRAB atom
+ */
 public class SelectDiscardWeaponInteraction extends InteractionBase {
 
     private WeaponCard newWeaponCard;
 
+    /**
+     * Builds a new {@code SelectDiscardWeaponInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param newWeapon weapon to pass on to this {@code Interaction}'s children
+     */
     public SelectDiscardWeaponInteraction(InteractionContext context, WeaponCard newWeapon) {
         super(context);
         this.newWeaponCard = newWeapon;

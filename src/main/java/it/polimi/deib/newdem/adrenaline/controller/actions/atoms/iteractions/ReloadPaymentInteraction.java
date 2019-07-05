@@ -5,12 +5,19 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
-
+/**
+ * Interaction encapsulating the payment within a RELOAD atom
+ */
 public class ReloadPaymentInteraction extends InteractionBase {
 
     private WeaponCard selectedWeapon;
     private GameChange paymentGC;
 
+    /**
+     * Builds a new {@code ReloadPaymentInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param selectedWeapon selected weapon to pass down to this {@code Interaction}'s children
+     */
     public ReloadPaymentInteraction(InteractionContext context, WeaponCard selectedWeapon) {
         super(context);
         this.selectedWeapon = selectedWeapon;

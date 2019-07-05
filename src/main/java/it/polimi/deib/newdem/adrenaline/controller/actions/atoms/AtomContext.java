@@ -18,12 +18,22 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An atom which allows the {@code Interaction}s contained to use an {@code EffectContext}
+ */
 public abstract class AtomContext extends AtomBase implements AtomEffectContext {
 
     protected WeaponCard usedWeapon;
     private List<Player> damagedPlayers;
     private boolean enableDamageTriggers;
 
+    /**
+     * Creates a new {@code AtomBase} bound to the given {@code AtomsContainer} and
+     * with the set {@code EntryPointFactory}
+     *
+     * @param parent this atom's container
+     * @param entryPointType this atom's entrypoint
+     */
     public AtomContext(AtomsContainer parent, EntryPointType entryPointType) {
         super(parent, new EntryPointFactory(entryPointType));
         damagedPlayers = new ArrayList<>();
@@ -107,19 +117,7 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
     @Override
     public void damageDealtTrigger(Player attacker, Player victim) {
         if(!enableDamageTriggers) { return; }
-        // TODO choose power up and execute it
-        // adds player which receives damage > 0 from active player
         damagedPlayers.add(victim);
-        // does not create action
-        /*
-        // Additional damage, scope
-        // from the calling interaction, this is encapsulated by effect.apply()
-        // this triggers a new action on the same player of this context's parent,
-        // which can be reused.
-
-        ConcreteActionFactory damageDealtFactory = new ConcreteActionFactory(AtomicActionType.USE_POWERUP);
-        // proceed only if there are one or more onDamage triggered pups
-        */
     }
 
     @Override
@@ -132,11 +130,7 @@ public abstract class AtomContext extends AtomBase implements AtomEffectContext 
         if(!enableDamageTriggers) { return; }
         TimedExecutor.pauseTimer();
 
-
-        // turn, i.e. context, needs to change here.
-        // need to take the datasource of the victim and refer to it for the "revenge turn"
         ConcreteActionFactory revengeFactory = new ConcreteActionFactory(AtomicActionType.REVENGE);
-        /// AdrenalineGameController agc.makeTurnForPlayer()
         revengeFactory.setAttacker(parent.getDataSource().peekActor());
         Action revengeAction = revengeFactory.makeAction(victim, parent.getDataSource());
         parent.getDataSource().pushActor(victim);

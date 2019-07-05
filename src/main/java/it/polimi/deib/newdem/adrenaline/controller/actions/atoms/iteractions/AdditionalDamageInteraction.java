@@ -6,8 +6,15 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the initial check for legal targets in/ a REVENGE atom
+ */
 public class AdditionalDamageInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code AdditionalDamageInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public AdditionalDamageInteraction(InteractionContext context) {
         super(context);
     }

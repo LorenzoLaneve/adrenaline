@@ -9,11 +9,18 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.NotOrdinaryTileException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Interaction encapsulating the pick up of a drop within a GRAB interaction
+ */
 public class GrabDropInteraction extends InteractionBase {
 
     private DropInstance dropInstance;
     private PowerUpCard pupCard;
 
+    /**
+     * Builds a new {@code ReloadPaymentInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public GrabDropInteraction(InteractionContext context) {
         super(context);
         dropInstance = null;

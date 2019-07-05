@@ -5,10 +5,18 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 
+/**
+ * Interaction encapsulating the resolution of the weapon's effect at the core of a SHOOT atom
+ */
 public class DischargeInteraction extends InteractionBase {
 
     private Weapon weapon;
 
+    /**
+     * Builds a new {@code DischargeInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param weapon to apply the effect of
+     */
     public DischargeInteraction(InteractionContext context, Weapon weapon) {
         super(context);
         this.weapon = weapon;

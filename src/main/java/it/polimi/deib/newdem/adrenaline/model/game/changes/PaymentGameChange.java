@@ -17,6 +17,11 @@ public class PaymentGameChange implements GameChange {
     private PaymentReceipt receipt;
     private Player player;
 
+    /**
+     * Builds a new {@code GameChange} to detract a {@code PaymentReceipt} from a {@code Player}'s {@code Inventory}
+     * @param player buyer
+     * @param receipt cost
+     */
     public PaymentGameChange(Player player, PaymentReceipt receipt) {
         this.player = player;
         this.receipt = receipt;

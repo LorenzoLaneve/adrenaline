@@ -6,7 +6,9 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Concrete behavior for the strategy in {@code ActionBoardImpl}
+ */
 public class OrdinaryActionBoardBehavior implements ActionBoardBehavior {
 
     @Override
@@ -28,7 +30,6 @@ public class OrdinaryActionBoardBehavior implements ActionBoardBehavior {
     @Override
     public void onEnter(ActionBoardImpl actionBoard) {
         // do nothing
-        // TODO notify listener of existence?
     }
 
     @Override

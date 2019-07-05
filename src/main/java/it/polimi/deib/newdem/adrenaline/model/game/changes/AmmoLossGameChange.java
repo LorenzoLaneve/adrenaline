@@ -13,7 +13,11 @@ public class AmmoLossGameChange implements GameChange {
     private Player player;
     private AmmoSet ammos;
 
-
+    /**
+     * Builds a new AmmoLossGameChange for the given {@code Player} and {@code AmmoSet}
+     * @param player to change the inventory of
+     * @param ammos to remove from the {@code Player}'s inventory
+     */
     public AmmoLossGameChange(Player player, AmmoSet ammos) {
         this.ammos = ammos;
         this.player = player;

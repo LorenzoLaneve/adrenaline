@@ -17,7 +17,11 @@ public class PowerUpCardDiscardGameChange implements GameChange {
 
     private List<PowerUpCard> discardedPowerUps;
 
-
+    /**
+     * Builds a new {@code PowerUpCardDiscardGameChange} representing the discard of the given {@code PowerUpCard}s
+     * @param player discarder
+     * @param powerUps discarded powerups
+     */
     public PowerUpCardDiscardGameChange(Player player, List<PowerUpCard> powerUps) {
         this.player = player;
         this.discardedPowerUps = powerUps;

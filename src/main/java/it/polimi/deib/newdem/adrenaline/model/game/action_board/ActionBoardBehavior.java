@@ -10,13 +10,22 @@ import java.util.List;
  */
 public interface ActionBoardBehavior {
 
+    /**
+     * Retrieves the basic actions allowed by the current game state
+     * @return allowed actions
+     */
     List<ActionFactory> getBasicActions();
 
     /**
-     * @return Numbers of actions to do in a turn.
+     * Retrieves the total number of actions to do in this turn
+     * @return total number of actions to do in this turn
      */
     int getIterations();
 
+    /**
+     * Checks whether this {@code ActionBoard} is in frenzy mode
+     * @return
+     */
     boolean isFrenzy();
 
     /**

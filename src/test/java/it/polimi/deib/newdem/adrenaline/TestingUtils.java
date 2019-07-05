@@ -16,8 +16,14 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Static utilities for testing
+ */
 public class TestingUtils {
 
+    /**
+     * Loads all the singletons for this project
+     */
     public static void loadSingleton() {
         try {
             WeaponDeck.loadCardsFromJson(GameImpl.WEAPON_DECK_PATH);
@@ -26,6 +32,12 @@ public class TestingUtils {
         catch (InvalidJSONException e) { throw new IllegalStateException(); }
     }
 
+    /**
+     * Builds a new {@code Game} with minimal but payable features
+     * @param color of the playing players. The amount of values corresponds to the
+     *              amount of playing players.
+     * @return a new game
+     */
     public static Game makeTestGame(PlayerColor ... color) {
         loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
@@ -41,6 +53,12 @@ public class TestingUtils {
         return g;
     }
 
+    /**
+     * Builds a new {@code GameRigged} with minimal but payable features
+     * @param color of the playing players. The amount of values corresponds to the
+     *              amount of playing players.
+     * @return a new rigged game
+     */
     public static GameRigged makeRiggedGame(PlayerColor ... color) {
         loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
