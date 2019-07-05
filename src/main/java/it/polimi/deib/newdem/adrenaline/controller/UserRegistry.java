@@ -67,7 +67,6 @@ public class UserRegistry implements UserListener {
 
                 oldUser.takeOverConnection(user);
 
-                // oldUser.sendEvent(new RegisterUsernameEvent(true));
                 core.getLogger().info(String.format("User %s successfully reconnected with name to %s.", oldUser.hashCode(), name));
                 core.getLobbyRegistry().assignLobby(oldUser);
 
