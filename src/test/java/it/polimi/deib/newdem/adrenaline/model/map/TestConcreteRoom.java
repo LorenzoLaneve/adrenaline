@@ -22,7 +22,9 @@ public class TestConcreteRoom {
     PlayerImpl player2;
     Game game;
 
-
+    /**
+     * Testing ConcreteRoom in a simple environment with two players on a small map
+     */
     @Before
     public void initTest(){
         List<int[]> roomInt = new ArrayList<>();

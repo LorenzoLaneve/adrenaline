@@ -7,6 +7,9 @@ public class SneakyGameListener implements GameListener {
 
     GameData gameData;
 
+    /**
+     * Mock GameListener used for testing.
+     */
     public GameData getGameData() {
         return gameData;
     }

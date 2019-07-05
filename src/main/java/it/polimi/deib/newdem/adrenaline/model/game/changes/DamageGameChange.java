@@ -24,7 +24,16 @@ public class DamageGameChange implements GameChange {
     private boolean didDie;
     private boolean canRealizeMarks;
 
-
+    /**
+     * Builds a new {@code DamageGameChange} bound to the given parameters.
+     *
+     * The built {@code GameChange} will attempt to realize marks by default.
+     *
+     * @param attacker player dealing damage
+     * @param attacked player taking damage
+     * @param dmgAmt amount of damage dealt
+     * @param mrkAmt amount of mark dealt
+     */
     public DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt){
         this.victim = attacked;
         this.attacker = attacker;
@@ -34,8 +43,17 @@ public class DamageGameChange implements GameChange {
         canRealizeMarks = true;
     }
 
-    public DamageGameChange(Player attacker, Player victim, int desiredDmg, int desiredMrk, boolean canRealizeMarks) {
-        this(attacker, victim, desiredDmg, desiredMrk);
+    /**
+     * Builds a new {@code DamageGameChange} bound to the given parameters.
+     *
+     * @param attacker player dealing damage
+     * @param attacked player taking damage
+     * @param dmgAmt amount of damage dealt
+     * @param mrkAmt amount of mark dealt
+     * @param canRealizeMarks whether the damages dealt within this {@code GameChange} should attempt to realize marks.
+     */
+    public DamageGameChange(Player attacker, Player attacked, int dmgAmt, int mrkAmt, boolean canRealizeMarks) {
+        this(attacker, attacked, dmgAmt, mrkAmt);
         this.canRealizeMarks = canRealizeMarks;
     }
 
@@ -64,48 +82,6 @@ public class DamageGameChange implements GameChange {
             victim.reportDeath(true);
             didDie = true;
         }
-
-        /*
-        int damageToDeal = desiredDmg;
-        DamageBoard victimBoard = victim.getDamageBoard();
-
-        previousMrk = victim.getMarksFromPlayer(attacker);
-
-        if(damageToDeal > 0) {
-            if(desiredMrk > 0) {
-                damageToDeal += victimBoard.getTotalMarksFromPlayer(attacker);
-                victimBoard.setMarksFromPlayer(0, attacker);
-                victimBoard.getListener().boardDidConvertMarks(attacker);
-            }
-
-            try {
-                while (damageToDeal > 0) {
-                    victimBoard.appendDamage(attacker);
-                    damageToDeal--;
-                }
-            }
-            catch (DamageTrackFullException e) {
-                // that's ok
-            }
-            finally {
-                actualDmg = desiredDmg - damageToDeal;
-            }
-
-            int newMarks = min(desiredMrk + victimBoard.getTotalMarksFromPlayer(attacker), DamageBoardImpl.MAX_MARKS);
-            victimBoard.setMarksFromPlayer(newMarks, attacker);
-
-            if(victimBoard.getTotalDamage() > DEATH_SHOT_INDEX) {
-                victim.reportDeath(true);
-                didDie = true;
-            }
-        }
-        else{
-            // just marks
-            int newMarks = min(desiredMrk + victimBoard.getTotalMarksFromPlayer(attacker), DamageBoardImpl.MAX_MARKS);
-            victimBoard.setMarksFromPlayer(newMarks, attacker);
-            actualDmg = 0;
-        }
-        */
     }
 
     @Override

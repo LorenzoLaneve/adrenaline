@@ -7,8 +7,15 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Interaction encapsulating the selection of a weapon within a SHOOT atom
+ */
 public class SelectShootWeaponInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code SelectShootWeaponInteraction} bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public SelectShootWeaponInteraction(InteractionContext context) {
         super(context);
     }

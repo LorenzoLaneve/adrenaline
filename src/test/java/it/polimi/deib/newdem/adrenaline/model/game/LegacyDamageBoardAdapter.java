@@ -14,6 +14,11 @@ public class LegacyDamageBoardAdapter implements DamageBoard {
     private DamageBoard innerDmgb;
     private DamageBoardListener listener;
 
+    /**
+     * Adapter used inorder not to modify previous tests with slightly different damageboard implementation.
+     * @param innerDmgb the damage in the damageboard
+     */
+
     public LegacyDamageBoardAdapter(DamageBoard innerDmgb) {
         this.innerDmgb = innerDmgb;
     }

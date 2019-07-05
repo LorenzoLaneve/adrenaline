@@ -15,6 +15,11 @@ public class RevengeEffectApplicationIneraction extends InteractionBase {
 
     private PowerUpCard selectedPup;
 
+    /**
+     * Builds a new {@code RevengeEffectApplicationIneraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param selectedPup the card of the effect to apply
+     */
     public RevengeEffectApplicationIneraction(InteractionContext context, PowerUpCard selectedPup) {
         super(context);
         this.selectedPup = selectedPup;

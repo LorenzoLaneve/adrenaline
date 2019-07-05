@@ -5,10 +5,29 @@ package it.polimi.deib.newdem.adrenaline.model.game.player;
  */
 public enum PlayerColor {
 
+    /**
+     * Magenta player
+     */
     MAGENTA,
+
+    /**
+     * Cyan player
+     */
     CYAN,
+
+    /**
+     * Gray player
+     */
     GRAY,
+
+    /**
+     * Yellow player
+     */
     YELLOW,
+
+    /**
+     * Green player
+     */
     GREEN
 
 }

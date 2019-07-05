@@ -10,6 +10,9 @@ import it.polimi.deib.newdem.adrenaline.model.map.NotSpawnPointTileException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.WeaponAlreadyPresentException;
 
+/**
+ * Interaction encapsulating the assignment of new, discarded and newly drawn weapons at the end of a GRAB interaction.
+ */
 public class AssignWeaponInteraction extends InteractionBase {
 
     private WeaponCard newWeaponCard;

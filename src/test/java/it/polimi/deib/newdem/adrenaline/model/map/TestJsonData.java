@@ -14,6 +14,9 @@ public class TestJsonData {
     int[] yellow = {1,1};
     private String mapID = null;
 
+    /**
+     * Test Constructor for json using directly GSON classes
+     */
     @Test
     public void testConstructor(){
         try{

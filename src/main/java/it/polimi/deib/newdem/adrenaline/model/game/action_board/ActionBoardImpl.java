@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory;
 
 import java.util.List;
 
+/**
+ * A simple implementation of {@code ActionBoard} using a strategy
+ * with an {@code ActionBoardBehavior} behavior object.
+ */
 public class ActionBoardImpl implements ActionBoard {
 
     private ActionBoardBehavior behavior;

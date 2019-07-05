@@ -13,10 +13,22 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
+/**
+ * Receives and propagates notifications about events that happen during a turn
+ */
 public interface TurnListener {
 
+    /**
+     * Notifies that a new turn has begun
+     * @param actor whose turn begun
+     */
     void turnDidStart(Player actor);
 
+    /**
+     * Nortifies that the current turn is over
+     *
+     * @param actor whose turn is over
+     */
     void turnWillEnd(Player actor);
 
     /**

@@ -29,6 +29,10 @@ public interface KillTrack {
      */
     int getTotalKills();
 
+    /**
+     * Assigns the given listener to this {@code KillTrack}
+     * @param listener to assign to this {@code KillTrack}
+     */
     void setListener(KillTrackListener listener);
 
     /**

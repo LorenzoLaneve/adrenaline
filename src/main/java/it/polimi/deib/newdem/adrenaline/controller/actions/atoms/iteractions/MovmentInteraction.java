@@ -7,12 +7,21 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Interaction encapsulating the selection of the target tile within a MOVE atom.
+ */
 public class MovmentInteraction extends InteractionBase {
 
     private int minDist;
     private int maxDist;
     private GameChange movmentGC;
 
+    /**
+     * Builds a new {@code ReloadPaymentInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param minDist minimum movement distance
+     * @param maxDist maximum movement distance
+     */
     public MovmentInteraction(InteractionContext context, int minDist, int maxDist) {
         super(context);
         this.minDist = minDist;

@@ -20,6 +20,10 @@ import java.util.List;
 
 public class MockGame implements Game {
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     private Map map;
     @Override
     public Map getMap() {

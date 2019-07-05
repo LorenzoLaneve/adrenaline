@@ -28,12 +28,6 @@ public class VirtualKillTrackView implements KillTrackView, KillTrackListener {
     }
 
     @Override
-    public void killTrackDidUndoLastKill() {
-        undoLastKill();
-    }
-
-
-    @Override
     public void restoreView(KillTrackData data) {
         vgv.sendEvent(new KillTrackDataEvent(data));
     }

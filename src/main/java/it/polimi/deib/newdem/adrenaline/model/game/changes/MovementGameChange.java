@@ -16,6 +16,11 @@ public class MovementGameChange implements GameChange {
 
     private Tile sourceTile;
 
+    /**
+     * Builds a new {code GameChange} to move the given {@code Player} to the specified {@code TIle }
+     * @param player player to move
+     * @param destTile destination of the movement
+     */
     public MovementGameChange(Player player, Tile destTile) {
         this.player = player;
         this.destinationTile = destTile;

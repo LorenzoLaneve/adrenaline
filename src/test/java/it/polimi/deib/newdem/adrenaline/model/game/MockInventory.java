@@ -9,6 +9,10 @@ import java.util.List;
 
 public class MockInventory extends PlayerInventory {
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     private List<PowerUpCard> cards;
 
     public MockInventory(Player player) {

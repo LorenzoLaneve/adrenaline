@@ -33,7 +33,7 @@ public class PlayerDataTest {
     public void setUp() throws Exception {
         TestingUtils.loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         gp.setMinPlayers(2);
         gp.setColorUserOrder(Arrays.asList(
                 new ColorUserPair(PlayerColor.MAGENTA, new User()),

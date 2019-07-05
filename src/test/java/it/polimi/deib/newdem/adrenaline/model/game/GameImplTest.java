@@ -18,8 +18,6 @@ import it.polimi.deib.newdem.adrenaline.view.server.VirtualKillTrackView;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +26,10 @@ import static it.polimi.deib.newdem.adrenaline.model.game.GameImpl.MAX_PLAYERS_P
 import static org.junit.Assert.*;
 
 public class GameImplTest {
+
+    /**
+     *Testing Major methods of Game in its implementation.
+     */
 
     GameImpl game;
     GameParameters gp;
@@ -327,7 +329,7 @@ public class GameImplTest {
                 new ColorUserPair(PlayerColor.GREEN, new User()),
                 new ColorUserPair(PlayerColor.GRAY, new User())
         ));
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         Game g = new GameImpl(gp);
         g.init();
         Turn t = g.getNextTurn();

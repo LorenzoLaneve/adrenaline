@@ -38,6 +38,7 @@ public class PlayerData implements Serializable {
 
     /**
      * Initializes the player data object with information about the given player.
+     * @param player to take a snapshot of
      */
     PlayerData(Player player) {
         this.color = player.getColor();
@@ -89,58 +90,121 @@ public class PlayerData implements Serializable {
         this.score = player.getScore();
     }
 
+    /**
+     * Retrieves this player's powerup cards
+     * @return powerup cards in this player's inventory
+     */
     public List<Integer> getPowerUpCards() {
         return new ArrayList<>(powerUpCards);
     }
 
+    /**
+     * Retrieves the loaded weapon cards in this player's inventory
+     * @return loaded weapon cards
+     */
     public List<Integer> getReadyWeaponCards() {
         return new ArrayList<>(readyWeaponCards);
     }
 
+    /**
+     * Retrieves the discharged weapon cards in this player's inventory
+     * @return discharged weapon cards
+     */
     public List<Integer> getUnloadedWeaponCards() {
         return new ArrayList<>(unloadedWeaponCards);
     }
 
+    /**
+     * Retrieves the ammunitions in this player's inventory
+     * @return map of ammunitions
+     */
     public Map<AmmoColor, Integer> getAmmos() {
         return new EnumMap<>(ammos);
     }
 
+    /**
+     * Checks if this player's action board is in any frenzy state
+     * @return is action board frenzy
+     */
     public boolean isActionBoardFrenzy() {
         return isActionBoardFrenzy;
     }
 
+    /**
+     * Checks if this player's damage board is in any frenzy state
+     * @return is damage board frenzy
+     */
     public boolean isDamageBoardFrenzy() {
         return isDamageBoardFrenzy;
     }
 
+    /**
+     * Retrieves the damages on this player's action board as a list of {@code PlayerColors}
+     *
+     * @return damages currently on this player
+     */
     public List<PlayerColor> getDamages() {
         return new ArrayList<>(damages);
     }
 
+    /**
+     * Retrieves the marks in this player's damage board
+     * @return marks on this player's damage board
+     */
     public Map<PlayerColor, Integer> getMarks() {
         return new EnumMap<>(marks);
     }
 
+    /**
+     * Retrieves this player's color
+     *
+     * @return this player's color
+     */
     public PlayerColor getColor() {
         return color;
     }
 
+    /**
+     * Retrieves this player's position on its map
+     *
+     * @return current position
+     */
     public TilePosition getPosition() {
         return position;
     }
 
+    /**
+     * Retrieves the amount of deaths of this player
+     *
+     * @return number of deaths
+     */
     public int getDeaths() {
         return deaths;
     }
 
+    /**
+     * Checks if this player is currently dead
+     *
+     * @return is this player dead
+     */
     public boolean isDead() {
         return isDead;
     }
 
+    /**
+     * Checks if this player has the first player card
+     *
+     * @return has first player card
+     */
     public boolean hasFirstPlayerCard() {
         return hasFirstPlayerCard;
     }
 
+    /**
+     * Retrieves this player's current score
+     *
+     * @return this player's score
+     */
     public int getScore() {
         return score;
     }

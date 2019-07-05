@@ -12,6 +12,9 @@ public class TestPowerUpCardImpl {
 
     PowerUpCard card;
 
+    /**
+     * Testing the correct functionality of PowerUpCard
+     */
     @Before
     public void setUp() throws Exception {
         Effect cardEffect = EffectLoader.fromClass("it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect");

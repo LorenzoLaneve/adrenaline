@@ -31,6 +31,9 @@ public class FrenzyDamageBoardTest {
     Game game;
     VirtualGameView vgv;
 
+    /**
+     * Testing the definitive implementation of FrenzyDamageBord by creating a simple TestingGame
+     */
     @Before
     public void setUp(){
         TestingUtils.loadSingleton();

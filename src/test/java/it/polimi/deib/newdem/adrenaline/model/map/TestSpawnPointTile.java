@@ -54,6 +54,9 @@ public class TestSpawnPointTile {
         }
     }
 
+    /**
+     * Testing the definitive implementation of SpawnPointTile with assistance object MockWeapon in a simple map environment.
+     */
     @Before
     public void initTest(){
         AmmoSet ammoSet = new AmmoSet(1,1,0);
@@ -97,6 +100,9 @@ public class TestSpawnPointTile {
         }
     }
 
+    /**
+     * @throws NotOrdinaryTileException because this is not a SpawnPointTile
+     */
     @Test(expected = NotOrdinaryTileException.class)
     public void testAddDropPositive() throws NotOrdinaryTileException, DropAlreadyPresentException {
         tile.addDrop(d1);
@@ -113,6 +119,10 @@ public class TestSpawnPointTile {
         }
     }
 
+    /**
+     * Testing the correct behavior of addWeaponNegative in case of a full SpawnpointTile
+     * @throws OutOfSlotsException because the tile is full
+     */
     @Test (expected = WeaponAlreadyPresentException.class)
     public void testAddWeaponNegative() throws OutOfSlotsException, WeaponAlreadyPresentException, NotSpawnPointTileException {
         tile.addWeapon(w1);
