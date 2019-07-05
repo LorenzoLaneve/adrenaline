@@ -8,3 +8,5 @@ By
 
 Course of [Software Engineering](http://home.deib.polimi.it/sanpietr/SE/SE-270.html)
 by prof. [Pierluigi San Pietro](http://home.deib.polimi.it/sanpietr/didattica.html)
+
+For instructions on how to run the client and server jar files, see `readme.txt` 
