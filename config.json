@@ -12,6 +12,6 @@
   "maxPlayers": 3,
 
   "turnTime": 60,
-  "debugMode": true,
-  "killTrackLength":8
+
+  "killTrackLength": 8
 }
