@@ -128,6 +128,7 @@
                             <excludes>
                                 <exclude>**/server</exclude>
                                 <exclude>**/server/*</exclude>
+                                <exclude>**/gui/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -150,6 +151,7 @@
                             <excludes>
                                 <exclude>**/client</exclude>
                                 <exclude>**/client/*</exclude>
+                                <exclude>**/gui/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
