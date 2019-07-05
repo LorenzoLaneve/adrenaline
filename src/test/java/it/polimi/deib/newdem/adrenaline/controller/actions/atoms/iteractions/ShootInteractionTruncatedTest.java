@@ -25,7 +25,7 @@ public class ShootInteractionTruncatedTest {
 
         @Test
         public void testExecute() throws Exception {
-            ScriptedDataSource sds = new ScriptedDataSource(
+            ScriptedDataSource sds = new ScriptedDataSource( game,
                     new ActionType(MOVE3, GRAB),
                     new ActionType(MOVE3, SHOOT),
                     new ActionType(MOVE3)
@@ -61,7 +61,7 @@ public class ShootInteractionTruncatedTest {
 
         @Test
         public void testUndos() throws Exception {
-            ScriptedDataSource sds = new ScriptedDataSource(
+            ScriptedDataSource sds = new ScriptedDataSource( game,
                     new ActionType(MOVE2, GRAB),
                     new ActionType(MOVE3)
             );
@@ -71,6 +71,8 @@ public class ShootInteractionTruncatedTest {
             // end action 1
             // pick up weapon
             sds.pushWeaponCardIndex(0);
+            sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.BLUE));
+            sds.pushWeaponCardIndex(ScriptedDataSource.getNullWeaponCardIndex());
             sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.BLUE));
             // undo, back to tile
             sds.pushWeaponCardIndex(ScriptedDataSource.getUndoWeaponCardIndex());

@@ -2,10 +2,12 @@ package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 
 import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
+import it.polimi.deib.newdem.adrenaline.model.game.GameImpl;
 import it.polimi.deib.newdem.adrenaline.model.game.rigged.GameRigged;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.ScriptedDataSource;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
+import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,8 @@ import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAc
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.MOVE3;
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAGENTA;
 import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GrabInteractionTest {
 
@@ -27,7 +31,7 @@ public class GrabInteractionTest {
 
     @Test
     public void testExecute() throws Exception {
-        ScriptedDataSource sds = new ScriptedDataSource(
+        ScriptedDataSource sds = new ScriptedDataSource( game,
                 new ActionType(MOVE3, GRAB),
                 new ActionType(MOVE3, GRAB)
         );
@@ -47,7 +51,7 @@ public class GrabInteractionTest {
 
     @Test
     public void testUndos() throws Exception {
-        ScriptedDataSource sds = new ScriptedDataSource(
+        ScriptedDataSource sds = new ScriptedDataSource( game,
                 new ActionType(MOVE2, GRAB),
                 new ActionType(MOVE3)
         );
@@ -57,6 +61,8 @@ public class GrabInteractionTest {
         // end action 1
         // pick up weapon
         sds.pushWeaponCardIndex(0);
+        sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.BLUE));
+        sds.pushWeaponCardIndex(ScriptedDataSource.getNullWeaponCardIndex());
         sds.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.BLUE));
         // undo, back to tile
         sds.pushWeaponCardIndex(ScriptedDataSource.getUndoWeaponCardIndex());
@@ -72,10 +78,10 @@ public class GrabInteractionTest {
 
     @Test
     public void testUndoPayment() throws Exception {
-        ScriptedDataSource sds = new ScriptedDataSource(
+        ScriptedDataSource sds = new ScriptedDataSource( game,
                 new ActionType(MOVE3, GRAB),
                 new ActionType(MOVE3)
-        );;
+        );
 
         sds.pushTile(game.getMap().getSpawnPointFromColor(RED));
         // grab drop
@@ -92,6 +98,23 @@ public class GrabInteractionTest {
         Turn t = game.getNextTurn();
         t.setRunClosingActions(false);
         t.bindDataSource(sds);
+
+        t.getActivePlayer().getInventory().removeAmmoSet(new AmmoSet(3,3,3));
+        int startingAmmos = t.getActivePlayer().getInventory().getAmmoSet().getTotalAmmos();
+
         t.execute();
+
+        int closingAmmos = t.getActivePlayer().getInventory().getAmmoSet().getTotalAmmos();
+        assertTrue(closingAmmos > startingAmmos);
+    }
+
+    @Test
+    public void testRevert() throws Exception {
+        new GrabDropInteraction(new MockInteractionContext()).revert();
+    }
+
+    @Test
+    public void testRequiresInput() throws Exception {
+        assertFalse(new GrabDropInteraction(new MockInteractionContext()).requiresInput());
     }
 }

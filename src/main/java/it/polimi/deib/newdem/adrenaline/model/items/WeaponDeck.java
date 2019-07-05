@@ -105,7 +105,7 @@ public class WeaponDeck {
             throw new InvalidJSONException(e.getMessage());
         }
 
-        return new Deck<WeaponCard>(cards);
+        return new Deck<>(cards);
     }
 
     // deprecated

@@ -205,7 +205,7 @@ public abstract class DamageBoardImpl implements DamageBoard {
         // this does not trigger any listener
         if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
         damages.add(p);
-        listener.boardDidTakeDamage(1, 0, p);
+        if(null != listener) { listener.boardDidTakeDamage(1, 0, p); }
         if(player.getTotalDamage() > DEATH_SHOT_INDEX + 1) {
             player.reportDeath(true);
         }

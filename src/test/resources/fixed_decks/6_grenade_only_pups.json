@@ -1,0 +1,39 @@
+{ "cards": [
+  {
+    "id": 12,
+    "equivAmmo": "blue",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  },
+  {
+    "id": 13,
+    "equivAmmo": "blue",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  },
+  {
+    "id": 14,
+    "equivAmmo": "red",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  },
+  {
+    "id": 15,
+    "equivAmmo": "red",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  },
+  {
+    "id": 16,
+    "equivAmmo": "yellow",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  },
+  {
+    "id": 17,
+    "equivAmmo": "yellow",
+    "trigger": "damageTaken",
+    "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect"
+  }
+]
+}

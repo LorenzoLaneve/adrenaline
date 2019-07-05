@@ -5,11 +5,13 @@ import it.polimi.deib.newdem.adrenaline.controller.actions.ActionType;
 import it.polimi.deib.newdem.adrenaline.controller.effects.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector;
+import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
+import it.polimi.deib.newdem.adrenaline.model.map.MockGame;
 import it.polimi.deib.newdem.adrenaline.model.map.OrdinaryTile;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -22,7 +24,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import static sun.swing.MenuItemLayoutHelper.max;
 
-public class ScriptedDataSource implements TurnDataSource {
+public class ScriptedDataSource extends TurnDataSourceImpl {
 
     ActionType[] arr;
     List<Tile> tiles;
@@ -32,29 +34,36 @@ public class ScriptedDataSource implements TurnDataSource {
     // int paymentsToUndo;
     Deque<SheduledPaymentType> paymentUndoQ;
     Deque<Integer> fragmentQ;
-    Deque<Player> playerFromMetaQ;
+    // Deque<Player> playerFromMetaQ;
+    PlayerRecordQueue playerFromMetaQ;
 
     private static final int UNDO_TILE_X = 90;
     private static final int UNDO_TILE_Y = 90;
+    private static final int NULL_TILE_X = 89;
+    private static final int NULL_TILE_Y = 89;
     private static final int UNDO_WEAPON_CARD_INDEX = 10;
+    private static final int NULL_WEAPON_CARD_INDEX = 11;
     private static final int UNDO_PUP_INDEX = 42;
+    private static final int NULL_PUP_INDEX = 43;
 
 
-    public ScriptedDataSource(ActionType ... types) {
+    public ScriptedDataSource(Game game, ActionType ... types) {
+        super(new NullTurnListener(), game);
         arr = types;
         i = 0;
         tiles = new ArrayList<>();
         pups = new ArrayList<>();
         weaponCardIndex = new WeaponIndexQueue();
-        // paymentsToUndo = 0;
         paymentUndoQ = new ArrayDeque<>();
         fragmentQ = new ArrayDeque<>();
-        playerFromMetaQ = new ArrayDeque<>();
+        playerFromMetaQ = new PlayerRecordQueue();
     }
 
     public static Tile getUndoTile() {
         return new OrdinaryTile(new TilePosition(UNDO_TILE_X, UNDO_TILE_Y));
     }
+
+    public static Tile getNullTile() {return new OrdinaryTile(new TilePosition(NULL_TILE_X, NULL_TILE_Y)); }
 
     // Tile (90, 90) means throw undo exception
     public void pushTile(Tile tile) {
@@ -69,6 +78,10 @@ public class ScriptedDataSource implements TurnDataSource {
         return UNDO_PUP_INDEX;
     }
 
+    public static int getNullPupIndex() {
+        return NULL_PUP_INDEX;
+    }
+
 
     @Override
     public ActionType requestAction(List<ActionType> actionTypeList) throws UndoException {
@@ -77,35 +90,29 @@ public class ScriptedDataSource implements TurnDataSource {
         return out;
     }
 
-    @Override
-    public void pushActor(Player actor) {
-
+    public void pushUndoPlayer() {
+        playerFromMetaQ.pushUndo();
     }
 
-    @Override
-    public void popActor(Player actor) {
-
+    public void pushNullPlayer() {
+        playerFromMetaQ.pushNull();
     }
 
     public void pushPlayerFromMeta(Player p) {
-        playerFromMetaQ.push(p);
+        playerFromMetaQ.pushPlayer(p);
     }
 
     @Override
     public Player requestPlayer(MetaPlayer metaPlayer, PlayerSelector selector, boolean forceChoice) throws UndoException {
-        if(playerFromMetaQ.isEmpty()) return null;
+        // if(playerFromMetaQ.isEmpty()) return null;
         return playerFromMetaQ.pop();
     }
-/*
-    @Override
-    public PowerUpCard chooseCard(List<PowerUpCard> cards) {
-        return null;
-    }
-*/
 
     public static int getUndoWeaponCardIndex() {
         return UNDO_WEAPON_CARD_INDEX;
     }
+
+    public static int getNullWeaponCardIndex() { return NULL_WEAPON_CARD_INDEX; }
 
     public void pushWeaponCardIndex(int i) {
         weaponCardIndex.pushIndex(i);
@@ -125,6 +132,7 @@ public class ScriptedDataSource implements TurnDataSource {
         if(unknown.isIndex()) {
             int index = unknown.getVal();
             if (UNDO_WEAPON_CARD_INDEX == index) throw new UndoException();
+            if(NULL_WEAPON_CARD_INDEX == index) return null;
             return cards.get(index);
         }
         else {
@@ -141,6 +149,7 @@ public class ScriptedDataSource implements TurnDataSource {
     public PowerUpCard choosePowerUpCard(List<PowerUpCard> cards) throws UndoException {
         int index = pups.remove(pups.size() - 1);
         if(UNDO_PUP_INDEX == index) throw new UndoException();
+        if(NULL_PUP_INDEX == index) return null;
         PowerUpCard pup = cards.get(index);
         if(null == pup) throw new IllegalStateException();
         return pup;
@@ -151,6 +160,7 @@ public class ScriptedDataSource implements TurnDataSource {
             Tile tile = tiles.remove(tiles.size() - 1);
             if(null == tile) throw new IllegalStateException();
             if(tile.getPosition().equals(new TilePosition(UNDO_TILE_X,UNDO_TILE_Y))) throw new UndoException();
+            if(tile.getPosition().equals(new TilePosition(NULL_TILE_X,  NULL_TILE_Y))) return null;
             return tile;
         }
 
@@ -164,8 +174,16 @@ public class ScriptedDataSource implements TurnDataSource {
         return fragmentQ.pop();
     }
 
+    public void pushAcceptPayment() {
+        paymentUndoQ.push(SheduledPaymentType.ACCEPT);
+    }
+
     public void pushUndoPayment() {
         paymentUndoQ.push(SheduledPaymentType.UNDO);
+    }
+
+    public void pushNullPayment() {
+        paymentUndoQ.push(SheduledPaymentType.NULL);
     }
 
     @Override
@@ -177,10 +195,5 @@ public class ScriptedDataSource implements TurnDataSource {
             case ACCEPT: return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
         }
         return new PaymentReceipt(invoice.getRedAmmos(), invoice.getBlueAmmos(), invoice.getYellowAmmos(), new ArrayList<>());
-    }
-
-    @Override
-    public Player peekActor() {
-        return null;
     }
 }

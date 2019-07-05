@@ -1,0 +1,92 @@
+{ "cards": [ {
+  "id": 19,
+  "ammo": ["yellow", "yellow"],
+  "powerUp": true
+},
+{
+"id": 20,
+"ammo": ["red", "red"],
+"powerUp": true
+},
+{
+"id": 21,
+"ammo": ["blue", "blue"],
+"powerUp": true
+},
+{
+"id": 22,
+"ammo": ["yellow", "red"],
+"powerUp": true
+},
+{
+"id": 23,
+"ammo": ["yellow", "blue"],
+"powerUp": true
+},
+{
+"id": 24,
+"ammo": ["red", "blue"],
+"powerUp": true
+},
+{
+"id": 25,
+"ammo": ["yellow", "red"],
+"powerUp": true
+},
+{
+"id": 26,
+"ammo": ["yellow", "blue"],
+"powerUp": true
+},
+{
+"id": 27,
+"ammo": ["red", "blue"],
+"powerUp": true
+},
+{
+"id": 28,
+"ammo": ["yellow", "yellow"],
+"powerUp": true
+},
+{
+"id": 29,
+"ammo": ["red", "red"],
+"powerUp": true
+},
+{
+"id": 30,
+"ammo": ["blue", "blue"],
+"powerUp": true
+},
+{
+"id": 31,
+"ammo": ["yellow", "red"],
+"powerUp": true
+},
+{
+"id": 32,
+"ammo": ["yellow", "blue"],
+"powerUp": true
+},
+{
+"id": 33,
+"ammo": ["red", "blue"],
+"powerUp": true
+},
+{
+"id": 34,
+"ammo": ["yellow", "red"],
+"powerUp": true
+},
+{
+"id": 35,
+"ammo": ["yellow", "blue"],
+"powerUp": true
+},
+{
+"id": 36,
+"ammo": ["red", "blue"],
+"powerUp": true
+}
+]
+}

@@ -1,0 +1,57 @@
+{"cards" : [ {
+  "id": 18,
+
+  "equivAmmo": "blue",
+
+  "trigger": "damageDealt",
+
+  "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+},
+{
+"id": 19,
+
+"equivAmmo": "blue",
+
+"trigger": "damageDealt",
+
+"effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+},
+{
+"id": 20,
+
+"equivAmmo": "red",
+
+"trigger": "damageDealt",
+
+"effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+},
+{
+"id": 21,
+
+"equivAmmo": "red",
+
+"trigger": "damageDealt",
+
+"effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+},
+{
+"id": 22,
+
+"equivAmmo": "yellow",
+
+"trigger": "damageDealt",
+
+"effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+},
+{
+"id": 23,
+
+"equivAmmo": "yellow",
+
+"trigger": "damageDealt",
+
+"effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect"
+}
+]
+
+}

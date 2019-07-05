@@ -33,7 +33,7 @@ public class SelectAdditionalDamageVictimInteraction extends InteractionBase {
             throw new UndoException();
         }
 
-        if(null == selectedPlayer) { return; }
+        if(null == selectedPlayer) { throw new UndoException(); }
 
         context.setVictim(selectedPlayer);
 
