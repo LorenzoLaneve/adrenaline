@@ -23,6 +23,10 @@ public class PlayerInventory {
     private Player player;
     private List<PowerUpCard> powerUpCards;
     private List<Weapon> weapons;
+
+
+    public static final int INITIAL_AMMOS = 1;
+
     /**
      * Maximum amount of equipments for an inventory at any given time
      */
@@ -37,6 +41,8 @@ public class PlayerInventory {
      * Maximum amount of ammo cubes of any one color for an inventory at any given time
      */
     public static final int MAX_AMMO_PER_COLOR = 3;
+
+
     private EnumMap<AmmoColor, Integer> ammos;
 
     /**
@@ -50,9 +56,9 @@ public class PlayerInventory {
         powerUpCards = new ArrayList<>(MAX_EQUIPMENT);
         weapons = new ArrayList<>(MAX_WEAPONS);
         ammos = new EnumMap<>(AmmoColor.class);
-        ammos.put(RED, 3);
-        ammos.put(BLUE, 3);
-        ammos.put(YELLOW, 3);
+        ammos.put(RED, INITIAL_AMMOS);
+        ammos.put(BLUE, INITIAL_AMMOS);
+        ammos.put(YELLOW, INITIAL_AMMOS);
     }
 
     /**
