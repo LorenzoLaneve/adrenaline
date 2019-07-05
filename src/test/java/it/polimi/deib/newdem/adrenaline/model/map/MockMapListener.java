@@ -7,6 +7,12 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import java.util.List;
 
 public class MockMapListener implements MapListener {
+
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
+
     @Override
     public void playerDidMove(Player player, Tile source, Tile destination) {
 

@@ -28,6 +28,9 @@ public class TestConcreteTile {
     TilePosition tilePositionRightRight;
     Game game;
 
+    /**
+     * Testing ConcreteTile in a simple MockGame.
+     */
     @Before
     public void initTest(){
         game = new MockGame();

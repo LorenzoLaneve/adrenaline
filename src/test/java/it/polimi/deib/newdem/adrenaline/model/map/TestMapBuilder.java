@@ -8,6 +8,9 @@ import static org.junit.Assert.assertEquals;
 
 public class TestMapBuilder {
 
+    /**
+     * Testing the soundness of MapBuilder by calling the static Method in map that makes use of it.
+     */
     @Test
     public void testConstructor(){
         MapBuilder mapBuilder = new MapBuilder("Map1_0.json");
@@ -17,20 +20,4 @@ public class TestMapBuilder {
         assertEquals(new TilePosition(2,2),map.getSpawnPointFromColor(AmmoColor.BLUE).getPosition());
     }
 
-
-    @Test
-    public void testBuildMatrixMap() {
-    }
-
-    @Test
-    public void testExtractRoomList() {
-    }
-
-    @Test
-    public void testExtractSpawnPointList() {
-    }
-
-    @Test
-    public void testBindTiles() {
-    }
 }

@@ -29,7 +29,7 @@ public class TestingUtils {
     public static Game makeTestGame(PlayerColor ... color) {
         loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setGameMap(TestingMapBuilder.getNewMap(TestingUtils.class));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         gp.setColorUserOrder(
                 Arrays.stream(color)
                         .map(c -> new ColorUserPair(c, new User()))
@@ -44,7 +44,7 @@ public class TestingUtils {
     public static GameRigged makeRiggedGame(PlayerColor ... color) {
         loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setGameMap(TestingMapBuilder.getNewMap(TestingUtils.class));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         gp.setColorUserOrder(
                 Arrays.stream(color)
                         .map(c -> new ColorUserPair(c, new User()))
