@@ -12,6 +12,9 @@ import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
 import java.util.List;
 
+/**
+ * A running game of Adrenaline
+ */
 public interface Game {
 
     /**
@@ -96,10 +99,24 @@ public interface Game {
      */
     Deck<DropInstance> getDropDeck();
 
+    /**
+     * Generates a new {@code GameData} object for this {@code Game}  based on
+     * its current state
+     * @return game snapshot
+     */
     GameData generateGameData();
 
+    /**
+     * Generates a new {@code KillTrackData} object for this {@code Game}'s {@code KillTrack}
+     * based on its current state
+     * @return Killtrack snapshot
+     */
     KillTrackData generateKillTrackData();
 
+    /**
+     *
+     * @return
+     */
     GameResults generateResults();
 
     void concludeGame();
