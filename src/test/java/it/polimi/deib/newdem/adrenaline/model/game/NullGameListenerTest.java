@@ -8,6 +8,9 @@ public class NullGameListenerTest {
 
     NullGameListener l;
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
     @Before
     public void setUp() throws Exception {
         l = new NullGameListener();

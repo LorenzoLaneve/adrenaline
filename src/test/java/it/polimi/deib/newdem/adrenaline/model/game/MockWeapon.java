@@ -11,6 +11,10 @@ public class MockWeapon implements Weapon {
     private WeaponCard card;
     private Player player;
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     public MockWeapon(WeaponCard card, boolean ready) {
         this.ready = ready;
         this.card = card;

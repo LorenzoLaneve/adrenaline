@@ -18,6 +18,10 @@ import java.util.List;
 
 public class MockGame implements Game {
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     @Override
     public void init() {
 

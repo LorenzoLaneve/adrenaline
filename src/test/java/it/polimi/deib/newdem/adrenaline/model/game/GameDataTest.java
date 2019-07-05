@@ -2,17 +2,10 @@ package it.polimi.deib.newdem.adrenaline.model.game;
 
 import it.polimi.deib.newdem.adrenaline.TestingUtils;
 import it.polimi.deib.newdem.adrenaline.controller.Config;
-import it.polimi.deib.newdem.adrenaline.controller.GameControllerFactory;
-import it.polimi.deib.newdem.adrenaline.controller.effects.TestMachineGunEffect;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData;
-import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
-import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -20,6 +13,10 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class GameDataTest {
+
+    /**
+     * Testing constructor and finalization of GameData.
+     */
 
     private GameParameters gp;
     private Game game;
@@ -32,7 +29,7 @@ public class GameDataTest {
         TestingUtils.loadSingleton();
         SneakyGameListener listener = new SneakyGameListener();
         gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         gp.setMinPlayers(1);
         carl = new User();
         carl.setName("Carl");

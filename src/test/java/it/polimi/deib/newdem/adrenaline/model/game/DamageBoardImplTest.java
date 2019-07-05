@@ -49,7 +49,7 @@ public class DamageBoardImplTest {
         gp.setColorUserOrder(listPairs);
 
         gp.setMinPlayers(1);
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         game = new GameImpl(gp);
 
         vgv = new NullVirtualGameView();

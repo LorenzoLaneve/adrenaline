@@ -8,6 +8,10 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 public class MockPowerUpCard implements PowerUpCard {
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     @Override
     public Effect getEffect() {
         return null;

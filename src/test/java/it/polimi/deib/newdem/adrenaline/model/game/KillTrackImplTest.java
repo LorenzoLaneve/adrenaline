@@ -9,6 +9,10 @@ import static org.junit.Assert.*;
 
 public class KillTrackImplTest {
 
+    /**
+     * Testing full implementation of KillTrack especially its registerKill and scoring funcionalities.
+     */
+
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorNegativeLowerBound() {
         new KillTrackImpl(KillTrackImpl.MIN_KILLTRACK_SIZE - 1);

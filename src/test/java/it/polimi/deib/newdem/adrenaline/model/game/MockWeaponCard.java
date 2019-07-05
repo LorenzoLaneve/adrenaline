@@ -10,6 +10,10 @@ public class MockWeaponCard implements WeaponCard {
 
     private String name;
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     public MockWeaponCard(String name) {
         this.name = name;
     }

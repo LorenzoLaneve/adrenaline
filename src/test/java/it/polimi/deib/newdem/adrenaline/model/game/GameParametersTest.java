@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 
 public class GameParametersTest {
 
+    /**
+     *Testing GameParameters paying close attention to behavior on IllegalArguments
+     */
+
     @Test(expected = IllegalStateException.class)
     public void testIsColorPlayerMapSet() throws Exception {
         GameParameters gp = new GameParameters();
