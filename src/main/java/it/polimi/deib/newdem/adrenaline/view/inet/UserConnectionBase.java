@@ -39,12 +39,8 @@ public abstract class UserConnectionBase implements UserConnection {
 
     @Override
     public void start() {
-        //if (!Boolean.getBoolean("debugMode")) {
-        //    this.heartbeatThread = new Thread(this::doHeartbeat);
-        //    this.heartbeatThread.start();
-        //}
-
-        // TODO REMOVE COMMENTS. heartbeat is disabled for testing purposes.
+        this.heartbeatThread = new Thread(this::doHeartbeat);
+        this.heartbeatThread.start();
     }
 
     @Override
