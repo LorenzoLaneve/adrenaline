@@ -7,6 +7,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.utils.ScoreboardEntry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A simple implemntation of {@code KillTrack} useing {@code Cell}s.
+ */
 public class KillTrackImpl implements KillTrack {
 
     private List<Cell> kills;
@@ -14,12 +17,21 @@ public class KillTrackImpl implements KillTrack {
     private KillTrackListener listener;
     private int[] score;
 
+
+    /**
+     * Minimum size of any {@code KillTrack}. This may override a wrong config option.
+     */
     public static final int MIN_KILLTRACK_SIZE = 5;
+
+    /**
+     * Maximum size of any {@code KillTrack}. This may override a wrong config option.
+     */
     public static final int MAX_KILLTRACK_SIZE = 8;
 
     /** Creates a new {@code KillTrack} with {@code trackLength} initial skulls on it.
      *
      * @param trackLength Amount of initial skulls on the track. Between 5 and 8, inclusive.
+     * @throws IllegalArgumentException if trackLength is out of bounds
      */
     public KillTrackImpl(int trackLength){
         if(trackLength < MIN_KILLTRACK_SIZE || trackLength > MAX_KILLTRACK_SIZE) {
@@ -140,6 +152,11 @@ public class KillTrackImpl implements KillTrack {
         return s;
     }
 
+    /**
+     * Creates a new {@code KillTrackData} representing this object at the time of invocation
+     *
+     * @return serializable data about this object
+     */
     @Override
     public KillTrackData generateKillTrackData() {
         KillTrackData data = new KillTrackData(this);

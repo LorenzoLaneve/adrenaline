@@ -14,11 +14,23 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Integration tests for {@code GrabAtom}
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.GrabAtom
+ */
 public class GrabAtomTest {
 
     private Game game;
     private ScriptedDataSource source;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
@@ -37,10 +49,10 @@ public class GrabAtomTest {
                 );
     }
 
-    @Test
-    public void testGrabUndo() throws Exception {
-    }
-
+    /**
+     * Simulates a game with many grabs of weapons and undos of weapon selection
+     * @throws Exception
+     */
     @Test
     public void testGrabUndoNNewCardSelection() throws Exception {
         source.pushWeaponCardIndex(0);
@@ -67,6 +79,10 @@ public class GrabAtomTest {
         assertEquals(0, source.getWeaponCardLeftovers());
     }
 
+    /**
+     * Simulates a game with many grabs of weapons and undos of payment of such weapons
+     * @throws Exception
+     */
     @Test
     public void testGrabUndoNPayments() throws Exception {
         // i want to try to start an attempt to grab, then undo and redo new weapon selection n > 10 times
@@ -100,90 +116,6 @@ public class GrabAtomTest {
             turn.execute();
             game.concludeTurn(turn);
         }
-    }
-
-    @Test
-    public void testGrab() throws Exception {
-        // TODO
-        // this test is non-deterministic
-        /*
-        Turn turn = game.getNextTurn();
-        turn.bindDataSource(source);
-
-        for(int i = 0; i < 10; i++) {
-            source.pushWeaponCardIndex(0);
-            source.pushPupIndex(0);
-        }
-        // read from bottom to top
-
-        // just grab it
-        source.pushTile(game.getMap().getTile(TestingMapBuilder.getDropTilePos())); // move to next tile, with drop
-        // ^ ACTION 2
-        // do not discard card
-        // pay for it
-        // buy random weapon from spawnpoint
-        refillAmmos(turn.getActivePlayer());
-        // ^ fill inventory with max ammos
-        source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED)); // move to red spawnpoint tile
-        // ACTION 1
-        source.pushPupIndex(0); // spawn // spawn at a random spawnpoint
-        // end bottom to top
-
-        turn.execute();
-        game.concludeTurn(turn);
-        // now player has 1 weapon
-        //
-        //
-        //
-
-        turn = game.getNextTurn();
-        turn.bindDataSource(source);
-
-        pickUpWeaponHere();
-        refillAmmos(turn.getActivePlayer());
-        moveStill(turn.getActivePlayer());
-        // ^ add second weapon
-
-        turn.execute();
-        game.concludeTurn(turn);
-        // now player has 2 weapons
-
-        turn = game.getNextTurn();
-        turn.bindDataSource(source);
-
-        pickUpWeaponHere();
-        refillAmmos(turn.getActivePlayer());
-        moveStill(turn.getActivePlayer());
-        // ^ fill inventory with third weapon
-
-        turn.execute();
-        game.concludeTurn(turn);
-
-        turn = game.getNextTurn();
-        turn.bindDataSource(source);
-
-        // more difficult than pickUpWeaponHere();
-        // or not
-        // choiche is random anyway
-        pickUpWeaponHere();
-        refillAmmos(turn.getActivePlayer());
-        moveStill(turn.getActivePlayer());
-
-        turn.execute();
-        game.concludeTurn(turn);
-        */
-    }
-
-    private void pickUpWeaponHere() {
-        // do not discard card
-        // pay for it
-        // buy random weapon from spawnpoint
-        source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED)); // move to red spawnpoint tile
-        // ACTION 1
-    }
-
-    private void moveStill(Player player) {
-        source.pushTile(player.getTile());
     }
 
     private void refillAmmos(Player player) {

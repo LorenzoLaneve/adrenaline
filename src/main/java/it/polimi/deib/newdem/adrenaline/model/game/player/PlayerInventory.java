@@ -23,8 +23,19 @@ public class PlayerInventory {
     private Player player;
     private List<PowerUpCard> powerUpCards;
     private List<Weapon> weapons;
-    public static final int MAX_EQUIPMENT = 4;
+    /**
+     * Maximum amount of equipments for an inventory at any given time
+     */
+    public static final int MAX_EQUIPMENT = 3;
+
+    /**
+     * Maximum amount of weapons for an inventory at any given time
+     */
     public static final int MAX_WEAPONS = 3;
+
+    /**
+     * Maximum amount of ammo cubes of any one color for an inventory at any given time
+     */
     public static final int MAX_AMMO_PER_COLOR = 3;
     private EnumMap<AmmoColor, Integer> ammos;
 
@@ -119,14 +130,29 @@ public class PlayerInventory {
         return new ArrayList<>(cards);
     }
 
+    /**
+     * Retrieves the amount od red ammo cubes currently in this inventory.
+     *
+     * @return amount of red ammo cubes
+     */
     public int getRed() {
         return ammos.get(RED);
     }
 
+    /**
+     * Retrieves the amount od blue ammo cubes currently in this inventory.
+     *
+     * @return amount of blue ammo cubes
+     */
     public int getBlue() {
         return ammos.get(BLUE);
     }
 
+    /**
+     * Retrieves the amount od yellow ammo cubes currently in this inventory.
+     *
+     * @return amount of yellow ammo cubes
+     */
     public int getYellow() {
         return ammos.get(YELLOW);
     }
@@ -162,6 +188,13 @@ public class PlayerInventory {
         player.getListener().playerDidReceiveAmmos(player, ammoSet);
      }
 
+    /**
+     * Removes {@code amount} ammos of the given {@code color} form this inventory and
+     * notifies the listener of said deduction.
+     *
+     * @param color of ammos to remove
+     * @param amount of ammos to remove
+     */
      public void removeAmmo(AmmoColor color, int amount){
         if(amount < 0) throw new IllegalArgumentException();
         int delta = ammos.get(color);
@@ -213,8 +246,13 @@ public class PlayerInventory {
         }
     }
 
+    /**
+     * Checks whether this inventory can accept a new powerup
+     *
+     * @return can this inventory accept a new powerup
+     */
     public boolean canAcceptPowerUp() {
-        return powerUpCards.size() < MAX_EQUIPMENT - 1;
+        return powerUpCards.size() < MAX_EQUIPMENT;
     }
 
     public void addPowerUp(PowerUpCard card) throws OutOfSlotsException {
@@ -225,7 +263,7 @@ public class PlayerInventory {
     }
 
     /**
-     * Removes the goven {@code PowerUpCard} from this inventory, if it is present (optional operation).
+     * Removes the given {@code PowerUpCard} from this inventory, if it is present (optional operation).
      * @param card Powerup to be removed from this inventory, if present
      */
     public void removePowerUp(PowerUpCard card) {
@@ -233,6 +271,12 @@ public class PlayerInventory {
         player.getListener().playerDidDiscardPowerUpCard(player, card);
     }
 
+    /**
+     * Removes from this inventory all elements of the given {@code PowerUpCard}
+     * that are present in the inventory (optional operation).
+     *
+     * @param powerUpCardList Powerups to be removed from this inventory, if present
+     */
     public void removePowerUps(List<PowerUpCard> powerUpCardList){
         powerUpCards.removeAll(powerUpCardList);
         for(PowerUpCard card: powerUpCardList){
@@ -240,26 +284,21 @@ public class PlayerInventory {
         }
     }
 
-    public int getWeaponAmount() {
-        return weapons.size();
-    }
-
+    /**
+     * Retrieves a list of all the weapon cards of this inventory, regardless
+     * of their corresponding {@code Weapon}'s state of loaded or discharged.
+     *
+     * @return cards of all the weapons in this inventory
+     */
     public List<WeaponCard> getAllWeaponCards() {
         return weapons.stream().map(Weapon::getCard).collect(Collectors.toList());
     }
 
-    public void removeWeaponFromCard(WeaponCard card) {
-        if(null == card) throw new IllegalArgumentException();
-        for(Weapon w : weapons) {
-            if(w.getCard().equals(card)){
-                //TODO enrich .equals()
-
-                removeWeapon(w);
-                break;
-            }
-        }
-    }
-
+    /**
+     * Adds all the ammos of the given {@code AmmoSet} to this inventory.
+     * Excesses are truncated at {@code MAX_AMMO_PER_COLOR}
+     * @param ammoSet ammos to add
+     */
     public void addAmmoSet(AmmoSet ammoSet) {
         int deltaRed = ammos.get(RED);
         int deltaBlue = ammos.get(BLUE);
@@ -276,6 +315,11 @@ public class PlayerInventory {
         player.getListener().playerDidReceiveAmmos(player, new AmmoSet(deltaRed, deltaYellow, deltaBlue));
     }
 
+    /**
+     * Removes all the ammos of the given {@code AmmoSet} to this inventory.
+     *
+     * @param ammoSet ammos to remove
+     */
     public void removeAmmoSet(AmmoSet ammoSet) {
         int deltaRed = ammos.get(RED);
         int deltaBlue = ammos.get(BLUE);
@@ -292,10 +336,20 @@ public class PlayerInventory {
         player.getListener().playerDidDiscardAmmos(player, new AmmoSet(deltaRed, deltaYellow, deltaBlue));
     }
 
+    /**
+     * Retrieves all the ammos in this inventory as an {@code AmmoSet}
+     *
+     * @return ammos in this inventory
+     */
     public AmmoSet getAmmoSet() {
         return new AmmoSet(ammos.get(RED), ammos.get(YELLOW), ammos.get(BLUE));
     }
 
+    /**
+     * Retrieves all discharged weapons in this inventory
+     *
+     * @return discharged weapons
+     */
     public List<Weapon> getDischargedWeapons() {
         ArrayList<Weapon> dischargedWeapons = new ArrayList<>();
         for(Weapon w : weapons) {

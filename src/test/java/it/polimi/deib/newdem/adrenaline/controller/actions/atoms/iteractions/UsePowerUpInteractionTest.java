@@ -19,10 +19,22 @@ import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAc
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+/**
+ * Integration tests for a use powerup interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectPupInteraction
+ */
 public class UsePowerUpInteractionTest {
 
-    GameRigged game;
-    
+    private GameRigged game;
+
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeRiggedGame(PlayerColor.MAGENTA, PlayerColor.GREEN);
@@ -30,9 +42,10 @@ public class UsePowerUpInteractionTest {
         game.setDropDeck(DropDeck.fromJson("fixed_decks/18_pup_all_drops.json").createNewDeck());
     }
 
-    // EOT pups too
-    // pups as action
-
+    /**
+     * Simulates a game with a powerup interaction and undos at various steps
+     * @throws Exception
+     */
     @Test
     public void testUndo() throws Exception {
 

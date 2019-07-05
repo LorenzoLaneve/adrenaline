@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Helper class to determine the score of all payers who dealt damage to a damage board
+ * or whose counters are in the kill track.
+ */
 public class Scoreboard {
     private ArrayList<ScoreboardEntry> entries;
 
@@ -22,10 +26,17 @@ public class Scoreboard {
 
     };
 
+    /**
+     * Creates a new empty scoreboard
+     */
     public Scoreboard() {
         entries = new ArrayList<>();
     }
 
+    /**
+     * Adds the given entry to this scoreboard
+     * @param e to add to this board
+     */
     public void registerEntry(ScoreboardEntry e) {
         entries.add(e);
     }

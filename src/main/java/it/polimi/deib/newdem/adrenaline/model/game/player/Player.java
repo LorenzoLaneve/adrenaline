@@ -9,7 +9,7 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import java.util.List;
 
 /**
- * Returns an object representing a playing character in an Adrenaline game.
+ * Implementers behave like a playing character in an Adrenaline game.
  */
 public interface Player {
 
@@ -22,53 +22,71 @@ public interface Player {
 
     /**
      * Returns the game this player is playing in.
+     * @return the {@code Game} this player belongs to
      */
     Game getGame();
 
+    /**
+     * Retrieves the listener associated with this {@code Player}
+     * @return this {@code Player}'s listener
+     */
     PlayerListener getListener();
 
     /**
      * Returns the name of the user associated to this player.
+     * @return name
      */
     String getName();
 
     /**
      * Returns the tile this player is located in, or {@code null} if the player is out of the map.
+     * @return this player's {@code Tile}
      */
     Tile getTile();
 
     /**
      * Sets the this player's location to the given tile.
+     * @param dest this player's new location
      */
     void setTile(Tile dest);
 
     /**
      * Returns a PlayerInventory object describing the player's inventory, containing all of their resources.
+     * @return this player's {@code PlayerInventory} object. USe with care.
      */
     PlayerInventory getInventory();
 
     /**
      * Returns the player's color.
+     * @return this {@code Player}'s color
      */
     PlayerColor getColor();
 
     /**
-     * @return List of action factory (action) from the player action board
+     * Retrieves a list of all the legal actions this player can take at the time of invocation.
+     *
+     * This depends on powerups in inventory, action boards' state, damage taken.
+     *
+     * @return List of actions this player may perform
      */
     List<ActionFactory> getMoves();
 
     /**
-     * @return amount of actions that can be performed in a turn
+     * Retrieves the amount of actions that can be performed this turn
+     *
+     * @return amount of actions that can be performed this turn
      */
     int getMovesAmount();
 
     /**
      * Returns the number of times this player died.
+     * @return number of deaths
      */
     int getDeaths();
 
     /**
      * Returns the number of damage this player currently has.
+     * @return total damage taken
      */
     int getTotalDamage();
 
@@ -82,16 +100,19 @@ public interface Player {
 
     /**
      * Returns the total damage that this player received from the given player since their (re)spawn.
+     * @return amount of damage taken
      */
     int getDamageFromPlayer(Player player);
 
     /**
      * Returns the total number of marks that this player received from the given player.
+     * @return amount of marks taken
      */
     int getMarksFromPlayer(Player player);
 
     /**
-     * Returns whether the player has received their lethal damage.
+     * Returns whether the player is dead in the way that the game Adrenaline means death.
+     * @return is this dead
      */
     boolean isDead();
 
@@ -124,23 +145,31 @@ public interface Player {
     /**
      * Returns whether this player has the first player card, and therefore whether
      * they are the first player that needs to make their move.
+     * @return does this player have the first player card
      */
     boolean hasFirstPlayerCard();
 
     /**
      * Gives the given points to the player.
+     * @param points to add to this player's score
      */
     void addScore(int points);
 
     /**
      * Returns the total score this player currently has.
+     * @return current score
      */
     int getScore();
 
+    /**
+     * Assigns the given {@code PlayerListener} to this player
+     * @param listener to assign to this player
+     */
     void setListener(PlayerListener listener);
 
     /**
      * Returns whether this player has an open connection.
+     * @return does this user have an open connection
      */
     boolean isConnected();
 
@@ -163,7 +192,7 @@ public interface Player {
 
     /**
      * Used to report death and allow resurrection with Undo.
-     * @param isDead
+     * @param isDead death status of this player
      */
     void reportDeath(boolean isDead);
 
@@ -172,10 +201,17 @@ public interface Player {
      */
     void addSkull();
 
+    /**
+     * Checks whether this player's action board is in any Frenzy state.
+     *
+     * @return is this player's action board frenzy
+     */
     boolean isActionBoardFrenzy();
 
     /**
-     * @return initial player state to be sent to the listener.
+     * Generates a new snapshot of this {@code Player}'s state
+     *
+     * @return current player state to be sent to the listener.
      */
     PlayerData generatePlayerData();
 
@@ -187,6 +223,7 @@ public interface Player {
 
     /**
      * Checks if the player died this turn and should assign score for their death.
+     * @return did this player die this turn, or has this player's damage board been scored
      */
     boolean diedThisTurn();
 

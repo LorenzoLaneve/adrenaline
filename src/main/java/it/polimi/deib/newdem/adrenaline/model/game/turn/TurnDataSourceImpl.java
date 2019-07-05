@@ -16,6 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * An implementation of {@code TurnDataSource}
+ *
+ * This implementation allows for a player to be put on hold while other players
+ * interrupt their turn.
+ *
+ * Do note that this is not bound to any one turn, but may provide all the information that any
+ * turn requires to run its normal operations. It's possible that one {@code TUrnDataSourceImplementation}
+ * be used for multiple turns. This is evident in REVENGE actions, diring which a player's turn is interrupted
+ * by the revenger's wihout changing {@code TurnDataSource}.
+ *
+ */
 public class TurnDataSourceImpl implements TurnDataSource {
 
     private TurnListener listener;
@@ -24,6 +36,12 @@ public class TurnDataSourceImpl implements TurnDataSource {
     private List<Player> playersOnHold;
     private Player activePlayer;
 
+    /**
+     * Creates a new {@code TurnDataSourceImpl} associated with the given listener and game
+     *
+     * @param listener to which notify turn-relevant events
+     * @param game the turn belongs to
+     */
     public TurnDataSourceImpl(TurnListener listener, Game game) {
         this.playersOnHold = new ArrayList<>();
         this.activePlayer = null;
