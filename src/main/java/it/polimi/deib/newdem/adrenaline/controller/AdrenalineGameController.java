@@ -28,6 +28,8 @@ public class AdrenalineGameController implements GameController {
 
     private Turn currentTurn;
 
+    private static Random randomizer;
+
     /**
      * Initializes the GameController with the LobbyController that hosts the game.
      */
@@ -45,9 +47,12 @@ public class AdrenalineGameController implements GameController {
     }
 
     private static String getRandomMapID() {
-        Random r = new Random();
-        int x = r.nextBoolean() ? 1 : 0;
-        int y = r.nextBoolean() ? 1 : 0;
+        if(null == AdrenalineGameController.randomizer) {
+            randomizer = new Random();
+        }
+
+        int x = randomizer.nextBoolean() ? 1 : 0;
+        int y = randomizer.nextBoolean() ? 1 : 0;
         return "Map"+ x +"_"+ y;
     }
 
