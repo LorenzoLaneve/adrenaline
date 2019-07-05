@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="20.0625" y="187.5">it.polimi.deib.newdem.adrenaline.view.inet.events</node>
+    <node x="487.4125" y="353.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeterImpl</node>
+    <node x="487.4125" y="0.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter</node>
+    <node x="168.0625" y="99.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection</node>
+    <node x="465.1625" y="99.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule</node>
+    <node x="258.1625" y="0.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpoint</node>
+    <node x="143.3125" y="353.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpoint">
+      <point x="0.0" y="-102.0" />
+      <point x="276.0625" y="74.0" />
+      <point x="298.6625" y="74.0" />
+      <point x="-40.5" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.events">
+      <point x="-99.0" y="-91.0" />
+      <point x="176.3125" y="328.0" />
+      <point x="116.0625" y="328.0" />
+      <point x="32.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl">
+      <point x="54.0" y="102.0" />
+      <point x="330.0625" y="328.0" />
+      <point x="308.3125" y="328.0" />
+      <point x="33.0" y="-91.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeterImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule">
+      <point x="-59.75" y="-36.0" />
+      <point x="547.1625" y="328.0" />
+      <point x="556.1625" y="328.0" />
+      <point x="0.0" y="102.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events" target="it.polimi.deib.newdem.adrenaline.view.inet.events">
+      <point x="-32.0" y="13.5" />
+      <point x="52.0625" y="234.5" />
+      <point x="0.0625" y="234.5" />
+      <point x="0.0625" y="201.0" />
+      <point x="-64.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection">
+      <point x="-33.0" y="-91.0" />
+      <point x="242.3125" y="328.0" />
+      <point x="222.0625" y="328.0" />
+      <point x="-54.0" y="102.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpoint">
+      <point x="99.0" y="-91.0" />
+      <point x="374.3125" y="328.0" />
+      <point x="394.5625" y="328.0" />
+      <point x="394.5625" y="74.0" />
+      <point x="379.6625" y="74.0" />
+      <point x="40.5" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter">
+      <point x="0.0" y="-102.0" />
+      <point x="556.1625" y="74.0" />
+      <point x="547.1625" y="74.0" />
+      <point x="-59.75" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeterImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter">
+      <point x="59.75" y="-36.0" />
+      <point x="666.6625" y="328.0" />
+      <point x="657.6625" y="328.0" />
+      <point x="657.6625" y="74.0" />
+      <point x="666.6625" y="74.0" />
+      <point x="59.75" y="24.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="126.75" y="88.75" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

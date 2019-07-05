@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="538.0" y="749.0">it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection</node>
+    <node x="204.5" y="484.5">it.polimi.deib.newdem.adrenaline.view.inet.events</node>
+    <node x="1221.0" y="187.0">it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserModule</node>
+    <node x="299.0" y="1097.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeterImpl</node>
+    <node x="0.0" y="804.0">it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker</node>
+    <node x="299.0" y="998.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter</node>
+    <node x="198.375" y="0.0">it.polimi.deib.newdem.adrenaline.view.inet.UserConnection</node>
+    <node x="494.0" y="297.0">it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase</node>
+    <node x="1127.75" y="0.0">it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule</node>
+    <node x="744.0" y="749.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection</node>
+    <node x="1029.0" y="143.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule</node>
+    <node x="283.0" y="826.5">it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber</node>
+    <node x="51.0" y="998.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpoint</node>
+    <node x="0.0" y="1097.0">it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserModule" target="it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule">
+      <point x="0.0" y="-102.0" />
+      <point x="1115.0" y="118.0" />
+      <point x="1169.5" y="118.0" />
+      <point x="-41.75" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserModule" target="it.polimi.deib.newdem.adrenaline.view.inet.IncomingUserModule">
+      <point x="0.0" y="-58.0" />
+      <point x="1307.5" y="118.0" />
+      <point x="1253.0" y="118.0" />
+      <point x="41.75" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection" target="it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase">
+      <point x="0.0" y="-102.0" />
+      <point x="631.0" y="724.0" />
+      <point x="616.5" y="724.0" />
+      <point x="-122.5" y="201.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIUserConnection" target="it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase">
+      <point x="0.0" y="-102.0" />
+      <point x="847.0" y="724.0" />
+      <point x="861.5" y="724.0" />
+      <point x="122.5" y="201.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker" target="it.polimi.deib.newdem.adrenaline.view.inet.events">
+      <point x="0.0" y="-47.0" />
+      <point x="131.5" y="724.0" />
+      <point x="235.25" y="724.0" />
+      <point x="-30.75" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events" target="it.polimi.deib.newdem.adrenaline.view.inet.UserConnection">
+      <point x="0.0" y="-13.5" />
+      <point x="266.0" y="272.0" />
+      <point x="320.875" y="272.0" />
+      <point x="-122.5" y="123.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber" target="it.polimi.deib.newdem.adrenaline.view.inet.events">
+      <point x="0.0" y="-24.5" />
+      <point x="400.5" y="724.0" />
+      <point x="296.75" y="724.0" />
+      <point x="30.75" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpointImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIEndpoint">
+      <point x="0.0" y="-91.0" />
+      <point x="0.0" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.UserConnectionBase" target="it.polimi.deib.newdem.adrenaline.view.inet.UserConnection">
+      <point x="0.0" y="-201.0" />
+      <point x="739.0" y="272.0" />
+      <point x="565.875" y="272.0" />
+      <point x="122.5" y="123.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeterImpl" target="it.polimi.deib.newdem.adrenaline.view.inet.rmi.RMIServerGreeter">
+      <point x="0.0" y="-36.0" />
+      <point x="0.0" y="24.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="598.2539682539684" y="870.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

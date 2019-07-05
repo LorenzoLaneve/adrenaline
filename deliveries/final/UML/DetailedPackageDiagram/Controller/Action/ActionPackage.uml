@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="316.0" y="0.0">it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory</node>
+    <node x="5.25" y="121.0">it.polimi.deib.newdem.adrenaline.controller.actions.ActionContainer</node>
+    <node x="0.0" y="22.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms</node>
+    <node x="0.0" y="436.0">it.polimi.deib.newdem.adrenaline.controller.actions.ActionDataSource</node>
+    <node x="141.0" y="0.0">it.polimi.deib.newdem.adrenaline.controller.actions.Action</node>
+    <node x="316.0" y="121.0">it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory</node>
+    <node x="397.0" y="436.0">it.polimi.deib.newdem.adrenaline.controller.actions.ActionType</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.ActionContainer" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms">
+      <point x="-64.0" y="-135.0" />
+      <point x="69.25" y="96.0" />
+      <point x="60.5" y="96.0" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.ConcreteActionFactory" target="it.polimi.deib.newdem.adrenaline.controller.actions.ActionFactory">
+      <point x="0.0" y="-91.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.ActionContainer" target="it.polimi.deib.newdem.adrenaline.controller.actions.Action">
+      <point x="64.0" y="-135.0" />
+      <point x="197.25" y="96.0" />
+      <point x="206.0" y="96.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8" x="297.25" y="366.7500000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

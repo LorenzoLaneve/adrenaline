@@ -3,138 +3,297 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="-38.0" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl</node>
-    <node x="190.0" y="106.5">it.polimi.deib.newdem.adrenaline.model.game.GameChange</node>
-    <node x="1114.5" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener</node>
-    <node x="-3.5" y="586.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior</node>
-    <node x="645.5" y="346.5">it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard</node>
-    <node x="1063.0" y="346.5">it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn</node>
-    <node x="215.5" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair</node>
-    <node x="638.5" y="586.5">it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard</node>
-    <node x="496.0" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener</node>
-    <node x="609.0" y="106.5">it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange</node>
-    <node x="-24.0" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.GameParameters</node>
-    <node x="-24.0" y="826.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource</node>
-    <node x="1073.5" y="586.5">it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn</node>
-    <node x="917.0" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.GameImpl</node>
-    <node x="862.5" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoard</node>
-    <node x="-1.5" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener</node>
-    <node x="-34.5" y="106.5">it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange</node>
-    <node x="-3.5" y="346.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior</node>
-    <node x="354.5" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior</node>
-    <node x="1009.0" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry</node>
-    <node x="703.0" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener</node>
-    <node x="1059.0" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl</node>
-    <node x="252.5" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory</node>
-    <node x="611.0" y="1186.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.Cell</node>
-    <node x="927.0" y="826.5">it.polimi.deib.newdem.adrenaline.model.game.Game</node>
-    <node x="222.5" y="826.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard</node>
-    <node x="1251.0" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.turn.Turn</node>
-    <node x="910.0" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin</node>
-    <node x="197.0" y="1186.5">it.polimi.deib.newdem.adrenaline.model.game.GameData</node>
-    <node x="724.0" y="826.5">it.polimi.deib.newdem.adrenaline.model.game.player.Player</node>
-    <node x="-10.0" y="1186.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData</node>
-    <node x="1142.5" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor</node>
-    <node x="31.0" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior</node>
-    <node x="330.5" y="346.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior</node>
-    <node x="765.5" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener</node>
-    <node x="473.5" y="826.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack</node>
-    <node x="127.0" y="226.5">it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange</node>
-    <node x="1259.0" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.GameListener</node>
-    <node x="212.5" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl</node>
-    <node x="386.5" y="1186.5">it.polimi.deib.newdem.adrenaline.model.game.GameResults</node>
-    <node x="648.5" y="466.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl</node>
-    <node x="459.5" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData</node>
-    <node x="162.0" y="-13.5">it.polimi.deib.newdem.adrenaline.model.game.changes.AmmoLossGameChange</node>
-    <node x="402.0" y="186.5">it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange</node>
-    <node x="710.0" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl</node>
-    <node x="459.5" y="706.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl</node>
+    <node x="2042.0" y="746.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl</node>
+    <node x="2270.0" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.GameChange</node>
+    <node x="1318.5" y="426.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener</node>
+    <node x="3076.5" y="1226.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior</node>
+    <node x="565.5" y="186.5">it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard</node>
+    <node x="2863.0" y="546.5">it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn</node>
+    <node x="1379.5" y="186.5">it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair</node>
+    <node x="318.5" y="226.5">it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard</node>
+    <node x="1176.0" y="226.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener</node>
+    <node x="2249.0" y="1266.5">it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange</node>
+    <node x="1376.0" y="66.5">it.polimi.deib.newdem.adrenaline.model.game.GameParameters</node>
+    <node x="2056.0" y="626.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource</node>
+    <node x="2673.5" y="426.5">it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn</node>
+    <node x="3677.0" y="1546.5">it.polimi.deib.newdem.adrenaline.model.game.GameImpl</node>
+    <node x="786.5" y="306.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoard</node>
+    <node x="-1.5" y="306.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener</node>
+    <node x="2045.5" y="1186.5">it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange</node>
+    <node x="3396.5" y="1346.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior</node>
+    <node x="2798.5" y="1346.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior</node>
+    <node x="4049.0" y="1626.5">it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry</node>
+    <node x="2263.0" y="746.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener</node>
+    <node x="2663.0" y="546.5">it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl</node>
+    <node x="1572.5" y="426.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory</node>
+    <node x="1931.0" y="1826.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.Cell</node>
+    <node x="906.5" y="426.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard</node>
+    <node x="2691.0" y="1546.5">it.polimi.deib.newdem.adrenaline.model.game.turn.Turn</node>
+    <node x="3470.0" y="1466.5">it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin</node>
+    <node x="237.0" y="1946.5">it.polimi.deib.newdem.adrenaline.model.game.GameData</node>
+    <node x="1924.0" y="546.5">it.polimi.deib.newdem.adrenaline.model.game.player.Player</node>
+    <node x="1790.0" y="106.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData</node>
+    <node x="1586.5" y="186.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor</node>
+    <node x="3115.0" y="1346.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior</node>
+    <node x="2770.5" y="1226.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior</node>
+    <node x="4045.5" y="1826.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener</node>
+    <node x="3673.5" y="1706.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack</node>
+    <node x="2447.0" y="866.5">it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange</node>
+    <node x="3863.0" y="1626.5">it.polimi.deib.newdem.adrenaline.model.game.GameListener</node>
+    <node x="1092.5" y="426.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl</node>
+    <node x="426.5" y="1946.5">it.polimi.deib.newdem.adrenaline.model.game.GameResults</node>
+    <node x="572.5" y="306.5">it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl</node>
+    <node x="-20.5" y="1946.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData</node>
+    <node x="2242.0" y="946.5">it.polimi.deib.newdem.adrenaline.model.game.changes.AmmoLossGameChange</node>
+    <node x="2042.0" y="1066.5">it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange</node>
+    <node x="1590.0" y="306.5">it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl</node>
+    <node x="3659.5" y="1826.5">it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack">
-      <point x="0.0" y="13.5" />
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-74.5" y="-0.0" />
+      <point x="1968.0" y="1200.0" />
+      <point x="8.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-78.0" y="-0.0" />
+      <point x="1972.0" y="1080.0" />
+      <point x="12.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener">
+      <point x="60.5" y="-0.0" />
+      <point x="-74.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
       <point x="0.0" y="-13.5" />
+      <point x="3720.0" y="200.0" />
+      <point x="53.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerListener">
+      <point x="-50.0" y="-8.0" />
+      <point x="1240.0" y="312.0" />
+      <point x="0.0" y="13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.FirstTurn" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl">
-      <point x="0.0" y="-13.5" />
       <point x="0.0" y="13.5" />
+      <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.FrenzyDamageBoard" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl">
       <point x="0.0" y="13.5" />
       <point x="0.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.RoundRobin">
+      <point x="-36.0" y="-13.5" />
+      <point x="3684.0" y="1480.0" />
+      <point x="50.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerData" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
+      <point x="0.0" y="13.5" />
+      <point x="1840.0" y="192.0" />
+      <point x="53.5" y="-8.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
+      <point x="0.0" y="13.5" />
+      <point x="1160.0" y="1360.0" />
+      <point x="-81.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-71.0" y="-0.0" />
+      <point x="1964.0" y="1280.0" />
+      <point x="4.0" y="13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.AmmoLossGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
       <point x="0.0" y="13.5" />
       <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.Turn">
-      <point x="61.0" y="-0.0" />
-      <point x="-29.0" y="-0.0" />
+      <point x="0.0" y="13.5" />
+      <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-57.0" y="-0.0" />
+      <point x="36.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior">
       <point x="0.0" y="13.5" />
       <point x="0.0" y="-13.5" />
     </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior">
-      <point x="0.0" y="-13.5" />
-      <point x="0.0" y="13.5" />
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnListener">
+      <point x="78.0" y="-0.0" />
+      <point x="-57.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameParameters" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
+      <point x="64.0" y="-0.0" />
+      <point x="1600.0" y="80.0" />
+      <point x="-40.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.PaymentGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
       <point x="74.5" y="-0.0" />
-      <point x="-50.0" y="-0.0" />
+      <point x="2280.0" y="1200.0" />
+      <point x="-40.0" y="13.5" />
     </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.Cell">
+      <point x="-60.5" y="-0.0" />
+      <point x="29.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardListener">
+      <point x="-67.5" y="-0.0" />
+      <point x="81.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.killtrack.Cell" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
       <point x="0.0" y="-13.5" />
       <point x="0.0" y="13.5" />
     </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="67.5" y="-0.0" />
+      <point x="1932.0" y="440.0" />
+      <point x="-28.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
+      <point x="0.0" y="13.5" />
+      <point x="2560.0" y="1080.0" />
+      <point x="50.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard">
+      <point x="-50.0" y="8.0" />
+      <point x="960.0" y="328.0" />
+      <point x="0.0" y="-13.5" />
+    </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.OrdinaryTurn" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl">
+      <point x="-57.0" y="-0.0" />
+      <point x="57.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackListener">
       <point x="0.0" y="13.5" />
       <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
+      <point x="50.0" y="-0.0" />
+      <point x="1946.0" y="320.0" />
+      <point x="-14.0" y="-13.5" />
     </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl">
-      <point x="0.0" y="-13.5" />
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.PowerUpCardDiscardGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-113.0" y="-0.0" />
+      <point x="1980.0" y="880.0" />
+      <point x="20.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
+      <point x="60.5" y="-0.0" />
+      <point x="-53.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener">
+      <point x="67.5" y="-0.0" />
+      <point x="-81.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrack">
       <point x="0.0" y="13.5" />
+      <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
       <point x="0.0" y="13.5" />
       <point x="0.0" y="-13.5" />
     </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
-      <point x="-71.0" y="-0.0" />
-      <point x="50.0" y="-0.0" />
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.OrdinaryDamageBoard" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl">
+      <point x="0.0" y="13.5" />
+      <point x="400.0" y="312.0" />
+      <point x="-67.5" y="-8.0" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior">
-      <point x="0.0" y="13.5" />
-      <point x="0.0" y="-13.5" />
+      <point x="-123.5" y="-0.0" />
+      <point x="85.0" y="-0.0" />
     </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.Game">
-      <point x="0.0" y="13.5" />
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
       <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard">
-      <point x="0.0" y="13.5" />
+      <point x="-67.5" y="-0.0" />
+      <point x="53.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.Turn">
+      <point x="-43.0" y="-0.0" />
+      <point x="29.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnBaseImpl" target="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource">
+      <point x="-57.0" y="8.0" />
+      <point x="2120.0" y="568.0" />
       <point x="0.0" y="-13.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
-      <point x="89.0" y="-0.0" />
-      <point x="-85.5" y="-0.0" />
+      <point x="-85.0" y="-0.0" />
+      <point x="81.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-18.0" y="-13.5" />
+      <point x="3702.0" y="360.0" />
+      <point x="1988.0" y="360.0" />
+      <point x="28.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoard">
+      <point x="-50.0" y="-0.0" />
+      <point x="53.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.GameListener">
+      <point x="36.0" y="13.5" />
+      <point x="3756.0" y="1640.0" />
+      <point x="-57.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry" target="it.polimi.deib.newdem.adrenaline.model.game.GameListener">
+      <point x="-71.0" y="-0.0" />
+      <point x="57.0" y="-0.0" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.GameChange">
-      <point x="0.0" y="-13.5" />
-      <point x="480.0" y="128.0" />
-      <point x="50.0" y="8.0" />
+      <point x="78.0" y="-0.0" />
+      <point x="-50.0" y="-0.0" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.DamageBoard">
-      <point x="71.5" y="-0.0" />
-      <point x="-57.5" y="-0.0" />
+      <point x="67.5" y="-0.0" />
+      <point x="-53.5" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameImpl" target="it.polimi.deib.newdem.adrenaline.model.game.ListenerRegistry">
+      <point x="43.0" y="-0.0" />
+      <point x="4120.0" y="1560.0" />
+      <point x="0.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.GameParameters" target="it.polimi.deib.newdem.adrenaline.model.game.ColorUserPair">
+      <point x="0.0" y="13.5" />
+      <point x="0.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.changes.AmmoLossGameChange" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="-78.0" y="-0.0" />
+      <point x="1976.0" y="960.0" />
+      <point x="16.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.DamageBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="0.0" y="13.5" />
+      <point x="640.0" y="560.0" />
+      <point x="-36.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory">
+      <point x="0.0" y="13.5" />
+      <point x="0.0" y="-13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSourceImpl" target="it.polimi.deib.newdem.adrenaline.model.game.player.Player">
+      <point x="0.0" y="13.5" />
+      <point x="2120.0" y="840.0" />
+      <point x="1984.0" y="840.0" />
+      <point x="24.0" y="13.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="1405.9999999999998" y="870.9999999999998" />
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="1687.4999999999995" y="1235.9999999999995" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>

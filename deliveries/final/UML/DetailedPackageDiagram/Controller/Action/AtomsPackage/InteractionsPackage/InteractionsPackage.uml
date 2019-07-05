@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="3787.0" y="610.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ReloadPaymentInteraction</node>
+    <node x="3299.0" y="621.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ReloadActivationInteraction</node>
+    <node x="2045.0" y="610.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectDiscardWeaponInteraction</node>
+    <node x="606.0" y="621.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.RevengeEffectApplicationIneraction</node>
+    <node x="899.0" y="632.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectReloadWeaponInteraction</node>
+    <node x="3062.0" y="632.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectNewWeaponInteraction</node>
+    <node x="1157.0" y="610.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.AssignWeaponInteraction</node>
+    <node x="407.0" y="599.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.MovmentInteraction</node>
+    <node x="1995.75" y="11.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.Interaction</node>
+    <node x="1832.0" y="307.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase</node>
+    <node x="1815.0" y="621.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.RequireDiscardInteraction</node>
+    <node x="2207.583333333333" y="0.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStack</node>
+    <node x="209.0" y="599.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.GrabDropInteraction</node>
+    <node x="1750.75" y="22.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionContext</node>
+    <node x="0.0" y="1013.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory</node>
+    <node x="1571.0" y="632.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectRevengePupInteraction</node>
+    <node x="2423.0" y="621.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectShootWeaponInteraction</node>
+    <node x="77.5" y="804.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType</node>
+    <node x="3543.0" y="610.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.NewWeaponPaymentInteraction</node>
+    <node x="2867.0" y="632.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectPupInteraction</node>
+    <node x="0.0" y="621.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ActivatePupInteraction</node>
+    <node x="1376.0" y="621.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.DischargeInteraction</node>
+    <node x="2067.625" y="175.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStackImpl</node>
+    <node x="2686.0" y="632.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.GetTileInteraction</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.AssignWeaponInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-69.0" />
+      <point x="1256.5" y="559.0" />
+      <point x="1888.9411764705883" y="559.0" />
+      <point x="-31.05882352941171" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ReloadActivationInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-58.0" />
+      <point x="3411.0" y="529.0" />
+      <point x="1982.1176470588234" y="529.0" />
+      <point x="62.11764705882342" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.GetTileInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-46.5" />
+      <point x="2766.5" y="559.0" />
+      <point x="1951.0588235294117" y="559.0" />
+      <point x="31.05882352941171" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectShootWeaponInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-57.5" />
+      <point x="2544.5" y="569.0" />
+      <point x="1940.7058823529412" y="569.0" />
+      <point x="20.705882352941217" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectRevengePupInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-46.5" />
+      <point x="1683.0" y="579.0" />
+      <point x="1909.6470588235293" y="579.0" />
+      <point x="-10.352941176470722" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ActivatePupInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-58.0" />
+      <point x="94.5" y="509.0" />
+      <point x="1837.1764705882354" y="509.0" />
+      <point x="-82.82352941176464" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStackImpl" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStack">
+      <point x="85.66666666666652" y="-157.0" />
+      <point x="2281.7916666666665" y="155.0" />
+      <point x="2327.583333333333" y="155.0" />
+      <point x="0.0" y="57.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectPupInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-46.5" />
+      <point x="2954.5" y="549.0" />
+      <point x="1961.4117647058822" y="549.0" />
+      <point x="41.411764705882206" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionContext">
+      <point x="-44.0" y="-24.5" />
+      <point x="1876.0" y="155.0" />
+      <point x="1807.0" y="155.0" />
+      <point x="-56.25" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectReloadWeaponInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-46.5" />
+      <point x="1018.0" y="549.0" />
+      <point x="1878.5882352941176" y="549.0" />
+      <point x="-41.41176470588243" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.Interaction">
+      <point x="44.0" y="-24.5" />
+      <point x="1964.0" y="155.0" />
+      <point x="2033.0" y="155.0" />
+      <point x="-37.25" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.MovmentInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-80.0" />
+      <point x="496.5" y="529.0" />
+      <point x="1857.8823529411766" y="529.0" />
+      <point x="-62.11764705882342" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.DischargeInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-58.0" />
+      <point x="1463.5" y="569.0" />
+      <point x="1899.2941176470588" y="569.0" />
+      <point x="-20.705882352941217" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.NewWeaponPaymentInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-69.0" />
+      <point x="3655.0" y="519.0" />
+      <point x="1992.4705882352941" y="519.0" />
+      <point x="72.47058823529414" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.GrabDropInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-80.0" />
+      <point x="298.0" y="519.0" />
+      <point x="1847.5294117647059" y="519.0" />
+      <point x="-72.47058823529414" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectDiscardWeaponInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-69.0" />
+      <point x="2224.0" y="579.0" />
+      <point x="1930.3529411764705" y="579.0" />
+      <point x="10.352941176470495" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.RequireDiscardInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-58.0" />
+      <point x="0.0" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStackImpl" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionContext">
+      <point x="-85.66666666666652" y="-157.0" />
+      <point x="2110.4583333333335" y="145.0" />
+      <point x="1919.5" y="145.0" />
+      <point x="56.25" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.RevengeEffectApplicationIneraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-58.0" />
+      <point x="742.5" y="539.0" />
+      <point x="1868.235294117647" y="539.0" />
+      <point x="-51.76470588235293" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionStackImpl" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.Interaction">
+      <point x="0.0" y="-157.0" />
+      <point x="2196.125" y="135.0" />
+      <point x="2107.5" y="135.0" />
+      <point x="37.25" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointFactory" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.EntryPointType">
+      <point x="0.0" y="-102.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectNewWeaponInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-46.5" />
+      <point x="3170.5" y="539.0" />
+      <point x="1971.764705882353" y="539.0" />
+      <point x="51.76470588235293" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.ReloadPaymentInteraction" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.InteractionBase">
+      <point x="0.0" y="-69.0" />
+      <point x="3888.5" y="509.0" />
+      <point x="2002.8235294117644" y="509.0" />
+      <point x="82.82352941176441" y="24.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="377.9999999999998" y="140.9999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

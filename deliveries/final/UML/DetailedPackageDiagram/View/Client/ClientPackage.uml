@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="57.0" y="876.0">it.polimi.deib.newdem.adrenaline.view.client.gui</node>
+    <node x="181.0" y="876.0">it.polimi.deib.newdem.adrenaline.view.client.cli</node>
+    <node x="434.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.GameClientManager</node>
+    <node x="0.0" y="557.0">it.polimi.deib.newdem.adrenaline.view.client.ViewMaker</node>
+    <node x="387.0" y="557.0">it.polimi.deib.newdem.adrenaline.view.client.ClientInstance</node>
+    <node x="0.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.TurnClientManager</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui" target="it.polimi.deib.newdem.adrenaline.view.client.ViewMaker">
+      <point x="0.0" y="-13.5" />
+      <point x="109.0" y="851.0" />
+      <point x="85.5" y="851.0" />
+      <point x="-85.5" y="134.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.cli" target="it.polimi.deib.newdem.adrenaline.view.client.ViewMaker">
+      <point x="0.0" y="-13.5" />
+      <point x="233.0" y="851.0" />
+      <point x="256.5" y="851.0" />
+      <point x="85.5" y="134.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8" x="409.75" y="761.2500000000002" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="916.0" y="727.0">it.polimi.deib.newdem.adrenaline.view.inet.events.ConnectionCloseEvent</node>
+    <node x="1660.0" y="1817.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPlayerResponse</node>
+    <node x="1066.0" y="1033.0">it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent</node>
+    <node x="148.0" y="706.0">it.polimi.deib.newdem.adrenaline.view.inet.events.GameEndEvent</node>
+    <node x="1315.0" y="509.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnWeaponResponse</node>
+    <node x="239.0" y="1421.0">it.polimi.deib.newdem.adrenaline.view.inet.events.MovePlayerEvent</node>
+    <node x="1201.0" y="644.0">it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerStartEvent</node>
+    <node x="1220.0" y="1505.0">it.polimi.deib.newdem.adrenaline.view.inet.events.WeaponUnloadEvent</node>
+    <node x="537.0" y="862.0">it.polimi.deib.newdem.adrenaline.view.inet.events.RevengeStartEvent</node>
+    <node x="459.0" y="1269.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnWeaponRequest</node>
+    <node x="1457.0" y="1093.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardAmmoEvent</node>
+    <node x="668.0" y="727.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnFragmentResponse</node>
+    <node x="826.0" y="1766.0">it.polimi.deib.newdem.adrenaline.view.inet.events.RegisterUsernameEvent</node>
+    <node x="1403.0" y="89.0">it.polimi.deib.newdem.adrenaline.view.inet.events.WeaponReloadEvent</node>
+    <node x="1563.0" y="610.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardPowerUpEvent</node>
+    <node x="548.0" y="997.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPaymentRequest</node>
+    <node x="227.0" y="1600.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardWeaponEvent</node>
+    <node x="249.0" y="857.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnTileResponse</node>
+    <node x="1264.0" y="2079.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReceiveAmmoEvent</node>
+    <node x="81.0" y="1151.0">it.polimi.deib.newdem.adrenaline.view.inet.events.DeathPlayerEvent</node>
+    <node x="828.0" y="1108.0">it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackDataEvent</node>
+    <node x="1215.0" y="1124.0">it.polimi.deib.newdem.adrenaline.view.inet.events.GameStartEvent</node>
+    <node x="727.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerAcquireWeaponEvent</node>
+    <node x="1139.0" y="357.0">it.polimi.deib.newdem.adrenaline.view.inet.events.MapDataEvent</node>
+    <node x="982.0" y="1400.0">it.polimi.deib.newdem.adrenaline.view.inet.events.RevengeEndEvent</node>
+    <node x="123.0" y="1286.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerPopDamageEvent</node>
+    <node x="962.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnDropEvent</node>
+    <node x="1785.0" y="930.0">it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackAddKillEvent</node>
+    <node x="1253.0" y="779.0">it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnWeaponEvent</node>
+    <node x="1296.0" y="958.0">it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent</node>
+    <node x="2018.0" y="1384.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerAcquirePowerUpEvent</node>
+    <node x="1655.0" y="475.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPowerUpRequest</node>
+    <node x="602.0" y="13.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnActionRequest</node>
+    <node x="623.0" y="1984.0">it.polimi.deib.newdem.adrenaline.view.inet.events.DespawnWeaponEvent</node>
+    <node x="1015.0" y="849.0">it.polimi.deib.newdem.adrenaline.view.inet.events.ActionBoardFlipEvent</node>
+    <node x="1295.0" y="1844.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPlayerRequest</node>
+    <node x="1908.0" y="1249.0">it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardFlipEvent</node>
+    <node x="1098.0" y="267.0">it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerAbortEvent</node>
+    <node x="1534.0" y="940.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnEndEvent</node>
+    <node x="1251.0" y="1370.0">it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent</node>
+    <node x="517.0" y="443.0">it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent</node>
+    <node x="53.0" y="1005.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnStartEvent</node>
+    <node x="1767.0" y="1109.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnActionResponse</node>
+    <node x="722.0" y="1587.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent</node>
+    <node x="0.0" y="571.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPaymentResponse</node>
+    <node x="1026.0" y="2016.0">it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnPlayerEvent</node>
+    <node x="1784.0" y="795.0">it.polimi.deib.newdem.adrenaline.view.inet.events.DespawnDropEvent</node>
+    <node x="474.0" y="1636.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPowerUpResponse</node>
+    <node x="1332.0" y="1684.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDisconnectEvent</node>
+    <node x="963.0" y="592.0">it.polimi.deib.newdem.adrenaline.view.inet.events.LeaveMapPlayerEvent</node>
+    <node x="545.0" y="264.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnTileRequest</node>
+    <node x="1469.0" y="340.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDataEvent</node>
+    <node x="860.0" y="297.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerActiveEvent</node>
+    <node x="1830.0" y="281.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerNameEvent</node>
+    <node x="1565.0" y="1360.0">it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest</node>
+    <node x="371.0" y="1949.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDamageEvent</node>
+    <node x="1571.0" y="1450.0">it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackUndoKillEvent</node>
+    <node x="536.0" y="1452.0">it.polimi.deib.newdem.adrenaline.view.inet.events.GameDataEvent</node>
+    <node x="960.0" y="1610.0">it.polimi.deib.newdem.adrenaline.view.inet.events.HeartbeatEvent</node>
+    <node x="1190.0" y="1214.0">it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent</node>
+    <node x="1901.0" y="1594.0">it.polimi.deib.newdem.adrenaline.view.inet.events.TurnFragmentRequest</node>
+    <node x="489.0" y="578.0">it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameResponse</node>
+    <node x="2072.0" y="816.0">it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardClearEvent</node>
+    <node x="1636.0" y="1667.0">it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.DespawnDropEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerUpdateEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackAddKillEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardAmmoEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPowerUpResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.WeaponUnloadEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.ActionBoardFlipEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.RevengeStartEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPaymentResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnEndEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnPlayerEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerPopDamageEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.GameDataEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerStartEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerAcquirePowerUpEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPowerUpRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.DespawnWeaponEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnFragmentRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnDropEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerActiveEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPlayerResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerScoreEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDataEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnActionRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnActionResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.GameEndEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.SpawnWeaponEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnWeaponRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPlayerRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnPaymentRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnWeaponResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.RegisterUsernameEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnTileRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.EnterLobbyEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardPowerUpEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.HeartbeatEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReconnectEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.MovePlayerEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDisconnectEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.ConnectionCloseEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackUndoKillEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardClearEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.KillTrackDataEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyTimerAbortEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.WeaponReloadEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.DamageBoardFlipEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.LeaveMapPlayerEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerNameEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnTileResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnStartEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.ExitLobbyEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.TurnFragmentResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameRequest" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDamageEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.UpdateUsernameResponse" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerDiscardWeaponEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.DeathPlayerEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.MapDataEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerReceiveAmmoEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.PlayerAcquireWeaponEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.GameStartEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet.events.RevengeEndEvent" target="it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000004" x="1884.666666666666" y="2268.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

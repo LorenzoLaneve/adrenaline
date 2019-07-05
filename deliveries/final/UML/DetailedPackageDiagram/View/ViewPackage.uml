@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1336.0" y="22.0">it.polimi.deib.newdem.adrenaline.view.TurnView</node>
+    <node x="840.8750000000001" y="409.0">it.polimi.deib.newdem.adrenaline.view.server</node>
+    <node x="480.0000000000001" y="88.0">it.polimi.deib.newdem.adrenaline.view.KillTrackView</node>
+    <node x="948.0000000000001" y="22.0">it.polimi.deib.newdem.adrenaline.view.MapView</node>
+    <node x="0.0" y="504.9130859375">it.polimi.deib.newdem.adrenaline.view.ConnectionView</node>
+    <node x="195.0" y="77.0">it.polimi.deib.newdem.adrenaline.view.DamageBoardView</node>
+    <node x="1429.0" y="409.0">it.polimi.deib.newdem.adrenaline.view.client</node>
+    <node x="2172.0" y="110.0">it.polimi.deib.newdem.adrenaline.view.ActionBoardView</node>
+    <node x="0.0" y="55.0">it.polimi.deib.newdem.adrenaline.view.LobbyView</node>
+    <node x="296.0" y="504.9130859375">it.polimi.deib.newdem.adrenaline.view.UsernameView</node>
+    <node x="1924.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.PlayerView</node>
+    <node x="510.0" y="504.9130859375">it.polimi.deib.newdem.adrenaline.view.MapViewEventListener</node>
+    <node x="717.0000000000001" y="77.0">it.polimi.deib.newdem.adrenaline.view.GameView</node>
+    <node x="2376.0" y="121.0">it.polimi.deib.newdem.adrenaline.view.inet</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.client">
+      <point x="0.0" y="13.5" />
+      <point x="1493.0" y="456.0" />
+      <point x="1409.0" y="456.0" />
+      <point x="1409.0" y="422.5" />
+      <point x="-64.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.GameView">
+      <point x="-8.0" y="-13.5" />
+      <point x="896.8750000000001" y="359.0" />
+      <point x="769.7500000000001" y="359.0" />
+      <point x="-52.75" y="57.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.ActionBoardView">
+      <point x="56.0" y="-13.5" />
+      <point x="960.8750000000001" y="369.0" />
+      <point x="2213.0" y="369.0" />
+      <point x="-41.0" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.server">
+      <point x="0.0" y="13.5" />
+      <point x="904.8750000000001" y="456.0" />
+      <point x="820.8750000000001" y="456.0" />
+      <point x="820.8750000000001" y="422.5" />
+      <point x="-64.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.inet">
+      <point x="56.0" y="-13.5" />
+      <point x="1549.0" y="389.0" />
+      <point x="2461.5" y="389.0" />
+      <point x="28.5" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.GameView">
+      <point x="-24.0" y="-13.5" />
+      <point x="1469.0" y="299.0" />
+      <point x="875.2500000000001" y="299.0" />
+      <point x="52.75" y="57.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.ActionBoardView">
+      <point x="40.0" y="-13.5" />
+      <point x="1533.0" y="379.0" />
+      <point x="2295.0" y="379.0" />
+      <point x="41.0" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.TurnView">
+      <point x="24.0" y="-13.5" />
+      <point x="928.8750000000001" y="339.0" />
+      <point x="1478.0" y="339.0" />
+      <point x="-142.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.TurnView">
+      <point x="8.0" y="-13.5" />
+      <point x="1501.0" y="339.0" />
+      <point x="1762.0" y="339.0" />
+      <point x="142.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.PlayerView">
+      <point x="24.0" y="-13.5" />
+      <point x="1517.0" y="359.0" />
+      <point x="2095.0" y="359.0" />
+      <point x="57.0" y="134.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.PlayerView">
+      <point x="40.0" y="-13.5" />
+      <point x="944.8750000000001" y="349.0" />
+      <point x="1981.0" y="349.0" />
+      <point x="-57.0" y="134.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.inet" target="it.polimi.deib.newdem.adrenaline.view.inet">
+      <point x="-28.5" y="13.5" />
+      <point x="2404.5" y="168.0" />
+      <point x="2356.0" y="168.0" />
+      <point x="2356.0" y="134.5" />
+      <point x="-57.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.KillTrackView">
+      <point x="-24.0" y="-13.5" />
+      <point x="880.8750000000001" y="369.0" />
+      <point x="534.2500000000001" y="369.0" />
+      <point x="-54.25" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.DamageBoardView">
+      <point x="-40.0" y="-13.5" />
+      <point x="864.8750000000001" y="379.0" />
+      <point x="261.25" y="379.0" />
+      <point x="-66.25" y="57.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.DamageBoardView">
+      <point x="-56.0" y="-13.5" />
+      <point x="1437.0" y="319.0" />
+      <point x="393.75" y="319.0" />
+      <point x="66.25" y="57.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.MapView">
+      <point x="-8.0" y="-13.5" />
+      <point x="1485.0" y="289.0" />
+      <point x="1224.0" y="289.0" />
+      <point x="92.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client" target="it.polimi.deib.newdem.adrenaline.view.KillTrackView">
+      <point x="-40.0" y="-13.5" />
+      <point x="1453.0" y="309.0" />
+      <point x="642.7500000000001" y="309.0" />
+      <point x="54.25" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.MapView">
+      <point x="8.0" y="-13.5" />
+      <point x="912.8750000000001" y="329.0" />
+      <point x="1040.0" y="329.0" />
+      <point x="-92.0" y="112.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.server" target="it.polimi.deib.newdem.adrenaline.view.LobbyView">
+      <point x="-56.0" y="-13.5" />
+      <point x="848.8750000000001" y="389.0" />
+      <point x="87.5" y="389.0" />
+      <point x="0.0" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="915.7500000000002" y="433.2500000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
