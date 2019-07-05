@@ -68,27 +68,6 @@ public abstract class ConcreteTile implements Tile {
      */
     @Override
     public int distanceFrom(Tile t) {
-        /*int distance = -1;
-
-        if (adjacentTiles.contains(t)){
-            distance = 1;
-        }
-        else if(t.equals(this)){
-            distance = 0;
-        }
-        else{
-            for(Tile adTile : adjacentTiles){
-                if(distance == -1){
-                    distance = 99;
-                }
-                else if (((adTile.distanceFrom(t) + 1) < distance)){
-                    distance = adTile.distanceFrom(t) + 1;
-                }
-
-            }
-        }
-        return distance;*/
-
         return this.getMap().getDistance(this,t);
 
     }

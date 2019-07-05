@@ -1,5 +1,9 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
+
+/**
+ * Class used to load from json the SpawnPointTiles.
+ */
 public class SpawnPointTileDict{
     private int[] red;
     private int[] blue;

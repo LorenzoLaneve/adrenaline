@@ -4,6 +4,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 
 import java.io.Serializable;
 
+/**
+ * Class Used in MapData to keep track of player's position.
+ */
 public class PlayerTilePair implements Serializable {
 
     private TilePosition tile;

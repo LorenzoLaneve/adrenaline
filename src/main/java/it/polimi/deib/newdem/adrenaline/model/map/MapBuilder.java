@@ -110,6 +110,11 @@ public class MapBuilder {
         return tempRooms;
     }
 
+    /**
+     * Inner class used to load the data of the SpawnPointTile
+     * @param tileInt
+     * @return
+     */
     private AmmoColor spawnPointColorTileInt(int[] tileInt){
             AmmoColor result;
 
@@ -132,6 +137,10 @@ public class MapBuilder {
             return result;
     }
 
+    /**
+     * Method used in the static method of map to create a map.
+     * @return
+     */
     public Map buildMap(){
         Map map = new ConcreteMap(matrixMap,rooms, mapID);
         map.bindRooms();

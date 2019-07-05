@@ -8,8 +8,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Data representation of the current game state. Intended for communication with the views,
+ * this does not include non-visible information (e.g. who is the active player)
+ */
+
 public class MapData implements Serializable {
 
+    /**
+     * The name of the map as saved on resources.
+     */
     private String mapID;
 
     private ArrayList<TilePosition> tiles;

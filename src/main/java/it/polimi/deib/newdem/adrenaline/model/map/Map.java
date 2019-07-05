@@ -17,6 +17,11 @@ public interface Map {
      */
     void bindRooms();
 
+    /**
+     * Method used to move the player or add it on the map if it needs to spawn.
+     * @param player that needs to be moved
+     * @param destination the tile to which the player should be moved.
+     */
     void movePlayer(Player player, Tile destination);
 
     void setListener(MapListener listener);

@@ -63,6 +63,11 @@ public class ConcreteMap implements Map {
         }
     }
 
+    /**
+     * Method used to move the player or add it on the map if it needs to spawn.
+     * @param player that needs to be moved
+     * @param destination the tile to which the player should be moved.
+     */
     @Override
     public void movePlayer(Player player, Tile destination) {
         Tile source = player.getTile();
@@ -97,6 +102,10 @@ public class ConcreteMap implements Map {
         return mapListener;
     }
 
+    /**
+     * Method use to when a player has been killed and needs to be removed from the map before respawing in his next turn
+     * @param player
+     */
     @Override
     public void removePlayer(Player player) {
         Tile tile = player.getTile();
@@ -109,7 +118,10 @@ public class ConcreteMap implements Map {
         }
     }
 
-
+    /**
+     * @param selector the conditions the tiles have to meet.
+     * @return the list of tiles that meet the condition of the selector.
+     */
     @Override
     public List<Tile> selectTiles(TileSelector selector) {
         List<Tile> selectedTiles = new ArrayList<>();
@@ -127,6 +139,10 @@ public class ConcreteMap implements Map {
         return selectedTiles;
     }
 
+    /**
+     * @param ammoColor
+     * @return the SpawnPointTile of the color ammoColor.
+     */
     @Override
     public Tile getSpawnPointFromColor(AmmoColor ammoColor) {
 
@@ -161,6 +177,12 @@ public class ConcreteMap implements Map {
         return tiles;
     }
 
+    /**
+     * Distance from source and destination.
+     * @param source
+     * @param destination
+     * @return
+     */
     @Override
     public int getDistance(Tile source, Tile destination) {
 
@@ -196,6 +218,9 @@ public class ConcreteMap implements Map {
         return distDict.get(destination);
     }
 
+    /**
+     * @return Data representation of the current map state. Intended for communication with the views.
+     */
     @Override
     public MapData generateMapData() {
 
@@ -281,6 +306,11 @@ public class ConcreteMap implements Map {
         mapListener.mapDidRestoreData(generateMapData());
     }
 
+    /**
+     * Method used to keep track of deaths, respawns and resurrections.
+     * @param player
+     * @param alive
+     */
     @Override
     public void updatePlayerState(Player player, boolean alive) {
         if (alive){

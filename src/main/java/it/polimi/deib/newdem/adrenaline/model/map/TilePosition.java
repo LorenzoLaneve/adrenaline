@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.model.map;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Class used to identify Tiles in a map.
+ */
+
 public class TilePosition implements Serializable {
 
     private int x;
