@@ -19,6 +19,11 @@ public class MockConnectionSender implements UserConnection {
     }
 
     @Override
+    public void setUser(User user) {
+
+    }
+
+    @Override
     public <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber) {
 
     }

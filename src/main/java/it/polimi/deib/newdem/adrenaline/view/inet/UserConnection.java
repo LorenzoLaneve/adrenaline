@@ -31,6 +31,11 @@ public interface UserConnection {
     User getUser();
 
     /**
+     * Sets the user associated to the given connection.
+     */
+    void setUser(User user);
+
+    /**
      * Subscribes the given subscriber object to this connection so that it will receiver events of the given class.
      */
     <T extends UserEvent> void subscribeEvent(Class<T> eventClass, UserEventSubscriber<T> subscriber);

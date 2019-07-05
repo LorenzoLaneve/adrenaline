@@ -41,6 +41,11 @@ public abstract class UserConnectionBase implements UserConnection {
         return user;
     }
 
+    @Override
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     /**
      * NOTE: if you need to override this method, REMEMBER TO CALL {@code super.start()}
      */

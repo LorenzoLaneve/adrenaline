@@ -20,7 +20,7 @@ public class DisconnectionDialog implements Dialog {
 
             Button terminateButton = (Button) dialogPane.lookup(".terminate-button");
             terminateButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                System.exit(1);
+                System.exit(0);
             });
 
             return dialogPane;

@@ -87,7 +87,7 @@ public class CLIViewMaker implements ViewMaker {
         out.println();
         out.println("Connection to server lost.");
 
-        System.exit(1);
+        System.exit(0);
     }
 
 }

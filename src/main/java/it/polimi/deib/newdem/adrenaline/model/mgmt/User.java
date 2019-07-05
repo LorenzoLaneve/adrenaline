@@ -147,6 +147,11 @@ public class User {
      */
     public void takeOverConnection(User user) {
         bindConnection(user.getBoundConnection());
+
+        if (getBoundConnection() != null) {
+            getBoundConnection().setUser(this);
+        }
+
         user.bindConnection(null);
     }
 
