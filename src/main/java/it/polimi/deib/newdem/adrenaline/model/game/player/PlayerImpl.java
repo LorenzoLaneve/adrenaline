@@ -15,6 +15,9 @@ import java.util.List;
 
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.*;
 
+/**
+ * An implementation of {@code Player}
+ */
 public class PlayerImpl implements Player {
 
     private PlayerListener listener;
@@ -25,18 +28,20 @@ public class PlayerImpl implements Player {
     private Game game;
     private Tile position;
     private int deaths;
-    private boolean isDead; // maybe inferred?
+    private boolean isDead;
     private boolean isInit;
     private boolean hasFirstPlayerCard;
     private boolean diedThisTurn;
     private int score;
 
-    public static Player makePlayer(PlayerColor color, Game game) {
-        Player p = new PlayerImpl(color,game);
-        p.init();
-        return p;
-    }
-
+    /**
+     * Creates a new player for the given game.
+     *
+     * The created player will not be initialized
+     *
+     * @param color this player's color
+     * @param game this player will play in
+    */
     public PlayerImpl(PlayerColor color, Game game) {
         this.color = color;
         this.game = game;
@@ -48,6 +53,19 @@ public class PlayerImpl implements Player {
         this.inventory = null;
         this.damageBoard = null;
         this.score = 0;
+    }
+
+    /**
+     * Creates and initializes a new player for the given game
+     *
+     * @param color of the layer to create
+     * @param game to which the new player will belong
+     * @return new player
+     */
+    public static Player makePlayer(PlayerColor color, Game game) {
+        Player p = new PlayerImpl(color,game);
+        p.init();
+        return p;
     }
 
     /**
@@ -89,11 +107,10 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * Retuns this player's name
+     * Returns this player's name
      *
      * @return the name
      */
-    //TODO reflect on user
     @Override
     public String getName() {
         return game.getUserByPlayer(this).getName();
@@ -149,23 +166,6 @@ public class PlayerImpl implements Player {
         if(!canReload()) {
             factories.removeIf(e -> reloadType.covers(e.getType()));
         }
-
-        // if an action is completely covered by another one, remove it
-        /*
-        for(int i = factories.size() - 1; i >= 0; i--) {
-            ActionType ti = factories.get(i).getType();
-            for(int j = factories.size() - 1; j >= 0; j--) {
-                if( j == i ) {
-                    j--;
-                }
-                ActionType tj = factories.get(j).getType();
-                if(ti.covers(tj)) {
-                    factories.remove(j);
-                }
-            }
-        }
-        */
-
 
         return factories;
     }
@@ -262,6 +262,7 @@ public class PlayerImpl implements Player {
         this.damageBoard = damageBoard;
     }
 
+    @Override
     public void assignFirstPlayerCard() {
         hasFirstPlayerCard = true;
     }
@@ -363,8 +364,6 @@ public class PlayerImpl implements Player {
             Map map = getGame().getMap();
             if (map.getListener() != null) {
                 map.getListener().playerDidDie(this);
-                // DO not do this.deaths += 1; here
-                // ^ EOT
             }
         }
         else {
