@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="447.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.TileSelector</node>
+    <node x="323.0" y="519.0">it.polimi.deib.newdem.adrenaline.controller.Config</node>
+    <node x="428.0" y="298.0">it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelector</node>
+    <node x="424.25" y="149.0">it.polimi.deib.newdem.adrenaline.controller.GameControllerFactory</node>
+    <node x="0.0" y="375.0">it.polimi.deib.newdem.adrenaline.controller.AdrenalineGameController</node>
+    <node x="271.25" y="0.0">it.polimi.deib.newdem.adrenaline.controller.LobbyState</node>
+    <node x="28.25" y="226.0">it.polimi.deib.newdem.adrenaline.controller.LobbyControllerImpl</node>
+    <node x="217.25" y="226.0">it.polimi.deib.newdem.adrenaline.controller.TimedExecutor</node>
+    <node x="0.0" y="519.0">it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch</node>
+    <node x="35.0" y="298.0">it.polimi.deib.newdem.adrenaline.controller.GameController</node>
+    <node x="519.0" y="447.0">it.polimi.deib.newdem.adrenaline.controller.UserRegistry</node>
+    <node x="569.0" y="519.0">it.polimi.deib.newdem.adrenaline.controller.Timer</node>
+    <node x="389.25" y="226.0">it.polimi.deib.newdem.adrenaline.controller.AdrenalineGameControllerFactory</node>
+    <node x="446.0" y="519.0">it.polimi.deib.newdem.adrenaline.controller.effects.Effect</node>
+    <node x="347.0" y="447.0">it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext</node>
+    <node x="0.0" y="77.0">it.polimi.deib.newdem.adrenaline.controller.InGameLobbyState</node>
+    <node x="329.0" y="77.0">it.polimi.deib.newdem.adrenaline.controller.GameOverLobbyState</node>
+    <node x="185.5" y="149.0">it.polimi.deib.newdem.adrenaline.controller.TimerListener</node>
+    <node x="175.0" y="447.0">it.polimi.deib.newdem.adrenaline.controller.LobbyRegistry</node>
+    <node x="165.0" y="519.0">it.polimi.deib.newdem.adrenaline.controller.UserGreeter</node>
+    <node x="168.0" y="77.0">it.polimi.deib.newdem.adrenaline.controller.ReadyLobbyState</node>
+    <node x="511.0" y="77.0">it.polimi.deib.newdem.adrenaline.controller.TimerWaitingLobbyState</node>
+    <node x="0.0" y="149.0">it.polimi.deib.newdem.adrenaline.controller.LobbyController</node>
+    <node x="249.0" y="298.0">it.polimi.deib.newdem.adrenaline.controller.ServerInstance</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.InGameLobbyState" target="it.polimi.deib.newdem.adrenaline.controller.LobbyState">
+      <point x="0.0" y="-13.5" />
+      <point x="74.0" y="47.0" />
+      <point x="284.5" y="47.0" />
+      <point x="-39.75" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.TimedExecutor" target="it.polimi.deib.newdem.adrenaline.controller.TimerListener">
+      <point x="0.0" y="-13.5" />
+      <point x="31.75" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.GameOverLobbyState" target="it.polimi.deib.newdem.adrenaline.controller.LobbyState">
+      <point x="0.0" y="-13.5" />
+      <point x="410.0" y="57.0" />
+      <point x="337.5" y="57.0" />
+      <point x="13.25" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.LobbyControllerImpl" target="it.polimi.deib.newdem.adrenaline.controller.LobbyController">
+      <point x="-42.25" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.TimerWaitingLobbyState" target="it.polimi.deib.newdem.adrenaline.controller.LobbyState">
+      <point x="0.0" y="-13.5" />
+      <point x="606.0" y="47.0" />
+      <point x="364.0" y="47.0" />
+      <point x="39.75" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.ReadyLobbyState" target="it.polimi.deib.newdem.adrenaline.controller.LobbyState">
+      <point x="0.0" y="-13.5" />
+      <point x="238.5" y="57.0" />
+      <point x="311.0" y="57.0" />
+      <point x="-13.25" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.AdrenalineGameController" target="it.polimi.deib.newdem.adrenaline.controller.GameController">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.AdrenalineGameControllerFactory" target="it.polimi.deib.newdem.adrenaline.controller.GameControllerFactory">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.LobbyControllerImpl" target="it.polimi.deib.newdem.adrenaline.controller.TimerListener">
+      <point x="42.25" y="-13.5" />
+      <point x="155.0" y="201.0" />
+      <point x="217.25" y="201.0" />
+      <point x="-31.75" y="13.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="1005.7142857142856" y="237.99999999999997" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

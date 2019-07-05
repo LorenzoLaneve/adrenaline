@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="671.4950980392157" y="705.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.GrabAtom</node>
+    <node x="903.6740196078432" y="154.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequence</node>
+    <node x="493.12500000000006" y="286.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase</node>
+    <node x="0.0" y="992.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.RevengeAtom</node>
+    <node x="1139.674019607843" y="0.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType</node>
+    <node x="438.0" y="1014.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ShootAtom</node>
+    <node x="446.4485294117647" y="0.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer</node>
+    <node x="117.82843137254906" y="496.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext</node>
+    <node x="142.57843137254906" y="22.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext</node>
+    <node x="553.4950980392157" y="705.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.MoveAtom</node>
+    <node x="794.5490196078432" y="319.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequenceImpl</node>
+    <node x="635.3333333333334" y="143.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction</node>
+    <node x="427.1666666666667" y="176.0">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions</node>
+    <node x="167.0" y="1014.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.PowerUpAtom</node>
+    <node x="306.0" y="1014.5">it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ReloadAtom</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase">
+      <point x="93.25" y="-223.0" />
+      <point x="397.57843137254906" y="471.0" />
+      <point x="533.9583333333335" y="471.0" />
+      <point x="-81.66666666666663" y="80.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction">
+      <point x="81.66666666666663" y="-80.0" />
+      <point x="697.2916666666667" y="261.0" />
+      <point x="696.0833333333334" y="261.0" />
+      <point x="-60.75" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequenceImpl" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAction">
+      <point x="-58.25" y="-47.0" />
+      <point x="852.7990196078432" y="261.0" />
+      <point x="817.5833333333334" y="261.0" />
+      <point x="60.75" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.PowerUpAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext">
+      <point x="0.0" y="-13.5" />
+      <point x="226.5" y="967.0" />
+      <point x="257.70343137254906" y="967.0" />
+      <point x="-46.625" y="223.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequenceImpl" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsRunSequence">
+      <point x="58.25" y="-47.0" />
+      <point x="969.2990196078432" y="261.0" />
+      <point x="999.1740196078432" y="261.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer">
+      <point x="0.0" y="-80.0" />
+      <point x="615.6250000000001" y="261.0" />
+      <point x="598.6666666666667" y="261.0" />
+      <point x="598.6666666666667" y="118.0" />
+      <point x="626.4485294117646" y="118.0" />
+      <point x="71.99999999999999" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext">
+      <point x="-93.25" y="-223.0" />
+      <point x="-68.5" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.RevengeAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext">
+      <point x="0.0" y="-36.0" />
+      <point x="73.5" y="967.0" />
+      <point x="164.45343137254906" y="967.0" />
+      <point x="-139.875" y="223.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions">
+      <point x="-81.66666666666674" y="-80.0" />
+      <point x="533.9583333333334" y="261.0" />
+      <point x="561.3333333333334" y="261.0" />
+      <point x="53.66666666666663" y="13.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions">
+      <point x="0.0" y="13.5" />
+      <point x="507.6666666666667" y="233.0" />
+      <point x="397.1666666666667" y="233.0" />
+      <point x="397.1666666666667" y="182.75" />
+      <point x="-80.5" y="-6.75" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomEffectContext">
+      <point x="-53.66666666666663" y="-13.5" />
+      <point x="454.00000000000006" y="118.0" />
+      <point x="348.07843137254906" y="118.0" />
+      <point x="68.5" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.MoveAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase">
+      <point x="0.0" y="-13.5" />
+      <point x="602.4950980392157" y="471.0" />
+      <point x="615.6250000000001" y="471.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomsContainer">
+      <point x="0.0" y="-13.5" />
+      <point x="507.6666666666667" y="118.0" />
+      <point x="482.4485294117647" y="118.0" />
+      <point x="-72.0" y="46.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ReloadAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext">
+      <point x="0.0" y="-13.5" />
+      <point x="362.0" y="967.0" />
+      <point x="350.95343137254906" y="967.0" />
+      <point x="46.625" y="223.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.GrabAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomBase">
+      <point x="0.0" y="-13.5" />
+      <point x="720.4950980392157" y="471.0" />
+      <point x="697.2916666666667" y="471.0" />
+      <point x="81.66666666666674" y="80.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ShootAtom" target="it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomContext">
+      <point x="0.0" y="-13.5" />
+      <point x="490.5" y="967.0" />
+      <point x="444.20343137254906" y="967.0" />
+      <point x="139.875" y="223.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="576.0" y="426.7500000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

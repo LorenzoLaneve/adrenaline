@@ -48,6 +48,12 @@ public class WeaponDeck {
         return new PaymentInvoice(redAmmos, blueAmmos, yellowAmmos, anyColorAmmos);
     }
 
+    /**
+     * Method used to load the singleton during server setup from the json files.
+     * @param jsonFile the sources of the singleton's data.
+     * @throws InvalidJSONException if the json is not complete or formatted incorrectly.
+     * @throws DeckAlreadyLoadedException if the deck is already loaded.
+     */
     public static void loadCardsFromJson(String jsonFile) throws InvalidJSONException, DeckAlreadyLoadedException {
         if(null != cards) throw new DeckAlreadyLoadedException();
         cards = new ArrayList<>();
@@ -77,6 +83,12 @@ public class WeaponDeck {
         }
     }
 
+    /**
+     * Method used to load directly from a json file a playable deck.
+     * @param jsonFile sources of the deck's cards.
+     * @return a playable Weapon deck.
+     * @throws InvalidJSONException if the json is not complete or formatted incorrectly.
+     */
     public static Deck<WeaponCard> newPlayableDeckFromJson(String jsonFile) throws InvalidJSONException {
         ArrayList<WeaponCard> cards;
         cards = new ArrayList<>();
@@ -108,7 +120,10 @@ public class WeaponDeck {
         return new Deck<>(cards);
     }
 
-    // deprecated
+    /**
+     * @return a new WeaponDeck factory object from @param jsonFile
+     * @throws InvalidJSONException if the json is not complete or formatted incorrectly.
+     */
     public static WeaponDeck makeFactoryFromJson(String jsonFile) throws InvalidJSONException {
         List<WeaponCard> cards = new ArrayList<>();
 

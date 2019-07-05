@@ -22,11 +22,23 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Integration tests for {@code MoveAtom}
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.MoveAtom
+ */
 public class MoveAtomTest {
 
-    Game game;
-    ScriptedDataSource source;
+    private Game game;
+    private ScriptedDataSource source;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
@@ -41,8 +53,11 @@ public class MoveAtomTest {
         source.pushTile(game.getMap().getTile(new TilePosition(1,0)));
     }
 
+    /**
+     * Simulates a game with a {@code MoveAtom}
+     */
     @Test
-    public void testExecute() throws Exception {
+    public void testExecute() {
         Turn turn = game.getNextTurn();
         turn.setRunClosingActions(false);
         turn.bindDataSource(source);

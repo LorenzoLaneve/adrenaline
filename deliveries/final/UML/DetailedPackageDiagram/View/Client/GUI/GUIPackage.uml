@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="976.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs</node>
+    <node x="0.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameView</node>
+    <node x="745.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIActionBoardView</node>
+    <node x="0.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIConnectionPromptReceiver</node>
+    <node x="269.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIKillTrackView</node>
+    <node x="0.0" y="927.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIMapView</node>
+    <node x="330.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUITurnView</node>
+    <node x="684.0" y="502.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIViewMaker</node>
+    <node x="273.0" y="502.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper</node>
+    <node x="0.0" y="502.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIPlayerView</node>
+    <node x="1077.0" y="601.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIUsernameView</node>
+    <node x="0.0" y="99.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIConnectionView</node>
+    <node x="947.0" y="927.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIDamageBoardView</node>
+    <node x="646.0" y="927.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIConnectionWindow</node>
+    <node x="531.0" y="1264.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUILocker</node>
+    <node x="1075.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUILobbyWindow</node>
+    <node x="1084.5" y="502.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIUsernamePromptReceiver</node>
+    <node x="1257.0" y="927.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUILobbyView</node>
+    <node x="413.0" y="927.0">it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.GUIUsernameView" target="it.polimi.deib.newdem.adrenaline.view.client.gui.GUIUsernamePromptReceiver">
+      <point x="0.0" y="-113.0" />
+      <point x="0.0" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.GUIConnectionView" target="it.polimi.deib.newdem.adrenaline.view.client.gui.GUIConnectionPromptReceiver">
+      <point x="0.0" y="-179.0" />
+      <point x="0.0" y="24.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="693.0" y="456.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

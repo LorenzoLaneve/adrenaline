@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="904.0" y="218.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.WeaponSelectionDialog</node>
+    <node x="2029.0" y="207.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PlayerEquipDialog</node>
+    <node x="1752.0" y="240.5">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.DisconnectionDialog</node>
+    <node x="1181.0" y="119.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PaymentSelectionDialog</node>
+    <node x="1046.75" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog</node>
+    <node x="350.0" y="196.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.GameResultsDialog</node>
+    <node x="0.0" y="196.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.ActionSelectionDialog</node>
+    <node x="627.0" y="174.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.AmmoSelectionDialog</node>
+    <node x="1475.0" y="218.0">it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PowerUpSelectionDialog</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PaymentSelectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-146.0" />
+      <point x="1318.0" y="99.0" />
+      <point x="1191.3125" y="99.0" />
+      <point x="16.0625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PlayerEquipDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-58.0" />
+      <point x="2157.5" y="69.0" />
+      <point x="1287.6875" y="69.0" />
+      <point x="112.4375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.AmmoSelectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-91.0" />
+      <point x="755.5" y="89.0" />
+      <point x="1127.0625" y="89.0" />
+      <point x="-48.1875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.PowerUpSelectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-47.0" />
+      <point x="1603.5" y="89.0" />
+      <point x="1223.4375" y="89.0" />
+      <point x="48.1875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.GameResultsDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-69.0" />
+      <point x="478.5" y="79.0" />
+      <point x="1094.9375" y="79.0" />
+      <point x="-80.3125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.ActionSelectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-69.0" />
+      <point x="165.0" y="69.0" />
+      <point x="1062.8125" y="69.0" />
+      <point x="-112.4375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.WeaponSelectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-47.0" />
+      <point x="1032.5" y="99.0" />
+      <point x="1159.1875" y="99.0" />
+      <point x="-16.0625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.DisconnectionDialog" target="it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs.Dialog">
+      <point x="0.0" y="-24.5" />
+      <point x="1880.5" y="79.0" />
+      <point x="1255.5625" y="79.0" />
+      <point x="80.3125" y="24.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="1405.9999999999998" y="1267.9999999999998" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

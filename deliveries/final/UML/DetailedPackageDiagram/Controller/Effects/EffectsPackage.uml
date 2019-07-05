@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1232.0625" y="882.201171875">it.polimi.deib.newdem.adrenaline.controller.effects.selection</node>
+    <node x="2551.0" y="626.0">it.polimi.deib.newdem.adrenaline.controller.effects.CyberbladeEffect</node>
+    <node x="5175.0" y="637.0">it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch</node>
+    <node x="7125.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.ShotgunEffect</node>
+    <node x="3107.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.PowerGloveEffect</node>
+    <node x="5431.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.RailgunEffect</node>
+    <node x="3959.875" y="88.5">it.polimi.deib.newdem.adrenaline.controller.effects.Effect</node>
+    <node x="0.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.MachineGunEffect</node>
+    <node x="550.0" y="670.0">it.polimi.deib.newdem.adrenaline.controller.effects.VortexCannonEffect</node>
+    <node x="2833.0" y="681.0">it.polimi.deib.newdem.adrenaline.controller.effects.LockRifleEffect</node>
+    <node x="6190.0" y="703.5">it.polimi.deib.newdem.adrenaline.controller.effects.WhisperEffect</node>
+    <node x="6413.0" y="703.5">it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect</node>
+    <node x="6859.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.ZX2Effect</node>
+    <node x="5922.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.FurnaceEffect</node>
+    <node x="4012.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.ShockwaveEffect</node>
+    <node x="1610.0625" y="875.0">it.polimi.deib.newdem.adrenaline.controller.effects.UndoException</node>
+    <node x="7404.0" y="703.5">it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect</node>
+    <node x="0.0" y="1194.0">it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager</node>
+    <node x="3383.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.LaserMagnumEffect</node>
+    <node x="1703.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.THOREffect</node>
+    <node x="4296.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.TractorBeamEffect</node>
+    <node x="1415.0625" y="875.0">it.polimi.deib.newdem.adrenaline.controller.effects.EffectLoader</node>
+    <node x="990.0" y="875.0">it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceiptData</node>
+    <node x="57.0" y="941.0">it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer</node>
+    <node x="5699.0" y="703.5">it.polimi.deib.newdem.adrenaline.controller.effects.HeatseekerEffect</node>
+    <node x="1995.0000000000002" y="681.0">it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect</node>
+    <node x="171.0" y="875.0">it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext</node>
+    <node x="1387.0" y="681.0">it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect</node>
+    <node x="281.0" y="681.0">it.polimi.deib.newdem.adrenaline.controller.effects.ChainsawEffect</node>
+    <node x="2370.125" y="0.0">it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice</node>
+    <node x="542.0" y="875.0">it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceipt</node>
+    <node x="6636.0" y="703.5">it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect</node>
+    <node x="822.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.FlamethrowerEffect</node>
+    <node x="2268.0" y="637.0">it.polimi.deib.newdem.adrenaline.controller.effects.PlasmaGunEffect</node>
+    <node x="4583.0" y="659.0">it.polimi.deib.newdem.adrenaline.controller.effects.SledgehammerEffect</node>
+    <node x="1111.0" y="681.0">it.polimi.deib.newdem.adrenaline.controller.effects.HellionEffect</node>
+    <node x="3675.0" y="626.0">it.polimi.deib.newdem.adrenaline.controller.effects.RocketLauncherEffect</node>
+    <node x="4879.0" y="648.0">it.polimi.deib.newdem.adrenaline.controller.effects.GrenadeLauncherEffect</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.SledgehammerEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-69.0" y="-69.0" />
+      <point x="4652.0" y="376.0" />
+      <point x="2562.625" y="376.0" />
+      <point x="87.5" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.GrenadeLauncherEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-69.0" y="-80.0" />
+      <point x="4948.0" y="356.0" />
+      <point x="2574.2916666666665" y="356.0" />
+      <point x="99.16666666666652" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.LockRifleEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="63.5" y="-47.0" />
+      <point x="3023.5" y="576.0" />
+      <point x="4036.0" y="576.0" />
+      <point x="-25.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.MachineGunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="65.25" y="-69.0" />
+      <point x="195.75" y="476.0" />
+      <point x="3963.5" y="476.0" />
+      <point x="-97.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ShockwaveEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-66.0" y="-69.0" />
+      <point x="4078.0" y="416.0" />
+      <point x="2539.2916666666665" y="416.0" />
+      <point x="64.16666666666652" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TractorBeamEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="66.75" y="-69.0" />
+      <point x="4496.25" y="386.0" />
+      <point x="4072.25" y="386.0" />
+      <point x="10.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.PlasmaGunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="65.75" y="-91.0" />
+      <point x="2465.25" y="556.0" />
+      <point x="4021.5" y="556.0" />
+      <point x="-39.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ChainsawEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="62.25" y="-47.0" />
+      <point x="467.75" y="486.0" />
+      <point x="3970.75" y="486.0" />
+      <point x="-90.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.NewtonEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-24.5" />
+      <point x="7505.5" y="246.0" />
+      <point x="4159.25" y="246.0" />
+      <point x="97.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.THOREffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="68.0" y="-69.0" />
+      <point x="1907.0" y="536.0" />
+      <point x="4007.0" y="536.0" />
+      <point x="-54.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.FlamethrowerEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="67.25" y="-69.0" />
+      <point x="1023.75" y="506.0" />
+      <point x="3985.25" y="506.0" />
+      <point x="-76.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-91.0" />
+      <point x="5293.0" y="336.0" />
+      <point x="4094.0" y="336.0" />
+      <point x="32.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.SledgehammerEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="69.0" y="-69.0" />
+      <point x="4790.0" y="366.0" />
+      <point x="4079.5" y="366.0" />
+      <point x="18.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.CyberbladeEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-65.5" y="-102.0" />
+      <point x="2616.5" y="466.0" />
+      <point x="2480.9583333333335" y="466.0" />
+      <point x="5.833333333333485" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.LockRifleEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-63.5" y="-47.0" />
+      <point x="2896.5" y="456.0" />
+      <point x="2492.625" y="456.0" />
+      <point x="17.5" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-24.5" />
+      <point x="6514.5" y="286.0" />
+      <point x="4130.25" y="286.0" />
+      <point x="68.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.RocketLauncherEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="79.25" y="-102.0" />
+      <point x="3912.75" y="606.0" />
+      <point x="4057.75" y="606.0" />
+      <point x="-3.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.PowerGloveEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="64.0" y="-69.0" />
+      <point x="3299.0" y="586.0" />
+      <point x="4043.25" y="586.0" />
+      <point x="-18.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.selection" target="it.polimi.deib.newdem.adrenaline.controller.effects.selection">
+      <point x="0.0" y="13.5" />
+      <point x="1301.0625" y="929.201171875" />
+      <point x="1212.0625" y="929.201171875" />
+      <point x="1212.0625" y="895.701171875" />
+      <point x="-69.0" y="-0.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ShotgunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-69.0" />
+      <point x="7254.5" y="256.0" />
+      <point x="4152.0" y="256.0" />
+      <point x="90.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.MachineGunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-65.25" y="-69.0" />
+      <point x="65.25" y="386.0" />
+      <point x="2375.9583333333335" y="386.0" />
+      <point x="-99.16666666666652" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.HeatseekerEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-24.5" />
+      <point x="5800.5" y="316.0" />
+      <point x="4108.5" y="316.0" />
+      <point x="47.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.RocketLauncherEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-79.25" y="-102.0" />
+      <point x="3754.25" y="426.0" />
+      <point x="2527.625" y="426.0" />
+      <point x="52.5" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.PowerGloveEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-64.0" y="-69.0" />
+      <point x="3171.0" y="446.0" />
+      <point x="2504.2916666666665" y="446.0" />
+      <point x="29.166666666666515" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.HellionEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="64.0" y="-47.0" />
+      <point x="1303.0" y="516.0" />
+      <point x="3992.5" y="516.0" />
+      <point x="-68.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager" target="it.polimi.deib.newdem.adrenaline.controller.effects.EffectContext">
+      <point x="104.0" y="-234.0" />
+      <point x="260.0" y="1169.0" />
+      <point x="334.0" y="1169.0" />
+      <point x="0.0" y="134.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TractorBeamEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-66.75" y="-69.0" />
+      <point x="4362.75" y="396.0" />
+      <point x="2550.9583333333335" y="396.0" />
+      <point x="75.83333333333348" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.CyberbladeEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="65.5" y="-102.0" />
+      <point x="2747.5" y="566.0" />
+      <point x="4028.75" y="566.0" />
+      <point x="-32.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.HellionEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-64.0" y="-47.0" />
+      <point x="1175.0" y="426.0" />
+      <point x="2422.625" y="426.0" />
+      <point x="-52.5" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.VortexCannonEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="63.0" y="-58.0" />
+      <point x="739.0" y="496.0" />
+      <point x="3978.0" y="496.0" />
+      <point x="-83.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ZX2Effect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-69.0" />
+      <point x="6982.0" y="266.0" />
+      <point x="4144.75" y="266.0" />
+      <point x="83.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.THOREffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-68.0" y="-69.0" />
+      <point x="1771.0" y="446.0" />
+      <point x="2445.9583333333335" y="446.0" />
+      <point x="-29.166666666666515" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.RailgunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-69.0" />
+      <point x="5555.0" y="326.0" />
+      <point x="4101.25" y="326.0" />
+      <point x="39.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-74.0" y="-47.0" />
+      <point x="1461.0" y="436.0" />
+      <point x="2434.2916666666665" y="436.0" />
+      <point x="-40.833333333333485" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.LaserMagnumEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="68.0" y="-69.0" />
+      <point x="3587.0" y="596.0" />
+      <point x="4050.5" y="596.0" />
+      <point x="-10.875" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ShockwaveEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="66.0" y="-69.0" />
+      <point x="4210.0" y="406.0" />
+      <point x="4065.0" y="406.0" />
+      <point x="3.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.FlamethrowerEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-67.25" y="-69.0" />
+      <point x="889.25" y="416.0" />
+      <point x="2410.9583333333335" y="416.0" />
+      <point x="-64.16666666666652" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.WhisperEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-24.5" />
+      <point x="6291.5" y="296.0" />
+      <point x="4123.0" y="296.0" />
+      <point x="61.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.GrenadeLauncherEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="69.0" y="-80.0" />
+      <point x="5086.0" y="346.0" />
+      <point x="4086.75" y="346.0" />
+      <point x="25.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="63.25" y="-47.0" />
+      <point x="2184.75" y="546.0" />
+      <point x="4014.25" y="546.0" />
+      <point x="-47.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ChainsawEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-62.25" y="-47.0" />
+      <point x="343.25" y="396.0" />
+      <point x="2387.625" y="396.0" />
+      <point x="-87.5" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.FurnaceEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-69.0" />
+      <point x="6046.0" y="306.0" />
+      <point x="4115.75" y="306.0" />
+      <point x="54.375" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.PlasmaGunEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-65.75" y="-91.0" />
+      <point x="2333.75" y="466.0" />
+      <point x="2469.2916666666665" y="466.0" />
+      <point x="-5.833333333333485" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.LaserMagnumEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-68.0" y="-69.0" />
+      <point x="3451.0" y="436.0" />
+      <point x="2515.9583333333335" y="436.0" />
+      <point x="40.833333333333485" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TargetingScopeEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="74.0" y="-47.0" />
+      <point x="1609.0" y="526.0" />
+      <point x="3999.75" y="526.0" />
+      <point x="-61.625" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.EffectManager" target="it.polimi.deib.newdem.adrenaline.controller.effects.MetaPlayer">
+      <point x="-104.0" y="-234.0" />
+      <point x="52.0" y="1169.0" />
+      <point x="80.5" y="1169.0" />
+      <point x="-23.5" y="68.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.VortexCannonEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-63.0" y="-58.0" />
+      <point x="613.0" y="406.0" />
+      <point x="2399.2916666666665" y="406.0" />
+      <point x="-75.83333333333348" y="113.0" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.TagbackGrenadeEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.Effect">
+      <point x="0.0" y="-24.5" />
+      <point x="6737.5" y="276.0" />
+      <point x="4137.5" y="276.0" />
+      <point x="76.125" y="24.5" />
+    </edge>
+    <edge source="it.polimi.deib.newdem.adrenaline.controller.effects.ElectroscytheEffect" target="it.polimi.deib.newdem.adrenaline.controller.effects.PaymentInvoice">
+      <point x="-63.25" y="-47.0" />
+      <point x="2058.25" y="456.0" />
+      <point x="2457.625" y="456.0" />
+      <point x="-17.5" y="113.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="2272.499999999999" y="632.9166666666665" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -10,19 +10,28 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.Turn;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
-import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
+/**
+ * Integration tests for {@code ReloadAtom}
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.ReloadAtom
+ */
 public class ReloadAtomTest {
 
     private Game game;
     private ScriptedDataSource source;
 
+    /**
+     * Builds a new test game
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
@@ -33,6 +42,10 @@ public class ReloadAtomTest {
         );
     }
 
+    /**
+     * Simulates a game with a reload atom
+     * @throws Exception
+     */
     @Test
     public void testExecute() throws Exception {
         Turn turn = game.getNextTurn();
@@ -44,7 +57,6 @@ public class ReloadAtomTest {
         source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED));
         for(int i = 0; i < 10; i++) { source.pushWeaponCardIndex(0); }
 
-        // pickUpWeaponHere();
         source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED)); // move to red spawn
         source.pushPupIndex(0); // spawn // spawn at a random spawnpoint
 
@@ -55,18 +67,6 @@ public class ReloadAtomTest {
 
         refillAmmos(turn.getActivePlayer());
         game.concludeTurn(turn); // implies reload
-    }
-
-    private void pickUpWeaponHere() {
-        // do not discard card
-        // pay for it
-        // buy random weapon from spawnpoint
-        source.pushTile(game.getMap().getSpawnPointFromColor(AmmoColor.RED)); // move to red spawnpoint tile
-        // ACTION 1
-    }
-
-    private void moveStill(Player player) {
-        source.pushTile(player.getTile());
     }
 
     private void refillAmmos(Player player) {
