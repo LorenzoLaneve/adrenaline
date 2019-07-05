@@ -233,7 +233,7 @@ public class TestElectroscytheEffect {
             fail();
         }
 
-        assertEquals(2,player1.getInventory().getBlue());
+        assertEquals(1,player1.getInventory().getBlue());
         assertEquals(2,player2.getDamageFromPlayer(player1));
         assertEquals(2,player3.getDamageFromPlayer(player1));
 
