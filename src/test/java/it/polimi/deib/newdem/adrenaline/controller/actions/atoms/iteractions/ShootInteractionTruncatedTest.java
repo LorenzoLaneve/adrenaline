@@ -14,16 +14,32 @@ import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicAc
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAGENTA;
 import static org.junit.Assert.*;
 
+/**
+ * Integration tests for a shoot interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectShootWeaponInteraction
+ */
 public class ShootInteractionTruncatedTest {
 
-        GameRigged game;
+        private GameRigged game;
 
-        @Before
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
+    @Before
         public void SetUp() throws Exception {
             game = TestingUtils.makeRiggedGame(MAGENTA);
         }
 
-        @Test
+    /**
+     * Simulates a game with a shoot interaction
+     * @throws Exception
+     */
+    @Test
         public void testExecute() throws Exception {
             ScriptedDataSource sds = new ScriptedDataSource( game,
                     new ActionType(MOVE3, GRAB),
@@ -59,7 +75,11 @@ public class ShootInteractionTruncatedTest {
                     t.getActivePlayer().getTile().getPosition());
         }
 
-        @Test
+    /**
+     * Simulates a game with a shoot interaction and undos at various steps
+     * @throws Exception
+     */
+    @Test
         public void testUndos() throws Exception {
             ScriptedDataSource sds = new ScriptedDataSource( game,
                     new ActionType(MOVE2, GRAB),

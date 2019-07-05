@@ -22,11 +22,22 @@ import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAG
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
+/**
+ * Integration tests for {@code DischargeInteraction}
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.DischargeInteraction
+ */
 public class DischargeInteractionTest {
 
-    GameRigged game;
+    private GameRigged game;
 
+    /**
+     * Creates a tesdt game with controlled weapons and powerups
+     * @throws Exception
+     */
     @Before
     public void SetUp() throws Exception {
         game = TestingUtils.makeRiggedGame(MAGENTA, GREEN);
@@ -34,6 +45,10 @@ public class DischargeInteractionTest {
         game.setPowerupDeck(PowerUpDeck.fromJson("fixed_decks/11_call_only_pups.json").createNewDeck());
     }
 
+    /**
+     * Simulates a game with a discharge weapon interaction
+     * @throws Exception
+     */
     @Test
     public void testUndos() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,

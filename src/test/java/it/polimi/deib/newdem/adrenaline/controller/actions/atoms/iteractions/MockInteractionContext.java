@@ -7,6 +7,11 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
 import java.util.List;
 
+/**
+ * Mock object for testing purposes
+ *
+ * All of its methods do nothing
+ */
 public class MockInteractionContext implements InteractionContext {
 
     @Override

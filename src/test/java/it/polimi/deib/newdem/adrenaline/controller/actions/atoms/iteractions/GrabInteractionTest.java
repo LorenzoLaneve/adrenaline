@@ -20,15 +20,31 @@ import static it.polimi.deib.newdem.adrenaline.model.items.AmmoColor.RED;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Integration tests for a grab interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.GetTileInteraction
+ */
 public class GrabInteractionTest {
 
-    GameRigged game;
+    private GameRigged game;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void SetUp() throws Exception {
         game = TestingUtils.makeRiggedGame(MAGENTA);
     }
 
+    /**
+     * Simulates a game with a grab on a drop
+     * @throws Exception
+     */
     @Test
     public void testExecute() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,
@@ -49,6 +65,10 @@ public class GrabInteractionTest {
         t.execute();
     }
 
+    /**
+     * Simulates a game with a grab on a spawnpoint
+     * @throws Exception
+     */
     @Test
     public void testUndos() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,
@@ -76,6 +96,10 @@ public class GrabInteractionTest {
         t.execute();
     }
 
+    /**
+     * Simulates a game with a grab and many undos at various steps on a spawnpoint
+     * @throws Exception
+     */
     @Test
     public void testUndoPayment() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,
@@ -108,11 +132,19 @@ public class GrabInteractionTest {
         assertTrue(closingAmmos > startingAmmos);
     }
 
+    /**
+     * Tests revert functionality
+     * @throws Exception
+     */
     @Test
     public void testRevert() throws Exception {
         new GrabDropInteraction(new MockInteractionContext()).revert();
     }
 
+    /**
+     * Tests requires input functionality
+     * @throws Exception
+     */
     @Test
     public void testRequiresInput() throws Exception {
         assertFalse(new GrabDropInteraction(new MockInteractionContext()).requiresInput());
