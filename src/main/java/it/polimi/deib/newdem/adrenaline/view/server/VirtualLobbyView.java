@@ -45,6 +45,7 @@ public class VirtualLobbyView implements LobbyView, LobbyListener {
         if (lobby.isInGame()) {
             for (User user : lobby.getUsers()) {
                 if (user.getName().equals(name)) {
+                    user.sendEvent(new LobbyDataEvent(users));
                     user.sendEvent(new GameStartEvent());
                     break;
                 }

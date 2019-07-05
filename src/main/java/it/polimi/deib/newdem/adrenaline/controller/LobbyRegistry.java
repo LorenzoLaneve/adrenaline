@@ -43,6 +43,9 @@ public class LobbyRegistry {
 
     private LobbyController getOrCreateLobbyController(User user) {
         //TODO persistence
+        if(userLocations.containsKey(user)) {
+            return userLocations.get(user);
+        }
         return getAvailableLobbyController();
     }
 

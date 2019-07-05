@@ -8,8 +8,8 @@
   "rmiIdentifier": "adrenaline",
 
   "timerLength": 90,
-  "minPlayers": 3,
-  "maxPlayers": 3,
+  "minPlayers": 1,
+  "maxPlayers": 2,
 
   "turnTime": 60,
 

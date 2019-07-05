@@ -55,8 +55,10 @@ public class LobbyControllerImpl implements LobbyController, TimerListener, User
 
     @Override
     public synchronized void addUser(User user) {
+        if(!this.lobby.getUsers().contains(user)) {
+            user.addListener(this);
+        }
         this.lobby.addUser(user);
-        user.addListener(this);
 
         this.switchState(lobbyState.userDidEnterLobby(user, this));
     }

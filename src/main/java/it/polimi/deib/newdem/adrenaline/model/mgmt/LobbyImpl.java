@@ -33,7 +33,9 @@ public class LobbyImpl implements Lobby {
 
     @Override
     public synchronized void addUser(User user) {
-        this.users.add(user);
+        if(!users.contains(user)) {
+            this.users.add(user);
+        }
 
         if (listener != null) {
             listener.userDidEnterLobby(user, this);
