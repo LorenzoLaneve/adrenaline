@@ -6,6 +6,10 @@ import it.polimi.deib.newdem.adrenaline.view.KillTrackView;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code KillTrackView}
+ * @see KillTrackView for the semantics of the view methods.
+ */
 public class CLIKillTrackView implements KillTrackView {
 
     private PrintStream out;

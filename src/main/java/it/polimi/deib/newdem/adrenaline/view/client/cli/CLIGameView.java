@@ -7,6 +7,10 @@ import it.polimi.deib.newdem.adrenaline.view.GameView;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code GameView}
+ * @see GameView for the semantics of the view methods.
+ */
 public class CLIGameView implements GameView {
 
     private PrintStream out;

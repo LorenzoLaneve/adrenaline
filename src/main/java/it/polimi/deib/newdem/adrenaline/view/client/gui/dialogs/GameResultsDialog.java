@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * A window that displays the game results object passed to the constructor.
+ * Also presents a button that will exit the application.
+ */
 public class GameResultsDialog implements Dialog {
 
     private GameResults results;

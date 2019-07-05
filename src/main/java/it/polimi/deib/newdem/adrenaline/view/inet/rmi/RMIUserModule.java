@@ -9,6 +9,12 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of {@code IncomingUserModule} involving the response of Remote Method
+ * Invocations requested by external hosts. This class involves the creation and binding of a
+ * {@code RMIServerGreeter} to the server's RMI registry, that will provide connecting clients
+ * {@code RMIEndpoints} that they can use to receive messages from the server.
+ */
 public class RMIUserModule implements IncomingUserModule {
 
     private RMIServerGreeter greeter;

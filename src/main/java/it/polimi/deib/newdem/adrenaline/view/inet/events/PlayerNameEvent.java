@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given player changed their name to the given name.
+ * @see UserEvent to see what this class is used for.
+ */
 public class PlayerNameEvent implements UserEvent {
 
     private PlayerColor color;

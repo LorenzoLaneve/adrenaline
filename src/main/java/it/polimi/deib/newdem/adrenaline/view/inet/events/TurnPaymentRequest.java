@@ -7,6 +7,12 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The server is requesting the user to choose a way to pay the given payment invoice.
+ * The resources of the player, including ammos and power ups that can be sued to pay, are passed.
+ * {@code fragmentToPay} is an ID that explains what the user is going to pay.
+ * @see UserEvent to see what this class is used for.
+ */
 public class TurnPaymentRequest implements UserEvent {
 
     private PaymentInvoice invoice;

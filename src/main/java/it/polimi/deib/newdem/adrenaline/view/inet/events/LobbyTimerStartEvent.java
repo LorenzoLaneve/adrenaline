@@ -2,6 +2,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The timer in the lobby has started with the given seconds of countdown.
+ * @see UserEvent to see what this class is used for.
+ */
 public class LobbyTimerStartEvent implements UserEvent {
 
     private int seconds;

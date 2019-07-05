@@ -4,19 +4,14 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.PlayerTilePair;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.MapViewEventListener;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GUIMapView implements MapView {
 
@@ -44,14 +39,14 @@ public class GUIMapView implements MapView {
             Pane mapGrid = (Pane) window.getScene().lookup("#mapGrid");
             for (int i = 2; i >= 0; i--) {
                 for (int j = 0; j < 4; j++) {
-                    mapGrid.getChildren().add(GUIGameWindowHelper.createTilePane(new TilePosition(j, i)));
+                    mapGrid.getChildren().add(GUIHelper.createTilePane(new TilePosition(j, i)));
                 }
             }
 
             for (TilePosition tile : data.getTiles()) {
                 DropInstance drop = data.getDropInTile(tile);
                 if (drop != null) {
-                    GUIGameWindowHelper.addDropsToTilePane(window.getScene(), tile, drop);
+                    GUIHelper.addDropsToTilePane(window.getScene(), tile, drop);
                 }
             }
 
@@ -61,24 +56,24 @@ public class GUIMapView implements MapView {
 
             for (Integer wCard : data.getRedWeaponSet()) {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#redSpawnPointCards");
-                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+                spawnPointCards.getChildren().add(GUIHelper.createSpawnPointCardPane(wCard));
             }
 
             for (Integer wCard : data.getBlueWeaponSet()) {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#blueSpawnPointCards");
-                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+                spawnPointCards.getChildren().add(GUIHelper.createSpawnPointCardPane(wCard));
             }
 
             for (Integer wCard : data.getYellowWeaponSet()) {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#yellowSpawnPointCards");
-                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(wCard));
+                spawnPointCards.getChildren().add(GUIHelper.createSpawnPointCardPane(wCard));
             }
 
             for (PlayerTilePair pair : data.getPlayerLocations()) {
-                Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), pair.getPlayer());
+                Pane playerPin = GUIHelper.getPlayerPin(window.getScene(), pair.getPlayer());
                 if (playerPin != null) ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
 
-                GUIGameWindowHelper.addPlayerToTilePane(window.getScene(), pair.getPlayer(), pair.getTile());
+                GUIHelper.addPlayerToTilePane(window.getScene(), pair.getPlayer(), pair.getTile());
             }
 
             window.closeDialog(); // close loading data
@@ -88,19 +83,19 @@ public class GUIMapView implements MapView {
     @Override
     public void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3) {
         Platform.runLater(() -> {
-            Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+            Pane tilePane = GUIHelper.lookupTilePane(window.getScene(), tile);
 
             Pane dropsPane = (Pane) tilePane.lookup(".tile-drops-pane");
-            dropsPane.getChildren().add(GUIGameWindowHelper.createDropIcon(drop1));
-            dropsPane.getChildren().add(GUIGameWindowHelper.createDropIcon(drop2));
-            dropsPane.getChildren().add(GUIGameWindowHelper.createDropIcon(drop3));
+            dropsPane.getChildren().add(GUIHelper.createDropIcon(drop1));
+            dropsPane.getChildren().add(GUIHelper.createDropIcon(drop2));
+            dropsPane.getChildren().add(GUIHelper.createDropIcon(drop3));
         });
     }
 
     @Override
     public void removeDrops(TilePosition tile) {
         Platform.runLater(() -> {
-            Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+            Pane tilePane = GUIHelper.lookupTilePane(window.getScene(), tile);
 
             Pane dropsPane = (Pane) tilePane.lookup(".tile-drops-pane");
             dropsPane.getChildren().clear();
@@ -110,32 +105,32 @@ public class GUIMapView implements MapView {
     @Override
     public void movePlayer(PlayerColor player, TilePosition destTile) {
         Platform.runLater(() -> {
-            Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), player);
+            Pane playerPin = GUIHelper.getPlayerPin(window.getScene(), player);
             ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
 
-            GUIGameWindowHelper.addPlayerToTilePane(window.getScene(), player, destTile);
+            GUIHelper.addPlayerToTilePane(window.getScene(), player, destTile);
         });
     }
 
     @Override
     public void spawnPlayer(PlayerColor player, TilePosition tile) {
         Platform.runLater(() -> {
-            Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), player);
+            Pane playerPin = GUIHelper.getPlayerPin(window.getScene(), player);
             if (playerPin != null) ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
 
-            GUIGameWindowHelper.addPlayerToTilePane(window.getScene(), player, tile);
+            GUIHelper.addPlayerToTilePane(window.getScene(), player, tile);
         });
     }
 
     @Override
     public void killPlayer(PlayerColor player) {
-        Platform.runLater(() -> GUIGameWindowHelper.getPlayerPin(window.getScene(), player).getStyleClass().add("dead"));
+        Platform.runLater(() -> GUIHelper.getPlayerPin(window.getScene(), player).getStyleClass().add("dead"));
     }
 
     @Override
     public void removePlayer(PlayerColor player) {
         Platform.runLater(() -> {
-            Pane playerPin = GUIGameWindowHelper.getPlayerPin(window.getScene(), player);
+            Pane playerPin = GUIHelper.getPlayerPin(window.getScene(), player);
             if (playerPin != null) {
                 ((Pane) playerPin.getParent()).getChildren().remove(playerPin);
             }
@@ -161,7 +156,7 @@ public class GUIMapView implements MapView {
             AmmoColor spawnPointColor = spawnPointLocs.get(tilePosition);
             if (spawnPointColor != null) {
                 Pane spawnPointCards = (Pane) window.getScene().lookup("#"+ ammoToID(spawnPointColor) +"SpawnPointCards");
-                spawnPointCards.getChildren().add(GUIGameWindowHelper.createSpawnPointCardPane(cardId));
+                spawnPointCards.getChildren().add(GUIHelper.createSpawnPointCardPane(cardId));
             }
         });
     }

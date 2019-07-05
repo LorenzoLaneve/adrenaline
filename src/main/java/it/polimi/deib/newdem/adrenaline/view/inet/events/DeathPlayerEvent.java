@@ -3,9 +3,13 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given player died.
+ * @see UserEvent to see what this class is used for.
+ */
 public class DeathPlayerEvent implements UserEvent {
 
-    PlayerColor playerColor;
+    private PlayerColor playerColor;
 
     public DeathPlayerEvent(PlayerColor playerColor){
         this.playerColor = playerColor;

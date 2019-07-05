@@ -12,6 +12,10 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dialog that asks the user to choose an action among the ones passed to the constructor.
+ * The choice will be notified to the {@code Listener} passed to the constructor.
+ */
 public class ActionSelectionDialog implements Dialog {
 
     @FunctionalInterface

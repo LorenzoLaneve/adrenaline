@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Object that encapsulates a JavaFX stage showing a lobby state to the user.
+ */
 public class GUILobbyWindow {
 
     private GUIUsernamePromptReceiver usernameReceiver;
@@ -19,7 +22,10 @@ public class GUILobbyWindow {
 
     private Scene scene;
 
-
+    /**
+     * Creates a new lobby window with the object that will receive the data about the username
+     * @see GUIUsernamePromptReceiver for further information.
+     */
     public GUILobbyWindow(GUIUsernamePromptReceiver usernameReceiver) {
         this.usernameReceiver = usernameReceiver;
     }
@@ -53,6 +59,9 @@ public class GUILobbyWindow {
         usernameReceiver.deliverUsername(usernameField.getText());
     }
 
+    /**
+     * Shows the given message in the error label of the username form in the window.
+     */
     public void showUsernameError(String message) {
         Label errorLabel = (Label) scene.lookup("#errorLabel");
         errorLabel.setText(message);
@@ -63,6 +72,9 @@ public class GUILobbyWindow {
         return (Label) scene.lookup("#userSlot"+ slotIndex);
     }
 
+    /**
+     * Adds the given name in the user list in the window.
+     */
     public void addUser(String name) {
         Label userSlot;
         for (int i = 1; i <= 5; i++) {
@@ -77,6 +89,9 @@ public class GUILobbyWindow {
         }
     }
 
+    /**
+     * Removes the given name from the user list in the window.
+     */
     public void removeUser(String name) {
         Label userSlot;
         for (int i = 1; i <= 5; i++) {
@@ -91,6 +106,9 @@ public class GUILobbyWindow {
         }
     }
 
+    /**
+     * Shows the timer label with the given seconds.
+     */
     public void startTimer(int seconds) {
         Label lobbyStateLabel = (Label) scene.lookup("#lobbyState");
         lobbyStateLabel.setText("Enough players. Starting in");
@@ -98,11 +116,17 @@ public class GUILobbyWindow {
         syncTimer(seconds);
     }
 
+    /**
+     * Updates the timer label with the given seconds.
+     */
     public void syncTimer(int seconds) {
         Label lobbyTimerLabel = (Label) scene.lookup("#lobbyTimer");
         lobbyTimerLabel.setText(""+ seconds);
     }
 
+    /**
+     * Removes the timer label from the window.
+     */
     public void abortTimer() {
         Label lobbyStateLabel = (Label) scene.lookup("#lobbyState");
         lobbyStateLabel.setText("Waiting for three players");
@@ -111,6 +135,9 @@ public class GUILobbyWindow {
         lobbyTimerLabel.setText("");
     }
 
+    /**
+     * Removes the username form from the window.
+     */
     public void closeUsernameForm() {
         Pane contentPane = (Pane) scene.lookup("#contentPane");
         contentPane.getChildren().clear();
@@ -135,6 +162,9 @@ public class GUILobbyWindow {
         this.stage.hide();
     }
 
+    /**
+     * Shows a dialog saying that the server connection was lost.
+     */
     public void notifyDisconnection() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Adrenaline");

@@ -5,8 +5,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
-import java.util.List;
 
+/**
+ * View that observes a Map object in the model.
+ */
 public interface MapView {
 
     /**
@@ -21,6 +23,9 @@ public interface MapView {
      */
     void addDrops(TilePosition tile, GameData.DropType drop1, GameData.DropType drop2, GameData.DropType drop3);
 
+    /**
+     * Notifies that the drops were removed from the given tile.
+     */
     void removeDrops(TilePosition tile);
 
     /**
@@ -43,8 +48,14 @@ public interface MapView {
      */
     void removePlayer(PlayerColor player);
 
+    /**
+     * Adds the weapon with the given card ID to the spawn point in the given location.
+     */
     void addWeapon(TilePosition tilePosition, int cardId);
 
+    /**
+     * Removes the weapon with the given card ID from the spawn point in the given location.
+     */
     void removeWeapon(TilePosition tilePosition, int cardId);
 
 }

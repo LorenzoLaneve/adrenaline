@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given drop is spawned in the given tile.
+ * @see UserEvent to see what this class is used for.
+ */
 public class SpawnDropEvent implements UserEvent {
 
     private GameData.DropType drop1;

@@ -8,6 +8,10 @@ import it.polimi.deib.newdem.adrenaline.view.PlayerView;
 import java.io.PrintStream;
 import java.util.Map;
 
+/**
+ * Command Line Interface implementation of {@code PlayerView}
+ * @see PlayerView for the semantics of the view methods.
+ */
 public class CLIPlayerView implements PlayerView {
 
     private PlayerColor color;

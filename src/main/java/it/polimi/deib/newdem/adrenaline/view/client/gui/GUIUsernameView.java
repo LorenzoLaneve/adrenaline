@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 import it.polimi.deib.newdem.adrenaline.view.UsernameView;
 import javafx.application.Platform;
 
+/**
+ * Java FX implementation of {@code UsernameView}
+ * @see UsernameView for the semantics of the view methods.
+ */
 public class GUIUsernameView implements UsernameView, GUIUsernamePromptReceiver {
 
     private GUILobbyWindow window;

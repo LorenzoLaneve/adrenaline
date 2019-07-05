@@ -5,6 +5,10 @@ import javafx.application.Platform;
 
 import java.util.List;
 
+/**
+ * Java FX implementation of {@code LobbyView}
+ * @see LobbyView for the semantics of the view methods.
+ */
 public class GUILobbyView implements LobbyView {
 
     private GUILobbyWindow lobbyWindow;

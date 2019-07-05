@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * An object that has to be bound to the server's RMI registry that will send
+ * connection setup information to clients.
+ */
 public interface RMIServerGreeter extends Remote {
 
     /**

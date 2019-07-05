@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.view.LobbyView;
 import java.io.PrintStream;
 import java.util.List;
 
+/**
+ * Command Line Interface implementation of {@code LobbyView}
+ * @see LobbyView for the semantics of the view methods.
+ */
 public class CLILobbyView implements LobbyView {
 
     private PrintStream out;

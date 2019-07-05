@@ -2,6 +2,12 @@ package it.polimi.deib.newdem.adrenaline.view.inet;
 
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 
+/**
+ * An incoming user modules consists of a sort of source for users that can join the server.
+ * These modules are user by the UserGreeter object: the user greeter keeps on calling
+ * {@code IncomingUserModule#newUser()}, and the user modules should wait until a new user is connected.
+ * Also methods to initialize and dispose the used resources are provided by this interface.
+ */
 public interface IncomingUserModule {
 
     /**

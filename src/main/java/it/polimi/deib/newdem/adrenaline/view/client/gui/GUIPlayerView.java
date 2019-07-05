@@ -42,7 +42,7 @@ public class GUIPlayerView implements PlayerView {
     }
 
     private Pane getPlayerPane() {
-        return (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+        return (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color));
     }
 
 
@@ -62,14 +62,14 @@ public class GUIPlayerView implements PlayerView {
 
 
             for (Integer powerUp : data.getPowerUpCards()) {
-                powerUpsPane.getChildren().add(GUIGameWindowHelper.createPowerUpCardPane(powerUp));
+                powerUpsPane.getChildren().add(GUIHelper.createPowerUpCardPane(powerUp));
             }
 
             for (Integer weapon : data.getReadyWeaponCards()) {
-                weaponsPane.getChildren().add(GUIGameWindowHelper.createWeaponCardPane(weapon));
+                weaponsPane.getChildren().add(GUIHelper.createWeaponCardPane(weapon));
             }
             for (Integer weapon : data.getUnloadedWeaponCards()) {
-                Group cardPane = GUIGameWindowHelper.createWeaponCardPane(weapon);
+                Group cardPane = GUIHelper.createWeaponCardPane(weapon);
                 cardPane.getStyleClass().add("needs-reload");
             }
 
@@ -92,18 +92,14 @@ public class GUIPlayerView implements PlayerView {
 
             Pane damagesPane = (Pane) damageBoardPane.lookup(".dmg-signs");
             for (PlayerColor damager : data.getDamages()) {
-                damagesPane.getChildren().add(GUIGameWindowHelper.createDamageIcon(damager));
+                damagesPane.getChildren().add(GUIHelper.createDamageIcon(damager));
             }
 
             Pane marksPane = (Pane) damageBoardPane.lookup(".mark-signs");
             for (Map.Entry<PlayerColor, Integer> marks : data.getMarks().entrySet()) {
                 for (int i = 0; i < marks.getValue(); i++) {
-                    marksPane.getChildren().add(GUIGameWindowHelper.createDamageIcon(marks.getKey()));
+                    marksPane.getChildren().add(GUIHelper.createDamageIcon(marks.getKey()));
                 }
-            }
-
-            if (data.getPosition() != null) {
-                // TODO position, or maybe it should get moves to map view.
             }
 
             Label scoreLabel = (Label) damageBoardPane.lookup(".score-amt");
@@ -139,7 +135,7 @@ public class GUIPlayerView implements PlayerView {
             Label powerUpsLabel = (Label) getPlayerPane().lookup(".ammo-amt.powerup");
             powerUpsLabel.setText(""+ (Integer.valueOf(powerUpsLabel.getText()) + 1));
 
-            powerUpsPane.getChildren().add(GUIGameWindowHelper.createPowerUpCardPane(cardID));
+            powerUpsPane.getChildren().add(GUIHelper.createPowerUpCardPane(cardID));
         });
     }
 
@@ -165,7 +161,7 @@ public class GUIPlayerView implements PlayerView {
     @Override
     public void addWeaponCard(int cardID) {
         Platform.runLater(() -> {
-            weaponsPane.getChildren().add(GUIGameWindowHelper.createWeaponCardPane(cardID));
+            weaponsPane.getChildren().add(GUIHelper.createWeaponCardPane(cardID));
         });
     }
 

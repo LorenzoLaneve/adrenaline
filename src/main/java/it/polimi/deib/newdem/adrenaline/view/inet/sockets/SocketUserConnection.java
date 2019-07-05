@@ -7,6 +7,10 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * A socket user connection is a user connection that uses Java Sockets to
+ * send and receive user events from the other side.
+ */
 public class SocketUserConnection extends UserConnectionBase {
 
     private InputStream input;
@@ -19,7 +23,7 @@ public class SocketUserConnection extends UserConnectionBase {
 
 
     /**
-     * Initializes a new socket user connection
+     * Initializes a new socket user connection.
      * @param observedSocket the socket that has to be read/written to for incoming/outgoing events.
      * @param user the user object representing the user that will generate/receive the events.
      * @throws IOException If a socket error occurs.

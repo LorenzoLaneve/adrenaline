@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * An object encapsulating a JavaFX stage showing the game window, and providing methods
+ * to easily show elements.
+ */
 public class GUIGameWindow {
 
     private Stage stage;

@@ -8,6 +8,12 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 import java.io.PrintStream;
 import java.util.logging.Logger;
 
+/**
+ * Command Line Interface implementation of {@code ViewMaker}.
+ * This is implemented simply by using the input and outstream passed to the constructor.
+ * This view maker will create CLI views that will use the specified streams to communicate with
+ * the user.
+ */
 public class CLIViewMaker implements ViewMaker {
 
     private Logger log;
@@ -16,6 +22,9 @@ public class CLIViewMaker implements ViewMaker {
 
     private CLIReader in;
 
+    /**
+     * Create a new CLI view maker with the given streams.
+     */
     public CLIViewMaker(Logger log, PrintStream out, CLIReader in) {
         this.log = log;
         this.out = out;

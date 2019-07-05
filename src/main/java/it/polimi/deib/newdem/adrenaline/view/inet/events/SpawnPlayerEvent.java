@@ -4,10 +4,14 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given player spawned at the given location in map.
+ * @see UserEvent to see what this class is used for.
+ */
 public class SpawnPlayerEvent implements UserEvent {
 
-    PlayerColor playerColor;
-    TilePosition spawnPoint;
+    private PlayerColor playerColor;
+    private TilePosition spawnPoint;
 
     public SpawnPlayerEvent(PlayerColor playerColor, TilePosition tilePosition){
         this.playerColor = playerColor;

@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract user connection that implements the publisher-subscriber mechanism.
+ * @see UserConnection for further information.
+ */
 public abstract class UserConnectionBase implements UserConnection {
 
     private HashMap<Class<? extends UserEvent>, List<UserEventSubscriber>> subscribers;
@@ -37,6 +41,9 @@ public abstract class UserConnectionBase implements UserConnection {
         return user;
     }
 
+    /**
+     * NOTE: if you need to override this method, REMEMBER TO CALL {@code super.start()}
+     */
     @Override
     public void start() {
         this.heartbeatThread = new Thread(this::doHeartbeat);
@@ -81,6 +88,9 @@ public abstract class UserConnectionBase implements UserConnection {
         }
     }
 
+    /**
+     * NOTE: if you need to override this method, REMEMBER TO CALL {@code super.close()}
+     */
     @Override
     public void close() {
         notifyEvent(new ConnectionCloseEvent());

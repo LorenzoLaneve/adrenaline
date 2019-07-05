@@ -8,14 +8,18 @@ import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 
-import java.io.FileReader;
 import java.io.Reader;
 
+/**
+ * Class containing utility methods for Command Line Interface.
+ */
 class CLIHelper {
 
     private CLIHelper() {  }
 
-
+    /**
+     * Returns a user-readable string for the given player color.
+     */
     public static String colorToString(PlayerColor color) {
         switch (color) {
             case YELLOW:
@@ -32,6 +36,9 @@ class CLIHelper {
         return null;
     }
 
+    /**
+     * Returns the screen name of the weapon card with the given ID.
+     */
     public static String getWeaponName(int cardID) {
         try (Reader fread = FileUtils.getResourceReader("cards/weaponuserdata.json")) {
             JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
@@ -44,6 +51,9 @@ class CLIHelper {
         }
     }
 
+    /**
+     * Returns the screen name of the power up card with the given ID.
+     */
     public static String getPowerUpName(int cardID) {
         try (Reader fread = FileUtils.getResourceReader("cards/powerupuserdata.json")) {
             JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();
@@ -57,11 +67,16 @@ class CLIHelper {
     }
 
 
-
+    /**
+     * Returns a user-readable string for the given tile position.
+     */
     public static String tilePositionToString(TilePosition pos) {
         return "("+ pos.getX() +", "+ pos.getY() +")";
     }
 
+    /**
+     * Returns a user-readable string representing the given drop instance.
+     */
     public static String dropInstanceToString(DropInstance drop) {
         if (drop == null) {
             return "no drop";
@@ -75,6 +90,9 @@ class CLIHelper {
         }
     }
 
+    /**
+     * Returns a user-readable string for the given drop type.
+     */
     public static String getStringFromDropType(GameData.DropType dType) {
         switch (dType) {
             case RED_AMMO:

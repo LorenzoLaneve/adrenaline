@@ -15,6 +15,11 @@ import it.polimi.deib.newdem.adrenaline.view.inet.sockets.SocketUserConnection;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ * An object representing a client, handling all the client logic (i.e. network handling)
+ * Note that this class does not depend on the type of interface (GUI or CLI), which is
+ * completely determined by the implementation of {@code ViewMaker}.
+ */
 public class ClientInstance implements AutoCloseable, UserListener {
 
     private ViewMaker viewMaker;
@@ -28,10 +33,17 @@ public class ClientInstance implements AutoCloseable, UserListener {
     private GameClientManager gameManager;
 
 
+    /**
+     * Creates a new client instance with the given UI view maker.
+     */
     public ClientInstance(ViewMaker viewMaker) {
         this.viewMaker = viewMaker;
     }
 
+    /**
+     * Starts the client instance. Note that the client logic is run in another thread,
+     * and the caller thread will wait for this thread to finish.
+     */
     public void start() {
         this.clientThread = new Thread(this::runClient);
         this.clientThread.start();

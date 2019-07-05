@@ -39,7 +39,7 @@ public class GUITurnView implements TurnView {
 
 
     private Label getStatusLabel(PlayerColor color) {
-        return (Label) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+        return (Label) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color) +" .status");
     }
 
 
@@ -185,7 +185,7 @@ public class GUITurnView implements TurnView {
             }
 
             for (PlayerColor player : legalPlayers) {
-                Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
+                Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIHelper.toStyleClass(player));
                 if (playerPin != null) {
                     playerPin.getStyleClass().add("selectable");
 
@@ -202,7 +202,7 @@ public class GUITurnView implements TurnView {
         } finally {
             Platform.runLater(() -> {
                 for (PlayerColor player : legalPlayers) {
-                    Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIGameWindowHelper.toStyleClass(player));
+                    Pane playerPin = (Pane) window.getScene().lookup(".player-pin."+ GUIHelper.toStyleClass(player));
                     if (playerPin != null) {
                         playerPin.getStyleClass().remove("selectable");
                         playerPin.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(player));
@@ -239,7 +239,7 @@ public class GUITurnView implements TurnView {
             }
 
             for (TilePosition tile : legalTiles) {
-                Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+                Pane tilePane = GUIHelper.lookupTilePane(window.getScene(), tile);
                 if (tilePane != null) {
                     tilePane.getStyleClass().add("selectable");
 
@@ -256,7 +256,7 @@ public class GUITurnView implements TurnView {
         } finally {
             Platform.runLater(() -> {
                 for (TilePosition tile : legalTiles) {
-                    Pane tilePane = GUIGameWindowHelper.lookupTilePane(window.getScene(), tile);
+                    Pane tilePane = GUIHelper.lookupTilePane(window.getScene(), tile);
                     if (tilePane != null) {
                         tilePane.getStyleClass().remove("selectable");
                         tilePane.removeEventHandler(MouseEvent.MOUSE_CLICKED, handlerMap.get(tile));
@@ -290,7 +290,7 @@ public class GUITurnView implements TurnView {
                 controlButtons.getChildren().add(noChoiceButton);
             }
 
-            GUIGameWindowHelper.setActiveWeaponCard(window.getScene(), cardID);
+            GUIHelper.setActiveWeaponCard(window.getScene(), cardID);
 
             Pane activeCardSlot = (Pane) window.getScene().lookup("#activeCardSlot");
             for (int fragID : fragments) {
@@ -322,7 +322,7 @@ public class GUITurnView implements TurnView {
 
 
     private String retrieveFragmentName(int fragID) {
-        return "Frag ID "+ fragID; // TODO
+        return "Frag ID "+ fragID;
     }
 
     @Override

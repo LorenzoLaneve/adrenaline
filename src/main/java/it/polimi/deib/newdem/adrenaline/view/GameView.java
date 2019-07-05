@@ -4,6 +4,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.GameResults;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 
+/**
+ * A view that observes a Game object in the model.
+ */
 public interface GameView {
 
     /**

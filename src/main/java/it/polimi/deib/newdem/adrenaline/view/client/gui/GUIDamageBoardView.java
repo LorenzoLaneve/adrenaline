@@ -23,18 +23,18 @@ public class GUIDamageBoardView implements DamageBoardView {
 
 
     private void handleMarks(int markAmount, PlayerColor dealer) {
-        Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+        Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color));
         Pane markSigns = (Pane) playerSlot.lookup(".mark-signs");
         if (markAmount >= 0) {
             for (int i = 0; i < markAmount; i++) {
-                markSigns.getChildren().add(GUIGameWindowHelper.createDamageIcon(dealer));
+                markSigns.getChildren().add(GUIHelper.createDamageIcon(dealer));
             }
         } else {
             List<Node> marks = new ArrayList<>();
             List<Node> children = new ArrayList<>(markSigns.getChildren());
             Collections.reverse(children);
             for (Node child : children) {
-                if (child.getStyleClass().contains(GUIGameWindowHelper.toStyleClass(dealer))) {
+                if (child.getStyleClass().contains(GUIHelper.toStyleClass(dealer))) {
                     marks.add(child);
                     if (marks.size() >= -markAmount) break;
                 }
@@ -47,11 +47,11 @@ public class GUIDamageBoardView implements DamageBoardView {
     @Override
     public void registerDamage(int damageAmount, int markAmount, PlayerColor dealer) {
         Platform.runLater(() -> {
-            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color));
 
             Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
             for (int i = 0; i < damageAmount; i++) {
-                dmgSigns.getChildren().add(GUIGameWindowHelper.createDamageIcon(dealer));
+                dmgSigns.getChildren().add(GUIHelper.createDamageIcon(dealer));
             }
 
             handleMarks(markAmount, dealer);
@@ -61,7 +61,7 @@ public class GUIDamageBoardView implements DamageBoardView {
     @Override
     public void popDamage() {
         Platform.runLater(() -> {
-            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color));
 
             Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
             dmgSigns.getChildren().remove(dmgSigns.getChildren().size() - 1);
@@ -71,7 +71,7 @@ public class GUIDamageBoardView implements DamageBoardView {
     @Override
     public void goFrenzy() {
         Platform.runLater(() -> {
-            Pane damageBoardPane = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .damage-board");
+            Pane damageBoardPane = (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color) +" .damage-board");
             damageBoardPane.getStyleClass().add("frenzy");
         });
     }
@@ -79,7 +79,7 @@ public class GUIDamageBoardView implements DamageBoardView {
     @Override
     public void clearBoard() {
         Platform.runLater(() -> {
-            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color));
+            Pane playerSlot = (Pane) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color));
 
             Pane dmgSigns = (Pane) playerSlot.lookup(".dmg-signs");
             dmgSigns.getChildren().clear();

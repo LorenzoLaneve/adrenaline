@@ -7,6 +7,11 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.LobbyDataEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 
+/**
+ * Java FX implementation of {@code ViewMaker}.
+ * The view maker creates views that interacts with the Java FX application by modifying
+ * Node in the stages provided by the application.
+ */
 public class GUIViewMaker implements ViewMaker {
 
     private final Application application;

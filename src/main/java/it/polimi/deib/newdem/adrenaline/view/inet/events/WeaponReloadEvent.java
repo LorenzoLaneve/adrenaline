@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given player reloaded the weapon with the given card ID, according to the user weapon deck.
+ * @see UserEvent to see what this class is used for.
+ */
 public class WeaponReloadEvent implements UserEvent {
 
     private PlayerColor color;

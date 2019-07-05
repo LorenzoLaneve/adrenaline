@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The weapon with the given card ID spawned in the given tile.
+ * @see UserEvent to see what this class is used for.
+ */
 public class SpawnWeaponEvent implements UserEvent {
 
     private int cardID;

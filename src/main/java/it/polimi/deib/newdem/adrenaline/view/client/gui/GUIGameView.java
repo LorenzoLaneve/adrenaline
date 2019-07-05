@@ -24,7 +24,7 @@ public class GUIGameView implements GameView {
 
 
     private Label getStatusLabel(PlayerColor color) {
-        return (Label) window.getScene().lookup(".player-slot."+ GUIGameWindowHelper.toStyleClass(color) +" .status");
+        return (Label) window.getScene().lookup(".player-slot."+ GUIHelper.toStyleClass(color) +" .status");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GUIGameView implements GameView {
             for (GameData.UserColorPair pair : data.getPlayers()) {
                 try {
                     Pane playerSlot = FXMLLoader.load(getClass().getResource("/gui/player-view.fxml"));
-                    playerSlot.getStyleClass().add(GUIGameWindowHelper.toStyleClass(pair.getColor()));
+                    playerSlot.getStyleClass().add(GUIHelper.toStyleClass(pair.getColor()));
 
                     Label playerName = (Label) playerSlot.lookup(".player-name");
                     playerName.setText(pair.getUsername());

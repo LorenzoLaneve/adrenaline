@@ -2,6 +2,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * A user with the given username disconnected from the lobby.
+ * @see UserEvent to see what this class is used for.
+ */
 public class ExitLobbyEvent implements UserEvent {
 
     private String username;

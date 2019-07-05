@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.view.ActionBoardView;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code ActionBoardView}
+ * @see ActionBoardView for the semantics of the view methods.
+ */
 public class CLIActionBoardView implements ActionBoardView {
 
     private PlayerColor color;

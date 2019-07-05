@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.view.UsernameView;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code UsernameView}
+ * @see UsernameView for the semantics of the view methods.
+ */
 public class CLIUsernameView implements UsernameView {
 
     private PrintStream out;

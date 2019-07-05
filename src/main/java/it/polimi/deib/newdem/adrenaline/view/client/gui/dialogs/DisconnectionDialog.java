@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * A simple popup window notifying the user that the server connection is lost.
+ * Also a button that will close the application is presented.
+ */
 public class DisconnectionDialog implements Dialog {
 
     @Override

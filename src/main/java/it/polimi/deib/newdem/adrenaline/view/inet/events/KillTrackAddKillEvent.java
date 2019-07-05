@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The kill track in the game registered a new kill from the given player with the given amount of points.
+ * @see UserEvent to see what this class is used for.
+ */
 public class KillTrackAddKillEvent implements UserEvent {
 
     private final PlayerColor color;

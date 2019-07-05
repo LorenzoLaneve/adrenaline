@@ -9,9 +9,10 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
 import java.util.EnumMap;
 
+/**
+ * An object that links the client connection to the UI views about the game.
+ */
 public class GameClientManager {
-
-    private PlayerColor currentPlayer;
 
     private ViewMaker viewMaker;
 
@@ -39,6 +40,10 @@ public class GameClientManager {
     }
 
 
+    /**
+     * Initializes the game client manager with the given UI view maker and the connection
+     * used by the client.
+     */
     public GameClientManager(ViewMaker viewMaker, UserConnection connection) {
         this.viewMaker = viewMaker;
         this.connection = connection;
@@ -56,6 +61,10 @@ public class GameClientManager {
         return damageBoardViews.get(color);
     }
 
+    /**
+     * Waits for the server to send the data about the joined game,
+     * and aligns the UI views with the received data.
+     */
     public void loadData() {
         gameView = viewMaker.makeGameView();
         mapView = viewMaker.makeMapView();
@@ -80,9 +89,10 @@ public class GameClientManager {
         connection.subscribeEvent(PlayerDataEvent.class, (conn, e) -> playerViews.get(e.getData().getColor()).setPlayerData(e.getData()));
     }
 
+    /**
+     * Links the UI views with the client connection.
+     */
     public void linkViews() {
-        // FIXME ViewLinker class that links views to connection events.
-
         connection.subscribeEvent(PlayerDisconnectEvent.class, (conn, event) ->
                 gameView.disablePlayer(event.getPlayerColor()));
         connection.subscribeEvent(PlayerReconnectEvent.class, (conn, event) ->
@@ -160,6 +170,10 @@ public class GameClientManager {
         }
     }
 
+    /**
+     * Blocks the caller thread until a {@code GameEndEvent} is received,
+     * then notifies the UI views with the game results.
+     */
     public void waitForEnd() {
         UserEventLocker<GameEndEvent> gameEndLocker = new UserEventLocker<>();
 

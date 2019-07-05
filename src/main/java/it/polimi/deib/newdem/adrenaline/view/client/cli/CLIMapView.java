@@ -6,15 +6,16 @@ import it.polimi.deib.newdem.adrenaline.model.map.MapData;
 import it.polimi.deib.newdem.adrenaline.model.map.PlayerTilePair;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.MapView;
-import it.polimi.deib.newdem.adrenaline.view.MapViewEventListener;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code MapView}
+ * @see MapView for the semantics of the view methods.
+ */
 public class CLIMapView implements MapView {
 
     private PrintStream out;
-
-
 
     public CLIMapView(PrintStream out) {
         this.out = out;

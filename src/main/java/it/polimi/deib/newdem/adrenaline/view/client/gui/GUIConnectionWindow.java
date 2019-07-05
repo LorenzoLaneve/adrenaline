@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Object encapsulating a JavaFX stage asking the user for connection data to be delivered by GUIConnectionView.
+ */
 public class GUIConnectionWindow {
 
     private GUIConnectionPromptReceiver receiver;
@@ -19,7 +22,9 @@ public class GUIConnectionWindow {
 
     private Scene scene;
 
-
+    /**
+     * Create a new connection window with the object that will receive connection data from UI events.
+     */
     public GUIConnectionWindow(GUIConnectionPromptReceiver receiver) {
         this.receiver = receiver;
     }
@@ -56,6 +61,9 @@ public class GUIConnectionWindow {
         }
     }
 
+    /**
+     * Shows the given message in the error label of the window.
+     */
     public void showError(String message) {
         Label errorLabel = (Label) scene.lookup("#errorLabel");
         errorLabel.setText(message);

@@ -1,5 +1,8 @@
 package it.polimi.deib.newdem.adrenaline.view;
 
+/**
+ * A view that observes a Lobby object in the model.
+ */
 public interface LobbyView {
 
     /**

@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.view.DamageBoardView;
 
 import java.io.PrintStream;
 
+/**
+ * Command Line Interface implementation of {@code DamageBoardView}
+ * @see DamageBoardView for the semantics of the view methods.
+ */
 public class CLIDamageBoardView implements DamageBoardView {
 
     private PlayerColor color;

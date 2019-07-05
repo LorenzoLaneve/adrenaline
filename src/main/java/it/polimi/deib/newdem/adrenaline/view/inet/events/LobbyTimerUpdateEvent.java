@@ -2,6 +2,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The timer in the lobby sent a tick to update the countdown to the given seconds left.
+ * @see UserEvent to see what this class is used for.
+ */
 public class LobbyTimerUpdateEvent implements UserEvent {
 
     private int seconds;

@@ -5,8 +5,12 @@ import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
+/**
+ * Object that implements an interruptible reader.
+ * This encapsulation allows the string reading from streams like standard input
+ * to be more user-friendly, while allowing concurrent thread to interrupt reading when needed.
+ */
 public class CLIReader {
 
     private String line;
@@ -15,11 +19,17 @@ public class CLIReader {
 
     private Thread readerThread;
 
+    /**
+     * Creates a new reader that takes input from the given InputStream.
+     */
     public CLIReader(InputStream in) {
         this.line = null;
         this.in = in;
     }
 
+    /**
+     * Starts the reader.
+     */
     public void start() {
         readerThread = (new Thread(this::runReader));
         readerThread.start();
@@ -28,8 +38,9 @@ public class CLIReader {
     private void runReader() {
         try {
             BufferedReader scanner = new BufferedReader(new InputStreamReader(in));
-            while (true) {
-                String newLine = scanner.readLine();
+
+            String newLine;
+            while ((newLine = scanner.readLine()) != null) {
                 synchronized (this) {
                     this.line = newLine;
                     notifyAll();
@@ -40,6 +51,10 @@ public class CLIReader {
         }
     }
 
+    /**
+     * Reads a new line from the enclosing input stream.
+     * @throws ClosedException if the caller thread gets interrupted while trying to read this exception.
+     */
     public synchronized String nextLine() {
         this.line = null;
 
@@ -55,7 +70,9 @@ public class CLIReader {
         return ret;
     }
 
-
+    /**
+     * Closes the reader and the enclosing stream.
+     */
     public void close() {
         try {
             in.close();

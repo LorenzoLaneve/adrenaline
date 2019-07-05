@@ -1,7 +1,7 @@
 package it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs;
 
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
-import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -12,6 +12,10 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dialog that makes the user choose among the power ups whose IDs are passed to the constructor.
+ * The choice will be notified to the {@code Listener} object passed to the constructor.
+ */
 public class PowerUpSelectionDialog implements Dialog {
 
     @FunctionalInterface
@@ -38,7 +42,7 @@ public class PowerUpSelectionDialog implements Dialog {
 
             Pane powerUpsViewer = (Pane) dialogPane.lookup("#powerUpsViewer");
             for (Integer cardID : powerUps) {
-                Group cardPane = GUIGameWindowHelper.createPowerUpCardPane(cardID);
+                Group cardPane = GUIHelper.createPowerUpCardPane(cardID);
                 cardPane.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> listener.powerUpChosen(cardID));
 
                 powerUpsViewer.getChildren().add(cardPane);

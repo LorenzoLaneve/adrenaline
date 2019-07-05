@@ -2,6 +2,9 @@ package it.polimi.deib.newdem.adrenaline.view;
 
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 
+/**
+ * A view observing a DamageBoard object in the model.
+ */
 public interface DamageBoardView {
 
     /**

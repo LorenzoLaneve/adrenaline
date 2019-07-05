@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.deib.newdem.adrenaline.model.game.GameData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.DropInstance;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
@@ -25,10 +24,16 @@ import java.io.*;
 import java.net.URL;
 import java.util.Map;
 
-public class GUIGameWindowHelper {
+/**
+ * Class that provide utility methods to interact with the game window.
+ */
+public class GUIHelper {
 
-    private GUIGameWindowHelper() { }
+    private GUIHelper() { }
 
+    /**
+     * Returns a CSS class for the given player color.
+     */
     public static String toStyleClass(PlayerColor color) {
         switch (color) {
             case YELLOW:
@@ -45,6 +50,9 @@ public class GUIGameWindowHelper {
         return null;
     }
 
+    /**
+     * Returns a CSS class for the given drop type.
+     */
     public static String toStyleClass(GameData.DropType dropType) {
         switch (dropType) {
             case RED_AMMO:
@@ -59,21 +67,12 @@ public class GUIGameWindowHelper {
         return null;
     }
 
-    public static String toStyleClass(AmmoColor color) {
-        switch (color) {
-            case RED:
-                return "red-ammo";
-            case BLUE:
-                return "blue-ammo";
-            case YELLOW:
-                return "yellow-ammo";
-        }
-        return null;
-    }
-
+    /**
+     * Creates and returns a tile pane for the given tile position.
+     */
     public static Pane createTilePane(TilePosition tilePosition) {
         try {
-            Pane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/tile.fxml"));
+            Pane tilePane = FXMLLoader.load(GUIHelper.class.getResource("/gui/tile.fxml"));
             tilePane.setId("tileSlot"+ tilePosition.getX() +"_"+ tilePosition.getY());
 
             Pane playersPane = (Pane) tilePane.lookup(".tile-players-pane");
@@ -85,6 +84,9 @@ public class GUIGameWindowHelper {
         }
     }
 
+    /**
+     * Creates and returns a player pin pane for the given player color to show in the tile pane.
+     */
     public static Pane createPlayerPin(PlayerColor color) {
         Pane pin = new Pane();
 
@@ -93,6 +95,9 @@ public class GUIGameWindowHelper {
         return pin;
     }
 
+    /**
+     * Creates and returns an icon representing the given drop type to show in a tile pane.
+     */
     public static Pane createDropIcon(GameData.DropType dropType) {
         Pane icon = new Pane();
 
@@ -101,11 +106,12 @@ public class GUIGameWindowHelper {
         return icon;
     }
 
-
-
+    /**
+     * Creates a Pane showing the weapon card with the given ID to be added to spawn points.
+     */
     public static Group createSpawnPointCardPane(int cardID) {
         try {
-            Image image = new Image(GUIGameWindowHelper.class.getResource("/gui/assets/cards/weapon"+ cardID +".png").openStream());
+            Image image = new Image(GUIHelper.class.getResource("/gui/assets/cards/weapon"+ cardID +".png").openStream());
 
             ImageView imgView = new ImageView(image);
             imgView.setFitWidth(104);
@@ -119,13 +125,16 @@ public class GUIGameWindowHelper {
         }
     }
 
+    /**
+     * Creates and returns a new pane showing a power up with the given card ID.
+     */
     public static Group createPowerUpCardPane(int cardID) {
         try {
             String imgLocation = cardID < 0 ?
                     "/gui/assets/cards/powerup_flipped.png" :
                     "/gui/assets/cards/powerup"+ cardID +".png";
 
-            Image image = new Image(GUIGameWindowHelper.class.getResource(imgLocation).openStream());
+            Image image = new Image(GUIHelper.class.getResource(imgLocation).openStream());
 
             ImageView imgView = new ImageView(image);
             imgView.setFitWidth(83);
@@ -139,11 +148,14 @@ public class GUIGameWindowHelper {
         }
     }
 
+    /**
+     * Creates and returns a new pane showing the weapon with the given card ID.
+     */
     public static Group createWeaponCardPane(int cardID) {
         try {
             String imgLocation = "/gui/assets/cards/weapon"+ cardID +".png";
 
-            Image image = new Image(GUIGameWindowHelper.class.getResource(imgLocation).openStream());
+            Image image = new Image(GUIHelper.class.getResource(imgLocation).openStream());
 
             ImageView imgView = new ImageView(image);
             imgView.setFitWidth(102);
@@ -157,7 +169,9 @@ public class GUIGameWindowHelper {
         }
     }
 
-
+    /**
+     * Creates a new pane showing a damage icon with the given color.
+     */
     public static Pane createDamageIcon(PlayerColor color) {
         Pane pane = new Pane();
 
@@ -166,11 +180,16 @@ public class GUIGameWindowHelper {
         return pane;
     }
 
+    /**
+     * Returns a tile pane present in the given scene associated with the given tile position.
+     */
     public static Pane lookupTilePane(Scene scene, TilePosition position) {
         return (Pane) scene.lookup("#tileSlot"+ position.getX() +"_"+ position.getY());
     }
 
-
+    /**
+     * Shows the given drops in the tile associated to the given tile position present in the given scene.
+     */
     public static void addDropsToTilePane(Scene scene, TilePosition tile, DropInstance drop) {
         Pane dropsPane = (Pane) lookupTilePane(scene, tile).lookup(".tile-drops-pane");
 
@@ -197,19 +216,26 @@ public class GUIGameWindowHelper {
         }
     }
 
+    /**
+     * Shows the player with the given color in the tile pane associated to the given tile position
+     * present in the given scene.
+     */
     public static void addPlayerToTilePane(Scene scene, PlayerColor color, TilePosition destTile) {
-        Pane playersPane = (Pane) GUIGameWindowHelper.lookupTilePane(scene, destTile).lookup(".tile-players-pane");
+        Pane playersPane = (Pane) GUIHelper.lookupTilePane(scene, destTile).lookup(".tile-players-pane");
         playersPane.getChildren().add(createPlayerPin(color));
     }
 
+    /**
+     * Returns the player pin associated to the given player color present in the scene.
+     */
     public static Pane getPlayerPin(Scene scene, PlayerColor color) {
         return (Pane) scene.lookup(".player-pin."+ toStyleClass(color));
     }
 
 
-
-
-
+    /**
+     * Shows the weapon card with the given card ID in the scene's active card slot (upper right corner of the map).
+     */
     public static void setActiveWeaponCard(Scene scene, int cardID) {
         StackPane activeCardSlot = (StackPane) scene.lookup("#activeCardSlot");
         activeCardSlot.getChildren().clear();
@@ -218,11 +244,14 @@ public class GUIGameWindowHelper {
         activeCardSlot.getChildren().add(createActiveCardGrid(cardID));
     }
 
+    /**
+     * Creates and returns a GridPane object containing clickable buttons representing the fragments of the given card ID.
+     */
     private static Node createActiveCardGrid(int cardID) {
         try {
-            GridPane tilePane = FXMLLoader.load(GUIGameWindowHelper.class.getResource("/gui/active-card-grid.fxml"));
+            GridPane tilePane = FXMLLoader.load(GUIHelper.class.getResource("/gui/active-card-grid.fxml"));
 
-            URL res = GUIGameWindowHelper.class.getResource("/cards/weaponuserdata.json");
+            URL res = GUIHelper.class.getResource("/cards/weaponuserdata.json");
 
             try (Reader fread = new InputStreamReader(res.openStream())) {
                 JsonObject userData = new JsonParser().parse(fread).getAsJsonObject();

@@ -2,11 +2,13 @@ package it.polimi.deib.newdem.adrenaline.view.client.cli;
 
 import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
+/**
+ * Command Line Interface implementation of {@code ConnectionView}
+ * @see ConnectionView for the semantics of the view methods.
+ */
 public class CLIConnectionView implements ConnectionView {
 
     private Logger log;

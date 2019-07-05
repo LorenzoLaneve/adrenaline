@@ -7,6 +7,10 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserEventLocker;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserEventSubscriber;
 import it.polimi.deib.newdem.adrenaline.view.inet.events.*;
 
+/**
+ * Object that links the UI view to the connection events, receiving requests from server
+ * and sending responses from the UI.
+ */
 public class TurnClientManager {
 
     private UserConnection connection;
@@ -33,13 +37,20 @@ public class TurnClientManager {
 
     private UserEventSubscriber<TurnPaymentRequest> paymentSubscriber = this::askPayment;
 
-
+    /**
+     * Initializes the turn client manager with the connection, the UI turn view, and the color
+     * of the player that is taking control of the game.
+     */
     public TurnClientManager(UserConnection connection, TurnView turnView, PlayerColor actor) {
         this.connection = connection;
         this.turnView = turnView;
         this.actor = actor;
     }
 
+    /**
+     * Links all the events to the methods of the turn view passed to the constructor and then
+     * blocks the caller thread until a {@code TurnEndEvent} is received.
+     */
     public void start() {
         turnView.startTurn(actor);
 

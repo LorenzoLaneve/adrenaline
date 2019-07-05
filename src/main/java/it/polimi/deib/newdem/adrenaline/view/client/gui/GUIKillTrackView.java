@@ -29,7 +29,7 @@ public class GUIKillTrackView implements KillTrackView {
                 Pane slot = (Pane) window.getScene().lookup("#killTrackSlot"+ currentSlot++);
 
                 for (int i = 0; i < cell.getAmount(); i++) {
-                    slot.getChildren().add(GUIGameWindowHelper.createDamageIcon(cell.getKiller()));
+                    slot.getChildren().add(GUIHelper.createDamageIcon(cell.getKiller()));
                 }
 
                 this.killTrackLength = data.getInitialLength();
@@ -48,7 +48,7 @@ public class GUIKillTrackView implements KillTrackView {
 
 
             for (int i = 0; i < amount; i++) {
-                slot.getChildren().add(GUIGameWindowHelper.createDamageIcon(pColor));
+                slot.getChildren().add(GUIHelper.createDamageIcon(pColor));
             }
         });
     }

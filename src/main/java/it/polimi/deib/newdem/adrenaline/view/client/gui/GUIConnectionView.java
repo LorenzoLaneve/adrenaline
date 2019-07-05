@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.view.client.ClosedException;
 import it.polimi.deib.newdem.adrenaline.view.ConnectionView;
 import javafx.application.Platform;
 
+/**
+ * Java FX implementation of {@code ConnectionView}
+ * @see ConnectionView for the semantics of the view methods.
+ */
 public class GUIConnectionView implements ConnectionView, GUIConnectionPromptReceiver {
 
     private String serverHost;

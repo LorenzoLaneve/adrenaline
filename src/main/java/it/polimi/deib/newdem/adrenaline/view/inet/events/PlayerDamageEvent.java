@@ -3,6 +3,10 @@ package it.polimi.deib.newdem.adrenaline.view.inet.events;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The first player took damage from the second player, for the specified amount.
+ * @see UserEvent to see what this class is used for.
+ */
 public class PlayerDamageEvent implements UserEvent {
 
     private PlayerColor damagedPlayer;

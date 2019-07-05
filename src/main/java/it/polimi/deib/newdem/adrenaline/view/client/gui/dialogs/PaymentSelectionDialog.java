@@ -5,7 +5,7 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.PaymentReceiptData;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
-import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
+/**
+ * Dialog that asks the use to choose how to pay, by choosing among the resources that are
+ * passed to the constructor. The choice is passed to the {@code Listener} set with {@code setPaymentCallback}.
+ */
 public class PaymentSelectionDialog implements Dialog {
 
     @FunctionalInterface
@@ -45,7 +49,6 @@ public class PaymentSelectionDialog implements Dialog {
 
 
     private static AmmoColor getEquivalentAmmo(int cardID) {
-        // FIXME this should not be done as it is not general. It should be better to use a json file for the client.
         switch (cardID % 6) {
             case 0:
             case 1:
@@ -81,7 +84,7 @@ public class PaymentSelectionDialog implements Dialog {
         AmmoColor equivalentAmmo = getEquivalentAmmo(cardID);
 
         StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(GUIGameWindowHelper.createPowerUpCardPane(cardID));
+        stackPane.getChildren().add(GUIHelper.createPowerUpCardPane(cardID));
         stackPane.getChildren().add(new Pane());
 
         stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {

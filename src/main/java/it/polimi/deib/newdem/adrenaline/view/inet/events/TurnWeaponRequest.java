@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The server is requesting the user to choose a card fragment among the given ones.
+ * @see UserEvent to see what this class is used for.
+ */
 public class TurnWeaponRequest implements UserEvent {
 
     private ArrayList<Integer> cardIDs;

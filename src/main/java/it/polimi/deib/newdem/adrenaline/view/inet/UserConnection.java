@@ -6,8 +6,18 @@ import it.polimi.deib.newdem.adrenaline.view.inet.events.UserEvent;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A point-to-point abstract connection between two logical end points.
+ *
+ * This connection consists of a publisher-subscriber pattern that takes advantage of
+ * the Java Reflection: anyone can subscribe to a particular type of message, which is
+ * a subclass of {@code UserEvent}. The connection acts as a publisher for the
+ * opposite endpoint connection.
+ *
+ * @see UserEvent for the interface that every type of message exchanged through this connection
+ *                has to implement.
+ */
 public interface UserConnection {
-
 
     /**
      * Starts a new thread that listens to new events.

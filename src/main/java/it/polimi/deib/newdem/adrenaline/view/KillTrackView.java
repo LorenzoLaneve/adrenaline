@@ -3,6 +3,9 @@ package it.polimi.deib.newdem.adrenaline.view;
 import it.polimi.deib.newdem.adrenaline.model.game.killtrack.KillTrackData;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 
+/**
+ * A view that observes a KillTrack object in the model.
+ */
 public interface KillTrackView {
 
     /**

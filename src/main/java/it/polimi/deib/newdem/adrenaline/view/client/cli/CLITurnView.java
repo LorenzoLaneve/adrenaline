@@ -17,6 +17,10 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Command Line Interface implementation of {@code TurnView}
+ * @see TurnView for the semantics of the view methods.
+ */
 public class CLITurnView implements TurnView {
 
     private PrintStream out;
@@ -216,7 +220,7 @@ public class CLITurnView implements TurnView {
 
 
     private String getFragmentName(int cardID, int fragID) {
-        return "frag ID "+ fragID; // TODO
+        return "frag ID "+ fragID;
     }
 
     @Override
@@ -243,10 +247,7 @@ public class CLITurnView implements TurnView {
     }
 
 
-
-
     private static AmmoColor getEquivalentAmmo(int cardID) {
-        // FIXME this should not be done as it is not general. It should be better to use a json file for the client.
         switch (cardID % 6) {
             case 0:
             case 1:

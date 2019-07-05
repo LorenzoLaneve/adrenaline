@@ -3,7 +3,7 @@ package it.polimi.deib.newdem.adrenaline.view.client.gui.dialogs;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
-import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindowHelper;
+import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,11 +15,19 @@ import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dialog that asks the user to choose an ammo or power up among the ones passed to the constructor.
+ * The choice will be notified to the {@code Listener} set with {@code setListener}.
+ */
 public class AmmoSelectionDialog implements Dialog {
 
     @FunctionalInterface
     public interface Listener {
 
+        /**
+         * The user made a choice. If the choice is a power up then
+         * {@code ammo} is {@code null} and vice versa.
+         */
         void ammoChosen(AmmoColor ammo, Integer powerUp);
 
     }
@@ -34,6 +42,11 @@ public class AmmoSelectionDialog implements Dialog {
     private AmmoSet playerInv;
 
 
+    /**
+     * Creates an ammo selection dialog making the user choose a resource among the ones they have,
+     * which are specified in {@code playerInv} and {@code powerUps}.
+     * @param reason A user-readable string explaining why this choice is prompted.
+     */
     public AmmoSelectionDialog(AmmoSet playerInv, List<Integer> powerUps, String reason) {
         this.playerInv = new AmmoSet(playerInv.getRedAmmos(), playerInv.getYellowAmmos(), playerInv.getBlueAmmos());
         this.powerUps = new ArrayList<>(powerUps);
@@ -49,7 +62,7 @@ public class AmmoSelectionDialog implements Dialog {
         int cardID = powerUps.get(i);
 
         StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(GUIGameWindowHelper.createPowerUpCardPane(cardID));
+        stackPane.getChildren().add(GUIHelper.createPowerUpCardPane(cardID));
         stackPane.getChildren().add(new Pane());
 
         stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {

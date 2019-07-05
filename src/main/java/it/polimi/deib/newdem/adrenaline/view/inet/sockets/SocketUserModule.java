@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Implementation of {@code IncomingUserModule} involving the acceptance of
+ * new TCP connections through the use of Java Sockets.
+ */
 public class SocketUserModule implements IncomingUserModule {
 
     private ServerSocket serverSocket;

@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.view.inet.UserConnection;
 
+/**
+ * The given player moved to the given tile.
+ * @see UserEvent to see what this class is used for.
+ */
 public class MovePlayerEvent implements UserEvent {
 
     private PlayerColor playerColor;
