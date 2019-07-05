@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 
 public class TestDropInstance {
 
+    /**
+     * Testing DropInstance implementation specifically its constructors an getters aside from equals a nd copy methods
+     */
     @Test
     public void testGetAmmos() {
         AmmoSet ammoSet;

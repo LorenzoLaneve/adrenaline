@@ -7,7 +7,9 @@ import static org.junit.Assert.*;
 
 public class TestAmmoSet {
 
-
+    /**
+     * Testing straightforward fumcionality of AmmoSet
+     */
     @Test
     public void testGetRedAmmos() {
         AmmoSet ammoSet = new AmmoSet(1,2,3);
@@ -61,6 +63,9 @@ public class TestAmmoSet {
         new AmmoSet(1, 2,3);
     }
 
+    /**
+     * Failing on negative inputs
+     */
     @Test(expected = IllegalArgumentException.class)
     public void TestConstructorNegative() {
         new AmmoSet(-1, -1,-1);

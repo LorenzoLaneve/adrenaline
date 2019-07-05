@@ -26,6 +26,10 @@ public class TestDeck {
     Game game;
     Deck deck;
 
+    /**
+     * GEenral testing for deck especially important was testing the behavior of reshuffle draw and discard as the core method of the abstract class
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         TestingUtils.loadSingleton();

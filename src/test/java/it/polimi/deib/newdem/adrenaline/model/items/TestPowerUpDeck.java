@@ -6,11 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestPowerUpDeck {
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
+    /**
+     * Testing correct loading of deck from json.
+     */
     @Test
     public void createNewDeck() {
 
