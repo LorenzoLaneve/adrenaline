@@ -34,6 +34,16 @@ public class GameRigged extends GameImpl {
     }
 
     public void setDropDeck(Deck<DropInstance> deck) {
+        for(Tile tile : getMap().getAllTiles()) {
+            try{
+                tile.grabDrop();
+            }
+            catch (NotOrdinaryTileException e) {
+                // ok
+            }
+        }
+
         this.dropDeck = deck;
+        refillTiles();
     }
 }

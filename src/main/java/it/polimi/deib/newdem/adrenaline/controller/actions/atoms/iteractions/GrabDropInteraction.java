@@ -47,11 +47,7 @@ public class GrabDropInteraction extends InteractionBase {
             pupCard = context.getActor().getGame().getPowerUpDeck().draw();
             context.getActor().getInventory().addPowerUp(pupCard);
         }
-        catch (NoDrawableCardException x) {
-            // too bad, you're out of pup.
-            pupCard = null;
-        }
-        catch (OutOfSlotsException y) {
+        catch (OutOfSlotsException | NoDrawableCardException y) {
             throw new IllegalStateException(y);
         }
     }

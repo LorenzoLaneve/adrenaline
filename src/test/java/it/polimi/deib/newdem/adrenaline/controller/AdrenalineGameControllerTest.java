@@ -70,7 +70,7 @@ public class AdrenalineGameControllerTest {
         AdrenalineGameController agc =
                 new ScriptedAdrenalineGameController(new LobbyControllerImpl(null, Config.getDefaultConfig()));
         ((ScriptedAdrenalineGameController) agc).injectTurnScripts(
-                new ScriptedDataSource(new ActionType(AtomicActionType.MOVE1))
+                new ScriptedDataSource(null, new ActionType(AtomicActionType.MOVE1))
         );
 
         agc.setupGame(Arrays.asList(new User(), new User(), new User()));

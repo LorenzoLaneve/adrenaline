@@ -24,11 +24,9 @@ public class ResolveAdditionalDamageInteraction extends InteractionBase {
         try {
             context.getActor().getInventory().removePowerUp(selectedPup);
             effect.apply(new EffectManager(context.getEffectContext()), context.getActor());
+            context.getGame().getPowerUpDeck().discard(selectedPup);
         }
         catch (InterruptExecutionException e) {
-            // go to finally
-        }
-        finally {
             context.getGame().getPowerUpDeck().discard(selectedPup);
         }
 

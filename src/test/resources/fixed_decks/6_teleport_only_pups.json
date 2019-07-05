@@ -1,0 +1,41 @@
+{
+  "cards": [
+    // TELEPORT
+    {
+      "id": 0,
+      "equivAmmo": "blue",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 1,
+      "equivAmmo": "blue",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 2,
+      "equivAmmo": "red",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 3,
+      "equivAmmo": "red",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 4,
+      "equivAmmo": "yellow",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    },
+    {
+      "id": 5,
+      "equivAmmo": "yellow",
+      "trigger": "call",
+      "effectClass": "it.polimi.deib.newdem.adrenaline.controller.effects.TeleportEffect"
+    }
+  ]
+}
