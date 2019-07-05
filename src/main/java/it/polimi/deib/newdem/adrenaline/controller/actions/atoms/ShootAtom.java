@@ -10,10 +10,18 @@ import it.polimi.deib.newdem.adrenaline.view.inet.ConnectionException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Atom representing an atomic SHOOT action
+ */
 public class ShootAtom extends AtomContext {
 
     private Player victim;
 
+    /**
+     * Builds a new atom bound to the given {@context parent}
+     *
+     * @param parent this atom's context
+     */
     public ShootAtom(AtomsContainer parent) {
         super(parent, EntryPointType.SHOOT);
     }

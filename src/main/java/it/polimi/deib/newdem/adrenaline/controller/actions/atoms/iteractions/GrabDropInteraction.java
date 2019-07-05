@@ -9,11 +9,18 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.map.NotOrdinaryTileException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Interaction encapsulating the pick up of a drop within a GRAB interaction
+ */
 public class GrabDropInteraction extends InteractionBase {
 
     private DropInstance dropInstance;
     private PowerUpCard pupCard;
 
+    /**
+     * Builds a new {@code ReloadPaymentInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public GrabDropInteraction(InteractionContext context) {
         super(context);
         dropInstance = null;
@@ -28,12 +35,14 @@ public class GrabDropInteraction extends InteractionBase {
         try {
              dropInstance = dropTIle.grabDrop();
              if(null == dropInstance)  { return; }
-             player.getInventory().addAmmoSet(dropInstance.getAmmos());
 
+             player.getInventory().addAmmoSet(dropInstance.getAmmos());
              if(player.getInventory().canAcceptPowerUp() &&
                 dropInstance.hasPowerUp()) {
                  attemptDraw();
              }
+
+             context.getGame().getDropDeck().discard(dropInstance);
         }
         catch (NotOrdinaryTileException e) {
             throw new IllegalStateException(e);
@@ -45,11 +54,7 @@ public class GrabDropInteraction extends InteractionBase {
             pupCard = context.getActor().getGame().getPowerUpDeck().draw();
             context.getActor().getInventory().addPowerUp(pupCard);
         }
-        catch (NoDrawableCardException x) {
-            // too bad, you're out of pup.
-            pupCard = null;
-        }
-        catch (OutOfSlotsException y) {
+        catch (OutOfSlotsException | NoDrawableCardException y) {
             throw new IllegalStateException(y);
         }
     }

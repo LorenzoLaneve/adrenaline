@@ -5,8 +5,15 @@ import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the selection of a new weapon within a GRAB atom
+ */
 public class SelectNewWeaponInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code SelectNewWeaponInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public SelectNewWeaponInteraction(InteractionContext context) {
         super(context);
     }

@@ -5,13 +5,11 @@ import it.polimi.deib.newdem.adrenaline.controller.Config;
 import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor;
-import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerImpl;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
 import it.polimi.deib.newdem.adrenaline.model.map.Map;
-import it.polimi.deib.newdem.adrenaline.view.client.gui.GUIGameWindow;
 import it.polimi.deib.newdem.adrenaline.view.server.NullVirtualGameView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualDamageBoardView;
 import it.polimi.deib.newdem.adrenaline.view.server.VirtualGameView;
@@ -20,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -52,7 +49,7 @@ public class DamageBoardImplTest {
         gp.setColorUserOrder(listPairs);
 
         gp.setMinPlayers(1);
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         game = new GameImpl(gp);
 
         vgv = new NullVirtualGameView();
@@ -275,7 +272,7 @@ public class DamageBoardImplTest {
             fail();
         }
 
-        p1.getDamageBoard().appendDamage(p2);
+        p1.getDamageBoard().appendDamage(p2, true);
         Player p5 = dmgb.popDamage();
         assertEquals(p5, p2);
     }

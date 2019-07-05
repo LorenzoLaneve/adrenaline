@@ -202,7 +202,7 @@ public class AdrenalineGameController implements GameController {
             Player p0 = players.get(0);
             for (Player p : players) if (p != p0) {
                 try {
-                    for (int j = 0; j < 9; j++) p.getDamageBoard().appendDamage(p0);
+                    for (int j = 0; j < 9; j++) p.getDamageBoard().appendDamage(p0, true);
                 } catch (DamageTrackFullException x) {
                     //nothing to do here.
                 }

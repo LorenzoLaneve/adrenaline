@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.PlayerSelec
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' Laser Magnum weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class LaserMagnumEffect implements Effect {
 
     private static final int GIGAWATT_MODE = 1;

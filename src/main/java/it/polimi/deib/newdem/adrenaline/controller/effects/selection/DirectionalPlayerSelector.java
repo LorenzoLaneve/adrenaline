@@ -15,10 +15,20 @@ public class DirectionalPlayerSelector implements PlayerSelector {
     private Direction direction;
     private boolean ignoreWalls;
 
+    /**
+     * Selects all the players that are in any direction from the given player.
+     * @param ignoreWalls if players behind walls should be selected.
+     * @see PlayerSelector for further information
+     */
     public DirectionalPlayerSelector(Player sourcePlayer, boolean ignoreWalls) {
         this(sourcePlayer, null, ignoreWalls);
     }
 
+    /**
+     * Selects all the players that are in the given direction from the given player
+     * @param ignoreWalls if players behind walls should be selected
+     * @see PlayerSelector for further information
+     */
     public DirectionalPlayerSelector(Player sourcePlayer, Direction direction, boolean ignoreWalls) {
         this.sourcePlayer = sourcePlayer;
         this.direction = direction;

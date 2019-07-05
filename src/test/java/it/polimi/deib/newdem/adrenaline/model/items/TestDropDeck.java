@@ -7,10 +7,9 @@ import static org.junit.Assert.*;
 
 public class TestDropDeck {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
+    /**
+     * Testing correct loading from json of the deck of drops.
+     */
     @Test
     public void createNewDeck() {
         DropDeck dDeck = null;

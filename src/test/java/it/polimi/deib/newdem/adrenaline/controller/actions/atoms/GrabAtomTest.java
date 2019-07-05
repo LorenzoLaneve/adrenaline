@@ -22,7 +22,7 @@ public class GrabAtomTest {
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
-        source = new ScriptedDataSource(
+        source = new ScriptedDataSource( game,
                 new ActionType(AtomicActionType.MOVE3, AtomicActionType.GRAB),
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),
                 new ActionType(AtomicActionType.MOVE2, AtomicActionType.GRAB),

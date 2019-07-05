@@ -37,6 +37,9 @@ public class TestConcreteMap {
     Player player3;
     Player player4;
 
+    /**
+     * Testing initialisation of a game creating the map placing players in it and moving the around.
+     */
     @Before
     public void initTest(){
 

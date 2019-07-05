@@ -2,14 +2,16 @@ package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.*;
 import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.MovementGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Card effect that implements Adrenaline' Rocket Launcher weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class RocketLauncherEffect implements Effect {
 
     private static final int BASIC_EFFECT = 1;

@@ -5,8 +5,8 @@ import java.util.*;
 public class Deck<T extends Card> {
 
     private Deque<T> drawableCards;
-    private HashSet<T> discardedCards;
-    private HashSet<T> activeCards;
+    private ArrayList<T> discardedCards;
+    private ArrayList<T> activeCards;
 
     /** Creates a new {@code Deck} made up of the elements of the given list.
      *
@@ -23,8 +23,8 @@ public class Deck<T extends Card> {
         Collections.shuffle(workingList);
 
         this.drawableCards = new LinkedList<>(workingList);
-        this.discardedCards = new HashSet<>();
-        this.activeCards = new HashSet<>();
+        this.discardedCards = new ArrayList<>();
+        this.activeCards = new ArrayList<>();
     }
 
 

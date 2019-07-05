@@ -6,8 +6,15 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the selection of a player for additional damage after a SHOOT atom
+ */
 public class SelectAdditionalDamagePowerupInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code SelectAdditionalDamagePowerupInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public SelectAdditionalDamagePowerupInteraction(InteractionContext context) {
         super(context);
     }
@@ -25,6 +32,8 @@ public class SelectAdditionalDamagePowerupInteraction extends InteractionBase {
         catch (UndoException e) {
             // if undo, terminate this interaction stack.
         }
+
+        if(null == selectedPup) { return; }
 
         context.pushInteraction(new SelectAdditionalDamageVictimInteraction(context, selectedPup));
     }

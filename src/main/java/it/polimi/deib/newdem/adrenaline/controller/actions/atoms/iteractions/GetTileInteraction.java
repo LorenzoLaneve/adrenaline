@@ -3,8 +3,16 @@ package it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
+/**
+ * Interaction encapsulating the inspection of the current player's tile wihin a
+ * GRAB atom
+ */
 public class GetTileInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code ReloadPaymentInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public GetTileInteraction(InteractionContext context) {
         super(context);
     }

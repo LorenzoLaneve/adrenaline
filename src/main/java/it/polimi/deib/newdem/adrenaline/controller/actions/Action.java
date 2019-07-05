@@ -3,6 +3,9 @@ package it.polimi.deib.newdem.adrenaline.controller.actions;
 import it.polimi.deib.newdem.adrenaline.controller.effects.UndoException;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Control element of the game. This interface offers simple methods to model
+ */
 public interface Action {
 
     /**

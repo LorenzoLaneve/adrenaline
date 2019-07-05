@@ -1,7 +1,11 @@
 package it.polimi.deib.newdem.adrenaline.model.map;
 
 public class TestingMapBuilder {
-    public static Map getNewMap(Class c) {
+    /**
+     * Utils class for testing purposes.
+     * @return a map for testing.
+     */
+    public static Map getNewMap() {
         return Map.createMap("TestMap.json");
     }
 

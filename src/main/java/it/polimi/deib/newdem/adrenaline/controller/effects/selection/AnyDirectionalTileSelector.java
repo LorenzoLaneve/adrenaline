@@ -15,6 +15,11 @@ public class AnyDirectionalTileSelector implements TileSelector {
     private Tile sourceTile;
 
 
+    /**
+     * Selects all the tiles in all the fourth directions in the given distance range
+     * @param ignoreWalls whether walls in map should be ignored or not by this selector.
+     * @see TileSelector for further information
+     */
     public AnyDirectionalTileSelector(Tile sourceTile, int minDist, int maxDist, boolean ignoreWalls) {
         this.sourceTile = sourceTile;
         this.minDistance = minDist;

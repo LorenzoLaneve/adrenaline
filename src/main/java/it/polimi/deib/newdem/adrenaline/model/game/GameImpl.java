@@ -243,7 +243,14 @@ public class GameImpl implements Game {
 
     @Override
     public void concludeGame() {
+        assignScoreFromKillTrack();
         listener.gameWillEnd(this, generateResults());
+    }
+
+    private void assignScoreFromKillTrack() {
+        for(Player p : players) {
+            p.addScore(killTrack.getScoreForPlayer(p));
+        }
     }
 
     @Override
@@ -332,11 +339,19 @@ public class GameImpl implements Game {
         if(shouldGoFrenzy()) {
             goFrenzy();
         }
+
+        resetTurnDeathFlags();
+    }
+
+    private void resetTurnDeathFlags() {
+        for(Player p : players) {
+            p.resetTurnDeath();
+        }
     }
 
     private void registerKills() {
         for(Player p : players) {
-            if(p.isDead()) {
+            if(p.diedThisTurn()) {
                 distributeScore(p); // assigns the due score to damagers
                 scoreDamageboard(p);   // updates killtrack, removes from map, empties damageboard
 
@@ -424,7 +439,8 @@ public class GameImpl implements Game {
     }
 
     public boolean isOver() {
-        return isOver;
+        // return isOver;
+        return turnQueue.isEmpty();
     }
 
     @Override
@@ -504,5 +520,10 @@ public class GameImpl implements Game {
                 throw new IllegalStateException(e);
             }
         }
+    }
+
+    @Override
+    public Deck<DropInstance> getDropDeck() {
+        return dropDeck;
     }
 }

@@ -12,6 +12,10 @@ public class VisiblePlayerSelector implements PlayerSelector {
 
     private Player sourcePlayer;
 
+    /**
+     * Selects all the players that are visible from the given player.
+     * @see PlayerSelector for further information
+     */
     public VisiblePlayerSelector(Player sourcePlayer) {
         this.sourcePlayer = sourcePlayer;
     }

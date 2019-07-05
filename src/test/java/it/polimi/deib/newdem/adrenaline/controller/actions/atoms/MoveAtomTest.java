@@ -30,7 +30,8 @@ public class MoveAtomTest {
     @Before
     public void setUp() throws Exception {
         game = TestingUtils.makeTestGame(PlayerColor.MAGENTA);
-        source = new ScriptedDataSource(new ActionType(AtomicActionType.MOVE1),
+        source = new ScriptedDataSource( game,
+                new ActionType(AtomicActionType.MOVE1),
                 new ActionType(AtomicActionType.MOVE4),
                 new ActionType(AtomicActionType.MOVE4));
         source.pushPupIndex(0);

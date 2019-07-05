@@ -9,10 +9,18 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the selection of the victim to receive an extra damage after a SHOOT atom
+ */
 public class SelectAdditionalDamageVictimInteraction extends InteractionBase {
 
     private PowerUpCard selectedPup;
 
+    /**
+     * Builds a new {@code SelectAdditionalDamageVictimInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param selectedPup powerUp to pass on to this {@code Interaction}'s children
+     */
     public SelectAdditionalDamageVictimInteraction(InteractionContext context, PowerUpCard selectedPup) {
         super(context);
         this.selectedPup = selectedPup;
@@ -33,7 +41,9 @@ public class SelectAdditionalDamageVictimInteraction extends InteractionBase {
             throw new UndoException();
         }
 
-        if(null == selectedPlayer) { return; }
+        if(null == selectedPlayer) { throw new UndoException(); }
+
+        context.setVictim(selectedPlayer);
 
         context.pushInteraction(new ResolveAdditionalDamageInteraction(context, selectedPup));
     }

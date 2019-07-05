@@ -7,15 +7,9 @@ import static org.junit.Assert.*;
 
 public class TestWeaponDeck {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @Test
-    public void createNewDeck() {
-
-    }
-
+    /**
+     * Testing the correct implementation for deck from json.
+     */
     @Test
     public void fromJson() {
         try{

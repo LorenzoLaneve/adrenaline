@@ -7,6 +7,10 @@ public class SameTilePlayerSelector implements PlayerSelector {
 
     private Player sourcePlayer;
 
+    /**
+     * Selects all the players in the same tile as the given player.
+     * @see PlayerSelector for further information
+     */
     public SameTilePlayerSelector(Player sourcePlayer) {
         this.sourcePlayer = sourcePlayer;
     }

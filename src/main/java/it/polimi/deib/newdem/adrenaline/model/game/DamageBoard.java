@@ -66,7 +66,7 @@ public interface DamageBoard {
      * This also resolves any leftovers marks from the given {@code Player} if applicable.
      * @throws DamageTrackFullException if the damage board is full and no other damage is allowed to be added.
      */
-    void appendDamage(Player player) throws DamageTrackFullException;
+    void appendDamage(Player player, boolean canRealizeMarks) throws DamageTrackFullException;
 
     /**
      * Removes the last damage from the damage board.

@@ -4,6 +4,9 @@ import it.polimi.deib.newdem.adrenaline.model.items.AmmoSet;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
+/**
+ * Interface for objects that listen
+ */
 public interface PlayerListener {
 
     /**

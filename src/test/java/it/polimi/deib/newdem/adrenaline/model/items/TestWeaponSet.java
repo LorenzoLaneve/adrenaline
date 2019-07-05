@@ -22,6 +22,9 @@ public class TestWeaponSet {
 
     WeaponSet weaponSet;
 
+    /**
+     * Testing basic functionality of weaponSet especially behavior when full, when trying to add a weapon already present or removing
+     */
     public class MockWeapon implements WeaponCard{
         private String code;
 

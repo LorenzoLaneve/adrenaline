@@ -4,13 +4,16 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.Directional
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.IntersectPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearPlayerSelector;
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.NearTileSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.map.Direction;
 import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.Iterator;
 
+/**
+ * Card effect that implements Adrenaline' Flamethrower weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class FlamethrowerEffect implements Effect {
 
     private static final int BARBECUE_MODE = 1;

@@ -19,6 +19,10 @@ public class TestOrdinaryTile {
     WeaponSet set;
     WeaponCard w1;
 
+    /**
+     * Testing in very simple map and environment the implementation of of OrdinaryTile.
+     */
+
     public class MockWeapon implements WeaponCard{
         private String code;
 
@@ -100,6 +104,9 @@ public class TestOrdinaryTile {
         assertFalse(tile.missingDrop());
     }
 
+    /**
+     * Testing the lack of a weaponSet since it's aan OrdinaryTile
+     */
     @Test
     public void testInspectWeaponSet() {
         List<WeaponCard> weaponSet;
@@ -137,6 +144,9 @@ public class TestOrdinaryTile {
         assertTrue(tile.missingDrop());
     }
 
+    /**
+     * Expecting NotSpawnPointTileException on GrabWeapon since it's an OrdinaryTile
+     */
     @Test (expected = NotSpawnPointTileException.class)
     public void testGrabWeapon() throws NotSpawnPointTileException {
         tile.grabWeapon(w1);

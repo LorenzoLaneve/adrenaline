@@ -6,8 +6,16 @@ import it.polimi.deib.newdem.adrenaline.model.items.PowerUpTrigger;
 
 import java.util.List;
 
+/**
+ * Interaction encapsulating the selection of an appropriate revenge powerup
+ * within a REVENGE atom
+ */
 public class SelectRevengePupInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code SelectRevengePupInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public SelectRevengePupInteraction(InteractionContext context) {
         super(context);
     }

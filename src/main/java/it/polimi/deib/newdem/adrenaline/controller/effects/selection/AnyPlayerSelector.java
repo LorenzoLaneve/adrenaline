@@ -5,6 +5,10 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 
 public class AnyPlayerSelector implements PlayerSelector {
 
+    /**
+     * Selects all the players.
+     * @see PlayerSelector for further information
+     */
     public AnyPlayerSelector() {
         // nothing here
     }

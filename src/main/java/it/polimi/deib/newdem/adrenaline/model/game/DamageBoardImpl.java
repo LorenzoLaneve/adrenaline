@@ -164,13 +164,15 @@ public abstract class DamageBoardImpl implements DamageBoard {
         return new HashMap<>(marks);
     }
 
-    public void appendDamage(Player player) throws DamageTrackFullException {
+    public void appendDamage(Player player, boolean canRealizeMarks) throws DamageTrackFullException {
 
         if(damages.size() > MAX_LIFE) {
             throw new DamageTrackFullException();
         }
 
-        convertMarksFromPlayerHelper(player);
+        if(canRealizeMarks) {
+            convertMarksFromPlayerHelper(player);
+        }
         // mark conversion functionality is NOT handled by DamageGameChange
 
         appendDamageTrivial(player);
@@ -200,9 +202,10 @@ public abstract class DamageBoardImpl implements DamageBoard {
     }
 
     public void appendDamageTrivial(Player p) throws DamageTrackFullException {
+        // this does not trigger any listener
         if(damages.size() > MAX_LIFE) throw new DamageTrackFullException();
         damages.add(p);
-        listener.boardDidTakeDamage(1, 0, p);
+        if(null != listener) { listener.boardDidTakeDamage(1, 0, p); }
         if(player.getTotalDamage() > DEATH_SHOT_INDEX + 1) {
             player.reportDeath(true);
         }

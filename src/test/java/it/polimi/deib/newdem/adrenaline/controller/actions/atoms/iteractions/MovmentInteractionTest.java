@@ -21,7 +21,7 @@ public class MovmentInteractionTest {
     @Before
     public void setUp() throws Exception {
         gameRigged = TestingUtils.makeRiggedGame(PlayerColor.MAGENTA);
-        sds = new ScriptedDataSource(
+        sds = new ScriptedDataSource( gameRigged,
                 new ActionType(MOVE3),
                 new ActionType(MOVE3));
         sds.pushTile(gameRigged.getMap().getSpawnPointFromColor(AmmoColor.RED));
@@ -35,5 +35,7 @@ public class MovmentInteractionTest {
         t.bindDataSource(sds);
         t.setRunClosingActions(false);
         t.execute(); // move
+        assertEquals(gameRigged.getMap().getSpawnPointFromColor(AmmoColor.RED),
+                gameRigged.getPlayerFromColor(PlayerColor.MAGENTA).getTile());
     }
 }

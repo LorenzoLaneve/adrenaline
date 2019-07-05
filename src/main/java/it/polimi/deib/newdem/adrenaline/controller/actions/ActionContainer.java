@@ -12,6 +12,9 @@ import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of {@code Action} as a container of {@code AtomicAction}s
+ */
 public class ActionContainer implements Action, AtomsContainer {
 
     protected TurnDataSource dataSource;
@@ -20,6 +23,12 @@ public class ActionContainer implements Action, AtomsContainer {
     private List<AtomicAction> atomicActions;
     private AtomsRunSequence atomsRunSequence;
 
+    /**
+     * Creates a new empty container bound to the given {@code Player} and {@code TurnDataSource}
+     *
+     * @param actor running this action
+     * @param dataSource source of additional data for this action
+     */
     public ActionContainer(Player actor, TurnDataSource dataSource) {
         this.actor = actor;
         this.dataSource = dataSource;
@@ -27,6 +36,7 @@ public class ActionContainer implements Action, AtomsContainer {
         this.atomicActions = new ArrayList<>();
         this.atomsRunSequence = new AtomsRunSequenceImpl();
     }
+
 
     void addAtom(AtomicAction atomicAction) {
         atomicActions.add(atomicAction);

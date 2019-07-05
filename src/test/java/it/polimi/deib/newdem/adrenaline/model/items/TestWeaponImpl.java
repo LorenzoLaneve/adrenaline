@@ -31,6 +31,10 @@ public class TestWeaponImpl {
     private Weapon weapon;
     private Map map;
 
+    /**
+     * Creating simple environment to test the straightforward method of Weapon
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         TestingUtils.loadSingleton();

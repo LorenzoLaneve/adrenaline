@@ -19,6 +19,9 @@ public class NullMapListenerTest {
     private Tile t2;
     private DropInstance dropInstance;
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
     @Before
     public void setUp() throws Exception {
         l = new NullMapListener();

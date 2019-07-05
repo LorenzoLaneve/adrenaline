@@ -4,6 +4,10 @@ import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlay
 import it.polimi.deib.newdem.adrenaline.controller.effects.utils.EffectSwitch;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' ZX-2 weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class ZX2Effect implements Effect {
 
     private static final int BASIC_MODE = 1;

@@ -6,7 +6,6 @@ import it.polimi.deib.newdem.adrenaline.model.game.*;
 import it.polimi.deib.newdem.adrenaline.model.items.AmmoColor;
 import it.polimi.deib.newdem.adrenaline.model.items.PowerUpCard;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
-import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 import it.polimi.deib.newdem.adrenaline.model.map.TestingMapBuilder;
 import it.polimi.deib.newdem.adrenaline.model.map.TilePosition;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
@@ -18,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +33,7 @@ public class PlayerDataTest {
     public void setUp() throws Exception {
         TestingUtils.loadSingleton();
         GameParameters gp = GameParameters.fromConfig(Config.getDefaultConfig());
-        gp.setGameMap(TestingMapBuilder.getNewMap(this.getClass()));
+        gp.setGameMap(TestingMapBuilder.getNewMap());
         gp.setMinPlayers(2);
         gp.setColorUserOrder(Arrays.asList(
                 new ColorUserPair(PlayerColor.MAGENTA, new User()),
@@ -63,7 +61,7 @@ public class PlayerDataTest {
         pup = new MockPowerUpCard();
         inventory.addPowerUp(pup);
         player.getDamageBoard().setListener(new VirtualDamageBoardView(player, vgv));
-        player.getDamageBoard().appendDamage(game.getPlayerFromColor(PlayerColor.GREEN));
+        player.getDamageBoard().appendDamage(game.getPlayerFromColor(PlayerColor.GREEN), true);
         player.getDamageBoard().setMarksFromPlayer(1, game.getPlayerFromColor(PlayerColor.GREEN));
         playerData = player.generatePlayerData();
     }

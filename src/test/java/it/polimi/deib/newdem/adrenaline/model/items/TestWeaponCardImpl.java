@@ -12,6 +12,9 @@ public class TestWeaponCardImpl {
 
     WeaponCard drawnCard;
 
+    /**
+     * Testing correct loading of deck form json and basic functionality of the WeaponCard
+     */
     @Before
     public void setUp() throws Exception {
         try {

@@ -1,9 +1,12 @@
 package it.polimi.deib.newdem.adrenaline.controller.effects;
 
 import it.polimi.deib.newdem.adrenaline.controller.effects.selection.VisiblePlayerSelector;
-import it.polimi.deib.newdem.adrenaline.model.game.changes.DamageGameChange;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 
+/**
+ * Card effect that implements Adrenaline' T.H.O.R. weapon card.
+ * @see Effect for further information about the card effects.
+ */
 public class THOREffect implements Effect {
 
     private static final int CHAIN_REACTION = 1;

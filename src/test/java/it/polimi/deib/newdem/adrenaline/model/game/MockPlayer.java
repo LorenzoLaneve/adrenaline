@@ -9,6 +9,10 @@ import java.util.List;
 
 public class MockPlayer extends PlayerImpl {
 
+    /**
+     * Simple Mock Object Used for testing purposes.
+     */
+
     private PlayerColor color;
     private String name;
     private DamageBoard damageBoard;

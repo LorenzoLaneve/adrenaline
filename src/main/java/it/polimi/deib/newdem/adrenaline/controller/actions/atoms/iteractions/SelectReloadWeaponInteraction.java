@@ -5,9 +5,15 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
 import java.util.List;
-
+/**
+ * Interaction encapsulating the request of which weapon to reload within a RELOAD atom
+ */
 public class SelectReloadWeaponInteraction extends InteractionBase {
 
+    /**
+     * Builds a new {@code  SelectReloadWeaponInteraction} bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     */
     public SelectReloadWeaponInteraction(InteractionContext context) {
         super(context);
     }

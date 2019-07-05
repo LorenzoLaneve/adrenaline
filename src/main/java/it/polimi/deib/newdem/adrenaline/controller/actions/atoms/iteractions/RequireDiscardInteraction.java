@@ -5,10 +5,18 @@ import it.polimi.deib.newdem.adrenaline.model.game.player.PlayerInventory;
 import it.polimi.deib.newdem.adrenaline.model.items.Weapon;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponCard;
 
+/**
+ * Interaction encapsulating the check for the necessity of discarding a weapon withing a GRAB atom
+ */
 public class RequireDiscardInteraction extends InteractionBase {
 
     private WeaponCard newCard;
 
+    /**
+     * Builds a new {@code RequireDiscardInteraction } bound to the given {@code InteractionContext}
+     * @param context this interaction's environment
+     * @param weapon newly deawn erapon to pass down to this {@code Interaction}'s children
+     */
     public RequireDiscardInteraction(InteractionContext context, WeaponCard weapon) {
         super(context);
         this.newCard = weapon;

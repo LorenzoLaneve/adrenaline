@@ -7,6 +7,10 @@ public class NegatedTileSelector implements TileSelector {
 
     private TileSelector innerSelector;
 
+    /**
+     * Selects all the tiles that are NOT selected by the given selector.
+     * @see TileSelector for further information
+     */
     public NegatedTileSelector(TileSelector innerSelector) {
         this.innerSelector = innerSelector;
     }
