@@ -3,48 +3,23 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="894.0" y="701.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIDamageBoardView</node>
-    <node x="678.0" y="701.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLILobbyView</node>
-    <node x="0.0" y="232.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLITurnView</node>
-    <node x="314.0" y="1060.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIGameView</node>
-    <node x="584.0" y="276.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIViewMaker</node>
-    <node x="1215.0" y="375.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIUsernameView</node>
-    <node x="826.0" y="1060.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIActionBoardView</node>
-    <node x="0.0" y="701.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIPlayerView</node>
-    <node x="566.0" y="1060.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIKillTrackView</node>
-    <node x="0.0" y="1060.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIHelper</node>
-    <node x="837.25" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader</node>
-    <node x="269.0" y="701.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIMapView</node>
-    <node x="948.0" y="298.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIConnectionView</node>
+    <node x="198.0" y="828.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIDamageBoardView</node>
+    <node x="970.0" y="469.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLILobbyView</node>
+    <node x="818.0" y="828.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIGameView</node>
+    <node x="0.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLITurnView</node>
+    <node x="609.0" y="0.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIViewMaker</node>
+    <node x="0.0" y="1055.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIUsernameView</node>
+    <node x="468.0" y="1055.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIActionBoardView</node>
+    <node x="0.0" y="469.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIPlayerView</node>
+    <node x="210.0" y="1055.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIKillTrackView</node>
+    <node x="504.0" y="828.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIHelper</node>
+    <node x="561.0" y="469.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIMapView</node>
+    <node x="0.0" y="828.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader</node>
+    <node x="269.0" y="469.0">it.polimi.deib.newdem.adrenaline.view.client.cli.CLIConnectionView</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIViewMaker" target="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader">
-      <point x="0.0" y="-168.0" />
-      <point x="756.0" y="212.0" />
-      <point x="894.625" y="212.0" />
-      <point x="-19.125" y="91.0" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIUsernameView" target="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader">
-      <point x="0.0" y="-69.0" />
-      <point x="1297.5" y="202.0" />
-      <point x="971.125" y="202.0" />
-      <point x="57.375" y="91.0" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIConnectionView" target="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader">
-      <point x="0.0" y="-146.0" />
-      <point x="1071.5" y="212.0" />
-      <point x="932.875" y="212.0" />
-      <point x="19.125" y="91.0" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.view.client.cli.CLITurnView" target="it.polimi.deib.newdem.adrenaline.view.client.cli.CLIReader">
-      <point x="0.0" y="-212.0" />
-      <point x="282.0" y="202.0" />
-      <point x="856.375" y="202.0" />
-      <point x="-57.375" y="91.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="460.5" y="409.75" />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="713.0" y="454.5" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

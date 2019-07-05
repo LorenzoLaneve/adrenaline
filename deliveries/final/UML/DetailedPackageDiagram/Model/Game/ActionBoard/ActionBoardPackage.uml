@@ -3,29 +3,29 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="58.75" y="44.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener</node>
-    <node x="0.0" y="264.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.NullActionBoardListener</node>
-    <node x="667.287037037037" y="441.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior</node>
-    <node x="536.5" y="242.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior</node>
-    <node x="771.5" y="220.5">it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior</node>
-    <node x="257.75" y="187.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl</node>
-    <node x="384.28703703703707" y="441.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior</node>
-    <node x="532.287037037037" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior</node>
-    <node x="257.75" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard</node>
+    <node x="305.0" y="490.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener</node>
+    <node x="291.0" y="589.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.NullActionBoardListener</node>
+    <node x="0.0" y="374.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior</node>
+    <node x="396.5" y="187.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior</node>
+    <node x="165.5" y="209.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior</node>
+    <node x="0.0" y="677.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl</node>
+    <node x="281.0" y="374.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior</node>
+    <node x="272.25" y="0.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior</node>
+    <node x="0.0" y="490.0">it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard</node>
   </nodes>
   <notes />
   <edges>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.OrdinaryActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
       <point x="0.0" y="-68.5" />
-      <point x="896.5" y="162.0" />
-      <point x="740.6203703703702" y="162.0" />
-      <point x="83.33333333333326" y="68.5" />
+      <point x="519.5" y="162.0" />
+      <point x="456.75" y="162.0" />
+      <point x="61.5" y="68.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzySingleActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior">
-      <point x="-5.6843418860808015E-14" y="-35.5" />
-      <point x="515.787037037037" y="416.0" />
-      <point x="590.25" y="416.0" />
-      <point x="-53.75" y="46.5" />
+      <point x="0.0" y="-35.5" />
+      <point x="411.5" y="349.0" />
+      <point x="323.75" y="349.0" />
+      <point x="52.75" y="46.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard">
       <point x="0.0" y="-102.0" />
@@ -33,34 +33,22 @@
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyDoubleActionBoardBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior">
       <point x="0.0" y="-35.5" />
-      <point x="798.787037037037" y="416.0" />
-      <point x="697.75" y="416.0" />
-      <point x="53.75" y="46.5" />
+      <point x="130.5" y="349.0" />
+      <point x="218.25" y="349.0" />
+      <point x="-52.75" y="46.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.FrenzyCommonBehavior" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
       <point x="0.0" y="-46.5" />
-      <point x="644.0" y="162.0" />
-      <point x="657.287037037037" y="162.0" />
-      <point x="0.0" y="68.5" />
+      <point x="271.0" y="162.0" />
+      <point x="333.75" y="162.0" />
+      <point x="-61.5" y="68.5" />
     </edge>
     <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.NullActionBoardListener" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener">
       <point x="0.0" y="-24.5" />
-      <point x="-44.75" y="24.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardBehavior">
-      <point x="83.33333333333337" y="-102.0" />
-      <point x="466.08333333333337" y="162.0" />
-      <point x="573.9537037037037" y="162.0" />
-      <point x="-83.33333333333331" y="68.5" />
-    </edge>
-    <edge source="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardImpl" target="it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoardListener">
-      <point x="-83.33333333333326" y="-102.0" />
-      <point x="299.41666666666674" y="162.0" />
-      <point x="193.0" y="162.0" />
-      <point x="44.75" y="24.5" />
+      <point x="0.0" y="24.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="360.0" y="0.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="713.0" y="454.5" />
   <SelectedNodes>
     <node>it.polimi.deib.newdem.adrenaline.model.game.action_board.ActionBoard</node>
   </SelectedNodes>
