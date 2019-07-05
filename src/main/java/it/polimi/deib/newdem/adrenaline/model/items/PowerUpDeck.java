@@ -26,7 +26,11 @@ public class PowerUpDeck {
 
 
 
-
+    /**
+     * Method to load correctly the Trigger from Json field.
+     * @param jsonTrigger Json field of the PowerUpTrigger.
+     * @return the PowerUpTrigger as loaded from the json
+     */
     private static PowerUpTrigger parseTrigger(String jsonTrigger) throws InvalidJSONException {
         switch (jsonTrigger.toLowerCase()) {
             case "discharge":
@@ -42,6 +46,11 @@ public class PowerUpDeck {
         }
     }
 
+    /**
+     * Method to load correctly the ammoColor from Json field.
+     * @param jsonAmmoColor Json field of the ammoColor.
+     * @return the Ammocolor as loaded from the json
+     */
     private static AmmoColor parseAmmoColor(String jsonAmmoColor) throws InvalidJSONException {
         switch (jsonAmmoColor.toLowerCase()) {
             case "red":
@@ -55,7 +64,12 @@ public class PowerUpDeck {
         }
     }
 
-
+    /**
+     * Method to load PowerUpDeck from json file in resources.
+     * @param jsonFile the source file for the PowerUpDeck.
+     * @return the PowerUpDeck loaded from the file.
+     * @throws InvalidJSONException in case the file is wrong.
+     */
     public static PowerUpDeck fromJson(String jsonFile) throws InvalidJSONException {
         List<PowerUpCard> cards = new ArrayList<>();
 

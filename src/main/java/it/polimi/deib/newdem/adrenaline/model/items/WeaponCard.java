@@ -12,5 +12,10 @@ public interface WeaponCard extends Card{
 
     Effect getEffect();
 
+    /**
+     * Contructs Weapon from WeaponCards info and assign it to the player
+     * @param player the player to which the weapon will belong.
+     * @return the Weapon object corresponding to this WeaponCard.
+     */
     Weapon makeWeapon(Player player);
 }

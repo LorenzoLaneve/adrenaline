@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeckData implements Serializable {
+
+    /**
+     * Data representation of the current deck state. Intended for communication with the views.
+     */
+
     int drawableCards;
     List<Integer> discardedCards;
 
