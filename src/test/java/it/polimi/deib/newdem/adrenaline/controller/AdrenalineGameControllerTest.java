@@ -9,10 +9,13 @@ import it.polimi.deib.newdem.adrenaline.model.items.Deck;
 import it.polimi.deib.newdem.adrenaline.model.items.DeckAlreadyLoadedException;
 import it.polimi.deib.newdem.adrenaline.model.items.WeaponDeck;
 import it.polimi.deib.newdem.adrenaline.model.mgmt.User;
+import it.polimi.deib.newdem.adrenaline.utils.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+
+import static org.junit.Assert.fail;
 
 public class AdrenalineGameControllerTest {
 
@@ -83,4 +86,36 @@ public class AdrenalineGameControllerTest {
         agc.userDidDisconnect(u1);
         agc.userDidReconnect(u1);
     }
+
+    @Test
+    public void testAlterGame(){
+
+        System.setProperty("debugMode", "true");
+
+        Config c;
+        try {
+            c = Config.fromFile(FileUtils.getAbsoluteDecodedFilePath("configtest.json", this.getClass()));
+        } catch (InvalidConfigException e) {
+            fail();
+            return;
+        }
+
+        agc = new AdrenalineGameController(new LobbyControllerImpl(null, c));
+
+
+
+        u1.setName("ezkills");
+        u2.setName("frenzypls");
+        u3.setName("Steve");
+
+        agc.setupGame(Arrays.asList(
+                u1,u2, u3
+        ));
+
+
+        System.setProperty("debugMode", "false");
+
+    }
+
+
 }

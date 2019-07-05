@@ -90,7 +90,7 @@ public class GameParameters {
     }
 
     public void setKillTrackInitialLength(int length) {
-        if(length <= MIN_KILLTRACK_SIZE || length > MAX_KILLTRACK_SIZE) {
+        if(length < MIN_KILLTRACK_SIZE || length > MAX_KILLTRACK_SIZE) {
             throw new IllegalArgumentException();
         }
         this.killTrackInitialLength = length;
