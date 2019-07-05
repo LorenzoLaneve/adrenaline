@@ -14,7 +14,13 @@ import it.polimi.deib.newdem.adrenaline.model.map.Tile;
 
 import java.util.List;
 
+/**
+ * Mock object for testing purposes
+ *
+ * All of its methods do nothing
+ */
 public class MockAtomEffectContext implements AtomEffectContext {
+
 
     @Override
     public void setSelectedWeaponCard(WeaponCard card) {

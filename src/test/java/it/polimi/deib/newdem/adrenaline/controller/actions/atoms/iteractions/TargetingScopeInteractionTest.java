@@ -24,10 +24,22 @@ import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAG
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Integration tests for a targeting scope interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectAdditionalDamagePowerupInteraction
+ */
 public class TargetingScopeInteractionTest {
 
-    GameRigged game;
+    private GameRigged game;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void SetUp() throws Exception {
         game = TestingUtils.makeRiggedGame(MAGENTA, GREEN);
@@ -35,6 +47,10 @@ public class TargetingScopeInteractionTest {
         game.setPowerupDeck(PowerUpDeck.fromJson("fixed_decks/6_scope_only_pups.json").createNewDeck());
     }
 
+    /**
+     * Simulates a game with a targeting scope interaction and undos at various steps
+     * @throws Exception
+     */
     @Test
     public void testUndos() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,

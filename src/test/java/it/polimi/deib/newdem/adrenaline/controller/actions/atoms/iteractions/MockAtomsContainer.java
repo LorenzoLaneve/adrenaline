@@ -5,6 +5,11 @@ import it.polimi.deib.newdem.adrenaline.model.game.Game;
 import it.polimi.deib.newdem.adrenaline.model.game.player.Player;
 import it.polimi.deib.newdem.adrenaline.model.game.turn.TurnDataSource;
 
+/**
+ * Mock object for testing purposes
+ *
+ * All of its methods do nothing
+ */
 public class MockAtomsContainer implements AtomsContainer {
 
     @Override

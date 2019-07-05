@@ -21,12 +21,23 @@ import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.GRE
 import static it.polimi.deib.newdem.adrenaline.model.game.player.PlayerColor.MAGENTA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
+/**
+ * Integration tests for a revenge interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.SelectRevengePupInteraction
+ */
 public class RevengeInteractionTest {
 
-    GameRigged game;
+    private GameRigged game;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void SetUp() throws Exception {
         game = TestingUtils.makeRiggedGame(MAGENTA, GREEN);
@@ -34,6 +45,10 @@ public class RevengeInteractionTest {
         game.setPowerupDeck(PowerUpDeck.fromJson("fixed_decks/6_grenade_only_pups.json").createNewDeck());
     }
 
+    /**
+     * Simulates a game with a revenge interaction and undos at various steps
+     * @throws Exception
+     */
     @Test
     public void testUndos() throws Exception {
         ScriptedDataSource sds = new ScriptedDataSource( game,

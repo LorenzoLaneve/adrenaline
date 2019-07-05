@@ -13,11 +13,23 @@ import org.junit.Test;
 import static it.polimi.deib.newdem.adrenaline.controller.actions.atoms.AtomicActionType.MOVE3;
 import static org.junit.Assert.*;
 
+/**
+ * Integration tests for a movement interaction
+ *
+ * These tests are run as a simulation of a complete game with
+ * controlled user inputs and cards drawn
+ *
+ * @see it.polimi.deib.newdem.adrenaline.controller.actions.atoms.iteractions.MovmentInteraction
+ */
 public class MovmentInteractionTest {
 
-    GameRigged gameRigged;
-    ScriptedDataSource sds;
+    private GameRigged gameRigged;
+    private ScriptedDataSource sds;
 
+    /**
+     * Creates a new test game
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         gameRigged = TestingUtils.makeRiggedGame(PlayerColor.MAGENTA);
@@ -29,6 +41,10 @@ public class MovmentInteractionTest {
         sds.pushPupIndex(0); // spawn
     }
 
+    /**
+     * Simulates a game with movement interaction
+     * @throws Exception
+     */
     @Test
     public void testExecute() throws Exception {
         Turn t = gameRigged.getNextTurn();
