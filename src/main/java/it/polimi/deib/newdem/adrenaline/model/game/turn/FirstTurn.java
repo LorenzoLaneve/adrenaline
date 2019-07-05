@@ -12,15 +12,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Implements the game logic for handling a player's first turn.
+ */
 public class FirstTurn extends TurnBaseImpl {
 
     /**
-     * This class is currently a stub
+     * Redefinition of base class' method to add logic to spawning for the first time.
      *
-     * Logic for spawning in needs to be added
-     *
-     * What and how to override is not yet defined
-     *
+     * @throws TurnInterruptedException if this turn in interrupted abruptly for any reason
      */
     @Override
     protected void performInitialActions() throws TurnInterruptedException {

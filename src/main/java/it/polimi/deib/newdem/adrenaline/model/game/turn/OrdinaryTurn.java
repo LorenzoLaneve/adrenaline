@@ -9,13 +9,24 @@ import it.polimi.deib.newdem.adrenaline.model.map.Map;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Implementation of the game logic for an ordinary turn
+ *
+ */
 public class OrdinaryTurn extends TurnBaseImpl {
 
+    /**
+     * Creates a new ordinary turn for the give player
+     * @param activePlayer which will be active during this turn
+     */
     public OrdinaryTurn(Player activePlayer) {
         super(activePlayer);
-        // Or is it?
     }
 
+    /**
+     * Adds ordinary respawn logic
+     * @throws TurnInterruptedException if the turn terminates abruptly for any reason
+     */
     @Override
     protected void performInitialActions() throws TurnInterruptedException {
         // if dead, spawn
